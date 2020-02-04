@@ -1446,7 +1446,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1266227010}
   - component: {fileID: 1266227009}
-  - component: {fileID: 1266227008}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1454,14 +1453,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1266227008
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1266227007}
-  m_Enabled: 1
 --- !u!20 &1266227009
 Camera:
   m_ObjectHideFlags: 0
@@ -1874,12 +1865,12 @@ MonoBehaviour:
   - {fileID: 6700716075161373839, guid: 22bc3d0eaee86bb428496bf988489ae9, type: 3}
   - {fileID: 2500389178016090726, guid: 3767eab88ce28c4448bbd26f359914bc, type: 3}
   playerHead: {fileID: 777009149}
-  mazeRows: 4
-  mazeCols: 4
+  mazeRows: 5
+  mazeCols: 5
   tileWidth: 0.8
   startRow: 0
   startCol: 0
-  playAreaSize: {x: 3, y: 0, z: 3}
+  playAreaSize: {x: 4, y: 0, z: 4}
   isMapSeeded: 0
   randomGeneratorSeed: 0
   portalGenerationLocation: 1

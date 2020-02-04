@@ -55,7 +55,7 @@ public class MapManager : MonoBehaviour
         {
             startRow = 0;
             startCol = 0;
-            Debug.Log("Player was out of game area, Maze starts from (0;0).");
+            //Debug.Log("Player was out of game area, Maze starts from (0;0).");
         }
         if (portalGenerationLocation == PortalGenerationType.Everywhere)
             GenerateMapSequence();
@@ -135,7 +135,7 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < mapSequence.Length; i++)
         {
-            Debug.Log("Starting Maze " + i);
+            //Debug.Log("Starting Maze " + i);
             Vector3 mapSpawnPoint = new Vector3(transform.position.x + i * (mazeCols * tileWidth + 1), 0, 0);
             GameObject tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[i].mapType], mapSpawnPoint, Quaternion.identity);
             tempMap.name = i.ToString() + " - " + mapSequence[i].mapType.ToString();
@@ -144,7 +144,7 @@ public class MapManager : MonoBehaviour
             MapGenerator mapScript = tempMap.GetComponent<MapGenerator>();
             mapScript.SetDimensions(mazeRows, mazeCols, tileWidth);
             mapScript.Initialize();
-            Debug.Log("Maze " + i + " Initialized!");
+            //Debug.Log("Maze " + i + " Initialized!");
 
             //calculate start seed
             if (i > 0)
@@ -160,7 +160,7 @@ public class MapManager : MonoBehaviour
                 List<TileInfo> possibleStarts = PortalPositionHelper.GetAllCornerTiles();
                 if (possibleStarts.Contains(startNoDir) == false)
                 {
-                    Debug.Log("Start seed not possible for rooms, generating room at (0,1,1)");
+                    //Debug.Log("Start seed not possible for rooms, generating room at (0,1,1)");
                     mapSequence[i].startSeed = new TileInfo(0, 1, 3);
                 }
             }
@@ -176,7 +176,7 @@ public class MapManager : MonoBehaviour
             if (i + 1 < mapSequence.Length)
             {
                 mapSequence[i].isEndSeeded = true;
-                Debug.Log("Generating End Seed For Maze " + i);
+                //Debug.Log("Generating End Seed For Maze " + i);
                 if ((int)mapSequence[i + 1].mapType == 1)
                     mapSequence[i].endSeed = GenerateRandomRoomDeadEnd(mapSequence[i].startSeed);
                 else
@@ -205,25 +205,25 @@ public class MapManager : MonoBehaviour
         foreach (var v in possibleCoordinates)
             v.PrintTile();
 
-        //Remoe Start
-        if (possibleCoordinates.Remove(startCoord))
-            Debug.Log("Removed Start (" + startCoord.row + ";" + startCoord.column + ")");
+        ////Remove Start
+        //if (possibleCoordinates.Remove(startCoord))
+        //    Debug.Log("Removed Start (" + startCoord.row + ";" + startCoord.column + ")");
 
-        //Remove Lead-in
-        if (possibleCoordinates.Remove(flag.GetNeighbourCoord()))
-            Debug.Log("Removed Lead-in (" + flag.GetNeighbourCoord().row + ";" + flag.GetNeighbourCoord().column + ")");
+        ////Remove Lead-in
+        //if (possibleCoordinates.Remove(flag.GetNeighbourCoord()))
+        //    Debug.Log("Removed Lead-in (" + flag.GetNeighbourCoord().row + ";" + flag.GetNeighbourCoord().column + ")");
 
         //Remove corner shutoffs
         List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord);
-        if (shutoffCorners.Count > 0)
-        {
-            Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
-            foreach (TileInfo t in shutoffCorners)
-            {
-                if (possibleCoordinates.Remove(t))
-                    Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
-            }
-        }
+        //if (shutoffCorners.Count > 0)
+        //{
+        //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
+        //    foreach (TileInfo t in shutoffCorners)
+        //    {
+        //        if (possibleCoordinates.Remove(t))
+        //            Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
+        //    }
+        //}
 
         // Generate directions
         // These are the Dead-end directions in the maze befor the room so they have to point
@@ -255,7 +255,7 @@ public class MapManager : MonoBehaviour
             if (t.IsLeadingIntoEntrance(flag))
             {
                 tilesToRemove.Add(t);
-                Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") leads into entrance");
+                //Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") leads into entrance");
             }
         }
 
@@ -263,7 +263,7 @@ public class MapManager : MonoBehaviour
         {
             if (possibleTiles.Remove(t))
             {
-                Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") removed");
+                //Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") removed");
             }
         }
 
@@ -283,13 +283,13 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        //Remove Start
-        if (possibleCoordinates.Remove(startCoord))
-            Debug.Log("Removed Start (" + startCoord.row + ";" + startCoord.column + ")");
+        ////Remove Start
+        //if (possibleCoordinates.Remove(startCoord))
+        //    Debug.Log("Removed Start (" + startCoord.row + ";" + startCoord.column + ")");
 
-        //Remove Lead-in
-        if (possibleCoordinates.Remove(flag.GetNeighbourCoord()))
-            Debug.Log("Removed Lead-in (" + flag.GetNeighbourCoord().row + ";" + flag.GetNeighbourCoord().column + ")");
+        ////Remove Lead-in
+        //if (possibleCoordinates.Remove(flag.GetNeighbourCoord()))
+        //    Debug.Log("Removed Lead-in (" + flag.GetNeighbourCoord().row + ";" + flag.GetNeighbourCoord().column + ")");
 
         //Remove corners
         for (int i = 0; i < 2; i++)
@@ -297,29 +297,29 @@ public class MapManager : MonoBehaviour
             for (int j = 0; j < 2; j++)
             {
                 TileInfo cornerTile = new TileInfo(i * (mazeRows - 1), j * (mazeCols - 1), -1);
-                if (possibleCoordinates.Remove(cornerTile))
-                    Debug.Log("Removed corner (" + cornerTile.row + ";" + cornerTile.column + ")");
+                //if (possibleCoordinates.Remove(cornerTile))
+                //    Debug.Log("Removed corner (" + cornerTile.row + ";" + cornerTile.column + ")");
             }
         }
 
         //Remove corner shutoffs
         List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord);
-        if (shutoffCorners.Count > 0)
-        {
-            Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
-            foreach (TileInfo t in shutoffCorners)
-            {
-                if (possibleCoordinates.Remove(t))
-                    Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
-            }
-        }
+        //if (shutoffCorners.Count > 0)
+        //{
+        //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
+        //    foreach (TileInfo t in shutoffCorners)
+        //    {
+        //        if (possibleCoordinates.Remove(t))
+        //            Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
+        //    }
+        //}
 
         //Generate possible directions
-        Debug.Log("All possible coordinates\n---------------------");
-        foreach (TileInfo t in possibleCoordinates)
-        {
-            Debug.Log("(" + t.row + ";" + t.column + ")");
-        }
+        //Debug.Log("All possible coordinates\n---------------------");
+        //foreach (TileInfo t in possibleCoordinates)
+        //{
+        //    Debug.Log("(" + t.row + ";" + t.column + ")");
+        //}
 
         List<TileInfo> possibleTiles = new List<TileInfo>();
         foreach (TileInfo t in possibleCoordinates)
@@ -339,28 +339,28 @@ public class MapManager : MonoBehaviour
             if (t.IsPerpendicular())
             {
                 tilesToRemove.Add(t);
-                Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") is perpendicular");
+                //Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") is perpendicular");
             }
             else if (t.IsLeadingIntoEntrance(flag))
             {
                 tilesToRemove.Add(t);
-                Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") leads into entrance");
+                //Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") leads into entrance");
             }
         }
 
-        foreach (TileInfo t in tilesToRemove)
-        {
-            if (possibleTiles.Remove(t))
-            {
-                Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") removed");
-            }
-        }
+        //foreach (TileInfo t in tilesToRemove)
+        //{
+        //    if (possibleTiles.Remove(t))
+        //    {
+        //        Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") removed");
+        //    }
+        //}
 
-        Debug.Log("All possible Tiles\n---------------------");
-        foreach (TileInfo t in possibleTiles)
-        {
-            Debug.Log("(" + t.row + ";" + t.column + ";" + t.direction + ")");
-        }
+        //Debug.Log("All possible Tiles\n---------------------");
+        //foreach (TileInfo t in possibleTiles)
+        //{
+        //    Debug.Log("(" + t.row + ";" + t.column + ";" + t.direction + ")");
+        //}
 
         int idx = Random.Range(0, possibleTiles.Count);
         return possibleTiles[idx];
@@ -387,7 +387,7 @@ public class MapManager : MonoBehaviour
         if (chaperone != null)
         {
             chaperone.GetPlayAreaSize(ref x, ref z);
-            Debug.Log("got here"); //expert debugging right here
+            //Debug.Log("got here"); //expert debugging right here
             size = new Vector3(Mathf.Round(x), 0, Mathf.Round(z));
         }
         return size;
