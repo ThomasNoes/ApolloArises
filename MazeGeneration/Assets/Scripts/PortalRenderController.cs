@@ -42,7 +42,7 @@ public class PortalRenderController : MonoBehaviour
 
     void InitializePortals()
     {
-        Debug.Log("Portals will go here:");
+        //Debug.Log("Portals will go here:");
         for (int i = 0; i < mazeCount - 1; i++)
         {
             TileInfo currentPortal = mapManager.mapSequence[i].endSeed;
