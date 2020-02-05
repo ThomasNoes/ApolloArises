@@ -16,7 +16,7 @@ public abstract class MapGenerator : MonoBehaviour
         tileArray = new Tile[mazeRows, mazeColumns];
         //float mazeHalfWidth = mazeRows / 2f; // Add scalability with tile width!
         //float mazeHalfHeight = mazeColumns / 2f; // Add scalability with tile height!
-        for (int i = 0; i < mazeRows; i++)
+        for (int i = 0; i < mazeRows; i++) // nested forloop for positioning each tile in the individual mazes
         {
             for (int j = 0; j < mazeColumns; j++)
             {
@@ -39,7 +39,7 @@ public abstract class MapGenerator : MonoBehaviour
 
     protected void GenerateIntArray()
     {
-        mazeIntArray = new int[mazeRows, mazeColumns];
+        mazeIntArray = new int[mazeRows, mazeColumns]; // will be filled with the ID for each tile in tileArray
         for (int i = 0; i < mazeRows; i++)
         {
             for (int j = 0; j < mazeColumns; j++)
