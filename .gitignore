@@ -187,3 +187,8 @@ MazeGeneration/SteamVR_Actions.csproj
 MazeGeneration/SteamVR_Editor.csproj
 MazeGeneration/SteamVR_Input_Editor.csproj
 MazeGeneration/SteamVR_Windows_EditorHelper.csproj
+MazeGeneration/Library/ArtifactDB
+*.dwlt
+*.log
+MazeGeneration/Library/ArtifactDB
+MazeGeneration/Library/SourceAssetDB
