@@ -34,3 +34,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+MazeGeneration/Library/SourceAssetDB
+MazeGeneration/Library/ArtifactDB
+MazeGeneration/Library/SourceAssetDB
+MazeGeneration/Library/ScriptAssemblies/Assembly-CSharp.dll
+MazeGeneration/Library/StateCache/Hierarchy/db143d-mainStage.json
+MazeGeneration/Library/StateCache/SceneView/59d1d1-mainStage.json
