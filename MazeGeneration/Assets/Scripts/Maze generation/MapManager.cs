@@ -167,15 +167,15 @@ public class MapManager : MonoBehaviour
                     mapSequence[i].startSeed = new TileInfo(0, 1, 3);
                 }
             }
-            /*else
+            else
             {
                 //if the current is maze and next is room we need to set the end seed
                 if (i + 1 < mapSequence.Length && (int)mapSequence[i + 1].mapType == 1) //Change this so we can use the enum
                 {
-                    Debug.Log("Can't do rooms with this method yet...");
-                    //i++;
+                    //Debug.Log("Can't do rooms with this method yet...");
+                    i++;
                 }
-            } */
+            } 
             if (i + 1 < mapSequence.Length) // if we are not at the last maze segments yet.
             {
                 mapSequence[i].isEndSeeded = true;
