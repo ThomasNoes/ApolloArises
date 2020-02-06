@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//This is for
+
 public class Tile : MonoBehaviour {
     public int tileID;
-    public int[] wallArray; //[0] = north, [1] = east, [2]= south, [3] = west. 1 = traversable, 0 = not traversable
+    public int[] wallArray; //[0] = north, [1] = east, [2]= south, [3] = west. 1 = traversable / no wall, 0 = not traversable / wall
     public float tileWidth;
 
     void Awake () {

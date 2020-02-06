@@ -19,7 +19,7 @@ public class MazeGenerator : MapGenerator
     //Generates an integer array with the tileIDs in it. Will be used to find dead ends for portal placement
     public override void Generate(MapInfo info)
     {
-        if (!info.isEndSeeded)
+        if (!info.isEndSeeded) // if this is the lazt maze segments (?) Or it is a room
         {
             Generate(info.startSeed);
         }
@@ -77,7 +77,7 @@ public class MazeGenerator : MapGenerator
 
         Generate(startRow, startCol, startDirection);
 
-        switch (endDirection)
+        switch (endDirection) // connecting tiles - open the wall on the other size
         {
             case 0:
                 Tile.ConnectTiles(tileArray[endRow, endCol], tileArray[endRow - 1, endCol], endDirection);

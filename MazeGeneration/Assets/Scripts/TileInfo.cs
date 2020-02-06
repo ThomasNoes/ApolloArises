@@ -39,7 +39,7 @@ public class TileInfo
         return inCorner;
     }
 
-    public bool IsPerpendicular()
+    public bool IsPerpendicular() // to the egde of the map sequence
     {
         int mazeRows = GameObject.Find("MapManager").GetComponent<MapManager>().mazeRows;
         int mazeCols = GameObject.Find("MapManager").GetComponent<MapManager>().mazeCols;
