@@ -8,12 +8,24 @@ public class TileInfo
     public int row;
     public int column;
     public int direction;
+    public string spelledDirection;
+
+    private static Dictionary<int, string> SpelledDirection = new Dictionary<int, string>
+    {
+        {-1, "No Direction"},
+        {0, "North"},
+        {1, "East"},
+        {2, "South"},
+        {3, "West"},
+    };
 
     public TileInfo(int _row, int _col, int _dir)
     {
         row = _row;
         column = _col;
         direction = _dir;
+        spelledDirection = SpelledDirection[_dir];
+
     }
 
     public TileInfo(TileInfo obj)
@@ -96,6 +108,22 @@ public class TileInfo
     {
         TileInfo neighbour = GetNeighbourCoord();
         return (neighbour.IsSamePosition(entrance));
+    }
+
+    public bool IsVisibleThroughEntrance(TileInfo entrance)
+    {
+        bool visible = false;
+        Debug.Log("entrance " + entrance.spelledDirection + " and this tile " + spelledDirection);
+
+
+        return visible;
+    }
+
+    public bool IsInViewWithEntrance(TileInfo entrance)
+    {
+        //To Do
+
+        return true;
     }
 
     public bool IsSamePosition(TileInfo tile)

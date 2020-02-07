@@ -211,7 +211,7 @@ public class MapManager : MonoBehaviour
             v.PrintTile();
 
         ////Remove Start
-        //if (possibleCoordinates.Remove(startCoord))
+        //if(possibleCoordinates.Remove(startCoord))
         //    Debug.Log("Removed Start (" + startCoord.row + ";" + startCoord.column + ")");
 
         ////Remove Lead-in
@@ -278,6 +278,7 @@ public class MapManager : MonoBehaviour
 
     TileInfo GenerateRandomHallwayDeadEnd(TileInfo flag)
     {
+        //Geeting all tile position in a maze segment 
         TileInfo startCoord = new TileInfo(flag.row, flag.column, -1);
         List<TileInfo> possibleCoordinates = new List<TileInfo>();
         for (int i = 0; i < mazeRows; i++)
@@ -288,15 +289,12 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        ////Remove Start
-        possibleCoordinates.Remove(startCoord);
+        //Removing entire tiles
+        possibleCoordinates.Remove(startCoord); //Remove Start
 
-        ////Remove Lead-in
-        possibleCoordinates.Remove(flag.GetNeighbourCoord());
+        possibleCoordinates.Remove(flag.GetNeighbourCoord()); //Remove Lead-in
 
-
-        //Remove corners
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 2; i++) //Remove corners
         {
             for (int j = 0; j < 2; j++)
             {
@@ -306,8 +304,7 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        //Remove corner shutoffs
-        List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord);
+        List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
         if (shutoffCorners.Count > 0)
         {
         //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
@@ -318,46 +315,54 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        //Generate possible directions
-        //Debug.Log("All possible coordinates\n---------------------");
-        //foreach (TileInfo t in possibleCoordinates)
-        //{
-        //    Debug.Log("(" + t.row + ";" + t.column + ")");
-        //}
-
+        //Now we have all tiles that a portal can be placed on.
+        //Now we include the possible directions the portal can have on the remaining tiles.
         List<TileInfo> possibleTiles = new List<TileInfo>();
         foreach (TileInfo t in possibleCoordinates)
         {
-            int[] possibleDirections = PortalPositionHelper.GetEntranceArray(t.row, t.column);
+            int[] possibleDirections = PortalPositionHelper.GetEntranceArray(t.row, t.column); //each possible direction based on the placement the tile has in the maze segment.
             for (int i = 0; i < possibleDirections.Length; i++)
             {
-                TileInfo tileToAdd = new TileInfo(t.row, t.column, possibleDirections[i]);
+                TileInfo tileToAdd = new TileInfo(t.row, t.column, possibleDirections[i]); 
                 
-                possibleTiles.Add(tileToAdd);
+                possibleTiles.Add(tileToAdd); // add multiple tiles in the same position with different directions
             }
         }
 
-        //Remove direction that are perpendicular to maze edges and ones that lead into reserved tile next to entrance
-        List<TileInfo> tilesToRemove = new List<TileInfo>();
+       
+        List<TileInfo> tilesToRemove = new List<TileInfo>(); //list of tiles with certain directions that will be removed.
+
         foreach (TileInfo t in possibleTiles)
         {
-            if (t.IsPerpendicular())
+
+            if (t.IsPerpendicular()) //Remove direction that are perpendicular to maze edges  
+            {
+                tilesToRemove.Add(t);          
+            }
+            else if (t.IsLeadingIntoEntrance(flag)) //Remove directions that lead into reserved tile next to entrance
             {
                 tilesToRemove.Add(t);
-                //Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") is perpendicular");
             }
-            else if (t.IsLeadingIntoEntrance(flag))
+            else if (t.IsVisibleThroughEntrance(flag))
             {
                 tilesToRemove.Add(t);
-                //Debug.Log("Tile (" + t.row + ";" + t.column + ";" + t.direction + ") leads into entrance");
             }
+            // remove some based on start coordinate (called flag)
+            //Remove exit tiles that are visible through entrance portal
+            //Remove exit tiles that are in view of the entrance portal
         }
+
+        
 
         foreach (TileInfo t in tilesToRemove)
         {
             possibleTiles.Remove(t);
 
         }
+
+        
+
+
 
         //Debug.Log("All possible Tiles\n---------------------");
         //foreach (TileInfo t in possibleTiles)
