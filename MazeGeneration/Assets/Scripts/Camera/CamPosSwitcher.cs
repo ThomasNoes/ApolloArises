@@ -6,7 +6,9 @@
     {
         public float rayMaxDist = 20.0f;
         private GameObject thisCamera, player, currentNextPortal, currentPrevPortal;    // TODO find and assign current portal pairs for each maze
+        private GameObject[] portalRenderQuads; // TODO and then figure out which maze ID you are currently in (or portal IDs currently used)
         private FollowCam followCam;
+        public PortalRenderController pRController;
         private LayerMask layerMask;
         private bool prevCollision = false, nextCollision = false;
 
@@ -20,7 +22,7 @@
             followCam = thisCamera.GetComponent<FollowCam>();
             player = GameObject.FindGameObjectWithTag("Player");
 
-            if (player != null && followCam != null)
+            if (player != null && followCam != null && pRController != null)
                 InvokeRepeating("CheckerLoop", 2.0f, 0.3f);
         }
 
@@ -38,6 +40,11 @@
             {
                 followCam.offset = +followCam.offset;   // TODO: Find a proper way to do this
             }
+        }
+
+        public void CurrentPortals()    // TODO: Use events to change currentNextPortal, currentPrevPortal; 
+        {
+
         }
 
         private void ResetBools()

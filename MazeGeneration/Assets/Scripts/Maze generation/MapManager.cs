@@ -188,9 +188,9 @@ public class MapManager : MonoBehaviour
             mapScript.Generate(mapSequence[i]);
             //if (mapSequence[i].isEndSeeded == false)
             if (i + 1 < mapSequence.Length && mapSequence[i + 1].mapType == 0) // if we are not at the last maze segment and the next segment is a maze segment
-                Debug.Log(mapSequence[i].endSeed); // test this out
+                //Debug.Log(mapSequence[i].endSeed); // test this out
                 mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed); // DA FUQ!!!!! is this not done in line 186? what is the point?
-                Debug.Log(mapSequence[i].endSeed); // test this out
+                //Debug.Log(mapSequence[i].endSeed); // test this out
 
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
