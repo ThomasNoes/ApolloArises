@@ -386,13 +386,12 @@ public class MapManager : MonoBehaviour
     public Vector3 GetCameraRigSize()
     {
         Vector3 size = new Vector3(playAreaSize.x, 0, playAreaSize.z);
-        var chaperone = Valve.VR.OpenVR.Chaperone;
-        float x = 0, z = 0;
+        Vector3 chaperone = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+
         if (chaperone != null)
         {
-            chaperone.GetPlayAreaSize(ref x, ref z);
-            //Debug.Log("got here"); //expert debugging right here
-            size = new Vector3(Mathf.Round(x), 0, Mathf.Round(z));
+            Debug.Log(chaperone);
+            size = new Vector3(Mathf.Round(chaperone.x), 0, Mathf.Round(chaperone.z));
         }
         return size;
     }
