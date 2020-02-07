@@ -129,6 +129,6 @@ public class TileInfo
     }
 
     public void PrintTile() {
-        Debug.Log("(" + row + ";" + column + ";" + direction + ")");
+        //Debug.Log("(" + row + ";" + column + ";" + direction + ")");
     }
 }
