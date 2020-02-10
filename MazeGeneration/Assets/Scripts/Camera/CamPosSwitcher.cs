@@ -1,4 +1,5 @@
-﻿namespace Assets.Scripts.Camera
+﻿// Put this script on the main camera!
+namespace Assets.Scripts.Camera
 {
     using UnityEngine;
 
@@ -104,12 +105,12 @@
             }
         }
 
-        private void DistanceCheck()
+        private void AngleCheck()
         {
             if (nextCollision && prevCollision)
             {
-                PositionSwitch(Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) <
-                               Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position)
+                PositionSwitch(Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position) <
+                               Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position)
                     ? 1
                     : 0);
 
@@ -187,7 +188,7 @@
                 return;
 
             RaycastCheck();
-            DistanceCheck();
+            AngleCheck();
         }
     }
 }
