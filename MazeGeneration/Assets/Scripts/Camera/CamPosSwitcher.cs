@@ -32,16 +32,18 @@
 
             if (player != null && followCam != null && pRController != null)
             {
-                InvokeRepeating("CheckerLoop", 2.0f, 0.3f);
-
-                for (int i = 0; i < pRController.nextProjectionQuadArray.Length; i++)
-                {
-                    // TODO: find prevRenderQuadArray and nextRenderQuadArray objects;
-                }
-
-                currentMaze = pRController.currentMaze;
-                mazeCount = pRController.mazeCount;
+                InvokeRepeating("CheckerLoop", 2.5f, 0.2f);
+                Invoke("DelayedStart", 1.0f);
             }
+        }
+
+        private void DelayedStart()
+        {
+            nextRenderQuadArray = pRController.nextRenderQuadArray;
+            prevRenderQuadArray = pRController.prevRenderQuadArray;
+
+            currentMaze = pRController.currentMaze;
+            mazeCount = pRController.mazeCount;
         }
 
         /// <summary>

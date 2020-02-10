@@ -18,8 +18,8 @@ public class PortalRenderController : MonoBehaviour
     public float cameraOffset;
     public float portalWidth;
     public float pillarOffset = 0.1f;
-    public GameObject[] prevProjectionQuadArray;
-    public GameObject[] nextProjectionQuadArray;
+    public GameObject[] prevProjectionQuadArray, nextProjectionQuadArray;
+    [HideInInspector] public GameObject[] prevRenderQuadArray, nextRenderQuadArray;
     MapManager mapManager;
 
     void Start()
@@ -34,6 +34,8 @@ public class PortalRenderController : MonoBehaviour
 
         prevProjectionQuadArray = new GameObject[portalCount];
         nextProjectionQuadArray = new GameObject[portalCount];
+        prevRenderQuadArray = new GameObject[portalCount];
+        nextRenderQuadArray = new GameObject[portalCount];
 
         InitializePortals();
         SetProjectionQuads();
@@ -67,6 +69,7 @@ public class PortalRenderController : MonoBehaviour
             tempScript.isForwardTeleporter = true;
             tempScript.cameraOffset = cameraOffset;
             nextProjectionQuadArray[i] = tempScript.projectionQuad.gameObject;
+            nextRenderQuadArray[i] = tempScript.renderQuad.gameObject;
             tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
 
             //we could find a way to remove the redundancy here
@@ -91,6 +94,7 @@ public class PortalRenderController : MonoBehaviour
             tempScript.isForwardTeleporter = false;
             tempScript.cameraOffset = cameraOffset;
             prevProjectionQuadArray[i] = tempScript.projectionQuad.gameObject;
+            prevRenderQuadArray[i] = tempScript.renderQuad.gameObject;
             tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Prev" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
         }
 
