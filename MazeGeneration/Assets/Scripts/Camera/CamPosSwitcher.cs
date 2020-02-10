@@ -16,7 +16,7 @@
 
         private bool prevCollision = false, nextCollision = false;
         private int currentMaze, mazeCount;
-        public float rayMaxDist = 15.0f;
+        public float rayMaxDist = 15.0f, portalWidth;
 
         private void Start()
         {
@@ -44,6 +44,7 @@
 
             currentMaze = pRController.currentMaze;
             mazeCount = pRController.mazeCount;
+            portalWidth = pRController.portalWidth;
         }
 
         /// <summary>
@@ -73,15 +74,20 @@
 
             for (int i = 0; i < 4; i++)
             {
-                if (i <= 1)
+                switch (i)
                 {
-                    portalDirs[i] = currentPrevPortal.transform.position - thisCamera.transform.position;
-                    // TODO: check edges instead
-                }
-                else
-                {
-                    portalDirs[i] = currentNextPortal.transform.position - thisCamera.transform.position;
-                    // TODO: check edges instead
+                    case 0:
+                        portalDirs[i] = PortalEdgeFinder(false, true) - thisCamera.transform.position;
+                        break;
+                    case 1:
+                        portalDirs[i] = PortalEdgeFinder(false, false) - thisCamera.transform.position;
+                        break;
+                    case 2:
+                        portalDirs[i] = PortalEdgeFinder(true, true) - thisCamera.transform.position;
+                        break;
+                    case 3:
+                        portalDirs[i] = PortalEdgeFinder(true, false) - thisCamera.transform.position;
+                        break;
                 }
 
                 if (Physics.Raycast(thisCamera.transform.position, portalDirs[i], out hit, rayMaxDist, layerMask))
@@ -149,6 +155,28 @@
         {
             nextCollision = false;
             prevCollision = false;
+        }
+
+        private Vector3 PortalEdgeFinder(bool next, bool right)
+        {
+            Vector3 tempEdgePos = new Vector3();
+
+            if (next)   // if next portal
+            {
+                if (right) // if right edge
+                    tempEdgePos = currentNextPortal.transform.position + currentNextPortal.transform.right * (portalWidth / 2.0f);
+                else // else left edge
+                    tempEdgePos = currentNextPortal.transform.position - currentNextPortal.transform.right * (portalWidth / 2.0f);
+            }
+            else   // else prev portal
+            {
+                if (right) // if right edge
+                    tempEdgePos = currentPrevPortal.transform.position + currentPrevPortal.transform.right * (portalWidth / 2.0f);
+                else // else left edge
+                    tempEdgePos = currentPrevPortal.transform.position - currentPrevPortal.transform.right * (portalWidth / 2.0f);
+            }
+
+            return tempEdgePos;
         }
 
         private void CheckerLoop()  // This is a loop invoked in Start()
