@@ -4,16 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Fuse_01
-  - Fuse_02
-  - Fuse_03
-  - Fuse_04
-  - Fuse_05
   - CameraRig
-  - FuseBox
-  - MineLights
   - Controller
-  - projectile
   layers:
   - Default
   - TransparentFX
@@ -26,10 +18,10 @@ TagManager:
   - PostProcessing
   - OnClickLayer
   - hiddenLayer
-  - clueLayer
-  - newRoomTriggerLayer
-  - BurnedDimensions
-  - PastDimension
+  - ObjectLayer
+  - 
+  - 
+  - 
   - 
   - 
   - 
