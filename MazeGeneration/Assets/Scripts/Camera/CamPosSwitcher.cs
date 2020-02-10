@@ -71,8 +71,6 @@ namespace Assets.Scripts.Camera
             if (currentPrevPortal == null || currentNextPortal == null)
                 return;
 
-            RaycastHit hit;
-
             for (int i = 0; i < 4; i++)
             {
                 switch (i)
@@ -90,6 +88,8 @@ namespace Assets.Scripts.Camera
                         portalDirs[i] = PortalEdgeFinder(true, false) - thisCamera.transform.position;
                         break;
                 }
+
+                RaycastHit hit;
 
                 if (Physics.Raycast(thisCamera.transform.position, portalDirs[i], out hit, rayMaxDist, layerMask))
                 {
