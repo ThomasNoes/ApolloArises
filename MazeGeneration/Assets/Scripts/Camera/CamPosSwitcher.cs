@@ -33,7 +33,7 @@ namespace Assets.Scripts.Camera
 
             if (player != null && followCam != null && pRController != null)
             {
-                InvokeRepeating("CheckerLoop", 2.5f, 0.2f);
+                InvokeRepeating("CheckerLoop", 2.5f, 0.3f);
                 Invoke("DelayedStart", 1.0f);
             }
         }
