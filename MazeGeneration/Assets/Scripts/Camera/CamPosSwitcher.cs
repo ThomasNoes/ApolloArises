@@ -4,13 +4,19 @@
 
     public class CamPosSwitcher : MonoBehaviour
     {
-        public float rayMaxDist = 20.0f;
-        private GameObject thisCamera, player, currentNextPortal, currentPrevPortal;    // TODO find and assign current portal pairs for each maze
-        private GameObject[] portalRenderQuads; // TODO and then figure out which maze ID you are currently in (or portal IDs currently used)
+        private GameObject thisCamera, player, currentNextPortal, currentPrevPortal;
+        private GameObject[] prevRenderQuadArray;
+        private GameObject[] nextRenderQuadArray;
+
         private FollowCam followCam;
         public PortalRenderController pRController;
+
+        private Vector3[] portalDirs;
         private LayerMask layerMask;
+
         private bool prevCollision = false, nextCollision = false;
+        private int currentMaze, mazeCount;
+        public float rayMaxDist = 15.0f;
 
         private void Start()
         {
@@ -18,74 +24,87 @@
             layerMask |= LayerMask.GetMask("Ignore Raycast");
             layerMask = ~layerMask;
 
+            portalDirs = new Vector3[4];
+
             thisCamera = gameObject;
             followCam = thisCamera.GetComponent<FollowCam>();
             player = GameObject.FindGameObjectWithTag("Player");
 
             if (player != null && followCam != null && pRController != null)
+            {
                 InvokeRepeating("CheckerLoop", 2.0f, 0.3f);
+
+                for (int i = 0; i < pRController.nextProjectionQuadArray.Length; i++)
+                {
+                    // TODO: find prevRenderQuadArray and nextRenderQuadArray objects;
+                }
+
+                currentMaze = pRController.currentMaze;
+                mazeCount = pRController.mazeCount;
+            }
         }
 
         /// <summary>
-        /// Switches camera position between previous and next maze
+        /// Switches camera position between previous and next maze. This can be controlled remotely (public)
         /// </summary>
         /// <param name="dir">0 = previous maze, 1 = next maze</param>
         public void PositionSwitch(int dir)
         {
             if (dir == 0)
             {
-                followCam.offset = -followCam.offset;   // TODO: Find a proper way to do this
+                if (followCam.offset > 0)
+                    followCam.offset = - followCam.offset;
             }
             else if (dir == 1)
             {
-                followCam.offset = +followCam.offset;   // TODO: Find a proper way to do this
+                if (followCam.offset < 0)
+                    followCam.offset = -1 * followCam.offset;
             }
         }
 
-        public void CurrentPortals()    // TODO: Use events to change currentNextPortal, currentPrevPortal; 
+        private void RaycastCheck()
         {
-
-        }
-
-        private void ResetBools()
-        {
-            nextCollision = false;
-            prevCollision = false;
-        }
-
-        private void CheckerLoop()
-        {
-            Vector3 dirPrevPortal =  - thisCamera.transform.position;
-            Vector3 dirNextPortal = -thisCamera.transform.position; // TODO find portal edge positions (+- center?)
+            if (currentPrevPortal == null || currentNextPortal == null)
+                return;
 
             RaycastHit hit;
 
-            if (Physics.Raycast(thisCamera.transform.position, dirNextPortal, out hit, rayMaxDist, layerMask))
+            for (int i = 0; i < 4; i++)
             {
-                if (hit.collider.tag == currentNextPortal.tag) // TODO: Make sure portals are tagged
+                if (i <= 1)
                 {
-                    nextCollision = true;
-                }
-            }
-            if (Physics.Raycast(thisCamera.transform.position, dirPrevPortal, out hit, rayMaxDist, layerMask))
-            {
-                if (hit.collider.tag == currentPrevPortal.tag) // TODO: Make sure portals are tagged
-                {
-                    prevCollision = true;
-                }
-            }
-
-            if (nextCollision && prevCollision)
-            {
-                if (Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) <
-                    Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position))  // TODO: find a better solution than distance
-                {
-                    PositionSwitch(1);
+                    portalDirs[i] = currentPrevPortal.transform.position - thisCamera.transform.position;
+                    // TODO: check edges instead
                 }
                 else
                 {
-                    PositionSwitch(0);
+                    portalDirs[i] = currentNextPortal.transform.position - thisCamera.transform.position;
+                    // TODO: check edges instead
                 }
+
+                if (Physics.Raycast(thisCamera.transform.position, portalDirs[i], out hit, rayMaxDist, layerMask))
+                {
+                    if (hit.collider.tag == currentNextPortal.tag) // TODO: Make sure portals are tagged
+                    {
+                        nextCollision = true;
+                    }
+                    else if (hit.collider.tag == currentPrevPortal.tag) // TODO: Make sure portals are tagged
+                    {
+                        prevCollision = true;
+                    }
+                }
+            }
+        }
+
+        private void DistanceCheck()
+        {
+            if (nextCollision && prevCollision)
+            {
+                PositionSwitch(Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) <
+                               Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position)
+                    ? 1
+                    : 0);
+
                 ResetBools();
             }
             else if (nextCollision)
@@ -98,8 +117,47 @@
                 PositionSwitch(0);
                 ResetBools();
             }
+        }
 
-            // TODO: Make sure that first and end maze behaviour is different YYY
+        private void CurrentMazeCheck()
+        {
+            if (currentMaze != pRController.currentMaze)
+            {
+                currentMaze = pRController.currentMaze;
+
+                if (currentMaze == 0)
+                {
+                    currentNextPortal = nextRenderQuadArray[currentMaze];
+                    PositionSwitch(1);
+                }
+                else if (currentMaze == mazeCount - 1)
+                {
+                    currentPrevPortal = prevRenderQuadArray[currentMaze];
+                    PositionSwitch(0);
+                }
+                else
+                {
+                    currentNextPortal = nextRenderQuadArray[currentMaze];
+                    currentPrevPortal = prevRenderQuadArray[currentMaze];
+                }
+            }
+        }
+
+        private void ResetBools()
+        {
+            nextCollision = false;
+            prevCollision = false;
+        }
+
+        private void CheckerLoop()  // This is a loop invoked in Start()
+        {
+            CurrentMazeCheck();
+
+            if (currentMaze == 0 && currentMaze == mazeCount - 1)
+                return;
+
+            RaycastCheck();
+            DistanceCheck();
         }
     }
 }
