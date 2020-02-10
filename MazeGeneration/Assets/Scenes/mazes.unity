@@ -236,6 +236,8 @@ MonoBehaviour:
   pillarOffset: 0.1
   prevProjectionQuadArray: []
   nextProjectionQuadArray: []
+  prevRenderQuadArray: []
+  nextRenderQuadArray: []
 --- !u!1 &777009145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,6 +1272,27 @@ PrefabInstance:
     - {fileID: 4385104830626132771, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
     - {fileID: 6388483862733474765, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
+--- !u!1 &2526136163395224740 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5369379566299229991, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+    type: 3}
+  m_PrefabInstance: {fileID: 2526136163395224739}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2526136163395224741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526136163395224740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3afcde426e9053145a8dcd37a96229df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pRController: {fileID: 451614001}
+  rayMaxDist: 15
+  portalWidth: 0
 --- !u!4 &7605872993242702298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5369379566299587961, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
