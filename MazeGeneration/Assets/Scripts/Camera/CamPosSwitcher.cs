@@ -17,7 +17,7 @@ namespace Assets.Scripts.Camera
 
         public bool useDistance = true;
         private bool prevCollision = false, nextCollision = false;
-        private int currentMaze, mazeCount;
+        private int currentMaze = -1, mazeCount;
         private float portalWidth, prevScore, nextScore;
         public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f, scoreModifier = 2.5f;
 
@@ -198,7 +198,7 @@ namespace Assets.Scripts.Camera
         {
             CurrentMazeCheck();
 
-            if (currentMaze == 0 && currentMaze == mazeCount - 1)
+            if (currentMaze == 0 || currentMaze == mazeCount - 1)
                 return;
 
             AngleCheck();

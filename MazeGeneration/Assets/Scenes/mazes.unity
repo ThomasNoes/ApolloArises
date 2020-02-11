@@ -1290,9 +1290,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afcde426e9053145a8dcd37a96229df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  followCamLeft: {fileID: 1165058067}
+  followCamRight: {fileID: 995948997}
   pRController: {fileID: 451614001}
+  useDistance: 1
   rayMaxDist: 15
-  portalWidth: 0
+  loopRepeatRate: 0.3
+  scoreModifier: 2.5
 --- !u!4 &7605872993242702298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5369379566299587961, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
