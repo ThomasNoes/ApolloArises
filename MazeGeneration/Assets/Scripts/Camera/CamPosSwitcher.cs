@@ -208,7 +208,10 @@ namespace Assets.Scripts.Camera
             else
                 RaycastCheck();
 
+            
+
             PositionSwitch(nextScore > prevScore ? 1 : 0);
         }
+
     }
 }
