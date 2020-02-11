@@ -33,6 +33,7 @@ public class TileInfo
         row = obj.row;
         column = obj.column;
         direction = obj.direction;
+        spelledDirection = SpelledDirection[obj.direction];
     }
 
     public bool IsInCorner()
@@ -113,17 +114,66 @@ public class TileInfo
     public bool IsVisibleThroughEntrance(TileInfo entrance)
     {
         bool visible = false;
-        Debug.Log("entrance " + entrance.spelledDirection + " and this tile " + spelledDirection);
 
+        if (entrance.GetOppositeDirection() == 2 && spelledDirection == "North")
+        {
+            if (entrance.column == column && entrance.row > row)
+            {
+                visible = true;
+            }
+        }
+        if (entrance.GetOppositeDirection() == 0 && spelledDirection == "South")
+        {
+            if (entrance.column == column && entrance.row < row)
+            {
+                visible = true;
+            }
+        }
+        if (entrance.GetOppositeDirection() == 3 && spelledDirection == "East")
+        {
+            if (entrance.row == row && entrance.column < column)
+            {
+                visible = true;
+            }
+        }
+        if (entrance.GetOppositeDirection() == 1 && spelledDirection == "West")
+        {
+            if (entrance.row == row && entrance.column > column)
+            {
+                visible = true;
+            }
+        }
 
         return visible;
     }
 
-    public bool IsInViewWithEntrance(TileInfo entrance)
+    public bool IsAdjacentwithSameDirection(TileInfo entrance)
     {
-        //To Do
+        bool adjacentAndSame = false;
 
-        return true;
+        if (entrance.direction == direction) //check if they are pointing in same direction
+        {
+            if(spelledDirection == "North" || spelledDirection == "South") // check if the direction is vertical
+            {
+                if (entrance.row == row && // check if same row
+                    (entrance.column == column + 1 || entrance.column == column - 1)) //check if it is the adjacent column
+                {
+                    adjacentAndSame = true;
+                }
+            }
+            if (spelledDirection == "East" || spelledDirection == "West") // check if the direction is horizontal
+            {
+                if (entrance.column == column && // check if same column
+                    (entrance.row == row + 1 || entrance.row == row - 1)) //check if it is the adjacent row
+                {
+                    adjacentAndSame = true;
+                }
+            }
+
+        }
+
+
+        return adjacentAndSame;
     }
 
     public bool IsSamePosition(TileInfo tile)
@@ -151,12 +201,25 @@ public class TileInfo
         }
     }
 
+    public int GetOppositeDirection(int i)
+    {
+        return (i + 2) % 4;
+    }
+    private int GetOppositeDirection()
+    {
+        return (direction + 2) % 4;
+    }
+
     public override int GetHashCode()
     {
         return row + column + direction;
     }
 
     public void PrintTile() {
-        Debug.Log("(" + row + ";" + column + ";" + direction + ")");
+        Debug.Log("(row " + row + "; column " + column + "; direction " + direction + ")");
+    }
+    public string TileToString()
+    {
+        return "(row " + row + "; column " + column + "; direction " + spelledDirection + ")";
     }
 }

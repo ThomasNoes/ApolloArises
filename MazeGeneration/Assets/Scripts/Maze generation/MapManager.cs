@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
+    public GameObject debugGizmo;
+
     public GameObject[] mazeGeneratorPrefab;
     public Transform playerHead;
+    GameObject tempMap;
 
     public int mazeRows;
     public int mazeCols;
@@ -59,11 +62,12 @@ public class MapManager : MonoBehaviour
         if (portalGenerationLocation == PortalGenerationType.Everywhere)
         {
             GenerateMapSequence();
-            Debug.Log("entered");
+        }
+        else
+        {
+            GenerateMapSequenceHallway();
         }
 
-        else
-            GenerateMapSequenceHallway();
         OffsetMap();
         /*
         //This is to debug the portal infos in the console
@@ -87,7 +91,7 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < mapSequence.Length; i++)
         {
             Vector3 mapSpawnPoint = new Vector3(transform.position.x + i * (mazeCols * tileWidth + 1), 0, 0);
-            GameObject tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[i].mapType], mapSpawnPoint, Quaternion.identity);
+            tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[i].mapType], mapSpawnPoint, Quaternion.identity);
             tempMap.name = i.ToString() + " - " + mapSequence[i].mapType.ToString();
             tempMap.transform.parent = transform;
 
@@ -140,7 +144,7 @@ public class MapManager : MonoBehaviour
         {
             //Debug.Log("Starting Maze " + i);
             Vector3 mapSpawnPoint = new Vector3(transform.position.x + i * (mazeCols * tileWidth + 1), 0, 0);
-            GameObject tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[i].mapType], mapSpawnPoint, Quaternion.identity);
+            tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[i].mapType], mapSpawnPoint, Quaternion.identity);
             tempMap.name = i.ToString() + " - " + mapSequence[i].mapType.ToString();
             tempMap.transform.parent = transform;
 
@@ -183,14 +187,14 @@ public class MapManager : MonoBehaviour
                 if ((int)mapSequence[i + 1].mapType == 1) // if the next maze segment is a room
                     mapSequence[i].endSeed = GenerateRandomRoomDeadEnd(mapSequence[i].startSeed);
                 else
-                    mapSequence[i].endSeed = GenerateRandomHallwayDeadEnd(mapSequence[i].startSeed); 
+                    mapSequence[i].endSeed = GenerateRandomHallwayDeadEnd(mapSequence[i].startSeed, i); 
             }
             mapScript.Generate(mapSequence[i]);
             //if (mapSequence[i].isEndSeeded == false)
             if (i + 1 < mapSequence.Length && mapSequence[i + 1].mapType == 0) // if we are not at the last maze segment and the next segment is a maze segment
-                Debug.Log(mapSequence[i].endSeed); // test this out
+                //Debug.Log(mapSequence[i].endSeed); // test this out
                 mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed); // DA FUQ!!!!! is this not done in line 186? what is the point?
-                Debug.Log(mapSequence[i].endSeed); // test this out
+                //Debug.Log(mapSequence[i].endSeed); // test this out
 
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
@@ -276,8 +280,9 @@ public class MapManager : MonoBehaviour
         return possibleTiles[idx];
     }
 
-    TileInfo GenerateRandomHallwayDeadEnd(TileInfo flag)
+    TileInfo GenerateRandomHallwayDeadEnd(TileInfo flag, int mazeSegment)
     {
+
         //Geeting all tile position in a maze segment 
         TileInfo startCoord = new TileInfo(flag.row, flag.column, -1);
         List<TileInfo> possibleCoordinates = new List<TileInfo>();
@@ -337,16 +342,27 @@ public class MapManager : MonoBehaviour
 
             if (t.IsPerpendicular()) //Remove direction that are perpendicular to maze edges  
             {
+                //Instantiate(debugGizmo, new Vector3(transform.position.x + t.column * tileWidth, 0, transform.position.z - t.row * tileWidth), Quaternion.identity);
                 tilesToRemove.Add(t);          
             }
             else if (t.IsLeadingIntoEntrance(flag)) //Remove directions that lead into reserved tile next to entrance
             {
+                //Debug.Log("removed " + t.TileToString());
                 tilesToRemove.Add(t);
             }
             else if (t.IsVisibleThroughEntrance(flag))
             {
+                //Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
+                //Debug.Log("Maze Segment " + mazeSegment);
                 tilesToRemove.Add(t);
             }
+            else if (t.IsAdjacentwithSameDirection(flag))
+            {
+                Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
+                Debug.Log("Maze Segment " + mazeSegment);
+                tilesToRemove.Add(t);
+            }
+
             // remove some based on start coordinate (called flag)
             //Remove exit tiles that are visible through entrance portal
             //Remove exit tiles that are in view of the entrance portal
