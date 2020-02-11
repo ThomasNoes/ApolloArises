@@ -5,11 +5,11 @@ namespace Assets.Scripts.Camera
 
     public class CamPosSwitcher : MonoBehaviour
     {
+        public GameObject followCamLeft, followCamRight;
         private GameObject thisCamera, player, currentNextPortal, currentPrevPortal;
-        private GameObject[] prevRenderQuadArray;
-        private GameObject[] nextRenderQuadArray;
+        private GameObject[] prevRenderQuadArray, nextRenderQuadArray;
 
-        private FollowCam followCam;
+        private FollowCam followCamScriptLeft, followCamScriptRight;
         public PortalRenderController pRController;
 
         private Vector3[] portalDirs;
@@ -28,10 +28,13 @@ namespace Assets.Scripts.Camera
             portalDirs = new Vector3[4];
 
             thisCamera = gameObject;
-            followCam = thisCamera.GetComponent<FollowCam>();
             player = GameObject.FindGameObjectWithTag("Player");
 
-            if (player != null && followCam != null && pRController != null)
+            followCamScriptLeft = followCamLeft?.GetComponent<FollowCam>();
+            followCamScriptRight = followCamRight?.GetComponent<FollowCam>();
+
+
+            if (player != null && followCamScriptLeft != null && pRController != null)
             {
                 InvokeRepeating("CheckerLoop", 2.5f, 0.3f);
                 Invoke("DelayedStart", 1.0f);
@@ -56,13 +59,19 @@ namespace Assets.Scripts.Camera
         {
             if (dir == 0)
             {
-                if (followCam.offset > 0)
-                    followCam.offset = - followCam.offset;
+                if (followCamScriptLeft.offset > 0)
+                {
+                    followCamScriptLeft.offset = -followCamScriptLeft.offset;
+                    followCamScriptRight.offset = -followCamScriptRight.offset;
+                }
             }
             else if (dir == 1)
             {
-                if (followCam.offset < 0)
-                    followCam.offset = -1 * followCam.offset;
+                if (followCamScriptLeft.offset < 0)
+                {
+                    followCamScriptLeft.offset = -1 * followCamScriptLeft.offset;
+                    followCamScriptRight.offset = -1 * followCamScriptRight.offset;
+                }
             }
         }
 
@@ -93,11 +102,11 @@ namespace Assets.Scripts.Camera
 
                 if (Physics.Raycast(thisCamera.transform.position, portalDirs[i], out hit, rayMaxDist, layerMask))
                 {
-                    if (hit.collider.tag == currentNextPortal.tag) // TODO: Make sure portals are tagged
+                    if (hit.collider.tag == currentNextPortal.tag)
                     {
                         nextCollision = true;
                     }
-                    else if (hit.collider.tag == currentPrevPortal.tag) // TODO: Make sure portals are tagged
+                    else if (hit.collider.tag == currentPrevPortal.tag)
                     {
                         prevCollision = true;
                     }
