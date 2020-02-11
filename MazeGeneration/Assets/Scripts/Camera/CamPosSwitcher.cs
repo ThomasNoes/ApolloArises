@@ -15,10 +15,13 @@ namespace Assets.Scripts.Camera
         private Vector3[] portalDirs;
         private LayerMask layerMask;
 
+        public bool useDistance = true;
         private bool prevCollision = false, nextCollision = false;
         private int currentMaze, mazeCount;
-        public float rayMaxDist = 15.0f, portalWidth;
+        private float portalWidth, prevScore, nextScore;
+        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f, scoreModifier = 2.5f;
 
+        #region Start
         private void Start()
         {
             layerMask = LayerMask.GetMask("Player");
@@ -36,7 +39,7 @@ namespace Assets.Scripts.Camera
 
             if (player != null && followCamScriptLeft != null && pRController != null)
             {
-                InvokeRepeating("CheckerLoop", 2.5f, 0.3f);
+                InvokeRepeating("CheckerLoop", 2.5f, loopRepeatRate);
                 Invoke("DelayedStart", 1.0f);
             }
         }
@@ -50,7 +53,9 @@ namespace Assets.Scripts.Camera
             mazeCount = pRController.mazeCount;
             portalWidth = pRController.portalWidth;
         }
+        #endregion
 
+        #region PositionSwitch
         /// <summary>
         /// Switches camera position between previous and next maze. This can be controlled remotely (public)
         /// </summary>
@@ -73,8 +78,12 @@ namespace Assets.Scripts.Camera
                     followCamScriptRight.offset = -1 * followCamScriptRight.offset;
                 }
             }
-        }
 
+            ResetValues();
+        }
+        #endregion
+
+        #region RaycastCheck
         private void RaycastCheck()
         {
             if (currentPrevPortal == null || currentNextPortal == null)
@@ -104,38 +113,24 @@ namespace Assets.Scripts.Camera
                 {
                     if (hit.collider.tag == currentNextPortal.tag)
                     {
-                        nextCollision = true;
+                        nextScore += 1000;
                     }
                     else if (hit.collider.tag == currentPrevPortal.tag)
                     {
-                        prevCollision = true;
+                        prevScore += 1000;
                     }
                 }
             }
         }
+        #endregion
 
+        #region AngleCheck
         private void AngleCheck()
         {
-            if (nextCollision && prevCollision)
-            {
-                PositionSwitch(Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position) <
-                               Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position)
-                    ? 1
-                    : 0);
-
-                ResetBools();
-            }
-            else if (nextCollision)
-            {
-                PositionSwitch(1);
-                ResetBools();
-            }
-            else if (prevCollision)
-            {
-                PositionSwitch(0);
-                ResetBools();
-            }
+            nextScore = Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position);
+            prevScore = Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position);
         }
+        #endregion
 
         private void CurrentMazeCheck()
         {
@@ -161,12 +156,21 @@ namespace Assets.Scripts.Camera
             }
         }
 
-        private void ResetBools()
+        private void DistanceCheck()
+        {
+            nextScore = Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * scoreModifier;
+            prevScore = Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * scoreModifier;
+        }
+
+        private void ResetValues()
         {
             nextCollision = false;
             prevCollision = false;
+            nextScore = 0;
+            prevScore = 0;
         }
 
+        #region PortalEdgeFinder
         private Vector3 PortalEdgeFinder(bool next, bool right)
         {
             Vector3 tempEdgePos = new Vector3();
@@ -188,6 +192,7 @@ namespace Assets.Scripts.Camera
 
             return tempEdgePos;
         }
+        #endregion
 
         private void CheckerLoop()  // This is a loop invoked in Start()
         {
@@ -196,8 +201,14 @@ namespace Assets.Scripts.Camera
             if (currentMaze == 0 && currentMaze == mazeCount - 1)
                 return;
 
-            RaycastCheck();
             AngleCheck();
+
+            if (useDistance)
+                DistanceCheck();
+            else
+                RaycastCheck();
+
+            PositionSwitch(nextScore > prevScore ? 1 : 0);
         }
     }
 }
