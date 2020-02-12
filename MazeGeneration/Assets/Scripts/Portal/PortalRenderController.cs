@@ -48,7 +48,7 @@ public class PortalRenderController : MonoBehaviour
         for (int i = 0; i < mazeCount - 1; i++)
         {
             TileInfo currentPortal = mapManager.mapSequence[i].endSeed;
-            currentPortal.PrintTile();
+            //currentPortal.PrintTile();
             GameObject tempPortal = Instantiate(portalPrefab, new Vector3(transform.position.x + i * cameraOffset + currentPortal.column * portalWidth, 0, transform.position.z - currentPortal.row * portalWidth), Quaternion.identity);
             Teleporter tempScript = tempPortal.GetComponent<Teleporter>();
             BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();

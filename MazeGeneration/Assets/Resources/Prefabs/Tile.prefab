@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 740540993216588667}
   - component: {fileID: 740540993216588660}
-  - component: {fileID: 1905776264782445600}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -48,19 +47,6 @@ MonoBehaviour:
   tileID: 0
   wallArray: 
   tileWidth: 0
---- !u!65 &1905776264782445600
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 740540993216588661}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.20976591, z: 1}
-  m_Center: {x: 0, y: -0.09820938, z: 0}
 --- !u!1 &740540993738681865
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +58,7 @@ GameObject:
   - component: {fileID: 740540993738681864}
   - component: {fileID: 740540993738681869}
   - component: {fileID: 740540993738681870}
-  - component: {fileID: 740540993738681871}
+  - component: {fileID: 2998176582415543387}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -116,6 +102,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -127,6 +114,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -139,8 +127,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &740540993738681871
-MeshCollider:
+--- !u!65 &2998176582415543387
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -149,7 +137,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000002, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0.05}

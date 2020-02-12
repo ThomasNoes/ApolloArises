@@ -19,14 +19,14 @@
 
             struct vertexInput
             {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
+                float4 vertex : POSITION; //object space position of vertex
+                float2 uv : TEXCOORD0; //UV coordinates for the images _LeftTex, _RightTex
             };
 
             struct vertexOutput
             {
-                float2 uvLeft : TEXCOORD0;
-                float2 uvRight : TEXCOORD1;
+                float2 uvLeft : TEXCOORD0; //differentiate between the two images for each eye by having UV for each
+				float2 uvRight : TEXCOORD1;
                 float4 vertex : SV_POSITION;
             };
 
@@ -48,7 +48,7 @@
             {
                 return lerp(tex2D(_LeftTex, i.uvLeft), 
                     tex2D(_RightTex, i.uvRight), 
-                    unity_StereoEyeIndex);
+                    unity_StereoEyeIndex); // selecting which eye to render to.
             }
             ENDCG
         }
