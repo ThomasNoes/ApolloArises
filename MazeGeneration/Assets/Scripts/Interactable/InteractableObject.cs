@@ -21,7 +21,7 @@
 
         private void DelayedStart()
         {
-            if (parentObject)
+            if (isParentObject)
                 activated = true;
         }
 
@@ -48,7 +48,7 @@
 
         public void CopySpawner(int dir, Collider col)    // 0 = prev, 1 = next
         {
-            if (copyExist || !parentObject)
+            if (copyExist || !isParentObject)
                 return;
 
             Debug.Log("Running");

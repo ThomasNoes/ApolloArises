@@ -320,6 +320,7 @@ GameObject:
   - component: {fileID: 5389408691304948379}
   - component: {fileID: 6852313442744497902}
   - component: {fileID: 9185601504404125415}
+  - component: {fileID: 3231733612033302910}
   m_Layer: 0
   m_Name: RightEyeAnchor
   m_TagString: Untagged
@@ -416,6 +417,19 @@ MonoBehaviour:
   offset: 0
   isStereoscopic: 1
   isRightEye: 1
+--- !u!135 &3231733612033302910
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5369379566299229989}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5369379566299229991
 GameObject:
   m_ObjectHideFlags: 0
