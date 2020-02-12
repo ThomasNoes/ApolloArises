@@ -10,12 +10,24 @@ public class Teleporter : MonoBehaviour
     public Transform renderQuad;
     public Transform projectionQuad;
     public float cameraOffset;
+    private List<GameObject> teleportCopies;
+
+    void Start()
+    {
+        teleportCopies = new List<GameObject>();
+    }
+
+    public void AddTeleportCopy(GameObject obj)
+    {
+        if (teleportCopies != null)
+            teleportCopies.Add(obj);
+    }
 
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log(other.name + " Exited " + transform.name);
+            //Debug.Log(other.name + " Exited " + transform.name);
             PortalRenderController prController = null;
             if (!tutorialMode)
             {
@@ -43,6 +55,15 @@ public class Teleporter : MonoBehaviour
                         prController.TeleportPlayer(portalID);
                     other.transform.root.Translate(-cameraOffset, 0, 0, Space.World);
                 }
+
+                if (teleportCopies.Count > 0)
+                {
+                    foreach (var item in teleportCopies)
+                    {
+                        Destroy(item);
+                    }
+                }
+
             }
         }
         //advance culling mask array
