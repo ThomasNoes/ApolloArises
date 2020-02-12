@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject debugGizmo;
-
     public GameObject[] mazeGeneratorPrefab;
     public Transform playerHead;
     GameObject tempMap;
@@ -309,16 +307,20 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
-        if (shutoffCorners.Count > 0)
+        if( true || !(mazeCols <= 3 && mazeRows <=3)) //if the maze is 3x3 or smaller, there is not space for small room unless we allow for shutting of corners
         {
-        //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
-            foreach (TileInfo t in shutoffCorners)
+            List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
+            if (shutoffCorners.Count > 0)
             {
-                possibleCoordinates.Remove(t);
-        //            Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
+            //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
+                foreach (TileInfo t in shutoffCorners)
+                {
+                    possibleCoordinates.Remove(t);
+            //            Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
+                }
             }
         }
+        
 
         //Now we have all tiles that a portal can be placed on.
         //Now we include the possible directions the portal can have on the remaining tiles.

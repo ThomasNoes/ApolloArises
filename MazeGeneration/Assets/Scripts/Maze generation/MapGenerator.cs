@@ -4,12 +4,13 @@ using UnityEngine;
 
 public abstract class MapGenerator : MonoBehaviour
 {
-    public int mazeRows;
-    public int mazeColumns;
+    public int mazeRows; // size of maze
+    public int mazeColumns; // size of maze
     public float tileWidth;
     public GameObject tilePrefab;
-    public Tile[,] tileArray;
+    public Tile[,] tileArray; //
     public int[,] mazeIntArray;
+    public GameObject[] aStarTiles;
 
     public void Initialize()
     {

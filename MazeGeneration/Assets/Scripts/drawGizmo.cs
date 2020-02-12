@@ -51,4 +51,10 @@ public class drawGizmo : MonoBehaviour
             }
         }
     }
+
+    public void SetColor(Color color)
+    {
+        this.color = color;
+    }
+
 }

@@ -24,7 +24,14 @@ public class MazeGenerator : MapGenerator
             Generate(info.startSeed);
         }
         else //if both start and end are seeded
+        {
             Generate(info.startSeed, info.endSeed);
+        }
+        //all tile ID should be set now. Find optimal route in this maze segment!
+        aStarTiles = AStarPathFinding.BeginAStar();
+
+
+
         GenerateIntArray();
     }
 
