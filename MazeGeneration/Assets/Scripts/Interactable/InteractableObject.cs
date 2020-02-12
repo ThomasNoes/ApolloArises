@@ -37,21 +37,19 @@
             }
         }
 
-        private void Update()   // TODO: Used for debugging, remove later
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log("Key registred");
-                CopySpawner(1, null);
-            }
-        }
+        //private void Update()   // TODO: Used for debugging, remove later
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F))
+        //    {
+        //        CopySpawner(1, null);
+        //    }
+        //}
 
         public void CopySpawner(int dir, Collider col)    // 0 = prev, 1 = next
         {
             if (copyExist || !isParentObject)
                 return;
 
-            Debug.Log("Running");
             thisObjectCopy = Instantiate(gameObject, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z), transform.rotation);
 
             InteractableObject tempScript = thisObjectCopy.GetComponent<InteractableObject>();

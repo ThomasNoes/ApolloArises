@@ -6,7 +6,7 @@ public class IsVisible : MonoBehaviour
 {
     private Renderer thisRenderer;
     private Texture2D disabledTexture;
-    private RenderTexture enabledTexture;
+    private Material enabledTexture;
     private bool active = false;
 
     private void Start()
@@ -17,7 +17,7 @@ public class IsVisible : MonoBehaviour
     private void DelayedStart()
     {
         thisRenderer = gameObject.GetComponent<Renderer>();
-        enabledTexture = RenderTexture.active;
+        enabledTexture = thisRenderer.material;
         disabledTexture = new Texture2D(1, 1);
         disabledTexture.SetPixel(0, 0, Color.black);
         disabledTexture.Apply();
@@ -25,7 +25,6 @@ public class IsVisible : MonoBehaviour
         if (thisRenderer != null && enabledTexture != null)
             active = true;
 
-        Debug.Log("IS WORKING: " + active);
     }
 
     static bool VisibleFromCamera(Renderer renderer, Camera camera)
@@ -41,7 +40,7 @@ public class IsVisible : MonoBehaviour
             thisRenderer.material.SetTexture("_MainTex", disabledTexture);
             return;
         }
-        thisRenderer.material.SetTexture("_MainTex", enabledTexture);
+        thisRenderer.material.SetTexture("_MainTex", enabledTexture.mainTexture);
     }
 
     private void LateUpdate()

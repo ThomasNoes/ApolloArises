@@ -15,11 +15,11 @@ namespace Assets.Scripts.Camera
         private Vector3[] portalDirs;
         private LayerMask layerMask;
 
-        public bool useDistance = true;
+        public bool useDistance = true, useCameraAngle = true;
         private bool prevCollision = false, nextCollision = false;
-        private int currentMaze = -1, mazeCount;
+        private int currentMaze = -1, mazeCount, currentDir = -1;
         private float portalWidth, prevScore, nextScore;
-        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f, scoreModifier = 2.5f;
+        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f, scoreModifier = 3.0f;
 
         #region Start
         private void Start()
@@ -62,6 +62,12 @@ namespace Assets.Scripts.Camera
         /// <param name="dir">0 = previous maze, 1 = next maze</param>
         public void PositionSwitch(int dir)
         {
+            if (dir == currentDir)
+            {
+                ResetValues();
+                return;
+            }
+
             if (dir == 0)
             {
                 if (followCamScriptLeft.offset > 0)
@@ -79,6 +85,7 @@ namespace Assets.Scripts.Camera
                 }
             }
 
+            currentDir = dir;
             ResetValues();
         }
         #endregion
@@ -113,11 +120,11 @@ namespace Assets.Scripts.Camera
                 {
                     if (hit.collider.tag == currentNextPortal.tag)
                     {
-                        nextScore += 1000;
+                        prevScore += 1000;
                     }
                     else if (hit.collider.tag == currentPrevPortal.tag)
                     {
-                        prevScore += 1000;
+                        nextScore += 1000;
                     }
                 }
             }
@@ -127,8 +134,16 @@ namespace Assets.Scripts.Camera
         #region AngleCheck
         private void AngleCheck()
         {
-            nextScore = Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position);
-            prevScore = Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position);
+            if (useCameraAngle)
+            {
+                nextScore = Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position);
+                prevScore = Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position);
+            }
+            else
+            {
+                nextScore = Vector3.Angle(player.transform.forward, currentNextPortal.transform.position);
+                prevScore = Vector3.Angle(player.transform.forward, currentPrevPortal.transform.position);
+            }
         }
         #endregion
 
@@ -145,21 +160,21 @@ namespace Assets.Scripts.Camera
                 }
                 else if (currentMaze == mazeCount - 1)
                 {
-                    currentPrevPortal = prevRenderQuadArray[currentMaze];
+                    currentPrevPortal = prevRenderQuadArray[currentMaze - 1];
                     PositionSwitch(0);
                 }
                 else
                 {
                     currentNextPortal = nextRenderQuadArray[currentMaze];
-                    currentPrevPortal = prevRenderQuadArray[currentMaze];
+                    currentPrevPortal = prevRenderQuadArray[currentMaze - 1];
                 }
             }
         }
 
         private void DistanceCheck()
         {
-            nextScore = Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * scoreModifier;
-            prevScore = Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * scoreModifier;
+            nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * scoreModifier;
+            prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * scoreModifier;
         }
 
         private void ResetValues()
@@ -208,9 +223,7 @@ namespace Assets.Scripts.Camera
             else
                 RaycastCheck();
 
-            
-
-            PositionSwitch(nextScore > prevScore ? 1 : 0);
+            PositionSwitch(nextScore < prevScore ? 1 : 0);
         }
 
     }

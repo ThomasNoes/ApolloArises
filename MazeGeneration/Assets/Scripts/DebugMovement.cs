@@ -7,6 +7,7 @@ public class DebugMovement : MonoBehaviour
     CharacterController characterController;
 
     public float speed = 6.0f;
+    public float rotSpeed = 50.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
 
@@ -19,6 +20,15 @@ public class DebugMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.E))
+        {
+            transform.Rotate(0, rotSpeed * Time.deltaTime, 0);
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            transform.Rotate(0, -rotSpeed * Time.deltaTime, 0);
+        }
+
         if (characterController.isGrounded)
         {
             // We are grounded, so recalculate
