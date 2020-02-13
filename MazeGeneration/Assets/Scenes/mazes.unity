@@ -221,8 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14135e9dc8f71f341b32833c9d8c29dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  previousPortalCameraLeftEye: {fileID: 1813671424}
-  previousPortalCameraRightEye: {fileID: 1347709476}
+  previousPortalCameraLeftEye: {fileID: 1165058068}
+  previousPortalCameraRightEye: {fileID: 995948998}
   nextPortalCameraLeftEye: {fileID: 1165058068}
   nextPortalCameraRightEye: {fileID: 995948998}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
@@ -1104,7 +1104,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739769, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_Radius
-      value: 0.05
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739769, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -1114,7 +1114,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739770, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_Radius
-      value: 0.05
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739770, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
