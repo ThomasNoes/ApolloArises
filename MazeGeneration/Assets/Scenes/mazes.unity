@@ -1105,6 +1105,11 @@ PrefabInstance:
       propertyPath: pRController
       value: 
       objectReference: {fileID: 451614001}
+    - target: {fileID: 1776048526178739750, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: useCameraAngle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739768, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: speed

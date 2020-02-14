@@ -30,7 +30,7 @@ namespace Assets.Scripts.Camera
 
             portalDirs = new Vector3[4];
 
-            thisCamera = gameObject;
+            thisCamera = Camera.main.gameObject;
             player = GameObject.FindGameObjectWithTag("Player");
 
             followCamScriptLeft = followCamLeft?.GetComponent<FollowCam>();
