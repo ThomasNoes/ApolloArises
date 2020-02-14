@@ -6,17 +6,26 @@ using UnityEngine;
 //This is for
 
 public class Tile : MonoBehaviour {
-    //for A Star
-    public int row;
-    public int column;
-    private int gCost = 0;
-    private int hCost = 0;
-    private Tile parent;
 
+    [Header("A Star information")]
+    //A star information
+    public bool isAStarTile = false;
+    public bool hecked = false;
+    public int nextDistance;
+    public int prevdistance;
 
+    [Header("Tile information")]
+    //tile information
     public int tileID;
     public int[] wallArray; //[0] = north, [1] = east, [2]= south, [3] = west. 1 = traversable / no wall, 0 = not traversable / wall
     public float tileWidth;
+
+    //for A Star algorithm
+    private int row;
+    private int column;
+    private int gCost = 0;
+    private int hCost = 0;
+    private Tile parent;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
@@ -136,5 +145,33 @@ public class Tile : MonoBehaviour {
     public void SetParent(Tile parent)
     {
         this.parent = parent;
+    }
+    public int GetRow()
+    {
+        return row;
+    }
+    public void SetRow(int r)
+    {
+        row = r;
+    }
+    public int GetCol()
+    {
+        return column;
+    }
+    public void SetCol(int c)
+    {
+        column = c;
+    }
+    public void ApproveTile(int index, int length)
+    {
+        isAStarTile = true;
+        nextDistance = index;
+        prevdistance = length;
+    }
+    public void DisapproveTile(int index, int length)
+    {
+        isAStarTile = true;
+        //pathIndex = index;
+        //pathLength = length;
     }
 }

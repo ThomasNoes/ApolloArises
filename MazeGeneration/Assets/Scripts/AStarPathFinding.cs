@@ -36,6 +36,7 @@ public  class AStarPathFinding : MonoBehaviour
         DrawGizmo(start, Color.green);
         DrawGizmo(goal, Color.red);
 
+
         return aStarTiles;
     }
 
@@ -61,19 +62,19 @@ public  class AStarPathFinding : MonoBehaviour
                 switch (i)
                 {
                     case 0:
-                        neighbor = tileArray[current.row - 1, current.column]; //neighbor tile north
+                        neighbor = tileArray[current.GetRow() - 1, current.GetCol()]; //neighbor tile north
                         CheckNeighbor(current, neighbor);
                         break;
                     case 1:
-                        neighbor = tileArray[current.row, current.column + 1]; //neighbor tile north
+                        neighbor = tileArray[current.GetRow(), current.GetCol() + 1]; //neighbor tile north
                         CheckNeighbor(current, neighbor);
                         break;
                     case 2:
-                        neighbor = tileArray[current.row + 1, current.column]; //neighbor tile north
+                        neighbor = tileArray[current.GetRow() + 1, current.GetCol()]; //neighbor tile north
                         CheckNeighbor(current, neighbor);
                         break;
                     case 3:
-                        neighbor = tileArray[current.row, current.column - 1]; //neighbor tile north
+                        neighbor = tileArray[current.GetRow(), current.GetCol() - 1]; //neighbor tile north
                         CheckNeighbor(current, neighbor);
                         break;
                     default:
@@ -115,7 +116,17 @@ public  class AStarPathFinding : MonoBehaviour
         path.Add(current);
         path.Reverse();
 
+        ApproveTiles(path);
+
         return path;
+    }
+
+    private void ApproveTiles(List<Tile> tiles)
+    {
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            tiles[i].ApproveTile(i, tiles.Count);
+        }
     }
 
     private void SetHCosts(Tile[,] tiles)
@@ -129,7 +140,7 @@ public  class AStarPathFinding : MonoBehaviour
     private int GetDistance(Tile from, Tile to)
     {
         //manhattan Distance
-        return (Mathf.Abs(from.row - to.row) + Mathf.Abs(from.column - to.column));
+        return (Mathf.Abs(from.GetRow() - to.GetRow()) + Mathf.Abs(from.GetCol() - to.GetCol()));
     }
 
     private Tile FindLowestFTile(List<Tile> tiles)
@@ -192,7 +203,7 @@ public  class AStarPathFinding : MonoBehaviour
     {
         GameObject gizmo = Instantiate(gizmoPrefab, t.transform);
         gizmo.GetComponent<drawGizmo>().SetColor(color);
-        gizmo.name = "Gizmo: R" + t.row + "C" + t.column;
+        gizmo.name = "Gizmo: R" + t.GetRow() + "C" + t.GetCol();
     }
 
     private void SetGizmoPrefab()
