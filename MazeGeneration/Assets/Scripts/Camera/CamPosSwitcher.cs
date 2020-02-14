@@ -177,6 +177,12 @@ namespace Assets.Scripts.Camera
             prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * scoreModifier;
         }
 
+        static bool VisibleFromCamera(Renderer renderer, Camera camera)
+        {
+            Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
+            return GeometryUtility.TestPlanesAABB(frustumPlanes, renderer.bounds);
+        }
+
         private void ResetValues()
         {
             nextCollision = false;
