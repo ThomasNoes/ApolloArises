@@ -4,12 +4,13 @@ using UnityEngine;
 
 public abstract class MapGenerator : MonoBehaviour
 {
-    public int mazeRows;
-    public int mazeColumns;
+    public int mazeRows; // size of maze
+    public int mazeColumns; // size of maze
     public float tileWidth;
     public GameObject tilePrefab;
-    public Tile[,] tileArray;
+    public Tile[,] tileArray; //
     public int[,] mazeIntArray;
+    public List<Tile> aStarTiles;
 
     public void Initialize()
     {
@@ -22,10 +23,12 @@ public abstract class MapGenerator : MonoBehaviour
             {
                 Vector3 tileSpawnPosition = new Vector3(transform.position.x + j * tileWidth, 0, transform.position.z - i * tileWidth);
                 GameObject emptyTile = Instantiate(tilePrefab, tileSpawnPosition, Quaternion.identity);
-                emptyTile.name = "Tile " + (mazeColumns * i + j).ToString();
+                //emptyTile.name = "Tile " + (mazeColumns * i + j).ToString();
+                emptyTile.name = "Tile R" + i + "C" + j;
                 emptyTile.transform.parent = transform;
                 tileArray[i, j] = emptyTile.GetComponent<Tile>();
                 tileArray[i, j].SetWidth(tileWidth);
+                tileArray[i, j].SetRowAndColumn(i,j);
             }
         }
         //Debug.Log(name + " initialized.");

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
-    public GameObject debugGizmo;
-
     public GameObject[] mazeGeneratorPrefab;
     public Transform playerHead;
     GameObject tempMap;
@@ -192,9 +190,23 @@ public class MapManager : MonoBehaviour
             mapScript.Generate(mapSequence[i]);
             //if (mapSequence[i].isEndSeeded == false)
             if (i + 1 < mapSequence.Length && mapSequence[i + 1].mapType == 0) // if we are not at the last maze segment and the next segment is a maze segment
-                //Debug.Log(mapSequence[i].endSeed); // test this out
-                mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed); // DA FUQ!!!!! is this not done in line 186? what is the point?
-                //Debug.Log(mapSequence[i].endSeed); // test this out
+                mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed);
+
+            //A star Path Finding
+            if (i == 0)
+            {
+                //we need a start position
+            }
+            else if (i == mapSequence.Length-1)
+            {
+                //we need a end destination
+            }
+            else
+            {
+                AStarPathFinding aStar = new AStarPathFinding();
+                aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
+            }
+
 
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
@@ -309,16 +321,20 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
-        if (shutoffCorners.Count > 0)
+        if( true || !(mazeCols <= 3 && mazeRows <=3)) //if the maze is 3x3 or smaller, there is not space for small room unless we allow for shutting of corners
         {
-        //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
-            foreach (TileInfo t in shutoffCorners)
+            List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
+            if (shutoffCorners.Count > 0)
             {
-                possibleCoordinates.Remove(t);
-        //            Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
+            //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
+                foreach (TileInfo t in shutoffCorners)
+                {
+                    possibleCoordinates.Remove(t);
+            //            Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
+                }
             }
         }
+        
 
         //Now we have all tiles that a portal can be placed on.
         //Now we include the possible directions the portal can have on the remaining tiles.
@@ -358,8 +374,8 @@ public class MapManager : MonoBehaviour
             }
             else if (t.IsAdjacentwithSameDirection(flag))
             {
-                Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
-                Debug.Log("Maze Segment " + mazeSegment);
+                //Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
+                //Debug.Log("Maze Segment " + mazeSegment);
                 tilesToRemove.Add(t);
             }
 

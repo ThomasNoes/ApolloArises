@@ -6,6 +6,14 @@ using UnityEngine;
 //This is for
 
 public class Tile : MonoBehaviour {
+    //for A Star
+    public int row;
+    public int column;
+    private int gCost = 0;
+    private int hCost = 0;
+    private Tile parent;
+
+
     public int tileID;
     public int[] wallArray; //[0] = north, [1] = east, [2]= south, [3] = west. 1 = traversable / no wall, 0 = not traversable / wall
     public float tileWidth;
@@ -13,6 +21,12 @@ public class Tile : MonoBehaviour {
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
         tileID = 0;
+    }
+
+    public void SetRowAndColumn(int row, int column)
+    {
+        this.row = row;
+        this.column = column;
     }
 
     public void SetWidth (float width) {
@@ -93,5 +107,34 @@ public class Tile : MonoBehaviour {
 
     public int GetTileID () {
         return tileID;
+    }
+
+    public int GetG()
+    {
+        return gCost;
+    }
+    public void SetG( int g)
+    {
+        gCost = g;
+    }
+    public int GetH()
+    {
+        return hCost;
+    }
+    public void SetH(int h)
+    {
+        hCost = h;
+    }
+    public int GetF()
+    {
+        return gCost + hCost;
+    }
+    public Tile GetParent()
+    {
+        return parent;
+    }
+    public void SetParent(Tile parent)
+    {
+        this.parent = parent;
     }
 }
