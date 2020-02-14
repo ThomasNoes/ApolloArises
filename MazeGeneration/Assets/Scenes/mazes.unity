@@ -1110,6 +1110,11 @@ PrefabInstance:
       propertyPath: useCameraAngle
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1776048526178739750, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: rendererInViewCheck
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739768, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: speed
@@ -1266,7 +1271,8 @@ MonoBehaviour:
   followCamLeft: {fileID: 1165058067}
   followCamRight: {fileID: 995948997}
   pRController: {fileID: 451614001}
-  useDistance: 1
+  distanceCheck: 1
+  rendererInViewCheck: 0
   useCameraAngle: 1
   rayMaxDist: 15
   loopRepeatRate: 0.3

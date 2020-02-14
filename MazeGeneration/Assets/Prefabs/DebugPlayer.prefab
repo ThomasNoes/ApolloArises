@@ -129,7 +129,13 @@ MonoBehaviour:
   speed: 7
   rotSpeed: 50
   jumpSpeed: 8
-  gravity: 15
+  axes: 0
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60
 --- !u!114 &1776048526178739750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,8 +151,9 @@ MonoBehaviour:
   followCamLeft: {fileID: 0}
   followCamRight: {fileID: 0}
   pRController: {fileID: 0}
-  useDistance: 1
-  useCameraAngle: 0
+  distanceCheck: 1
+  rendererInViewCheck: 1
+  useCameraAngle: 1
   rayMaxDist: 15
   loopRepeatRate: 0.4
   scoreModifier: 4
