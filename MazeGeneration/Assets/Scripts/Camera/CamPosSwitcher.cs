@@ -19,7 +19,7 @@ namespace Assets.Scripts.Camera
         private bool prevCollision = false, nextCollision = false;
         private int currentMaze = -1, mazeCount, currentDir = -1;
         private float portalWidth, prevScore, nextScore;
-        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f, scoreModifier = 3.0f;
+        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f, scoreModifier = 8.0f;
 
         #region Start
         private void Start()
