@@ -18,7 +18,7 @@ public class DebugMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (Input.GetKey(KeyCode.E))
         {
