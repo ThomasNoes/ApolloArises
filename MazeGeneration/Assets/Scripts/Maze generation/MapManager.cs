@@ -190,9 +190,10 @@ public class MapManager : MonoBehaviour
             mapScript.Generate(mapSequence[i]);
             //if (mapSequence[i].isEndSeeded == false)
             if (i + 1 < mapSequence.Length && mapSequence[i + 1].mapType == 0) // if we are not at the last maze segment and the next segment is a maze segment
-                //Debug.Log(mapSequence[i].endSeed); // test this out
-                mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed); // DA FUQ!!!!! is this not done in line 186? what is the point?
-                //Debug.Log(mapSequence[i].endSeed); // test this out
+                mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed); 
+
+            AStarPathFinding aStar = new AStarPathFinding();
+            aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
 
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
@@ -360,8 +361,8 @@ public class MapManager : MonoBehaviour
             }
             else if (t.IsAdjacentwithSameDirection(flag))
             {
-                Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
-                Debug.Log("Maze Segment " + mazeSegment);
+                //Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
+                //Debug.Log("Maze Segment " + mazeSegment);
                 tilesToRemove.Add(t);
             }
 
