@@ -10,12 +10,24 @@ public class Teleporter : MonoBehaviour
     public Transform renderQuad;
     public Transform projectionQuad;
     public float cameraOffset;
+    private List<GameObject> teleportCopies;
+
+    void Start()
+    {
+        teleportCopies = new List<GameObject>();
+    }
+
+    public void AddTeleportCopy(GameObject obj)
+    {
+        if (teleportCopies != null)
+            teleportCopies.Add(obj);
+    }
 
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log(other.name + " Exited " + transform.name);
+            //Debug.Log(other.name + " Exited " + transform.name);
             PortalRenderController prController = null;
             if (!tutorialMode)
             {
@@ -30,7 +42,7 @@ public class Teleporter : MonoBehaviour
             //offsets are static for some reason, we need to fix that
             if (Vector3.Magnitude(playerNoYAxis - renderPlaneNoYAxis) < Vector3.Magnitude(colliderNoYAxis - renderPlaneNoYAxis))
             {
-                Debug.Log(Vector3.Magnitude(playerNoYAxis - renderPlaneNoYAxis) + " lower than " + Vector3.Magnitude(colliderNoYAxis - renderPlaneNoYAxis));
+                //Debug.Log(Vector3.Magnitude(playerNoYAxis - renderPlaneNoYAxis) + " lower than " + Vector3.Magnitude(colliderNoYAxis - renderPlaneNoYAxis));
                 if (isForwardTeleporter)
                 {
                     if (prController != null)
@@ -43,6 +55,15 @@ public class Teleporter : MonoBehaviour
                         prController.TeleportPlayer(portalID);
                     other.transform.root.Translate(-cameraOffset, 0, 0, Space.World);
                 }
+
+                if (teleportCopies.Count > 0)
+                {
+                    foreach (var item in teleportCopies)
+                    {
+                        Destroy(item);
+                    }
+                }
+
             }
         }
         //advance culling mask array

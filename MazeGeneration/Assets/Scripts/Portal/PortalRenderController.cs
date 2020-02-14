@@ -95,7 +95,7 @@ public class PortalRenderController : MonoBehaviour
             tempScript.cameraOffset = cameraOffset;
             prevProjectionQuadArray[i] = tempScript.projectionQuad.gameObject;
             prevRenderQuadArray[i] = tempScript.renderQuad.gameObject;
-            tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Prev" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
+            tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
         }
 
     }
