@@ -190,10 +190,23 @@ public class MapManager : MonoBehaviour
             mapScript.Generate(mapSequence[i]);
             //if (mapSequence[i].isEndSeeded == false)
             if (i + 1 < mapSequence.Length && mapSequence[i + 1].mapType == 0) // if we are not at the last maze segment and the next segment is a maze segment
-                mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed); 
+                mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed);
 
-            AStarPathFinding aStar = new AStarPathFinding();
-            aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
+            //A star Path Finding
+            if (i == 0)
+            {
+                //we need a start position
+            }
+            else if (i == mapSequence.Length-1)
+            {
+                //we need a end destination
+            }
+            else
+            {
+                AStarPathFinding aStar = new AStarPathFinding();
+                aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
+            }
+
 
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
