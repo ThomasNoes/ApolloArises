@@ -1,9 +1,10 @@
 ﻿// This script must be placed on the portal render quad in portal prefab
-// TODO: Currently not working, look at it later
 using UnityEngine;
 
 public class IsVisible : MonoBehaviour
 {
+    public PortalRenderController pRController;
+    public bool isStereoscopic = true;
     private Renderer thisRenderer;
     private Texture2D disabledTexture;
     private Material enabledTexture;
@@ -12,12 +13,16 @@ public class IsVisible : MonoBehaviour
     private void Start()
     {
         Invoke("DelayedStart", 1.0f);
+
+        if (pRController == null)
+            enabledTexture = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
+        else
+            enabledTexture = Resources.Load("Materials/Next" + (pRController.isStereoscopic ? "Stereo" : "Mono")) as Material;
     }
 
     private void DelayedStart()
     {
         thisRenderer = gameObject.GetComponent<Renderer>();
-        enabledTexture = thisRenderer.material;
         disabledTexture = new Texture2D(1, 1);
         disabledTexture.SetPixel(0, 0, Color.black);
         disabledTexture.Apply();
