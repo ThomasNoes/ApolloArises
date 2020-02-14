@@ -14,6 +14,8 @@ public class IsVisible : MonoBehaviour
     {
         Invoke("DelayedStart", 1.0f);
 
+        pRController = transform.root.GetComponent<PortalRenderController>();
+
         if (pRController == null)
             enabledTexture = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
         else
