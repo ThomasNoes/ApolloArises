@@ -179,7 +179,6 @@ namespace Assets.Scripts.Camera
             if (distanceCheck)
                 DistanceCheck();
 
-            Debug.Log(nextScore + " | " + prevScore);
             PositionSwitch(nextScore < prevScore ? 1 : 0);
         }
 
