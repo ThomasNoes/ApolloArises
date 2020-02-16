@@ -135,8 +135,8 @@ namespace Assets.Scripts.Camera
 
         private void DistanceCheck()
         {
-            nextScore = Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * nextScore;
-            prevScore = Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * prevScore;
+            nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * 2.0f;
+            prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * 2.0f;
         }
 
         #region InCamFrustumCheck
