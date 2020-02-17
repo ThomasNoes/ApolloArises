@@ -75,6 +75,7 @@ namespace Assets.Scripts.Camera
                 {
                     followCamScriptLeft.offset = -followCamScriptLeft.offset;
                     followCamScriptRight.offset = -followCamScriptRight.offset;
+                    pRController.SetProjectionQuads(false);
                 }
             }
             else if (dir == 1)
@@ -83,6 +84,7 @@ namespace Assets.Scripts.Camera
                 {
                     followCamScriptLeft.offset = -1 * followCamScriptLeft.offset;
                     followCamScriptRight.offset = -1 * followCamScriptRight.offset;
+                    pRController.SetProjectionQuads(true);
                 }
             }
 

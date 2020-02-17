@@ -5,8 +5,6 @@ using UnityEngine.Rendering;
 
 public class PortalRenderController : MonoBehaviour
 {
-    public ObliqueProjectionToQuad previousPortalCameraLeftEye;
-    public ObliqueProjectionToQuad previousPortalCameraRightEye;
     public ObliqueProjectionToQuad nextPortalCameraLeftEye;
     public ObliqueProjectionToQuad nextPortalCameraRightEye;
 
@@ -38,7 +36,7 @@ public class PortalRenderController : MonoBehaviour
         nextRenderQuadArray = new GameObject[portalCount];
 
         InitializePortals();
-        SetProjectionQuads();
+        SetProjectionQuads(true);
         OffsetCameras();
     }
 
@@ -101,55 +99,64 @@ public class PortalRenderController : MonoBehaviour
     }
 
     // This is for debugging, we can remove it later
-    void Update()
-    {
-        if (Input.GetKeyUp("space"))
-        {
-            currentMaze++;
-            Debug.Log(currentMaze % portalCount);
-            TeleportPlayer(currentMaze);
-            //Camera.main.transform.Translate(cameraOffset, 0, 0, Space.World);
-        }
-        if (Input.GetKeyUp("n"))
-        {
-            currentMaze--;
-            Debug.Log(currentMaze % portalCount);
-            TeleportPlayer(currentMaze);
-            //Camera.main.transform.Translate(cameraOffset, 0, 0, Space.World);
-        }
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyUp("space"))
+    //    {
+    //        currentMaze++;
+    //        Debug.Log(currentMaze % portalCount);
+    //        TeleportPlayer(currentMaze);
+    //        //Camera.main.transform.Translate(cameraOffset, 0, 0, Space.World);
+    //    }
+    //    if (Input.GetKeyUp("n"))
+    //    {
+    //        currentMaze--;
+    //        Debug.Log(currentMaze % portalCount);
+    //        TeleportPlayer(currentMaze);
+    //        //Camera.main.transform.Translate(cameraOffset, 0, 0, Space.World);
+    //    }
+    //}
 
     void OffsetCameras()
     {
-        previousPortalCameraLeftEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
-        previousPortalCameraRightEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
+        //previousPortalCameraLeftEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
+        //previousPortalCameraRightEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
         nextPortalCameraLeftEye.GetComponent<FollowCam>().SetOffset(cameraOffset);
         nextPortalCameraRightEye.GetComponent<FollowCam>().SetOffset(cameraOffset);
         if (isStereoscopic)
         {
-            previousPortalCameraLeftEye.GetComponent<FollowCam>().isStereoscopic = true;
-            previousPortalCameraRightEye.GetComponent<FollowCam>().isStereoscopic = true;
+            //previousPortalCameraLeftEye.GetComponent<FollowCam>().isStereoscopic = true;
+            //previousPortalCameraRightEye.GetComponent<FollowCam>().isStereoscopic = true;
             nextPortalCameraLeftEye.GetComponent<FollowCam>().isStereoscopic = true;
             nextPortalCameraRightEye.GetComponent<FollowCam>().isStereoscopic = true;
         }
 
     }
 
-    void SetProjectionQuads()
+    public void SetProjectionQuads(bool dir) // true = next, false = prev
     {
-        previousPortalCameraRightEye.projectionScreen = prevProjectionQuadArray[TrueModulus(currentMaze - 1, portalCount)];
-        nextPortalCameraRightEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze, portalCount)];
-        if (isStereoscopic)
+        if (dir)
         {
-            previousPortalCameraLeftEye.projectionScreen = prevProjectionQuadArray[TrueModulus(currentMaze - 1, portalCount)];
-            nextPortalCameraLeftEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze, portalCount)];
+            nextPortalCameraRightEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze, portalCount)];
+            if (isStereoscopic)
+            {
+                nextPortalCameraLeftEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze, portalCount)];
+            }
+        }
+        else
+        {
+            nextPortalCameraRightEye.projectionScreen = prevProjectionQuadArray[TrueModulus(currentMaze - 1, portalCount)];
+            if (isStereoscopic)
+            {
+                nextPortalCameraLeftEye.projectionScreen = prevProjectionQuadArray[TrueModulus(currentMaze - 1, portalCount)];
+            }
         }
     }
 
     public void TeleportPlayer(int mazeID)
     {
         currentMaze = mazeID;
-        SetProjectionQuads();
+        SetProjectionQuads(true);
     }
 
     int TrueModulus(int k, int n)
