@@ -81,7 +81,7 @@ public class TileInfo
         return perpendicular;
     }
 
-    public TileInfo GetNeighbourCoord()
+    public TileInfo GetLeadInCoord()
     {
         int r = row;
         int c = column;
@@ -105,9 +105,33 @@ public class TileInfo
         return new TileInfo(r, c, -1);
     }
 
+    public TileInfo GetBehindCoord()
+    {
+        int r = row;
+        int c = column;
+        switch (direction)
+        {
+            case 0:
+                r++;
+                break;
+            case 1:
+                c--;
+                break;
+            case 2:
+                r--;
+                break;
+            case 3:
+                c++;
+                break;
+            default:
+                break;
+        }
+        return new TileInfo(r, c, -1);
+    }
+
     public bool IsLeadingIntoEntrance(TileInfo entrance)
     {
-        TileInfo neighbour = GetNeighbourCoord();
+        TileInfo neighbour = GetLeadInCoord();
         return (neighbour.IsSamePosition(entrance));
     }
 
