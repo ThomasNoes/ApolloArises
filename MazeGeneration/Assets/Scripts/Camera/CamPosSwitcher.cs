@@ -8,6 +8,7 @@ namespace Assets.Scripts.Camera
         public GameObject followCamLeft, followCamRight;
         private GameObject thisCamera, player, currentNextPortal, currentPrevPortal;
         private GameObject[] prevRenderQuadArray, nextRenderQuadArray;
+        private Renderer currentNextPortalRenderer, currentPrevPortalRenderer;
 
         private FollowCam followCamScriptLeft, followCamScriptRight;
         public PortalRenderController pRController;
@@ -15,11 +16,11 @@ namespace Assets.Scripts.Camera
         private Vector3[] portalDirs;
         private LayerMask layerMask;
 
-        public bool useDistance = true, useCameraAngle = true;
-        private bool prevCollision = false, nextCollision = false;
+        public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
+        private bool prevInCamFrustum, nextInCamFrustum;
         private int currentMaze = -1, mazeCount, currentDir = -1;
         private float portalWidth, prevScore, nextScore;
-        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f, scoreModifier = 8.0f;
+        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f;
 
         #region Start
         private void Start()
@@ -90,6 +91,112 @@ namespace Assets.Scripts.Camera
         }
         #endregion
 
+        #region AngleCheck
+        private void AngleCheck()
+        {
+            if (useCameraAngle)
+            {
+                nextScore = Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position);
+                prevScore = Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position);
+            }
+            else
+            {
+                nextScore = Vector3.Angle(player.transform.forward, currentNextPortal.transform.position);
+                prevScore = Vector3.Angle(player.transform.forward, currentPrevPortal.transform.position);
+            }
+        }
+        #endregion
+
+        private void CurrentMazeCheck()
+        {
+            if (currentMaze != pRController.currentMaze)
+            {
+                currentMaze = pRController.currentMaze;
+
+                if (currentMaze == 0)
+                {
+                    currentNextPortal = nextRenderQuadArray[currentMaze];
+                    PositionSwitch(1);
+                }
+                else if (currentMaze == mazeCount - 1)
+                {
+                    currentPrevPortal = prevRenderQuadArray[currentMaze - 1];
+                    PositionSwitch(0);
+                }
+                else
+                {
+                    currentNextPortal = nextRenderQuadArray[currentMaze];
+                    currentPrevPortal = prevRenderQuadArray[currentMaze - 1];
+                    currentNextPortalRenderer = currentNextPortal.GetComponent<Renderer>();
+                    currentPrevPortalRenderer = currentPrevPortal.GetComponent<Renderer>();
+                }
+            }
+        }
+
+        private void DistanceCheck()
+        {
+            nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * 2.0f;
+            prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * 2.0f;
+        }
+
+        #region InCamFrustumCheck
+        static bool VisibleFromCamera(Renderer renderer, Camera camera)
+        {
+            Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
+            return GeometryUtility.TestPlanesAABB(frustumPlanes, renderer.bounds);
+        }
+
+        private void InCamFrustumCheck()
+        {
+            if (VisibleFromCamera(currentNextPortalRenderer, Camera.main))
+                nextInCamFrustum = true;
+            if (VisibleFromCamera(currentPrevPortalRenderer, Camera.main))
+                prevInCamFrustum = true;
+
+            if (nextInCamFrustum && prevInCamFrustum)
+                Checks();
+            else if (nextInCamFrustum)
+                PositionSwitch(1);
+            else if (prevInCamFrustum)
+                PositionSwitch(0);
+
+            ResetValues();
+        }
+        #endregion
+
+        private void ResetValues()
+        {
+            nextInCamFrustum = false;
+            prevInCamFrustum = false;
+            nextScore = 0;
+            prevScore = 0;
+        }
+
+        private void Checks()
+        {
+            AngleCheck();
+
+            if (distanceCheck)
+                DistanceCheck();
+
+            PositionSwitch(nextScore < prevScore ? 1 : 0);
+        }
+
+        private void CheckerLoop()  // This is a loop invoked in Start()
+        {
+            CurrentMazeCheck();
+
+            if (currentMaze == 0 || currentMaze == mazeCount - 1)
+                return;
+
+            if (rendererInViewCheck)
+                InCamFrustumCheck();
+            else
+                Checks();
+        }
+
+
+        //// NOT IN USE ANY LONGER: ////
         #region RaycastCheck
         private void RaycastCheck()
         {
@@ -129,67 +236,6 @@ namespace Assets.Scripts.Camera
                 }
             }
         }
-        #endregion
-
-        #region AngleCheck
-        private void AngleCheck()
-        {
-            if (useCameraAngle)
-            {
-                nextScore = Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position);
-                prevScore = Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position);
-            }
-            else
-            {
-                nextScore = Vector3.Angle(player.transform.forward, currentNextPortal.transform.position);
-                prevScore = Vector3.Angle(player.transform.forward, currentPrevPortal.transform.position);
-            }
-        }
-        #endregion
-
-        private void CurrentMazeCheck()
-        {
-            if (currentMaze != pRController.currentMaze)
-            {
-                currentMaze = pRController.currentMaze;
-
-                if (currentMaze == 0)
-                {
-                    currentNextPortal = nextRenderQuadArray[currentMaze];
-                    PositionSwitch(1);
-                }
-                else if (currentMaze == mazeCount - 1)
-                {
-                    currentPrevPortal = prevRenderQuadArray[currentMaze - 1];
-                    PositionSwitch(0);
-                }
-                else
-                {
-                    currentNextPortal = nextRenderQuadArray[currentMaze];
-                    currentPrevPortal = prevRenderQuadArray[currentMaze - 1];
-                }
-            }
-        }
-
-        private void DistanceCheck()
-        {
-            nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * scoreModifier;
-            prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * scoreModifier;
-        }
-
-        static bool VisibleFromCamera(Renderer renderer, Camera camera)
-        {
-            Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
-            return GeometryUtility.TestPlanesAABB(frustumPlanes, renderer.bounds);
-        }
-
-        private void ResetValues()
-        {
-            nextCollision = false;
-            prevCollision = false;
-            nextScore = 0;
-            prevScore = 0;
-        }
 
         #region PortalEdgeFinder
         private Vector3 PortalEdgeFinder(bool next, bool right)
@@ -214,23 +260,6 @@ namespace Assets.Scripts.Camera
             return tempEdgePos;
         }
         #endregion
-
-        private void CheckerLoop()  // This is a loop invoked in Start()
-        {
-            CurrentMazeCheck();
-
-            if (currentMaze == 0 || currentMaze == mazeCount - 1)
-                return;
-
-            AngleCheck();
-
-            if (useDistance)
-                DistanceCheck();
-            else
-                RaycastCheck();
-
-            PositionSwitch(nextScore < prevScore ? 1 : 0);
-        }
-
+        #endregion
     }
 }
