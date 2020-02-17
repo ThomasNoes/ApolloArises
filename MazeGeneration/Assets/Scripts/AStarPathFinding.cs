@@ -32,6 +32,9 @@ public  class AStarPathFinding : MonoBehaviour
             FindPath();
         }
 
+
+        SetDistanceForRemainingTiles(aStarTiles);
+
         DrawAStarPath();
         DrawGizmo(start, Color.green);
         DrawGizmo(goal, Color.red);
@@ -66,15 +69,15 @@ public  class AStarPathFinding : MonoBehaviour
                         CheckNeighbor(current, neighbor);
                         break;
                     case 1:
-                        neighbor = tileArray[current.GetRow(), current.GetCol() + 1]; //neighbor tile north
+                        neighbor = tileArray[current.GetRow(), current.GetCol() + 1]; //neighbor tile east
                         CheckNeighbor(current, neighbor);
                         break;
                     case 2:
-                        neighbor = tileArray[current.GetRow() + 1, current.GetCol()]; //neighbor tile north
+                        neighbor = tileArray[current.GetRow() + 1, current.GetCol()]; //neighbor tile south
                         CheckNeighbor(current, neighbor);
                         break;
                     case 3:
-                        neighbor = tileArray[current.GetRow(), current.GetCol() - 1]; //neighbor tile north
+                        neighbor = tileArray[current.GetRow(), current.GetCol() - 1]; //neighbor tile west
                         CheckNeighbor(current, neighbor);
                         break;
                     default:
@@ -125,7 +128,8 @@ public  class AStarPathFinding : MonoBehaviour
     {
         for (int i = 0; i < tiles.Count; i++)
         {
-            tiles[i].ApproveTile(i, tiles.Count);
+            tiles[i].SetPortalDistance(i, tiles.Count);
+            tiles[i].SetAsAstarTile();
         }
     }
 
@@ -157,6 +161,59 @@ public  class AStarPathFinding : MonoBehaviour
         }
         return returnTile; 
     }
+
+    private void SetDistanceForRemainingTiles(List<Tile> tiles)
+    {
+        for (int i = 1; i < tiles.Count-1; i++)
+        {
+            CheckForNoneMarkedTile(tiles[i]);
+        }
+        
+
+        
+    }
+    private void CheckForNoneMarkedTile(Tile t)
+    {
+        for (int i = 0; i < t.wallArray.Length; i++)
+        {
+            if (t.wallArray[i] == 1) // if the tile is traversable in that direction
+            {
+                Tile neighbor = new Tile();
+                switch (i)
+                {
+                    case 0:
+                        neighbor = tileArray[t.GetRow() - 1, t.GetCol()]; //neighbor tile north
+                        MarkTile(neighbor, t);
+                        break;
+                    case 1:
+                        neighbor = tileArray[t.GetRow(), t.GetCol() + 1]; //neighbor tile east
+                        MarkTile(neighbor, t);
+                        break;
+                    case 2:
+                        neighbor = tileArray[t.GetRow() + 1, t.GetCol()]; //neighbor tile south
+                        MarkTile(neighbor, t);
+                        break;
+                    case 3:
+                        neighbor = tileArray[t.GetRow(), t.GetCol() - 1]; //neighbor tile west
+                        MarkTile(neighbor, t);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
+    private void MarkTile(Tile neighbor, Tile t)
+    {
+        if (!neighbor.isAStarTile && !neighbor.isMarked)
+        {
+            neighbor.isMarked = true;
+            neighbor.SetPortalDistance(t);
+            CheckForNoneMarkedTile(neighbor);
+        }
+    }
+
 
     //draw Astar path
     private void DrawAStarPath()

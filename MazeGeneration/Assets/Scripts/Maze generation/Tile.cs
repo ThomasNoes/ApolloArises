@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour {
     [Header("A Star information")]
     //A star information
     public bool isAStarTile = false;
-    public bool hecked = false;
+    public bool isMarked = false;
     public int nextDistance;
     public int prevdistance;
 
@@ -162,16 +162,22 @@ public class Tile : MonoBehaviour {
     {
         column = c;
     }
-    public void ApproveTile(int index, int length)
+    public void SetPortalDistance(int index, int length)
     {
-        isAStarTile = true;
         nextDistance = index;
-        prevdistance = length;
+        prevdistance = (length-1)-index;
     }
-    public void DisapproveTile(int index, int length)
+    public void SetPortalDistance(Tile t)
+    {
+        nextDistance = t.nextDistance+1;
+        prevdistance = t.prevdistance+1;
+    }
+    public void SetAsAstarTile()
     {
         isAStarTile = true;
-        //pathIndex = index;
-        //pathLength = length;
+    }
+    public void SetAsMarked()
+    {
+        isMarked = true;
     }
 }
