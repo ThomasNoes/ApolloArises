@@ -309,8 +309,7 @@ public class MapManager : MonoBehaviour
         //Removing entire tiles
         possibleCoordinates.Remove(startCoord); //Remove Start
 
-        possibleCoordinates.Remove(flag.GetNeighbourCoord()); //Remove Lead-in
-
+        possibleCoordinates.Remove(flag.GetLeadInCoord()); //Remove Lead-in
         for (int i = 0; i < 2; i++) //Remove corners
         {
             for (int j = 0; j < 2; j++)
@@ -321,20 +320,15 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        if(!(mazeCols <= 3 && mazeRows <=3)) //if the maze is 3x3 or smaller, there is not space for small room unless we allow for shutting of corners
-        {
-            List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
-            if (shutoffCorners.Count > 0)
-            {
-            //    Debug.Log("Start (" + startCoord.row + ";" + startCoord.column + ") Shuts off corners.");
-                foreach (TileInfo t in shutoffCorners)
-                {
-                    possibleCoordinates.Remove(t);
-            //            Debug.Log("(" + t.row + ";" + t.column + ") Removed.");
-                }
-            }
-        }
-        
+        List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
+        //if (shutoffCorners.Count > 0 &&
+        //    mazeRows > 3 && mazeCols > 3)
+        //{
+        //    foreach (TileInfo soc in shutoffCorners)
+        //    {
+        //        possibleCoordinates.Remove(soc);
+        //    }
+        //}
 
         //Now we have all tiles that a portal can be placed on.
         //Now we include the possible directions the portal can have on the remaining tiles.
@@ -350,7 +344,6 @@ public class MapManager : MonoBehaviour
             }
         }
 
-       
         List<TileInfo> tilesToRemove = new List<TileInfo>(); //list of tiles with certain directions that will be removed.
 
         foreach (TileInfo t in possibleTiles)
@@ -379,20 +372,34 @@ public class MapManager : MonoBehaviour
                 tilesToRemove.Add(t);
             }
 
-            // remove some based on start coordinate (called flag)
-            //Remove exit tiles that are visible through entrance portal
-            //Remove exit tiles that are in view of the entrance portal
-        }
+            if (shutoffCorners.Count > 0 )
+            {
+                TileInfo behindFlag = flag.GetBehindCoord();
+                foreach (TileInfo soc in shutoffCorners)
+                {
+                    if (t.IsSamePosition(soc))
+                    {
+                        TileInfo behindT = t.GetBehindCoord();
 
-        
+                        if (!behindFlag.IsSamePosition(behindT))
+                        {
+                            tilesToRemove.Add(t);
+                        }
+                    }
+                }
+            }
+
+            // remove some based on start coordinate (called flag)
+        }
 
         foreach (TileInfo t in tilesToRemove)
         {
             possibleTiles.Remove(t);
-
         }
 
-        
+
+
+
 
 
 
