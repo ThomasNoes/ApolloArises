@@ -1,12 +1,5 @@
 ﻿using UnityEngine;
 
-/*
-*   THIS IS MARTIN'S CODE FROM THE WIKIBOOK!
-*   READ IT AND LEARN IT REALLY WELL BECAUSE
-*   IT WILL DEFINITELY BE IN THE EXAM!!!
- */
-
-
 // Use the following line to apply the script in the editor:
 //[ExecuteInEditMode]
 
