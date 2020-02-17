@@ -164,8 +164,8 @@ public class Tile : MonoBehaviour {
     }
     public void SetPortalDistance(int index, int length)
     {
-        nextDistance = index;
-        prevdistance = (length-1)-index;
+        nextDistance = (length - 1) - index;
+        prevdistance = index;
     }
     public void SetPortalDistance(Tile t)
     {

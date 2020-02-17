@@ -6,6 +6,18 @@ public static class PortalPositionHelper
 {
     private static int maxRows = GameObject.FindObjectOfType<MapManager>().mazeRows;
     private static int maxCols = GameObject.FindObjectOfType<MapManager>().mazeCols;
+    private static List<TileInfo> CornerShutoffList = new List<TileInfo>
+    {
+        new TileInfo(0,1, -1),
+        new TileInfo(0, maxCols - 2, -1),
+        new TileInfo(maxRows - 2, 0, -1),
+        new TileInfo(maxRows - 1, maxCols - 2, -1),
+        new TileInfo(1, 0, -1),
+        new TileInfo(1, maxCols - 1, -1),
+        new TileInfo(maxRows - 1, 1, -1),
+        new TileInfo(maxRows - 2, maxCols - 1, -1),
+    };
+
     private static Dictionary<string, int[]> PortalEntranceArrayList = new Dictionary<string, int[]>
     {
         {"topLeftCorner", new int[2] {1,2}},
@@ -17,18 +29,6 @@ public static class PortalPositionHelper
         {"bottomRow", new int[3] {0,1,3}},
         {"leftColumn", new int[3] {0,1,2}},
         {"inside", new int[4] {0,1,2,3}},
-    };
-
-    private static List<TileInfo> CornerShutoffList = new List<TileInfo>
-    {
-        new TileInfo(0,1, -1),
-        new TileInfo(0, maxCols - 2, -1),
-        new TileInfo(maxRows - 2, 0, -1),
-        new TileInfo(maxRows - 1, maxCols - 2, -1),
-        new TileInfo(1, 0, -1),
-        new TileInfo(1, maxCols - 1, -1),
-        new TileInfo(maxRows - 1, 1, -1),
-        new TileInfo(maxRows - 2, maxCols - 1, -1),
     };
 
     private static string GetDirectionArray(int row, int col)
@@ -94,7 +94,8 @@ public static class PortalPositionHelper
         return GetRandomArrayElementWithFlag(directionArray, direction);
     }
 
-    public static List<TileInfo> GetAllCornerTiles() {
+    public static List<TileInfo> GetAllCornerTiles()
+    { 
         return new List<TileInfo>(CornerShutoffList);
     }
 
@@ -102,11 +103,11 @@ public static class PortalPositionHelper
     {
         List<TileInfo> shutoffIndexes = new List<TileInfo>();
         
-        for (int i = 0; i < CornerShutoffList.Count; i++)
+        for (int i = 0; i < CornerShutoffList.Count; i++) // go through all shut off corner position
         {
-            if (CornerShutoffList[i].IsSamePosition(tile))
+            if (CornerShutoffList[i].IsSamePosition(tile)) // find shut off corner position that matches the ínput tile. 
             {
-                shutoffIndexes.Add(CornerShutoffList[(i+4)%8]);
+                shutoffIndexes.Add(CornerShutoffList[(i+4)%8]); // add the position with +4 index
             }
         }
         return shutoffIndexes;

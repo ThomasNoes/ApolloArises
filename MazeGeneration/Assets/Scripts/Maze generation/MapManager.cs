@@ -321,7 +321,7 @@ public class MapManager : MonoBehaviour
             }
         }
 
-        if( true || !(mazeCols <= 3 && mazeRows <=3)) //if the maze is 3x3 or smaller, there is not space for small room unless we allow for shutting of corners
+        if(!(mazeCols <= 3 && mazeRows <=3)) //if the maze is 3x3 or smaller, there is not space for small room unless we allow for shutting of corners
         {
             List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
             if (shutoffCorners.Count > 0)
