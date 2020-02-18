@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6395070241882163286}
   - component: {fileID: 6395070241882163281}
   - component: {fileID: 3907946024521144469}
-  - component: {fileID: 8932069858402737973}
   m_Layer: 0
   m_Name: WallSegmentProcedural
   m_TagString: Untagged
@@ -93,21 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1acf3b07efeba4d498ef45e7fa83b824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSize: 10
-  ySize: 10
+  activated: 0
+  xSize: 4
+  ySize: 8
   amplitude: 2.5
   frequenzy: 1.91
   depth: 1.2
---- !u!65 &8932069858402737973
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6395070241882163283}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 0.1}
-  m_Center: {x: 5, y: 5, z: 0.5}
