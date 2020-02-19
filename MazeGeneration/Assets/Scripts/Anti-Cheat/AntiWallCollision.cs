@@ -2,7 +2,7 @@
 
 public class AntiWallCollision : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision col)
+    private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag("Wall"))
         {
@@ -10,7 +10,7 @@ public class AntiWallCollision : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision col)
+    private void OnTriggerExit(Collider col)
     {
         if (col.gameObject.CompareTag("Wall"))
         {
