@@ -12,11 +12,14 @@ public class Teleporter : MonoBehaviour
     public float cameraOffset;
     private List<GameObject> teleportCopies;
     private GameObject player;
+    private CharacterController charControl;
 
     void Start()
     {
         teleportCopies = new List<GameObject>();
         player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            charControl = player.GetComponent<CharacterController>();
     }
 
     public void AddTeleportCopy(GameObject obj)
@@ -49,13 +52,21 @@ public class Teleporter : MonoBehaviour
                 {
                     if (prController != null)
                         prController.TeleportPlayer(portalID + 1);
+                    charControl.enabled = false;
                     player.transform.Translate(cameraOffset, 0, 0, Space.World);
+                    charControl.enabled = true;
+                    //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x + cameraOffset,
+                    //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }
                 else
                 {
                     if (prController != null)
                         prController.TeleportPlayer(portalID);
+                    charControl.enabled = false;
                     player.transform.Translate(-cameraOffset, 0, 0, Space.World);
+                    charControl.enabled = true;
+                    //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x - cameraOffset, 
+                    //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }
 
                 if (teleportCopies.Count > 0)
