@@ -39,7 +39,10 @@ public class Tile : MonoBehaviour {
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        cPosSwitch = player?.GetComponent<CamPosSwitcher>();
+        cPosSwitch = Camera.main.gameObject.GetComponent<CamPosSwitcher>();
+
+        if (cPosSwitch == null)
+            cPosSwitch = player?.GetComponent<CamPosSwitcher>();
     }
 
     public void SetRowAndColumn(int row, int column)
