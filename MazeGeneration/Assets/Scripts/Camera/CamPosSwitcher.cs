@@ -20,7 +20,7 @@ namespace Assets.Scripts.Camera
         private bool prevInCamFrustum, nextInCamFrustum;
         private int currentMaze = -1, mazeCount, currentDir = -1, prevScore, nextScore, prevDistance, nextDistance;
         private float portalWidth;
-        public float loopRepeatRate = 0.3f;
+        public float loopRepeatRate = 0.2f;
 
         #region Start
         private void Start()

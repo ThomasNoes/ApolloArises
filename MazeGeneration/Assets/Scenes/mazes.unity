@@ -1236,6 +1236,16 @@ PrefabInstance:
       propertyPath: loopRepeatRate
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: rendererInViewCheckFirst
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: rendererInViewCheck
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive

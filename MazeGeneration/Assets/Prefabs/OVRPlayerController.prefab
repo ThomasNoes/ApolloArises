@@ -101,8 +101,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5369379566299525889}
   - component: {fileID: 5387531384396959349}
-  - component: {fileID: 4385104830626132771}
-  - component: {fileID: 6388483862733474765}
   m_Layer: 0
   m_Name: LeftEyeAnchor
   m_TagString: Untagged
@@ -167,38 +165,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &4385104830626132771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369379566299229985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a6a4f6a8eac00244b3a16ee5512016c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectionScreen: {fileID: 0}
-  estimateViewFrustum: 1
-  setNearClipPlane: 1
-  minNearClipDistance: 0.0001
-  nearClipDistanceOffset: -0.01
---- !u!114 &6388483862733474765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369379566299229985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ed759c47ee799d4c9792212da6dea89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: 0
-  isStereoscopic: 1
-  isRightEye: 0
 --- !u!1 &5369379566299229987
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,8 +284,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5369379566299525893}
   - component: {fileID: 5389408691304948379}
-  - component: {fileID: 6852313442744497902}
-  - component: {fileID: 9185601504404125415}
   - component: {fileID: 3231733612033302910}
   m_Layer: 0
   m_Name: RightEyeAnchor
@@ -385,38 +349,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &6852313442744497902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369379566299229989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a6a4f6a8eac00244b3a16ee5512016c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectionScreen: {fileID: 0}
-  estimateViewFrustum: 1
-  setNearClipPlane: 1
-  minNearClipDistance: 0.0001
-  nearClipDistanceOffset: -0.01
---- !u!114 &9185601504404125415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369379566299229989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ed759c47ee799d4c9792212da6dea89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: 0
-  isStereoscopic: 1
-  isRightEye: 1
 --- !u!135 &3231733612033302910
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -428,7 +360,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5369379566299229991
 GameObject:
@@ -550,7 +482,7 @@ MonoBehaviour:
   distanceCheck: 1
   rendererInViewCheck: 1
   useCameraAngle: 1
-  loopRepeatRate: 0.3
+  loopRepeatRate: 0.2
 --- !u!1 &5369379566299229997
 GameObject:
   m_ObjectHideFlags: 0
