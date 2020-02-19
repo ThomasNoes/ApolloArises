@@ -93,8 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 0
-  xSize: 4
-  ySize: 8
+  xSize: 2
+  ySize: 4
   amplitude: 2.5
   frequenzy: 1.91
   depth: 1.2
