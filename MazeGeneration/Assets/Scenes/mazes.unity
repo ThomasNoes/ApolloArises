@@ -1061,6 +1061,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2526136163395224739}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1943357195
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943357194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1776048526422341044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1250,7 +1263,7 @@ PrefabInstance:
     - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: rendererInViewCheck
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
