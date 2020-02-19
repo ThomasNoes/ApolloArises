@@ -1234,7 +1234,7 @@ PrefabInstance:
     - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: loopRepeatRate
-      value: 0.2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
