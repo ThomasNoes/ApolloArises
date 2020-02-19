@@ -831,12 +831,12 @@ MonoBehaviour:
   - {fileID: 6700716075161373839, guid: 22bc3d0eaee86bb428496bf988489ae9, type: 3}
   - {fileID: 2500389178016090726, guid: 3767eab88ce28c4448bbd26f359914bc, type: 3}
   playerHead: {fileID: 2526136163395224742}
-  mazeRows: 5
-  mazeCols: 5
+  mazeRows: 3
+  mazeCols: 3
   tileWidth: 0.8
   startRow: 0
   startCol: 0
-  playAreaSize: {x: 4, y: 0, z: 4}
+  playAreaSize: {x: 3, y: 0, z: 3}
   isMapSeeded: 0
   randomGeneratorSeed: 0
   portalGenerationLocation: 1
@@ -1202,6 +1202,11 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5162969301141097211, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc399f754a05a8c4798ce883a14677f8, type: 3}
 --- !u!1001 &2526136163395224739
@@ -1229,12 +1234,27 @@ PrefabInstance:
     - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: loopRepeatRate
-      value: 0.2
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: rendererInViewCheckFirst
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: rendererInViewCheck
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerCollider
       objectReference: {fileID: 0}
     - target: {fileID: 2526136162183218452, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
@@ -1346,12 +1366,7 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6852313442744497902, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
-    - {fileID: 9185601504404125415, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
-    - {fileID: 4385104830626132771, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
-    - {fileID: 6388483862733474765, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
-    - {fileID: 2526136162186352918, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
 --- !u!4 &2526136163395224742 stripped
 Transform:
