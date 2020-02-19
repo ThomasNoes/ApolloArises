@@ -52,9 +52,11 @@ public class Teleporter : MonoBehaviour
                 {
                     if (prController != null)
                         prController.TeleportPlayer(portalID + 1);
-                    charControl.enabled = false;
+                    if (charControl != null)
+                        charControl.enabled = false;
                     player.transform.Translate(cameraOffset, 0, 0, Space.World);
-                    charControl.enabled = true;
+                    if (charControl != null)
+                        charControl.enabled = true;
                     //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x + cameraOffset,
                     //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }
@@ -62,9 +64,11 @@ public class Teleporter : MonoBehaviour
                 {
                     if (prController != null)
                         prController.TeleportPlayer(portalID);
-                    charControl.enabled = false;
+                    if (charControl != null)
+                        charControl.enabled = false;
                     player.transform.Translate(-cameraOffset, 0, 0, Space.World);
-                    charControl.enabled = true;
+                    if (charControl != null)
+                        charControl.enabled = true;
                     //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x - cameraOffset, 
                     //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }
