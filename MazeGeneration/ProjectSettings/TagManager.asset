@@ -9,6 +9,7 @@ TagManager:
   - Portal
   - PlayerCollider
   - Wall
+  - TileChecker
   layers:
   - Default
   - TransparentFX
