@@ -148,23 +148,23 @@ namespace Assets.Scripts.Camera
 
         private void DistanceCheck()
         {
-            nextScore = nextDistance;
-            prevScore = prevDistance;
+            //nextScore = nextDistance;
+            //prevScore = prevDistance;
 
-            Debug.Log(nextScore + " | " + prevScore);
+            //Debug.Log(nextScore + " | " + prevScore);
 
-            //RaycastHit hit;
+            RaycastHit hit;
 
-            //if (Physics.Raycast(thisCamera.transform.position, -player.transform.up, out hit, 10.0f, layerMask))
-            //{
-            //    Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
+            if (Physics.Raycast(thisCamera.transform.position, -player.transform.up, out hit, 10.0f, layerMask))
+            {
+                Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
-            //    if (tempTile != null)
-            //    {
-            //        nextScore = tempTile.nextDistance;
-            //        prevScore = tempTile.prevdistance;
-            //    }
-            //}
+                if (tempTile != null)
+                {
+                    nextScore = tempTile.nextDistance;
+                    prevScore = tempTile.prevdistance;
+                }
+            }
 
             //nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * 2.0f;
             //prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * 2.0f;
