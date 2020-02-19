@@ -194,7 +194,7 @@ public class Tile : MonoBehaviour {
     private void OnTriggerEnter(Collider col)
     {
         if (cPosSwitch != null)
-            if (col.CompareTag(player.tag))
+            if (col.CompareTag("TileChecker"))
             {
                 cPosSwitch.SetDistanceVariables(prevdistance, nextDistance);
             }
