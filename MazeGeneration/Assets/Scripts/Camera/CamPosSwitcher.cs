@@ -151,6 +151,8 @@ namespace Assets.Scripts.Camera
             nextScore = nextDistance;
             prevScore = prevDistance;
 
+            Debug.Log(nextScore + " | " + prevScore);
+
             //RaycastHit hit;
 
             //if (Physics.Raycast(thisCamera.transform.position, -player.transform.up, out hit, 10.0f, layerMask))
