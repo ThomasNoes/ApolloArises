@@ -11,10 +11,12 @@ public class Teleporter : MonoBehaviour
     public Transform projectionQuad;
     public float cameraOffset;
     private List<GameObject> teleportCopies;
+    private GameObject player;
 
     void Start()
     {
         teleportCopies = new List<GameObject>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void AddTeleportCopy(GameObject obj)
@@ -25,7 +27,7 @@ public class Teleporter : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "PlayerCollider")
         {
             //Debug.Log(other.name + " Exited " + transform.name);
             PortalRenderController prController = null;
@@ -47,13 +49,13 @@ public class Teleporter : MonoBehaviour
                 {
                     if (prController != null)
                         prController.TeleportPlayer(portalID + 1);
-                    other.transform.root.Translate(cameraOffset, 0, 0, Space.World);
+                    player.transform.Translate(cameraOffset, 0, 0, Space.World);
                 }
                 else
                 {
                     if (prController != null)
                         prController.TeleportPlayer(portalID);
-                    other.transform.root.Translate(-cameraOffset, 0, 0, Space.World);
+                    player.transform.Translate(-cameraOffset, 0, 0, Space.World);
                 }
 
                 if (teleportCopies.Count > 0)
