@@ -31,12 +31,12 @@ public class MapManager : MonoBehaviour
 
     void Awake()
     {
-        //#if UNITY_ANDROID
-        //playAreaSize = GetCameraRigSize();
+#if UNITY_ANDROID
+        playAreaSize = GetCameraRigSize();
 
-        //mazeRows = Mathf.RoundToInt(playAreaSize.x);
-        //mazeCols = Mathf.RoundToInt(playAreaSize.z);
-        //#endif
+        mazeRows = Mathf.RoundToInt(playAreaSize.x);
+        mazeCols = Mathf.RoundToInt(playAreaSize.z);
+#endif
 
         if (isMapSeeded)
             Random.InitState(randomGeneratorSeed);
