@@ -16,7 +16,7 @@ namespace Assets.Scripts.Camera
         private Vector3[] portalDirs;
         private LayerMask layerMask;
 
-        public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
+        public bool isDebugPlayer, distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
         private bool prevInCamFrustum, nextInCamFrustum;
         private int currentMaze = -1, mazeCount, currentDir = -1, prevScore, nextScore, prevDistance, nextDistance;
         private float portalWidth;
@@ -151,11 +151,9 @@ namespace Assets.Scripts.Camera
             //nextScore = nextDistance;
             //prevScore = prevDistance;
 
-            //Debug.Log(nextScore + " | " + prevScore);
-
             RaycastHit hit;
 
-            if (Physics.Raycast(thisCamera.transform.position, -player.transform.up, out hit, 10.0f, layerMask))
+            if (Physics.Raycast(gameObject.transform.position, -gameObject.transform.up, out hit, 10.0f, layerMask))
             {
                 Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
@@ -169,6 +167,7 @@ namespace Assets.Scripts.Camera
             //nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * 2.0f;
             //prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * 2.0f;
         }
+
 
         #region InCamFrustumCheck
         static bool VisibleFromCamera(Renderer renderer, Camera camera)

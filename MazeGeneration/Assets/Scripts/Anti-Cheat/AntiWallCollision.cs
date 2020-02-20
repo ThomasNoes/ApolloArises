@@ -4,15 +4,18 @@ public class AntiWallCollision : MonoBehaviour
 {
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag(Camera.main.tag))
+        if (col.gameObject.CompareTag("Wall"))
         {
             OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+            Debug.Log("Wall Entered!");
         }
     }
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.CompareTag(Camera.main.tag))
+        Debug.Log("Wall Exited!");
+
+        if (col.gameObject.CompareTag("Wall"))
         {
             OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
         }
