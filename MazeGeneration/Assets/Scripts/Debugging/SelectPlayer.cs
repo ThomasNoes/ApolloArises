@@ -6,6 +6,8 @@ public class SelectPlayer : MonoBehaviour
 {
     public bool useDebugPlayer;
 
+    private bool inEditor;
+
     private GameObject player;
     private GameObject debugPlayer;
 
@@ -26,8 +28,13 @@ public class SelectPlayer : MonoBehaviour
         portalCameraRight = GameObject.Find("Next Maze Camera Right").GetComponent<FollowCam>();
 
 
-        //check if it is running in editor or on quest
-        if (true) //if it is running in editor
+        #if UNITY_EDITOR //check if it is running in editor or on quest
+        inEditor = true;
+        #endif
+
+
+
+        if (inEditor) //if it is running in editor
         {
             
             if (useDebugPlayer)
