@@ -85,7 +85,7 @@ public class MazeGenerator : MapGenerator
 
         Generate(startRow, startCol, startDirection);
 
-        switch (endDirection) // connecting tiles - open the wall on the other size
+        switch (endDirection) // connecting tiles - open the wall on the other side
         {
             case 0:
                 Tile.ConnectTiles(tileArray[endRow, endCol], tileArray[endRow - 1, endCol], endDirection);
