@@ -25,7 +25,7 @@ namespace Assets.Scripts.Camera
         #region Start
         private void Start()
         {
-            layerMask = LayerMask.GetMask("Player");
+            layerMask = LayerMask.GetMask("Head");
             layerMask |= LayerMask.GetMask("Ignore Raycast");
             layerMask = ~layerMask;
 

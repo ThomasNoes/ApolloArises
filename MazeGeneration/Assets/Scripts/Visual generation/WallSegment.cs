@@ -28,7 +28,7 @@ public class WallSegment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        colliderSize = new Vector3(xSize, ySize, 0.1f);
+        colliderSize = new Vector3(xSize, ySize, 0.15f);
         colliderPos = new Vector3(xSize/2.0f, ySize/2.0f, 0.3f);
         BoxCollider newCollider = gameObject.AddComponent<BoxCollider>();
         newCollider.size = colliderSize;

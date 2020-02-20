@@ -13,7 +13,23 @@ public class AntiWallCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Wall"))
+        if (col.tag == "Wall")
+        {
+            AntiCheat(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.tag == "Wall")
+        {
+            AntiCheat(false);
+        }
+    }
+
+    private void AntiCheat(bool response) // true: activate, false: stop
+    {
+        if (response)
         {
             if (useVibration)
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
@@ -21,11 +37,7 @@ public class AntiWallCollision : MonoBehaviour
             if (useVisual)
                 Camera.main.farClipPlane = 0;
         }
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.gameObject.CompareTag("Wall"))
+        else
         {
             if (useVibration)
                 OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);

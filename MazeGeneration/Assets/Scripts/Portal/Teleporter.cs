@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Assets.Scripts.Camera;
 using UnityEngine;
 
 public class Teleporter : MonoBehaviour
@@ -13,6 +13,7 @@ public class Teleporter : MonoBehaviour
     private List<GameObject> teleportCopies;
     private GameObject player;
     private CharacterController charControl;
+    private CamPosSwitcher cPosSwitcher;
 
     void Start()
     {
@@ -20,6 +21,8 @@ public class Teleporter : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             charControl = player.GetComponent<CharacterController>();
+
+        cPosSwitcher = Camera.main.gameObject.GetComponent<CamPosSwitcher>();
     }
 
     public void AddTeleportCopy(GameObject obj)
@@ -57,6 +60,8 @@ public class Teleporter : MonoBehaviour
                     player.transform.Translate(cameraOffset, 0, 0, Space.World);
                     if (charControl != null)
                         charControl.enabled = true;
+
+                    cPosSwitcher?.PositionSwitch(0);
                     //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x + cameraOffset,
                     //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }
@@ -69,6 +74,8 @@ public class Teleporter : MonoBehaviour
                     player.transform.Translate(-cameraOffset, 0, 0, Space.World);
                     if (charControl != null)
                         charControl.enabled = true;
+
+                    cPosSwitcher?.PositionSwitch(1);
                     //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x - cameraOffset, 
                     //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }

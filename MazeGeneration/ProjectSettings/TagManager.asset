@@ -21,9 +21,9 @@ TagManager:
   - 
   - PostProcessing
   - OnClickLayer
-  - hiddenLayer
+  - CheatCollider
   - ObjectLayer
-  - 
+  - Head
   - 
   - 
   - 

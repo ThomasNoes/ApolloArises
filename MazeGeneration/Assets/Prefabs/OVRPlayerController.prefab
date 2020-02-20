@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2526136162183480110}
   - component: {fileID: 2526136162196613260}
-  m_Layer: 26
+  m_Layer: 12
   m_Name: HeadCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 2461923309316023020}
   - component: {fileID: 1152054127104321620}
   - component: {fileID: 494955333806273333}
-  m_Layer: 26
+  m_Layer: 2
   m_Name: AntiCheat
   m_TagString: PlayerCollider
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &494955333806273333
 MonoBehaviour:
@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3cd8e099c54a4247b2baf47f0291706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useVibration: 0
+  useVisual: 0
 --- !u!1 &5368327564747179415
 GameObject:
   m_ObjectHideFlags: 0
