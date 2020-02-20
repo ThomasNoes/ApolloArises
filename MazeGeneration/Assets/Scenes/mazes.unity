@@ -225,7 +225,7 @@ MonoBehaviour:
   nextPortalCameraRightEye: {fileID: 995948998}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
-  isStereoscopic: 0
+  isStereoscopic: 1
   mazeCount: 3
   portalCount: 0
   currentMaze: 0
@@ -359,8 +359,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallOffset: 0.1
   wallHeight: 2.5
-  ceilingLamp: {fileID: 2113239386476817509, guid: 8ca664705a6803049aa393e96c6ca14b,
-    type: 3}
+  pillarMat: {fileID: 0}
+  wallMat: {fileID: 0}
+  floorMat: {fileID: 0}
+  ceilingMat: {fileID: 0}
   ceiling: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f, type: 3}
   wallSegment: {fileID: 6395070241882163283, guid: da65273e1ca2d6f4c959dc86610a8cc1,
     type: 3}
@@ -426,7 +428,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.29803923, g: 0.29803923, b: 0.29803923, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -439,8 +441,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 200
+  near clip plane: 0.1
+  far clip plane: 15
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -486,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 5
-  isStereoscopic: 0
+  isStereoscopic: 1
   isRightEye: 1
 --- !u!1 &1165058067
 GameObject:
@@ -537,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 5
-  isStereoscopic: 0
+  isStereoscopic: 1
   isRightEye: 0
 --- !u!20 &1165058070
 Camera:
@@ -562,8 +564,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 200
+  near clip plane: 0.1
+  far clip plane: 15
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -834,1221 +836,12 @@ MonoBehaviour:
   tileWidth: 0.8
   startRow: 0
   startCol: 0
-  playAreaSize: {x: 4, y: 0, z: 4}
+  playAreaSize: {x: 3, y: 0, z: 3}
   isMapSeeded: 0
   randomGeneratorSeed: 0
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
   - mapType: 0
     roomName: 
     isEndSeeded: 0
@@ -2262,6 +1055,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1943357194 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5369379566299229991, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+    type: 3}
+  m_PrefabInstance: {fileID: 2526136163395224739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1776048526422341044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2297,7 +1096,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739749, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02
+      value: -0.331
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739749, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -2389,6 +1188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DebugPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 1776048526178739775, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: near clip plane
@@ -2399,6 +1203,16 @@ PrefabInstance:
       propertyPath: field of view
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162969301141097211, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc399f754a05a8c4798ce883a14677f8, type: 3}
 --- !u!1001 &2526136163395224739
@@ -2408,14 +1222,59 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: followCamLeft
+      value: 
+      objectReference: {fileID: 1165058067}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: followCamRight
+      value: 
+      objectReference: {fileID: 995948997}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: pRController
+      value: 
+      objectReference: {fileID: 451614001}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: loopRepeatRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: rendererInViewCheckFirst
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: rendererInViewCheck
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerCollider
       objectReference: {fileID: 0}
     - target: {fileID: 2526136162183218452, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526136162196613260, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526136162196613260, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5369379566293736129, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
@@ -2428,6 +1287,11 @@ PrefabInstance:
       propertyPath: usePerEyeCameras
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5369379566296636139, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5369379566299229987, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Name
@@ -2436,7 +1300,7 @@ PrefabInstance:
     - target: {fileID: 5369379566299229987, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5369379566299525901, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
@@ -2501,45 +1365,20 @@ PrefabInstance:
     - target: {fileID: 5369379566301145499, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: far clip plane
-      value: 500
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978605477665142411, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9185601504404125415, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6852313442744497902, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
-    - {fileID: 9185601504404125415, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
-    - {fileID: 4385104830626132771, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
-    - {fileID: 6388483862733474765, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
---- !u!1 &2526136163395224740 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5369379566299229991, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
-    type: 3}
-  m_PrefabInstance: {fileID: 2526136163395224739}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2526136163395224741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526136163395224740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3afcde426e9053145a8dcd37a96229df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followCamLeft: {fileID: 1165058067}
-  followCamRight: {fileID: 995948997}
-  pRController: {fileID: 451614001}
-  distanceCheck: 1
-  rendererInViewCheck: 0
-  useCameraAngle: 1
-  rayMaxDist: 15
-  loopRepeatRate: 0.3
 --- !u!4 &2526136163395224742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5369379566299525895, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
@@ -2552,3 +1391,92 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2526136163395224739}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8176629752260204714
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8176629752080046660, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: followObject
+      value: 
+      objectReference: {fileID: 1943357194}
+    - target: {fileID: 8176629752080046660, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: findOffsetFromPosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046661, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046661, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046663, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerTileChecker
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.831
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8176629752080046682, guid: ffec9bd1a2ad12149a3c3a3aabeae92d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ffec9bd1a2ad12149a3c3a3aabeae92d, type: 3}

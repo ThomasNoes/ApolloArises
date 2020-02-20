@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class WallSegment : MonoBehaviour
 {
+    public bool activated = true;
+
     Mesh mesh;
+    Collider col;
+    float standardDepth = 0.2f;
 
     Vector3[] vertices;
+    Vector3 colliderSize, colliderPos;
     int[] triangles;
     Vector2[] uv;
 
-    public int xSize = 20;
-    public int ySize = 20;
+    public int xSize = 2;
+    public int ySize = 4;
 
     [Range(1, 5)]
     public float amplitude = 1f;
@@ -23,8 +28,16 @@ public class WallSegment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        colliderSize = new Vector3(xSize, ySize, 0.1f);
+        colliderPos = new Vector3(xSize/2.0f, ySize/2.0f, 0.5f);
+        BoxCollider newCollider = gameObject.AddComponent<BoxCollider>();
+        newCollider.size = colliderSize;
+        newCollider.center = colliderPos;
+
         int[] wallArray = transform.parent.GetComponent<Tile>().wallArray;
         float tileWidth = transform.parent.GetComponent<Tile>().tileWidth;
+
+        col = gameObject.GetComponent<BoxCollider>();
 
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
@@ -40,11 +53,14 @@ public class WallSegment : MonoBehaviour
         vertices = new Vector3[(xSize + 1) * (ySize + 1)];
         uv = new Vector2[vertices.Length];
 
+
         for (int i = 0, y = 0; y <= ySize; y++)
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float z = Mathf.PerlinNoise(x * frequenzy, y * frequenzy) * depth;
+                float z = standardDepth;
+                if (activated)
+                    z = Mathf.PerlinNoise(x * frequenzy, y * frequenzy) * depth;
                 vertices[i] = new Vector3(x, y, z);
                 uv[i] = new Vector2(x, y);
                 i++;

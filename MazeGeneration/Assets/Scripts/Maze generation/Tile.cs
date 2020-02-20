@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Camera;
 using UnityEngine;
 
 
@@ -27,10 +28,22 @@ public class Tile : MonoBehaviour {
     private int hCost = 0;
     private Tile parent;
 
+    //private GameObject player;
+    //private CamPosSwitcher cPosSwitch;
+
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
         tileID = 0;
     }
+
+    //void Start()
+    //{
+    //    player = GameObject.FindGameObjectWithTag("Player");
+    //    cPosSwitch = Camera.main.gameObject.GetComponent<CamPosSwitcher>();
+
+    //    if (cPosSwitch == null)
+    //        cPosSwitch = player?.GetComponent<CamPosSwitcher>();
+    //}
 
     public void SetRowAndColumn(int row, int column)
     {
@@ -180,4 +193,13 @@ public class Tile : MonoBehaviour {
     {
         isMarked = true;
     }
+
+    //private void OnTriggerEnter(Collider col)
+    //{
+    //    if (cPosSwitch != null)
+    //        if (col.CompareTag("TileChecker"))
+    //        {
+    //            cPosSwitch.SetDistanceVariables(prevdistance, nextDistance);
+    //        }
+    //}
 }

@@ -18,9 +18,9 @@ namespace Assets.Scripts.Camera
 
         public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
         private bool prevInCamFrustum, nextInCamFrustum;
-        private int currentMaze = -1, mazeCount, currentDir = -1;
-        private float portalWidth, prevScore, nextScore;
-        public float rayMaxDist = 15.0f, loopRepeatRate = 0.3f;
+        private int currentMaze = -1, mazeCount, currentDir = -1, prevScore, nextScore, prevDistance, nextDistance;
+        private float portalWidth;
+        public float loopRepeatRate = 0.2f;
 
         #region Start
         private void Start()
@@ -98,13 +98,24 @@ namespace Assets.Scripts.Camera
         {
             if (useCameraAngle)
             {
-                nextScore = Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position);
-                prevScore = Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position);
+                if (Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position) <
+                    Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position))
+                {
+                    nextScore -= 1;
+                }
+                else
+                    prevScore -= 1;
+
             }
             else
             {
-                nextScore = Vector3.Angle(player.transform.forward, currentNextPortal.transform.position);
-                prevScore = Vector3.Angle(player.transform.forward, currentPrevPortal.transform.position);
+                if (Vector3.Angle(player.transform.forward, currentNextPortal.transform.position) <
+                    Vector3.Angle(player.transform.forward, currentPrevPortal.transform.position))
+                {
+                    nextScore -= 1;
+                }
+                else
+                    prevScore -= 1;
             }
         }
         #endregion
@@ -137,8 +148,26 @@ namespace Assets.Scripts.Camera
 
         private void DistanceCheck()
         {
-            nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * 2.0f;
-            prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * 2.0f;
+            //nextScore = nextDistance;
+            //prevScore = prevDistance;
+
+            //Debug.Log(nextScore + " | " + prevScore);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(thisCamera.transform.position, -player.transform.up, out hit, 10.0f, layerMask))
+            {
+                Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
+
+                if (tempTile != null)
+                {
+                    nextScore = tempTile.nextDistance;
+                    prevScore = tempTile.prevdistance;
+                }
+            }
+
+            //nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * 2.0f;
+            //prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * 2.0f;
         }
 
         #region InCamFrustumCheck
@@ -156,7 +185,7 @@ namespace Assets.Scripts.Camera
                 prevInCamFrustum = true;
 
             if (nextInCamFrustum && prevInCamFrustum)
-                Checks();
+                FinalChecks();
             else if (nextInCamFrustum)
                 PositionSwitch(1);
             else if (prevInCamFrustum)
@@ -174,16 +203,6 @@ namespace Assets.Scripts.Camera
             prevScore = 0;
         }
 
-        private void Checks()
-        {
-            AngleCheck();
-
-            if (distanceCheck)
-                DistanceCheck();
-
-            PositionSwitch(nextScore < prevScore ? 1 : 0);
-        }
-
         private void CheckerLoop()  // This is a loop invoked in Start()
         {
             CurrentMazeCheck();
@@ -194,9 +213,25 @@ namespace Assets.Scripts.Camera
             if (rendererInViewCheck)
                 InCamFrustumCheck();
             else
-                Checks();
+                FinalChecks();
         }
 
+        private void FinalChecks()
+        {
+            if (distanceCheck)
+                DistanceCheck();
+
+            if (nextScore == prevScore)
+                AngleCheck();
+
+            PositionSwitch(nextScore < prevScore ? 1 : 0);
+        }
+
+        public void SetDistanceVariables(int prev, int next)
+        {
+            prevDistance = prev;
+            nextDistance = next;
+        }
 
         //// NOT IN USE ANY LONGER: ////
         #region RaycastCheck
@@ -225,7 +260,7 @@ namespace Assets.Scripts.Camera
 
                 RaycastHit hit;
 
-                if (Physics.Raycast(thisCamera.transform.position, portalDirs[i], out hit, rayMaxDist, layerMask))
+                if (Physics.Raycast(thisCamera.transform.position, portalDirs[i], out hit, 15.0f, layerMask))
                 {
                     if (hit.collider.tag == currentNextPortal.tag)
                     {

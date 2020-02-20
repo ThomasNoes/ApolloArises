@@ -7,6 +7,9 @@ TagManager:
   - CameraRig
   - Controller
   - Portal
+  - PlayerCollider
+  - Wall
+  - TileChecker
   layers:
   - Default
   - TransparentFX
