@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11437430, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 3}
+      propertyPath: StartWithControllers
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 3}
 --- !u!1 &451613999
@@ -225,7 +229,7 @@ MonoBehaviour:
   nextPortalCameraRightEye: {fileID: 995948998}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
-  isStereoscopic: 0
+  isStereoscopic: 1
   mazeCount: 3
   portalCount: 0
   currentMaze: 0
@@ -488,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 5
-  isStereoscopic: 0
+  isStereoscopic: 1
   isRightEye: 1
 --- !u!1 &1165058067
 GameObject:
@@ -539,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 5
-  isStereoscopic: 0
+  isStereoscopic: 1
   isRightEye: 0
 --- !u!20 &1165058070
 Camera:
@@ -934,6 +938,1215 @@ MonoBehaviour:
       column: 0
       direction: 0
       spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
 --- !u!4 &1604854435
 Transform:
   m_ObjectHideFlags: 0
@@ -960,7 +2173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdfc59815f49de48ac01cd791794197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useDebugPlayer: 1
+  useDebugPlayer: 0
 --- !u!1 &1813671423
 GameObject:
   m_ObjectHideFlags: 0
