@@ -225,7 +225,7 @@ MonoBehaviour:
   nextPortalCameraRightEye: {fileID: 995948998}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
-  isStereoscopic: 1
+  isStereoscopic: 0
   mazeCount: 3
   portalCount: 0
   currentMaze: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 5
-  isStereoscopic: 1
+  isStereoscopic: 0
   isRightEye: 1
 --- !u!1 &1165058067
 GameObject:
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 5
-  isStereoscopic: 1
+  isStereoscopic: 0
   isRightEye: 0
 --- !u!20 &1165058070
 Camera:
@@ -1171,7 +1171,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739750, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: rendererInViewCheck
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739768, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -1191,7 +1191,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739775, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -1300,7 +1300,7 @@ PrefabInstance:
     - target: {fileID: 5369379566299229987, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5369379566299525901, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
