@@ -2,6 +2,7 @@
 
 public class AntiWallCollision : MonoBehaviour
 {
+    public GameObject cheatCube;
     public bool useVibration = true;
     public bool useVisual = false;
     private float farClippingPlane;
@@ -35,7 +36,7 @@ public class AntiWallCollision : MonoBehaviour
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
 
             if (useVisual)
-                Camera.main.farClipPlane = 0;
+                cheatCube?.SetActive(true);
         }
         else
         {
@@ -43,7 +44,7 @@ public class AntiWallCollision : MonoBehaviour
                 OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
 
             if (useVisual)
-                Camera.main.farClipPlane = farClippingPlane;
+                cheatCube?.SetActive(false);
         }
     }
 }
