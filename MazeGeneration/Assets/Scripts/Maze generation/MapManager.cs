@@ -7,11 +7,12 @@ public class MapManager : MonoBehaviour
     public GameObject[] mazeGeneratorPrefab;
     public bool usePlayAreaCenter;
     public Transform playerHead;
+    private Vector3 playAreaCenter;
     GameObject tempMap;
 
     public int mazeRows;
     public int mazeCols;
-    public float tileWidth = 1f;
+    public float tileWidth = 0.8f;
     public int startRow;
     public int startCol;
 
@@ -30,12 +31,12 @@ public class MapManager : MonoBehaviour
 
     void Awake()
     {
-        #if UNITY_ANDROID
-        playAreaSize = GetCameraRigSize();
+        //#if UNITY_ANDROID
+        //playAreaSize = GetCameraRigSize();
 
-        mazeRows = Mathf.RoundToInt(playAreaSize.x);
-        mazeCols = Mathf.RoundToInt(playAreaSize.z);
-        #endif
+        //mazeRows = Mathf.RoundToInt(playAreaSize.x);
+        //mazeCols = Mathf.RoundToInt(playAreaSize.z);
+        //#endif
 
         if (isMapSeeded)
             Random.InitState(randomGeneratorSeed);
@@ -49,13 +50,9 @@ public class MapManager : MonoBehaviour
             portalInfo = new TileInfo[mapSequence.Length - 1];
 
         if (usePlayAreaCenter)
-        {
             GetStartSeedFromPlayerPosition(out startCol, out startRow, false);
-        }
         else
-        {
             GetStartSeedFromPlayerPosition(out startCol, out startRow, true);
-        }
 
         if (startRow < 0 || startRow >= mazeRows || startCol < 0 || startCol >= mazeCols || isMapSeeded) //if map is seeded maze starts from 0;0
         {
@@ -431,6 +428,7 @@ public class MapManager : MonoBehaviour
     {
         Vector3 size = new Vector3(playAreaSize.x, 0, playAreaSize.z);
         Vector3 chaperone = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+        playAreaCenter = new Vector3(chaperone.x / 2.0f, 0.0f, chaperone.z / 2.0f);
 
         if (chaperone != null)
         {
@@ -453,8 +451,8 @@ public class MapManager : MonoBehaviour
         }
         else
         {
-            col = Mathf.RoundToInt(Mathf.Abs((0.0f - (-playAreaSize.x / 2f + tileWidth / 2f)) / tileWidth));
-            row = Mathf.RoundToInt(Mathf.Abs((0.0f - (playAreaSize.z / 2f - tileWidth / 2f)) / tileWidth));
+            col = Mathf.RoundToInt(Mathf.Abs((playAreaCenter.x - (-playAreaSize.x / 2f + tileWidth / 2f)) / tileWidth));
+            row = Mathf.RoundToInt(Mathf.Abs((playAreaCenter.z - (playAreaSize.z / 2f - tileWidth / 2f)) / tileWidth));
         }
 
         return;

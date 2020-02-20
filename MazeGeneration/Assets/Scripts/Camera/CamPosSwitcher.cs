@@ -16,11 +16,11 @@ namespace Assets.Scripts.Camera
         private Vector3[] portalDirs;
         private LayerMask layerMask;
 
-        public bool isDebugPlayer, distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
+        public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
         private bool prevInCamFrustum, nextInCamFrustum;
         private int currentMaze = -1, mazeCount, currentDir = -1, prevScore, nextScore, prevDistance, nextDistance;
         private float portalWidth;
-        public float loopRepeatRate = 0.2f;
+        public float loopRepeatRate = 0.7f;
 
         #region Start
         private void Start()
