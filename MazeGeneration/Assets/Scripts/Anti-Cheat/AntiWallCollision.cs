@@ -3,7 +3,13 @@
 public class AntiWallCollision : MonoBehaviour
 {
     public bool useVibration = true;
-    public bool turnScreenBlack = false;
+    public bool useVisual = false;
+    private float farClippingPlane;
+
+    private void Start()
+    {
+        farClippingPlane = Camera.main.farClipPlane;
+    }
 
     private void OnTriggerEnter(Collider col)
     {
@@ -11,6 +17,9 @@ public class AntiWallCollision : MonoBehaviour
         {
             if (useVibration)
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
+
+            if (useVisual)
+                Camera.main.farClipPlane = 0;
         }
     }
 
@@ -20,6 +29,9 @@ public class AntiWallCollision : MonoBehaviour
         {
             if (useVibration)
                 OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+
+            if (useVisual)
+                Camera.main.farClipPlane = farClippingPlane;
         }
     }
 }
