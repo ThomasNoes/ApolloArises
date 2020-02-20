@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public GameObject[] mazeGeneratorPrefab;
+    public bool usePlayAreaCenter;
     public Transform playerHead;
     GameObject tempMap;
 
@@ -27,16 +28,15 @@ public class MapManager : MonoBehaviour
     public TileInfo[] portalInfo;
     public MapInfo[] mapSequence;
 
-    /*
-    *   IF YOU ADD ROOMS, THEY HAVE TO ALTERNATE WITH MAZES!!!
-    *   IF YOU ADD ROOMS, THEY HAVE TO ALTERNATE WITH MAZES!!!
-    *   IF YOU ADD ROOMS, THEY HAVE TO ALTERNATE WITH MAZES!!!
-    *   IF YOU ADD ROOMS, THEY HAVE TO ALTERNATE WITH MAZES!!!
-    *   IF YOU ADD ROOMS, THEY HAVE TO ALTERNATE WITH MAZES!!!
-     */
-
     void Awake()
     {
+        #if UNITY_ANDROID
+        playAreaSize = GetCameraRigSize();
+
+        mazeRows = Mathf.RoundToInt(playAreaSize.x);
+        mazeCols = Mathf.RoundToInt(playAreaSize.z);
+        #endif
+
         if (isMapSeeded)
             Random.InitState(randomGeneratorSeed);
         minMazeSize = SetMinMazeSize(); //3x3 is the minimum size, 4x4 if there are rooms as well.
@@ -48,8 +48,14 @@ public class MapManager : MonoBehaviour
         if (mapSequence.Length > 1) // if map sequence is more than 1, it means the maps needs to 
             portalInfo = new TileInfo[mapSequence.Length - 1];
 
-        //playAreaSize = GetCameraRigSize();
-        GetStartSeedFromPlayerPosition(out startCol, out startRow);
+        if (usePlayAreaCenter)
+        {
+            GetStartSeedFromPlayerPosition(out startCol, out startRow, false);
+        }
+        else
+        {
+            GetStartSeedFromPlayerPosition(out startCol, out startRow, true);
+        }
 
         if (startRow < 0 || startRow >= mazeRows || startCol < 0 || startCol >= mazeCols || isMapSeeded) //if map is seeded maze starts from 0;0
         {
@@ -397,12 +403,6 @@ public class MapManager : MonoBehaviour
             possibleTiles.Remove(t);
         }
 
-
-
-
-
-
-
         //Debug.Log("All possible Tiles\n---------------------");
         //foreach (TileInfo t in possibleTiles)
         //{
@@ -434,7 +434,6 @@ public class MapManager : MonoBehaviour
 
         if (chaperone != null)
         {
-            Debug.Log(chaperone);
             size = new Vector3(Mathf.Round(chaperone.x), 0, Mathf.Round(chaperone.z));
         }
         return size;
@@ -445,10 +444,18 @@ public class MapManager : MonoBehaviour
         transform.Translate(-playAreaSize.x / 2f + tileWidth / 2f, 0, playAreaSize.z / 2f - tileWidth / 2f);
     }
 
-    void GetStartSeedFromPlayerPosition(out int col, out int row)
+    void GetStartSeedFromPlayerPosition(out int col, out int row, bool usePlayerPos)
     {
-        col = Mathf.RoundToInt(Mathf.Abs((playerHead.position.x - (-playAreaSize.x / 2f + tileWidth / 2f)) / tileWidth));
-        row = Mathf.RoundToInt(Mathf.Abs((playerHead.position.z - (playAreaSize.z / 2f - tileWidth / 2f)) / tileWidth));
+        if (usePlayerPos)
+        {
+            col = Mathf.RoundToInt(Mathf.Abs((playerHead.position.x - (-playAreaSize.x / 2f + tileWidth / 2f)) / tileWidth));
+            row = Mathf.RoundToInt(Mathf.Abs((playerHead.position.z - (playAreaSize.z / 2f - tileWidth / 2f)) / tileWidth));
+        }
+        else
+        {
+            col = Mathf.RoundToInt(Mathf.Abs((0.0f - (-playAreaSize.x / 2f + tileWidth / 2f)) / tileWidth));
+            row = Mathf.RoundToInt(Mathf.Abs((0.0f - (playAreaSize.z / 2f - tileWidth / 2f)) / tileWidth));
+        }
 
         return;
     }
