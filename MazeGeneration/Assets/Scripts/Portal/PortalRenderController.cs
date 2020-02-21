@@ -21,6 +21,10 @@ public class PortalRenderController : MonoBehaviour
     MapManager mapManager;
     Vector3 tempPos;
 
+    Vector3 nextOffset;
+    Vector3 prevOffset;
+    bool placeForward;
+
     void Start()
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
@@ -176,5 +180,31 @@ public class PortalRenderController : MonoBehaviour
     int TrueModulus(int k, int n)
     {
         return ((k %= n) < 0) ? k + n : k;
+    }
+    private void SetCameraOffsets(int currentMaze)
+    {
+        //cameraOffset = (float)mapManager.mazeCols * mapManager.tileWidth + 1f;
+        int nextMaze = currentMaze + 1;
+        int prevMaze = currentMaze - 1;
+
+        if (nextMaze <= mapSequence.Length - 1) // if there is a next maze
+        {
+            nextOffset = mapSequence[currentMaze].mapObject.transform.position - mapSequence[nextMaze].mapObject.transform.position;
+
+        }
+        else
+        {
+            placeForward = false;
+        }
+
+        if (prevMaze >= 0) // if there is a previous maze
+        {
+            prevOffset = mapSequence[prevMaze].mapObject.transform.position - mapSequence[currentMaze].mapObject.transform.position;
+        }
+        else
+        {
+            placeForward = true;
+        }
+
     }
 }

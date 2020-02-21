@@ -4,8 +4,26 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
+    public enum MazePlacementType
+    {
+        OrderedAlongX,
+        orderedDiagonally,
+        randomButIncreasesAlongY
+    }
+
+    public enum PortalGenerationType
+    {
+        Everywhere,
+        Hallways
+    }
+
     public GameObject[] mazeGeneratorPrefab;
-    public bool usePlayAreaCenter, setDimensionsAutomatically, PlaceMazesInOrder = true;
+    public bool usePlayAreaCenter, setDimensionsAutomatically;
+    public MazePlacementType MazePlacement;
+
+    private Vector3 minimumBound = Vector3.zero;
+    private Vector3 maximumBound;
+
     public Transform playerHead;
     private Vector3 playAreaCenter;
     GameObject tempMap;
@@ -17,11 +35,8 @@ public class MapManager : MonoBehaviour
     public int startCol;
 
     public Vector3 playAreaSize;
-    public enum PortalGenerationType
-    {
-        Everywhere,
-        Hallways
-    }
+
+
     private int minMazeSize;
     public bool isMapSeeded;
     public int randomGeneratorSeed;
@@ -146,14 +161,21 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < mapSequence.Length; i++)
         {
-            if (PlaceMazesInOrder)
+            switch (MazePlacement)
             {
-                PlaceMazesOrderly(i);
+                case MazePlacementType.OrderedAlongX:
+                    PlaceOrderedAlongX(i);
+                    break;
+                case MazePlacementType.orderedDiagonally:
+                    PlaceOrderedDiagonally(i);
+                    break;
+                case MazePlacementType.randomButIncreasesAlongY:
+                    PlaceRandomButIncreaseY(i);
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                PlaceMazesRandomly(i);
-            }
+
             tempMap.name = i.ToString() + " - " + mapSequence[i].mapType.ToString();
             tempMap.transform.parent = transform;
             mapSequence[i].mapObject = tempMap;
@@ -480,18 +502,53 @@ public class MapManager : MonoBehaviour
         return 3;
     }
 
-    private void PlaceMazesOrderly(int index)
+    private Vector3 SetMaximumBound()
+    {
+        Vector3 returnVector;
+        float openness = 2; 
+
+        //finding the minimum space required
+        float x = mazeCols * tileWidth * mapSequence.Length;
+        float y = mapSequence.Length; 
+        float z= mazeRows * tileWidth * mapSequence.Length;
+
+        returnVector = new Vector3(x,y,z);
+
+        returnVector *= openness; //multiply with openness for how open/bare you towers to be 
+
+        return returnVector;
+    }
+
+    private void PlaceOrderedAlongX(int index)
     {
         Vector3 mapSpawnPoint = new Vector3(transform.position.x + index * (mazeCols * tileWidth + 1), 0, 0);
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
         //Debug.Log("maze position is "+ tempMap.transform.position);
     }
 
-    private void PlaceMazesRandomly(int index)
+    private void PlaceOrderedDiagonally(int index)
     {
+
+
         float distance = transform.position.x + index * (mazeCols * tileWidth + 1);
         Vector3 mapSpawnPoint = new Vector3(distance, distance, distance);
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
+
+
+    }
+    private void PlaceRandomButIncreaseY(int index)
+    {
+        maximumBound = SetMaximumBound();
+
+        if (index == 0)
+        {
+
+        }
+
+        if (index == mapSequence.Length - 1)
+        {
+
+        }
     }
 
 }
