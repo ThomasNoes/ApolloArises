@@ -171,7 +171,45 @@ public class TileInfo
         return visible;
     }
 
-    public bool IsAdjacentwithSameDirection(TileInfo entrance)
+    public bool BothPortalsVisibleFromLeadIn(TileInfo entrance)
+    {
+        bool visible = false;
+        TileInfo leadIn = entrance.GetLeadInCoord();
+
+        if (entrance.direction == 0 || entrance.direction == 2)
+        {
+            if (leadIn.row == row)
+            {
+                if (column < leadIn.column && direction == 1)
+                {
+                    visible = true;
+                }
+                if (column > leadIn.column && direction == 3)
+                {
+                    visible = true;
+                }
+            }
+        }
+
+        if (entrance.direction == 3 || entrance.direction == 1)
+        {
+            if (leadIn.column == column)
+            {
+                if (row < leadIn.row && direction == 2)
+                {
+                    visible = true;
+                }
+                if (row > leadIn.row && direction == 0)
+                {
+                    visible = true;
+                }
+            }
+        }
+
+        return visible;
+    }
+
+    public bool IsAdjacentLaneWithSameDirection(TileInfo entrance)
     {
         bool adjacentAndSame = false;
 

@@ -327,8 +327,8 @@ public class MapManager : MonoBehaviour
         }
 
         List<TileInfo> shutoffCorners = PortalPositionHelper.GetShutoffList(startCoord); //Remove corner shutoffs
-        //if (shutoffCorners.Count > 0 &&
-        //    mazeRows > 3 && mazeCols > 3)
+        //if (shutoffCorners.Count > 0) // &&
+            //mazeRows > 3 && mazeCols > 3)
         //{
         //    foreach (TileInfo soc in shutoffCorners)
         //    {
@@ -360,7 +360,7 @@ public class MapManager : MonoBehaviour
                 //Instantiate(debugGizmo, new Vector3(transform.position.x + t.column * tileWidth, 0, transform.position.z - t.row * tileWidth), Quaternion.identity);
                 tilesToRemove.Add(t);          
             }
-            else if (t.IsLeadingIntoEntrance(flag)) //Remove directions that lead into reserved tile next to entrance
+            else if (t.IsLeadingIntoEntrance(flag)) //Remove directions that lead into reserved tile next to entrance this tile 
             {
                 //Debug.Log("removed " + t.TileToString());
                 tilesToRemove.Add(t);
@@ -368,10 +368,14 @@ public class MapManager : MonoBehaviour
             else if (t.IsVisibleThroughEntrance(flag))
             {
                 //Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
-                //Debug.Log("Maze Segment " + mazeSegment);
                 tilesToRemove.Add(t);
             }
-            else if (t.IsAdjacentwithSameDirection(flag))
+            else if (t.BothPortalsVisibleFromLeadIn(flag))
+            {
+                //Debug.Log(flag.TileToString() + " removed " + t.TileToString() + "maze: " + mazeSegment);
+                tilesToRemove.Add(t);
+            }
+            else if (t.IsAdjacentLaneWithSameDirection(flag))
             {
                 //Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
                 //Debug.Log("Maze Segment " + mazeSegment);
