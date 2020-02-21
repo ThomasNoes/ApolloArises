@@ -484,7 +484,7 @@ public class MapManager : MonoBehaviour
     {
         Vector3 mapSpawnPoint = new Vector3(transform.position.x + index * (mazeCols * tileWidth + 1), 0, 0);
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
-        Debug.Log("maze position is "+ tempMap.transform.position);
+        //Debug.Log("maze position is "+ tempMap.transform.position);
     }
 
     private void PlaceMazesRandomly(int index)
