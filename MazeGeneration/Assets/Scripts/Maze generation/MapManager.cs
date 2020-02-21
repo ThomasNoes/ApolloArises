@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public GameObject[] mazeGeneratorPrefab;
-    public bool usePlayAreaCenter, setDimensionsAutomatically = true;
+    public bool usePlayAreaCenter, setDimensionsAutomatically, PlaceMazesInOrder = true;
     public Transform playerHead;
     private Vector3 playAreaCenter;
     GameObject tempMap;
@@ -146,12 +146,17 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < mapSequence.Length; i++)
         {
-            //Debug.Log("Starting Maze " + i);
-            Vector3 mapSpawnPoint = new Vector3(transform.position.x + i * (mazeCols * tileWidth + 1), 0, 0);
-            tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[i].mapType], mapSpawnPoint, Quaternion.identity);
+            if (PlaceMazesInOrder)
+            {
+                PlaceMazesOrderly(i);
+            }
+            else
+            {
+                PlaceMazesRandomly(i);
+            }
             tempMap.name = i.ToString() + " - " + mapSequence[i].mapType.ToString();
             tempMap.transform.parent = transform;
-
+            mapSequence[i].mapObject = tempMap;
             MapGenerator mapScript = tempMap.GetComponent<MapGenerator>();
             mapScript.SetDimensions(mazeRows, mazeCols, tileWidth);
             mapScript.Initialize();
@@ -474,4 +479,19 @@ public class MapManager : MonoBehaviour
         }
         return 3;
     }
+
+    private void PlaceMazesOrderly(int index)
+    {
+        Vector3 mapSpawnPoint = new Vector3(transform.position.x + index * (mazeCols * tileWidth + 1), 0, 0);
+        tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
+        Debug.Log("maze position is "+ tempMap.transform.position);
+    }
+
+    private void PlaceMazesRandomly(int index)
+    {
+        float distance = transform.position.x + index * (mazeCols * tileWidth + 1);
+        Vector3 mapSpawnPoint = new Vector3(distance, distance, distance);
+        tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
+    }
+
 }

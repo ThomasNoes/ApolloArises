@@ -10,7 +10,7 @@ public class PortalRenderController : MonoBehaviour
 
     public GameObject portalPrefab;
     public bool isStereoscopic;
-    public int mazeCount;
+    public MapInfo[] mapSequence; 
     public int portalCount;
     public int currentMaze;
     public float cameraOffset;
@@ -23,8 +23,8 @@ public class PortalRenderController : MonoBehaviour
     void Start()
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
-        mazeCount = mapManager.mapSequence.Length;
-        portalCount = mazeCount - 1;
+        mapSequence = mapManager.mapSequence;
+        portalCount = mapSequence.Length - 1;
         cameraOffset = (float)mapManager.mazeCols * mapManager.tileWidth + 1f;
         portalWidth = mapManager.tileWidth;
 
@@ -43,11 +43,18 @@ public class PortalRenderController : MonoBehaviour
     void InitializePortals()
     {
         //Debug.Log("Portals will go here:");
-        for (int i = 0; i < mazeCount - 1; i++)
+        for (int i = 0; i < mapSequence.Length - 1; i++)
         {
-            TileInfo currentPortal = mapManager.mapSequence[i].endSeed;
+            TileInfo currentPortal = mapSequence[i].endSeed;
             //currentPortal.PrintTile();
-            GameObject tempPortal = Instantiate(portalPrefab, new Vector3(transform.position.x + i * cameraOffset + currentPortal.column * portalWidth, 0, transform.position.z - currentPortal.row * portalWidth), Quaternion.identity);
+            //GameObject tempPortal = Instantiate(portalPrefab, new Vector3(transform.position.x + i * cameraOffset + currentPortal.column * portalWidth, 0, transform.position.z - currentPortal.row * portalWidth), Quaternion.identity);
+
+            Vector3 tempPos = new Vector3(mapSequence[i].mapObject.transform.position.x + currentPortal.column * portalWidth,
+                mapSequence[i].mapObject.transform.position.y,
+                mapSequence[i].mapObject.transform.position.z - currentPortal.row * portalWidth);
+
+            GameObject tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity);
+
             Teleporter tempScript = tempPortal.GetComponent<Teleporter>();
             BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();
 
