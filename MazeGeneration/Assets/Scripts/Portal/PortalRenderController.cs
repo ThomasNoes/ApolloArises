@@ -19,6 +19,7 @@ public class PortalRenderController : MonoBehaviour
     public GameObject[] prevProjectionQuadArray, nextProjectionQuadArray;
     [HideInInspector] public GameObject[] prevRenderQuadArray, nextRenderQuadArray;
     MapManager mapManager;
+    Vector3 tempPos;
 
     void Start()
     {
@@ -49,7 +50,7 @@ public class PortalRenderController : MonoBehaviour
             //currentPortal.PrintTile();
             //GameObject tempPortal = Instantiate(portalPrefab, new Vector3(transform.position.x + i * cameraOffset + currentPortal.column * portalWidth, 0, transform.position.z - currentPortal.row * portalWidth), Quaternion.identity);
 
-            Vector3 tempPos = new Vector3(mapSequence[i].mapObject.transform.position.x + currentPortal.column * portalWidth,
+            tempPos = new Vector3(mapSequence[i].mapObject.transform.position.x + currentPortal.column * portalWidth,
                 mapSequence[i].mapObject.transform.position.y,
                 mapSequence[i].mapObject.transform.position.z - currentPortal.row * portalWidth);
 
@@ -79,7 +80,13 @@ public class PortalRenderController : MonoBehaviour
 
             //we could find a way to remove the redundancy here
 
-            tempPortal = Instantiate(portalPrefab, new Vector3(transform.position.x + (i + 1) * cameraOffset + currentPortal.column * portalWidth, 0, transform.position.z - currentPortal.row * portalWidth), Quaternion.identity);
+            tempPos = new Vector3(mapSequence[i+1].mapObject.transform.position.x + currentPortal.column * portalWidth,
+                mapSequence[i+1].mapObject.transform.position.y,
+                mapSequence[i+1].mapObject.transform.position.z - currentPortal.row * portalWidth);
+
+            //tempPortal = Instantiate(portalPrefab, new Vector3(transform.position.x + (i + 1) * cameraOffset + currentPortal.column * portalWidth, 0, transform.position.z - currentPortal.row * portalWidth), Quaternion.identity);
+            tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity);
+
             tempScript = tempPortal.GetComponent<Teleporter>();
             bc = tempScript.renderQuad.GetComponent<BoxCollider>();
 
