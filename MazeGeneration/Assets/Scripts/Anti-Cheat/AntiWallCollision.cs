@@ -33,6 +33,11 @@ public class AntiWallCollision : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision col)
+    {
+        Debug.Log("COLLISION!");
+    }
+
     private void AntiCheat(bool response) // true: activate, false: stop
     {
         if (response)
