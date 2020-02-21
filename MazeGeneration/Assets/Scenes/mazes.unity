@@ -858,7 +858,8 @@ MonoBehaviour:
   mazeGeneratorPrefab:
   - {fileID: 6700716075161373839, guid: 22bc3d0eaee86bb428496bf988489ae9, type: 3}
   - {fileID: 2500389178016090726, guid: 3767eab88ce28c4448bbd26f359914bc, type: 3}
-  usePlayAreaCenter: 0
+  usePlayAreaCenter: 1
+  setDimensionsAutomatically: 1
   playerHead: {fileID: 2526136163395224742}
   mazeRows: 3
   mazeCols: 3
@@ -871,32 +872,6 @@ MonoBehaviour:
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
   - mapType: 0
     roomName: 
     isEndSeeded: 0

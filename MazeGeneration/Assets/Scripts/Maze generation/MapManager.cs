@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     public GameObject[] mazeGeneratorPrefab;
-    public bool usePlayAreaCenter;
+    public bool usePlayAreaCenter, setDimensionsAutomatically = true;
     public Transform playerHead;
     private Vector3 playAreaCenter;
     GameObject tempMap;
@@ -34,8 +34,11 @@ public class MapManager : MonoBehaviour
 #if UNITY_ANDROID
         playAreaSize = GetCameraRigSize();
 
-        mazeRows = Mathf.RoundToInt(playAreaSize.x);
-        mazeCols = Mathf.RoundToInt(playAreaSize.z);
+        if (setDimensionsAutomatically)
+        {
+            mazeRows = Mathf.RoundToInt(playAreaSize.x / tileWidth);
+            mazeCols = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+        }
 #endif
 
         if (isMapSeeded)
