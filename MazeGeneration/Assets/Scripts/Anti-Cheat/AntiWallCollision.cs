@@ -9,21 +9,26 @@ public class AntiWallCollision : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Anti cheat ready!");
         farClippingPlane = Camera.main.farClipPlane;
     }
 
     private void OnTriggerEnter(Collider col)
     {
+        Debug.Log("Collided/entered with: " + col.name);
         if (col.tag == "Wall")
         {
+            Debug.Log("Wall enter!");
             AntiCheat(true);
         }
     }
 
     private void OnTriggerExit(Collider col)
     {
+        Debug.Log("Collided/exited with: " + col.name);
         if (col.tag == "Wall")
         {
+            Debug.Log("Wall exit!");
             AntiCheat(false);
         }
     }
