@@ -9,6 +9,7 @@ public class DebugWindow : MonoBehaviour
     private bool active;
     public Text debugText;
     public GameObject debugPanel;
+    private ScrollRect scrollRect;
 
     void Awake()
     {
@@ -19,6 +20,7 @@ public class DebugWindow : MonoBehaviour
             return;
 
         //Application.logMessageReceived += Log;
+        scrollRect = debugText.gameObject.GetComponent<ScrollRect>();
         InvokeRepeating("CustomUpdate", 1.0f, 4.0f);
     }
 
@@ -61,5 +63,21 @@ public class DebugWindow : MonoBehaviour
             if (debugPanel != null)
                 debugPanel.SetActive(!debugPanel.activeSelf);
         }
+
+        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp))
+            ScrollToTop();
+        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown))
+            ScrollToBottom();
+    }
+
+    public void ScrollToTop()
+    {
+        if (scrollRect.normalizedPosition.y >= 0 && scrollRect.normalizedPosition.y <= 1)
+            scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, scrollRect.normalizedPosition.y + 0.05f * Time.deltaTime);
+    }
+    public void ScrollToBottom()
+    {
+        if (scrollRect.normalizedPosition.y >= 0 && scrollRect.normalizedPosition.y <= 1)
+            scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, scrollRect.normalizedPosition.y - 0.05f * Time.deltaTime);
     }
 }
