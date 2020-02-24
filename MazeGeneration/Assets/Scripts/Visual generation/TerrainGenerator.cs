@@ -35,6 +35,7 @@ namespace EventCallbacks {
             // Set the object as a child of the current tile
             newCeiling = Instantiate (ceiling, new Vector3 (tileTransform.position.x, tileTransform.position.y + wallHeight, tileTransform.position.z), Quaternion.AngleAxis (90, Vector3.left));
             newCeiling.transform.parent = tileTransform;
+            newCeiling.transform.localScale = new Vector3(1, 1, 1);
             if (ceilingMat != null)
                 newCeiling.GetComponent<Renderer>().material = ceilingMat;
 
