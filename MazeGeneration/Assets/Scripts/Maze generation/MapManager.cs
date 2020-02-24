@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VRTK;
 
 public class MapManager : MonoBehaviour
 {
@@ -31,15 +32,15 @@ public class MapManager : MonoBehaviour
 
     void Awake()
     {
-#if UNITY_ANDROID
+        #if UNITY_ANDROID
         playAreaSize = GetCameraRigSize();
 
         if (setDimensionsAutomatically)
         {
-            mazeRows = Mathf.RoundToInt(playAreaSize.x / tileWidth);
-            mazeCols = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+            mazeRows = Mathf.FloorToInt(playAreaSize.x / tileWidth);
+            mazeCols = Mathf.FloorToInt(playAreaSize.z / tileWidth);
         }
-#endif
+        #endif
 
         if (isMapSeeded)
             Random.InitState(randomGeneratorSeed);
@@ -52,10 +53,8 @@ public class MapManager : MonoBehaviour
         if (mapSequence.Length > 1) // if map sequence is more than 1, it means the maps needs to 
             portalInfo = new TileInfo[mapSequence.Length - 1];
 
-        if (usePlayAreaCenter)
-            GetStartSeedFromPlayerPosition(out startCol, out startRow, false);
-        else
-            GetStartSeedFromPlayerPosition(out startCol, out startRow, true);
+
+        GetStartSeedFromPlayerPosition(out startCol, out startRow, !usePlayAreaCenter);
 
         if (startRow < 0 || startRow >= mazeRows || startCol < 0 || startCol >= mazeCols || isMapSeeded) //if map is seeded maze starts from 0;0
         {
@@ -64,13 +63,9 @@ public class MapManager : MonoBehaviour
             //Debug.Log("Player was out of game area, Maze starts from (0;0).");
         }
         if (portalGenerationLocation == PortalGenerationType.Everywhere)
-        {
             GenerateMapSequence();
-        }
         else
-        {
             GenerateMapSequenceHallway();
-        }
 
         OffsetMap();
         /*
@@ -446,6 +441,18 @@ public class MapManager : MonoBehaviour
 
     void OffsetMap()
     {
+        //Vector3[] playAreaLocations = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
+        //Vector3 playAreaLocation = new Vector3(Mathf.Abs(playAreaLocations[0].x), 0.0f, Mathf.Abs(playAreaLocations[0].z));
+        //Vector3 playAreaDimensions = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+
+        //playAreaCenter = new Vector3(playAreaDimensions.x / 2.0f, 0.0f, playAreaDimensions.z / 2.0f);
+
+        //playAreaCenter = new Vector3 (-playAreaLocation.x + tileWidth / 2.0f, -2.0f, playAreaLocation.z - tileWidth / 2.0f); // TODO set y to 0
+
+
+        ////transform.Translate(playAreaCenter);
+        ////transform.position = playAreaCenter;
+        //transform.position = new Vector3(-playAreaDimensions.x / 2f + tileWidth / 2f, 0, playAreaDimensions.z / 2f - tileWidth / 2f);
         transform.Translate(-playAreaSize.x / 2f + tileWidth / 2f, 0, playAreaSize.z / 2f - tileWidth / 2f);
     }
 

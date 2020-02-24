@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VRTK;
 
 public class CenterObjectToPlayArea : MonoBehaviour
 {
@@ -12,11 +13,11 @@ public class CenterObjectToPlayArea : MonoBehaviour
             return;
 
         #if UNITY_ANDROID
-        Vector3[] playAreaLocation = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
-
-        Debug.Log("geo first vector: " + playAreaLocation[0]);
         Debug.Log("Play area size: " + OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea));
-        #endif
+
+        Debug.Log("PlayAreaTransform().position  " + VRTK_DeviceFinder.PlayAreaTransform().position);
+        Debug.Log("PlayAreaTransform().rotation  " + VRTK_DeviceFinder.PlayAreaTransform().rotation);
+#endif
     }
 
 }

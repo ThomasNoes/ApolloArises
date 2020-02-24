@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using VRTK;
 
 public class DebugWindow : MonoBehaviour
 {
@@ -71,8 +72,9 @@ public class DebugWindow : MonoBehaviour
 
         if (OVRInput.GetDown(OVRInput.Button.Two))
         {
-            Vector3[] playAreaLocation = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
-            Debug.Log("geo first vector: " + playAreaLocation[0]);
+            VRTK_DeviceFinder.PlayAreaTransform().SetPositionAndRotation(new Vector3(0,-2f,0), Quaternion.identity);
+            Debug.Log("PlayAreaTransform().position  " + VRTK_DeviceFinder.PlayAreaTransform().position);
+            Debug.Log("PlayAreaTransform().rotation  " + VRTK_DeviceFinder.PlayAreaTransform().rotation);
         }
     }
 
