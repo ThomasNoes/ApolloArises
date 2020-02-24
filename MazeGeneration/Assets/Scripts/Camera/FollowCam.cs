@@ -5,7 +5,7 @@ using UnityEngine;
 //[ExecuteInEditMode]
 public class FollowCam : MonoBehaviour
 {
-    public float offset;
+    Vector3 offset;
     public bool isStereoscopic;
     public bool isRightEye;
 
@@ -26,7 +26,7 @@ public class FollowCam : MonoBehaviour
         Vector3 mainCameraPosition;
         if (!isStereoscopic)
         {
-            transform.position = new Vector3(Camera.main.transform.position.x + offset, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            transform.position = new Vector3(Camera.main.transform.position.x + offset.x, Camera.main.transform.position.y + offset.y, Camera.main.transform.position.z + +offset.z);
         }
         else
         {
@@ -40,13 +40,42 @@ public class FollowCam : MonoBehaviour
                 Matrix4x4 viewMatrix = Camera.main.GetStereoViewMatrix(Camera.StereoscopicEye.Left);
                 mainCameraPosition = viewMatrix.inverse.GetColumn(3);
             }
-            transform.position = new Vector3(mainCameraPosition.x + offset, mainCameraPosition.y, mainCameraPosition.z);
+            transform.position = new Vector3(mainCameraPosition.x + offset.x, mainCameraPosition.y + offset.y, mainCameraPosition.z + offset.z);
         }
         transform.rotation = Camera.main.transform.rotation;
     }
 
-    public void SetOffset(float o)
+    public void SwitchOffset()
     {
-        offset = o;
+        if (offset == nextOffset)
+        {
+            offset = prevOffset;
+        }
+        else
+        {
+            offset = nextOffset;
+        }
+    }
+    public void SetOffsets(Vector3 next, Vector3 prev)
+    {
+        SetNextOffset(next);
+        SetPrevOffset(prev);
+        SetToNext();
+    }
+    public void SetToNext()
+    {
+        offset = nextOffset;
+    }
+    public void SetToPrev()
+    {
+        offset = prevOffset;
+    }
+    public void SetNextOffset(Vector3 offset)
+    {
+        nextOffset = offset;
+    }
+    public void SetPrevOffset(Vector3 offset)
+    {
+        prevOffset = offset;
     }
 }

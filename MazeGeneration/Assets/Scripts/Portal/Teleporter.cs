@@ -7,13 +7,16 @@ public class Teleporter : MonoBehaviour
     public bool tutorialMode;
     public bool isForwardTeleporter;
     public int portalID;
+    public int mazeID;
     public Transform renderQuad;
     public Transform projectionQuad;
-    public float cameraOffset;
     private List<GameObject> teleportCopies;
     private GameObject player;
     private CharacterController charControl;
     private CamPosSwitcher cPosSwitcher;
+
+    Vector3 nextOffset;
+    Vector3 prevOffset;
 
     void Start()
     {
@@ -21,8 +24,9 @@ public class Teleporter : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
             charControl = player.GetComponent<CharacterController>();
-
         cPosSwitcher = Camera.main.gameObject.GetComponent<CamPosSwitcher>();
+        nextOffset = PortalRenderController.SetNextOffset(mazeID);
+        prevOffset = PortalRenderController.SetPrevOffset(mazeID);
     }
 
     public void AddTeleportCopy(GameObject obj)
@@ -47,6 +51,8 @@ public class Teleporter : MonoBehaviour
             Vector3 colliderNoYAxis = new Vector3(colliderWorldPos.x, 0, colliderWorldPos.z);
             Vector3 renderPlaneNoYAxis = new Vector3(renderQuad.position.x, 0, renderQuad.position.z);
 
+
+
             //offsets are static for some reason, we need to fix that
             if (Vector3.Magnitude(playerNoYAxis - renderPlaneNoYAxis) < Vector3.Magnitude(colliderNoYAxis - renderPlaneNoYAxis))
             {
@@ -57,11 +63,11 @@ public class Teleporter : MonoBehaviour
                         prController.TeleportPlayer(portalID + 1);
                     if (charControl != null)
                         charControl.enabled = false;
-                    player.transform.Translate(cameraOffset, 0, 0, Space.World);
+                    player.transform.Translate(nextOffset, Space.World);
                     if (charControl != null)
                         charControl.enabled = true;
 
-                    cPosSwitcher?.PositionSwitch(0);
+                    cPosSwitcher?.PositionSwitch(true);//maybe opposite
                     //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x + cameraOffset,
                     //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }
@@ -71,11 +77,11 @@ public class Teleporter : MonoBehaviour
                         prController.TeleportPlayer(portalID);
                     if (charControl != null)
                         charControl.enabled = false;
-                    player.transform.Translate(-cameraOffset, 0, 0, Space.World);
+                    player.transform.Translate(prevOffset, Space.World);
                     if (charControl != null)
                         charControl.enabled = true;
 
-                    cPosSwitcher?.PositionSwitch(1);
+                    cPosSwitcher?.PositionSwitch(false); //maybe opposite
                     //player.transform.SetPositionAndRotation(new Vector3(player.transform.position.x - cameraOffset, 
                     //    player.transform.position.y, player.transform.position.z), player.transform.rotation);
                 }
@@ -90,6 +96,6 @@ public class Teleporter : MonoBehaviour
 
             }
         }
-        //advance culling mask array
+
     }
 }
