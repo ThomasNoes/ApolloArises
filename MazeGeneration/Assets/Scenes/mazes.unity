@@ -1445,23 +1445,23 @@ MonoBehaviour:
   cachedSystemSDKInfo:
     baseTypeName: VRTK.SDK_BaseSystem
     fallbackTypeName: VRTK.SDK_FallbackSystem
-    typeName: VRTK.SDK_UnitySystem
-    descriptionIndex: 4
+    typeName: VRTK.SDK_OculusSystem
+    descriptionIndex: 1
   cachedBoundariesSDKInfo:
     baseTypeName: VRTK.SDK_BaseBoundaries
     fallbackTypeName: VRTK.SDK_FallbackBoundaries
-    typeName: VRTK.SDK_UnityBoundaries
-    descriptionIndex: 4
+    typeName: VRTK.SDK_OculusBoundaries
+    descriptionIndex: 1
   cachedHeadsetSDKInfo:
     baseTypeName: VRTK.SDK_BaseHeadset
     fallbackTypeName: VRTK.SDK_FallbackHeadset
-    typeName: VRTK.SDK_UnityHeadset
-    descriptionIndex: 4
+    typeName: VRTK.SDK_OculusHeadset
+    descriptionIndex: 1
   cachedControllerSDKInfo:
     baseTypeName: VRTK.SDK_BaseController
     fallbackTypeName: VRTK.SDK_FallbackController
-    typeName: VRTK.SDK_UnityController
-    descriptionIndex: 4
+    typeName: VRTK.SDK_OculusController
+    descriptionIndex: 1
 --- !u!1001 &1776048526422341044
 PrefabInstance:
   m_ObjectHideFlags: 0
