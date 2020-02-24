@@ -64,10 +64,16 @@ public class DebugWindow : MonoBehaviour
                 debugPanel.SetActive(!debugPanel.activeSelf);
         }
 
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
             ScrollToTop();
-        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown))
+        else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
             ScrollToBottom();
+
+        if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            Vector3[] playAreaLocation = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
+            Debug.Log("geo first vector: " + playAreaLocation[0]);
+        }
     }
 
     public void ScrollToTop()

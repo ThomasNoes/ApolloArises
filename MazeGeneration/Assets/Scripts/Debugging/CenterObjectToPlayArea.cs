@@ -8,10 +8,15 @@ public class CenterObjectToPlayArea : MonoBehaviour
 
     void Start()
     {
+        if (Application.isEditor)
+            return;
+
+        #if UNITY_ANDROID
         Vector3[] playAreaLocation = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
 
         Debug.Log("geo first vector: " + playAreaLocation[0]);
         Debug.Log("Play area size: " + OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea));
+        #endif
     }
 
 }
