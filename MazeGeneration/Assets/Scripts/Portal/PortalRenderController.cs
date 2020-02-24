@@ -77,11 +77,11 @@ public class PortalRenderController : MonoBehaviour
         tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
         if(isForward)
         { 
-            tempScript.projectionQuad.Translate(nextOffset, Space.World); // needs to be different
+            tempScript.projectionQuad.Translate(nextOffset, Space.World);
         }
         else
         {
-            tempScript.projectionQuad.Translate(prevOffset, Space.World); // needs to be different
+            tempScript.projectionQuad.Translate(prevOffset, Space.World);
         }
 
 
@@ -112,68 +112,68 @@ public class PortalRenderController : MonoBehaviour
         tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
     }
 
-    private void OldSetup(int i)
-    {
-        //Debug.Log("Portals will go here:");
-            TileInfo currentPortal = mapSequence[i].endSeed;
-            tempPos = new Vector3(mapSequence[i].mapObject.transform.position.x + currentPortal.column * portalWidth,
-                mapSequence[i].mapObject.transform.position.y,
-                mapSequence[i].mapObject.transform.position.z - currentPortal.row * portalWidth);
+    //private void OldSetup(int i)
+    //{
+    //    //Debug.Log("Portals will go here:");
+    //        TileInfo currentPortal = mapSequence[i].endSeed;
+    //        tempPos = new Vector3(mapSequence[i].mapObject.transform.position.x + currentPortal.column * portalWidth,
+    //            mapSequence[i].mapObject.transform.position.y,
+    //            mapSequence[i].mapObject.transform.position.z - currentPortal.row * portalWidth);
 
-            GameObject tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity);
+    //        GameObject tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity);
 
-            Teleporter tempScript = tempPortal.GetComponent<Teleporter>();
-            BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();
+    //        Teleporter tempScript = tempPortal.GetComponent<Teleporter>();
+    //        BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();
 
-            tempPortal.transform.Rotate(0f, 180 + 90f * currentPortal.direction, 0f);
-            tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
-            tempScript.projectionQuad.Translate(cameraOffset, 0, 0, Space.World);
+    //        tempPortal.transform.Rotate(0f, 180 + 90f * currentPortal.direction, 0f);
+    //        tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
+    //        tempScript.projectionQuad.Translate(cameraOffset, 0, 0, Space.World);
 
-            tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
-            tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
-            bc.center = new Vector3(0, 0, -portalWidth / 2f + pillarOffset);
+    //        tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
+    //        tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
+    //        bc.center = new Vector3(0, 0, -portalWidth / 2f + pillarOffset);
 
-            tempPortal.name = "Forward Teleporter " + i;
-            tempScript.renderQuad.name = "Forward Render Quad " + i;
-            tempScript.projectionQuad.name = "Forward Projection Quad " + i;
-            tempPortal.transform.parent = transform;
-            tempScript.portalID = i;
-            tempScript.isForwardTeleporter = true;
-            //tempScript.cameraOffset = cameraOffset;
-            nextProjectionQuadArray[i] = tempScript.projectionQuad.gameObject;
-            nextRenderQuadArray[i] = tempScript.renderQuad.gameObject;
-            tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
+    //        tempPortal.name = "Forward Teleporter " + i;
+    //        tempScript.renderQuad.name = "Forward Render Quad " + i;
+    //        tempScript.projectionQuad.name = "Forward Projection Quad " + i;
+    //        tempPortal.transform.parent = transform;
+    //        tempScript.portalID = i;
+    //        tempScript.isForwardTeleporter = true;
+    //        //tempScript.cameraOffset = cameraOffset;
+    //        nextProjectionQuadArray[i] = tempScript.projectionQuad.gameObject;
+    //        nextRenderQuadArray[i] = tempScript.renderQuad.gameObject;
+    //        tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
 
-            //we could find a way to remove the redundancy here
+    //        //we could find a way to remove the redundancy here
 
-            tempPos = new Vector3(mapSequence[i + 1].mapObject.transform.position.x + currentPortal.column * portalWidth,
-                mapSequence[i + 1].mapObject.transform.position.y,
-                mapSequence[i + 1].mapObject.transform.position.z - currentPortal.row * portalWidth);
+    //        tempPos = new Vector3(mapSequence[i + 1].mapObject.transform.position.x + currentPortal.column * portalWidth,
+    //            mapSequence[i + 1].mapObject.transform.position.y,
+    //            mapSequence[i + 1].mapObject.transform.position.z - currentPortal.row * portalWidth);
 
-            tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity);
+    //        tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity);
 
-            tempScript = tempPortal.GetComponent<Teleporter>();
-            bc = tempScript.renderQuad.GetComponent<BoxCollider>();
+    //        tempScript = tempPortal.GetComponent<Teleporter>();
+    //        bc = tempScript.renderQuad.GetComponent<BoxCollider>();
 
-            tempPortal.transform.Rotate(0f, 90f * currentPortal.direction, 0f);
-            tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
-            tempScript.projectionQuad.Translate(-cameraOffset, 0, 0, Space.World);
+    //        tempPortal.transform.Rotate(0f, 90f * currentPortal.direction, 0f);
+    //        tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
+    //        tempScript.projectionQuad.Translate(-cameraOffset, 0, 0, Space.World);
 
-            tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
-            tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
-            bc.center = new Vector3(0, 0, -portalWidth / 2f + pillarOffset);
+    //        tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
+    //        tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
+    //        bc.center = new Vector3(0, 0, -portalWidth / 2f + pillarOffset);
 
-            tempPortal.name = "Back Teleporter " + i;
-            tempScript.renderQuad.name = "Back Render Quad " + i;
-            tempScript.projectionQuad.name = "Back Projection Quad " + i;
-            tempPortal.transform.parent = transform;
-            tempScript.portalID = i;
-            tempScript.isForwardTeleporter = false;
-            //tempScript.cameraOffset = cameraOffset;
-            prevProjectionQuadArray[i] = tempScript.projectionQuad.gameObject;
-            prevRenderQuadArray[i] = tempScript.renderQuad.gameObject;
-            tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
-    }
+    //        tempPortal.name = "Back Teleporter " + i;
+    //        tempScript.renderQuad.name = "Back Render Quad " + i;
+    //        tempScript.projectionQuad.name = "Back Projection Quad " + i;
+    //        tempPortal.transform.parent = transform;
+    //        tempScript.portalID = i;
+    //        tempScript.isForwardTeleporter = false;
+    //        //tempScript.cameraOffset = cameraOffset;
+    //        prevProjectionQuadArray[i] = tempScript.projectionQuad.gameObject;
+    //        prevRenderQuadArray[i] = tempScript.renderQuad.gameObject;
+    //        tempScript.renderQuad.GetComponent<Renderer>().material = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
+    //}
 
     void InitializePortals()
     {
@@ -208,10 +208,10 @@ public class PortalRenderController : MonoBehaviour
     {
         if (dir)
         {
-            nextPortalCameraRightEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze+1, portalCount)];
+            nextPortalCameraRightEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze, portalCount)];
             if (isStereoscopic)
             {
-                nextPortalCameraLeftEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze+1, portalCount)];
+                nextPortalCameraLeftEye.projectionScreen = nextProjectionQuadArray[TrueModulus(currentMaze, portalCount)];
             }
         }
         else
@@ -239,22 +239,18 @@ public class PortalRenderController : MonoBehaviour
     public void SetCameraOffsets(int currentMaze)
     {
         nextOffset = SetNextOffset(currentMaze);
-        nextOffset = SetPrevOffset(currentMaze);
+        prevOffset = SetPrevOffset(currentMaze);
     }
     static public Vector3 SetNextOffset(int currentMaze)
     {
         Vector3 offset;
         int nextMaze = currentMaze + 1;
+
         if (nextMaze <= mapSequence.Length-1) // if there is a next maze
-        {
-            offset = mapSequence[nextMaze].mapObject.transform.position - mapSequence[currentMaze].mapObject.transform.position;
-            //Debug.Log("next maze offset is " + offset);
-        }
+            offset = mapSequence[nextMaze].mapObject.transform.position - mapSequence[currentMaze].mapObject.transform.position; // TODO: prev and next seems to be mixed around?
         else
-        {
-            offset = new Vector3(0, 0, 0);// mapSequence[currentMaze].mapObject.transform.position; // do not what to set it to
-            Debug.Log("no next maze. offset is " + offset);
-        }
+            offset = new Vector3(0, 0, 0); // TODO do not what to set it to
+
         return offset;
     }
 
@@ -262,15 +258,12 @@ public class PortalRenderController : MonoBehaviour
     {
         Vector3 offset;
         int prevMaze = currentMaze - 1;
+
         if (prevMaze >= 0) // if there is a previous maze 
-        {
-            offset = mapSequence[prevMaze].mapObject.transform.position - mapSequence[currentMaze].mapObject.transform.position; // seems to be a mistake here
-            Debug.Log("next maze offset is " + offset);
-        }
+            offset = mapSequence[prevMaze].mapObject.transform.position - mapSequence[currentMaze].mapObject.transform.position; // TODO: prev and next seems to be mixed around?
         else
-        {
-            offset = new Vector3(0, 0, 0); //= mapSequence[currentMaze].mapObject.transform.position; // do not what to set it to
-        }
+            offset = new Vector3(0, 0, 0);  // TODO do not what to set it to
+
         return offset;
     }
 }

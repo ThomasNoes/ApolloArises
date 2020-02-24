@@ -60,7 +60,6 @@ public class FollowCam : MonoBehaviour
     {
         SetNextOffset(next);
         SetPrevOffset(prev);
-        SetToNext();
     }
     public void SetToNext()
     {
