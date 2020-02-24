@@ -51,7 +51,7 @@ namespace Assets.Scripts.Camera
             prevRenderQuadArray = pRController.prevRenderQuadArray;
 
             currentMaze = pRController.currentMaze;
-            mazeCount = pRController.mazeCount;
+            mazeCount = pRController.mapSequence.Length;
             portalWidth = pRController.portalWidth;
         }
         #endregion

@@ -16,4 +16,5 @@ public struct MapInfo
     public bool isEndSeeded;
     public TileInfo startSeed;
     public TileInfo endSeed;
+    public GameObject mapObject;
 }
