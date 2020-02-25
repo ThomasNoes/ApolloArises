@@ -9,6 +9,10 @@ public class FollowCam : MonoBehaviour
     public bool isStereoscopic;
     public bool isRightEye;
 
+    Vector3 nextOffset;
+    Vector3 prevOffset;
+    bool placeForward;
+
     void Awake()
     {
         if (!isStereoscopic && !isRightEye)
