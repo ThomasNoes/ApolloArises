@@ -5,6 +5,7 @@ using VRTK;
 
 public class DebugWindow : MonoBehaviour
 {
+    public GameObject mapManagerObj;
     private string _dLog;
     private Queue _dLogQueue = new Queue();
     private bool active;
@@ -72,9 +73,19 @@ public class DebugWindow : MonoBehaviour
 
         if (OVRInput.GetDown(OVRInput.Button.Two))
         {
-            VRTK_DeviceFinder.PlayAreaTransform().SetPositionAndRotation(new Vector3(0,-2f,0), Quaternion.identity);
-            Debug.Log("PlayAreaTransform().position  " + VRTK_DeviceFinder.PlayAreaTransform().position);
-            Debug.Log("PlayAreaTransform().rotation  " + VRTK_DeviceFinder.PlayAreaTransform().rotation);
+            Vector3 playAreaDimensions = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+
+            Debug.Log("map position " + mapManagerObj.transform.position);
+            Debug.Log("map local pos " + mapManagerObj.transform.localPosition);
+
+            Debug.Log("VRTK local playarea: " + VRTK_DeviceFinder.PlayAreaTransform().localPosition);
+            Debug.Log("VRTK non-local playarea: " + VRTK_DeviceFinder.PlayAreaTransform().position);
+            Debug.Log("Player pos: " + Camera.main.transform.position);
+
+            if (mapManagerObj != null)
+            {
+                VRTK_DeviceFinder.PlayAreaTransform().SetPositionAndRotation(mapManagerObj.transform.position, Quaternion.identity);
+            }
         }
     }
 

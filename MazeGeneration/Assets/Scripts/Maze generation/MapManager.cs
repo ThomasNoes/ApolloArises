@@ -453,7 +453,7 @@ public class MapManager : MonoBehaviour
         ////transform.Translate(playAreaCenter);
         ////transform.position = playAreaCenter;
         //transform.position = new Vector3(-playAreaDimensions.x / 2f + tileWidth / 2f, 0, playAreaDimensions.z / 2f - tileWidth / 2f);
-        transform.Translate(-playAreaSize.x / 2f + tileWidth / 2f, 0, playAreaSize.z / 2f - tileWidth / 2f);
+        // transform.Translate(-playAreaSize.x / 2f + tileWidth / 2f, 0, playAreaSize.z / 2f - tileWidth / 2f);
     }
 
     void GetStartSeedFromPlayerPosition(out int col, out int row, bool usePlayerPos)
