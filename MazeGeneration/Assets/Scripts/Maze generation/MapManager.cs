@@ -31,13 +31,16 @@ public class MapManager : MonoBehaviour
 
     void Awake()
     {
-#if UNITY_ANDROID
-        playAreaSize = GetCameraRigSize();
-
-        if (setDimensionsAutomatically)
+        #if UNITY_ANDROID
+        if (!Application.isEditor)
         {
-            mazeRows = Mathf.RoundToInt(playAreaSize.x / tileWidth);
-            mazeCols = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+            playAreaSize = GetCameraRigSize();
+
+            if (setDimensionsAutomatically)
+            {
+                mazeRows = Mathf.RoundToInt(playAreaSize.x / tileWidth);
+                mazeCols = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+            }
         }
 #endif
 
@@ -446,7 +449,10 @@ public class MapManager : MonoBehaviour
 
     void OffsetMap()
     {
-        transform.Translate(-playAreaSize.x / 2f + tileWidth / 2f, 0, playAreaSize.z / 2f - tileWidth / 2f);
+        //transform.Translate(new Vector3(playAreaSize.x / 2.0f, 0, playAreaSize.z / 2.0f));
+
+        //transform.position = new Vector3(-playAreaSize.x / 2f  / 2f, 0, playAreaSize.z / 2f - tileWidth / 2f);
+        transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
     }
 
     void GetStartSeedFromPlayerPosition(out int col, out int row, bool usePlayerPos)

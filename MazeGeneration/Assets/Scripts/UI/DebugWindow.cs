@@ -69,11 +69,6 @@ public class DebugWindow : MonoBehaviour
         else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
             ScrollToBottom();
 
-        if (OVRInput.GetDown(OVRInput.Button.Two))
-        {
-            Vector3[] playAreaLocation = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
-            Debug.Log("geo first vector: " + playAreaLocation[0]);
-        }
     }
 
     public void ScrollToTop()
