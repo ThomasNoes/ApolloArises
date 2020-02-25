@@ -8,6 +8,7 @@ public class PlayAreaCalibration : MonoBehaviour
     private GameObject mapManager;
     private GameObject portalManager;
     private bool active = true;
+    private OVRManager thisOvrManager;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class PlayAreaCalibration : MonoBehaviour
 
         mapManager = GameObject.Find("MapManager");
         portalManager = GameObject.Find("Portal Manager");
+        thisOvrManager = FindObjectOfType<OVRManager>();
 
         if (mapManager == null || portalManager == null)
             active = false;
@@ -45,6 +47,9 @@ public class PlayAreaCalibration : MonoBehaviour
                 helpText?.SetActive(false);
                 active = false;
                 OVRManager.boundary.SetVisible(false);
+
+                if (thisOvrManager != null)
+                    thisOvrManager.AllowRecenter = false;
             }
     }
 
