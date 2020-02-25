@@ -7,6 +7,7 @@ public class MapManager : MonoBehaviour
     public enum MazePlacementType
     {
         OrderedAlongX,
+        orderedAlongXProportionally,
         orderedDiagonally,
         randomButIncreasesAlongY
     }
@@ -168,6 +169,9 @@ public class MapManager : MonoBehaviour
             {
                 case MazePlacementType.OrderedAlongX:
                     PlaceOrderedAlongX(i);
+                    break;
+                case MazePlacementType.orderedAlongXProportionally:
+                    PlaceOrderedAlongXProportionally(i);
                     break;
                 case MazePlacementType.orderedDiagonally:
                     PlaceOrderedDiagonally(i);
@@ -540,6 +544,12 @@ public class MapManager : MonoBehaviour
     private void PlaceOrderedAlongX(int index)
     {
         Vector3 mapSpawnPoint = new Vector3(transform.position.x + index * (mazeCols * tileWidth + 1), 0, 0);
+        tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
+        //Debug.Log("maze position is "+ tempMap.transform.position);
+    }
+    private void PlaceOrderedAlongXProportionally(int index)
+    {
+        Vector3 mapSpawnPoint = new Vector3((transform.position.x + index) * index * (mazeCols * tileWidth + 1), 0, 0);
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
         //Debug.Log("maze position is "+ tempMap.transform.position);
     }

@@ -14,6 +14,7 @@ public class Teleporter : MonoBehaviour
     private GameObject player;
     private CharacterController charControl;
     private CamPosSwitcher cPosSwitcher;
+    private PortalRenderController prc;
 
     Vector3 nextOffset;
     Vector3 prevOffset;
@@ -27,6 +28,7 @@ public class Teleporter : MonoBehaviour
         cPosSwitcher = Camera.main.gameObject.GetComponent<CamPosSwitcher>();
         nextOffset = PortalRenderController.SetNextOffset(mazeID);
         prevOffset = PortalRenderController.SetPrevOffset(mazeID);
+        prc = GameObject.Find("Portal Manager").GetComponent<PortalRenderController>();
     }
 
     public void AddTeleportCopy(GameObject obj)
@@ -64,6 +66,7 @@ public class Teleporter : MonoBehaviour
                     if (charControl != null)
                         charControl.enabled = false;
                     player.transform.Translate(nextOffset, Space.World);
+                    prc.OffsetCameras(mazeID+1);
                     if (charControl != null)
                         charControl.enabled = true;
 
@@ -78,6 +81,7 @@ public class Teleporter : MonoBehaviour
                     if (charControl != null)
                         charControl.enabled = false;
                     player.transform.Translate(prevOffset, Space.World);
+                    prc.OffsetCameras(mazeID-1);
                     if (charControl != null)
                         charControl.enabled = true;
 

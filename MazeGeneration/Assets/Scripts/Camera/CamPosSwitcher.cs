@@ -73,16 +73,16 @@ namespace Assets.Scripts.Camera
             {
                 //followCamScriptLeft.offset = -1 * followCamScriptLeft.offset;
                 //followCamScriptRight.offset = -1 * followCamScriptRight.offset;
-                followCamScriptLeft.SwitchOffset();
-                followCamScriptRight.SwitchOffset();
+                followCamScriptLeft.SetToNext();
+                followCamScriptRight.SetToNext();
                 pRController.SetProjectionQuads(true);
             }
             else
             {
                 //followCamScriptLeft.offset = -followCamScriptLeft.offset;
                 //followCamScriptRight.offset = -followCamScriptRight.offset;
-                followCamScriptLeft.SwitchOffset();
-                followCamScriptRight.SwitchOffset();
+                followCamScriptLeft.SetToPrev();
+                followCamScriptRight.SetToPrev();
                 pRController.SetProjectionQuads(false);
             }
 

@@ -44,7 +44,7 @@ public class PortalRenderController : MonoBehaviour
 
         InitializePortals();
         SetProjectionQuads(true);
-        OffsetCameras();
+        OffsetCameras(0);
     }
 
     private void PortalSetup(bool isForward, int i)
@@ -187,10 +187,13 @@ public class PortalRenderController : MonoBehaviour
 
     }
 
-    public void OffsetCameras()
+    public void OffsetCameras(int currentMaze)
     {
         //previousPortalCameraLeftEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
         //previousPortalCameraRightEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
+        Debug.Log("offsetting");
+        SetCameraOffsets(currentMaze);
+
         nextPortalCameraLeftEye.GetComponent<FollowCam>().SetOffsets(nextOffset, prevOffset);
         nextPortalCameraRightEye.GetComponent<FollowCam>().SetOffsets(nextOffset, prevOffset);
 
@@ -249,7 +252,7 @@ public class PortalRenderController : MonoBehaviour
         if (nextMaze <= mapSequence.Length-1) // if there is a next maze
             offset = mapSequence[nextMaze].mapObject.transform.position - mapSequence[currentMaze].mapObject.transform.position; // TODO: prev and next seems to be mixed around?
         else
-            offset = new Vector3(0, 0, 0); // TODO do not what to set it to
+            offset = mapSequence[nextMaze-1].mapObject.transform.position - mapSequence[currentMaze-1].mapObject.transform.position; // TODO do not what to set it to
 
         return offset;
     }
