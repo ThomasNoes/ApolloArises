@@ -16,7 +16,11 @@ public class PlayAreaCalibration : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * playAreaSize.x, 1.0f, transform.localScale.x * playAreaSize.z);
 
         if (Application.isEditor)
+        {
+            helpText?.SetActive(false);
+            active = false;
             return;
+        }
 
         mapManager = GameObject.Find("MapManager");
         portalManager = GameObject.Find("Portal Manager");

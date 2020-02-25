@@ -121,7 +121,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4396015622698410534
 GameObject:
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cheatCube: {fileID: 940191591616484579}
   useVibration: 1
-  useVisual: 1
+  useVisual: 0
 --- !u!54 &1145361938758131890
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -317,7 +317,6 @@ GameObject:
   - component: {fileID: 5369379566293736129}
   - component: {fileID: 5369379566293798531}
   - component: {fileID: 5369379566293830621}
-  - component: {fileID: 8978605477665142411}
   m_Layer: 2
   m_Name: OVRPlayerController
   m_TagString: Player
@@ -381,7 +380,7 @@ MonoBehaviour:
   FixedSpeedSteps: 0
   HmdResetsY: 1
   HmdRotatesY: 1
-  GravityModifier: 1
+  GravityModifier: 0
   useProfileData: 1
   EnableLinearMovement: 0
   EnableRotation: 0
@@ -414,20 +413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71d1996d67004241a3b69960856ffcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &8978605477665142411
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369379566299229987}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.07
-  m_Height: 1.4508095
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.22540474, z: 0}
 --- !u!1 &5369379566299229989
 GameObject:
   m_ObjectHideFlags: 0

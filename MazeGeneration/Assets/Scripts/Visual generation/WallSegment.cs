@@ -8,15 +8,15 @@ public class WallSegment : MonoBehaviour
 
     Mesh mesh;
     Collider col;
-    float standardDepth = 0.2f;
+    float standardDepth = 0.05f;
 
     Vector3[] vertices;
     Vector3 colliderSize, colliderPos;
     int[] triangles;
     Vector2[] uv;
 
-    public int xSize = 2;
-    public int ySize = 4;
+    public int xSize = 1;
+    public int ySize = 2;
 
     [Range(1, 5)]
     public float amplitude = 1f;
