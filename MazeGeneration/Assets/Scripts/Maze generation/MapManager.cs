@@ -7,9 +7,11 @@ public class MapManager : MonoBehaviour
     public enum MazePlacementType
     {
         OrderedAlongX,
+        orderedAlongXProportionally,
         orderedDiagonally,
         randomButIncreasesAlongY
     }
+    List<Vector3> spawnPoints = new List<Vector3>();
 
     public enum PortalGenerationType
     {
@@ -17,9 +19,12 @@ public class MapManager : MonoBehaviour
         Hallways
     }
 
+    public GameObject gizmo;
+
     public GameObject[] mazeGeneratorPrefab;
     public bool usePlayAreaCenter, setDimensionsAutomatically;
     public MazePlacementType MazePlacement;
+    public bool StartMazeInOrigin;
 
     private Vector3 minimumBound = Vector3.zero;
     private Vector3 maximumBound;
@@ -169,11 +174,14 @@ public class MapManager : MonoBehaviour
                 case MazePlacementType.OrderedAlongX:
                     PlaceOrderedAlongX(i);
                     break;
+                case MazePlacementType.orderedAlongXProportionally:
+                    PlaceOrderedAlongXProportionally(i);
+                    break;
                 case MazePlacementType.orderedDiagonally:
                     PlaceOrderedDiagonally(i);
                     break;
                 case MazePlacementType.randomButIncreasesAlongY:
-                    PlaceRandomButIncreaseY(i);
+                    PlaceRandomButIncreaseY(i, mapSequence.Length-1);
                     break;
                 default:
                     break;
@@ -508,14 +516,13 @@ public class MapManager : MonoBehaviour
         return 3;
     }
 
-    private Vector3 SetMaximumBound()
+    private Vector3 SetMaximumBound(float openness)
     {
         Vector3 returnVector;
-        float openness = 2; 
 
         //finding the minimum space required
         float x = mazeCols * tileWidth * mapSequence.Length;
-        float y = mapSequence.Length; 
+        float y = mapSequence.Length * 1.8f; //i will assume the average person is 1.8  meter 
         float z= mazeRows * tileWidth * mapSequence.Length;
 
         returnVector = new Vector3(x,y,z);
@@ -525,36 +532,82 @@ public class MapManager : MonoBehaviour
         return returnVector;
     }
 
+    private bool OverlapCheck(Vector3 spawnPoint)
+    {
+        float minDistance = Mathf.Sqrt(mazeCols * mazeCols + mazeRows * mazeRows); // i treat the segment as a triablge and find the hypothenuse
+
+        foreach  (Vector3 point in spawnPoints)
+        {
+            spawnPoint.y = point.y; // i ignore y by have the two points share y.
+            if (Vector3.Distance(spawnPoint, point) < minDistance)
+            {
+                Debug.Log("it overlaps!");
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void PlaceOrderedAlongX(int index)
     {
         Vector3 mapSpawnPoint = new Vector3(transform.position.x + index * (mazeCols * tileWidth + 1), 0, 0);
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
         //Debug.Log("maze position is "+ tempMap.transform.position);
     }
+    private void PlaceOrderedAlongXProportionally(int index)
+    {
+        Vector3 mapSpawnPoint = new Vector3((transform.position.x + index) * index * (mazeCols * tileWidth + 1), 0, (transform.position.z + index) * index * (mazeCols * tileWidth + 1));
+        tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
+        //Debug.Log("maze position is "+ tempMap.transform.position);
+    }
 
     private void PlaceOrderedDiagonally(int index)
     {
-
-
         float distance = transform.position.x + index * (mazeCols * tileWidth + 1);
         Vector3 mapSpawnPoint = new Vector3(distance, distance, distance);
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
-
-
     }
-    private void PlaceRandomButIncreaseY(int index)
+    private void PlaceRandomButIncreaseY(int index, int length)
     {
-        maximumBound = SetMaximumBound();
+        maximumBound = SetMaximumBound(3);
+
+        Instantiate(gizmo, minimumBound, Quaternion.identity);
+        Instantiate(gizmo, maximumBound, Quaternion.identity);
+
+        //find the y increase
+        float yRatio = (float)index / length;
+
+        float y = (1.0f - yRatio) * minimumBound.y + yRatio * maximumBound.y;
+
+        Vector3 mapSpawnPoint = Vector3.zero;
 
         if (index == 0)
         {
+            if (StartMazeInOrigin)
+            {
+                mapSpawnPoint = Vector3.zero;
+            }
+            else
+            {
+                mapSpawnPoint = (minimumBound + maximumBound) / 2;
+                mapSpawnPoint.y = y;
+            }
 
         }
-
-        if (index == mapSequence.Length - 1)
+        else
         {
+            bool itOverlaps = true;
+            while(itOverlaps)
+            {
+                float x = Random.Range(minimumBound.x, maximumBound.x);
+                float z = Random.Range(minimumBound.z, maximumBound.z);
+                mapSpawnPoint = new Vector3(x, y, z);
+                itOverlaps = OverlapCheck(mapSpawnPoint);
+            }
 
         }
+        tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
+        spawnPoints.Add(mapSpawnPoint);
     }
 
 }

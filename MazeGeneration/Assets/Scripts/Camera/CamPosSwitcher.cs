@@ -17,8 +17,8 @@ namespace Assets.Scripts.Camera
         private LayerMask layerMask;
 
         public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
-        private bool prevInCamFrustum, nextInCamFrustum;
-        private int currentMaze = -1, mazeCount, currentDir = -1, prevScore, nextScore, prevDistance, nextDistance;
+        private bool prevInCamFrustum, nextInCamFrustum, currentDirection;
+        private int currentMaze = -1, mazeCount, prevScore, nextScore, prevDistance, nextDistance;
         private float portalWidth;
         public float loopRepeatRate = 0.7f;
 
@@ -41,7 +41,7 @@ namespace Assets.Scripts.Camera
             if (player != null && followCamScriptLeft != null && pRController != null)
             {
                 InvokeRepeating("CheckerLoop", 2.5f, loopRepeatRate);
-                Invoke("DelayedStart", 1.0f);
+                Invoke("DelayedStart", 0.2f);
             }
         }
 
@@ -50,8 +50,8 @@ namespace Assets.Scripts.Camera
             nextRenderQuadArray = pRController.nextRenderQuadArray;
             prevRenderQuadArray = pRController.prevRenderQuadArray;
 
-            currentMaze = pRController.currentMaze;
-            mazeCount = pRController.mapSequence.Length;
+            //currentMaze = pRController.currentMaze;
+            mazeCount = pRController.sequenceLength;
             portalWidth = pRController.portalWidth;
         }
         #endregion
@@ -61,34 +61,32 @@ namespace Assets.Scripts.Camera
         /// Switches camera position between previous and next maze. This can be controlled remotely (public)
         /// </summary>
         /// <param name="dir">0 = previous maze, 1 = next maze</param>
-        public void PositionSwitch(int dir)
+        public void PositionSwitch(bool isForward)
         {
-            if (dir == currentDir)
+            if (isForward == currentDirection) // should it continue looking in the same direction
             {
                 ResetValues();
                 return;
             }
 
-            if (dir == 0)
+            if (isForward) //looking at prev maze
             {
-                if (followCamScriptLeft.offset > 0)
-                {
-                    followCamScriptLeft.offset = -followCamScriptLeft.offset;
-                    followCamScriptRight.offset = -followCamScriptRight.offset;
-                    pRController.SetProjectionQuads(false);
-                }
+                //followCamScriptLeft.offset = -1 * followCamScriptLeft.offset;
+                //followCamScriptRight.offset = -1 * followCamScriptRight.offset;
+                followCamScriptLeft.SetToNext();
+                followCamScriptRight.SetToNext();
+                pRController.SetProjectionQuads(true);
             }
-            else if (dir == 1)
+            else
             {
-                if (followCamScriptLeft.offset < 0)
-                {
-                    followCamScriptLeft.offset = -1 * followCamScriptLeft.offset;
-                    followCamScriptRight.offset = -1 * followCamScriptRight.offset;
-                    pRController.SetProjectionQuads(true);
-                }
+                //followCamScriptLeft.offset = -followCamScriptLeft.offset;
+                //followCamScriptRight.offset = -followCamScriptRight.offset;
+                followCamScriptLeft.SetToPrev();
+                followCamScriptRight.SetToPrev();
+                pRController.SetProjectionQuads(false);
             }
 
-            currentDir = dir;
+            currentDirection = isForward;
             ResetValues();
         }
         #endregion
@@ -129,12 +127,16 @@ namespace Assets.Scripts.Camera
                 if (currentMaze == 0)
                 {
                     currentNextPortal = nextRenderQuadArray[currentMaze];
-                    PositionSwitch(1);
+                    followCamScriptLeft.SetToPrev();
+                    followCamScriptRight.SetToPrev();
+                    PositionSwitch(true);
                 }
                 else if (currentMaze == mazeCount - 1)
                 {
                     currentPrevPortal = prevRenderQuadArray[currentMaze - 1];
-                    PositionSwitch(0);
+                    followCamScriptLeft.SetToNext();
+                    followCamScriptRight.SetToNext();
+                    PositionSwitch(false);
                 }
                 else
                 {
@@ -186,9 +188,9 @@ namespace Assets.Scripts.Camera
             if (nextInCamFrustum && prevInCamFrustum)
                 FinalChecks();
             else if (nextInCamFrustum)
-                PositionSwitch(1);
+                PositionSwitch(true); //maybe opposite
             else if (prevInCamFrustum)
-                PositionSwitch(0);
+                PositionSwitch(false);//maybe opposite
 
             ResetValues();
         }
@@ -223,7 +225,7 @@ namespace Assets.Scripts.Camera
             if (nextScore == prevScore)
                 AngleCheck();
 
-            PositionSwitch(nextScore < prevScore ? 1 : 0);
+            PositionSwitch(nextScore < prevScore);
         }
 
         public void SetDistanceVariables(int prev, int next)
