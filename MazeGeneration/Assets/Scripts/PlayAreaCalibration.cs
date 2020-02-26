@@ -53,7 +53,10 @@ public class PlayAreaCalibration : MonoBehaviour
                 OVRManager.boundary.SetVisible(false);
 
                 if (thisOvrManager != null)
+                {
+                    thisOvrManager.reorientHMDOnControllerRecenter = false;
                     thisOvrManager.AllowRecenter = false;
+                }
             }
     }
 

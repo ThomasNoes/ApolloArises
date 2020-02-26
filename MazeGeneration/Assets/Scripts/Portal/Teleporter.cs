@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.Camera;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class Teleporter : MonoBehaviour
     private GameObject player;
     private CharacterController charControl;
     private CamPosSwitcher cPosSwitcher;
+    private MazeDisabler mazeDisabler;
 
     void Start()
     {
@@ -23,6 +25,7 @@ public class Teleporter : MonoBehaviour
             charControl = player.GetComponent<CharacterController>();
 
         cPosSwitcher = Camera.main.gameObject.GetComponent<CamPosSwitcher>();
+        mazeDisabler = FindObjectOfType<MazeDisabler>();
     }
 
     public void AddTeleportCopy(GameObject obj)
@@ -88,6 +91,7 @@ public class Teleporter : MonoBehaviour
                     }
                 }
 
+                mazeDisabler?.UpdateDisabled();
             }
         }
         //advance culling mask array
