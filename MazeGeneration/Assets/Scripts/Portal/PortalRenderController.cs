@@ -76,11 +76,13 @@ public class PortalRenderController : MonoBehaviour
         tempPortal.transform.Rotate(0f, (180 * (1-j)) + 90f * currentPortal.direction, 0f);
         tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
         if(isForward)
-        { 
+        {
+            Debug.Log(name + "projection quad's position: " + tempScript.projectionQuad.position); 
             tempScript.projectionQuad.Translate(nextOffset, Space.World);
         }
         else
         {
+            Debug.Log(name + "projection quad's position: " + tempScript.projectionQuad.position);
             tempScript.projectionQuad.Translate(prevOffset, Space.World);
         }
 
@@ -180,7 +182,7 @@ public class PortalRenderController : MonoBehaviour
         //Debug.Log("Portals will go here:");
         for (int i = 0; i < mapSequence.Length - 1; i++)
         {
-            SetCameraOffsets(i);
+            SetCameraOffsets(i, true);
             PortalSetup(true, i);
             PortalSetup(false, i);
         }
@@ -193,6 +195,9 @@ public class PortalRenderController : MonoBehaviour
         //previousPortalCameraRightEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
         Debug.Log("offsetting");
         SetCameraOffsets(currentMaze);
+
+        Debug.Log("nextOffset: " + nextOffset);
+        Debug.Log("prevOffset: " + prevOffset);
 
         nextPortalCameraLeftEye.GetComponent<FollowCam>().SetOffsets(nextOffset, prevOffset);
         nextPortalCameraRightEye.GetComponent<FollowCam>().SetOffsets(nextOffset, prevOffset);
@@ -239,10 +244,13 @@ public class PortalRenderController : MonoBehaviour
         return ((k %= n) < 0) ? k + n : k;
     }
 
-    public void SetCameraOffsets(int currentMaze)
+    public void SetCameraOffsets(int currentMaze, bool initializePhase = false)
     {
         nextOffset = SetNextOffset(currentMaze);
-        prevOffset = SetPrevOffset(currentMaze);
+        if (initializePhase)
+            prevOffset = SetPrevOffset(currentMaze + 1);
+        else
+            prevOffset = SetPrevOffset(currentMaze);
     }
     static public Vector3 SetNextOffset(int currentMaze)
     {

@@ -24,6 +24,7 @@ public class MapManager : MonoBehaviour
     public GameObject[] mazeGeneratorPrefab;
     public bool usePlayAreaCenter, setDimensionsAutomatically;
     public MazePlacementType MazePlacement;
+    public bool StartMazeInOrigin;
 
     private Vector3 minimumBound = Vector3.zero;
     private Vector3 maximumBound;
@@ -549,7 +550,7 @@ public class MapManager : MonoBehaviour
     }
     private void PlaceOrderedAlongXProportionally(int index)
     {
-        Vector3 mapSpawnPoint = new Vector3((transform.position.x + index) * index * (mazeCols * tileWidth + 1), 0, 0);
+        Vector3 mapSpawnPoint = new Vector3((transform.position.x + index) * index * (mazeCols * tileWidth + 1), 0, (transform.position.z + index) * index * (mazeCols * tileWidth + 1));
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
         //Debug.Log("maze position is "+ tempMap.transform.position);
     }
@@ -576,8 +577,16 @@ public class MapManager : MonoBehaviour
 
         if (index == 0)
         {
-            mapSpawnPoint = (minimumBound + maximumBound) / 2;
-            mapSpawnPoint.y = y;
+            if (StartMazeInOrigin)
+            {
+                mapSpawnPoint = Vector3.zero;
+            }
+            else
+            {
+                mapSpawnPoint = (minimumBound + maximumBound) / 2;
+                mapSpawnPoint.y = y;
+            }
+
         }
         else
         {
@@ -591,27 +600,6 @@ public class MapManager : MonoBehaviour
             }
 
         }
-
-
-        //if (index == 0)
-        //{
-        //    //place in the middle in the bottom
-        //    mapSpawnPoint = (minimumBound + maximumBound) / 2;
-        //    mapSpawnPoint.y = minimumBound.y;
-        //    Debug.Log("demodemodemodemo" + mapSpawnPoint);
-
-        //}
-        //if (index == mapSequence.Length - 1)
-        //{
-        //    mapSpawnPoint = (minimumBound + maximumBound) / 2;
-        //    mapSpawnPoint.y = maximumBound.y;
-        //}
-        //else
-        //{
-        //    float distance = transform.position.x + index * (mazeCols * tileWidth + 1);
-        //    mapSpawnPoint = new Vector3(distance, distance, distance);
-        //    Debug.Log("demodemodemodemo2");
-        //}
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
         spawnPoints.Add(mapSpawnPoint);
     }
