@@ -234,7 +234,7 @@ MonoBehaviour:
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
   isStereoscopic: 1
-  mapSequence: []
+  sequenceLength: 0
   portalCount: 0
   currentMaze: 0
   cameraOffset: 0
@@ -565,7 +565,7 @@ MonoBehaviour:
   wallHeight: 2.5
   pillarMat: {fileID: 0}
   wallMat: {fileID: 0}
-  floorMat: {fileID: 2100000, guid: 5d752f22659378d4c8bab06bcdd8b884, type: 2}
+  floorMat: {fileID: 0}
   ceilingMat: {fileID: 0}
   ceiling: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f, type: 3}
   wallSegment: {fileID: 6395070241882163283, guid: da65273e1ca2d6f4c959dc86610a8cc1,
@@ -691,7 +691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed759c47ee799d4c9792212da6dea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 5
   isStereoscopic: 1
   isRightEye: 1
 --- !u!1 &1165058067
@@ -742,7 +741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed759c47ee799d4c9792212da6dea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 5
   isStereoscopic: 1
   isRightEye: 0
 --- !u!20 &1165058070
@@ -907,7 +905,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed759c47ee799d4c9792212da6dea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: -5
   isStereoscopic: 1
   isRightEye: 1
 --- !u!1 &1395390713
@@ -1235,15 +1232,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cf9fef809acdc4693f423e1214c4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gizmo: {fileID: 0}
   mazeGeneratorPrefab:
   - {fileID: 6700716075161373839, guid: 22bc3d0eaee86bb428496bf988489ae9, type: 3}
   - {fileID: 2500389178016090726, guid: 3767eab88ce28c4448bbd26f359914bc, type: 3}
   usePlayAreaCenter: 1
   setDimensionsAutomatically: 1
   MazePlacement: 0
+  StartMazeInOrigin: 1
   playerHead: {fileID: 2526136163395224742}
-  mazeRows: 3
-  mazeCols: 3
+  mazeRows: 5
+  mazeCols: 5
   tileWidth: 0.7
   startRow: 0
   startCol: 0
@@ -1253,6 +1252,34 @@ MonoBehaviour:
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
   - mapType: 0
     roomName: 
     isEndSeeded: 0
@@ -1450,7 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed759c47ee799d4c9792212da6dea89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: -3.4
   isStereoscopic: 1
   isRightEye: 0
 --- !u!20 &1813671426
