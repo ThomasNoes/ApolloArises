@@ -27,6 +27,8 @@ public class SelectPlayer : MonoBehaviour
         portalCameraLeft = GameObject.Find("Next Maze Camera Left").GetComponent<FollowCam>();
         portalCameraRight = GameObject.Find("Next Maze Camera Right").GetComponent<FollowCam>();
 
+        if (player == null || debugPlayer == null || portalManager == null)
+            return;
 
         #if UNITY_EDITOR //check if it is running in editor or on quest
         inEditor = true;

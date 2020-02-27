@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MazeDisabler : MonoBehaviour
 {
+    public int bufferAmount = 3;
     private PortalRenderController pRController;
     private MapManager mapManager;
     private GameObject[][] portals;
@@ -17,7 +18,7 @@ public class MazeDisabler : MonoBehaviour
         if (mapManager == null || pRController == null)
             active = false;
         else
-            Invoke("Initialize", 0.5f);
+            Invoke("Initialize", 0.4f);
     }
 
     private void Initialize()
@@ -33,10 +34,10 @@ public class MazeDisabler : MonoBehaviour
         for (int i = 0; i < mapManager.mapSequence.Length; i++)
             mapManager.mapSequence[i].mapObject.SetActive(false);
 
-        for (int i = 0; i < portals.Length; i++)
+        foreach (var t in portals)
         {
-            portals[i][0].SetActive(false);
-            portals[i][1].SetActive(false);
+            t[0].SetActive(false);
+            t[1].SetActive(false);
         }
 
         UpdateDisabled();
@@ -51,17 +52,15 @@ public class MazeDisabler : MonoBehaviour
 
         portals = new GameObject[tempPortals.Length / 2][];
 
-        for (int i = 0; i < portals.Length; i++)
+        for (var i = 0; i < portals.Length; i++)
             portals[i] = new GameObject[2];
-        
 
-        Debug.Log(tempPortals);
+        var j = 0;
 
-        int j = 0;
-        for (int i = 0; i < portals.Length; i++)
+        foreach (var t in portals)
         {
-            portals[i][0] = tempPortals[j].gameObject;
-            portals[i][1] = tempPortals[j + 1].gameObject;
+            t[0] = tempPortals[j].gameObject;
+            t[1] = tempPortals[j + 1].gameObject;
             j += 2;
         }
     }
@@ -69,25 +68,26 @@ public class MazeDisabler : MonoBehaviour
     public void UpdateDisabled()
     {
         currentMaze = pRController.currentMaze;
-        mapManager.mapSequence[currentMaze].mapObject.SetActive(true);
-        portals[currentMaze][0].SetActive(true);
-        portals[currentMaze][1].SetActive(true);
+        SetMaze(currentMaze, true);
 
-        for (int i = 1; i < 3; i++)
+        for (int i = 1; i < bufferAmount + 1; i++)
         {
-            if (currentMaze + i != mapManager.mapSequence.Length - 1)
-            {
-                mapManager.mapSequence[currentMaze + i].mapObject.SetActive(true);
-                portals[currentMaze + 1][0].SetActive(true);
-                portals[currentMaze + 1][1].SetActive(true);
-            }
-
-            if (currentMaze - i >= 0)
-            {
-                mapManager.mapSequence[currentMaze - i].mapObject.SetActive(true);
-                portals[currentMaze - 1][0].SetActive(true);
-                portals[currentMaze - 1][0].SetActive(true);
-            }
+            SetMaze(currentMaze + i, true);
+            SetMaze(currentMaze - i, true);
         }
+
+        SetMaze(currentMaze + (bufferAmount + 1), false);
+        SetMaze(currentMaze - (bufferAmount + 1), false);
+
+    }
+
+    private void SetMaze(int index, bool enable)
+    {
+        if (index < 0 || index > mapManager.mapSequence.Length - 1)
+            return;
+
+        mapManager.mapSequence[index].mapObject.SetActive(enable);
+        portals[index][0].SetActive(enable);
+        portals[index][1].SetActive(enable);
     }
 }

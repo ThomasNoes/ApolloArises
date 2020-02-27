@@ -12,15 +12,16 @@ public class PlayAreaCalibration : MonoBehaviour
 
     void Start()
     {
-        Vector3 playAreaSize = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
-        transform.localScale = new Vector3(transform.localScale.x * playAreaSize.x, 1.0f, transform.localScale.x * playAreaSize.z);
-
         if (Application.isEditor)
         {
             helpText?.SetActive(false);
             active = false;
+            gameObject.SetActive(false);
             return;
         }
+
+        Vector3 playAreaSize = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+        transform.localScale = new Vector3(transform.localScale.x * playAreaSize.x, 1.0f, transform.localScale.x * playAreaSize.z);
 
         mapManager = GameObject.Find("MapManager");
         portalManager = GameObject.Find("Portal Manager");
