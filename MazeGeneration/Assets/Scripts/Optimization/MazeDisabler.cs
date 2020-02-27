@@ -87,7 +87,11 @@ public class MazeDisabler : MonoBehaviour
             return;
 
         mapManager.mapSequence[index].mapObject.SetActive(enable);
-        portals[index][0].SetActive(enable);
-        portals[index][1].SetActive(enable);
+
+        if (index != portals.Length)
+        {
+            portals[index][0].SetActive(enable);
+            portals[index][1].SetActive(enable);
+        }
     }
 }
