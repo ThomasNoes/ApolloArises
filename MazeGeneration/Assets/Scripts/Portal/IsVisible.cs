@@ -8,7 +8,8 @@ public class IsVisible : MonoBehaviour
     private Renderer thisRenderer;
     private Texture2D disabledTexture;
     private Material enabledTexture;
-    private bool active = false;
+    private Texture rightText, leftText;
+    private bool active, isAndroid;
 
     private void Start()
     {
@@ -17,9 +18,32 @@ public class IsVisible : MonoBehaviour
         pRController = transform.root.GetComponent<PortalRenderController>();
 
         if (pRController == null)
+        {
             enabledTexture = Resources.Load("Materials/Next" + (isStereoscopic ? "Stereo" : "Mono")) as Material;
+
+            if (isStereoscopic)
+            {
+                leftText = enabledTexture.GetTexture("_LeftText");
+                rightText = enabledTexture.GetTexture("_RightTex");
+            }
+        }
         else
+        {
             enabledTexture = Resources.Load("Materials/Next" + (pRController.isStereoscopic ? "Stereo" : "Mono")) as Material;
+
+            if (pRController.isStereoscopic)
+            {
+                leftText = enabledTexture.GetTexture("_LeftTex");
+                rightText = enabledTexture.GetTexture("_RightTex");
+            }
+        }
+
+        #if UNITY_ANDROID
+        isAndroid = true;
+        #endif
+        #if UNITY_EDITOR
+        isAndroid = false;
+        #endif
     }
 
     private void DelayedStart()
@@ -44,10 +68,27 @@ public class IsVisible : MonoBehaviour
     {
         if (!VisibleFromCamera(thisRenderer, Camera.main))
         {
-            thisRenderer.material.SetTexture("_MainTex", disabledTexture);
+            if (!isAndroid)
+            {
+                thisRenderer.material.SetTexture(1, disabledTexture);
+            }
+            else
+            {
+                thisRenderer.material.SetTexture("_LeftTex", disabledTexture);
+                thisRenderer.material.SetTexture("_RightTex", disabledTexture);
+            }
             return;
         }
-        thisRenderer.material.SetTexture("_MainTex", enabledTexture.mainTexture);
+
+        if (!isAndroid)
+        {
+            thisRenderer.material.SetTexture(1, enabledTexture.mainTexture);
+        }
+        else
+        {
+            thisRenderer.material.SetTexture("_LeftTex", leftText);
+            thisRenderer.material.SetTexture("_RightTex", rightText);
+        }
     }
 
     private void LateUpdate()

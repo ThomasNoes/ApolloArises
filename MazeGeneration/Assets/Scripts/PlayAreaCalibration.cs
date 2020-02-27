@@ -31,6 +31,12 @@ public class PlayAreaCalibration : MonoBehaviour
             active = false;
         else
             Invoke("DelayedStart", 0.1f);
+
+        if (thisOvrManager != null)
+        {
+            thisOvrManager.reorientHMDOnControllerRecenter = true;
+            thisOvrManager.AllowRecenter = true;
+        }
     }
 
     void DelayedStart()

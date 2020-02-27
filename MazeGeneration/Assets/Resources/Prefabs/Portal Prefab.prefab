@@ -49,9 +49,9 @@ MonoBehaviour:
   tutorialMode: 0
   isForwardTeleporter: 0
   portalID: 0
+  mazeID: 0
   renderQuad: {fileID: 1747615144528127520}
   projectionQuad: {fileID: 1747615144567443643}
-  cameraOffset: 0
 --- !u!54 &7073501727968177394
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1747615144528127521}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f548be37d5f1e142922ffb39dd57ad7, type: 3}
   m_Name: 

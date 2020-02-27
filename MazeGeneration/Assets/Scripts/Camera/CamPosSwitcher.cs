@@ -13,13 +13,11 @@ namespace Assets.Scripts.Camera
         private FollowCam followCamScriptLeft, followCamScriptRight;
         public PortalRenderController pRController;
 
-        private Vector3[] portalDirs;
         private LayerMask layerMask;
 
         public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
         private bool prevInCamFrustum, nextInCamFrustum, currentDirection;
-        private int currentMaze = -1, mazeCount, prevScore, nextScore, prevDistance, nextDistance;
-        private float portalWidth;
+        private int currentMaze = -1, mazeCount, prevScore, nextScore;
         public float loopRepeatRate = 0.7f;
 
         #region Start
@@ -28,8 +26,6 @@ namespace Assets.Scripts.Camera
             layerMask = LayerMask.GetMask("Head");
             layerMask |= LayerMask.GetMask("Ignore Raycast");
             layerMask = ~layerMask;
-
-            portalDirs = new Vector3[4];
 
             thisCamera = Camera.main.gameObject;
             player = GameObject.FindGameObjectWithTag("Player");
@@ -52,7 +48,6 @@ namespace Assets.Scripts.Camera
 
             //currentMaze = pRController.currentMaze;
             mazeCount = pRController.sequenceLength;
-            portalWidth = pRController.portalWidth;
         }
         #endregion
 
@@ -89,32 +84,35 @@ namespace Assets.Scripts.Camera
             currentDirection = isForward;
             ResetValues();
         }
+
+        public void PositionSwitchOverride(bool dir)
+        {
+            if (dir)
+            {
+                followCamScriptLeft.SetToPrev();
+                followCamScriptRight.SetToPrev();
+                pRController.SetProjectionQuads(true);
+            }
+            else
+            {
+                followCamScriptLeft.SetToNext();
+                followCamScriptRight.SetToNext();
+                pRController.SetProjectionQuads(false);
+            }
+
+        }
         #endregion
 
         #region AngleCheck
         private void AngleCheck()
         {
-            if (useCameraAngle)
+            if (Vector3.Angle(gameObject.transform.forward, currentNextPortal.transform.position) <
+                Vector3.Angle(gameObject.transform.forward, currentPrevPortal.transform.position))
             {
-                if (Vector3.Angle(thisCamera.transform.forward, currentNextPortal.transform.position) <
-                    Vector3.Angle(thisCamera.transform.forward, currentPrevPortal.transform.position))
-                {
-                    nextScore -= 1;
-                }
-                else
-                    prevScore -= 1;
-
+                nextScore -= 1;
             }
             else
-            {
-                if (Vector3.Angle(player.transform.forward, currentNextPortal.transform.position) <
-                    Vector3.Angle(player.transform.forward, currentPrevPortal.transform.position))
-                {
-                    nextScore -= 1;
-                }
-                else
-                    prevScore -= 1;
-            }
+                prevScore -= 1;
         }
         #endregion
 
@@ -227,77 +225,5 @@ namespace Assets.Scripts.Camera
 
             PositionSwitch(nextScore < prevScore);
         }
-
-        public void SetDistanceVariables(int prev, int next)
-        {
-            prevDistance = prev;
-            nextDistance = next;
-        }
-
-        //// NOT IN USE ANY LONGER: ////
-        #region RaycastCheck
-        private void RaycastCheck()
-        {
-            if (currentPrevPortal == null || currentNextPortal == null)
-                return;
-
-            for (int i = 0; i < 4; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        portalDirs[i] = PortalEdgeFinder(false, true) - thisCamera.transform.position;
-                        break;
-                    case 1:
-                        portalDirs[i] = PortalEdgeFinder(false, false) - thisCamera.transform.position;
-                        break;
-                    case 2:
-                        portalDirs[i] = PortalEdgeFinder(true, true) - thisCamera.transform.position;
-                        break;
-                    case 3:
-                        portalDirs[i] = PortalEdgeFinder(true, false) - thisCamera.transform.position;
-                        break;
-                }
-
-                RaycastHit hit;
-
-                if (Physics.Raycast(thisCamera.transform.position, portalDirs[i], out hit, 15.0f, layerMask))
-                {
-                    if (hit.collider.tag == currentNextPortal.tag)
-                    {
-                        prevScore += 1000;
-                    }
-                    else if (hit.collider.tag == currentPrevPortal.tag)
-                    {
-                        nextScore += 1000;
-                    }
-                }
-            }
-        }
-
-        #region PortalEdgeFinder
-        private Vector3 PortalEdgeFinder(bool next, bool right)
-        {
-            Vector3 tempEdgePos = new Vector3();
-
-            if (next)   // if next portal
-            {
-                if (right) // if right edge
-                    tempEdgePos = currentNextPortal.transform.position + currentNextPortal.transform.right * (portalWidth / 2.0f);
-                else // else left edge
-                    tempEdgePos = currentNextPortal.transform.position - currentNextPortal.transform.right * (portalWidth / 2.0f);
-            }
-            else   // else prev portal
-            {
-                if (right) // if right edge
-                    tempEdgePos = currentPrevPortal.transform.position + currentPrevPortal.transform.right * (portalWidth / 2.0f);
-                else // else left edge
-                    tempEdgePos = currentPrevPortal.transform.position - currentPrevPortal.transform.right * (portalWidth / 2.0f);
-            }
-
-            return tempEdgePos;
-        }
-        #endregion
-        #endregion
     }
 }

@@ -77,12 +77,10 @@ public class PortalRenderController : MonoBehaviour
         tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
         if(isForward)
         {
-            Debug.Log(name + "projection quad's position: " + tempScript.projectionQuad.position); 
             tempScript.projectionQuad.Translate(nextOffset, Space.World);
         }
         else
         {
-            Debug.Log(name + "projection quad's position: " + tempScript.projectionQuad.position);
             tempScript.projectionQuad.Translate(prevOffset, Space.World);
         }
 
@@ -193,11 +191,11 @@ public class PortalRenderController : MonoBehaviour
     {
         //previousPortalCameraLeftEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
         //previousPortalCameraRightEye.GetComponent<FollowCam>().SetOffset(-cameraOffset);
-        Debug.Log("offsetting");
+
         SetCameraOffsets(currentMaze);
 
-        Debug.Log("nextOffset: " + nextOffset);
-        Debug.Log("prevOffset: " + prevOffset);
+        //Debug.Log("nextOffset: " + nextOffset);
+        //Debug.Log("prevOffset: " + prevOffset);
 
         nextPortalCameraLeftEye.GetComponent<FollowCam>().SetOffsets(nextOffset, prevOffset);
         nextPortalCameraRightEye.GetComponent<FollowCam>().SetOffsets(nextOffset, prevOffset);
@@ -235,7 +233,7 @@ public class PortalRenderController : MonoBehaviour
     public void TeleportPlayer(int mazeID)
     {
         currentMaze = mazeID;
-        SetProjectionQuads(true);
+        //SetProjectionQuads(true);
         
     }
 
