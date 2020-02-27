@@ -13,7 +13,7 @@ public class Tile : MonoBehaviour {
     public bool isAStarTile = false;
     public bool isMarked = false;
     public int nextDistance;
-    public int prevdistance;
+    public int prevDistance;
 
     [Header("Tile information")]
     //tile information
@@ -178,12 +178,12 @@ public class Tile : MonoBehaviour {
     public void SetPortalDistance(int index, int length)
     {
         nextDistance = (length - 1) - index;
-        prevdistance = index;
+        prevDistance = index;
     }
     public void SetPortalDistance(Tile t)
     {
         nextDistance = t.nextDistance+1;
-        prevdistance = t.prevdistance+1;
+        prevDistance = t.prevDistance+1;
     }
     public void SetAsAstarTile()
     {

@@ -1336,6 +1336,20 @@ MonoBehaviour:
       direction: 0
       spelledDirection: 
     mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
 --- !u!4 &1604854435
 Transform:
   m_ObjectHideFlags: 0

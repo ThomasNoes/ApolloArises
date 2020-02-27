@@ -162,7 +162,7 @@ namespace Assets.Scripts.Camera
                 if (tempTile != null)
                 {
                     nextScore = tempTile.nextDistance;
-                    prevScore = tempTile.prevdistance;
+                    prevScore = tempTile.prevDistance;
                 }
             }
 
