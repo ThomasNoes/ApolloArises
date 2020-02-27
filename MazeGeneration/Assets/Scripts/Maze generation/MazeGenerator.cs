@@ -8,7 +8,6 @@ public class MazeGenerator : MapGenerator
     // Random starting positions
     public override void Generate()
     {
-        Debug.Log("generate maze yoyoyoyoy");
         int startRow = Random.Range(0, mazeRows);
         int startCol = Random.Range(0, mazeColumns);
         RecursiveDFS(startRow, startCol);
@@ -30,7 +29,18 @@ public class MazeGenerator : MapGenerator
         }
         //all tile ID should be set now. Find optimal route in this maze segment!
 
+
+        //make rooms here
+        List<DeadEnd>  deadends = GetDeadEndListTile(info.startSeed, info.endSeed, i);
+
+        foreach (DeadEnd d in deadends)
+        {
+                //aStar.DrawGizmo(d.GetTile(), Color.black, 0.25f);
+        }
+
+
         Debug.Log("A star here");
+        AStarPathFinding aStar = new AStarPathFinding();
         //A star Path Finding
         if (i == 0)
         {
@@ -42,13 +52,9 @@ public class MazeGenerator : MapGenerator
         }
         else
         {
-            AStarPathFinding aStar = new AStarPathFinding();
-            aStar.BeginAStar(tileArray, info.startSeed, info.endSeed);
+
+            //aStarTiles = aStar.BeginAStar(tileArray, info.startSeed, info.endSeed);
         }
-
-        //make rooms here
-        List<DeadEnd> deadends;
-
 
         GenerateIntArray();
     }

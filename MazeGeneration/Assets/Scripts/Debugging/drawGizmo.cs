@@ -10,7 +10,7 @@ public class drawGizmo : MonoBehaviour
     [Header("Costumize Your Gizmo's Appearance")]
     public GizmoType gizmo;
     public Color color = Color.black;
-    public Vector3 size = new Vector3(1,1,1);
+    public Vector3 size = new Vector3(1, 1, 1);
 
     public enum GizmoType
     {
@@ -57,4 +57,8 @@ public class drawGizmo : MonoBehaviour
         this.color = color;
     }
 
+    public void SetSize(float size)
+    {
+        this.size = new Vector3(size, size, size);
+    }
 }

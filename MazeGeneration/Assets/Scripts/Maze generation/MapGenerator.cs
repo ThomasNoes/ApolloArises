@@ -105,6 +105,28 @@ public abstract class MapGenerator : MonoBehaviour
         return deadEndList;
     }
 
+    public List<DeadEnd> GetDeadEndListTile(TileInfo start, TileInfo end, int mazeID)
+    {
+        List<DeadEnd> deadEndList = new List<DeadEnd>();
+        for (int i = 0; i < mazeRows; i++)
+        {
+            for (int j = 0; j < mazeColumns; j++)
+            {
+                int ID = tileArray[i, j].GetTileID();
+                if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
+                {
+                    if (!((i == start.row && j == start.column) || (i == end.row && j == end.column)))
+                    {
+                        deadEndList.Add(new DeadEnd(tileArray[i, j], mazeID));
+                    }
+                    
+
+                }
+            }
+        }
+        return deadEndList;
+    }
+
     public int[] GetFirstDeadEnd(int entranceRow, int entranceCol)
     {
         List<int[]> deadEndList = GetDeadEndList();

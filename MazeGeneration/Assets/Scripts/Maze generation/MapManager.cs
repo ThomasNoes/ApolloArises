@@ -89,15 +89,8 @@ public class MapManager : MonoBehaviour
 
             GenerateMapSequenceHallway();
 
-
         OffsetMap();
-        /*
-        //This is to debug the portal infos in the console
-        for (int i = 0; i < portalInfo.Length; i++)
-        {
-            Debug.Log("pp for maze: " + i + " r: " + portalInfo[i].row + " c: " + portalInfo[i].column + " d: " + portalInfo[i].direction);
-        }
-        */
+
         //maybe add script to find player head so we don't have to drag it in
     }
 
@@ -175,7 +168,27 @@ public class MapManager : MonoBehaviour
             //if (mapSequence[i].isEndSeeded == false)
             if (i + 1 < mapSequence.Length && mapSequence[i + 1].mapType == 0) // if we are not at the last maze segment and the next segment is a maze segment
                 mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed);
-            
+
+
+
+            Debug.Log("A star here");
+            AStarPathFinding aStar = new AStarPathFinding();
+            //A star Path Finding
+            if (i == 0)
+            {
+                //we need a start position
+            }
+            else if (i == mapSequence.Length - 1)
+            {
+                //we need a end destination
+            }
+            else
+            {
+
+                aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
+            }
+
+
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
         }

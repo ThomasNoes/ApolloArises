@@ -13,4 +13,10 @@ public class DeadEnd : MonoBehaviour
         this.mazeID = mazeID;
     }
 
+    public Tile GetTile()
+    {
+        return de;
+    }
+
+
 }
