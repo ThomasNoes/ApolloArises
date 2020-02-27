@@ -6,7 +6,7 @@ namespace Assets.Scripts.Camera
     public class CamPosSwitcher : MonoBehaviour
     {
         public GameObject followCamLeft, followCamRight;
-        private GameObject thisCamera, player, currentNextPortal, currentPrevPortal;
+        private GameObject player, currentNextPortal, currentPrevPortal;
         private GameObject[] prevRenderQuadArray, nextRenderQuadArray;
         private Renderer currentNextPortalRenderer, currentPrevPortalRenderer;
 
@@ -27,12 +27,10 @@ namespace Assets.Scripts.Camera
             layerMask |= LayerMask.GetMask("Ignore Raycast");
             layerMask = ~layerMask;
 
-            thisCamera = Camera.main.gameObject;
             player = GameObject.FindGameObjectWithTag("Player");
 
             followCamScriptLeft = followCamLeft?.GetComponent<FollowCam>();
             followCamScriptRight = followCamRight?.GetComponent<FollowCam>();
-
 
             if (player != null && followCamScriptLeft != null && pRController != null)
             {
@@ -91,13 +89,13 @@ namespace Assets.Scripts.Camera
             {
                 followCamScriptLeft.SetToPrev();
                 followCamScriptRight.SetToPrev();
-                pRController.SetProjectionQuads(true);
+                pRController.SetProjectionQuads(false);
             }
             else
             {
                 followCamScriptLeft.SetToNext();
                 followCamScriptRight.SetToNext();
-                pRController.SetProjectionQuads(false);
+                pRController.SetProjectionQuads(true);
             }
 
         }

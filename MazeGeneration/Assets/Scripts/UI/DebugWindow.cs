@@ -10,6 +10,7 @@ public class DebugWindow : MonoBehaviour
     public Text debugText;
     public GameObject debugPanel;
     private ScrollRect scrollRect;
+    private LayerMask layerMask;
 
     void Awake()
     {
@@ -22,6 +23,10 @@ public class DebugWindow : MonoBehaviour
         //Application.logMessageReceived += Log;
         scrollRect = debugText.gameObject.GetComponent<ScrollRect>();
         InvokeRepeating("CustomUpdate", 1.0f, 4.0f);
+
+        layerMask = LayerMask.GetMask("Head");
+        layerMask |= LayerMask.GetMask("Ignore Raycast");
+        layerMask = ~layerMask;
     }
 
     void OnEnable()
@@ -64,10 +69,25 @@ public class DebugWindow : MonoBehaviour
                 debugPanel.SetActive(!debugPanel.activeSelf);
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
-            ScrollToTop();
-        else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
-            ScrollToBottom();
+        //if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
+        //    ScrollToTop();
+        //else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
+        //    ScrollToBottom()
+
+        if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(Camera.main.transform.position, Vector3.down, out hit, 10.0f, layerMask))
+            {
+                Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
+
+                if (tempTile != null)
+                {
+                    Debug.Log(tempTile.nextDistance + " | " + tempTile.prevdistance);
+                }
+            }
+        }
 
     }
 
