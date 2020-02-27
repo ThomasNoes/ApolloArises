@@ -7,7 +7,7 @@ public class RoomGenerator : MapGenerator {
     public override void Generate () {
         Generate (0, 0, 1);
     }
-    public override void Generate (MapInfo info) {
+    public override void Generate (MapInfo info, int i, int length) {
         Generate (info.startSeed, info.roomName);
     }
     public override void Generate (TileInfo startSeed, string roomName = "RoomTemplate") {

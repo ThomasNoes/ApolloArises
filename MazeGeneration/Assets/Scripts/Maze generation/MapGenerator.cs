@@ -177,7 +177,7 @@ public abstract class MapGenerator : MonoBehaviour
     }
 
     public abstract void Generate();
-    public abstract void Generate(MapInfo info);
+    public abstract void Generate(MapInfo info, int i, int length);
     public abstract void Generate(TileInfo info, string roomName = "RoomTemplate");
     public abstract void Generate(int startRow, int startCol, int startDir, string roomName = "RoomTemplate");
     public abstract void Generate(int startRow, int startCol, int startDir, int endRow, int endCol, int endDir, string roomName = "RoomTemplate");

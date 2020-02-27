@@ -22,6 +22,7 @@ namespace EventCallbacks {
         }
 
         void OnGenerateTerrain (GenerateTerrainEvent generateTerrain) {
+            Debug.Log("instantiating the tiles");
             Transform tileTransform = generateTerrain.go.transform;
             tileTransform.localPosition = new Vector3(tileTransform.localPosition.x, 0, tileTransform.localPosition.z);
 

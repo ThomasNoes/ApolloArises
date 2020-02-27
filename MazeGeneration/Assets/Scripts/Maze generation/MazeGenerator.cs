@@ -8,6 +8,7 @@ public class MazeGenerator : MapGenerator
     // Random starting positions
     public override void Generate()
     {
+        Debug.Log("generate maze yoyoyoyoy");
         int startRow = Random.Range(0, mazeRows);
         int startCol = Random.Range(0, mazeColumns);
         RecursiveDFS(startRow, startCol);
@@ -17,7 +18,7 @@ public class MazeGenerator : MapGenerator
     }
 
     //Generates an integer array with the tileIDs in it. Will be used to find dead ends for portal placement
-    public override void Generate(MapInfo info)
+    public override void Generate(MapInfo info, int i, int length)
     {
         if (!info.isEndSeeded) // if this is the lazt maze segments (?) Or it is a room
         {
@@ -28,9 +29,25 @@ public class MazeGenerator : MapGenerator
             Generate(info.startSeed, info.endSeed);
         }
         //all tile ID should be set now. Find optimal route in this maze segment!
-        //AStarPathFinding aStar = new AStarPathFinding();
-        //aStarTiles = aStar.BeginAStar(tileArray,info.startSeed,info.endSeed);
 
+        Debug.Log("A star here");
+        //A star Path Finding
+        if (i == 0)
+        {
+            //we need a start position
+        }
+        else if (i == length - 1)
+        {
+            //we need a end destination
+        }
+        else
+        {
+            AStarPathFinding aStar = new AStarPathFinding();
+            aStar.BeginAStar(tileArray, info.startSeed, info.endSeed);
+        }
+
+        //make rooms here
+        List<DeadEnd> deadends;
 
 
         GenerateIntArray();

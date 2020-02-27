@@ -171,27 +171,11 @@ public class MapManager : MonoBehaviour
                 //Debug.Log("Generating End Seed For Maze " + i);
                     mapSequence[i].endSeed = GenerateRandomHallwayDeadEnd(mapSequence[i].startSeed, i); 
             }
-            mapScript.Generate(mapSequence[i]);
+            mapScript.Generate(mapSequence[i], i, mapSequence.Length);
             //if (mapSequence[i].isEndSeeded == false)
             if (i + 1 < mapSequence.Length && mapSequence[i + 1].mapType == 0) // if we are not at the last maze segment and the next segment is a maze segment
                 mapSequence[i].endSeed = mapScript.GetRandomDeadEndHallway(mapSequence[i].startSeed);
-
-            //A star Path Finding
-            if (i == 0)
-            {
-                //we need a start position
-            }
-            else if (i == mapSequence.Length-1)
-            {
-                //we need a end destination
-            }
-            else
-            {
-                AStarPathFinding aStar = new AStarPathFinding();
-                aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
-            }
-
-
+            
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
         }
