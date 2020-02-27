@@ -27,12 +27,12 @@ public class SelectPlayer : MonoBehaviour
         portalCameraLeft = GameObject.Find("Next Maze Camera Left").GetComponent<FollowCam>();
         portalCameraRight = GameObject.Find("Next Maze Camera Right").GetComponent<FollowCam>();
 
+        //if (player == null || debugPlayer == null || portalManager == null)
+        //    return;
 
         #if UNITY_EDITOR //check if it is running in editor or on quest
         inEditor = true;
         #endif
-
-
 
         if (inEditor) //if it is running in editor
         {
@@ -55,8 +55,8 @@ public class SelectPlayer : MonoBehaviour
 
     private void UsePlayer()
     {
-        player.SetActive(true);
-        debugPlayer.SetActive(false);
+        player?.SetActive(true);
+        debugPlayer?.SetActive(false);
 
         portalManager.isStereoscopic = true;
 
@@ -65,8 +65,8 @@ public class SelectPlayer : MonoBehaviour
     }
     private void UseDebugPlayer()
     {
-        player.SetActive(false);
-        debugPlayer.SetActive(true);
+        player?.SetActive(false);
+        debugPlayer?.SetActive(true);
 
         portalManager.isStereoscopic = false;
 

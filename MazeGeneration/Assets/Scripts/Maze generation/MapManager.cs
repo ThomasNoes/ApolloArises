@@ -347,9 +347,6 @@ public class MapManager : MonoBehaviour
 
     void OffsetMap()
     {
-        //transform.Translate(new Vector3(playAreaSize.x / 2.0f, 0, playAreaSize.z / 2.0f));
-
-        //transform.position = new Vector3(-playAreaSize.x / 2f  / 2f, 0, playAreaSize.z / 2f - tileWidth / 2f);
         transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
     }
 

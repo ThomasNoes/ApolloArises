@@ -41,7 +41,7 @@ namespace Assets.Scripts.Camera
             if (player != null && followCamScriptLeft != null && pRController != null)
             {
                 InvokeRepeating("CheckerLoop", 2.5f, loopRepeatRate);
-                Invoke("DelayedStart", 0.2f);
+                Invoke("DelayedStart", 0.7f);
             }
         }
 
