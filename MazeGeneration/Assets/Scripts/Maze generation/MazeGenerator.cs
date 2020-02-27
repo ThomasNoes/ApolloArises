@@ -52,7 +52,19 @@ public class MazeGenerator : MapGenerator
 
         foreach (DeadEnd d in deadends)
         {
-                aStar.DrawGizmo(d.GetTile(), Color.black, 0.25f);
+            Room tempRoom = new Room();
+            Tile t = tempRoom.SearchForRoom(d, tileArray);
+
+            aStar.DrawGizmo(d.GetTile(), Color.magenta, 0.25f);
+
+            if (t != null)
+            {
+                aStar.DrawGizmo(t, Color.magenta, 0.25f);
+            }
+
+
+
+
         }
 
         

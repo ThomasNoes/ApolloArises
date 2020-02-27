@@ -18,5 +18,20 @@ public class DeadEnd : MonoBehaviour
         return de;
     }
 
-
+    public int GetID()
+    {
+        return de.GetTileID();
+    }
+    public int[] GetWalls()
+    {
+        return de.GetWallArray();
+    }
+    public int GetRow()
+    {
+        return de.GetRow();
+    }
+    public int GetCol()
+    {
+        return de.GetCol();
+    }
 }
