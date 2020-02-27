@@ -17,44 +17,45 @@ public class MazeGenerator : MapGenerator
     }
 
     //Generates an integer array with the tileIDs in it. Will be used to find dead ends for portal placement
-    public override void Generate(MapInfo info, int i, int length)
+    public override void Generate(MapInfo[] mapSequence, int i)
     {
-        if (!info.isEndSeeded) // if this is the lazt maze segments (?) Or it is a room
+        if (!mapSequence[i].isEndSeeded) // if this is the lazt maze segments (?) Or it is a room
         {
-            Generate(info.startSeed);
+            Generate(mapSequence[i].startSeed);
         }
         else //if both start and end are seeded
         {
-            Generate(info.startSeed, info.endSeed);
+            Generate(mapSequence[i].startSeed, mapSequence[i].endSeed);
         }
         //all tile ID should be set now. Find optimal route in this maze segment!
 
+        if (i + 1 < mapSequence.Length)
+            mapSequence[i].endSeed = GetRandomDeadEndHallway(mapSequence[i].startSeed);
 
+        AStarPathFinding aStar = new AStarPathFinding();
+                //A star Path Finding
+                if (i == 0)
+                {
+                    //we need a start position
+                }
+                else if (i == mapSequence.Length - 1)
+                {
+                    //we need a end destination
+                }
+                else
+                {
+
+                    aStarTiles = aStar.BeginAStar(tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
+                }
         //make rooms here
-        List<DeadEnd>  deadends = GetDeadEndListTile(info.startSeed, info.endSeed, i);
+        List<DeadEnd>  deadends = GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
 
         foreach (DeadEnd d in deadends)
         {
-                //aStar.DrawGizmo(d.GetTile(), Color.black, 0.25f);
+                aStar.DrawGizmo(d.GetTile(), Color.black, 0.25f);
         }
 
-
-        Debug.Log("A star here");
-        AStarPathFinding aStar = new AStarPathFinding();
-        //A star Path Finding
-        if (i == 0)
-        {
-            //we need a start position
-        }
-        else if (i == length - 1)
-        {
-            //we need a end destination
-        }
-        else
-        {
-
-            //aStarTiles = aStar.BeginAStar(tileArray, info.startSeed, info.endSeed);
-        }
+        
 
         GenerateIntArray();
     }
