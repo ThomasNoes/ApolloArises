@@ -22,6 +22,10 @@ public class DeadEnd : MonoBehaviour
     {
         return de.GetTileID();
     }
+    public int GetMazeID()
+    {
+        return mazeID;
+    }
     public int[] GetWalls()
     {
         return de.GetWallArray();

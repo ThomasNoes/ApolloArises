@@ -50,21 +50,17 @@ public class MazeGenerator : MapGenerator
         //make rooms here
         List<DeadEnd>  deadends = GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
 
-        foreach (DeadEnd d in deadends)
+        foreach (DeadEnd de in deadends)
         {
-            Room tempRoom = new Room();
-            Tile t = tempRoom.SearchForRoom(d, tileArray);
+            RoomFinder rf = new RoomFinder(de, tileArray );
+            rf.SearchForRoom();
+            Debug.Log("------------new deadend---------- ");
 
-            aStar.DrawGizmo(d.GetTile(), Color.magenta, 0.25f);
-
-            if (t != null)
+            foreach (Tile t in rf.debugTiles)
             {
                 aStar.DrawGizmo(t, Color.magenta, 0.25f);
             }
-
-
-
-
+           
         }
 
         
