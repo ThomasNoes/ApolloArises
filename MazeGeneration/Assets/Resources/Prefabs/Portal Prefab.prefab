@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9adec2516a7dfa44ba47a7c91c3bba09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialMode: 0
   isForwardTeleporter: 0
   portalID: 0
   mazeID: 0
@@ -160,7 +159,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.1}
+  m_Size: {x: 1, y: 1, z: 0.02}
   m_Center: {x: 0, y: 0, z: -0.5}
 --- !u!114 &6413725851234064794
 MonoBehaviour:

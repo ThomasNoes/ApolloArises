@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MazeDisabler : MonoBehaviour
 {
+    public bool enable = true;
     public int bufferAmount = 3;
     private PortalRenderController pRController;
     private MapManager mapManager;
@@ -12,16 +13,23 @@ public class MazeDisabler : MonoBehaviour
 
     private void Start()
     {
+        if (!enable)
+            return;
+
         mapManager = gameObject.GetComponent<MapManager>();
         pRController = FindObjectOfType<PortalRenderController>();
 
         if (mapManager == null || pRController == null)
             active = false;
-        else
-            Invoke("Initialize", 0.4f);
+        else if (Application.isEditor)
+        {
+#if UNITY_EDITOR
+            Invoke("Initialize", 0.3f);
+#endif
+        }
     }
 
-    private void Initialize()
+    public void Initialize()
     {
         InitializePortalArray();
 

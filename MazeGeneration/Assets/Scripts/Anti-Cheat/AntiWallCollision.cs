@@ -6,10 +6,17 @@ public class AntiWallCollision : MonoBehaviour
     public bool useVibration = true;
     public bool useVisual = false;
     private float farClippingPlane;
+    private bool active = false;
 
     private void Start()
     {
         farClippingPlane = Camera.main.farClipPlane;
+        Invoke("DelayedStart", 2.0f);
+    }
+
+    private void DelayedStart()
+    {
+        active = true;
     }
 
     private void OnTriggerEnter(Collider col)
@@ -30,6 +37,9 @@ public class AntiWallCollision : MonoBehaviour
 
     private void AntiCheat(bool response) // true: activate, false: stop
     {
+        if (!active)
+            return;
+
         if (response)
         {
             if (useVibration)

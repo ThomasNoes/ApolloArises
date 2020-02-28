@@ -9,6 +9,7 @@ public class PlayAreaCalibration : MonoBehaviour
     private GameObject portalManager;
     private bool active = true;
     private OVRManager thisOvrManager;
+    private MazeDisabler mazeDisabler;
 
     void Start()
     {
@@ -30,7 +31,10 @@ public class PlayAreaCalibration : MonoBehaviour
         if (mapManager == null || portalManager == null)
             active = false;
         else
+        {
             Invoke("DelayedStart", 0.1f);
+            mazeDisabler = mapManager.GetComponent<MazeDisabler>();
+        }
 
         if (thisOvrManager != null)
         {
@@ -64,6 +68,9 @@ public class PlayAreaCalibration : MonoBehaviour
                     thisOvrManager.reorientHMDOnControllerRecenter = false;
                     thisOvrManager.AllowRecenter = false;
                 }
+
+                if (mazeDisabler != null)
+                    mazeDisabler.Initialize();
             }
     }
 

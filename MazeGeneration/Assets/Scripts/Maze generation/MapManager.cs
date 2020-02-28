@@ -58,8 +58,8 @@ public class MapManager : MonoBehaviour
 
             if (setDimensionsAutomatically)
             {
-                mazeRows = Mathf.RoundToInt(playAreaSize.x / tileWidth);
-                mazeCols = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+                mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+                mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
             }
         }
 #endif

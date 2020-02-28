@@ -76,17 +76,17 @@ public class DebugWindow : MonoBehaviour
 
         if (OVRInput.GetDown(OVRInput.Button.Two))
         {
-            RaycastHit hit;
+            //RaycastHit hit;
 
-            if (Physics.Raycast(Camera.main.transform.position, Vector3.down, out hit, 10.0f, layerMask))
-            {
-                Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
+            //if (Physics.Raycast(Camera.main.transform.position, Vector3.down, out hit, 10.0f, layerMask))
+            //{
+            //    Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
-                if (tempTile != null)
-                {
-                    Debug.Log(tempTile.nextDistance + " | " + tempTile.prevdistance);
-                }
-            }
+            //    if (tempTile != null)
+            //    {
+            //        Debug.Log(tempTile.nextDistance + " | " + tempTile.prevdistance);
+            //    }
+            //}
         }
 
     }

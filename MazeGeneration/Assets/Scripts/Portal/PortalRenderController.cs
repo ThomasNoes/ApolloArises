@@ -87,7 +87,7 @@ public class PortalRenderController : MonoBehaviour
 
         tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
         tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
-        bc.center = new Vector3(0, 0, -portalWidth / 2f + pillarOffset);
+        bc.center = new Vector3(0, 0, -portalWidth / 2.0f + pillarOffset);
 
         tempPortal.name = name + " Teleporter " + i;
         tempScript.renderQuad.name = name + "Render Quad " + i ;

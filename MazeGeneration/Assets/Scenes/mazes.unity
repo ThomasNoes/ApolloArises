@@ -627,7 +627,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 21
+  far clip plane: 25
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -748,7 +748,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 21
+  far clip plane: 25
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1194,6 +1194,8 @@ GameObject:
   - component: {fileID: 1604854435}
   - component: {fileID: 1604854434}
   - component: {fileID: 1604854436}
+  - component: {fileID: 1604854438}
+  - component: {fileID: 1604854437}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -1222,8 +1224,8 @@ MonoBehaviour:
   MazePlacement: 0
   StartMazeInOrigin: 1
   playerHead: {fileID: 2526136163395224742}
-  mazeRows: 4
-  mazeCols: 4
+  mazeRows: 3
+  mazeCols: 3
   tileWidth: 0.7
   startRow: 0
   startCol: 0
@@ -1470,6 +1472,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useDebugPlayer: 1
+--- !u!114 &1604854437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604854433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c33aacff76cab444810b841f19c8c3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filePath: Assets/Resources/CSV
+  fileName: /session
+  logData: 1
+  logFrameRate: 1
+  logCurrentMaze: 1
+  updateInterval: 1
+--- !u!114 &1604854438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604854433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a39898678e32cc41a88b3293ebf7970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enable: 1
+  bufferAmount: 3
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,16 +1967,6 @@ PrefabInstance:
       propertyPath: rendererInViewCheckFirst
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
-        type: 3}
-      propertyPath: m_TagString
-      value: PlayerCollider
-      objectReference: {fileID: 0}
     - target: {fileID: 2526136162183218452, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
@@ -1966,12 +1990,7 @@ PrefabInstance:
     - target: {fileID: 3887374555199132084, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.173
-      objectReference: {fileID: 0}
-    - target: {fileID: 4396015622698410534, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5369379566293736159, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
