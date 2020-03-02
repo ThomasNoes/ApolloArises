@@ -40,7 +40,7 @@ public abstract class MapGenerator : MonoBehaviour
         if (Input.GetKeyUp("b")) OpenAllDeadEnds();
     }
 
-    protected void GenerateIntArray()
+    public void GenerateIntArray()
     {
         mazeIntArray = new int[mazeRows, mazeColumns]; // will be filled with the ID for each tile in tileArray
         for (int i = 0; i < mazeRows; i++)

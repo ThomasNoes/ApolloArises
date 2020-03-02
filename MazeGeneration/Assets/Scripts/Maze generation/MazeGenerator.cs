@@ -32,40 +32,11 @@ public class MazeGenerator : MapGenerator
         if (i + 1 < mapSequence.Length)
             mapSequence[i].endSeed = GetRandomDeadEndHallway(mapSequence[i].startSeed);
 
-        AStarPathFinding aStar = new AStarPathFinding();
-                //A star Path Finding
-                if (i == 0)
-                {
-                    //we need a start position
-                }
-                else if (i == mapSequence.Length - 1)
-                {
-                    //we need a end destination
-                }
-                else
-                {
 
-                    aStarTiles = aStar.BeginAStar(tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
-                }
-        //make rooms here
-        List<DeadEnd>  deadends = GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
-
-        foreach (DeadEnd de in deadends)
-        {
-            RoomFinder rf = new RoomFinder(de, tileArray );
-            rf.SearchForRoom();
-            Debug.Log("------------new deadend---------- ");
-
-            foreach (Tile t in rf.debugTiles)
-            {
-                aStar.DrawGizmo(t, Color.magenta, 0.25f);
-            }
-           
-        }
 
         
 
-        GenerateIntArray();
+        //GenerateIntArray();
     }
 
     public override void Generate(TileInfo startSeed, string roomName = "RoomTemplate")

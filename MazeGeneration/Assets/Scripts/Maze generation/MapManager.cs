@@ -24,7 +24,17 @@ public class MapManager : MonoBehaviour
     public GameObject[] mazeGeneratorPrefab;
     public bool usePlayAreaCenter, setDimensionsAutomatically;
     public MazePlacementType MazePlacement;
-    public bool StartMazeInOrigin;
+    public bool startMazeInOrigin;
+    
+    //room variables
+    public bool createRooms;
+    public int idealDistanceBetweenRooms =1;
+    private int minimumMazeRoute=0;
+    private int idealRoomAmount;
+    private List<Room> potentialRooms = new List<Room>();
+    private bool[] roomAlreadyInSegment; 
+
+    List<MapGenerator> mapScripts = new List<MapGenerator>();
 
     private Vector3 minimumBound = Vector3.zero;
     private Vector3 maximumBound;
@@ -63,6 +73,7 @@ public class MapManager : MonoBehaviour
             }
         }
 #endif
+        roomAlreadyInSegment = new bool[mapSequence.Length];
 
         if (isMapSeeded)
             Random.InitState(randomGeneratorSeed);
@@ -87,7 +98,61 @@ public class MapManager : MonoBehaviour
             //Debug.Log("Player was out of game area, Maze starts from (0;0).");
         }
 
-            GenerateMapSequenceHallway();
+        GenerateMapSequenceHallway();
+
+        if (idealDistanceBetweenRooms <= 0)
+        {
+            idealDistanceBetweenRooms = 1;
+        }
+        idealRoomAmount = (int)(minimumMazeRoute/idealDistanceBetweenRooms);
+        Debug.Log("potentialRooms " + potentialRooms.Count);
+        Debug.Log("idealRoomAmount: "+ idealRoomAmount);
+
+        if (potentialRooms.Count <=idealRoomAmount) // just make the rooms if there is an ideal amount or if there are too few. in the future, maybe continue to generate maze segment or try generating everything from the beginning
+        {
+            foreach (Room r in potentialRooms)
+            {
+                r.DebugRoom();
+                r.CreateRoom();
+            }
+        }
+        else 
+        {
+            for (int i = 0; i < potentialRooms.Count; i++)// remove room if there already exists one if this maze segment
+            {
+                while (potentialRooms.Count > idealRoomAmount)
+                {
+                    if (roomAlreadyInSegment[potentialRooms[i].mazeID] == false)
+                    {
+                        roomAlreadyInSegment[potentialRooms[i].mazeID] = true;
+                        Debug.Log("first room in maze" + potentialRooms[i].mazeID);
+                    }
+                    else
+                    {
+                        potentialRooms.Remove(potentialRooms[i]);
+                        Debug.Log("hey i removed a room");
+                    }
+                }
+            }
+            while (potentialRooms.Count > idealRoomAmount) // if there are still to many room. remove at random - dunno what else
+            {
+                int index = Random.Range(0, potentialRooms.Count-1);
+                potentialRooms.RemoveAt(index);
+                Debug.Log("so there was still too many room so i removed one");
+            }
+            foreach (Room r in potentialRooms)
+            {
+                r.DebugRoom();
+                r.CreateRoom();
+            }
+        }
+
+
+        //here each maze segment is set and this will start to instantiate the gameobject that make the maze
+        foreach (MapGenerator mg in mapScripts)
+        {
+            mg.GenerateIntArray();
+        }
 
         OffsetMap();
 
@@ -127,6 +192,7 @@ public class MapManager : MonoBehaviour
             tempMap.transform.parent = transform;
             mapSequence[i].mapObject = tempMap;
             MapGenerator mapScript = tempMap.GetComponent<MapGenerator>();
+            mapScripts.Add(mapScript);
             mapScript.SetDimensions(mazeRows, mazeCols, tileWidth);
             mapScript.Initialize();
             //Debug.Log("Maze " + i + " Initialized!");
@@ -166,6 +232,43 @@ public class MapManager : MonoBehaviour
             }
             mapScript.Generate(mapSequence, i);
 
+            AStarPathFinding aStar = new AStarPathFinding();
+            //A star Path Finding
+            if (i == 0)
+            {
+                //we need a start position
+            }
+            else if (i == mapSequence.Length - 1)
+            {
+                //we need a end destination
+            }
+            else
+            {
+                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
+                minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
+            }
+
+            //Find rooms
+            if (createRooms) //only search if we want to create rooms
+            {
+                List<DeadEnd> deadends = mapScript.GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
+
+                foreach (DeadEnd de in deadends)
+                {
+                    RoomFinder rf = new RoomFinder(de, mapScript.tileArray);
+                    if(rf.SearchForRoom())
+                    {
+                        Room room = new Room(rf);
+                        potentialRooms.Add(room);
+                    }
+                    //Debug.Log("------------new deadend---------- ");
+
+                    foreach (Tile t in rf.debugTiles)
+                    {
+                        aStar.DrawGizmo(t, Color.magenta, 0.25f);
+                    }
+                }
+            }
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
         }
@@ -420,7 +523,7 @@ public class MapManager : MonoBehaviour
 
         if (index == 0)
         {
-            if (StartMazeInOrigin)
+            if (startMazeInOrigin)
             {
                 mapSpawnPoint = Vector3.zero;
             }

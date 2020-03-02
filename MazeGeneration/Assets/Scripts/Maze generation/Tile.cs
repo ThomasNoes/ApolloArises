@@ -28,8 +28,8 @@ public class Tile : MonoBehaviour {
     private int hCost = 0;
     private Tile parent;
 
-    //private GameObject player;
-    //private CamPosSwitcher cPosSwitch;
+    //for room
+    public bool isRoomTile=false;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
@@ -88,6 +88,48 @@ public class Tile : MonoBehaviour {
         int oppositeDirection = (direction + 2) % 4;
         from.OpenWall (direction);
         to.OpenWall (oppositeDirection);
+    }
+
+    public static void ConnectTiles(Tile from, Tile to)
+    {
+        int direction = -1;
+        bool connect = false;
+        //find the direction
+        if (from.GetRow() == to.GetRow() + 1 && from.GetCol() == to.GetCol()) //connect north
+        {
+            direction = 0;
+            connect = true;
+            Debug.Log("open north");
+        }
+        else if (from.GetRow() == to.GetRow() && from.GetCol() == to.GetCol() - 1) //connect east
+        {
+            direction = 1;
+            connect = true;
+            Debug.Log("open east");
+        }
+        else if (from.GetRow() == to.GetRow() - 1 && from.GetCol() == to.GetCol()) //connect south
+        {
+            direction = 2;
+            connect = true;
+            Debug.Log("open south");
+        }
+        else if (from.GetRow() == to.GetRow() && from.GetCol() == to.GetCol() + 1) //connect west
+        {
+            direction = 3;
+            connect = true;
+            Debug.Log("open west");
+        }
+        else
+        {
+            Debug.Log("trying to connect two tiles that are not adjacent");
+        }
+        if (connect)
+        {
+            int oppositeDirection = (direction + 2) % 4;
+            from.OpenWall(direction);
+            to.OpenWall(oppositeDirection);
+        }
+
     }
 
     //Same as connectTiles but closes them down.

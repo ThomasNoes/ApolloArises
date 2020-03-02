@@ -5,12 +5,18 @@ using UnityEngine;
 public class RoomFinder : MonoBehaviour
 {
     public Tile de;
+    public int deDirection;
     public int mazeID;
     public Tile[,] tileArray;
     List<Tile> clockTiles = new List<Tile>();
     List<Tile> counterTiles = new List<Tile>();
+    bool clockwiseIncludeAStar=false;
+    bool counterwiseIncludeAStar=false;
+
     bool roomisClockwise;
+    bool roomExists = false;
     public List<Tile> debugTiles = new List<Tile>();
+
 
 
     public RoomFinder(DeadEnd de, Tile[,] tileArray)
@@ -22,16 +28,14 @@ public class RoomFinder : MonoBehaviour
 
     public bool SearchForRoom()
     {
+
+        //Debug.Log("DeadEnd at (" +de.GetRow() + "," + de.GetCol() +") in Maze "+ mazeID);
         AddToClock(de);
         AddToCounter(de);
 
         bool roomClockWise = false;
         bool roomCounterWise = false;
-
-
         Tile leadIn;
-
-        tileArray.GetLength(1);
 
         for (int i = 0; i < de.wallArray.Length; i++)
         {
@@ -41,21 +45,29 @@ public class RoomFinder : MonoBehaviour
                 {
                     case 0:
                         leadIn = tileArray[de.GetRow() - 1,de.GetCol()];
+                        SetClockwiseIncludeAStar(leadIn);
+                        SetCounterwiseIncludeAStar(leadIn);
                         roomClockWise = CheckPerpendicularDirection(leadIn, i, true);
                         roomCounterWise = CheckPerpendicularDirection(leadIn, i, false);
                         break;
                     case 1:
                         leadIn = tileArray[de.GetRow(), de.GetCol() + 1];
+                        SetClockwiseIncludeAStar(leadIn);
+                        SetCounterwiseIncludeAStar(leadIn);
                         roomClockWise = CheckPerpendicularDirection(leadIn, i, true);
                         roomCounterWise = CheckPerpendicularDirection(leadIn, i, false);
                         break;
                     case 2:
                         leadIn = tileArray[de.GetRow() + 1, de.GetCol()];
+                        SetClockwiseIncludeAStar(leadIn);
+                        SetCounterwiseIncludeAStar(leadIn);
                         roomClockWise = CheckPerpendicularDirection(leadIn, i, true);
                         roomCounterWise = CheckPerpendicularDirection(leadIn, i, false);
                         break;
                     case 3:
                         leadIn = tileArray[de.GetRow(), de.GetCol() - 1];
+                        SetClockwiseIncludeAStar(leadIn);
+                        SetCounterwiseIncludeAStar(leadIn);
                         roomClockWise = CheckPerpendicularDirection(leadIn, i, true);
                         roomCounterWise = CheckPerpendicularDirection(leadIn, i, false);
                         break;
@@ -68,16 +80,34 @@ public class RoomFinder : MonoBehaviour
         if (roomClockWise && roomCounterWise)
         {
             // what to do if both are possible rooms
+            roomExists = true;
         }
         else if (roomClockWise)
         {
-            room
+            roomExists = true;
+            roomisClockwise = true;
         }
         else if (roomCounterWise)
         {
-
+            roomExists = true;
+            roomisClockwise = false;
         }
-        return true;
+        return roomExists;
+    }
+
+    public void SetClockwiseIncludeAStar(Tile t)
+    {
+        if (clockwiseIncludeAStar == false)
+        {
+            clockwiseIncludeAStar = t.isAStarTile;
+        }
+    }
+    public void SetCounterwiseIncludeAStar(Tile t)
+    {
+        if (counterwiseIncludeAStar == false)
+        {
+            counterwiseIncludeAStar = t.isAStarTile;
+        }
     }
 
     private bool CheckPerpendicularDirection(Tile t, int i, bool clockWise)
@@ -128,9 +158,17 @@ public class RoomFinder : MonoBehaviour
 
             if (t.wallArray[i] == 1) // if the path is open
             {
-                if (leadIn.isAStarTile && // if it is a a star tile
+                if (//leadIn.isAStarTile && // if it is a a star tile
                     leadIn.prevDistance > 0 && leadIn.nextDistance > 0) // and it is not the portal tile
                 {
+                    if (clockWise)
+                    {
+                        SetClockwiseIncludeAStar(leadIn);
+                    }
+                    else
+                    {
+                        SetCounterwiseIncludeAStar(leadIn);
+                    }
                     roomThisWay = CheckPerpendicularDirection(leadIn, i, clockWise);
                 }
             }
@@ -138,15 +176,24 @@ public class RoomFinder : MonoBehaviour
             {
                 if (leadIn == de) // we found our way back to the deadend de
                 {
-                    Debug.Log("i found the deadend");
-                    roomThisWay = true;
+                    //Debug.Log("i found the deadend");
                     if (clockWise)
                     {
-                        AddToClock(leadIn);
+                        SetClockwiseIncludeAStar(leadIn);
+                        if (clockwiseIncludeAStar)
+                        {
+                            roomThisWay = true;
+                            AddToClock(leadIn);
+                        }
                     }
                     else
                     {
-                        AddToCounter(leadIn);
+                        SetCounterwiseIncludeAStar(leadIn);
+                        if (counterwiseIncludeAStar)
+                        {
+                            roomThisWay = true;
+                            AddToCounter(leadIn);
+                        }
                     }
                 }
             }
@@ -170,8 +217,12 @@ public class RoomFinder : MonoBehaviour
 
     private void AddToClock(Tile t)
     {
-        clockTiles.Add(t);
-        Debug.Log("clockwise " + clockTiles.Count + " in maze "+ mazeID + " ----------------- added tile " + t.GetRow() + "," + t.GetCol());
+        if (!clockTiles.Contains(t))
+        {
+            clockTiles.Add(t);
+        }
+
+        //Debug.Log("clockwise " + clockTiles.Count + " in maze "+ mazeID + " ----------------- added tile " + t.GetRow() + "," + t.GetCol());
         if (!debugTiles.Contains(t))
         {
             debugTiles.Add(t);
@@ -180,8 +231,11 @@ public class RoomFinder : MonoBehaviour
 
     private void AddToCounter(Tile t)
     {
-        counterTiles.Add(t);
-        Debug.Log("counterwise "+ counterTiles.Count + " in maze " + mazeID + " ----------------- added tile " + t.GetRow() + "," + t.GetCol());
+        if (!counterTiles.Contains(t))
+        {
+            counterTiles.Add(t);
+        }
+        //Debug.Log("counterwise "+ counterTiles.Count + " in maze " + mazeID + " ----------------- added tile " + t.GetRow() + "," + t.GetCol());
         if (!debugTiles.Contains(t))
         {
             debugTiles.Add(t);
@@ -200,6 +254,11 @@ public class RoomFinder : MonoBehaviour
         }
         return input;
 
+    }
+
+    public bool GetRoomExists()
+    {
+        return roomExists;
     }
 
     public List<Tile> GetRoom()
