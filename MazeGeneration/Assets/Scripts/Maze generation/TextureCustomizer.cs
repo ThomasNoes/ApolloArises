@@ -19,7 +19,7 @@ public class TextureCustomizer : MonoBehaviour
         UpdateTextures(0);
     }
 
-    public void UpdateTextures(int index)
+    public void UpdateTextures(int index) // TODO: figure out if you can update a prefab when APK is built?
     {
         if (floorPrefab != null)
         {
@@ -66,9 +66,47 @@ public class TextureCustomizer : MonoBehaviour
         }
     }
 
-    public void GenerateNewPrefabs(int amount)
+    public void GenerateNewPrefabs() // TODO: Testing - not done yet - Not working as intended as prefabs cannot be generated to memory
     {
+        if (wallMats == null || wallPrefab == null)
+            return;
 
+        for (int i = 0; i < wallMats.Length; i++)
+        {
+            GameObject tempObj = wallPrefab.gameObject;
+            tempObj.GetComponent<Renderer>().material = wallMats[i];
+            newWallPrefabs.Add(tempObj);
+
+            if (floorMats.Length > i)
+            {
+                if (floorPrefab != null)
+                {
+                    tempObj = floorPrefab.gameObject;
+                    tempObj.GetComponent<Renderer>().material = floorMats[i];
+                    newFloorPrefabs.Add(tempObj);
+                }
+            }
+
+            if (pillarMats.Length > i)
+            {
+                if (pillarPrefab != null)
+                {
+                    tempObj = pillarPrefab.gameObject;
+                    tempObj.GetComponent<Renderer>().material = pillarMats[i];
+                    newPillarPrefabs.Add(tempObj);
+                }
+            }
+
+            if (ceilingMats.Length > i)
+            {
+                if (ceilingPrefab != null)
+                {
+                    tempObj = ceilingPrefab.gameObject;
+                    tempObj.GetComponent<Renderer>().material = ceilingMats[i];
+                    newCeilingPrefabs.Add(tempObj);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -122,9 +160,9 @@ public class TextureCustomizer_Editor : UnityEditor.Editor
 
         EditorGUILayout.Space(10.0f);
 
-        if (GUILayout.Button("Generate Prefabs"))
+        if (GUILayout.Button("[Not Working] Generate Prefabs"))
         {
-            // TODO
+            script.GenerateNewPrefabs();
             Debug.Log("TextureCustomizer: generated new prefabs");
         }
 

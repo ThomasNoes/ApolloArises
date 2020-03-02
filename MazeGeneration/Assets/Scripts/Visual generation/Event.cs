@@ -36,6 +36,7 @@ namespace EventCallbacks
         public GameObject go;
         public int[] wallArray;
         public float tileWidth;
+        public int materialIndex;
         public bool isRoomPart, noCeiling, isOuterOpenTile;
     }
 
