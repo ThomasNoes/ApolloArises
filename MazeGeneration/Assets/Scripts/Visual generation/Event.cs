@@ -36,7 +36,7 @@ namespace EventCallbacks
         public GameObject go;
         public int[] wallArray;
         public float tileWidth;
-
+        public bool isRoomPart, noCeiling, isOuterOpenTile;
     }
 
     public class FusePuzzlePlugIn : Event<FusePuzzlePlugIn>
