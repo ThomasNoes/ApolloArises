@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &450360490182712159
+--- !u!1 &7748457934529168356
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 450360490182712157}
-  - component: {fileID: 450360490182712156}
-  - component: {fileID: 3788025584908592819}
+  - component: {fileID: 7748457934529168358}
+  - component: {fileID: 7748457934529168359}
+  - component: {fileID: 7748457934529168361}
   m_Layer: 0
   m_Name: TileGenerator
   m_TagString: Untagged
@@ -18,13 +18,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &450360490182712157
+--- !u!4 &7748457934529168358
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450360490182712159}
+  m_GameObject: {fileID: 7748457934529168356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &450360490182712156
+--- !u!114 &7748457934529168359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450360490182712159}
+  m_GameObject: {fileID: 7748457934529168356}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f597773bc07373a4bb4206e11aea4ac3, type: 3}
@@ -46,22 +46,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallOffset: 0.1
   wallHeight: 2.5
-  pillarMat: {fileID: 0}
-  wallMat: {fileID: 0}
-  floorMat: {fileID: 0}
-  ceilingMat: {fileID: 0}
   ceiling: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f, type: 3}
   wallSegment: {fileID: 6395070241882163283, guid: da65273e1ca2d6f4c959dc86610a8cc1,
     type: 3}
   woodPillar: {fileID: 6666421332874310094, guid: 020cd9494efbe9e4281f6a7967fc414a,
     type: 3}
---- !u!114 &3788025584908592819
+--- !u!114 &7748457934529168361
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450360490182712159}
+  m_GameObject: {fileID: 7748457934529168356}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03d816631e3890e468cac39f58f48a22, type: 3}
@@ -75,9 +71,14 @@ MonoBehaviour:
     type: 3}
   ceilingPrefab: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f,
     type: 3}
+  newFloorPrefabs: []
+  newWallPrefabs: []
+  newPillarPrefabs: []
+  newCeilingPrefabs: []
   pillarMats: []
   wallMats: []
   floorMats: []
   ceilingMats: []
   autoSwitchTextures: 0
   frequency: 10
+  matIndex: 0

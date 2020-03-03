@@ -53,6 +53,7 @@ public abstract class MapGenerator : MonoBehaviour
                     mazeIntArray[i, j] = tileArray[i, j].GetTileID();
                     gtei.go = tileArray[i, j].gameObject;
                     gtei.wallArray = tileArray[i, j].GetWallArray();
+                    //gtei.isRoomPart = tileArray[i, j].isRoomTile;
                     gtei.tileWidth = tileWidth;
 
                     //ID Changing when creating new tile
