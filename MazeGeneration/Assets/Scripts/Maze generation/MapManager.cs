@@ -112,7 +112,7 @@ public class MapManager : MonoBehaviour
         {
             foreach (Room r in potentialRooms)
             {
-                r.DebugRoom();
+                //turn on again //r.DebugRoom();
                 r.CreateRoom();
             }
         }
@@ -142,7 +142,7 @@ public class MapManager : MonoBehaviour
             }
             foreach (Room r in potentialRooms)
             {
-                r.DebugRoom();
+                //turn on again //r.DebugRoom();
                 r.CreateRoom();
             }
         }
@@ -231,10 +231,10 @@ public class MapManager : MonoBehaviour
                 //Debug.Log("Generating End Seed For Maze " + i);
                     mapSequence[i].endSeed = GenerateRandomHallwayDeadEnd(mapSequence[i].startSeed, i); 
             }
-            mapScript.Generate(mapSequence, i);
+            mapScript.Generate(mapSequence, i); // maze tiles have now been opened and there are a path between portals
 
-            AStarPathFinding aStar = new AStarPathFinding();
             //A star Path Finding
+            AStarPathFinding aStar = new AStarPathFinding();
             if (i == 0)
             {
                 //we need a start position
@@ -248,6 +248,34 @@ public class MapManager : MonoBehaviour
                 mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
                 minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
             }
+
+            //Find outer tiles and determine how much their walls can be opened.
+            if (i == 0)
+            {
+                List<Tile> outerTiles = mapScript.FindOuterWalls(mapSequence[i].endSeed);
+                foreach (Tile t in outerTiles)
+                {
+                    aStar.DrawGizmo(t, Color.yellow, 0.1f);
+                }
+            }
+            else if (i == mapSequence.Length - 1)
+            {
+                List<Tile> outerTiles = mapScript.FindOuterWalls(mapSequence[i].startSeed);
+                foreach (Tile t in outerTiles)
+                {
+                    aStar.DrawGizmo(t, Color.yellow, 0.1f);
+                }
+            }
+            else
+            {
+
+                List<Tile> outerTiles = mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
+                foreach (Tile t in outerTiles)
+                {
+                    aStar.DrawGizmo(t, Color.yellow, 0.1f);
+                }
+            }
+
 
             //Find rooms
             if (createRooms) //only search if we want to create rooms
@@ -264,12 +292,13 @@ public class MapManager : MonoBehaviour
                     }
                     //Debug.Log("------------new deadend---------- ");
 
-                    foreach (Tile t in rf.debugTiles)
-                    {
-                        aStar.DrawGizmo(t, Color.magenta, 0.25f);
-                    }
+                    //foreach (Tile t in rf.debugTiles)
+                    //{
+                    //    aStar.DrawGizmo(t, Color.magenta, 0.25f);
+                    //}
                 }
             }
+
             if (i < portalInfo.Length)
                 portalInfo[i] = new TileInfo(mapSequence[i].endSeed);
         }

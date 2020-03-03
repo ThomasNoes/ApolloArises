@@ -18,7 +18,14 @@ public class Tile : MonoBehaviour {
     [Header("Tile information")]
     //tile information
     public int tileID;
-    public int[] wallArray; //[0] = north, [1] = east, [2]= south, [3] = west. 1 = traversable / no wall, 0 = not traversable / wall
+    /// <summary>
+    /// [0] = north, [1] = east, [2]= south, [3] = west. 0 = only wall, 1 = wall/window, 2 = wall/window/no wall
+    /// </summary>
+    public int[] outerWalls;
+    /// <summary>
+    /// [0] = north, [1] = east, [2]= south, [3] = west. 1 = traversable / no wall, 0 = not traversable / wall
+    /// </summary>
+    public int[] wallArray;
     public float tileWidth;
 
     //for A Star algorithm
@@ -31,20 +38,12 @@ public class Tile : MonoBehaviour {
     //for room
     public bool isRoomTile = false;
     public bool isPortalTile = false;
+    public bool isOuterTile = false;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
         tileID = 0;
     }
-
-    //void Start()
-    //{
-    //    player = GameObject.FindGameObjectWithTag("Player");
-    //    cPosSwitch = Camera.main.gameObject.GetComponent<CamPosSwitcher>();
-
-    //    if (cPosSwitch == null)
-    //        cPosSwitch = player?.GetComponent<CamPosSwitcher>();
-    //}
 
     public void SetRowAndColumn(int row, int column)
     {
@@ -100,25 +99,25 @@ public class Tile : MonoBehaviour {
         {
             direction = 0;
             connect = true;
-            Debug.Log("open north");
+            //turn on again //Debug.Log("open north");
         }
         else if (from.GetRow() == to.GetRow() && from.GetCol() == to.GetCol() - 1) //connect east
         {
             direction = 1;
             connect = true;
-            Debug.Log("open east");
+            //turn on again //Debug.Log("open east");
         }
         else if (from.GetRow() == to.GetRow() - 1 && from.GetCol() == to.GetCol()) //connect south
         {
             direction = 2;
             connect = true;
-            Debug.Log("open south");
+            //turn on again //Debug.Log("open south");
         }
         else if (from.GetRow() == to.GetRow() && from.GetCol() == to.GetCol() + 1) //connect west
         {
             direction = 3;
             connect = true;
-            Debug.Log("open west");
+            //turn on again //Debug.Log("open west");
         }
         else
         {

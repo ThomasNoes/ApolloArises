@@ -29,7 +29,7 @@ public class RoomFinder : MonoBehaviour
     public bool SearchForRoom()
     {
 
-        Debug.Log("DeadEnd at (" +de.GetRow() + "," + de.GetCol() +") in Maze "+ mazeID);
+        //turn on again //Debug.Log("DeadEnd at (" +de.GetRow() + "," + de.GetCol() +") in Maze "+ mazeID);
         AddToClock(de);
         AddToCounter(de);
 
@@ -159,7 +159,7 @@ public class RoomFinder : MonoBehaviour
             if (t.wallArray[i] == 1) // if the path is open
             {
                 if (//leadIn.isAStarTile && // if it is a a star tile
-                    leadIn.GetIsPortalTile()) // and it is not the portal tile
+                    !leadIn.GetIsPortalTile()) // and it is not the portal tile
                 {
                     if (clockWise)
                     {
@@ -176,11 +176,11 @@ public class RoomFinder : MonoBehaviour
             {
                 if (leadIn == de) // we found our way back to the deadend de
                 {
-                    Debug.Log("i found the deadend");
+                    //turn on again //Debug.Log("i found the deadend");
                     if (clockWise)
                     {
                         SetClockwiseIncludeAStar(leadIn);
-                        Debug.Log("clockwise include AStar:" + clockwiseIncludeAStar);
+                        //turn on again //Debug.Log("clockwise include AStar:" + clockwiseIncludeAStar);
                         if (clockwiseIncludeAStar)
                         {
                             roomThisWay = true;
@@ -190,7 +190,7 @@ public class RoomFinder : MonoBehaviour
                     else
                     {
                         SetCounterwiseIncludeAStar(leadIn);
-                        Debug.Log("counterwise include AStar:" + counterwiseIncludeAStar);
+                        //turn on again //Debug.Log("counterwise include AStar:" + counterwiseIncludeAStar);
                         if (counterwiseIncludeAStar)
                         {
                             roomThisWay = true;

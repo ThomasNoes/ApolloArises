@@ -200,6 +200,90 @@ public abstract class MapGenerator : MonoBehaviour
         }
     }
 
+    public List<Tile> FindOuterWalls(TileInfo portal)
+    {
+        List<Tile> outerTiles = new List<Tile>();
+
+        TileInfo startLeadIn = portal.GetLeadInCoord();
+
+        outerTiles.Add(tileArray[portal.row, portal.column]);
+        outerTiles.Add(tileArray[startLeadIn.row, startLeadIn.column]);
+
+        //OuterTileCheck(tileArray[start.row,start.column]);
+        //OuterTileCheck(tileArray[goal.row, goal.column]);
+
+        //foreach (Tile t in tileArray)
+        //{
+        //    if (OuterTileCheck(t))
+        //    {
+        //        outerTiles.Add(t);
+        //    }
+        //}
+
+        return outerTiles;
+    }
+
+    public List<Tile> FindOuterWalls(TileInfo start, TileInfo goal)
+    {
+        List<Tile> outerTiles = new List<Tile>();
+
+        TileInfo startLeadIn = start.GetLeadInCoord();
+        TileInfo goalLeadIn = goal.GetLeadInCoord();
+
+        InfoToTile(start).isOuterTile = true;
+
+        outerTiles.Add(InfoToTile(start));
+        outerTiles.Add(InfoToTile(startLeadIn));
+        outerTiles.Add(InfoToTile(goal));
+        outerTiles.Add(InfoToTile(goalLeadIn));
+
+        OuterTileCheck(tileArray[start.row,start.column]);
+        OuterTileCheck(tileArray[goal.row, goal.column]);
+
+        //foreach (Tile t in tileArray)
+        //{
+        //    if (OuterTileCheck(t))
+        //    {
+        //        outerTiles.Add(t);
+        //    }
+        //}
+
+        return outerTiles;
+    }
+
+    private bool OuterTileCheck(Tile t)
+    {
+        if (t.isOuterTile)
+        {
+            if (t.isPortalTile)
+            {
+                Debug.Log("already set as outerTile which means this is a portal tile so i return false");
+            }
+            else
+            {
+                Debug.Log("already set as outerTile but it is not a portal tile. i return false");
+            }
+            return false;
+        }
+
+        if (t.GetRow() == 0 || t.GetRow() == mazeRows-1 ||
+            t.GetCol() == 0 || t.GetCol() == mazeColumns - 1) // this should mean it is a outer tile
+        {
+            if (t.isPortalTile)
+            {
+                Debug.Log("This is a portal tile");
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public Tile InfoToTile(TileInfo ti)
+    {
+        return tileArray[ti.row, ti.column];
+    }
+
     public abstract void Generate();
     public abstract void Generate(MapInfo[] info, int i);
     public abstract void Generate(TileInfo info, string roomName = "RoomTemplate");
