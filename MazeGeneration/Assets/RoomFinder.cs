@@ -29,7 +29,7 @@ public class RoomFinder : MonoBehaviour
     public bool SearchForRoom()
     {
 
-        //Debug.Log("DeadEnd at (" +de.GetRow() + "," + de.GetCol() +") in Maze "+ mazeID);
+        Debug.Log("DeadEnd at (" +de.GetRow() + "," + de.GetCol() +") in Maze "+ mazeID);
         AddToClock(de);
         AddToCounter(de);
 
@@ -159,7 +159,7 @@ public class RoomFinder : MonoBehaviour
             if (t.wallArray[i] == 1) // if the path is open
             {
                 if (//leadIn.isAStarTile && // if it is a a star tile
-                    leadIn.prevDistance > 0 && leadIn.nextDistance > 0) // and it is not the portal tile
+                    leadIn.GetIsPortalTile()) // and it is not the portal tile
                 {
                     if (clockWise)
                     {
@@ -176,10 +176,11 @@ public class RoomFinder : MonoBehaviour
             {
                 if (leadIn == de) // we found our way back to the deadend de
                 {
-                    //Debug.Log("i found the deadend");
+                    Debug.Log("i found the deadend");
                     if (clockWise)
                     {
                         SetClockwiseIncludeAStar(leadIn);
+                        Debug.Log("clockwise include AStar:" + clockwiseIncludeAStar);
                         if (clockwiseIncludeAStar)
                         {
                             roomThisWay = true;
@@ -189,6 +190,7 @@ public class RoomFinder : MonoBehaviour
                     else
                     {
                         SetCounterwiseIncludeAStar(leadIn);
+                        Debug.Log("counterwise include AStar:" + counterwiseIncludeAStar);
                         if (counterwiseIncludeAStar)
                         {
                             roomThisWay = true;

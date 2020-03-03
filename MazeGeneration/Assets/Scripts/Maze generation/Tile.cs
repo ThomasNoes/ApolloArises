@@ -29,7 +29,8 @@ public class Tile : MonoBehaviour {
     private Tile parent;
 
     //for room
-    public bool isRoomTile=false;
+    public bool isRoomTile = false;
+    public bool isPortalTile = false;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
@@ -221,11 +222,14 @@ public class Tile : MonoBehaviour {
     {
         nextDistance = (length - 1) - index;
         prevDistance = index;
+        isPortalTile = GetIsPortalTile();
     }
     public void SetPortalDistance(Tile t)
     {
         nextDistance = t.nextDistance+1;
         prevDistance = t.prevDistance+1;
+        isPortalTile = GetIsPortalTile();
+
     }
     public void SetAsAstarTile()
     {
@@ -234,6 +238,18 @@ public class Tile : MonoBehaviour {
     public void SetAsMarked()
     {
         isMarked = true;
+    }
+
+    public bool GetIsPortalTile()
+    {
+        if (nextDistance == 0 || prevDistance == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     //private void OnTriggerEnter(Collider col)

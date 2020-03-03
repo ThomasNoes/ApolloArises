@@ -68,8 +68,8 @@ public class MapManager : MonoBehaviour
 
             if (setDimensionsAutomatically)
             {
-                mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
-                mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
+                mazeRows = Mathf.RoundToInt(playAreaSize.x / tileWidth);
+                mazeCols = Mathf.RoundToInt(playAreaSize.z / tileWidth);
             }
         }
 #endif
@@ -125,12 +125,12 @@ public class MapManager : MonoBehaviour
                     if (roomAlreadyInSegment[potentialRooms[i].mazeID] == false)
                     {
                         roomAlreadyInSegment[potentialRooms[i].mazeID] = true;
-                        Debug.Log("first room in maze" + potentialRooms[i].mazeID);
+                        //Debug.Log("first room in maze" + potentialRooms[i].mazeID);
                     }
                     else
                     {
                         potentialRooms.Remove(potentialRooms[i]);
-                        Debug.Log("hey i removed a room");
+                        //Debug.Log("hey i removed a room");
                     }
                 }
             }
@@ -138,7 +138,7 @@ public class MapManager : MonoBehaviour
             {
                 int index = Random.Range(0, potentialRooms.Count-1);
                 potentialRooms.RemoveAt(index);
-                Debug.Log("so there was still too many room so i removed one");
+               // Debug.Log("so there was still too many room so i removed one");
             }
             foreach (Room r in potentialRooms)
             {
@@ -146,6 +146,7 @@ public class MapManager : MonoBehaviour
                 r.CreateRoom();
             }
         }
+
 
 
         //here each maze segment is set and this will start to instantiate the gameobject that make the maze
