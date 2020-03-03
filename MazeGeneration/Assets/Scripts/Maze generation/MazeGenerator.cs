@@ -17,23 +17,26 @@ public class MazeGenerator : MapGenerator
     }
 
     //Generates an integer array with the tileIDs in it. Will be used to find dead ends for portal placement
-    public override void Generate(MapInfo info)
+    public override void Generate(MapInfo[] mapSequence, int i)
     {
-        if (!info.isEndSeeded) // if this is the lazt maze segments (?) Or it is a room
+        if (!mapSequence[i].isEndSeeded) // if this is the lazt maze segments (?) Or it is a room
         {
-            Generate(info.startSeed);
+            Generate(mapSequence[i].startSeed);
         }
         else //if both start and end are seeded
         {
-            Generate(info.startSeed, info.endSeed);
+            Generate(mapSequence[i].startSeed, mapSequence[i].endSeed);
         }
         //all tile ID should be set now. Find optimal route in this maze segment!
-        //AStarPathFinding aStar = new AStarPathFinding();
-        //aStarTiles = aStar.BeginAStar(tileArray,info.startSeed,info.endSeed);
+
+        if (i + 1 < mapSequence.Length)
+            mapSequence[i].endSeed = GetRandomDeadEndHallway(mapSequence[i].startSeed);
 
 
 
-        GenerateIntArray();
+        
+
+        //GenerateIntArray();
     }
 
     public override void Generate(TileInfo startSeed, string roomName = "RoomTemplate")

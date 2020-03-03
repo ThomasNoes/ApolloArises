@@ -246,20 +246,22 @@ public  class AStarPathFinding : MonoBehaviour
     //draw closed tiles
     public void DrawClosedPath()
     {
-        if (gizmoPrefab == null)
-        {
-            SetGizmoPrefab();
-        }
+
         foreach (Tile t in openTiles)
         {
             DrawGizmo(t, Color.red);
         }
     }
 
-    private void DrawGizmo (Tile t, Color color)
+    public void DrawGizmo (Tile t, Color color, float scale = 0.5f)
     {
+        if (gizmoPrefab == null)
+        {
+            SetGizmoPrefab();
+        }
         GameObject gizmo = Instantiate(gizmoPrefab, t.transform);
         gizmo.GetComponent<drawGizmo>().SetColor(color);
+        gizmo.GetComponent<drawGizmo>().SetSize(scale);
         gizmo.name = "Gizmo: R" + t.GetRow() + "C" + t.GetCol();
     }
 

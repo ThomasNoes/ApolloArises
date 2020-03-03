@@ -40,7 +40,7 @@ public abstract class MapGenerator : MonoBehaviour
         if (Input.GetKeyUp("b")) OpenAllDeadEnds();
     }
 
-    protected void GenerateIntArray()
+    public void GenerateIntArray()
     {
         mazeIntArray = new int[mazeRows, mazeColumns]; // will be filled with the ID for each tile in tileArray
         for (int i = 0; i < mazeRows; i++)
@@ -96,10 +96,33 @@ public abstract class MapGenerator : MonoBehaviour
         {
             for (int j = 0; j < mazeColumns; j++)
             {
-                if (mazeIntArray[i, j] == 1 || mazeIntArray[i, j] == 2 || mazeIntArray[i, j] == 4 || mazeIntArray[i, j] == 8)
+                int ID = tileArray[i, j].GetTileID();
+                if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
                 {
-                    deadEndList.Add(new TileInfo(i, j, (int)Mathf.Log(mazeIntArray[i, j], 2)));
+                    deadEndList.Add(new TileInfo(i, j, (int)Mathf.Log(ID, 2)));
                     //Debug.Log("" + i + " " + j);
+                }
+            }
+        }
+        return deadEndList;
+    }
+
+    public List<DeadEnd> GetDeadEndListTile(TileInfo start, TileInfo end, int mazeID)
+    {
+        List<DeadEnd> deadEndList = new List<DeadEnd>();
+        for (int i = 0; i < mazeRows; i++)
+        {
+            for (int j = 0; j < mazeColumns; j++)
+            {
+                int ID = tileArray[i, j].GetTileID();
+                if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
+                {
+                    if (!((i == start.row && j == start.column) || (i == end.row && j == end.column)))
+                    {
+                        deadEndList.Add(new DeadEnd(tileArray[i, j], mazeID));
+                    }
+                    
+
                 }
             }
         }
@@ -178,7 +201,7 @@ public abstract class MapGenerator : MonoBehaviour
     }
 
     public abstract void Generate();
-    public abstract void Generate(MapInfo info);
+    public abstract void Generate(MapInfo[] info, int i);
     public abstract void Generate(TileInfo info, string roomName = "RoomTemplate");
     public abstract void Generate(int startRow, int startCol, int startDir, string roomName = "RoomTemplate");
     public abstract void Generate(int startRow, int startCol, int startDir, int endRow, int endCol, int endDir, string roomName = "RoomTemplate");
