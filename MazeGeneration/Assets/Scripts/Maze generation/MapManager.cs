@@ -252,28 +252,19 @@ public class MapManager : MonoBehaviour
             //Find outer tiles and determine how much their walls can be opened.
             if (i == 0)
             {
-                List<Tile> outerTiles = mapScript.FindOuterWalls(mapSequence[i].endSeed);
-                foreach (Tile t in outerTiles)
-                {
-                    aStar.DrawGizmo(t, Color.yellow, 0.1f);
-                }
+                mapScript.FindOuterWalls(mapSequence[i].endSeed);
+
             }
             else if (i == mapSequence.Length - 1)
             {
-                List<Tile> outerTiles = mapScript.FindOuterWalls(mapSequence[i].startSeed);
-                foreach (Tile t in outerTiles)
-                {
-                    aStar.DrawGizmo(t, Color.yellow, 0.1f);
-                }
+                mapScript.FindOuterWalls(mapSequence[i].startSeed);
+
             }
             else
             {
 
-                List<Tile> outerTiles = mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
-                foreach (Tile t in outerTiles)
-                {
-                    aStar.DrawGizmo(t, Color.yellow, 0.1f);
-                }
+                mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
+
             }
 
 

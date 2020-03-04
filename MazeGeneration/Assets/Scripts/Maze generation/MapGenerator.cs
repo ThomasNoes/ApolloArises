@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class MapGenerator : MonoBehaviour
@@ -200,80 +201,103 @@ public abstract class MapGenerator : MonoBehaviour
         }
     }
 
-    public List<Tile> FindOuterWalls(TileInfo portal)
+    public void FindOuterWalls(TileInfo portal)
     {
+
+        //List<Tile> outerTiles = new List<Tile>();
+        List<Tile> portals = new List<Tile>();
+        List<Tile> leadIns = new List<Tile>();
+        portals.Add(InfoToTile(portal));
+        leadIns.Add(InfoToTile(portal.GetLeadInCoord()));
+
+        FindOuterWalls(portals, leadIns);
+
+        //return outerTiles;
+    }
+
+    public void FindOuterWalls(TileInfo start, TileInfo goal)
+    {
+        //List<Tile> outerTiles = new List<Tile>();
+
+        List<Tile> portals = new List<Tile>();
+        List<Tile> leadIns = new List<Tile>();
+
+        portals.Add(InfoToTile(start));
+        leadIns.Add(InfoToTile(start.GetLeadInCoord()));
+        portals.Add(InfoToTile(goal));
+        leadIns.Add(InfoToTile(goal.GetLeadInCoord()));
+
+        FindOuterWalls(portals, leadIns);
+
+        //return outerTiles;
+    }
+
+    public List<Tile> FindOuterWalls(List<Tile> portals, List<Tile> leadIns)
+    {
+
         List<Tile> outerTiles = new List<Tile>();
 
-        TileInfo startLeadIn = portal.GetLeadInCoord();
+        List<Tile> both = new List<Tile>();
+        both.AddRange(portals);
+        both.AddRange(leadIns);
 
-        outerTiles.Add(tileArray[portal.row, portal.column]);
-        outerTiles.Add(tileArray[startLeadIn.row, startLeadIn.column]);
+        foreach (Tile t in tileArray)
+        {
+            if (OuterTileCheck(t))
+            {
+                if (!LeadinOrPortalTile(t, both))
+                {
+                    SetOuterwalls(t, 2); // make it possible to make outer wall completely open or window
+                }
+            }
+        }
 
-        //OuterTileCheck(tileArray[start.row,start.column]);
-        //OuterTileCheck(tileArray[goal.row, goal.column]);
-
-        //foreach (Tile t in tileArray)
-        //{
-        //    if (OuterTileCheck(t))
-        //    {
-        //        outerTiles.Add(t);
-        //    }
-        //}
+        for (int i = 0; i < leadIns.Count; i++)
+        {
+            if (leadIns[i].isOuterTile)
+            {
+                SetOuterwalls(leadIns[i], 1); //only allow them to be windows
+            }
+        }
 
         return outerTiles;
     }
 
-    public List<Tile> FindOuterWalls(TileInfo start, TileInfo goal)
+    private void SetOuterwalls(Tile t, int maxWallType)
     {
-        List<Tile> outerTiles = new List<Tile>();
+        int[] innerWalls = PortalPositionHelper.GetEntranceArray(t.GetRow(), t.GetCol());
 
-        TileInfo startLeadIn = start.GetLeadInCoord();
-        TileInfo goalLeadIn = goal.GetLeadInCoord();
+        for (int i = 0; i < t.outerWalls.Length; i++)
+        {
+            if (!innerWalls.Contains(i))
+            {
+                t.outerWalls[i] = maxWallType;
+            }
+        }
+    }
 
-        InfoToTile(start).isOuterTile = true;
+    private bool LeadinOrPortalTile(Tile t, List<Tile> both)
+    {
+        foreach (Tile tile in both)
+        {
+            if (t == tile)
+            {
 
-        outerTiles.Add(InfoToTile(start));
-        outerTiles.Add(InfoToTile(startLeadIn));
-        outerTiles.Add(InfoToTile(goal));
-        outerTiles.Add(InfoToTile(goalLeadIn));
-
-        OuterTileCheck(tileArray[start.row,start.column]);
-        OuterTileCheck(tileArray[goal.row, goal.column]);
-
-        //foreach (Tile t in tileArray)
-        //{
-        //    if (OuterTileCheck(t))
-        //    {
-        //        outerTiles.Add(t);
-        //    }
-        //}
-
-        return outerTiles;
+                return true;
+            }
+        }
+        return false;
     }
 
     private bool OuterTileCheck(Tile t)
     {
-        if (t.isOuterTile)
-        {
-            if (t.isPortalTile)
-            {
-                Debug.Log("already set as outerTile which means this is a portal tile so i return false");
-            }
-            else
-            {
-                Debug.Log("already set as outerTile but it is not a portal tile. i return false");
-            }
-            return false;
-        }
 
-        if (t.GetRow() == 0 || t.GetRow() == mazeRows-1 ||
-            t.GetCol() == 0 || t.GetCol() == mazeColumns - 1) // this should mean it is a outer tile
+        if (t.GetRow() == 0 ||
+            t.GetCol() == 0 ||
+            t.GetRow() == mazeRows - 1 ||
+            t.GetCol() == mazeColumns - 1)
         {
-            if (t.isPortalTile)
-            {
-                Debug.Log("This is a portal tile");
-                return false;
-            }
+                                t.isOuterTile = true;
             return true;
         }
         return false;
