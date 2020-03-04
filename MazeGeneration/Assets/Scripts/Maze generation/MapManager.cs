@@ -568,8 +568,11 @@ public class MapManager : MonoBehaviour
     {
         maximumBound = SetMaximumBound(3);
 
-        Instantiate(gizmo, minimumBound, Quaternion.identity);
-        Instantiate(gizmo, maximumBound, Quaternion.identity);
+        if (gizmo != null)
+        {
+            Instantiate(gizmo, minimumBound, Quaternion.identity);
+            Instantiate(gizmo, maximumBound, Quaternion.identity);
+        }
 
         //find the y increase
         float yRatio = (float)index / length;
