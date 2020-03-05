@@ -218,11 +218,15 @@ public class Tile : MonoBehaviour {
     {
         column = c;
     }
-    public void SetPortalDistance(int index, int length)
+    public void SetPortalDistance(int index, int length, bool CheckIfPortalTile = true)
     {
-        nextDistance = (length - 1) - index;
+        nextDistance = (length-1) - index;
         prevDistance = index;
-        isPortalTile = GetIsPortalTile();
+        if (CheckIfPortalTile)
+        {
+            isPortalTile = GetIsPortalTile();
+        }
+
     }
     public void SetPortalDistance(Tile t)
     {

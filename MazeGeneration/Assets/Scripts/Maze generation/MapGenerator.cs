@@ -109,7 +109,37 @@ public abstract class MapGenerator : MonoBehaviour
         return deadEndList;
     }
 
-    public List<DeadEnd> GetDeadEndListTile(TileInfo start, TileInfo end, int mazeID)
+    public TileInfo GetFurthestDeadEnd(TileInfo portal, int mazeID)
+    {
+        int distance = 0;
+        int bigDistance =0;
+        TileInfo FurthestTile = portal; //it needs to be an instance and portal tileinfo is what i have. it should not be the furthest deadend anyway ;)
+
+        for (int i = 0; i < mazeRows; i++)
+        {
+            for (int j = 0; j < mazeColumns; j++)
+            {
+                int ID = tileArray[i, j].GetTileID();
+                if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
+                {
+                    if (!(i == portal.row && j == portal.column))
+                    {
+                        distance = Mathf.Abs(portal.row - tileArray[i, j].GetRow()) + Mathf.Abs(portal.column - tileArray[i, j].GetCol());
+                        if (distance > bigDistance)
+                        {
+                            bigDistance = distance;
+                            FurthestTile = new TileInfo(tileArray[i, j].GetRow(), tileArray[i, j].GetCol(), -1);
+                        }
+                    }
+
+
+                }
+            }
+        }
+        return FurthestTile;
+    }
+
+    public List<DeadEnd> GetDeadEndListTile(TileInfo portal, int mazeID)
     {
         List<DeadEnd> deadEndList = new List<DeadEnd>();
         for (int i = 0; i < mazeRows; i++)
@@ -119,7 +149,29 @@ public abstract class MapGenerator : MonoBehaviour
                 int ID = tileArray[i, j].GetTileID();
                 if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
                 {
-                    if (!((i == start.row && j == start.column) || (i == end.row && j == end.column)))
+                    if (!(i == portal.row && j == portal.column))
+                    {
+                        deadEndList.Add(new DeadEnd(tileArray[i, j], mazeID));
+                    }
+
+
+                }
+            }
+        }
+        return deadEndList;
+    }
+
+        public List<DeadEnd> GetDeadEndListTile(TileInfo start, TileInfo end, int mazeID)
+    {
+        List<DeadEnd> deadEndList = new List<DeadEnd>();
+        for (int i = 0; i < mazeRows; i++)
+        {
+            for (int j = 0; j < mazeColumns; j++)
+            {
+                int ID = tileArray[i, j].GetTileID();
+                if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
+                {
+                    if (!((i == start.row && j == start.column) || !(i == end.row && j == end.column)))
                     {
                         deadEndList.Add(new DeadEnd(tileArray[i, j], mazeID));
                     }

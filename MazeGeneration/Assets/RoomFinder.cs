@@ -5,9 +5,9 @@ using UnityEngine;
 public class RoomFinder : MonoBehaviour
 {
     public Tile de;
-    public int deDirection;
     public int mazeID;
     public Tile[,] tileArray;
+
     List<Tile> clockTiles = new List<Tile>();
     List<Tile> counterTiles = new List<Tile>();
     bool clockwiseIncludeAStar=false;
