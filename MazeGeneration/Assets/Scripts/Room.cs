@@ -63,8 +63,19 @@ public class Room : MonoBehaviour
         {
             t.isRoomTile = true;
         }
+        MarkAsEntryTile();
+
         Tile.ConnectTiles(tiles[0], tiles[3]);
-        //Tile.ConnectTiles(tileArray[tiles[0].GetRow(), tiles[0].GetCol()], tileArray[tiles[3].GetRow(), tiles[3].GetCol()]);
+    }
+
+    public void MarkAsEntryTile()
+    {
+        entranceTile.isRoomEntryTile = true;
+        exitTile.isRoomEntryTile = true;
+    }
+    public void SetRoomPosition()
+    {
+
     }
 
     public void DebugRoom()
