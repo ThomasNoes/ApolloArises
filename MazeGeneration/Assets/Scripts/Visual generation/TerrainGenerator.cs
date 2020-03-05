@@ -83,20 +83,33 @@
                 }
             }
 
-            if (generateTerrain.isRoomPart || generateTerrain.isOuterOpenTile) // Bool checks if tile is part of room, then it change pillar placement accordingly // TODO make work with outer open walls
-            {
-                if (generateTerrain.wallArray[0] == 0 && generateTerrain.wallArray[1] == 0)
-                    PlacePillar(tileTransform, generateTerrain, 1);
-                if (generateTerrain.wallArray[1] == 0 && generateTerrain.wallArray[2] == 0)
-                    PlacePillar(tileTransform, generateTerrain,3);
-                if (generateTerrain.wallArray[2] == 0 && generateTerrain.wallArray[3] == 0)
-                    PlacePillar(tileTransform, generateTerrain, 0);
-                if (generateTerrain.wallArray[3] == 0 && generateTerrain.wallArray[0] == 0)
-                    PlacePillar(tileTransform, generateTerrain, 2);
-            }
+            if (generateTerrain.isRoomPart || generateTerrain.isOuterOpenTile) // Bool checks if tile is part of room, then it change pillar placement accordingly
+                PlaceRoomPillars(tileTransform, generateTerrain);
             else
-            {
                 PlaceAllPillars(tileTransform, generateTerrain);
+        }
+
+        private void PlaceRoomPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain)
+        {
+            if (generateTerrain.wallArray[0] == 0)
+            {
+                PlacePillar(tileTransform, generateTerrain, 1);
+                PlacePillar(tileTransform, generateTerrain, 3);
+            }
+            if (generateTerrain.wallArray[1] == 0)
+            {
+                PlacePillar(tileTransform, generateTerrain, 1);
+                PlacePillar(tileTransform, generateTerrain, 2);
+            }
+            if (generateTerrain.wallArray[2] == 0)
+            {
+                PlacePillar(tileTransform, generateTerrain, 0);
+                PlacePillar(tileTransform, generateTerrain, 2);
+            }
+            if (generateTerrain.wallArray[3] == 0)
+            {
+                PlacePillar(tileTransform, generateTerrain, 0);
+                PlacePillar(tileTransform, generateTerrain, 3);
             }
         }
 
@@ -105,7 +118,7 @@
         /// </summary>
         /// <param name="tileTransform"></param>
         /// <param name="generateTerrain"></param>
-        /// <param name="position">Positions = 0: lower left corner, 1: upper right corner, 2: upper left corner, 3: lower right corner</param>
+        /// <param name="position">Positions = 0: lower left corner, 1: upper right corner, 2: lower right corner, 3: upper left corner</param>
         private void PlacePillar(Transform tileTransform, GenerateTerrainEvent generateTerrain, int position)
         {
             // Instantiate a corner piller and place it

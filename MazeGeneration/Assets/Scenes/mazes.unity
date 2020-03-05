@@ -1171,7 +1171,7 @@ MonoBehaviour:
   usePlayAreaCenter: 1
   setDimensionsAutomatically: 1
   MazePlacement: 0
-  startMazeInOrigin: 0
+  startMazeInOrigin: 1
   createRooms: 1
   idealDistanceBetweenRooms: 7
   playerHead: {fileID: 2526136163395224742}
@@ -1453,7 +1453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a39898678e32cc41a88b3293ebf7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enable: 1
+  enable: 0
   bufferAmount: 3
 --- !u!1 &1629571677
 GameObject:
@@ -1748,7 +1748,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739749, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.31
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739749, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -1758,7 +1758,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739749, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739749, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
