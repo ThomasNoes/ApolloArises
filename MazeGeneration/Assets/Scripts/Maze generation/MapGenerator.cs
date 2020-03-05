@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class MapGenerator : MonoBehaviour
@@ -40,7 +41,7 @@ public abstract class MapGenerator : MonoBehaviour
         if (Input.GetKeyUp("b")) OpenAllDeadEnds();
     }
 
-    protected void GenerateIntArray()
+    public void GenerateIntArray()
     {
         mazeIntArray = new int[mazeRows, mazeColumns]; // will be filled with the ID for each tile in tileArray
         for (int i = 0; i < mazeRows; i++)
@@ -96,10 +97,33 @@ public abstract class MapGenerator : MonoBehaviour
         {
             for (int j = 0; j < mazeColumns; j++)
             {
-                if (mazeIntArray[i, j] == 1 || mazeIntArray[i, j] == 2 || mazeIntArray[i, j] == 4 || mazeIntArray[i, j] == 8)
+                int ID = tileArray[i, j].GetTileID();
+                if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
                 {
-                    deadEndList.Add(new TileInfo(i, j, (int)Mathf.Log(mazeIntArray[i, j], 2)));
+                    deadEndList.Add(new TileInfo(i, j, (int)Mathf.Log(ID, 2)));
                     //Debug.Log("" + i + " " + j);
+                }
+            }
+        }
+        return deadEndList;
+    }
+
+    public List<DeadEnd> GetDeadEndListTile(TileInfo start, TileInfo end, int mazeID)
+    {
+        List<DeadEnd> deadEndList = new List<DeadEnd>();
+        for (int i = 0; i < mazeRows; i++)
+        {
+            for (int j = 0; j < mazeColumns; j++)
+            {
+                int ID = tileArray[i, j].GetTileID();
+                if (ID == 1 || ID == 2 || ID == 4 || ID == 8) // if it is a dead end
+                {
+                    if (!((i == start.row && j == start.column) || (i == end.row && j == end.column)))
+                    {
+                        deadEndList.Add(new DeadEnd(tileArray[i, j], mazeID));
+                    }
+                    
+
                 }
             }
         }
@@ -177,8 +201,115 @@ public abstract class MapGenerator : MonoBehaviour
         }
     }
 
+    public void FindOuterWalls(TileInfo portal)
+    {
+
+        //List<Tile> outerTiles = new List<Tile>();
+        List<Tile> portals = new List<Tile>();
+        List<Tile> leadIns = new List<Tile>();
+        portals.Add(InfoToTile(portal));
+        leadIns.Add(InfoToTile(portal.GetLeadInCoord()));
+
+        FindOuterWalls(portals, leadIns);
+
+        //return outerTiles;
+    }
+
+    public void FindOuterWalls(TileInfo start, TileInfo goal)
+    {
+        //List<Tile> outerTiles = new List<Tile>();
+
+        List<Tile> portals = new List<Tile>();
+        List<Tile> leadIns = new List<Tile>();
+
+        portals.Add(InfoToTile(start));
+        leadIns.Add(InfoToTile(start.GetLeadInCoord()));
+        portals.Add(InfoToTile(goal));
+        leadIns.Add(InfoToTile(goal.GetLeadInCoord()));
+
+        FindOuterWalls(portals, leadIns);
+
+        //return outerTiles;
+    }
+
+    public List<Tile> FindOuterWalls(List<Tile> portals, List<Tile> leadIns)
+    {
+
+        List<Tile> outerTiles = new List<Tile>();
+
+        List<Tile> both = new List<Tile>();
+        both.AddRange(portals);
+        both.AddRange(leadIns);
+
+        foreach (Tile t in tileArray)
+        {
+            if (OuterTileCheck(t))
+            {
+                if (!LeadinOrPortalTile(t, both))
+                {
+                    SetOuterwalls(t, 2); // make it possible to make outer wall completely open or window
+                }
+            }
+        }
+
+        for (int i = 0; i < leadIns.Count; i++)
+        {
+            if (leadIns[i].isOuterTile)
+            {
+                SetOuterwalls(leadIns[i], 1); //only allow them to be windows
+            }
+        }
+
+        return outerTiles;
+    }
+
+    private void SetOuterwalls(Tile t, int maxWallType)
+    {
+        int[] innerWalls = PortalPositionHelper.GetEntranceArray(t.GetRow(), t.GetCol());
+
+        for (int i = 0; i < t.outerWalls.Length; i++)
+        {
+            if (!innerWalls.Contains(i))
+            {
+                t.outerWalls[i] = maxWallType;
+            }
+        }
+    }
+
+    private bool LeadinOrPortalTile(Tile t, List<Tile> both)
+    {
+        foreach (Tile tile in both)
+        {
+            if (t == tile)
+            {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool OuterTileCheck(Tile t)
+    {
+
+        if (t.GetRow() == 0 ||
+            t.GetCol() == 0 ||
+            t.GetRow() == mazeRows - 1 ||
+            t.GetCol() == mazeColumns - 1)
+        {
+                                t.isOuterTile = true;
+            return true;
+        }
+        return false;
+    }
+
+    public Tile InfoToTile(TileInfo ti)
+    {
+        return tileArray[ti.row, ti.column];
+    }
+
     public abstract void Generate();
-    public abstract void Generate(MapInfo info);
+    public abstract void Generate(MapInfo[] info, int i);
     public abstract void Generate(TileInfo info, string roomName = "RoomTemplate");
     public abstract void Generate(int startRow, int startCol, int startDir, string roomName = "RoomTemplate");
     public abstract void Generate(int startRow, int startCol, int startDir, int endRow, int endCol, int endDir, string roomName = "RoomTemplate");
