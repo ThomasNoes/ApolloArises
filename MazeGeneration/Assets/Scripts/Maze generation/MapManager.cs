@@ -238,12 +238,18 @@ public class MapManager : MonoBehaviour
             if (i == 0)
             {
                 Debug.Log("first maze");
+                TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].endSeed, i);
+
+                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed);
+                minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
                 //we need a start position
             }
             else if (i == mapSequence.Length - 1)
             {
-                Debug.Log("last maze");
-                //we need a end destination
+                TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].startSeed, i);
+
+                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile);
+                minimumMazeRoute += mapScript.aStarTiles.Count; // no - 1 because the end tile does not overlap
             }
             else
             {
