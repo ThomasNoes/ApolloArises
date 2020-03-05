@@ -68,8 +68,8 @@ public class MapManager : MonoBehaviour
 
             if (setDimensionsAutomatically)
             {
-                mazeRows = Mathf.RoundToInt(playAreaSize.x / tileWidth);
-                mazeCols = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+                mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+                mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
             }
         }
 #endif
@@ -237,10 +237,9 @@ public class MapManager : MonoBehaviour
             AStarPathFinding aStar = new AStarPathFinding();
             if (i == 0)
             {
-                Debug.Log("first maze");
                 TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].endSeed, i);
 
-                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed);
+                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed,false, true);
                 minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
                 //we need a start position
             }
@@ -248,7 +247,7 @@ public class MapManager : MonoBehaviour
             {
                 TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].startSeed, i);
 
-                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile);
+                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile, true, false);
                 minimumMazeRoute += mapScript.aStarTiles.Count; // no - 1 because the end tile does not overlap
             }
             else
@@ -280,21 +279,33 @@ public class MapManager : MonoBehaviour
             if (createRooms) //only search if we want to create rooms
             {
                 List<DeadEnd> deadends = mapScript.GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
-
                 foreach (DeadEnd de in deadends)
                 {
                     RoomFinder rf = new RoomFinder(de, mapScript.tileArray);
                     if(rf.SearchForRoom())
                     {
+                        Debug.Log("found room in maze ID " +i);
                         Room room = new Room(rf);
+                        for (int j = 0; j < room.tiles.Count; j++)
+                        {
+                            switch (j)
+                            {
+                                case 0:
+                                    aStar.DrawGizmo(room.tiles[j], Color.black, 0.1f);
+                                    break;
+                                case 3:
+                                    aStar.DrawGizmo(room.tiles[j], Color.magenta, 0.1f);
+                                    break;
+                                default:
+                                    aStar.DrawGizmo(room.tiles[j], Color.grey, 0.1f);
+                                    break;
+                            }
+                        }
                         potentialRooms.Add(room);
                     }
                     //Debug.Log("------------new deadend---------- ");
-
-                    //foreach (Tile t in rf.debugTiles)
-                    //{
-                    //    aStar.DrawGizmo(t, Color.magenta, 0.25f);
-                    //}
+                    //Debug.Log("debugtiles: " + rf.debugTiles.Count);
+                    
                 }
             }
 

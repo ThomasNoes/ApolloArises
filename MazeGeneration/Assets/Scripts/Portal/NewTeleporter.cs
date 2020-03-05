@@ -20,8 +20,8 @@ public class NewTeleporter : MonoBehaviour
 
     private LayerMask layerMask;
 
-    Vector3 nextOffset;
-    Vector3 prevOffset;
+    private bool cooldownActive;
+    private Vector3 nextOffset, prevOffset;
 
     void Start()
     {
@@ -44,7 +44,10 @@ public class NewTeleporter : MonoBehaviour
 
     public void Teleport(Collider col)
     {
-        //Debug.Log("Player teleported!");
+        if (cooldownActive)
+            return;
+
+        StartCooldown(0.15f);
 
         if (isForwardTeleporter)
         {
@@ -95,4 +98,11 @@ public class NewTeleporter : MonoBehaviour
         else
             return prController;
     }
+
+    private void StartCooldown(float time)
+    {
+        cooldownActive = true;
+        Invoke("Cooldown", time);
+    }
+    private void Cooldown() { cooldownActive = false; }
 }

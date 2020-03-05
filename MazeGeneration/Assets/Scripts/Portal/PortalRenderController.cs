@@ -288,7 +288,7 @@ public class PortalRenderController : MonoBehaviour
     {
         currentMaze = mazeID;
         //SetProjectionQuads(true);
-        
+        Debug.Log("Teleported player to: " + currentMaze);
     }
 
     int TrueModulus(int k, int n)

@@ -5,9 +5,9 @@ using UnityEngine;
 public class RoomFinder : MonoBehaviour
 {
     public Tile de;
-    public int deDirection;
     public int mazeID;
     public Tile[,] tileArray;
+
     List<Tile> clockTiles = new List<Tile>();
     List<Tile> counterTiles = new List<Tile>();
     bool clockwiseIncludeAStar=false;
@@ -28,6 +28,11 @@ public class RoomFinder : MonoBehaviour
 
     public bool SearchForRoom()
     {
+        if (de.isPortalTile)
+        {
+            Debug.Log("searching from a portal tile dead end");
+            return false;
+        }
 
         //turn on again //Debug.Log("DeadEnd at (" +de.GetRow() + "," + de.GetCol() +") in Maze "+ mazeID);
         AddToClock(de);
@@ -100,6 +105,7 @@ public class RoomFinder : MonoBehaviour
         if (clockwiseIncludeAStar == false)
         {
             clockwiseIncludeAStar = t.isAStarTile;
+            //Debug.Log("clockwiseAStar: " + clockwiseIncludeAStar);
         }
     }
     public void SetCounterwiseIncludeAStar(Tile t)
@@ -107,6 +113,7 @@ public class RoomFinder : MonoBehaviour
         if (counterwiseIncludeAStar == false)
         {
             counterwiseIncludeAStar = t.isAStarTile;
+            //Debug.Log("counterwiseAStar: "+ counterwiseIncludeAStar);
         }
     }
 
