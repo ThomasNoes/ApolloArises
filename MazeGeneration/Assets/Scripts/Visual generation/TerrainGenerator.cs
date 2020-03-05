@@ -59,22 +59,26 @@
                             // Set the scaling to be the preset height chosen in the inspector
                             // Set the object as a child of the current tile
                             tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x - (generateTerrain.tileWidth / 2f), 
-                                tileTransform.position.y, tileTransform.position.z + (generateTerrain.tileWidth / 2f) - wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
+                                tileTransform.position.y,
+                                tileTransform.position.z + (generateTerrain.tileWidth / 2f) - wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
                             TileTransform(tileTransform, tempWall);
                             break;
                         case 1:
                             tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x + (generateTerrain.tileWidth / 2f) 
-                                - wallOffset, tileTransform.position.y, tileTransform.position.z + (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
+                                - wallOffset, tileTransform.position.y,
+                                tileTransform.position.z + (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
                             TileTransform(tileTransform, tempWall);
                             break;
                         case 2:
                             tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x + (generateTerrain.tileWidth / 2f), 
-                                tileTransform.position.y, tileTransform.position.z - (generateTerrain.tileWidth / 2f) + wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
+                                tileTransform.position.y, 
+                                tileTransform.position.z - (generateTerrain.tileWidth / 2f) + wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
                             TileTransform(tileTransform, tempWall);
                             break;
                         case 3:
                             tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x - (generateTerrain.tileWidth / 2f) + wallOffset, 
-                                tileTransform.position.y, tileTransform.position.z - (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
+                                tileTransform.position.y, 
+                                tileTransform.position.z - (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
                             TileTransform(tileTransform, tempWall);
                             break;
                         default:
