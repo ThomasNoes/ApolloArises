@@ -43,7 +43,7 @@
                 {
                     if (generateTerrain.wallArray[i] == 1)
                     {
-                        generateTerrain.wallArray[i / 2 % 4] = 1;
+                        generateTerrain.wallArray[(i + 2) % 4] = 1;
                         break;
                     }
                 }
