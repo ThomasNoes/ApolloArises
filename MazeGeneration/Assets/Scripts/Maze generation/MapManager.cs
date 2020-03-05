@@ -237,10 +237,12 @@ public class MapManager : MonoBehaviour
             AStarPathFinding aStar = new AStarPathFinding();
             if (i == 0)
             {
+                Debug.Log("first maze");
                 //we need a start position
             }
             else if (i == mapSequence.Length - 1)
             {
+                Debug.Log("last maze");
                 //we need a end destination
             }
             else
