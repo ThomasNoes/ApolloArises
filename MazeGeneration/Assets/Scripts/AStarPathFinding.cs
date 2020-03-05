@@ -11,17 +11,22 @@ public  class AStarPathFinding : MonoBehaviour
     Tile[,] tileArray;
     Tile start;
     Tile goal;
+    bool startIsPortal;
+    bool goalIsPortal;
     
     List<Tile> openTiles = new List<Tile>();
     List<Tile> closedTiles = new List<Tile>();
     List<Tile> aStarTiles = new List<Tile>();
 
     //pathFinding
-    public List<Tile> BeginAStar(Tile[,] tileArray, TileInfo startInfo, TileInfo goalInfo)
+    public List<Tile> BeginAStar(Tile[,] tileArray, TileInfo startInfo, TileInfo goalInfo, bool startIsPortal = true, bool goalIsPortal = true)
     {
         this.tileArray = tileArray;
         start = tileArray[startInfo.row, startInfo.column];
         goal = tileArray[goalInfo.row, goalInfo.column];
+
+        this.startIsPortal = startIsPortal;
+        this.goalIsPortal = goalIsPortal;
 
         SetHCosts(tileArray); // the distance each tile has to the goal should not change. so here i set them all. 
 
@@ -128,7 +133,15 @@ public  class AStarPathFinding : MonoBehaviour
     {
         for (int i = 0; i < tiles.Count; i++)
         {
-            tiles[i].SetPortalDistance(i, tiles.Count);
+            if ((i == 0 && !startIsPortal) || (i == tiles.Count-1 && !goalIsPortal))
+            {
+                tiles[i].SetPortalDistance(i, tiles.Count, false);
+            }
+            else
+            {
+                tiles[i].SetPortalDistance(i, tiles.Count);
+            }
+
             tiles[i].SetAsAstarTile();
         }
     }

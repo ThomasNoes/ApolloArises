@@ -237,22 +237,24 @@ public class MapManager : MonoBehaviour
             AStarPathFinding aStar = new AStarPathFinding();
             if (i == 0)
             {
-                Debug.Log("first maze");
+                Debug.Log("first pathfinding in maze " + i);
                 TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].endSeed, i);
 
-                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed);
+                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed,false, true);
                 minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
                 //we need a start position
             }
             else if (i == mapSequence.Length - 1)
             {
+                Debug.Log("last pathfinding in maze " + i);
                 TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].startSeed, i);
 
-                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile);
+                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile, true, false);
                 minimumMazeRoute += mapScript.aStarTiles.Count; // no - 1 because the end tile does not overlap
             }
             else
             {
+                Debug.Log("pathfinding in maze " + i);
                 mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
                 minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
             }
@@ -279,6 +281,7 @@ public class MapManager : MonoBehaviour
             //Find rooms
             if (createRooms) //only search if we want to create rooms
             {
+                //Debug.Log("finding rooms in maze ID " +i);
                 List<DeadEnd> deadends = mapScript.GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
 
                 foreach (DeadEnd de in deadends)
