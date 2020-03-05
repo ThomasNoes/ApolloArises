@@ -23,8 +23,7 @@ public class PortalGroundCollider : MonoBehaviour
     {
         if (col.tag == "PlayerCollider")
         {
-            Debug.Log("Player on tile");
-            StartCooldown(0.2f);
+            //Debug.Log("Player on tile");
             isInCollider = true;
         }
     }
@@ -33,7 +32,7 @@ public class PortalGroundCollider : MonoBehaviour
     {
         if (col.tag == "PlayerCollider")
         {
-            Debug.Log("Player off tile");
+            //Debug.Log("Player off tile");
             isInCollider = false;
         }
     }

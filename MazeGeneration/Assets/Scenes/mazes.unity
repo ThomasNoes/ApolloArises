@@ -233,6 +233,9 @@ MonoBehaviour:
   nextPortalCameraRightEye: {fileID: 995948998}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
+  newPortalPrefab: {fileID: 1747615143729970028, guid: d86d468a0662e0640af510c4d77ba070,
+    type: 3}
+  useNewPortals: 1
   isStereoscopic: 1
   sequenceLength: 0
   portalCount: 0
@@ -1740,6 +1743,11 @@ PrefabInstance:
       propertyPath: m_Drag
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1760635689096438934, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739749, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1848,7 +1856,12 @@ PrefabInstance:
     - target: {fileID: 1776048526178739775, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776048526464005714, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.849
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -1865,10 +1878,10 @@ PrefabInstance:
       propertyPath: m_ClearFlags
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5162969301141097211, guid: dc399f754a05a8c4798ce883a14677f8,
+    - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
-      propertyPath: m_Radius
-      value: 0.1
+      propertyPath: far clip plane
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc399f754a05a8c4798ce883a14677f8, type: 3}
@@ -1956,7 +1969,7 @@ PrefabInstance:
     - target: {fileID: 5369379566299229987, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5369379566299525901, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
@@ -2516,12 +2529,34 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 2526136163395224739}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2526136163395224741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2526136162183032862, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+    type: 3}
+  m_PrefabInstance: {fileID: 2526136163395224739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2526136163395224742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5369379566299525895, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
     type: 3}
   m_PrefabInstance: {fileID: 2526136163395224739}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &2526136163395224743
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526136163395224741}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!4 &7605872993242702298 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5369379566299587961, guid: 17cd1bd3e751a9f4bac0efc75a21f452,

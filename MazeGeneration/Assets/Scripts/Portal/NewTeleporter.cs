@@ -44,7 +44,7 @@ public class NewTeleporter : MonoBehaviour
 
     public void Teleport(Collider col)
     {
-        Debug.Log("Player teleported!");
+        //Debug.Log("Player teleported!");
 
         if (isForwardTeleporter)
         {

@@ -132,7 +132,7 @@ public class PortalRenderController : MonoBehaviour
         BoxCollider gbc = tempScript.groundCollider;
 
         tempPortal.transform.Rotate(0f, (180 * (1 - j)) + 90f * currentPortal.direction, 0f);
-        tempPortal.transform.Translate(0, 0, portalWidth / 2f - pillarOffset, Space.Self);
+        tempPortal.transform.Translate(0, 0, portalWidth / 2f /*- pillarOffset*/, Space.Self); // TODO removed pillar offset
 
         tempScript.projectionQuad.Translate(isForward ? nextOffset : prevOffset, Space.World);
 

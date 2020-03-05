@@ -23,7 +23,6 @@ public class PortalCollider : MonoBehaviour
         if (col.tag != "PlayerCollider") return;
 
         onPortalTile = false;
-        Debug.Log("Player collision with render plane!");
         teleporter.Teleport(col);
     }
 

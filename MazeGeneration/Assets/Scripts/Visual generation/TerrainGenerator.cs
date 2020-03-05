@@ -37,6 +37,18 @@
                 tempCeiling.transform.localScale = new Vector3(1, 1, 1);
             }
 
+            if (generateTerrain.isPortalTile)
+            {
+                for (int i = 0; i < generateTerrain.wallArray.Length; i++)
+                {
+                    if (generateTerrain.wallArray[i] == 1)
+                    {
+                        generateTerrain.wallArray[i / 2 % 4] = 1;
+                        break;
+                    }
+                }
+            }
+
             // Read through wallArray to see how many walls should be placed and where
             // Each case corresponds to a side on the current tile
             for (int i = 0; i < generateTerrain.wallArray.Length; i++) {
