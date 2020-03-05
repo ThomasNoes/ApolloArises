@@ -237,7 +237,6 @@ public class MapManager : MonoBehaviour
             AStarPathFinding aStar = new AStarPathFinding();
             if (i == 0)
             {
-                Debug.Log("first pathfinding in maze " + i);
                 TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].endSeed, i);
 
                 mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed,false, true);
@@ -246,7 +245,6 @@ public class MapManager : MonoBehaviour
             }
             else if (i == mapSequence.Length - 1)
             {
-                Debug.Log("last pathfinding in maze " + i);
                 TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].startSeed, i);
 
                 mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile, true, false);
@@ -254,7 +252,6 @@ public class MapManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("pathfinding in maze " + i);
                 mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
                 minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
             }
@@ -281,23 +278,34 @@ public class MapManager : MonoBehaviour
             //Find rooms
             if (createRooms) //only search if we want to create rooms
             {
-                //Debug.Log("finding rooms in maze ID " +i);
                 List<DeadEnd> deadends = mapScript.GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
-
                 foreach (DeadEnd de in deadends)
                 {
                     RoomFinder rf = new RoomFinder(de, mapScript.tileArray);
                     if(rf.SearchForRoom())
                     {
+                        Debug.Log("found room in maze ID " +i);
                         Room room = new Room(rf);
+                        for (int j = 0; j < room.tiles.Count; j++)
+                        {
+                            switch (j)
+                            {
+                                case 0:
+                                    aStar.DrawGizmo(room.tiles[j], Color.black, 0.1f);
+                                    break;
+                                case 3:
+                                    aStar.DrawGizmo(room.tiles[j], Color.magenta, 0.1f);
+                                    break;
+                                default:
+                                    aStar.DrawGizmo(room.tiles[j], Color.grey, 0.1f);
+                                    break;
+                            }
+                        }
                         potentialRooms.Add(room);
                     }
                     //Debug.Log("------------new deadend---------- ");
-
-                    //foreach (Tile t in rf.debugTiles)
-                    //{
-                    //    aStar.DrawGizmo(t, Color.magenta, 0.25f);
-                    //}
+                    //Debug.Log("debugtiles: " + rf.debugTiles.Count);
+                    
                 }
             }
 

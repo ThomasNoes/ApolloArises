@@ -10,7 +10,6 @@ public class Tile : MonoBehaviour {
 
     [Header("A Star information")]
     //A star information
-    public bool isAStarTile = false;
     public bool isMarked = false;
     public int nextDistance;
     public int prevDistance;
@@ -35,10 +34,15 @@ public class Tile : MonoBehaviour {
     private int hCost = 0;
     private Tile parent;
 
-    //for room
-    public bool isRoomTile = false;
+    //for room position
+    public string RoomPosition = "Corridor";
+    public bool isRoomEntryTile =false;
+
+    //tile type
+    public bool isAStarTile = false;
     public bool isPortalTile = false;
     public bool isOuterTile = false;
+    public bool isRoomTile = false;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
