@@ -37,6 +37,18 @@
                 tempCeiling.transform.localScale = new Vector3(1, 1, 1);
             }
 
+            if (generateTerrain.isPortalTile)
+            {
+                for (int i = 0; i < generateTerrain.wallArray.Length; i++)
+                {
+                    if (generateTerrain.wallArray[i] == 1)
+                    {
+                        generateTerrain.wallArray[(i + 2) % 4] = 1;
+                        break;
+                    }
+                }
+            }
+
             // Read through wallArray to see how many walls should be placed and where
             // Each case corresponds to a side on the current tile
             for (int i = 0; i < generateTerrain.wallArray.Length; i++) {
@@ -73,13 +85,13 @@
 
             if (generateTerrain.isRoomPart || generateTerrain.isOuterOpenTile) // Bool checks if tile is part of room, then it change pillar placement accordingly // TODO make work with outer open walls
             {
-                if (generateTerrain.wallArray[0] == 1 && generateTerrain.wallArray[1] == 1)
+                if (generateTerrain.wallArray[0] == 0 && generateTerrain.wallArray[1] == 0)
                     PlacePillar(tileTransform, generateTerrain, 1);
-                if (generateTerrain.wallArray[1] == 1 && generateTerrain.wallArray[2] == 1)
+                if (generateTerrain.wallArray[1] == 0 && generateTerrain.wallArray[2] == 0)
                     PlacePillar(tileTransform, generateTerrain,3);
-                if (generateTerrain.wallArray[2] == 1 && generateTerrain.wallArray[3] == 1)
+                if (generateTerrain.wallArray[2] == 0 && generateTerrain.wallArray[3] == 0)
                     PlacePillar(tileTransform, generateTerrain, 0);
-                if (generateTerrain.wallArray[3] == 1 && generateTerrain.wallArray[0] == 1)
+                if (generateTerrain.wallArray[3] == 0 && generateTerrain.wallArray[0] == 0)
                     PlacePillar(tileTransform, generateTerrain, 2);
             }
             else

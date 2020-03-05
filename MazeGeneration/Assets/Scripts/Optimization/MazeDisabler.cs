@@ -75,6 +75,9 @@ public class MazeDisabler : MonoBehaviour
 
     public void UpdateDisabled()
     {
+        if (!enable)
+            return;
+
         currentMaze = pRController.currentMaze;
         SetMaze(currentMaze, true);
 

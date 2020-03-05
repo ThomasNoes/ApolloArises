@@ -233,6 +233,9 @@ MonoBehaviour:
   nextPortalCameraRightEye: {fileID: 995948998}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
+  newPortalPrefab: {fileID: 1747615143729970028, guid: d86d468a0662e0640af510c4d77ba070,
+    type: 3}
+  useNewPortals: 1
   isStereoscopic: 1
   sequenceLength: 0
   portalCount: 0
@@ -1450,7 +1453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a39898678e32cc41a88b3293ebf7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enable: 0
+  enable: 1
   bufferAmount: 3
 --- !u!1 &1629571677
 GameObject:
@@ -1866,11 +1869,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ClearFlags
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5162969301141097211, guid: dc399f754a05a8c4798ce883a14677f8,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc399f754a05a8c4798ce883a14677f8, type: 3}

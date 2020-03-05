@@ -104,8 +104,11 @@ namespace Assets.Scripts.Camera
         #region AngleCheck
         private void AngleCheck()
         {
-            if (Vector3.Angle(gameObject.transform.forward, currentNextPortal.transform.position) <
-                Vector3.Angle(gameObject.transform.forward, currentPrevPortal.transform.position))
+            Vector3 dirNext = currentNextPortal.transform.position - transform.position;
+            Vector3 dirPrev = currentPrevPortal.transform.position - transform.position;
+
+            if (Vector3.Angle(transform.forward, dirNext) <
+                Vector3.Angle(transform.forward, dirPrev))
             {
                 nextScore -= 1;
             }
