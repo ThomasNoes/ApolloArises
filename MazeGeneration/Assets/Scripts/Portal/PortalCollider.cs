@@ -26,16 +26,6 @@ public class PortalCollider : MonoBehaviour
         teleporter.Teleport(col);
     }
 
-    //private void LateUpdate()
-    //{
-    //    if (!onPortalTile) return;
-    //    if (!VisibleFromCamera(planeRenderer, Camera.main)) return;
-
-    //    onPortalTile = false;
-    //    if (playerCollider != null)
-    //        teleporter.Teleport(playerCollider);
-    //}
-
     public void Teleport()
     {
         if (playerCollider != null)
