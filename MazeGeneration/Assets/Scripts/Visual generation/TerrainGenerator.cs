@@ -105,76 +105,61 @@
                                 tempWallScript.SetMesh(generateTerrain.outerWalls[i]);
                             }
                         }
-
                         TileTransform(tileTransform, tempWall);
-            // Read through wallArray to see how many walls should be placed and where
-            // Each case corresponds to a side on the current tile
-            for (int i = 0; i < generateTerrain.wallArray.Length; i++) {
-                if (generateTerrain.wallArray[i] == 0) {
-
-                    Vector3 localPos = new Vector3(0, heightScale/2, 0);
-                    Vector3 localScale = new Vector3(0.99f, heightScale, wallWidth);
-                    tempWall = Instantiate(wallSegment,tileTransform.position, Quaternion.AngleAxis (i*90, Vector3.up),tileTransform); // instantiate at the position of the tile
-                    tempWall.transform.localPosition = localPos;
-                    tempWall.transform.localScale = localScale;
-                    tempWall.name = "wall index " + i;
-                    switch (i)
-                    {
-                        case 0:
-                            tempWall.transform.Translate((tempWall.transform.forward * tileScale / 2) - (tempWall.transform.forward * wallWidth / 2 * tileScale)*1.05f);
-                            //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, 0.469f);
-                            break;
-                        case 1:
-                            tempWall.transform.Translate((-tempWall.transform.right * tileScale / 2) + (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
-                            //tempWall.transform.localPosition = new Vector3(0.469f, tempWall.transform.localPosition.y, 0);
-                            break;
-                        case 2:
-                            tempWall.transform.Translate((-tempWall.transform.forward * tileScale / 2) + (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.05f);
-                            //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, -0.469f);
-                            break;
-                        case 3:
-                            tempWall.transform.Translate((tempWall.transform.right * tileScale / 2) - (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
-                            //tempWall.transform.localPosition = new Vector3(-0.469f, tempWall.transform.localPosition.y, 0);
-                            break;
-                        default:
-                            break;
                     }
+                }
+            }
+            else
+            {
+                // Read through wallArray to see how many walls should be placed and where
+                // Each case corresponds to a side on the current tile
+                for (int i = 0; i < generateTerrain.wallArray.Length; i++)
+                {
+                    if (generateTerrain.wallArray[i] == 0)
+                    {
 
-                    //TileTransform(tileTransform, tempWall);
-                    
-                    //switch (i) {
-                    //    case 0:
-                    //        // Instatiate a wall segment and place it
-                    //        // Set the scaling to be the preset height chosen in the inspector
-                    //        // Set the object as a child of the current tile
-                    //        tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x - (generateTerrain.tileWidth / 2f), 
-                    //            tileTransform.position.y,
-                    //            tileTransform.position.z + (generateTerrain.tileWidth / 2f) - wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
-                    //        TileTransform(tileTransform, tempWall);
-                    //        break;
-                    //    case 1:
-                    //        tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x + (generateTerrain.tileWidth / 2f) 
-                    //            - wallOffset, tileTransform.position.y,
-                    //            tileTransform.position.z + (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
-                    //        TileTransform(tileTransform, tempWall);
-                    //        break;
-                    //    case 2:
-                    //        tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x + (generateTerrain.tileWidth / 2f), 
-                    //            tileTransform.position.y, 
-                    //            tileTransform.position.z - (generateTerrain.tileWidth / 2f) + wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
-                    //        TileTransform(tileTransform, tempWall);
-                    //        break;
-                    //    case 3:
-                    //        tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x - (generateTerrain.tileWidth / 2f) + wallOffset, 
-                    //            tileTransform.position.y, 
-                    //            tileTransform.position.z - (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
-                    //        TileTransform(tileTransform, tempWall);
-                    //        break;
-                    //    default:
-                    //        break;
-                    //}
+                        Vector3 localPos = new Vector3(0, heightScale / 2, 0);
+                        Vector3 localScale = new Vector3(0.99f, heightScale, wallWidth);
+                        tempWall = Instantiate(wallSegment, tileTransform.position, Quaternion.AngleAxis(i * 90, Vector3.up), tileTransform); // instantiate at the position of the tile
+                        tempWall.transform.localPosition = localPos;
+                        tempWall.transform.localScale = localScale;
+                        tempWall.name = "wall index " + i;
+                        switch (i)
+                        {
+                            case 0:
+                                tempWall.transform.Translate((tempWall.transform.forward * tileScale / 2) - (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, 0.469f);
+                                break;
+                            case 1:
+                                tempWall.transform.Translate((-tempWall.transform.right * tileScale / 2) + (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(0.469f, tempWall.transform.localPosition.y, 0);
+                                break;
+                            case 2:
+                                tempWall.transform.Translate((-tempWall.transform.forward * tileScale / 2) + (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, -0.469f);
+                                break;
+                            case 3:
+                                tempWall.transform.Translate((tempWall.transform.right * tileScale / 2) - (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(-0.469f, tempWall.transform.localPosition.y, 0);
+                                break;
+                            default:
+                                break;
+
+
+                        }
+
+                        Wall tempWallScript = tempWall.GetComponent<Wall>(); // NOTE: Might not be optimized(?)
+                        if (tempWallScript != null)
+                        {
+                            if (tempWallScript.meshes != null && generateTerrain.outerWalls != null)
+                            {
+                                tempWallScript.SetMesh(generateTerrain.outerWalls[i]);
+                            }
+                        }
+                    }
+                }
             }
-            }
+
 
             if (generateTerrain.isRoomPart || generateTerrain.isOuterOpenTile) // Bool checks if tile is part of room, then it change pillar placement accordingly
                 PlaceRoomPillars(tileTransform, generateTerrain);
