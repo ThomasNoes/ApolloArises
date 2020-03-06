@@ -14,6 +14,10 @@ public class TextureCustomizer : MonoBehaviour
     public bool autoSwitchTextures;
     [HideInInspector] public int frequency = 10, matIndex = 0;
 
+    //public GameObject testPrefab;
+    //public Material[] testMaterials;
+    //private bool testBool = false;
+
     public void UpdateTextures()
     {
         UpdateTextures(0);
@@ -64,49 +68,17 @@ public class TextureCustomizer : MonoBehaviour
                 }
             }
         }
-    }
 
-    public void GenerateNewPrefabs() // TODO: Testing - not done yet - Not working as intended as prefabs cannot be generated to memory
-    {
-        if (wallMats == null || wallPrefab == null)
-            return;
-
-        for (int i = 0; i < wallMats.Length; i++)
-        {
-            GameObject tempObj = wallPrefab.gameObject;
-            tempObj.GetComponent<Renderer>().material = wallMats[i];
-            newWallPrefabs.Add(tempObj);
-
-            if (floorMats.Length > i)
-            {
-                if (floorPrefab != null)
-                {
-                    tempObj = floorPrefab.gameObject;
-                    tempObj.GetComponent<Renderer>().material = floorMats[i];
-                    newFloorPrefabs.Add(tempObj);
-                }
-            }
-
-            if (pillarMats.Length > i)
-            {
-                if (pillarPrefab != null)
-                {
-                    tempObj = pillarPrefab.gameObject;
-                    tempObj.GetComponent<Renderer>().material = pillarMats[i];
-                    newPillarPrefabs.Add(tempObj);
-                }
-            }
-
-            if (ceilingMats.Length > i)
-            {
-                if (ceilingPrefab != null)
-                {
-                    tempObj = ceilingPrefab.gameObject;
-                    tempObj.GetComponent<Renderer>().material = ceilingMats[i];
-                    newCeilingPrefabs.Add(tempObj);
-                }
-            }
-        }
+        //if (testPrefab != null)
+        //{
+        //    if (testMaterials != null)
+        //    {
+        //        if (testMaterials.Length > index)
+        //        {
+        //            testPrefab.GetComponent<Renderer>().material = testMaterials[index];
+        //        }
+        //    }
+        //}
     }
 
     /// <summary>
@@ -141,6 +113,17 @@ public class TextureCustomizer : MonoBehaviour
                 return -1;
         }
     }
+
+    //private void Update()
+    //{
+    //    if (OVRInput.GetDown(OVRInput.Button.Two))
+    //    {
+    //        UpdateTextures(testBool ? 0 : 1);
+    //        testBool = !testBool;
+
+    //        Instantiate(testPrefab, Camera.main.transform.position, Quaternion.identity);
+    //    }
+    //}
 }
 
 #if UNITY_EDITOR
@@ -156,14 +139,6 @@ public class TextureCustomizer_Editor : UnityEditor.Editor
         if (script.autoSwitchTextures)
         {
             script.frequency = EditorGUILayout.IntField("Frequency:", script.frequency);
-        }
-
-        EditorGUILayout.Space(10.0f);
-
-        if (GUILayout.Button("[Not Working] Generate Prefabs"))
-        {
-            script.GenerateNewPrefabs();
-            Debug.Log("TextureCustomizer: generated new prefabs");
         }
 
         EditorGUILayout.Space(10.0f);

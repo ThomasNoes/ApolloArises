@@ -39,10 +39,8 @@ public class Tile : MonoBehaviour {
     public bool isRoomEntryTile =false;
 
     //tile type
-    public bool isAStarTile = false;
-    public bool isPortalTile = false;
-    public bool isOuterTile = false;
-    public bool isRoomTile = false;
+    public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile;
+    public int partOfMaze;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };

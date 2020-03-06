@@ -34,7 +34,7 @@ namespace EventCallbacks
     public class GenerateTerrainEvent : Event<GenerateTerrainEvent>
     {
         public GameObject go;
-        public int[] wallArray;
+        public int[] wallArray, outerWalls;
         public float tileWidth;
         public int materialIndex;
         public bool isRoomPart, noCeiling, isOuterOpenTile, isPortalTile;

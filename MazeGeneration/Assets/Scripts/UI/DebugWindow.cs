@@ -12,6 +12,8 @@ public class DebugWindow : MonoBehaviour
     private ScrollRect scrollRect;
     private LayerMask layerMask;
 
+    public GameObject testPrefab;
+
     void Awake()
     {
         //if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
@@ -69,26 +71,15 @@ public class DebugWindow : MonoBehaviour
                 debugPanel.SetActive(!debugPanel.activeSelf);
         }
 
-        //if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
-        //    ScrollToTop();
-        //else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
-        //    ScrollToBottom()
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickUp))
+            ScrollToTop();
+        else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
+            ScrollToBottom();
 
-        if (OVRInput.GetDown(OVRInput.Button.Two))
-        {
-            //RaycastHit hit;
-
-            //if (Physics.Raycast(Camera.main.transform.position, Vector3.down, out hit, 10.0f, layerMask))
-            //{
-            //    Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
-
-            //    if (tempTile != null)
-            //    {
-            //        Debug.Log(tempTile.nextDistance + " | " + tempTile.prevdistance);
-            //    }
-            //}
-        }
-
+        //if (OVRInput.GetDown(OVRInput.Button.Two))
+        //{
+            
+        //}
     }
 
     public void ScrollToTop()

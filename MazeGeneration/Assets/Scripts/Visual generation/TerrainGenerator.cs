@@ -2,8 +2,9 @@
 
     using UnityEngine;
 
-    public class TerrainGenerator : MonoBehaviour {
-
+    public class TerrainGenerator : MonoBehaviour
+    {
+        public bool useNewPlacementMethod = false;
         GameObject tempCeiling;
         GameObject tempWall;
         GameObject tempPillar;
@@ -28,6 +29,11 @@
             Transform tileTransform = generateTerrain.go.transform;
             tileTransform.localPosition = new Vector3(tileTransform.localPosition.x, 0, tileTransform.localPosition.z);
 
+            if (textureCustomizer != null)
+                if (textureCustomizer.autoSwitchTextures)
+                    textureCustomizer.UpdateTextures(generateTerrain.materialIndex);
+
+
             if (!generateTerrain.noCeiling)
             {
                 // Place ceiling on the tile
@@ -49,40 +55,50 @@
                 }
             }
 
-            // Read through wallArray to see how many walls should be placed and where
-            // Each case corresponds to a side on the current tile
-            for (int i = 0; i < generateTerrain.wallArray.Length; i++) {
-                if (generateTerrain.wallArray[i] == 0) {
-                    switch (i) {
-                        case 0:
-                            // Instatiate a wall segment and place it
-                            // Set the scaling to be the preset height chosen in the inspector
-                            // Set the object as a child of the current tile
-                            tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x - (generateTerrain.tileWidth / 2f), 
-                                tileTransform.position.y,
-                                tileTransform.position.z + (generateTerrain.tileWidth / 2f) - wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
-                            TileTransform(tileTransform, tempWall);
-                            break;
-                        case 1:
-                            tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x + (generateTerrain.tileWidth / 2f) 
-                                - wallOffset, tileTransform.position.y,
-                                tileTransform.position.z + (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
-                            TileTransform(tileTransform, tempWall);
-                            break;
-                        case 2:
-                            tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x + (generateTerrain.tileWidth / 2f), 
-                                tileTransform.position.y, 
-                                tileTransform.position.z - (generateTerrain.tileWidth / 2f) + wallOffset), Quaternion.AngleAxis (i * 90, Vector3.up));
-                            TileTransform(tileTransform, tempWall);
-                            break;
-                        case 3:
-                            tempWall = Instantiate (wallSegment, new Vector3 (tileTransform.position.x - (generateTerrain.tileWidth / 2f) + wallOffset, 
-                                tileTransform.position.y, 
-                                tileTransform.position.z - (generateTerrain.tileWidth / 2f)), Quaternion.AngleAxis (i * 90, Vector3.up));
-                            TileTransform(tileTransform, tempWall);
-                            break;
-                        default:
-                            break;
+            if (!useNewPlacementMethod)
+            {
+                // Read through wallArray to see how many walls should be placed and where
+                // Each case corresponds to a side on the current tile
+                Vector3 wallTransform = new Vector3();
+
+                for (int i = 0; i < generateTerrain.wallArray.Length; i++)
+                {
+                    if (generateTerrain.wallArray[i] == 0)
+                    {
+                        switch (i)
+                        {
+                            case 0:
+                                // Set the scaling to be the preset height chosen in the inspector
+                                // Set the object as a child of the current tile
+                                wallTransform = new Vector3(tileTransform.position.x - (generateTerrain.tileWidth / 2f), tileTransform.position.y,
+                                    tileTransform.position.z + (generateTerrain.tileWidth / 2f) - wallOffset);
+                                break;
+                            case 1:
+                                wallTransform = new Vector3(tileTransform.position.x + (generateTerrain.tileWidth / 2f) - wallOffset, tileTransform.position.y,
+                                    tileTransform.position.z + (generateTerrain.tileWidth / 2f));
+                                break;
+                            case 2:
+                                wallTransform = new Vector3(tileTransform.position.x + (generateTerrain.tileWidth / 2f), tileTransform.position.y,
+                                    tileTransform.position.z - (generateTerrain.tileWidth / 2f) + wallOffset);
+                                break;
+                            case 3:
+                                wallTransform = new Vector3(tileTransform.position.x - (generateTerrain.tileWidth / 2f) + wallOffset, tileTransform.position.y,
+                                    tileTransform.position.z - (generateTerrain.tileWidth / 2f));
+                                break;
+                        }
+
+                        tempWall = Instantiate(wallSegment, wallTransform, Quaternion.AngleAxis(i * 90, Vector3.up));
+
+                        Wall tempWallScript = tempWall.GetComponent<Wall>(); // NOTE: Might not be optimized(?)
+                        if (tempWallScript != null)
+                        {
+                            if (tempWallScript.meshes != null && generateTerrain.outerWalls != null)
+                            {
+                                tempWallScript.SetMesh(generateTerrain.outerWalls[i]);
+                            }
+                        }
+
+                        TileTransform(tileTransform, tempWall);
                     }
                 }
             }

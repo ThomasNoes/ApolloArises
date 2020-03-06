@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f597773bc07373a4bb4206e11aea4ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useNewPlacementMethod: 0
   wallOffset: 0.1
   wallHeight: 2.5
   ceiling: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f, type: 3}

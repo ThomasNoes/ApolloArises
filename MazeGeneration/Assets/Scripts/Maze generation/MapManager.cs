@@ -195,7 +195,7 @@ public class MapManager : MonoBehaviour
             MapGenerator mapScript = tempMap.GetComponent<MapGenerator>();
             mapScripts.Add(mapScript);
             mapScript.SetDimensions(mazeRows, mazeCols, tileWidth);
-            mapScript.Initialize();
+            mapScript.Initialize(i);
             //Debug.Log("Maze " + i + " Initialized!");
 
             //calculate start seed

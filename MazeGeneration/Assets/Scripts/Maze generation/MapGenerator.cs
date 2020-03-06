@@ -13,7 +13,7 @@ public abstract class MapGenerator : MonoBehaviour
     public int[,] mazeIntArray;
     public List<Tile> aStarTiles;
 
-    public void Initialize()
+    public void Initialize(int index)
     {
         tileArray = new Tile[mazeRows, mazeColumns];
         //float mazeHalfWidth = mazeRows / 2f; // Add scalability with tile width!
@@ -30,6 +30,7 @@ public abstract class MapGenerator : MonoBehaviour
                 tileArray[i, j] = emptyTile.GetComponent<Tile>();
                 tileArray[i, j].SetWidth(tileWidth);
                 tileArray[i, j].SetRowAndColumn(i,j);
+                tileArray[i, j].partOfMaze = index;
             }
         }
         //Debug.Log(name + " initialized.");
@@ -56,6 +57,7 @@ public abstract class MapGenerator : MonoBehaviour
                     gtei.wallArray = tileArray[i, j].GetWallArray();
                     gtei.isRoomPart = tileArray[i, j].isRoomTile;
                     gtei.isPortalTile = tileArray[i, j].isPortalTile;
+                    gtei.outerWalls = tileArray[i, j].outerWalls;
                     gtei.tileWidth = tileWidth;
 
                     //ID Changing when creating new tile
