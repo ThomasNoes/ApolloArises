@@ -37,7 +37,7 @@ namespace EventCallbacks
         public int[] wallArray, outerWalls;
         public float tileWidth;
         public int materialIndex;
-        public bool isRoomPart, noCeiling, isOuterOpenTile, isPortalTile;
+        public bool isRoomPart, noCeiling, isOuterTile, isPortalTile;
     }
 
     public class FusePuzzlePlugIn : Event<FusePuzzlePlugIn>

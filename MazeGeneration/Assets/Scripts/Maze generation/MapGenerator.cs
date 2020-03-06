@@ -59,6 +59,7 @@ public abstract class MapGenerator : MonoBehaviour
                     gtei.isPortalTile = tileArray[i, j].isPortalTile;
                     gtei.outerWalls = tileArray[i, j].outerWalls;
                     gtei.tileWidth = tileWidth;
+                    gtei.isOuterTile = tileArray[i, j].isOuterTile;
 
                     //ID Changing when creating new tile
                     gtei.FireEvent();
@@ -68,6 +69,11 @@ public abstract class MapGenerator : MonoBehaviour
                 //Debug.Log(tileWidth + " generated int array");
             }
         }
+    }
+
+    private void MaterialSwitcher()
+    {
+        // TODO
     }
 
     public void SetDimensions(int rows, int cols, float width)
