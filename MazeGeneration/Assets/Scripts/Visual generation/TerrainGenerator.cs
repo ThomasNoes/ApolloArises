@@ -11,9 +11,15 @@
         public float wallOffset = 0f;
         public float wallHeight = 1f;
 
+
         public GameObject ceiling;
         public GameObject wallSegment;
         public GameObject woodPillar;
+
+        float heightScale;
+        float wallWidth = 0.05f;
+        float tileScale;
+
 
         private TextureCustomizer textureCustomizer;
 
@@ -28,6 +34,8 @@
 
             Transform tileTransform = generateTerrain.go.transform;
             tileTransform.localPosition = new Vector3(tileTransform.localPosition.x, 0, tileTransform.localPosition.z);
+            tileScale = tileTransform.localScale.y;
+            heightScale = wallHeight / tileScale;
 
             if (textureCustomizer != null)
                 if (textureCustomizer.autoSwitchTextures)
@@ -97,11 +105,61 @@
                                 tempWallScript.SetMesh(generateTerrain.outerWalls[i]);
                             }
                         }
-
                         TileTransform(tileTransform, tempWall);
                     }
                 }
             }
+            else
+            {
+                // Read through wallArray to see how many walls should be placed and where
+                // Each case corresponds to a side on the current tile
+                for (int i = 0; i < generateTerrain.wallArray.Length; i++)
+                {
+                    if (generateTerrain.wallArray[i] == 0)
+                    {
+
+                        Vector3 localPos = new Vector3(0, heightScale / 2, 0);
+                        Vector3 localScale = new Vector3(0.99f, heightScale, wallWidth);
+                        tempWall = Instantiate(wallSegment, tileTransform.position, Quaternion.AngleAxis(i * 90, Vector3.up), tileTransform); // instantiate at the position of the tile
+                        tempWall.transform.localPosition = localPos;
+                        tempWall.transform.localScale = localScale;
+                        tempWall.name = "wall index " + i;
+                        switch (i)
+                        {
+                            case 0:
+                                tempWall.transform.Translate((tempWall.transform.forward * tileScale / 2) - (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, 0.469f);
+                                break;
+                            case 1:
+                                tempWall.transform.Translate((-tempWall.transform.right * tileScale / 2) + (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(0.469f, tempWall.transform.localPosition.y, 0);
+                                break;
+                            case 2:
+                                tempWall.transform.Translate((-tempWall.transform.forward * tileScale / 2) + (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, -0.469f);
+                                break;
+                            case 3:
+                                tempWall.transform.Translate((tempWall.transform.right * tileScale / 2) - (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
+                                //tempWall.transform.localPosition = new Vector3(-0.469f, tempWall.transform.localPosition.y, 0);
+                                break;
+                            default:
+                                break;
+
+
+                        }
+
+                        Wall tempWallScript = tempWall.GetComponent<Wall>(); // NOTE: Might not be optimized(?)
+                        if (tempWallScript != null)
+                        {
+                            if (tempWallScript.meshes != null && generateTerrain.outerWalls != null)
+                            {
+                                tempWallScript.SetMesh(generateTerrain.outerWalls[i]);
+                            }
+                        }
+                    }
+                }
+            }
+
 
             if (generateTerrain.isRoomPart || generateTerrain.isOuterOpenTile) // Bool checks if tile is part of room, then it change pillar placement accordingly
                 PlaceRoomPillars(tileTransform, generateTerrain);
@@ -144,30 +202,37 @@
             // Instantiate a corner piller and place it
             // Set the scaling of the pillar so the height matches the walls
             // Place the object as a child of the tile on which it is placed
+            tempPillar = Instantiate(woodPillar, 
+                new Vector3(tileTransform.transform.position.x, 
+                    tileTransform.position.y + (0.5f * wallHeight),
+                    tileTransform.transform.position.z),
+                Quaternion.identity);
+            tempPillar.transform.localScale *= tileScale;
+            //tempPillar.transform.localScale =new Vector3(tempPillar.transform.localScale.x * tileScale * 1.01f, tileScale,tempPillar.transform.localScale.z * tileScale * 1.01f);
+            TileTransform(tileTransform, tempPillar);
+
             switch (position)
             {
                 case 0:
-                    tempPillar = Instantiate(woodPillar, new Vector3(tileTransform.position.x - (generateTerrain.tileWidth / 2f) + (woodPillar.transform.localScale.x / 2f), tileTransform.position.y + (0.5f * wallHeight), tileTransform.position.z - (generateTerrain.tileWidth / 2f) + (woodPillar.transform.localScale.z / 2f)), Quaternion.identity);
-                    TileTransform(tileTransform, tempPillar);
-                    return;
+                    tempPillar.name = "lower left";
+                    tempPillar.transform.localPosition = new Vector3(-0.45f, tempPillar.transform.localPosition.y, -0.45f);
+                    break;
                 case 1:
-                    tempPillar = Instantiate(woodPillar, new Vector3(tileTransform.position.x + (generateTerrain.tileWidth / 2f) - (woodPillar.transform.localScale.x / 2f), tileTransform.position.y + (0.5f * wallHeight), tileTransform.position.z + (generateTerrain.tileWidth / 2f) - (woodPillar.transform.localScale.z / 2f)), Quaternion.identity);
-                    TileTransform(tileTransform, tempPillar);
-                    return;
-
+                    tempPillar.name = "upper right";
+                    tempPillar.transform.localPosition = new Vector3(0.45f, tempPillar.transform.localPosition.y, 0.45f);
+                    break;
                 case 2:
-                    tempPillar = Instantiate(woodPillar, new Vector3(tileTransform.position.x + (generateTerrain.tileWidth / 2f) - (woodPillar.transform.localScale.x / 2f), tileTransform.position.y + (0.5f * wallHeight), tileTransform.position.z - (generateTerrain.tileWidth / 2f) + (woodPillar.transform.localScale.z / 2f)), Quaternion.identity);
-                    TileTransform(tileTransform, tempPillar);
-                    return;
-
+                    tempPillar.name = "lower right";
+                    tempPillar.transform.localPosition = new Vector3(0.45f, tempPillar.transform.localPosition.y, -0.45f);
+                    break;
                 case 3:
-                    tempPillar = Instantiate(woodPillar, new Vector3(tileTransform.position.x - (generateTerrain.tileWidth / 2f) + (woodPillar.transform.localScale.x / 2f), tileTransform.position.y + (0.5f * wallHeight), tileTransform.position.z + (generateTerrain.tileWidth / 2f) - (woodPillar.transform.localScale.z / 2f)), Quaternion.identity);
-                    TileTransform(tileTransform, tempPillar);
-                    return;
+                    tempPillar.name = "upper left";
+                    tempPillar.transform.localPosition = new Vector3(-0.45f, tempPillar.transform.localPosition.y, 0.45f);
+                    break;
                 default:
-                    Debug.LogError("Terrain Generator Pillar Error: This is not a valid position");
                     break;
             }
+
         }
 
         private void PlaceAllPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain)

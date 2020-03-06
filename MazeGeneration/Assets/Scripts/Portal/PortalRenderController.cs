@@ -136,8 +136,8 @@ public class PortalRenderController : MonoBehaviour
 
         tempScript.projectionQuad.Translate(isForward ? nextOffset : prevOffset, Space.World);
 
-        tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
-        tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth) + pillarOffset * 2f, 0, 0);
+        tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth), 0, 0);
+        tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth), 0, 0);
 
         //bc.center = new Vector3(0, 0, -portalWidth / 2.0f + pillarOffset);
         gbc.gameObject.transform.localPosition = new Vector3(0, tempScript.renderQuad.localPosition.y, -portalWidth / 2.0f + pillarOffset);
@@ -288,7 +288,7 @@ public class PortalRenderController : MonoBehaviour
     {
         currentMaze = mazeID;
         //SetProjectionQuads(true);
-        Debug.Log("Teleported player to: " + currentMaze);
+        //Debug.Log("Teleported player to: " + currentMaze);
     }
 
     int TrueModulus(int k, int n)
