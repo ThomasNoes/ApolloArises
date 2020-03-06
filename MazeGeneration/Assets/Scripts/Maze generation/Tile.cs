@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour {
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };
-        outerWalls = new int[] { 0, 0, 0, 0 };
+        outerWalls = new int[] { -1, -1, -1, -1 };
         tileID = 0;
     }
 
