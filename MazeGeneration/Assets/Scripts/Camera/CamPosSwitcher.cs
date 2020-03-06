@@ -87,15 +87,15 @@ namespace Assets.Scripts.Camera
         {
             if (dir)
             {
+                pRController.SetProjectionQuads(false);
                 followCamScriptLeft.SetToPrev();
                 followCamScriptRight.SetToPrev();
-                pRController.SetProjectionQuads(false);
             }
             else
             {
+                pRController.SetProjectionQuads(true);
                 followCamScriptLeft.SetToNext();
                 followCamScriptRight.SetToNext();
-                pRController.SetProjectionQuads(true);
             }
 
         }

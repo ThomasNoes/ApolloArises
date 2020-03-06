@@ -23,6 +23,11 @@ public class FollowCam : MonoBehaviour
 
     void LateUpdate()
     {
+        SetCamera();
+    }
+
+    private void SetCamera()
+    {
         Vector3 mainCameraPosition;
         if (!isStereoscopic)
         {
@@ -64,10 +69,12 @@ public class FollowCam : MonoBehaviour
     public void SetToNext()
     {
         offset = nextOffset;
+        SetCamera();
     }
     public void SetToPrev()
     {
         offset = prevOffset;
+        SetCamera();
     }
     public void SetNextOffset(Vector3 offset)
     {
