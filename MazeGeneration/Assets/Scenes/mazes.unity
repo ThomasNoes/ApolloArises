@@ -1175,8 +1175,8 @@ MonoBehaviour:
   createRooms: 1
   idealDistanceBetweenRooms: 7
   playerHead: {fileID: 2526136163395224742}
-  mazeRows: 4
-  mazeCols: 4
+  mazeRows: 3
+  mazeCols: 3
   tileWidth: 0.7
   startRow: 0
   startCol: 0
@@ -1186,174 +1186,6 @@ MonoBehaviour:
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
   - mapType: 0
     roomName: 
     isEndSeeded: 0
@@ -1454,7 +1286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 1
-  bufferAmount: 3
+  bufferAmount: 10
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2599,7 +2431,7 @@ PrefabInstance:
         type: 3}
       propertyPath: wallSegment
       value: 
-      objectReference: {fileID: 6395070241882163283, guid: da65273e1ca2d6f4c959dc86610a8cc1,
+      objectReference: {fileID: 5064138798832107477, guid: e59470f358d4ff4489feb66753eddc9c,
         type: 3}
     - target: {fileID: 7748457934529168361, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
