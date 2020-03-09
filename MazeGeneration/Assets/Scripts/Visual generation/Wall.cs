@@ -8,13 +8,13 @@ public class Wall : MonoBehaviour
     [HideInInspector] public int currentMeshIndex, currentMaterialIndex;
     private MeshRenderer meshRenderer;
     private MeshFilter meshFilter;
-    private BoxCollider collider;
+    private Collider collider;
 
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
         meshFilter = GetComponent<MeshFilter>();
-        collider = GetComponent<BoxCollider>();
+        collider = GetComponent<Collider>();
     }
 
     public void SetMesh(int index)
@@ -26,8 +26,12 @@ public class Wall : MonoBehaviour
             meshFilter.sharedMesh = meshes[index];
 
         if (index == 2)
-            if (collider != null)
-                collider.enabled = false;
+        {
+            if (collider == null)
+                collider = GetComponent<Collider>();
+
+            collider.enabled = false;
+        }
     }
 
     public void SetMaterial(int index)
