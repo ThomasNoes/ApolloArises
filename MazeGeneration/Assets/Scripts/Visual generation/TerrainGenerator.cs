@@ -18,6 +18,7 @@
 
         float heightScale;
         float wallWidth = 0.05f;
+        float PillarWidth = 0.1f;
         float tileScale;
 
 
@@ -127,25 +128,23 @@
                         switch (i)
                         {
                             case 0:
-                                tempWall.transform.Translate((tempWall.transform.forward * tileScale / 2) - (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.05f);
+                                tempWall.transform.Translate((tempWall.transform.forward * tileScale / 2) - (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.01f);
                                 //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, 0.469f);
                                 break;
                             case 1:
-                                tempWall.transform.Translate((-tempWall.transform.right * tileScale / 2) + (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
+                                tempWall.transform.Translate((-tempWall.transform.right * tileScale / 2) + (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.01f);
                                 //tempWall.transform.localPosition = new Vector3(0.469f, tempWall.transform.localPosition.y, 0);
                                 break;
                             case 2:
-                                tempWall.transform.Translate((-tempWall.transform.forward * tileScale / 2) + (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.05f);
+                                tempWall.transform.Translate((-tempWall.transform.forward * tileScale / 2) + (tempWall.transform.forward * wallWidth / 2 * tileScale) * 1.01f);
                                 //tempWall.transform.localPosition = new Vector3(0, tempWall.transform.localPosition.y, -0.469f);
                                 break;
                             case 3:
-                                tempWall.transform.Translate((tempWall.transform.right * tileScale / 2) - (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.05f);
+                                tempWall.transform.Translate((tempWall.transform.right * tileScale / 2) - (tempWall.transform.right * wallWidth / 2 * tileScale) * 1.01f);
                                 //tempWall.transform.localPosition = new Vector3(-0.469f, tempWall.transform.localPosition.y, 0);
                                 break;
                             default:
                                 break;
-
-
                         }
 
                         Wall tempWallScript = tempWall.GetComponent<Wall>(); // NOTE: Might not be optimized(?)
@@ -207,7 +206,10 @@
                     tileTransform.position.y + (0.5f * wallHeight),
                     tileTransform.transform.position.z),
                 Quaternion.identity);
+            PillarWidth = tempPillar.transform.localScale.x;
             tempPillar.transform.localScale *= tileScale;
+
+            Debug.Log(PillarWidth);
             //tempPillar.transform.localScale =new Vector3(tempPillar.transform.localScale.x * tileScale * 1.01f, tileScale,tempPillar.transform.localScale.z * tileScale * 1.01f);
             TileTransform(tileTransform, tempPillar);
 
