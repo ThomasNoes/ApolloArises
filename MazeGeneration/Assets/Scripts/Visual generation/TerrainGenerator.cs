@@ -190,6 +190,18 @@
                 PlacePillar(tileTransform, generateTerrain, 0);
                 PlacePillar(tileTransform, generateTerrain, 3);
             }
+
+            if (!generateTerrain.isRoomPart)
+            {
+                if (generateTerrain.outerWalls[0] == -1 && generateTerrain.outerWalls[1] == -1)
+                    PlacePillar(tileTransform, generateTerrain, 1);
+                if (generateTerrain.outerWalls[1] == -1 && generateTerrain.outerWalls[2] == -1)
+                    PlacePillar(tileTransform, generateTerrain, 2);
+                if (generateTerrain.outerWalls[2] == -1 && generateTerrain.outerWalls[3] == -1)
+                    PlacePillar(tileTransform, generateTerrain, 0);
+                if (generateTerrain.outerWalls[3] == -1 && generateTerrain.outerWalls[0] == -1)
+                    PlacePillar(tileTransform, generateTerrain, 3);
+            }
         }
 
         private void PlaceRoomPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain)

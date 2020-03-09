@@ -10,7 +10,6 @@ public class DebugWindow : MonoBehaviour
     public Text debugText;
     public GameObject debugPanel;
     private ScrollRect scrollRect;
-    private LayerMask layerMask;
 
     public GameObject testPrefab;
 
@@ -22,13 +21,8 @@ public class DebugWindow : MonoBehaviour
         if (!active || debugText == null)
             return;
 
-        //Application.logMessageReceived += Log;
         scrollRect = debugText.gameObject.GetComponent<ScrollRect>();
-        InvokeRepeating("CustomUpdate", 1.0f, 4.0f);
-
-        layerMask = LayerMask.GetMask("Head");
-        layerMask |= LayerMask.GetMask("Ignore Raycast");
-        layerMask = ~layerMask;
+        InvokeRepeating("CustomUpdate", 1.0f, 3.0f);
     }
 
     void OnEnable()
@@ -75,11 +69,6 @@ public class DebugWindow : MonoBehaviour
             ScrollToTop();
         else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
             ScrollToBottom();
-
-        //if (OVRInput.GetDown(OVRInput.Button.Two))
-        //{
-            
-        //}
     }
 
     public void ScrollToTop()
