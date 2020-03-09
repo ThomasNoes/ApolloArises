@@ -576,7 +576,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 25
+  far clip plane: 40
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -697,7 +697,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 25
+  far clip plane: 40
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1286,7 +1286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 1
-  bufferAmount: 10
+  bufferAmount: 4
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
