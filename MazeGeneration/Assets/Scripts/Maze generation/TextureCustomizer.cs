@@ -31,7 +31,7 @@ public class TextureCustomizer : MonoBehaviour
             {
                 if (floorMats.Length > index)
                 {
-                    floorPrefab.GetComponent<Renderer>().material = floorMats[index];
+                    floorPrefab.transform.GetChild(0).GetComponent<Renderer>().material = floorMats[index];
                 }
             }
         }
@@ -42,7 +42,7 @@ public class TextureCustomizer : MonoBehaviour
             {
                 if (wallMats.Length > index)
                 {
-                    wallPrefab.gameObject.transform.GetChild(0).GetComponent<Renderer>().material = wallMats[index];
+                    wallPrefab.gameObject.GetComponent<Renderer>().material = wallMats[index];
                 }
             }
         }

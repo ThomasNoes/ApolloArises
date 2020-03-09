@@ -549,7 +549,7 @@ public class MapManager : MonoBehaviour
     }
     private void PlaceRandomButIncreaseY(int index, int length)
     {
-        maximumBound = SetMaximumBound(3);
+        maximumBound = SetMaximumBound(1);
 
         if (gizmo != null)
         {

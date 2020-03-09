@@ -45,13 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3fca5ce8b078a45aacac72a4724f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAStarTile: 0
   isMarked: 0
   nextDistance: 0
-  prevdistance: 0
+  prevDistance: 0
   tileID: 0
+  outerWalls: 
   wallArray: 
   tileWidth: 0
+  RoomPosition: Corridor
+  isRoomEntryTile: 0
+  isAStarTile: 0
+  isPortalTile: 0
+  isOuterTile: 0
+  isRoomTile: 0
+  partOfMaze: 0
 --- !u!65 &4126564364297773086
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -124,7 +131,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3fa1f9e51b9272944b7b36cd80058a24, type: 2}
+  - {fileID: 2100000, guid: 6fa48c2a126d0d74e8bb671b62e8cb1b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

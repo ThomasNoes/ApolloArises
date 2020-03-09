@@ -576,7 +576,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 25
+  far clip plane: 40
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -697,7 +697,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 25
+  far clip plane: 40
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1228,6 +1228,174 @@ MonoBehaviour:
       direction: 0
       spelledDirection: 
     mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
 --- !u!4 &1604854435
 Transform:
   m_ObjectHideFlags: 0
@@ -1286,7 +1454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 1
-  bufferAmount: 10
+  bufferAmount: 4
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,22 +2595,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7748457934529168359, guid: c7892fa38fcffbb49807b3c2ac709216,
+    - target: {fileID: 7748457934529168361, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
-      propertyPath: wallSegment
-      value: 
-      objectReference: {fileID: 5064138798832107477, guid: e59470f358d4ff4489feb66753eddc9c,
-        type: 3}
-    - target: {fileID: 7748457934529168359, guid: c7892fa38fcffbb49807b3c2ac709216,
-        type: 3}
-      propertyPath: useNewPlacementMethod
+      propertyPath: wallMats.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7748457934529168361, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
-      propertyPath: wallPrefab
-      value: 
-      objectReference: {fileID: 6395070241882163283, guid: da65273e1ca2d6f4c959dc86610a8cc1,
+      propertyPath: floorMats.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748457934529168361, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
+      propertyPath: wallMats.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e94da9bf869becf40a26c597ffb48f60, type: 2}
+    - target: {fileID: 7748457934529168361, guid: c7892fa38fcffbb49807b3c2ac709216,
+        type: 3}
+      propertyPath: floorMats.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6fa48c2a126d0d74e8bb671b62e8cb1b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7892fa38fcffbb49807b3c2ac709216, type: 3}
