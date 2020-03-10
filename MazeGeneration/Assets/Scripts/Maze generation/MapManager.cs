@@ -106,8 +106,8 @@ public class MapManager : MonoBehaviour
             idealDistanceBetweenRooms = 1;
         }
         idealRoomAmount = (int)(minimumMazeRoute/idealDistanceBetweenRooms);
-        Debug.Log("potentialRooms " + potentialRooms.Count);
-        Debug.Log("idealRoomAmount: "+ idealRoomAmount);
+        //Debug.Log("potentialRooms " + potentialRooms.Count);
+        //Debug.Log("idealRoomAmount: "+ idealRoomAmount);
 
         if (potentialRooms.Count <=idealRoomAmount) // just make the rooms if there is an ideal amount or if there are too few. in the future, maybe continue to generate maze segment or try generating everything from the beginning
         {
@@ -287,7 +287,7 @@ public class MapManager : MonoBehaviour
                     RoomFinder rf = new RoomFinder(de, mapScript.tileArray);
                     if(rf.SearchForRoom())
                     {
-                        Debug.Log("found room in maze ID " +i);
+                        //Debug.Log("found room in maze ID " +i);
                         Room room = new Room(rf);
                         for (int j = 0; j < room.tiles.Count; j++)
                         {
@@ -524,7 +524,7 @@ public class MapManager : MonoBehaviour
             spawnPoint.y = point.y; // i ignore y by have the two points share y.
             if (Vector3.Distance(spawnPoint, point) < minDistance)
             {
-                Debug.Log("it overlaps!");
+                //Debug.Log("it overlaps!");
                 return true;
             }
         }
@@ -552,7 +552,7 @@ public class MapManager : MonoBehaviour
     }
     private void PlaceRandomButIncreaseY(int index, int length)
     {
-        maximumBound = SetMaximumBound(1);
+        maximumBound = SetMaximumBound(2);
 
         if (gizmo != null)
         {
