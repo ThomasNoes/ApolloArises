@@ -246,7 +246,7 @@
             PillarWidth = tempPillar.transform.localScale.x;
             tempPillar.transform.localScale *= tileScale;
 
-            Debug.Log(PillarWidth);
+            //Debug.Log(PillarWidth);
             //tempPillar.transform.localScale =new Vector3(tempPillar.transform.localScale.x * tileScale * 1.01f, tileScale,tempPillar.transform.localScale.z * tileScale * 1.01f);
             TileTransform(tileTransform, tempPillar);
 
