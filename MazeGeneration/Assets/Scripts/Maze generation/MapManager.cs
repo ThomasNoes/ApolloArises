@@ -28,6 +28,7 @@ public class MapManager : MonoBehaviour
     
     //room variables
     public bool createRooms;
+    public bool FindOuterWalls;
     public int idealDistanceBetweenRooms =1;
     private int minimumMazeRoute=0;
     private int idealRoomAmount;
@@ -257,23 +258,25 @@ public class MapManager : MonoBehaviour
             }
 
             //Find outer tiles and determine how much their walls can be opened.
-            if (i == 0)
+            if (FindOuterWalls)
             {
-                mapScript.FindOuterWalls(mapSequence[i].endSeed);
+                if (i == 0)
+                {
+                    mapScript.FindOuterWalls(mapSequence[i].endSeed);
 
+                }
+                else if (i == mapSequence.Length - 1)
+                {
+                    mapScript.FindOuterWalls(mapSequence[i].startSeed);
+
+                }
+                else
+                {
+
+                    mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
+
+                }
             }
-            else if (i == mapSequence.Length - 1)
-            {
-                mapScript.FindOuterWalls(mapSequence[i].startSeed);
-
-            }
-            else
-            {
-
-                mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
-
-            }
-
 
             //Find rooms
             if (createRooms) //only search if we want to create rooms
