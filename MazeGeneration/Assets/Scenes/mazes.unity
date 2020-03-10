@@ -1173,12 +1173,12 @@ MonoBehaviour:
   MazePlacement: 3
   startMazeInOrigin: 1
   createRooms: 1
-  FindOuterWalls: 0
+  FindOuterWalls: 1
   idealDistanceBetweenRooms: 7
   playerHead: {fileID: 2526136163395224742}
   mazeRows: 3
   mazeCols: 3
-  tileWidth: 0.4
+  tileWidth: 0.65
   startRow: 0
   startCol: 0
   playAreaSize: {x: 3, y: 0, z: 3}
@@ -1187,6 +1187,34 @@ MonoBehaviour:
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
   - mapType: 0
     roomName: 
     isEndSeeded: 0
