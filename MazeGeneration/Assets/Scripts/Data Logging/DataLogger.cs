@@ -12,36 +12,57 @@ using UnityEditor;
 
 public class DataLogger : MonoBehaviour
 {
+    // References:
+    public AntiWallCollision antiWallCollision;
+    public GameObject mapManagerObj;
+    private GameObject mapObj;
+
     // Save location:
     public string filePath = @"Assets/Resources/CSV";
     public string fileName = "/session";
     private string fullPath;
 
-    // Bools:
-    public bool logData = true;
-    [HideInInspector] public bool logFrameRate, logCurrentMaze;
-    private bool active = false, initial = true;
-    [Tooltip("In seconds")] public float updateInterval = 1.0f;
+    [Tooltip("In seconds")] public float updateInterval = 5.0f;
 
-    // Lists:
+    // Bools:
+    public bool continuousLog = false, logData = true;
+    [HideInInspector] public bool logFrameRate, logAverageFrameRate, logCurrentMaze, logWallHits, logPreferredWidth, logPreferredHeight;
+    private bool active = false, initial = true;
+
+    // Lists & Arrays:
     private List<float> dataList;
+    private string[] csvLabels;
 
     // Other variables:
-    private int sessionNumber = -1;
+    private int sessionNumber = -1, fpsSum, fpsCount;
     private float lastTime, timeSpan, avgFrames, frameRate;
     private PortalRenderController pRController;
     private StreamWriter file;
     private WaitForSeconds delay;
 
-    private static string[] csvLabels =
-    {
-        "Session number" /*[0]*/, "FPS" /*[1]*/, "Current Maze" /*[2]*/
-    };
 
     private void Start()
     {
         if (logCurrentMaze)
             pRController = FindObjectOfType<PortalRenderController>();
+
+        if (logWallHits && antiWallCollision == null)
+            logWallHits = false;
+
+        if (logPreferredWidth)
+        {
+            if (mapManagerObj == null)
+                mapManagerObj = gameObject;
+
+            mapObj = mapManagerObj.transform.GetChild(0).gameObject;
+
+            if (mapObj == null)
+            {
+                logPreferredWidth = false;
+                logPreferredHeight = false;
+                Debug.LogError("Datalogger Error: Maze 1 not found");
+            }
+        }
 
 #if UNITY_ANDROID
         if (!Application.isEditor)
@@ -52,7 +73,7 @@ public class DataLogger : MonoBehaviour
 
         delay = updateInterval > 0 ? new WaitForSeconds(updateInterval) : new WaitForSeconds(1.0f);
 
-        //InitializeFile();
+        InitializeFile();
         dataList = new List<float>();
     }
 
@@ -73,15 +94,25 @@ public class DataLogger : MonoBehaviour
                 dataList.Add(sessionNumber);
 
                 if (logFrameRate)
-                {
-                    dataList.Add(frameRate);
-                }
-
+                    dataList.Add(logAverageFrameRate ? avgFrames : frameRate);
+                
                 if (logCurrentMaze)
                     dataList.Add(pRController.currentMaze);
 
+                if (logPreferredWidth)
+                    dataList.Add(mapObj.transform.localScale.x);
+
+                if (logPreferredHeight)
+                    dataList.Add(mapObj.transform.localScale.y);
+
+                if (logWallHits)
+                    dataList.Add(antiWallCollision.wallHits);
+
                 file.WriteLine(string.Join(";", dataList));
                 dataList.Clear();
+
+                if (!continuousLog)
+                    StartLogging();
 
                 yield return delay;
             }
@@ -92,17 +123,33 @@ public class DataLogger : MonoBehaviour
 
     private void InitializeFile()
     {
+        List<string> tempLabels = new List<string>();
 
-#if UNITY_EDITOR
-        if (!AssetDatabase.IsValidFolder(filePath))
+        tempLabels.Add("Session");
+
+        if (logFrameRate)
+            tempLabels.Add("FPS");
+
+        if (logCurrentMaze)
+            tempLabels.Add("CurrentMaze");
+
+        if (logPreferredWidth)
+            tempLabels.Add("PreferredWidth");
+
+        if (logPreferredHeight)
+            tempLabels.Add("PreferredHeight");
+
+        if (logWallHits)
+            tempLabels.Add("WallHits");
+
+
+        csvLabels = new string[tempLabels.Count];
+        for (int i = 0; i < tempLabels.Count; i++)
         {
-            if (!AssetDatabase.IsValidFolder("Assets/Resources"))
-            {
-                AssetDatabase.CreateFolder("Assets", "Resources");
-            }
-            AssetDatabase.CreateFolder("Assets/Resources", "CSV");
+            csvLabels[i] = tempLabels[i];
         }
-#endif
+
+        return; // Below currently not needed
 
         // System language generalization
         string spec = "G";
@@ -114,7 +161,7 @@ public class DataLogger : MonoBehaviour
         if (!logData)
             return;
 
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick))
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))
         {
             StartLogging();
         }
@@ -125,8 +172,13 @@ public class DataLogger : MonoBehaviour
 
         if (logFrameRate)
         {
-            //avgFrames += ((Time.deltaTime / Time.timeScale) - avgFrames) * 0.03f;
-            frameRate = (int)(1 / Time.deltaTime); 
+            frameRate = (int)(1 / Time.deltaTime);
+            if (logAverageFrameRate)
+            {
+                fpsSum += (int)frameRate;
+                fpsCount++;
+                avgFrames = fpsSum/fpsCount;
+            }
         }
     }
 
@@ -145,8 +197,6 @@ public class DataLogger : MonoBehaviour
             active = true;
 
             StartCoroutine(DataLog());
-
-            Debug.Log("Started logging session: " + sessionNumber);
         }
     }
 }
@@ -163,8 +213,20 @@ public class DataLogger_Editor : UnityEditor.Editor
 
         if (script.logData)
         {
+            EditorGUI.indentLevel += 1;
             script.logFrameRate = EditorGUILayout.Toggle("Log FPS", script.logFrameRate);
+            if (script.logFrameRate)
+            {
+                EditorGUI.indentLevel += 1;
+                script.logAverageFrameRate = EditorGUILayout.Toggle("Log Average", script.logAverageFrameRate);
+                EditorGUI.indentLevel -= 1;
+            }
             script.logCurrentMaze = EditorGUILayout.Toggle("Log Current Maze", script.logCurrentMaze);
+            script.logWallHits = EditorGUILayout.Toggle("Log Wall Hits", script.logWallHits);
+            script.logPreferredWidth = EditorGUILayout.Toggle("Log Pref. Width", script.logPreferredWidth);
+            script.logPreferredHeight = EditorGUILayout.Toggle("Log Pref. Height", script.logPreferredHeight);
+
+            EditorGUI.indentLevel -= 1;
         }
     }
 }
