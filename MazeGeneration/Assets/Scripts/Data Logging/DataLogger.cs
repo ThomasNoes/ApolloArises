@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using System;
-
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -79,7 +79,9 @@ public class DataLogger : MonoBehaviour
 
     private IEnumerator DataLog()
     {
-        fileName = "/ses" + sessionNumber + "_" + System.DateTime.Now.Day + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Year + "_" +
+        Scene scene = SceneManager.GetActiveScene();
+
+        fileName = "/" + scene.name + "_par" + sessionNumber + "_" + System.DateTime.Now.Day + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Year + "_" +
                    System.DateTime.Now.Hour + "-" + System.DateTime.Now.Minute + ".csv"; 
 
         fullPath = filePath + fileName;
