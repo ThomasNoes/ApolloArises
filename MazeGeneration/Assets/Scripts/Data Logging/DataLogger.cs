@@ -226,7 +226,7 @@ public class DataLogger : MonoBehaviour
         {
             int newParticipantNumber = PlayerPrefs.GetInt("participantNumber") + 1;
             PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
-            StartCoroutine(VibrateController(newParticipantNumber, 1, false));
+            StartCoroutine(VibrateController(newParticipantNumber, 0.7f, false));
             initial = true;
         }
         else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
@@ -237,7 +237,7 @@ public class DataLogger : MonoBehaviour
                 return;
 
             PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
-            StartCoroutine(VibrateController(newParticipantNumber, 1, false));
+            StartCoroutine(VibrateController(newParticipantNumber, 0.7f, false));
             initial = true;
         }
         
