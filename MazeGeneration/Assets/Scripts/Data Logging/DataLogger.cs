@@ -121,8 +121,6 @@ public class DataLogger : MonoBehaviour
                     file.Close();
                 }
             }
-
-            initial = true;
         }
     }
 
