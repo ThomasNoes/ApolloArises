@@ -213,11 +213,11 @@ public class DataLogger : MonoBehaviour
             CancelLastLine();
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.Four))
+        if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-            if (currentSceneIndex + 1 != SceneManager.sceneCount)
+            if (currentSceneIndex + 1 < SceneManager.sceneCount)
                 SceneManager.LoadScene(currentSceneIndex + 1);
         }
 
