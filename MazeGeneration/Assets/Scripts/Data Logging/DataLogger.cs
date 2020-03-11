@@ -133,7 +133,6 @@ public class DataLogger : MonoBehaviour
             st.SetLength(st.Length - 1);
             st.Close();
             Debug.Log("StreamWriter: Cancelled previous line");
-            initial = !initial;
         }
     }
 
