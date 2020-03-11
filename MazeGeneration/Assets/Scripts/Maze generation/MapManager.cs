@@ -26,10 +26,10 @@ public class MapManager : MonoBehaviour
     public MazePlacementType MazePlacement;
     public bool startMazeInOrigin;
     
-    //room variables
+    //room and wall variables
     public bool createRooms;
-    public bool FindOuterWalls;
-    public int idealDistanceBetweenRooms =1;
+    public int idealDistanceBetweenRooms = 1;
+    public int maxIndexOuterWall=0;
     private int minimumMazeRoute=0;
     private int idealRoomAmount;
     private List<Room> potentialRooms = new List<Room>();
@@ -258,24 +258,32 @@ public class MapManager : MonoBehaviour
             }
 
             //Find outer tiles and determine how much their walls can be opened.
-            if (FindOuterWalls)
+            if (maxIndexOuterWall != 0)
             {
-                if (i == 0)
+                if (mapSequence.Length > 1)
                 {
-                    mapScript.FindOuterWalls(mapSequence[i].endSeed);
+                    if (i == 0)
+                    {
+                        mapScript.FindOuterWalls(mapSequence[i].endSeed, maxIndexOuterWall);
 
+                    }
+                    else if (i == mapSequence.Length - 1)
+                    {
+                        mapScript.FindOuterWalls(mapSequence[i].startSeed, maxIndexOuterWall);
+
+                    }
+                    else
+                    {
+
+                        mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed, maxIndexOuterWall);
+
+                    }
                 }
-                else if (i == mapSequence.Length - 1)
+                else //if there is only one maze segment and therefore no portals
                 {
-                    mapScript.FindOuterWalls(mapSequence[i].startSeed);
-
+                    mapScript.FindOuterWalls(maxIndexOuterWall);
                 }
-                else
-                {
-
-                    mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
-
-                }
+                
             }
 
             //Find rooms

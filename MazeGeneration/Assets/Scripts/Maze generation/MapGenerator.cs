@@ -264,7 +264,7 @@ public abstract class MapGenerator : MonoBehaviour
         }
     }
 
-    public void FindOuterWalls(TileInfo portal)
+    public void FindOuterWalls(TileInfo portal, int maxIndex)
     {
 
         //List<Tile> outerTiles = new List<Tile>();
@@ -273,12 +273,12 @@ public abstract class MapGenerator : MonoBehaviour
         portals.Add(InfoToTile(portal));
         leadIns.Add(InfoToTile(portal.GetLeadInCoord()));
 
-        FindOuterWalls(portals, leadIns);
+        FindOuterWalls(portals, leadIns, maxIndex);
 
         //return outerTiles;
     }
 
-    public void FindOuterWalls(TileInfo start, TileInfo goal)
+    public void FindOuterWalls(TileInfo start, TileInfo goal, int maxIndex)
     {
         //List<Tile> outerTiles = new List<Tile>();
 
@@ -290,12 +290,19 @@ public abstract class MapGenerator : MonoBehaviour
         portals.Add(InfoToTile(goal));
         leadIns.Add(InfoToTile(goal.GetLeadInCoord()));
 
-        FindOuterWalls(portals, leadIns);
+        FindOuterWalls(portals, leadIns, maxIndex);
 
         //return outerTiles;
     }
 
-    public List<Tile> FindOuterWalls(List<Tile> portals, List<Tile> leadIns)
+    public void FindOuterWalls(int maxIndex)
+    {
+        List<Tile> portals = new List<Tile>();
+        List<Tile> leadIns = new List<Tile>();
+        FindOuterWalls(portals, leadIns, maxIndex);
+    }
+
+    public List<Tile> FindOuterWalls(List<Tile> portals, List<Tile> leadIns, int maxIndex)
     {
 
         List<Tile> outerTiles = new List<Tile>();
@@ -310,7 +317,7 @@ public abstract class MapGenerator : MonoBehaviour
             {
                 if (!LeadinOrPortalTile(t, both))
                 {
-                    SetOuterwalls(t, 2); // make it possible to make outer wall completely open or window
+                    SetOuterwalls(t, 2, maxIndex); // make it possible to make outer wall completely open or window
                 }
             }
         }
@@ -319,14 +326,14 @@ public abstract class MapGenerator : MonoBehaviour
         {
             if (leadIns[i].isOuterTile)
             {
-                SetOuterwalls(leadIns[i], 1); //only allow them to be windows
+                SetOuterwalls(leadIns[i], 1, maxIndex); //only allow them to be windows
             }
         }
 
         return outerTiles;
     }
 
-    private void SetOuterwalls(Tile t, int maxWallType)
+    private void SetOuterwalls(Tile t, int maxWallType, int maxIndex)
     {
         int[] innerWalls = PortalPositionHelper.GetEntranceArray(t.GetRow(), t.GetCol());
 
@@ -334,7 +341,15 @@ public abstract class MapGenerator : MonoBehaviour
         {
             if (!innerWalls.Contains(i))
             {
-                t.outerWalls[i] = maxWallType;
+                if (maxIndex < maxWallType)
+                {
+                    t.outerWalls[i] = maxIndex;
+                }
+                else
+                {
+                    t.outerWalls[i] = maxWallType;
+                }
+                
             }
         }
     }

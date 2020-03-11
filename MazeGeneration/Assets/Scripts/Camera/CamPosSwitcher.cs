@@ -20,12 +20,16 @@ namespace Assets.Scripts.Camera
         private int currentMaze = -1, mazeCount, prevScore, nextScore;
         public float loopRepeatRate = 0.7f;
 
+        private int mapSequenceLength;
+
         #region Start
         private void Start()
         {
             layerMask = LayerMask.GetMask("Head");
             layerMask |= LayerMask.GetMask("Ignore Raycast");
             layerMask = ~layerMask;
+
+            mapSequenceLength = GameObject.Find("MapManager").GetComponent<MapManager>().mapSequence.Length;
 
             player = GameObject.FindGameObjectWithTag("Player");
 
@@ -34,8 +38,11 @@ namespace Assets.Scripts.Camera
 
             if (player != null && followCamScriptLeft != null && pRController != null)
             {
-                InvokeRepeating("CheckerLoop", 2.5f, loopRepeatRate);
-                Invoke("DelayedStart", 0.7f);
+                if (mapSequenceLength > 1)
+                {
+                    InvokeRepeating("CheckerLoop", 2.5f, loopRepeatRate);
+                    Invoke("DelayedStart", 0.7f);
+                }
             }
         }
 
