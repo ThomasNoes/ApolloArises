@@ -65,10 +65,10 @@ public class DebugWindow : MonoBehaviour
                 debugPanel.SetActive(!debugPanel.activeSelf);
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickUp))
-            ScrollToTop();
-        else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
-            ScrollToBottom();
+        //if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickUp))
+        //    ScrollToTop();
+        //else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
+        //    ScrollToBottom();
     }
 
     public void ScrollToTop()

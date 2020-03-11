@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -22,16 +23,18 @@ public class DataLogger : MonoBehaviour
     public string fileName = "/session";
     private string fullPath;
 
-    [Tooltip("In seconds")] public float updateInterval = 5.0f;
+    [Tooltip("In seconds")] public float updateInterval = 1.0f;
 
     // Bools:
     public bool continuousLog = false, logData = true;
-    [HideInInspector] public bool logFrameRate, logAverageFrameRate, logCurrentMaze, logWallHits, logPreferredWidth, logPreferredHeight;
+    [HideInInspector] public bool logFrameRate, logAverageFrameRate, logCurrentMaze, 
+        logWallHits, logPreferredWidth, logPreferredHeight, useSceneSwitch;
     private bool active = false, initial = true;
 
     // Lists & Arrays:
     private List<float> dataList;
     private string[] csvLabels;
+    private int[] sceneIndexOrder;
 
     // Other variables:
     private int sessionNumber = -1, fpsSum, fpsCount;
@@ -40,6 +43,14 @@ public class DataLogger : MonoBehaviour
     private StreamWriter file;
     private WaitForSeconds delay;
 
+    public enum conditions
+    {
+        Walls,
+        Windows,
+        Balcony
+    }
+
+    [HideInInspector] public conditions condition1, condition2, condition3;
 
     private void Start()
     {
@@ -64,6 +75,11 @@ public class DataLogger : MonoBehaviour
             }
         }
 
+        sceneIndexOrder = new int[3];
+        sceneIndexOrder[0] = (int)condition1;
+        sceneIndexOrder[1] = (int)condition2;
+        sceneIndexOrder[2] = (int)condition3;
+
 #if UNITY_ANDROID
         if (!Application.isEditor)
             filePath = Application.persistentDataPath;
@@ -75,51 +91,92 @@ public class DataLogger : MonoBehaviour
 
         InitializeFile();
         dataList = new List<float>();
+
+        if (PlayerPrefs.GetInt("initialStart") == 0)
+        {
+            PlayerPrefs.SetInt("initialStart", 1);
+            PlayerPrefs.SetInt("participantNumber", 0);
+        }
     }
 
     private IEnumerator DataLog()
     {
-        Scene scene = SceneManager.GetActiveScene();
-
-        fileName = "/" + scene.name + "_par" + sessionNumber + "_" + System.DateTime.Now.Day + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Year + "_" +
-                   System.DateTime.Now.Hour + "-" + System.DateTime.Now.Minute + ".csv"; 
-
-        fullPath = filePath + fileName;
-        Debug.Log(fullPath);
-
-        using (file = File.CreateText(fullPath))
+        if (initial)
         {
-            file.WriteLine(string.Join(";", csvLabels));
+            Scene scene = SceneManager.GetActiveScene();
 
-            while (active)
+            fileName = "/" + scene.name + "_par" + sessionNumber + "_" + System.DateTime.Now.Day + "-" + System.DateTime.Now.Month + "-" + System.DateTime.Now.Year + "_" +
+                       System.DateTime.Now.Hour + "-" + System.DateTime.Now.Minute + ".csv";
+
+            fullPath = filePath + fileName;
+            Debug.Log(fullPath);
+            initial = false;
+
+            using (file = File.CreateText(fullPath))
             {
-                dataList.Add(sessionNumber);
+                file.WriteLine(string.Join(";", csvLabels));
 
-                if (logFrameRate)
-                    dataList.Add(logAverageFrameRate ? avgFrames : frameRate);
-                
-                if (logCurrentMaze)
-                    dataList.Add(pRController.currentMaze);
+                while (active)
+                {
+                    fileStream(file);
+                    yield return delay;
+                }
 
-                if (logPreferredWidth)
-                    dataList.Add(mapObj.transform.localScale.x);
+                file.Close();
+            }
+        }
+        else
+        {
+            using (Stream st = File.Open(fullPath, FileMode.Append, FileAccess.Write))
+            {
+                using (file = new StreamWriter(st))
+                {
+                    fileStream(file);
 
-                if (logPreferredHeight)
-                    dataList.Add(mapObj.transform.localScale.y);
-
-                if (logWallHits)
-                    dataList.Add(antiWallCollision.wallHits);
-
-                file.WriteLine(string.Join(";", dataList));
-                dataList.Clear();
-
-                if (!continuousLog)
-                    StartLogging();
-
-                yield return delay;
+                    file.Close();
+                }
             }
 
-            file.Close();
+            initial = true;
+        }
+    }
+
+    private void CancelLastLine()
+    {
+        using (Stream st = File.Open(fullPath, FileMode.Open, FileAccess.ReadWrite))
+        {
+            st.SetLength(st.Length - 1);
+            st.Close();
+            Debug.Log("StreamWriter: Cancelled previous line");
+            initial = !initial;
+        }
+    }
+
+    private void fileStream(StreamWriter file)
+    {
+        dataList.Add(sessionNumber);
+
+        if (logFrameRate)
+            dataList.Add(logAverageFrameRate ? avgFrames : frameRate);
+
+        if (logCurrentMaze)
+            dataList.Add(pRController.currentMaze);
+
+        if (logPreferredWidth)
+            dataList.Add(mapObj.transform.localScale.x);
+
+        if (logPreferredHeight)
+            dataList.Add(mapObj.transform.localScale.y);
+
+        if (logWallHits)
+            dataList.Add(antiWallCollision.wallHits);
+
+        file.WriteLine(string.Join(";", dataList));
+        dataList.Clear();
+
+        if (!continuousLog)
+        {
+            StartLogging();
         }
     }
 
@@ -150,12 +207,6 @@ public class DataLogger : MonoBehaviour
         {
             csvLabels[i] = tempLabels[i];
         }
-
-        return; // Below currently not needed
-
-        // System language generalization
-        string spec = "G";
-        CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
     }
 
     private void Update()
@@ -163,15 +214,59 @@ public class DataLogger : MonoBehaviour
         if (!logData)
             return;
 
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
         {
             StartLogging();
+            OVRInput.SetControllerVibration(0.7f, 0.1f, OVRInput.Controller.LTouch);
         }
         else if (Input.GetKeyDown("h"))
         {
             StartLogging();
         }
 
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        {
+            CancelLastLine();
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.Four))
+        {
+            int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
+            int currentConditionIndex = 0;
+
+            for (int i = 0; i < sceneIndexOrder.Length; i++)
+            {
+                if (currentBuildIndex == sceneIndexOrder[i])
+                {
+                    currentConditionIndex = i;
+                }
+            }
+
+            if (SceneManager.sceneCount < currentConditionIndex + 1)
+                Debug.LogError("Scene switch error: no more scenes in build index!");
+            else
+                SceneManager.LoadScene(currentBuildIndex + 1);
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
+        {
+            int newParticipantNumber = PlayerPrefs.GetInt("participantNumber") + 1;
+            PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
+            StartCoroutine(VibrateController(newParticipantNumber, 1, false));
+            initial = true;
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
+        {
+            int newParticipantNumber = PlayerPrefs.GetInt("participantNumber") - 1;
+
+            if (newParticipantNumber < 0)
+                return;
+
+            PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
+            StartCoroutine(VibrateController(newParticipantNumber, 1, false));
+            initial = true;
+        }
+        
         if (logFrameRate)
         {
             frameRate = (int)(1 / Time.deltaTime);
@@ -195,10 +290,34 @@ public class DataLogger : MonoBehaviour
         {
             StopAllCoroutines();
 
-            sessionNumber += 1;
+            sessionNumber = PlayerPrefs.GetInt("participantNumber");
             active = true;
 
             StartCoroutine(DataLog());
+        }
+    }
+
+    private IEnumerator VibrateController(int amount, float frequency, bool rightController)
+    {
+        WaitForSeconds delay1 = new WaitForSeconds(frequency / 2);
+        WaitForSeconds delay2 = new WaitForSeconds(frequency);
+
+        for (int i = 0; i < amount; i++)
+        {
+            if (rightController)
+            {
+                OVRInput.SetControllerVibration(1, 0.8f, OVRInput.Controller.RTouch);
+                yield return delay1;
+                OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+                yield return delay2;
+            }
+            else
+            {
+                OVRInput.SetControllerVibration(1, 0.8f, OVRInput.Controller.LTouch);
+                yield return delay1;
+                OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+                yield return delay2;
+            }
         }
     }
 }
@@ -212,6 +331,21 @@ public class DataLogger_Editor : UnityEditor.Editor
         DrawDefaultInspector();
 
         var script = target as DataLogger;
+
+        script.useSceneSwitch = EditorGUILayout.Toggle("Condition Switch?", script.useSceneSwitch);
+
+        if (script.useSceneSwitch)
+        {
+            SerializedProperty condition1Prop = serializedObject.FindProperty("condition1");
+            EditorGUILayout.PropertyField(condition1Prop);
+            SerializedProperty condition2Prop = serializedObject.FindProperty("condition2");
+            EditorGUILayout.PropertyField(condition2Prop);
+            SerializedProperty condition3Prop = serializedObject.FindProperty("condition3");
+            EditorGUILayout.PropertyField(condition3Prop);
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        GUILayout.Space(15);
 
         if (script.logData)
         {
