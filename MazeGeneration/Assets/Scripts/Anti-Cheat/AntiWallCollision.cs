@@ -7,6 +7,7 @@ public class AntiWallCollision : MonoBehaviour
     public bool useVisual = false;
     private float farClippingPlane;
     private bool active = false;
+    [HideInInspector] public int wallHits;
 
     private void Start()
     {
@@ -47,6 +48,8 @@ public class AntiWallCollision : MonoBehaviour
 
             if (useVisual)
                 cheatCube?.SetActive(true);
+
+            wallHits++;
         }
         else
         {
