@@ -20,7 +20,7 @@ public class DataLogger : MonoBehaviour
 
     // Save location:
     public string filePath = @"Assets/Resources/CSV";
-    public string fileName = "/session";
+    private string fileName = "/session";
     private string fullPath;
 
     [Tooltip("In seconds")] public float updateInterval = 1.0f;
@@ -231,21 +231,10 @@ public class DataLogger : MonoBehaviour
 
         if (OVRInput.GetDown(OVRInput.Button.Four))
         {
-            int currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
-            int currentConditionIndex = 0;
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-            for (int i = 0; i < sceneIndexOrder.Length; i++)
-            {
-                if (currentBuildIndex == sceneIndexOrder[i])
-                {
-                    currentConditionIndex = i;
-                }
-            }
-
-            if (SceneManager.sceneCount < currentConditionIndex + 1)
-                Debug.LogError("Scene switch error: no more scenes in build index!");
-            else
-                SceneManager.LoadScene(currentBuildIndex + 1);
+            if (currentSceneIndex + 1 != SceneManager.sceneCount)
+                SceneManager.LoadScene(currentSceneIndex + 1);
         }
 
         if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
