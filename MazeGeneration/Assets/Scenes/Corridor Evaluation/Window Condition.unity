@@ -1240,12 +1240,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c33aacff76cab444810b841f19c8c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  antiWallCollision: {fileID: 0}
+  mapManagerObj: {fileID: 0}
   filePath: Assets/Resources/CSV
-  fileName: /session
+  updateInterval: 1
+  continuousLog: 0
   logData: 1
   logFrameRate: 1
-  logCurrentMaze: 1
-  updateInterval: 1
+  logAverageFrameRate: 1
+  logCurrentMaze: 0
+  logWallHits: 1
+  logPreferredWidth: 1
+  logPreferredHeight: 1
+  useSceneSwitch: 0
+  condition1: 0
+  condition2: 0
+  condition3: 0
 --- !u!114 &1604854438
 MonoBehaviour:
   m_ObjectHideFlags: 0
