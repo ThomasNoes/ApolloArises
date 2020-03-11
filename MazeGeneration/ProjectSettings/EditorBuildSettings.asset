@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/mazes.unity
-    guid: ce1605abd0608ec4d91416949afefba6
+    path: Assets/Scenes/Corridor Test.unity
+    guid: 4e4740801e9c25641b25d6d56ea06a5d
   m_configObjects: {}

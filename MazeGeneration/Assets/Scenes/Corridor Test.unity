@@ -1174,7 +1174,7 @@ MonoBehaviour:
   startMazeInOrigin: 1
   createRooms: 0
   idealDistanceBetweenRooms: 7
-  maxIndexOuterWall: 0
+  maxIndexOuterWall: 1
   playerHead: {fileID: 2526136163395224742}
   mazeRows: 3
   mazeCols: 3
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   startCol: 0
   playAreaSize: {x: 3, y: 0, z: 3}
   isMapSeeded: 1
-  randomGeneratorSeed: 4
+  randomGeneratorSeed: 9
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
