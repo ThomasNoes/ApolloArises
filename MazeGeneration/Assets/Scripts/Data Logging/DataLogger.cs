@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Text;
 using UnityEngine;
-using System;
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
@@ -29,7 +26,8 @@ public class DataLogger : MonoBehaviour
     public bool continuousLog = false, logData = true;
     [HideInInspector] public bool logFrameRate, logAverageFrameRate, logCurrentMaze, 
         logWallHits, logPreferredWidth, logPreferredHeight, useSceneSwitch;
-    private bool active = false, initial = true;
+    private bool active = false, initial = true, onFirstData = true;
+    private bool[] dataWritten = new []{false, false};
 
     // Lists & Arrays:
     private List<float> dataList;
@@ -107,34 +105,94 @@ public class DataLogger : MonoBehaviour
                     yield return delay;
                 }
 
+                dataWritten[0] = true;
                 file.Close();
             }
         }
         else
         {
-            using (Stream st = File.Open(fullPath, FileMode.Append, FileAccess.Write))
+            if (onFirstData)
             {
-                using (file = new StreamWriter(st))
+                OverWriteLine();
+            }
+            else
+            {
+                if (!dataWritten[1])
                 {
-                    fileStream(file);
-
-                    file.Close();
+                    AppendLine();
+                    dataWritten[1] = true;
                 }
+                else
+                    OverWriteLine();
             }
         }
     }
 
-    private void CancelLastLine()
+    private void AppendLine()
     {
-        using (Stream st = File.Open(fullPath, FileMode.Open, FileAccess.ReadWrite))
+        using (Stream st = File.Open(fullPath, FileMode.Append, FileAccess.Write))
         {
-            st.SetLength(st.Length - 1);
+            using (file = new StreamWriter(st))
+            {
+                fileStream(file);
+                file.Close();
+            }
+        }
+    }
+
+    private void OverWriteLine()
+    {
+        using (Stream st = File.Open(fullPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+        {
+            StreamReader reader = new StreamReader(st);
+            List<string> tempList = new List<string>();
+
+            while (true)
+            {
+                string dataString = reader.ReadLine();
+                if (dataString == null)
+                    break;
+
+                tempList.Add(dataString);
+            }
+
+            UpdateDataList();
+
+            if (onFirstData && dataWritten[0])
+                tempList[1] = string.Join(";", dataList);
+            else if (dataWritten[1])
+                tempList[2] = string.Join(";", dataList);
+
             st.Close();
-            Debug.Log("StreamWriter: Cancelled previous line");
+
+            using (file = File.CreateText(fullPath))
+            {
+                foreach (var t in tempList)
+                {
+                    file.WriteLine(t);
+                }
+
+                file.Close();
+            }
+
+            StartLogging();
+            dataList.Clear();
         }
     }
 
     private void fileStream(StreamWriter file)
+    {
+        UpdateDataList();
+        file.WriteLine(string.Join(";", dataList));
+        dataList.Clear();
+
+        if (!continuousLog)
+        {
+            StartLogging();
+        }
+    }
+
+    private void UpdateDataList()
     {
         dataList.Add(sessionNumber);
 
@@ -152,14 +210,6 @@ public class DataLogger : MonoBehaviour
 
         if (logWallHits)
             dataList.Add(antiWallCollision.wallHits);
-
-        file.WriteLine(string.Join(";", dataList));
-        dataList.Clear();
-
-        if (!continuousLog)
-        {
-            StartLogging();
-        }
     }
 
     private void InitializeFile()
@@ -196,19 +246,18 @@ public class DataLogger : MonoBehaviour
         if (!logData)
             return;
 
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) || Input.GetKeyDown("h"))
         {
             StartLogging();
-            OVRInput.SetControllerVibration(0.7f, 0.1f, OVRInput.Controller.LTouch);
-        }
-        else if (Input.GetKeyDown("h"))
-        {
-            StartLogging();
+            if (!Application.isEditor)
+                OVRInput.SetControllerVibration(0.7f, 0.1f, OVRInput.Controller.LTouch);
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetKeyDown("l"))
         {
-            CancelLastLine();
+            onFirstData = !onFirstData;
+            if (!Application.isEditor)
+                VibrateController(onFirstData ? 1 : 2, 0.5f, false);
         }
 
         if (OVRInput.GetDown(OVRInput.Button.Start))
@@ -293,6 +342,7 @@ public class DataLogger : MonoBehaviour
     }
 }
 
+#region CustomInspector
 #if UNITY_EDITOR
 [CustomEditor(typeof(DataLogger))]
 public class DataLogger_Editor : UnityEditor.Editor
@@ -325,3 +375,4 @@ public class DataLogger_Editor : UnityEditor.Editor
     }
 }
 #endif
+#endregion
