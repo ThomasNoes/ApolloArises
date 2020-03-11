@@ -220,13 +220,13 @@ public class Tile : MonoBehaviour {
     {
         column = c;
     }
-    public void SetPortalDistance(int index, int length, bool CheckIfPortalTile = true)
+    public void SetPortalDistance(int index, int length, bool CheckForPortalTile = true)
     {
         nextDistance = (length-1) - index;
         prevDistance = index;
-        if (CheckIfPortalTile)
+        if (CheckForPortalTile)
         {
-            isPortalTile = GetIsPortalTile();
+            // isPortalTile = CheckIfPortalTile();
         }
 
     }
@@ -234,9 +234,14 @@ public class Tile : MonoBehaviour {
     {
         nextDistance = t.nextDistance+1;
         prevDistance = t.prevDistance+1;
-        isPortalTile = GetIsPortalTile();
-
+        //isPortalTile = CheckIfPortalTile();
     }
+
+    public void SetIsPortalTile(bool isPortalTile)
+    {
+        this.isPortalTile = isPortalTile;
+    }
+
     public void SetAsAstarTile()
     {
         isAStarTile = true;
@@ -246,7 +251,7 @@ public class Tile : MonoBehaviour {
         isMarked = true;
     }
 
-    public bool GetIsPortalTile()
+    public bool CheckIfPortalTile()
     {
         if (nextDistance == 0 || prevDistance == 0)
         {

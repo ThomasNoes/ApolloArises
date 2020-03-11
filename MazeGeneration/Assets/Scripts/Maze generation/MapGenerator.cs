@@ -295,6 +295,13 @@ public abstract class MapGenerator : MonoBehaviour
         //return outerTiles;
     }
 
+    public void FindOuterWalls()
+    {
+        List<Tile> portals = new List<Tile>();
+        List<Tile> leadIns = new List<Tile>();
+        FindOuterWalls(portals, leadIns);
+    }
+
     public List<Tile> FindOuterWalls(List<Tile> portals, List<Tile> leadIns)
     {
 

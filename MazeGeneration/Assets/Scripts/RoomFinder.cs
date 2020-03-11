@@ -166,7 +166,7 @@ public class RoomFinder : MonoBehaviour
             if (t.wallArray[i] == 1) // if the path is open
             {
                 if (//leadIn.isAStarTile && // if it is a a star tile
-                    !leadIn.GetIsPortalTile()) // and it is not the portal tile
+                    !leadIn.isPortalTile) // and it is not the portal tile
                 {
                     if (clockWise)
                     {

@@ -12,7 +12,7 @@ public class PortalRenderController : MonoBehaviour
     public bool useNewPortals = true, isStereoscopic;
     static public MapInfo[] mapSequence;
     public int sequenceLength, portalCount, currentMaze;
-    public float cameraOffset, portalWidth, pillarOffset = 0.1f;
+    public float portalWidth, pillarOffset = 0.1f;
     public GameObject[] prevProjectionQuadArray, nextProjectionQuadArray;
     [HideInInspector] public GameObject[] prevRenderQuadArray, nextRenderQuadArray;
     MapManager mapManager;
@@ -23,21 +23,23 @@ public class PortalRenderController : MonoBehaviour
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapSequence = mapManager.mapSequence;
-        sequenceLength = mapSequence.Length;
-        portalCount = mapSequence.Length - 1;
-        cameraOffset = (float)mapManager.mazeCols * mapManager.tileWidth + 1f;
-        portalWidth = mapManager.tileWidth;
+        if (mapSequence.Length >1)
+        {
+            sequenceLength = mapSequence.Length;
+            portalCount = mapSequence.Length - 1;
+            portalWidth = mapManager.tileWidth;
 
-        transform.position = mapManager.transform.position;
+            transform.position = mapManager.transform.position;
 
-        prevProjectionQuadArray = new GameObject[portalCount];
-        nextProjectionQuadArray = new GameObject[portalCount];
-        prevRenderQuadArray = new GameObject[portalCount];
-        nextRenderQuadArray = new GameObject[portalCount];
+            prevProjectionQuadArray = new GameObject[portalCount];
+            nextProjectionQuadArray = new GameObject[portalCount];
+            prevRenderQuadArray = new GameObject[portalCount];
+            nextRenderQuadArray = new GameObject[portalCount];
 
-        InitializePortals();
-        SetProjectionQuads(true);
-        OffsetCameras(0);
+            InitializePortals();
+            SetProjectionQuads(true);
+            OffsetCameras(0);
+        }
     }
 
     private void PortalSetup(bool isForward, int i)

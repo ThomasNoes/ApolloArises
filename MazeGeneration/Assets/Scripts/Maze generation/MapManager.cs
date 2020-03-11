@@ -260,22 +260,30 @@ public class MapManager : MonoBehaviour
             //Find outer tiles and determine how much their walls can be opened.
             if (FindOuterWalls)
             {
-                if (i == 0)
+                if (mapSequence.Length > 1)
                 {
-                    mapScript.FindOuterWalls(mapSequence[i].endSeed);
+                    if (i == 0)
+                    {
+                        mapScript.FindOuterWalls(mapSequence[i].endSeed);
 
+                    }
+                    else if (i == mapSequence.Length - 1)
+                    {
+                        mapScript.FindOuterWalls(mapSequence[i].startSeed);
+
+                    }
+                    else
+                    {
+
+                        mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
+
+                    }
                 }
-                else if (i == mapSequence.Length - 1)
+                else //if there is only one maze segment and therefore no portals
                 {
-                    mapScript.FindOuterWalls(mapSequence[i].startSeed);
-
+                    mapScript.FindOuterWalls();
                 }
-                else
-                {
-
-                    mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed);
-
-                }
+                
             }
 
             //Find rooms
