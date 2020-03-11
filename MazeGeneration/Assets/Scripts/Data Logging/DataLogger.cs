@@ -34,7 +34,6 @@ public class DataLogger : MonoBehaviour
     // Lists & Arrays:
     private List<float> dataList;
     private string[] csvLabels;
-    private int[] sceneIndexOrder;
 
     // Other variables:
     private int sessionNumber = -1, fpsSum, fpsCount;
@@ -42,15 +41,6 @@ public class DataLogger : MonoBehaviour
     private PortalRenderController pRController;
     private StreamWriter file;
     private WaitForSeconds delay;
-
-    public enum conditions
-    {
-        Walls,
-        Windows,
-        Balcony
-    }
-
-    [HideInInspector] public conditions condition1, condition2, condition3;
 
     private void Start()
     {
@@ -74,11 +64,6 @@ public class DataLogger : MonoBehaviour
                 Debug.LogError("Datalogger Error: Maze 1 not found");
             }
         }
-
-        sceneIndexOrder = new int[3];
-        sceneIndexOrder[0] = (int)condition1;
-        sceneIndexOrder[1] = (int)condition2;
-        sceneIndexOrder[2] = (int)condition3;
 
 #if UNITY_ANDROID
         if (!Application.isEditor)
@@ -320,19 +305,6 @@ public class DataLogger_Editor : UnityEditor.Editor
         DrawDefaultInspector();
 
         var script = target as DataLogger;
-
-        script.useSceneSwitch = EditorGUILayout.Toggle("Condition Switch?", script.useSceneSwitch);
-
-        if (script.useSceneSwitch)
-        {
-            SerializedProperty condition1Prop = serializedObject.FindProperty("condition1");
-            EditorGUILayout.PropertyField(condition1Prop);
-            SerializedProperty condition2Prop = serializedObject.FindProperty("condition2");
-            EditorGUILayout.PropertyField(condition2Prop);
-            SerializedProperty condition3Prop = serializedObject.FindProperty("condition3");
-            EditorGUILayout.PropertyField(condition3Prop);
-            serializedObject.ApplyModifiedProperties();
-        }
 
         GUILayout.Space(15);
 
