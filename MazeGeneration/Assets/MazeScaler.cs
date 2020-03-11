@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class MazeScaler : MonoBehaviour
 {
-    public float tileWidth;
+    [Header("Size in beginning")]
+    public float width;
     public float height;
 
+    [Header("minimum settings")]
     public float minimumWidth = 0.25f;
     public float minimumHeight = 1.5f;
-
     float minWidthMod;
     float minHeightMod;
+
+    [Header("maximum settings")]
+    public float maximumWidth = 1.5f;
+    public float maximumHeight = 5f;
+    float maxWidthMod;
+    float maxHeightMod;
 
     float widthModifier=0;
     float heightModifier=0;
 
     float widthStep = 0.05f;
-    float heightStep = 0.05f;
+    float heightStep = 0.1f;
 
 
     private GameObject mazeSegment;
@@ -26,23 +33,37 @@ public class MazeScaler : MonoBehaviour
     {
         mazeSegment = GameObject.Find("0 - Maze");
         SetLocalScale();
-        minWidthMod = minimumWidth - tileWidth;
+        minWidthMod = minimumWidth - width;
         minHeightMod = minimumHeight - height;
+
+        maxWidthMod = maximumWidth - width;
+        maxHeightMod = maximumHeight - height;
     }
 
     private void SetLocalScale()
     {
+        //checking minimum settings
         if (widthModifier < minWidthMod)
         {
             widthModifier = minWidthMod;
         }
-
         if (heightModifier < minHeightMod)
         {
             heightModifier = minHeightMod;
         }
 
-        mazeSegment.transform.localScale = new Vector3(tileWidth+widthModifier, height+heightModifier, tileWidth + widthModifier);
+        //checking maximum settings
+        if (widthModifier > maxWidthMod)
+        {
+            widthModifier = maxWidthMod;
+        }
+        if (heightModifier > maxHeightMod)
+        {
+            heightModifier = maxHeightMod;
+        }
+
+
+        mazeSegment.transform.localScale = new Vector3(width+widthModifier, height+heightModifier, width + widthModifier);
     }
 
     // Update is called once per frame

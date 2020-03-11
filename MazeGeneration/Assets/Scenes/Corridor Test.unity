@@ -1172,9 +1172,9 @@ MonoBehaviour:
   setDimensionsAutomatically: 1
   MazePlacement: 3
   startMazeInOrigin: 1
-  createRooms: 1
-  FindOuterWalls: 1
+  createRooms: 0
   idealDistanceBetweenRooms: 7
+  maxIndexOuterWall: 0
   playerHead: {fileID: 2526136163395224742}
   mazeRows: 3
   mazeCols: 3
@@ -1182,8 +1182,8 @@ MonoBehaviour:
   startRow: 0
   startCol: 0
   playAreaSize: {x: 3, y: 0, z: 3}
-  isMapSeeded: 0
-  randomGeneratorSeed: 0
+  isMapSeeded: 1
+  randomGeneratorSeed: 4
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
@@ -1272,8 +1272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5cd9cfcae687a4ca9fb5924d0ee8b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileWidth: 1
+  width: 1
   height: 2.5
+  minimumWidth: 0.25
+  minimumHeight: 1.5
+  maximumWidth: 1.5
+  maximumHeight: 5
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
