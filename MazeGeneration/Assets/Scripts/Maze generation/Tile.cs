@@ -39,7 +39,7 @@ public class Tile : MonoBehaviour {
     public bool isRoomEntryTile =false;
 
     //tile type
-    public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile;
+    public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof;
     public int partOfMaze;
 
     void Awake () {

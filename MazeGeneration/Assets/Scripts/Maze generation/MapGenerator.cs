@@ -53,13 +53,19 @@ public abstract class MapGenerator : MonoBehaviour
                 {
                     EventCallbacks.GenerateTerrainEvent gtei = new EventCallbacks.GenerateTerrainEvent();
                     mazeIntArray[i, j] = tileArray[i, j].GetTileID();
+
                     gtei.go = tileArray[i, j].gameObject;
                     gtei.wallArray = tileArray[i, j].GetWallArray();
-                    gtei.isRoomPart = tileArray[i, j].isRoomTile;
-                    gtei.isPortalTile = tileArray[i, j].isPortalTile;
-                    gtei.outerWalls = tileArray[i, j].outerWalls;
                     gtei.tileWidth = tileWidth;
-                    gtei.isOuterTile = tileArray[i, j].isOuterTile;
+
+                    //gtei.isRoomPart = tileArray[i, j].isRoomTile;
+                    //gtei.isPortalTile = tileArray[i, j].isPortalTile;
+                    //gtei.outerWalls = tileArray[i, j].outerWalls;
+                    //gtei.isOuterTile = tileArray[i, j].isOuterTile;
+                    //gtei.partOfMaze = tileArray[i, j].partOfMaze;
+
+                    gtei.tileXPos = i; gtei.tileYPos = j; // Can include tile array and pos instead? - TODO: if so, remove all above as redundant
+                    gtei.tileArray = tileArray;
 
                     //ID Changing when creating new tile
                     gtei.FireEvent();

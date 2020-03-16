@@ -21,7 +21,6 @@
         float PillarWidth = 0.1f;
         float tileScale;
 
-
         private TextureCustomizer textureCustomizer;
 
 
@@ -33,6 +32,8 @@
 
         void OnGenerateTerrain (GenerateTerrainEvent generateTerrain) {
 
+            Tile tempTile = generateTerrain.tileArray[generateTerrain.tileXPos, generateTerrain.tileYPos];
+
             Transform tileTransform = generateTerrain.go.transform;
             tileTransform.localPosition = new Vector3(tileTransform.localPosition.x, 0, tileTransform.localPosition.z);
             tileScale = tileTransform.localScale.y;
@@ -43,7 +44,7 @@
                     textureCustomizer.UpdateTextures(generateTerrain.materialIndex);
 
 
-            if (!generateTerrain.noCeiling)
+            if (!tempTile.isOpenRoof)
             {
                 // Place ceiling on the tile
                 // Set the object as a child of the current tile
@@ -52,7 +53,7 @@
                 tempCeiling.transform.localScale = new Vector3(1, 1, 1);
             }
 
-            if (generateTerrain.isPortalTile)
+            if (tempTile.isPortalTile)
             {
                 for (int i = 0; i < generateTerrain.wallArray.Length; i++)
                 {
@@ -101,9 +102,9 @@
                         Wall tempWallScript = tempWall.GetComponent<Wall>(); // NOTE: Might not be optimized(?)
                         if (tempWallScript != null)
                         {
-                            if (tempWallScript.meshes != null && generateTerrain.outerWalls != null)
+                            if (tempWallScript.meshes != null && tempTile.outerWalls != null)
                             {
-                                tempWallScript.SetMesh(generateTerrain.outerWalls[i]);
+                                tempWallScript.SetMesh(tempTile.outerWalls[i]);
                             }
                         }
                         TileTransform(tileTransform, tempWall);
@@ -150,56 +151,56 @@
                         Wall tempWallScript = tempWall.GetComponent<Wall>(); // NOTE: Might not be optimized(?)
                         if (tempWallScript != null)
                         {
-                            if (tempWallScript.meshes != null && generateTerrain.outerWalls != null)
+                            if (tempWallScript.meshes != null && tempTile.outerWalls != null)
                             {
-                                tempWallScript.SetMesh(generateTerrain.outerWalls[i]);
+                                tempWallScript.SetMesh(tempTile.outerWalls[i]);
                             }
                         }
                     }
                 }
             }
 
-            if (generateTerrain.isOuterTile && !generateTerrain.isPortalTile)
-                PlaceOuterPillars(tileTransform, generateTerrain);
-            else if (generateTerrain.isRoomPart)
+            if (tempTile.isOuterTile && !tempTile.isPortalTile)
+                PlaceOuterPillars(tileTransform, tempTile);
+            else if (tempTile.isRoomTile)
                 PlaceRoomPillars(tileTransform, generateTerrain);
             else
                 PlaceAllPillars(tileTransform, generateTerrain);
         }
 
-        private void PlaceOuterPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain) // TODO rewrite
+        private void PlaceOuterPillars(Transform tileTransform, Tile tile) // TODO rewrite
         {
-            if (generateTerrain.outerWalls[0] != 2 && generateTerrain.outerWalls[0] != -1)
+            if (tile.outerWalls[0] != 2 && tile.outerWalls[0] != -1)
             {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 3);
+                PlacePillar(tileTransform, 1);
+                PlacePillar(tileTransform, 3);
             }
-            if (generateTerrain.outerWalls[1] != 2 && generateTerrain.outerWalls[1] != -1)
+            if (tile.outerWalls[1] != 2 && tile.outerWalls[1] != -1)
             {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 2);
+                PlacePillar(tileTransform, 1);
+                PlacePillar(tileTransform, 2);
             }
-            if (generateTerrain.outerWalls[2] != 2 && generateTerrain.outerWalls[2] != -1)
+            if (tile.outerWalls[2] != 2 && tile.outerWalls[2] != -1)
             {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 2);
+                PlacePillar(tileTransform, 0);
+                PlacePillar(tileTransform, 2);
             }
-            if (generateTerrain.outerWalls[3] != 2 && generateTerrain.outerWalls[3] != -1)
+            if (tile.outerWalls[3] != 2 && tile.outerWalls[3] != -1)
             {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 3);
+                PlacePillar(tileTransform, 0);
+                PlacePillar(tileTransform, 3);
             }
 
-            if (!generateTerrain.isRoomPart)
+            if (!tile.isRoomTile)
             {
-                if (generateTerrain.outerWalls[0] == -1 && generateTerrain.outerWalls[1] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 1);
-                if (generateTerrain.outerWalls[1] == -1 && generateTerrain.outerWalls[2] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 2);
-                if (generateTerrain.outerWalls[2] == -1 && generateTerrain.outerWalls[3] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 0);
-                if (generateTerrain.outerWalls[3] == -1 && generateTerrain.outerWalls[0] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 3);
+                if (tile.outerWalls[0] == -1 && tile.outerWalls[1] == -1)
+                    PlacePillar(tileTransform, 1);
+                if (tile.outerWalls[1] == -1 && tile.outerWalls[2] == -1)
+                    PlacePillar(tileTransform, 2);
+                if (tile.outerWalls[2] == -1 && tile.outerWalls[3] == -1)
+                    PlacePillar(tileTransform, 0);
+                if (tile.outerWalls[3] == -1 && tile.outerWalls[0] == -1)
+                    PlacePillar(tileTransform, 3);
             }
         }
 
@@ -207,23 +208,23 @@
         {
             if (generateTerrain.wallArray[0] == 0)
             {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 3);
+                PlacePillar(tileTransform, 1);
+                PlacePillar(tileTransform, 3);
             }
             if (generateTerrain.wallArray[1] == 0)
             {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 2);
+                PlacePillar(tileTransform, 1);
+                PlacePillar(tileTransform, 2);
             }
             if (generateTerrain.wallArray[2] == 0)
             {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 2);
+                PlacePillar(tileTransform, 0);
+                PlacePillar(tileTransform, 2);
             }
             if (generateTerrain.wallArray[3] == 0)
             {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 3);
+                PlacePillar(tileTransform, 0);
+                PlacePillar(tileTransform, 3);
             }
         }
 
@@ -233,7 +234,7 @@
         /// <param name="tileTransform"></param>
         /// <param name="generateTerrain"></param>
         /// <param name="position">Positions = 0: lower left corner, 1: upper right corner, 2: lower right corner, 3: upper left corner</param>
-        private void PlacePillar(Transform tileTransform, GenerateTerrainEvent generateTerrain, int position)
+        private void PlacePillar(Transform tileTransform, int position)
         {
             // Instantiate a corner piller and place it
             // Set the scaling of the pillar so the height matches the walls
@@ -278,7 +279,7 @@
         {
             for (int i = 0; i < generateTerrain.wallArray.Length; i++)
             {
-                PlacePillar(tileTransform, generateTerrain, i);
+                PlacePillar(tileTransform, i);
             }
         }
 

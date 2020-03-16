@@ -35,7 +35,7 @@ public class MapManager : MonoBehaviour
     private List<Room> potentialRooms = new List<Room>();
     private bool[] roomAlreadyInSegment; 
 
-    List<MapGenerator> mapScripts = new List<MapGenerator>();
+    [HideInInspector] public List<MapGenerator> mapScripts = new List<MapGenerator>();
 
     private Vector3 minimumBound = Vector3.zero;
     private Vector3 maximumBound;

@@ -34,10 +34,11 @@ namespace EventCallbacks
     public class GenerateTerrainEvent : Event<GenerateTerrainEvent>
     {
         public GameObject go;
-        public int[] wallArray, outerWalls;
+        public Tile[,] tileArray;
+        public int[] wallArray/*, outerWalls*/;
         public float tileWidth;
-        public int materialIndex;
-        public bool isRoomPart, noCeiling, isOuterTile, isPortalTile;
+        public int tileXPos, tileYPos, materialIndex;
+        //public bool isRoomPart, noCeiling, isOuterTile, isPortalTile;
     }
 
     public class FusePuzzlePlugIn : Event<FusePuzzlePlugIn>
