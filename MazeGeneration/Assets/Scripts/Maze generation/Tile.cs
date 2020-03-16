@@ -226,7 +226,7 @@ public class Tile : MonoBehaviour {
         prevDistance = index;
         if (CheckForPortalTile)
         {
-            // isPortalTile = CheckIfPortalTile();
+            isPortalTile = CheckIfPortalTile();
         }
 
     }
@@ -234,7 +234,7 @@ public class Tile : MonoBehaviour {
     {
         nextDistance = t.nextDistance+1;
         prevDistance = t.prevDistance+1;
-        //isPortalTile = CheckIfPortalTile();
+        isPortalTile = CheckIfPortalTile();
     }
 
     public void SetIsPortalTile(bool isPortalTile)
