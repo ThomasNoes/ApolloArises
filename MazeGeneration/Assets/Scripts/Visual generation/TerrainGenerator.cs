@@ -6,7 +6,8 @@
     {
         // Variables:
         public bool useNewPlacementMethod = false;
-        public float wallOffset = 0f, wallHeight = 1f, heightScale, wallWidth = 0.05f, tileScale;
+        public float wallOffset = 0f, wallHeight = 1f;
+        private float pillarWidth = 0.1f, heightScale, wallWidth = 0.05f, tileScale;
 
         // Objects:
         public GameObject ceilingObj, wallObj, pillarObj;
@@ -230,7 +231,6 @@
             if (!PillarOrganizer(generateTerrain, position)) // Checks if pillar exist and otherwise adds to array of existing pillars
                 return;
             
-
             // Instantiate a corner piller and place it
             // Set the scaling of the pillar so the height matches the walls
             // Place the object as a child of the tile on which it is placed
@@ -239,8 +239,9 @@
                     tileTransform.position.y + (0.5f * wallHeight),
                     tileTransform.transform.position.z),
                 Quaternion.identity);
-
+            pillarWidth = tempPillar.transform.localScale.x;
             tempPillar.transform.localScale *= tileScale;
+
             //tempPillar.transform.localScale = new Vector3((tempPillar.transform.localScale.x * tileScale) * 1.01f, 
             //    tempPillar.transform.localScale.y * tileScale, (tempPillar.transform.localScale.z * tileScale) * 1.01f);
 
