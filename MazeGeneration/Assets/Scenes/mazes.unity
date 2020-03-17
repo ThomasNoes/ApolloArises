@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a39898678e32cc41a88b3293ebf7970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enable: 0
+  enable: 1
   bufferAmount: 4
 --- !u!1 &1629571677
 GameObject:
