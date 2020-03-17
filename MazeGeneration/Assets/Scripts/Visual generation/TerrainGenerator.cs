@@ -6,8 +6,8 @@
     {
         // Variables:
         public bool useNewPlacementMethod = false;
-        public float wallOffset = 0f, wallHeight = 1f;
-        private float pillarWidth = 0.1f, heightScale, wallWidth = 0.05f, tileScale;
+        public float wallOffset = 0f, wallHeight = 1f, pillarScale = 1.5f;
+        private float heightScale, wallWidth = 0.05f, tileScale;
 
         // Objects:
         public GameObject ceilingObj, wallObj, pillarObj;
@@ -239,11 +239,12 @@
                     tileTransform.position.y + (0.5f * wallHeight),
                     tileTransform.transform.position.z),
                 Quaternion.identity);
-            pillarWidth = tempPillar.transform.localScale.x;
-            tempPillar.transform.localScale *= tileScale;
 
-            //tempPillar.transform.localScale = new Vector3((tempPillar.transform.localScale.x * tileScale) * 1.01f, 
-            //    tempPillar.transform.localScale.y * tileScale, (tempPillar.transform.localScale.z * tileScale) * 1.01f);
+            //tempPillar.transform.localScale *= tileScale;
+            tempPillar.transform.localScale = new Vector3((tempPillar.transform.localScale.x * tileScale) * pillarScale,
+                tempPillar.transform.localScale.y * tileScale, (tempPillar.transform.localScale.z * tileScale) * pillarScale);
+
+            TileTransform(tileTransform, tempPillar);
 
             switch (position)
             {
