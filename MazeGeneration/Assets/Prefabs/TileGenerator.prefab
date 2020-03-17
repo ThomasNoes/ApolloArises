@@ -47,10 +47,14 @@ MonoBehaviour:
   useNewPlacementMethod: 1
   wallOffset: 0.1
   wallHeight: 2.5
-  ceiling: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f, type: 3}
-  wallSegment: {fileID: 5064138798832107477, guid: e59470f358d4ff4489feb66753eddc9c,
+  heightScale: 0
+  wallWidth: 0.05
+  pillarScale: 1.5
+  tileScale: 0
+  ceilingObj: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f,
     type: 3}
-  woodPillar: {fileID: 6666421332874310094, guid: 020cd9494efbe9e4281f6a7967fc414a,
+  wallObj: {fileID: 5064138798832107477, guid: e59470f358d4ff4489feb66753eddc9c, type: 3}
+  pillarObj: {fileID: 6666421332874310094, guid: 020cd9494efbe9e4281f6a7967fc414a,
     type: 3}
 --- !u!114 &7748457934529168361
 MonoBehaviour:

@@ -34,10 +34,11 @@ namespace EventCallbacks
     public class GenerateTerrainEvent : Event<GenerateTerrainEvent>
     {
         public GameObject go;
+        public MapGenerator mapGeneratorRef;
         public Tile[,] tileArray;
         public int[] wallArray/*, outerWalls*/;
         public float tileWidth;
-        public int tileXPos, tileYPos, materialIndex;
+        public int tileRowPos, tileColPos, materialIndex;
         //public bool isRoomPart, noCeiling, isOuterTile, isPortalTile;
     }
 

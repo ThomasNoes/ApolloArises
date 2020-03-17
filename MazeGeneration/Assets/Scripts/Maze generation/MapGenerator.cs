@@ -11,6 +11,7 @@ public abstract class MapGenerator : MonoBehaviour
     public GameObject tilePrefab;
     public Tile[,] tileArray; //
     public int[,] mazeIntArray;
+    public bool[,] pillarBoolArray;
     public List<Tile> aStarTiles;
 
     public void Initialize(int index)
@@ -45,6 +46,8 @@ public abstract class MapGenerator : MonoBehaviour
     public void GenerateIntArray()
     {
         mazeIntArray = new int[mazeRows, mazeColumns]; // will be filled with the ID for each tile in tileArray
+        pillarBoolArray = new bool[mazeRows + 1, mazeColumns + 1];
+
         for (int i = 0; i < mazeRows; i++)
         {
             for (int j = 0; j < mazeColumns; j++)
@@ -57,6 +60,7 @@ public abstract class MapGenerator : MonoBehaviour
                     gtei.go = tileArray[i, j].gameObject;
                     gtei.wallArray = tileArray[i, j].GetWallArray();
                     gtei.tileWidth = tileWidth;
+                    gtei.mapGeneratorRef = this;
 
                     //gtei.isRoomPart = tileArray[i, j].isRoomTile;
                     //gtei.isPortalTile = tileArray[i, j].isPortalTile;
@@ -64,7 +68,7 @@ public abstract class MapGenerator : MonoBehaviour
                     //gtei.isOuterTile = tileArray[i, j].isOuterTile;
                     //gtei.partOfMaze = tileArray[i, j].partOfMaze;
 
-                    gtei.tileXPos = i; gtei.tileYPos = j; // Can include tile array and pos instead? - TODO: if so, remove all above as redundant
+                    gtei.tileRowPos = i; gtei.tileColPos = j; // Can include tile array and pos like this instead - TODO: remove some above as redundant
                     gtei.tileArray = tileArray;
 
                     //ID Changing when creating new tile
