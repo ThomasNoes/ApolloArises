@@ -14,19 +14,19 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
+  m_FogMode: 1
   m_FogDensity: 0.01
   m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogEnd: 25
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 9ba05f538ee36044da5cd2a4f14a8b18, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 823dc0eb5b064e14da00166d21f93fef, type: 3}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -240,7 +240,6 @@ MonoBehaviour:
   sequenceLength: 0
   portalCount: 0
   currentMaze: 0
-  cameraOffset: 0
   portalWidth: 1
   pillarOffset: 0.1
   prevProjectionQuadArray: []
@@ -1173,20 +1172,91 @@ MonoBehaviour:
   MazePlacement: 3
   startMazeInOrigin: 1
   createRooms: 1
-  FindOuterWalls: 1
   idealDistanceBetweenRooms: 7
+  maxIndexOuterWall: 2
+  mapScripts: []
   playerHead: {fileID: 2526136163395224742}
-  mazeRows: 3
-  mazeCols: 3
+  mazeRows: 5
+  mazeCols: 5
   tileWidth: 0.65
   startRow: 0
   startCol: 0
-  playAreaSize: {x: 3, y: 0, z: 3}
+  playAreaSize: {x: 4, y: 0, z: 4}
   isMapSeeded: 0
   randomGeneratorSeed: 0
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
   - mapType: 0
     roomName: 
     isEndSeeded: 0
@@ -1296,12 +1366,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c33aacff76cab444810b841f19c8c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  antiWallCollision: {fileID: 0}
+  mapManagerObj: {fileID: 0}
   filePath: Assets/Resources/CSV
-  fileName: /session
+  updateInterval: 1
+  continuousLog: 0
   logData: 1
   logFrameRate: 1
+  logAverageFrameRate: 0
   logCurrentMaze: 1
-  updateInterval: 1
+  logWallHits: 0
+  logPreferredWidth: 0
+  logPreferredHeight: 0
+  useSceneSwitch: 0
 --- !u!114 &1604854438
 MonoBehaviour:
   m_ObjectHideFlags: 0

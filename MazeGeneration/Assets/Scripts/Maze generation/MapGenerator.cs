@@ -79,6 +79,14 @@ public abstract class MapGenerator : MonoBehaviour
                 //Debug.Log(tileWidth + " generated int array");
             }
         }
+
+        EventCallbacks.GenerateTowersEvent gtwe = new EventCallbacks.GenerateTowersEvent();
+        gtwe.go = gameObject;
+        gtwe.widthX = mazeColumns * tileWidth;
+        gtwe.widthY = mazeRows * tileWidth;
+        gtwe.tileWidth = tileWidth;
+
+        gtwe.FireEvent();
     }
 
     private void MaterialSwitcher()

@@ -9,7 +9,7 @@
         private float heightScale, wallWidth = 0.05f, tileScale;
 
         // Objects:
-        public GameObject ceilingObj, wallObj, pillarObj;
+        public GameObject ceilingObj, wallObj, pillarObj, towerObj;
         private GameObject tempCeiling, tempWall, tempPillar;
 
         // Refs:
@@ -18,7 +18,8 @@
 
         void Awake ()
         {
-            GenerateTerrainEvent.RegisterListener (OnGenerateTerrain);
+            GenerateTerrainEvent.RegisterListener(OnGenerateTerrain);
+            GenerateTowersEvent.RegisterListener(TowerGenerator);
             textureCustomizer = GetComponent<TextureCustomizer>();
         }
 
@@ -284,6 +285,19 @@
         {
             thisObj.transform.localScale = new Vector3(thisObj.transform.localScale.x, wallHeight, thisObj.transform.localScale.z);
             thisObj.transform.parent = thisTransform;
+        }
+
+        private void TowerGenerator(GenerateTowersEvent generateTowers)
+        {
+            if (towerObj == null)
+                return;
+
+            Transform towerTransform = generateTowers.go.transform;
+
+            GameObject tempTower = Instantiate(towerObj, towerTransform.position, Quaternion.identity, towerTransform);
+            tempTower.transform.localScale = new Vector3(generateTowers.widthX, tempTower.transform.localScale.y, generateTowers.widthY);
+
+            tempTower.transform.Translate((generateTowers.widthX / 2f) - (generateTowers.tileWidth / 2f), 0, (-generateTowers.widthY / 2f) + (generateTowers.tileWidth / 2f));
         }
     }
 }

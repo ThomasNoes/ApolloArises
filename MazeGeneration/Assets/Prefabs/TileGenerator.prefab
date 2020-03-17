@@ -45,16 +45,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useNewPlacementMethod: 1
+  towerStructureHeight: 100
   wallOffset: 0.1
   wallHeight: 2.5
-  heightScale: 0
-  wallWidth: 0.05
   pillarScale: 1.5
-  tileScale: 0
   ceilingObj: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f,
     type: 3}
   wallObj: {fileID: 5064138798832107477, guid: e59470f358d4ff4489feb66753eddc9c, type: 3}
   pillarObj: {fileID: 6666421332874310094, guid: 020cd9494efbe9e4281f6a7967fc414a,
+    type: 3}
+  towerObj: {fileID: 8490072557984060639, guid: 69be8d700cef62047ad38c8d47c70c0c,
     type: 3}
 --- !u!114 &7748457934529168361
 MonoBehaviour:

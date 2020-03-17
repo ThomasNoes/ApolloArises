@@ -36,21 +36,17 @@ namespace EventCallbacks
         public GameObject go;
         public MapGenerator mapGeneratorRef;
         public Tile[,] tileArray;
-        public int[] wallArray/*, outerWalls*/;
+        public int[] wallArray;
         public float tileWidth;
         public int tileRowPos, tileColPos, materialIndex;
+
+        //public int[] outerWalls;
         //public bool isRoomPart, noCeiling, isOuterTile, isPortalTile;
     }
 
-    public class FusePuzzlePlugIn : Event<FusePuzzlePlugIn>
+    public class GenerateTowersEvent : Event<GenerateTowersEvent>
     {
         public GameObject go;
-        public GameObject sGo;
-    }
-
-    public class FusePuzzlePlugOut : Event<FusePuzzlePlugOut>
-    {
-        public GameObject go;
-        public GameObject sGo;
+        public float widthX, widthY, tileWidth;
     }
 }
