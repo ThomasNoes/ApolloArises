@@ -1,5 +1,4 @@
 ﻿namespace EventCallbacks {
-
     using UnityEngine;
 
     public class TerrainGenerator : MonoBehaviour
@@ -113,7 +112,6 @@
                 {
                     if (generateTerrain.wallArray[i] == 0)
                     {
-
                         Vector3 localPos = new Vector3(0, heightScale / 2, 0);
                         Vector3 localScale = new Vector3(0.99f, heightScale, wallWidth);
                         tempWall = Instantiate(wallObj, tileTransform.position, Quaternion.AngleAxis(i * 90, Vector3.up), tileTransform); // instantiate at the position of the tile
@@ -162,70 +160,34 @@
                 PlaceAllPillars(tileTransform, generateTerrain);
         }
 
-        private void PlaceOuterPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain, Tile tile) // TODO rewrite
+        private void PlaceOuterPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain, Tile tile)
         {
-            if (tile.outerWalls[0] != 2 && tile.outerWalls[0] != -1)
+            for (int i = 0; i < tile.outerWalls.Length; i++)
             {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 3);
-            }
-            if (tile.outerWalls[1] != 2 && tile.outerWalls[1] != -1)
-            {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 2);
-            }
-            if (tile.outerWalls[2] != 2 && tile.outerWalls[2] != -1)
-            {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 2);
-            }
-            if (tile.outerWalls[3] != 2 && tile.outerWalls[3] != -1)
-            {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 3);
-            }
-
-            if (!tile.isRoomTile)
-            {
-                if (tile.outerWalls[0] == -1 && tile.outerWalls[1] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 1);
-                if (tile.outerWalls[1] == -1 && tile.outerWalls[2] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 2);
-                if (tile.outerWalls[2] == -1 && tile.outerWalls[3] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 0);
-                if (tile.outerWalls[3] == -1 && tile.outerWalls[0] == -1)
-                    PlacePillar(tileTransform, generateTerrain, 3);
+                if (tile.outerWalls[i] != 2 && generateTerrain.wallArray[i] != 1)
+                {
+                    PlacePillar(tileTransform, generateTerrain, i);
+                    PlacePillar(tileTransform, generateTerrain, (i + 1) % 4);
+                }
             }
         }
 
         private void PlaceRoomPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain)
         {
-            if (generateTerrain.wallArray[0] == 0)
+            for (int i = 0; i < generateTerrain.wallArray.Length; i++)
             {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 3);
-            }
-            if (generateTerrain.wallArray[1] == 0)
-            {
-                PlacePillar(tileTransform, generateTerrain, 1);
-                PlacePillar(tileTransform, generateTerrain, 2);
-            }
-            if (generateTerrain.wallArray[2] == 0)
-            {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 2);
-            }
-            if (generateTerrain.wallArray[3] == 0)
-            {
-                PlacePillar(tileTransform, generateTerrain, 0);
-                PlacePillar(tileTransform, generateTerrain, 3);
+                if (generateTerrain.wallArray[i] == 0)
+                {
+                    PlacePillar(tileTransform, generateTerrain, i);
+                    PlacePillar(tileTransform, generateTerrain, (i + 1) % 4);
+                }
             }
         }
 
         /// <summary>
-        /// Places a pillar at specified position
+        /// Places a pillar at specified position.
         /// </summary>
-        /// <param name="position">Positions = 0: lower left corner, 1: upper right corner, 2: lower right corner, 3: upper left corner</param>
+        /// <param name="position">Positions = 0: upper left corner, 1: upper right corner, 2: lower right corner, 3: lower left corner</param>
         private void PlacePillar(Transform tileTransform, GenerateTerrainEvent generateTerrain, int position)
         {
             if (!PillarOrganizer(generateTerrain, position)) // Checks if pillar exist and otherwise adds to array of existing pillars
@@ -249,8 +211,8 @@
             switch (position)
             {
                 case 0:
-                    tempPillar.name = "lower left";
-                    tempPillar.transform.localPosition = new Vector3(-0.5f, tempPillar.transform.localPosition.y, -0.5f); // old values = 0.45
+                    tempPillar.name = "upper left";
+                    tempPillar.transform.localPosition = new Vector3(-0.5f, tempPillar.transform.localPosition.y, 0.5f);
                     break;
                 case 1:
                     tempPillar.name = "upper right";
@@ -261,13 +223,12 @@
                     tempPillar.transform.localPosition = new Vector3(0.5f, tempPillar.transform.localPosition.y, -0.5f);
                     break;
                 case 3:
-                    tempPillar.name = "upper left";
-                    tempPillar.transform.localPosition = new Vector3(-0.5f, tempPillar.transform.localPosition.y, 0.5f);
+                    tempPillar.name = "lower left";
+                    tempPillar.transform.localPosition = new Vector3(-0.5f, tempPillar.transform.localPosition.y, -0.5f); // old values = 0.45
                     break;
                 default:
                     break;
             }
-
         }
 
         private void PlaceAllPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain)
@@ -278,18 +239,19 @@
             }
         }
 
-        /// <param name="pos">0: lower left corner, 1: upper right corner, 2: lower right corner, 3: upper left corner</param>
+        /// <param name="pos">0: upper left corner, 1: upper right corner, 2: lower right corner, 3: lower left corner</param>
         /// <returns></returns>
         private static bool PillarOrganizer(GenerateTerrainEvent generateTerrain, int pos) // This function updates pillar bool array and checks if pillars can be placed
         {
             switch (pos)
             {
                 case 0:
-                    if (!generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos + 1, generateTerrain.tileColPos])
+                    if (!generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos, generateTerrain.tileColPos])
                     {
-                        generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos + 1, generateTerrain.tileColPos] = true;
+                        generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos, generateTerrain.tileColPos] = true;
                         return true;
-                    } else
+                    }
+                    else
                         return false;
                 case 1:
                     if (!generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos, generateTerrain.tileColPos + 1])
@@ -306,11 +268,12 @@
                     } else
                         return false;
                 case 3:
-                    if (!generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos, generateTerrain.tileColPos])
+                    if (!generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos + 1, generateTerrain.tileColPos])
                     {
-                        generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos, generateTerrain.tileColPos] = true;
+                        generateTerrain.mapGeneratorRef.pillarBoolArray[generateTerrain.tileRowPos + 1, generateTerrain.tileColPos] = true;
                         return true;
-                    } else
+                    }
+                    else
                         return false;
                 default:
                     return false;
