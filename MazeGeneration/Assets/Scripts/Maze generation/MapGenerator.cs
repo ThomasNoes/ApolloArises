@@ -80,13 +80,18 @@ public abstract class MapGenerator : MonoBehaviour
             }
         }
 
+        // Generate towers event:
         EventCallbacks.GenerateTowersEvent gtwe = new EventCallbacks.GenerateTowersEvent();
         gtwe.go = gameObject;
         gtwe.widthX = mazeColumns * tileWidth;
         gtwe.widthY = mazeRows * tileWidth;
         gtwe.tileWidth = tileWidth;
-
         gtwe.FireEvent();
+
+        // Texture switch event:
+        EventCallbacks.TextureSwitchEvent tse = new EventCallbacks.TextureSwitchEvent();
+        tse.partOfMaze = tileArray[0, 0].partOfMaze;
+        tse.FireEvent();
     }
 
     private void MaterialSwitcher()

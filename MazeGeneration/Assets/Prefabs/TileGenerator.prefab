@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useNewPlacementMethod: 1
-  towerStructureHeight: 100
+  useTextureSwitcher: 0
   wallOffset: 0.1
   wallHeight: 2.5
   pillarScale: 1.5
@@ -68,22 +68,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d816631e3890e468cac39f58f48a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorPrefab: {fileID: 740540993216588661, guid: 702190ff65c258e46ab3fd7d688505b2,
-    type: 3}
-  wallPrefab: {fileID: 5064138798832107477, guid: e59470f358d4ff4489feb66753eddc9c,
-    type: 3}
-  pillarPrefab: {fileID: 6666421332874310094, guid: 020cd9494efbe9e4281f6a7967fc414a,
-    type: 3}
-  ceilingPrefab: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f,
-    type: 3}
-  newFloorPrefabs: []
-  newWallPrefabs: []
-  newPillarPrefabs: []
-  newCeilingPrefabs: []
-  pillarMats: []
-  wallMats: []
-  floorMats: []
-  ceilingMats: []
-  autoSwitchTextures: 0
-  frequency: 10
-  matIndex: 0
+  floorMaterial: {fileID: 2100000, guid: 6f6c9816529f4a9489aa009e63c82a07, type: 2}
+  wallMaterial: {fileID: 2100000, guid: eb36f07ea8ead6848adc223d847c03de, type: 2}
+  pillarMaterial: {fileID: 2100000, guid: 67b54dda9b57782449315925eab31d3a, type: 2}
+  ceilingMaterial: {fileID: 2100000, guid: 714d4210f54d7e644a332e19b07637bc, type: 2}
+  towerMaterial: {fileID: 2100000, guid: a6560dca61c34db4a8b2677e22bbd4db, type: 2}
+  floorMats:
+  - {fileID: 2100000, guid: c5de2de29649946caa67f57a9825cfd6, type: 2}
+  - {fileID: 2100000, guid: e94da9bf869becf40a26c597ffb48f60, type: 2}
+  - {fileID: 2100010, guid: 8fc6d98e4112c9149898fdb77e6b669d, type: 3}
+  wallMats:
+  - {fileID: 2100000, guid: 5d1946ce7cee747e6aa39a6ea4350e11, type: 2}
+  - {fileID: 2100000, guid: e94da9bf869becf40a26c597ffb48f60, type: 2}
+  - {fileID: 2100000, guid: e121bf11a9143914dbafa9e733415f2a, type: 2}
+  pillarMats:
+  - {fileID: 2100000, guid: 87a5f1fbf58136c47a23b88d87263551, type: 2}
+  - {fileID: 2100000, guid: a458093cdb4d25b499db8e111565c02d, type: 2}
+  - {fileID: 2100000, guid: c466b89bb972b8a42bd266c102f8f2cb, type: 2}
+  ceilingMats:
+  - {fileID: 2100000, guid: 4cfd59285e9559a4c8ed2e457f4bc646, type: 2}
+  - {fileID: 2100000, guid: b825d518262c2453b9c06573f9b21658, type: 2}
+  - {fileID: 2100000, guid: 1f0c317a1c26f8a4285902639d3d1a0c, type: 2}
+  towerMats:
+  - {fileID: 2100000, guid: c5de2de29649946caa67f57a9825cfd6, type: 2}
+  - {fileID: 2100000, guid: 02c684a5a201b40a4a0418558d9512d1, type: 2}
+  - {fileID: 2100000, guid: 6c5d622360ab88640a8bbcb987edbfdd, type: 2}
+  autoSwitchTextures: 1
+  frequency: 4
+  matIndex: -1

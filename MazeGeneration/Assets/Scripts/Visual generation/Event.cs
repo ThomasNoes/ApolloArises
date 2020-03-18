@@ -49,4 +49,9 @@ namespace EventCallbacks
         public GameObject go;
         public float widthX, widthY, tileWidth;
     }
+
+    public class TextureSwitchEvent : Event<TextureSwitchEvent>
+    {
+        public int partOfMaze;
+    }
 }

@@ -58,6 +58,7 @@ MonoBehaviour:
   isPortalTile: 0
   isOuterTile: 0
   isRoomTile: 0
+  isOpenRoof: 0
   partOfMaze: 0
 --- !u!65 &4126564364297773086
 BoxCollider:
@@ -131,7 +132,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6fa48c2a126d0d74e8bb671b62e8cb1b, type: 2}
+  - {fileID: 2100000, guid: 6f6c9816529f4a9489aa009e63c82a07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -4,7 +4,7 @@
     public class TerrainGenerator : MonoBehaviour
     {
         // Variables:
-        public bool useNewPlacementMethod = false;
+        public bool useNewPlacementMethod = false, useTextureSwitcher = true;
         public float wallOffset = 0f, wallHeight = 1f, pillarScale = 1.5f;
         private float heightScale, wallWidth = 0.05f, tileScale;
 
@@ -20,6 +20,7 @@
         {
             GenerateTerrainEvent.RegisterListener(OnGenerateTerrain);
             GenerateTowersEvent.RegisterListener(TowerGenerator);
+            TextureSwitchEvent.RegisterListener(TextureSwitch);
             textureCustomizer = GetComponent<TextureCustomizer>();
         }
 
@@ -31,12 +32,6 @@
             tileTransform.localPosition = new Vector3(tileTransform.localPosition.x, 0, tileTransform.localPosition.z);
             tileScale = tileTransform.localScale.y;
             heightScale = wallHeight / tileScale;
-
-
-            if (textureCustomizer != null)
-                if (textureCustomizer.autoSwitchTextures)
-                    textureCustomizer.UpdateTextures(generateTerrain.materialIndex);
-
 
             if (!tempTile.isOpenRoof)
             {
@@ -298,6 +293,19 @@
             tempTower.transform.localScale = new Vector3(generateTowers.widthX, tempTower.transform.localScale.y, generateTowers.widthY);
 
             tempTower.transform.Translate((generateTowers.widthX / 2f) - (generateTowers.tileWidth / 2f), 0, (-generateTowers.widthY / 2f) + (generateTowers.tileWidth / 2f));
+        }
+
+        private void TextureSwitch(TextureSwitchEvent textureSwitch)
+        {
+            if (textureCustomizer == null || !useTextureSwitcher)
+                return;
+
+            if (textureCustomizer.autoSwitchTextures)
+                if ((textureSwitch.partOfMaze % textureCustomizer.frequency) == 0)
+                {
+                    textureCustomizer.UpdateTextures(textureCustomizer.matIndex + 1);
+                    textureCustomizer.matIndex++;
+                }
         }
     }
 }

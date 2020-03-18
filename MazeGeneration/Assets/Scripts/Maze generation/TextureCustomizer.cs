@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 public class TextureCustomizer : MonoBehaviour
 {
-    public GameObject floorPrefab, wallPrefab, pillarPrefab, ceilingPrefab;
+    //public GameObject floorPrefab, wallPrefab, pillarPrefab, ceilingPrefab;
+    public Material floorMaterial, wallMaterial, pillarMaterial, ceilingMaterial, towerMaterial;
 
-    [HideInInspector] public List<GameObject> newFloorPrefabs, newWallPrefabs, newPillarPrefabs, newCeilingPrefabs;
+    public Material[] floorMats, wallMats, pillarMats, ceilingMats, towerMats;
 
-    public Material[] pillarMats, wallMats, floorMats, ceilingMats;
-
-    public bool autoSwitchTextures;
-    [HideInInspector] public int frequency = 10, matIndex = 0;
+    public bool autoSwitchTextures = true;
+    [HideInInspector] public int frequency = 10, matIndex = -1;
 
     //public GameObject testPrefab;
     //public Material[] testMaterials;
@@ -25,60 +22,60 @@ public class TextureCustomizer : MonoBehaviour
 
     public void UpdateTextures(int index) // TODO: figure out if you can update a prefab when APK is built?
     {
-        if (floorPrefab != null)
+        if (floorMaterial != null)
         {
             if (floorMats != null)
             {
                 if (floorMats.Length > index)
                 {
-                    floorPrefab.transform.GetChild(0).GetComponent<Renderer>().material = floorMats[index];
+                    floorMaterial.SetTexture(1, floorMats[index].mainTexture);
                 }
             }
         }
 
-        if (wallPrefab != null)
+        if (wallMaterial != null)
         {
             if (wallMats != null)
             {
                 if (wallMats.Length > index)
                 {
-                    wallPrefab.gameObject.GetComponent<Renderer>().material = wallMats[index];
+                    wallMaterial.SetTexture(1, wallMats[index].mainTexture);
                 }
             }
         }
 
-        if (pillarPrefab != null)
+        if (pillarMaterial != null)
         {
             if (pillarMats != null)
             {
                 if (pillarMats.Length > index)
                 {
-                    pillarPrefab.GetComponent<Renderer>().material = pillarMats[index];
+                    pillarMaterial.SetTexture(1, pillarMats[index].mainTexture);
                 }
             }
         }
 
-        if (ceilingPrefab != null)
+        if (ceilingMaterial != null)
         {
             if (ceilingMats != null)
             {
                 if (ceilingMats.Length > index)
                 {
-                    ceilingPrefab.GetComponent<Renderer>().material = ceilingMats[index];
+                   ceilingMaterial.SetTexture(1, ceilingMats[index].mainTexture);
                 }
             }
         }
 
-        //if (testPrefab != null)
-        //{
-        //    if (testMaterials != null)
-        //    {
-        //        if (testMaterials.Length > index)
-        //        {
-        //            testPrefab.GetComponent<Renderer>().material = testMaterials[index];
-        //        }
-        //    }
-        //}
+        if (towerMaterial != null)
+        {
+            if (towerMats != null)
+            {
+                if (towerMats.Length > index)
+                {
+                    towerMaterial.SetTexture(1, towerMats[index].mainTexture);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -113,17 +110,6 @@ public class TextureCustomizer : MonoBehaviour
                 return -1;
         }
     }
-
-    //private void Update()
-    //{
-    //    if (OVRInput.GetDown(OVRInput.Button.Two))
-    //    {
-    //        UpdateTextures(testBool ? 0 : 1);
-    //        testBool = !testBool;
-
-    //        Instantiate(testPrefab, Camera.main.transform.position, Quaternion.identity);
-    //    }
-    //}
 }
 
 #if UNITY_EDITOR
@@ -143,7 +129,7 @@ public class TextureCustomizer_Editor : UnityEditor.Editor
 
         EditorGUILayout.Space(10.0f);
 
-        script.matIndex = EditorGUILayout.IntField("Material Index", script.matIndex);
+        script.matIndex = EditorGUILayout.IntField("Current material index", script.matIndex);
 
         if (GUILayout.Button("Change Textures"))
         {
