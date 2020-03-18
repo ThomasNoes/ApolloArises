@@ -411,6 +411,8 @@ public class MapManager : MonoBehaviour
             {
                 //Debug.Log("entrance is "+ flag.TileToString() +  " removed " + t.TileToString());
                 //Debug.Log("Maze Segment " + mazeSegment);
+
+
                 tilesToRemove.Add(t);
             }
 

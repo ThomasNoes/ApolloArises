@@ -213,20 +213,18 @@ public class TileInfo
     {
         bool adjacentAndSame = false;
 
-        if (entrance.direction == direction) //check if they are pointing in same direction
+        if (entrance.direction == direction) //check if they are pointing in same direction //maybe this needs to be opposite
         {
             if(spelledDirection == "North" || spelledDirection == "South") // check if the direction is vertical
             {
-                if (entrance.row == row && // check if same row
-                    (entrance.column == column + 1 || entrance.column == column - 1)) //check if it is the adjacent column
+                if (entrance.column == column + 1 || entrance.column == column - 1) //check if it is the adjacent column
                 {
                     adjacentAndSame = true;
                 }
             }
             if (spelledDirection == "East" || spelledDirection == "West") // check if the direction is horizontal
             {
-                if (entrance.column == column && // check if same column
-                    (entrance.row == row + 1 || entrance.row == row - 1)) //check if it is the adjacent row
+                if (entrance.row == row + 1 || entrance.row == row - 1) //check if it is the adjacent row
                 {
                     adjacentAndSame = true;
                 }

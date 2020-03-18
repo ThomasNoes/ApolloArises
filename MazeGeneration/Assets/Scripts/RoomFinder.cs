@@ -10,6 +10,7 @@ public class RoomFinder : MonoBehaviour
 
     List<Tile> clockTiles = new List<Tile>();
     List<Tile> counterTiles = new List<Tile>();
+    List<Tile> returnRoom = new List<Tile>();
     bool clockwiseIncludeAStar=false;
     bool counterwiseIncludeAStar=false;
 
@@ -81,22 +82,15 @@ public class RoomFinder : MonoBehaviour
                 }
             }
         }
-        //check if a room exist and send back bool
-        if (roomClockWise && roomCounterWise)
-        {
-            // what to do if both are possible rooms
-            roomExists = true;
-        }
-        else if (roomClockWise)
+
+
+        //check if a room exist and decide which room it is
+        if (roomClockWise || roomCounterWise)
         {
             roomExists = true;
-            roomisClockwise = true;
+            SetRoom(roomClockWise, roomCounterWise);
         }
-        else if (roomCounterWise)
-        {
-            roomExists = true;
-            roomisClockwise = false;
-        }
+
         return roomExists;
     }
 
@@ -231,7 +225,6 @@ public class RoomFinder : MonoBehaviour
             clockTiles.Add(t);
         }
 
-        //Debug.Log("clockwise " + clockTiles.Count + " in maze "+ mazeID + " ----------------- added tile " + t.GetRow() + "," + t.GetCol());
         if (!debugTiles.Contains(t))
         {
             debugTiles.Add(t);
@@ -244,7 +237,7 @@ public class RoomFinder : MonoBehaviour
         {
             counterTiles.Add(t);
         }
-        //Debug.Log("counterwise "+ counterTiles.Count + " in maze " + mazeID + " ----------------- added tile " + t.GetRow() + "," + t.GetCol());
+
         if (!debugTiles.Contains(t))
         {
             debugTiles.Add(t);
@@ -272,19 +265,54 @@ public class RoomFinder : MonoBehaviour
 
     public List<Tile> GetRoom()
     {
-        if(roomisClockwise && clockTiles.Count ==4)
+        if (roomExists)
         {
-            return clockTiles;
+            return returnRoom;
         }
-        else if (!roomisClockwise && counterTiles.Count == 4)
+        return null;
+
+    }
+
+    private void SetRoom(bool roomClockWise, bool roomCounterWise)
+    {
+        if (roomClockWise && roomCounterWise) // if both directions are possible
         {
-            return counterTiles;
+            if (ShortestDistanceToPortal(clockTiles) >= ShortestDistanceToPortal(counterTiles)) // pick the room that is closest to the mid-point on the optimal route
+            {
+                returnRoom = clockTiles;
+            }
+            else
+            {
+                returnRoom = counterTiles;
+            }
         }
-        else
+        else if(roomClockWise)
         {
-            return null;
+            returnRoom = clockTiles;
+        }
+        else if (roomCounterWise)
+        {
+            returnRoom = counterTiles;
         }
     }
 
+    private int ShortestDistanceToPortal(List<Tile> tiles)
+    {
+        int shortest = int.MaxValue;
+
+        foreach (var t in tiles)
+        {
+
+            if(t.nextDistance < shortest)
+            {
+                shortest = t.nextDistance;
+            }
+            if (t.prevDistance < shortest)
+            {
+                shortest = t.prevDistance;
+            }
+        }
+        return shortest;
+    }
     
 }
