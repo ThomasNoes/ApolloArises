@@ -36,6 +36,10 @@
             tileScale = tileTransform.localScale.y;
             heightScale = wallHeight / tileScale;
 
+            if (tempTile.isPortalTile)
+                TextureSwitchPortalOverride(true, tempTile);
+
+        
             if (!tempTile.isOpenRoof)
             {
                 // Place ceiling on the tile
@@ -157,6 +161,9 @@
                 PlaceRoomPillars(tileTransform, generateTerrain);
             else
                 PlaceAllPillars(tileTransform, generateTerrain);
+
+            if (tempTile.isPortalTile)
+                TextureSwitchPortalOverride(false, tempTile);
         }
 
         private void PlaceOuterPillars(Transform tileTransform, GenerateTerrainEvent generateTerrain, Tile tile)
@@ -300,23 +307,48 @@
 
         private void TextureSwitch(TextureSwitchEvent textureSwitch)
         {
-            if (Application.isEditor && !useTextureSwitcherInEditor)
+            if (!AllowTextureSwitch(true))
                 return;
+
+            if ((textureSwitch.partOfMaze % textureCustomizer.frequency) == 0)
+            {
+                textureCustomizer.UpdateTextures(textureCustomizer.matIndex + 1);
+                textureCustomizer.matIndex++;
+            }
+        }
+
+        private void TextureSwitchPortalOverride(bool initial, Tile tile)
+        {
+            if (!AllowTextureSwitch(true))
+                return;
+
+            if (initial)
+            {
+                if (((tile.partOfMaze - 1) % textureCustomizer.frequency) == 0)
+                    textureCustomizer.UpdateTextures(textureCustomizer.matIndex - 1);
+            }
+            else
+                if ((tile.partOfMaze % textureCustomizer.frequency) == 0)
+                textureCustomizer.UpdateTextures(textureCustomizer.matIndex);
+        }
+
+        private bool AllowTextureSwitch(bool placeholder)
+        {
+            if (Application.isEditor && !useTextureSwitcherInEditor)
+                return false;
 
         #if UNITY_ANDROID
             if (!Application.isEditor && !useTextureSwitcherOnAndroid)
-                return;
+                return false;
         #endif
 
             if (textureCustomizer == null)
-                return;
+                return false;
 
-            if (textureCustomizer.autoSwitchTextures)
-                if ((textureSwitch.partOfMaze % textureCustomizer.frequency) == 0)
-                {
-                    textureCustomizer.UpdateTextures(textureCustomizer.matIndex + 1);
-                    textureCustomizer.matIndex++;
-                }
+            if (!textureCustomizer.autoSwitchTextures)
+                return false;
+
+                return true;
         }
     }
 }

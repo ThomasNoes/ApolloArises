@@ -45,8 +45,6 @@ public abstract class MapGenerator : MonoBehaviour
 
     public void GenerateIntArray()
     {
-        MaterialSwitcher();
-   
         mazeIntArray = new int[mazeRows, mazeColumns]; // will be filled with the ID for each tile in tileArray
         pillarBoolArray = new bool[mazeRows + 1, mazeColumns + 1];
 
@@ -89,6 +87,8 @@ public abstract class MapGenerator : MonoBehaviour
         gtwe.widthY = mazeRows * tileWidth;
         gtwe.tileWidth = tileWidth;
         gtwe.FireEvent();
+
+        MaterialSwitcher(); // Texture switch
     }
 
     private void MaterialSwitcher()
