@@ -3,76 +3,77 @@ using UnityEngine;
 
 public class TextureCustomizer : MonoBehaviour
 {
-    //public GameObject floorPrefab, wallPrefab, pillarPrefab, ceilingPrefab;
-    public Material floorMaterial, wallMaterial, pillarMaterial, ceilingMaterial, towerMaterial;
+    public GameObject floorPrefab, wallPrefab, pillarPrefab, ceilingPrefab, towerPrefab;
+    //public Material floorMaterial, wallMaterial, pillarMaterial, ceilingMaterial, towerMaterial;
 
     public Material[] floorMats, wallMats, pillarMats, ceilingMats, towerMats;
 
     public bool autoSwitchTextures = true;
     [HideInInspector] public int frequency = 10, matIndex = -1;
 
-    //public GameObject testPrefab;
-    //public Material[] testMaterials;
-    //private bool testBool = false;
-
-    public void UpdateTextures()
+    public void ResetTextures()
     {
         UpdateTextures(0);
     }
 
     public void UpdateTextures(int index) // TODO: figure out if you can update a prefab when APK is built?
     {
-        if (floorMaterial != null)
+        if (floorPrefab != null)
         {
             if (floorMats != null)
             {
                 if (floorMats.Length > index)
                 {
-                    floorMaterial.SetTexture(1, floorMats[index].mainTexture);
+                    floorPrefab.transform.GetChild(0).GetComponent<Renderer>().material = floorMats[index];
+                    //floorMaterial.SetTexture(1, floorMats[index].mainTexture);
                 }
             }
         }
 
-        if (wallMaterial != null)
+        if (wallPrefab != null)
         {
             if (wallMats != null)
             {
                 if (wallMats.Length > index)
                 {
-                    wallMaterial.SetTexture(1, wallMats[index].mainTexture);
+                    wallPrefab.gameObject.GetComponent<Renderer>().material = wallMats[index];
+                    //wallMaterial.SetTexture(1, wallMats[index].mainTexture);
                 }
             }
         }
 
-        if (pillarMaterial != null)
+        if (pillarPrefab != null)
         {
             if (pillarMats != null)
             {
                 if (pillarMats.Length > index)
                 {
-                    pillarMaterial.SetTexture(1, pillarMats[index].mainTexture);
+                    pillarPrefab.GetComponent<Renderer>().material = pillarMats[index];
+                    //pillarMaterial.SetTexture(1, pillarMats[index].mainTexture);
                 }
             }
         }
 
-        if (ceilingMaterial != null)
+        if (ceilingPrefab != null)
         {
             if (ceilingMats != null)
             {
                 if (ceilingMats.Length > index)
                 {
-                   ceilingMaterial.SetTexture(1, ceilingMats[index].mainTexture);
+                    ceilingPrefab.GetComponent<Renderer>().material = ceilingMats[index];
+                    //ceilingMaterial.SetTexture(1, ceilingMats[index].mainTexture);
                 }
             }
         }
 
-        if (towerMaterial != null)
+        if (towerPrefab != null)
         {
             if (towerMats != null)
             {
                 if (towerMats.Length > index)
                 {
-                    towerMaterial.SetTexture(1, towerMats[index].mainTexture);
+                    towerPrefab.transform.GetChild(0).GetComponent<Renderer>().material = towerMats[index];
+                    //towerMaterial.SetTexture(1, towerMats[index].mainTexture);
                 }
             }
         }

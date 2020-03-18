@@ -4,7 +4,7 @@
     public class TerrainGenerator : MonoBehaviour
     {
         // Variables:
-        public bool useNewPlacementMethod = false, useTextureSwitcher = true;
+        public bool useNewPlacementMethod = false, useTextureSwitcherInEditor = false, useTextureSwitcherOnAndroid = true;
         public float wallOffset = 0f, wallHeight = 1f, pillarScale = 1.5f;
         private float heightScale, wallWidth = 0.05f, tileScale;
 
@@ -22,6 +22,9 @@
             GenerateTowersEvent.RegisterListener(TowerGenerator);
             TextureSwitchEvent.RegisterListener(TextureSwitch);
             textureCustomizer = GetComponent<TextureCustomizer>();
+
+            if (useTextureSwitcherInEditor)
+                textureCustomizer?.ResetTextures();
         }
 
         private void OnGenerateTerrain (GenerateTerrainEvent generateTerrain) {
@@ -297,7 +300,15 @@
 
         private void TextureSwitch(TextureSwitchEvent textureSwitch)
         {
-            if (textureCustomizer == null || !useTextureSwitcher)
+            if (Application.isEditor && !useTextureSwitcherInEditor)
+                return;
+
+        #if UNITY_ANDROID
+            if (!Application.isEditor && !useTextureSwitcherOnAndroid)
+                return;
+        #endif
+
+            if (textureCustomizer == null)
                 return;
 
             if (textureCustomizer.autoSwitchTextures)

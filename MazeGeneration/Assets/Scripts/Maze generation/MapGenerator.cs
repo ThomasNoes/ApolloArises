@@ -45,6 +45,8 @@ public abstract class MapGenerator : MonoBehaviour
 
     public void GenerateIntArray()
     {
+        MaterialSwitcher();
+   
         mazeIntArray = new int[mazeRows, mazeColumns]; // will be filled with the ID for each tile in tileArray
         pillarBoolArray = new bool[mazeRows + 1, mazeColumns + 1];
 
@@ -87,16 +89,14 @@ public abstract class MapGenerator : MonoBehaviour
         gtwe.widthY = mazeRows * tileWidth;
         gtwe.tileWidth = tileWidth;
         gtwe.FireEvent();
-
-        // Texture switch event:
-        EventCallbacks.TextureSwitchEvent tse = new EventCallbacks.TextureSwitchEvent();
-        tse.partOfMaze = tileArray[0, 0].partOfMaze;
-        tse.FireEvent();
     }
 
     private void MaterialSwitcher()
     {
-        // TODO
+        // Texture switch event:
+        EventCallbacks.TextureSwitchEvent tse = new EventCallbacks.TextureSwitchEvent();
+        tse.partOfMaze = tileArray[0, 0].partOfMaze;
+        tse.FireEvent();
     }
 
     public void SetDimensions(int rows, int cols, float width)

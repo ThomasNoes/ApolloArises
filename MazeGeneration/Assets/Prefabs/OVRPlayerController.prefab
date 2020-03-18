@@ -201,6 +201,7 @@ MonoBehaviour:
   cheatCube: {fileID: 940191591616484579}
   useVibration: 1
   useVisual: 1
+  wallHits: 0
 --- !u!54 &1145361938758131890
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -588,7 +589,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 90
+  far clip plane: 95
   field of view: 90
   orthographic: 0
   orthographic size: 5
