@@ -16,6 +16,8 @@ public abstract class MapGenerator : MonoBehaviour
 
     public void Initialize(int index)
     {
+        MaterialSwitcher(index); // Texture switch
+
         tileArray = new Tile[mazeRows, mazeColumns];
         //float mazeHalfWidth = mazeRows / 2f; // Add scalability with tile width!
         //float mazeHalfHeight = mazeColumns / 2f; // Add scalability with tile height!
@@ -87,15 +89,13 @@ public abstract class MapGenerator : MonoBehaviour
         gtwe.widthY = mazeRows * tileWidth;
         gtwe.tileWidth = tileWidth;
         gtwe.FireEvent();
-
-        MaterialSwitcher(); // Texture switch
     }
 
-    private void MaterialSwitcher()
+    private void MaterialSwitcher(int index)
     {
         // Texture switch event:
         EventCallbacks.TextureSwitchEvent tse = new EventCallbacks.TextureSwitchEvent();
-        tse.partOfMaze = tileArray[0, 0].partOfMaze;
+        tse.partOfMaze = index;
         tse.FireEvent();
     }
 

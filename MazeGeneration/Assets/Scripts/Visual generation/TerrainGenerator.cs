@@ -350,5 +350,10 @@
 
                 return true;
         }
+
+        public void ResetTextures()
+        {
+            textureCustomizer?.ResetTextures();
+        }
     }
 }

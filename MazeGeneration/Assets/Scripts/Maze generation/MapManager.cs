@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using EventCallbacks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +20,7 @@ public class MapManager : MonoBehaviour
     }
 
     public GameObject gizmo;
+    public TerrainGenerator terrainGenerator;
 
     public GameObject[] mazeGeneratorPrefab;
     public bool usePlayAreaCenter, setDimensionsAutomatically;
@@ -52,7 +53,6 @@ public class MapManager : MonoBehaviour
 
     public Vector3 playAreaSize;
 
-
     private int minMazeSize;
     public bool isMapSeeded;
     public int randomGeneratorSeed;
@@ -62,7 +62,7 @@ public class MapManager : MonoBehaviour
 
     void Awake()
     {
-        #if UNITY_ANDROID
+#if UNITY_ANDROID
         if (!Application.isEditor)
         {
             playAreaSize = GetCameraRigSize();
@@ -74,6 +74,10 @@ public class MapManager : MonoBehaviour
             }
         }
 #endif
+        if (terrainGenerator != null)
+            if (terrainGenerator.useTextureSwitcherInEditor)
+                terrainGenerator.ResetTextures();
+        
         roomAlreadyInSegment = new bool[mapSequence.Length];
 
         if (isMapSeeded)
@@ -148,8 +152,6 @@ public class MapManager : MonoBehaviour
             }
         }
 
-
-
         //here each maze segment is set and this will start to instantiate the gameobject that make the maze
         foreach (MapGenerator mg in mapScripts)
         {
@@ -157,8 +159,6 @@ public class MapManager : MonoBehaviour
         }
 
         OffsetMap();
-
-        //maybe add script to find player head so we don't have to drag it in
     }
 
     void GenerateMapSequenceHallway()
