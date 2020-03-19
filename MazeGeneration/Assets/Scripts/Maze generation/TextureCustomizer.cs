@@ -18,6 +18,9 @@ public class TextureCustomizer : MonoBehaviour
 
     public void UpdateTextures(int index) // TODO: figure out if you can update a prefab when APK is built?
     {
+        if (index < 0)
+            return;
+
         if (floorPrefab != null)
         {
             if (floorMats != null)
