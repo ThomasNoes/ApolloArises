@@ -16,7 +16,7 @@ public abstract class MapGenerator : MonoBehaviour
 
     public void Initialize(int index)
     {
-        MaterialSwitcher(index); // Texture switch
+       /* MaterialSwitcher(index);*/ // Texture switch
 
         tileArray = new Tile[mazeRows, mazeColumns];
         //float mazeHalfWidth = mazeRows / 2f; // Add scalability with tile width!

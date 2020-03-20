@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useNewPlacementMethod: 1
   useTextureSwitcherInEditor: 0
-  useTextureSwitcherOnAndroid: 1
+  useTextureSwitcherOnAndroid: 0
   wallOffset: 0.1
   wallHeight: 2.5
   pillarScale: 1.5
