@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Globalization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,39 +13,35 @@ public class DataLogger : MonoBehaviour
 {
     // References:
     public AntiWallCollision antiWallCollision;
-    public GameObject mapManagerObj;
+    public DataHandler dataHandler;
+    private GameObject mapManagerObj; // can be made public if manual ref required
     private GameObject mapObj;
 
     // Save location:
-    public string filePath = @"Assets/Resources/CSV";
+    [HideInInspector] public string filePath = @"Assets/Resources/CSV";
     private string fileName = "/session";
     private string fullPath;
 
-    [Tooltip("In seconds")] public float updateInterval = 1.0f;
-
     // Bools:
-    public bool continuousLog = false, logData = true;
-    [HideInInspector] public bool logFrameRate, logAverageFrameRate, logCurrentMaze, 
-        logWallHits, logPreferredWidth, logPreferredHeight, useSceneSwitch;
-    private bool active = false, initial = true, onFirstData = true;
+    public bool onlineLogging = true, logData = true;
+    [HideInInspector] public bool logFrameRate, logAverageFrameRate, logTime, logGender, logAge, logLocation, logExperience,
+        logWallHits, logPreferredWidth, logPreferredHeight, logGeographic, useSceneSwitch, logPlayAreaSize, logVRSickness;
+    private bool active = false, initial = true, onFirstData = true, timerRunning;
     private bool[] dataWritten = new []{false, false};
 
     // Lists & Arrays:
-    private List<float> dataList;
+    private List<string> dataList;
     private string[] csvLabels;
 
     // Other variables:
     private int sessionNumber = -1, fpsSum, fpsCount;
-    private float lastTime, timeSpan, avgFrames, frameRate;
-    private PortalRenderController pRController;
+    private float updateInterval = 1.0f, avgFrames, frameRate, timeSpend;
+    private string sicknessFirstRes, sicknessSecondRes, ageRes, experienceRes, genderRes, locationRes;
     private StreamWriter file;
     private WaitForSeconds delay;
 
     private void Start()
     {
-        if (logCurrentMaze)
-            pRController = FindObjectOfType<PortalRenderController>();
-
         if (logWallHits && antiWallCollision == null)
             logWallHits = false;
 
@@ -63,17 +60,27 @@ public class DataLogger : MonoBehaviour
             }
         }
 
+        dataList = new List<string>();
+
+        if (onlineLogging)
+        {
+            if (dataHandler == null)
+                dataHandler = GetComponent<DataHandler>();
+
+            if (dataHandler == null) // is still null?
+                logData = false;
+
+            return;
+        }
+
 #if UNITY_ANDROID
         if (!Application.isEditor)
             filePath = Application.persistentDataPath;
 #endif
-
-        fullPath = filePath + "/Dummy.csv";
-
         delay = updateInterval > 0 ? new WaitForSeconds(updateInterval) : new WaitForSeconds(1.0f);
 
-        InitializeFile();
-        dataList = new List<float>();
+        fullPath = filePath + "/Dummy.csv";
+        InitializeCSVFile();
 
         if (PlayerPrefs.GetInt("initialStart") == 0)
         {
@@ -82,7 +89,8 @@ public class DataLogger : MonoBehaviour
         }
     }
 
-    private IEnumerator DataLog()
+    #region CSV
+    private IEnumerator CSVDataLogRoutine()
     {
         if (initial)
         {
@@ -113,22 +121,22 @@ public class DataLogger : MonoBehaviour
         {
             if (onFirstData)
             {
-                OverWriteLine();
+                CSVOverWriteLine();
             }
             else
             {
                 if (!dataWritten[1])
                 {
-                    AppendLine();
+                    CSVAppendLine();
                     dataWritten[1] = true;
                 }
                 else
-                    OverWriteLine();
+                    CSVOverWriteLine();
             }
         }
     }
 
-    private void AppendLine()
+    private void CSVAppendLine()
     {
         using (Stream st = File.Open(fullPath, FileMode.Append, FileAccess.Write))
         {
@@ -140,7 +148,7 @@ public class DataLogger : MonoBehaviour
         }
     }
 
-    private void OverWriteLine()
+    private void CSVOverWriteLine()
     {
         using (Stream st = File.Open(fullPath, FileMode.OpenOrCreate, FileAccess.ReadWrite))
         {
@@ -175,7 +183,7 @@ public class DataLogger : MonoBehaviour
                 file.Close();
             }
 
-            StartLogging();
+            ToggleCSVLogging();
             dataList.Clear();
         }
     }
@@ -185,34 +193,9 @@ public class DataLogger : MonoBehaviour
         UpdateDataList();
         file.WriteLine(string.Join(";", dataList));
         dataList.Clear();
-
-        if (!continuousLog)
-        {
-            StartLogging();
-        }
     }
 
-    private void UpdateDataList()
-    {
-        dataList.Add(sessionNumber);
-
-        if (logFrameRate)
-            dataList.Add(logAverageFrameRate ? avgFrames : frameRate);
-
-        if (logCurrentMaze)
-            dataList.Add(pRController.currentMaze);
-
-        if (logPreferredWidth)
-            dataList.Add(mapObj.transform.localScale.x);
-
-        if (logPreferredHeight)
-            dataList.Add(mapObj.transform.localScale.y);
-
-        if (logWallHits)
-            dataList.Add(antiWallCollision.wallHits);
-    }
-
-    private void InitializeFile()
+    private void InitializeCSVFile()
     {
         List<string> tempLabels = new List<string>();
 
@@ -221,8 +204,11 @@ public class DataLogger : MonoBehaviour
         if (logFrameRate)
             tempLabels.Add("FPS");
 
-        if (logCurrentMaze)
-            tempLabels.Add("CurrentMaze");
+        if (logTime)
+            tempLabels.Add("TimeSpend");
+
+        if (logWallHits)
+            tempLabels.Add("WallHits");
 
         if (logPreferredWidth)
             tempLabels.Add("PreferredWidth");
@@ -230,9 +216,14 @@ public class DataLogger : MonoBehaviour
         if (logPreferredHeight)
             tempLabels.Add("PreferredHeight");
 
-        if (logWallHits)
-            tempLabels.Add("WallHits");
+        if (logPlayAreaSize && !Application.isEditor)
+            tempLabels.Add("PlayArea Size");
 
+        if (logVRSickness)
+        {
+            tempLabels.Add("VR Sickness First");
+            tempLabels.Add("VR Sickness Second");
+        }
 
         csvLabels = new string[tempLabels.Count];
         for (int i = 0; i < tempLabels.Count; i++)
@@ -241,14 +232,173 @@ public class DataLogger : MonoBehaviour
         }
     }
 
+    public void ToggleCSVLogging()
+    {
+        if (active)
+        {
+            active = false;
+        }
+        else
+        {
+            StopAllCoroutines();
+
+            sessionNumber = PlayerPrefs.GetInt("participantNumber");
+            active = true;
+
+            StartCoroutine(CSVDataLogRoutine());
+        }
+    }
+    #endregion
+
+    private void UpdateDataList()
+    {
+        string spec = "G";
+        CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
+
+        dataList.Add(sessionNumber.ToString());
+
+        if (logFrameRate)
+            dataList.Add(logAverageFrameRate ? avgFrames.ToString(spec, ci) : frameRate.ToString(spec, ci));
+
+        if (logTime)
+            dataList.Add(timeSpend.ToString(spec, ci));
+
+        if (logWallHits)
+            dataList.Add(antiWallCollision.wallHits.ToString());
+
+        if (logPreferredWidth)
+            dataList.Add(mapObj.transform.localScale.x.ToString(spec, ci));
+
+        if (logPreferredHeight)
+            dataList.Add(mapObj.transform.localScale.y.ToString(spec, ci));
+
+        if (logPlayAreaSize && !Application.isEditor)
+            dataList.Add(GetPlayAreaSize().ToString());
+
+        if (logVRSickness)
+        {
+            dataList.Add(sicknessFirstRes);
+            dataList.Add(sicknessSecondRes);
+        }
+
+        if (onlineLogging)
+            if (logGeographic)
+            {
+                if (logGender)
+                    dataList.Add(genderRes);
+                if (logAge)
+                    dataList.Add(ageRes);
+                if (logLocation)
+                    dataList.Add(locationRes);
+                if (logExperience)
+                    dataList.Add(experienceRes);
+            }
+    }
+
+    public void PostDataOnline()
+    {
+        if (dataHandler == null)
+            return;
+
+        UpdateDataList();
+
+        dataHandler.SendData(dataList);
+    }
+
+    private Vector3 GetPlayAreaSize()
+    {
+        Vector3 size = new Vector3();
+        Vector3 chaperone = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+
+        if (chaperone != null)
+        {
+            size = new Vector3(Mathf.Round(chaperone.x), 0, Mathf.Round(chaperone.z));
+        }
+        return size;
+    }
+
+    public void SicknessResponse(bool firstResponse, bool response)
+    {
+        if (firstResponse)
+        {
+            if (response)
+                sicknessFirstRes = "Yes";
+            else
+                sicknessFirstRes = "No";
+        }
+        else
+        {
+            if (response)
+                sicknessSecondRes = "Yes";
+            else
+                sicknessSecondRes = "No";
+        }
+    }
+
+    public void AgeResponse(int age)
+    {
+        ageRes = age.ToString();
+    }
+
+    public void ExperienceResponse(int experienceIndex)
+    {
+        experienceRes = experienceIndex.ToString();
+    }
+
+    /// <param name="gender">0 = male, 1 = female, 2 = other</param>
+    public void GenderResponse(int gender)
+    {
+        if (gender == 0)
+            genderRes = "Male";
+        else if (gender == 1)
+            genderRes = "Female";
+        else
+            genderRes = "Other";
+    }
+
+    /// <param name="locationIndex">0 = Africa, 1 = Asia, 2 = Australia, 3 = Europe, 4 = North America, 5 = South America</param>
+    public void LocationResponse(int locationIndex)
+    {
+        if (locationIndex == 0)
+            locationRes = "Africa";
+        else if (locationIndex == 1)
+            locationRes = "Asia";
+        else if (locationIndex == 2)
+            locationRes = "Australia";
+        else if (locationIndex == 3)
+            locationRes = "Europe";
+        else if (locationIndex == 4)
+            locationRes = "North America";
+        else if (locationIndex == 5)
+            locationRes = "South America";
+    }
+
     private void Update()
     {
         if (!logData)
             return;
 
+        if (logFrameRate)
+        {
+            frameRate = (int)(1 / Time.deltaTime);
+            if (logAverageFrameRate)
+            {
+                fpsSum += (int)frameRate;
+                fpsCount++;
+                avgFrames = fpsSum/fpsCount;
+            }
+        }
+
+        if (logTime && timerRunning)
+            timeSpend += Time.deltaTime;
+
+        if (onlineLogging)
+            return;
+
+        #region OVR-Input
         if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) || Input.GetKeyDown("h"))
         {
-            StartLogging();
+            ToggleCSVLogging();
             if (!Application.isEditor)
                 OVRInput.SetControllerVibration(0.7f, 0.1f, OVRInput.Controller.LTouch);
         }
@@ -286,37 +436,23 @@ public class DataLogger : MonoBehaviour
             StartCoroutine(VibrateController(newParticipantNumber, 0.7f, false));
             initial = true;
         }
-        
-        if (logFrameRate)
-        {
-            frameRate = (int)(1 / Time.deltaTime);
-            if (logAverageFrameRate)
-            {
-                fpsSum += (int)frameRate;
-                fpsCount++;
-                avgFrames = fpsSum/fpsCount;
-            }
-        }
+        #endregion
     }
 
-    public void StartLogging()
+    public void ToggleTimer(bool start)
     {
-        if (active)
+        if (start)
         {
-            Debug.Log(sessionNumber + " session log saved!");
-            active = false;
+            timerRunning = true;
+            timeSpend = 0;
         }
         else
         {
-            StopAllCoroutines();
-
-            sessionNumber = PlayerPrefs.GetInt("participantNumber");
-            active = true;
-
-            StartCoroutine(DataLog());
+            timerRunning = false;
         }
     }
 
+    #region OVR-ControllerFeedback
     private IEnumerator VibrateController(int amount, float frequency, bool rightController)
     {
         WaitForSeconds delay1 = new WaitForSeconds(frequency / 2);
@@ -340,6 +476,7 @@ public class DataLogger : MonoBehaviour
             }
         }
     }
+    #endregion
 }
 
 #region CustomInspector
@@ -353,6 +490,12 @@ public class DataLogger_Editor : UnityEditor.Editor
 
         var script = target as DataLogger;
 
+        if (!script.onlineLogging)
+        {
+            GUILayout.Space(15);
+            script.filePath = EditorGUILayout.TextField("Local path:", script.filePath);
+        }
+
         GUILayout.Space(15);
 
         if (script.logData)
@@ -365,10 +508,23 @@ public class DataLogger_Editor : UnityEditor.Editor
                 script.logAverageFrameRate = EditorGUILayout.Toggle("Log Average", script.logAverageFrameRate);
                 EditorGUI.indentLevel -= 1;
             }
-            script.logCurrentMaze = EditorGUILayout.Toggle("Log Current Maze", script.logCurrentMaze);
-            script.logWallHits = EditorGUILayout.Toggle("Log Wall Hits", script.logWallHits);
-            script.logPreferredWidth = EditorGUILayout.Toggle("Log Pref. Width", script.logPreferredWidth);
-            script.logPreferredHeight = EditorGUILayout.Toggle("Log Pref. Height", script.logPreferredHeight);
+            script.logTime = EditorGUILayout.Toggle("Time Spend", script.logTime);
+            script.logWallHits = EditorGUILayout.Toggle("Wall Hits", script.logWallHits);
+            script.logPreferredWidth = EditorGUILayout.Toggle("Pref. Width", script.logPreferredWidth);
+            script.logPreferredHeight = EditorGUILayout.Toggle("Pref. Height", script.logPreferredHeight);
+            script.logPlayAreaSize = EditorGUILayout.Toggle("Play Area Size", script.logPlayAreaSize);
+            script.logVRSickness = EditorGUILayout.Toggle("VR Sickness", script.logVRSickness);
+            script.logGeographic = EditorGUILayout.Toggle("Geographics", script.logGeographic);
+
+            if (script.logGeographic)
+            {
+                EditorGUI.indentLevel += 1;
+                script.logGender = EditorGUILayout.Toggle("Gender", script.logGender);
+                script.logAge = EditorGUILayout.Toggle("Age", script.logAge);
+                script.logLocation = EditorGUILayout.Toggle("Location", script.logLocation);
+                script.logExperience = EditorGUILayout.Toggle("VR Experience", script.logExperience);
+                EditorGUI.indentLevel -= 1;
+            }
 
             EditorGUI.indentLevel -= 1;
         }
