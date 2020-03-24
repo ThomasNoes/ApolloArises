@@ -9,11 +9,17 @@ public class TMPAnimated : MonoBehaviour
     private TextMeshProUGUI target;
     private DialogData dialog;
 
-    public void ReadText(DialogData newDialog, TextMeshProUGUI Target)
+    public bool isRunning = false;
+
+    public bool ReadText(DialogData newDialog, TextMeshProUGUI Target)
     {
+        isRunning = true;
         target = Target;
         dialog = newDialog;
         StartCoroutine(Read());
+
+        Debug.Log("readtext done");
+        return true;
     }
 
     IEnumerator Read()
@@ -21,7 +27,7 @@ public class TMPAnimated : MonoBehaviour
         Debug.Log("here");
         target.text = "";
 
-        WaitForSeconds delay = new WaitForSeconds(1f);
+        WaitForSeconds delay = new WaitForSeconds(1f/dialog.textSpeed);
 
         int i = 0;
 
@@ -32,6 +38,7 @@ public class TMPAnimated : MonoBehaviour
             i++;
         }
 
-        yield return delay;
+        isRunning = false;
+        yield return null;
     }
 }

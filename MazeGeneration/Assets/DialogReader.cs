@@ -5,10 +5,10 @@ using TMPro;
 
 public class DialogReader : MonoBehaviour
 {
-    public List<DialogData> dialogs;
+    public DialogData[] dialogs;
     public TextMeshProUGUI TMP_Object;
 
-    public TMPAnimated tmpa;
+    private TMPAnimated tmpa;
 
     int index = 0;
 
@@ -27,7 +27,11 @@ public class DialogReader : MonoBehaviour
 
     public void DisplayDialog()
     {
-        tmpa.ReadText(dialogs[index], TMP_Object);
-        index++;
+        if (!tmpa.isRunning && index < dialogs.Length)
+        {
+            tmpa.ReadText(dialogs[index], TMP_Object);
+            index++;
+        }
+
     }
 }
