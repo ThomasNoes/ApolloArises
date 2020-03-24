@@ -5,6 +5,7 @@ using TMPro;
 
 public class TMPAnimated : MonoBehaviour
 {
+    public VoidEvent success, surprise, confetti;
 
     private TextMeshProUGUI target;
     private DialogData dialog;
@@ -18,7 +19,8 @@ public class TMPAnimated : MonoBehaviour
         dialog = newDialog;
         StartCoroutine(Read());
 
-        Debug.Log("readtext done");
+        PlaySound();
+      
         return true;
     }
 
@@ -40,5 +42,25 @@ public class TMPAnimated : MonoBehaviour
 
         isRunning = false;
         yield return null;
+    }
+
+    void PlaySound()
+    {
+        switch (dialog.dialogEffect)
+        {
+            case DialogData.effect.none:
+                break;
+            case DialogData.effect.success:
+                success.Raise();
+                break;
+            case DialogData.effect.surprise:
+                surprise.Raise();
+                break;
+            case DialogData.effect.confetti:
+                confetti.Raise();
+                break;
+            default:
+                break;
+        }
     }
 }
