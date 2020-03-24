@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Events : MonoBehaviour
 {
-    public AudioSource audio;
+    public AudioSource aus;
 
     private void Start()
     {
-        audio = GetComponent<AudioSource>();
+        aus = GetComponent<AudioSource>();
     }
 
     public void OnCustomButtonPress()
     {
         Debug.Log("We pushed our custom button!");
 
-        audio.Play();
+        aus.Play();
     }
 }
