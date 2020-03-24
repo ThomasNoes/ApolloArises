@@ -20,6 +20,13 @@ public class AudioManager_Inspector : UnityEditor.Editor
         if (script.soundEvents != null)
             for (int i = 0; i < script.soundEvents.Length; i++)
             {
+                if (script.soundEvents[i].instantiated == false)
+                {
+                    script.soundEvents[i].instantiated = true;
+                    script.soundEvents[i].soundVolume = 1.0f;
+                    script.soundEvents[i].soundPitch = 1.0f;
+                }
+
                 DrawUILine(false);
 
                 SerializedProperty triggerEventProp = serializedObject.FindProperty("soundEvents.Array.data[" + i + "].triggerEvent");
@@ -28,9 +35,18 @@ public class AudioManager_Inspector : UnityEditor.Editor
                 SerializedProperty audioClipProp = serializedObject.FindProperty("soundEvents.Array.data[" + i + "].audioClip");
                 EditorGUILayout.PropertyField(audioClipProp);
 
+                EditorGUILayout.Space(10);
+
+                script.soundEvents[i].soundVolume = EditorGUILayout.Slider("Volume", script.soundEvents[i].soundVolume, 0, 1);
+                script.soundEvents[i].soundPitch = EditorGUILayout.Slider("Pitch", script.soundEvents[i].soundPitch, -3, 3);
+
+                EditorGUILayout.Space(10);
+
                 script.soundEvents[i].runOnce = EditorGUILayout.Toggle("Run Once?", script.soundEvents[i].runOnce);
                 script.soundEvents[i].runOnStart = EditorGUILayout.Toggle("Run On Start?", script.soundEvents[i].runOnStart);
                 script.soundEvents[i].loopSound = EditorGUILayout.Toggle("Loop Sound?", script.soundEvents[i].loopSound);
+
+                EditorGUILayout.Space(10);
 
                 script.soundEvents[i].triggerDelay =
                     EditorGUILayout.FloatField("Trigger Delay", script.soundEvents[i].triggerDelay);

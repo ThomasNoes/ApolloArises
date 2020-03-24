@@ -61,9 +61,9 @@ public class SoundEvent
     [HideInInspector] public AudioSource audioSource;
     [HideInInspector] public int soundEventId;
     [HideInInspector] public SoundVoidEventListener soundEventListener;
-    [HideInInspector] public float triggerDelay = 0.0f;
+    [HideInInspector] public float triggerDelay = 0.0f, soundVolume = 1.0f, soundPitch = 1.0f;
     [HideInInspector] public VoidEvent triggerEvent;
-    [HideInInspector] public bool runOnce, runOnStart, loopSound;
+    [HideInInspector] public bool runOnce, runOnStart, loopSound, instantiated;
 
     private bool eventFired = false;
     private float parsedValue = 0;
@@ -107,6 +107,8 @@ public class SoundEvent
 
         audioSource.loop = loopSound;
         audioSource.clip = audioClip;
+        audioSource.volume = soundVolume;
+        audioSource.pitch = soundPitch;
         audioSource.Play();
         Debug.Log("Playing Sound: " + audioClip.name);
     }
