@@ -64,7 +64,12 @@ public class DataLogger : MonoBehaviour
 
         if (onlineLogging)
         {
-            dataHandler = GetComponent<DataHandler>();
+            if (dataHandler == null)
+                dataHandler = GetComponent<DataHandler>();
+
+            if (dataHandler == null) // is still null?
+                logData = false;
+
             return;
         }
 
