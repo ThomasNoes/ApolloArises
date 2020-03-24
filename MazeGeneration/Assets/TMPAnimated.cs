@@ -13,20 +13,15 @@ public class TMPAnimated : MonoBehaviour
     {
         target = Target;
         dialog = newDialog;
-        StartCoroutine(Read2());
-    }
-
-    IEnumerator Read2()
-    {
-        target.text = dialog.text;
-        return null;
+        StartCoroutine(Read());
     }
 
     IEnumerator Read()
     {
         Debug.Log("here");
         target.text = "";
-        WaitForSeconds delay = new WaitForSeconds( 1f / dialog.textSpeed);
+
+        WaitForSeconds delay = new WaitForSeconds(1f);
 
         int i = 0;
 
@@ -36,7 +31,7 @@ public class TMPAnimated : MonoBehaviour
             yield return delay;
             i++;
         }
-       
-        
+
+        yield return delay;
     }
 }

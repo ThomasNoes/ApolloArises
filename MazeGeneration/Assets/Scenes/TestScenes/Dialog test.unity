@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 270414955}
   - component: {fileID: 270414954}
   - component: {fileID: 270414958}
+  - component: {fileID: 270414959}
   m_Layer: 0
   m_Name: Screen
   m_TagString: Untagged
@@ -292,9 +293,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogs:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b62807123eb76a44189d2f46ca476e2e, type: 2}
+  - {fileID: 11400000, guid: 4c0cf4a224d99084cad4f9b368b0f0ce, type: 2}
   TMP_Object: {fileID: 1993315551}
+  tmpa: {fileID: 0}
+--- !u!114 &270414959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270414953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5df6fe15e21e4d4dbdb22d529b15032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &375106220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 477154, guid: ce816f2e6abb0504092c23ed9b970dfd,
