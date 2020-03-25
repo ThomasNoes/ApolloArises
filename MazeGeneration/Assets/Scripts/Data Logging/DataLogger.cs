@@ -13,8 +13,8 @@ public class DataLogger : MonoBehaviour
 {
     public DataHandler dataHandler;
     public AntiWallCollision wallCollision;
-    //public GameObject mapManagerObj; // Currently not needed
-    //private GameObject mapObj;
+    public GameObject mapManagerObj;
+    private GameObject mapObj;
     public int conditionAmount = 3;
 
     // Save location:
@@ -62,20 +62,20 @@ public class DataLogger : MonoBehaviour
         if (logWallHits && wallCollision == null)
             logWallHits = false;
 
-        //if (logPreferredWidth) // Curently not needed
-        //{
-        //    if (mapManagerObj == null)
-        //        mapManagerObj = gameObject;
+        if (logPreferredWidth) // Curently not needed
+        {
+            if (mapManagerObj == null)
+                mapManagerObj = gameObject;
 
-        //    mapObj = mapManagerObj.transform.GetChild(0).gameObject;
+            mapObj = mapManagerObj.transform.GetChild(0).gameObject;
 
-        //    if (mapObj == null)
-        //    {
-        //        logPreferredWidth = false;
-        //        logPreferredHeight = false;
-        //        Debug.LogError("Datalogger Error: Maze 1 not found");
-        //    }
-        //}
+            if (mapObj == null)
+            {
+                logPreferredWidth = false;
+                logPreferredHeight = false;
+                Debug.LogError("Datalogger Error: Maze 1 not found");
+            }
+        }
 
         dataList = new List<string>();
 
@@ -182,36 +182,34 @@ public class DataLogger : MonoBehaviour
         return size;
     }
 
-    public void SicknessResponse(bool firstResponse, bool response)
+    public void FirstSicknessResponse(bool response)
     {
-        if (firstResponse)
-        {
-            if (response)
-                sicknessFirstRes = "Yes";
-            else
-                sicknessFirstRes = "No";
-        }
+        if (response)
+            sicknessFirstRes = "Yes";
         else
-        {
-            if (response)
-                sicknessSecondRes = "Yes";
-            else
-                sicknessSecondRes = "No";
-        }
+            sicknessFirstRes = "No";
     }
 
-    public void PreferredWidthResponse(int testIndex, float preferredWidth)
+    public void SecondSicknessResponse(bool response)
     {
-        if (prefWidths != null)
+        if (response)
+            sicknessSecondRes = "Yes";
+        else
+            sicknessSecondRes = "No";
+    }
+
+    public void PreferredWidthResponse(int testIndex)
+    {
+        if (prefWidths != null && mapObj != null)
             if (testIndex >= 0 && testIndex < prefWidths.Length)
-                prefWidths[testIndex] = preferredWidth;
+                prefWidths[testIndex] = mapObj.transform.localScale.x;
     }
 
-    public void PreferredHeightResponse(int testIndex, float preferredHeight)
+    public void PreferredHeightResponse(int testIndex)
     {
-        if (prefHeights != null)
+        if (prefHeights != null && mapObj != null)
             if (testIndex >= 0 && testIndex < prefHeights.Length)
-                prefHeights[testIndex] = preferredHeight;
+                prefHeights[testIndex] = mapObj.transform.localScale.y;
     }
 
     public void AgeResponse(int age)
@@ -599,7 +597,7 @@ public class DataLogger_Editor : UnityEditor.Editor
 {
     public override void OnInspectorGUI()
     {
-        EditorGUILayout.HelpBox("Data Logger", MessageType.None);
+        EditorGUILayout.HelpBox("Remember: connect MapManager object and AntiWallCollision script reference", MessageType.Info);
         DrawDefaultInspector();
 
         var script = target as DataLogger;
