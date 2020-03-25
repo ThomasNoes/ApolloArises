@@ -48,6 +48,9 @@ public class DataLogger : MonoBehaviour
 
     private void Start()
     {
+        if (!logData)
+            return;
+
         Initialize();
 
         if (onlineLogging)
@@ -69,17 +72,22 @@ public class DataLogger : MonoBehaviour
 
         if (logPreferredWidth) // Curently not needed
         {
-            if (mapManagerObj == null)
-                mapManagerObj = gameObject;
+            if (mapManagerObj != null)
+            {
+                mapObj = mapManagerObj.transform.GetChild(0).gameObject;
 
-            mapObj = mapManagerObj.transform.GetChild(0).gameObject;
-
-            if (mapObj == null)
+                if (mapObj == null)
+                {
+                    logPreferredWidth = false;
+                    logPreferredHeight = false;
+                    Debug.LogError("Datalogger Error: Maze 1 not found");
+                }
+            }
+            else
             {
                 logPreferredWidth = false;
                 logPreferredHeight = false;
-                Debug.LogError("Datalogger Error: Maze 1 not found");
-            }
+            } 
         }
 
         dataList = new List<string>();
