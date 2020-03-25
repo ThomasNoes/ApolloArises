@@ -11,9 +11,8 @@ using UnityEditor;
 
 public class DataLogger : MonoBehaviour
 {
-    public VoidEvent wallHitEvent;
     public DataHandler dataHandler;
-    private DataEventListener listener;
+    public AntiWallCollision wallCollision;
     //public GameObject mapManagerObj; // Currently not needed
     //private GameObject mapObj;
     public int conditionAmount = 3;
@@ -85,8 +84,10 @@ public class DataLogger : MonoBehaviour
 
         if (logWallHits)
         {
-            InitializeListeners();
-            wallHits = new float[conditionAmount];
+            if (wallCollision == null)
+                logWallHits = false;
+            else
+                wallHits = new float[conditionAmount];
         }
 
         if (logPreferredWidth)
@@ -228,14 +229,18 @@ public class DataLogger : MonoBehaviour
         experienceRes = experienceIndex.ToString();
     }
 
-    public void LogTimeStart(int testIndex)
+    public void LogTimeStart()
     {
-
+        ToggleTimer(true);
     }
 
     public void LogTimeStop(int testIndex)
     {
+        ToggleTimer(false);
 
+        if (loggedTimes != null)
+            if (testIndex >= 0 && testIndex < loggedTimes.Length)
+                loggedTimes[testIndex] = timeSpend;
     }
 
     /// <summary>
@@ -590,26 +595,6 @@ public class DataLogger : MonoBehaviour
         }
     }
     #endregion
-
-    #region DataEvents
-    private void InitializeListeners()   // TODO: should be made to have many more events than one
-    {
-        listener = new DataEventListener();
-        listener.GameEvent = wallHitEvent;
-        listener.UnityEventResponse = new UnityVoidEvent();
-        listener.UnityEventResponse.AddListener(ExecuterFunction);
-        listener.RemoteEnable();
-    }
-
-    private void ExecuterFunction(Void @void)
-    {
-        wallHitsCount++;
-    }
-
-    public class DataEventListener : BaseGameEventListener<Void, VoidEvent, UnityVoidEvent>
-    {
-    }
-    #endregion
 }
 
 #region CustomInspector
@@ -619,7 +604,7 @@ public class DataLogger_Editor : UnityEditor.Editor
 {
     public override void OnInspectorGUI()
     {
-        EditorGUILayout.HelpBox("This class should be persistent (DontDestroyOnLoad) to function! - And only one must exist!", MessageType.Warning);
+        EditorGUILayout.HelpBox("Data Logger", MessageType.None);
         DrawDefaultInspector();
 
         var script = target as DataLogger;
