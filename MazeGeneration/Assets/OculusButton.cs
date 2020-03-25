@@ -9,6 +9,8 @@ public class OculusButton : MonoBehaviour
     [System.Serializable]
     public class ButtonEvent : UnityEvent { }
 
+    public VoidEvent ButtonDown;
+
     public float pressLength;
     public bool pressed;
     public ButtonEvent downEvent;

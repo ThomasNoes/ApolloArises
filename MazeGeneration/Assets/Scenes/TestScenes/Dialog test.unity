@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 347511421}
   - component: {fileID: 347511420}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Surprise
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6063,6 +6063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02f08571a55034458f8b73dcf15598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonDown: {fileID: 0}
   pressLength: 0.02
   pressed: 0
   downEvent:
@@ -6081,6 +6082,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 270414958}
         m_MethodName: DisplayDialog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 347511421}
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6214,7 +6226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81951bf347f7b134bb5a5f473e7c4c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aus: {fileID: 0}
 --- !u!4 &1981759807
 Transform:
   m_ObjectHideFlags: 0
