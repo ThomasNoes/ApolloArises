@@ -97,6 +97,7 @@ public class SoundEvent
         if (runOnce)
         {
             eventFired = true;
+            soundEventListener.Disable();
         }
     }
 
