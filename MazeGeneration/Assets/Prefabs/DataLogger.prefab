@@ -44,11 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c33aacff76cab444810b841f19c8c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallHitEvent: {fileID: 0}
   dataHandler: {fileID: 2627100202734912139}
   wallCollision: {fileID: 0}
+  mapManagerObj: {fileID: 0}
   conditionAmount: 3
   filePath: Assets/Resources/CSV
+  fpsData: {fileID: 11400000, guid: c1c963f7d134a1543b664292cc474a5f, type: 2}
+  firstSicknessData: {fileID: 11400000, guid: acb6d7c9a04b41d408a57878d5e991c4, type: 2}
+  secondSicknessData: {fileID: 11400000, guid: b3cf6c50cbd25d741b38cd8e48b6204b, type: 2}
+  ageData: {fileID: 11400000, guid: 19a0162c0d04cf544ba603234295148e, type: 2}
+  experienceData: {fileID: 11400000, guid: 8c777b46b9ebe2f4fad38bd4520a81cf, type: 2}
+  genderData: {fileID: 11400000, guid: a8871f4a62813634291c2cff9d3f4898, type: 2}
+  locationData: {fileID: 11400000, guid: d2aa12be60083f946bb3167748a7333e, type: 2}
+  prefWidthsData: {fileID: 11400000, guid: d26122a1355a3944d994e9694c5d5a10, type: 2}
+  prefHeightsData: {fileID: 11400000, guid: ddd875b582ae4ab49a33ae3e40c67a01, type: 2}
+  loggedTimesData: {fileID: 11400000, guid: 7910d158d8c4c6c429bd8c3c610bc6e5, type: 2}
+  wallHitsData: {fileID: 11400000, guid: f59153d57cf4c624d98109bc0de2e260, type: 2}
   onlineLogging: 1
   logData: 0
   logFrameRate: 1
@@ -79,4 +90,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowOneLogPerDevice: 0
   baseURL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSexhH0eNIisO1cU7O5TQCkf-3D1MT7xRdEyn2EP7fd4uKRfLw/formResponse
-  entryIds: []
+  entryIds:
+  - entry.748259335
+  - entry.1356966820
+  - entry.1415704000
+  - entry.588266708
+  - entry.1249109112
+  - entry.1030407368
+  - entry.1542220109
+  - entry.1931438654
+  - entry.469418512
+  - entry.1869166334
+  - entry.744913646
+  - entry.862625402
+  - entry.1178303894
+  - entry.1604808555
+  - entry.450749378
+  - entry.1677142749
+  - entry.279436481
