@@ -339,55 +339,73 @@ MonoBehaviour:
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
+    soundVolume: 1
+    soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: bd291b6bd5b5f8546b2a8ca572b3a578, type: 2}
     runOnce: 0
     runOnStart: 0
     loopSound: 0
+    instantiated: 1
   - thisAudioManager: {fileID: 0}
     audioClip: {fileID: 8300000, guid: 602d6b9182217b548b895d95453e68fe, type: 3}
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
+    soundVolume: 1
+    soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: 58f514070018f9b4abff2a244e1bcaed, type: 2}
     runOnce: 0
     runOnStart: 0
     loopSound: 0
+    instantiated: 1
   - thisAudioManager: {fileID: 0}
     audioClip: {fileID: 8300000, guid: a05d082cd207b4b12a47c089be8b7a62, type: 3}
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
+    soundVolume: 1
+    soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: 17f0d4f5006d69942840bac7207192a2, type: 2}
     runOnce: 0
     runOnStart: 0
     loopSound: 0
+    instantiated: 1
   - thisAudioManager: {fileID: 0}
     audioClip: {fileID: 8300000, guid: 944710650aa5d1b4382789dede333286, type: 3}
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
+    soundVolume: 1
+    soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: d761c93ff9f62ab4bab4e72b28761a7a, type: 2}
     runOnce: 0
     runOnStart: 0
     loopSound: 0
+    instantiated: 1
   - thisAudioManager: {fileID: 0}
     audioClip: {fileID: 8300000, guid: de019c19944a6a64b9a17cf5be777b84, type: 3}
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
+    soundVolume: 1
+    soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: 2ec681f1925d3eb418c0f7fe0b8b515a, type: 2}
     runOnce: 0
     runOnStart: 0
     loopSound: 0
+    instantiated: 1
   - thisAudioManager: {fileID: 0}
     audioClip: {fileID: 8300000, guid: 643a8004c42fa9a4eb8ad4d4a4a9274d, type: 3}
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
+    soundVolume: 1
+    soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: 17969de3384757540a8fc5efde7d3be5, type: 2}
     runOnce: 0
     runOnStart: 0
     loopSound: 0
+    instantiated: 1
 --- !u!82 &270414961
 AudioSource:
   m_ObjectHideFlags: 0
@@ -495,6 +513,7 @@ GameObject:
   - component: {fileID: 347511419}
   - component: {fileID: 347511421}
   - component: {fileID: 347511420}
+  - component: {fileID: 347511422}
   m_Layer: 0
   m_Name: Surprise
   m_TagString: Untagged
@@ -5296,6 +5315,34 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &347511422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347511418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 58f514070018f9b4abff2a244e1bcaed, type: 2}
+  delay: 0
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 347511421}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &375106220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 477154, guid: ce816f2e6abb0504092c23ed9b970dfd,
@@ -5412,6 +5459,7 @@ GameObject:
   - component: {fileID: 680978888}
   - component: {fileID: 680978890}
   - component: {fileID: 680978889}
+  - component: {fileID: 680978891}
   m_Layer: 0
   m_Name: Remark
   m_TagString: Untagged
@@ -10240,6 +10288,34 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &680978891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680978887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 2ec681f1925d3eb418c0f7fe0b8b515a, type: 2}
+  delay: 0
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 680978890}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &759494705
 GameObject:
   m_ObjectHideFlags: 0
@@ -10344,6 +10420,7 @@ GameObject:
   - component: {fileID: 848909347}
   - component: {fileID: 848909349}
   - component: {fileID: 848909348}
+  - component: {fileID: 848909350}
   m_Layer: 0
   m_Name: Confetti
   m_TagString: Untagged
@@ -10359,7 +10436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848909346}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.676, z: -0.66}
+  m_LocalPosition: {x: 0, y: -0.442, z: -0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1375832790}
@@ -15145,6 +15222,34 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &848909350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848909346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 17f0d4f5006d69942840bac7207192a2, type: 2}
+  delay: 0
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 848909349}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &869481392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15328,6 +15433,7 @@ GameObject:
   - component: {fileID: 1031199217}
   - component: {fileID: 1031199219}
   - component: {fileID: 1031199218}
+  - component: {fileID: 1031199220}
   m_Layer: 0
   m_Name: Success
   m_TagString: Untagged
@@ -15421,7 +15527,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031199216}
   serializedVersion: 6
-  lengthInSec: 4
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -16429,8 +16535,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.11816091
-          value: 0.5181582
+          time: 0.07110516
+          value: 0.6756757
           inSlope: -0.036704596
           outSlope: -0.036704596
           tangentMode: 0
@@ -16438,8 +16544,17 @@ ParticleSystem:
           inWeight: 0.97024584
           outWeight: 0.18678966
         - serializedVersion: 3
+          time: 0.15048893
+          value: 0.3741935
+          inSlope: 0.034844965
+          outSlope: 0.034844965
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.18821748
+        - serializedVersion: 3
           time: 0.8121046
-          value: 0.52535695
+          value: 0.37670833
           inSlope: 0.106767684
           outSlope: 0.106767684
           tangentMode: 0
@@ -16457,9 +16572,9 @@ ParticleSystem:
           outWeight: 0.8816673
         - serializedVersion: 3
           time: 1
-          value: 0.027026355
-          inSlope: 0.074581124
-          outSlope: 0.074581124
+          value: 0
+          inSlope: -6.116184
+          outSlope: -6.116184
           tangentMode: 0
           weightedMode: 0
           inWeight: 1
@@ -16602,8 +16717,8 @@ ParticleSystem:
     enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 1
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -16655,8 +16770,8 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 1
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -16708,24 +16823,51 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.7853982
+      minMaxState: 1
+      scalar: 6.108652
       minScalar: 0.7853982
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
           time: 0
+          value: 0.02702713
+          inSlope: 0.6208899
+          outSlope: 0.6208899
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.08705882
+        - serializedVersion: 3
+          time: 0.030571312
           value: 1
-          inSlope: 0
-          outSlope: 0
+          inSlope: 0.9992175
+          outSlope: 0.9992175
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
+          time: 0.050543174
           value: 1
+          inSlope: -3.0289938
+          outSlope: -3.0289938
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.14127263
+          value: 0.4594592
+          inSlope: -0.31480026
+          outSlope: -0.31480026
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.1297373
+        - serializedVersion: 3
+          time: 1
+          value: 0.43243217
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -20156,6 +20298,34 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1031199220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031199216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: bd291b6bd5b5f8546b2a8ca572b3a578, type: 2}
+  delay: 0
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1031199219}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1170040051
 GameObject:
   m_ObjectHideFlags: 0
@@ -20167,6 +20337,7 @@ GameObject:
   - component: {fileID: 1170040052}
   - component: {fileID: 1170040054}
   - component: {fileID: 1170040053}
+  - component: {fileID: 1170040055}
   m_Layer: 0
   m_Name: Question
   m_TagString: Untagged
@@ -24995,6 +25166,34 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1170040055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1170040051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 17969de3384757540a8fc5efde7d3be5, type: 2}
+  delay: 0
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1170040054}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1201583266
 GameObject:
   m_ObjectHideFlags: 0
@@ -25436,10 +25635,13 @@ MonoBehaviour:
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
+    soundVolume: 1
+    soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: 7e5db572a04e7d446b9c6a7065031177, type: 2}
     runOnce: 0
     runOnStart: 0
     loopSound: 0
+    instantiated: 1
 --- !u!114 &1696656441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25470,17 +25672,6 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 270414958}
         m_MethodName: DisplayDialog
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 347511421}
-        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
