@@ -59,7 +59,7 @@ public class DataLogger : MonoBehaviour
 
     private void Initialize()
     {
-        if (logWallHits && wallHitEvent == null)
+        if (logWallHits && wallCollision == null)
             logWallHits = false;
 
         //if (logPreferredWidth) // Curently not needed
@@ -83,12 +83,7 @@ public class DataLogger : MonoBehaviour
             loggedTimes = new float[conditionAmount];
 
         if (logWallHits)
-        {
-            if (wallCollision == null)
-                logWallHits = false;
-            else
-                wallHits = new float[conditionAmount];
-        }
+            wallHits = new float[conditionAmount];
 
         if (logPreferredWidth)
             prefWidths = new float[conditionAmount];
