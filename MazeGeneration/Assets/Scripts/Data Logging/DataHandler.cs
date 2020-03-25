@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class DataHandler : MonoBehaviour
 {
-    public bool allowOneLogPerDevice = false;
-    public string baseURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSew2H4-sq_9sXdFTLtyhcZQ7fXo6DoR8OVnkFkAmuOM-vm0Jg/formResponse"; // Dummy form, please change later
+    public bool OnlyOneLogPerDevice = false;
+    public string baseURL = ""; // fill out this and entry IDs in inspector
     public string[] entryIds;
 
     public void SendData(List<float> data)
@@ -37,10 +37,13 @@ public class DataHandler : MonoBehaviour
             Debug.LogError("Result POST error: entry ID array is empty!");
             yield return null;
         }
-        else if (PlayerPrefs.GetInt("dataSubmitted") == 1)
+        else if (OnlyOneLogPerDevice)
         {
-            Debug.Log("Data already submitted by this user - post request is ignored");
-            yield return null;
+            if (PlayerPrefs.GetInt("dataSubmitted") == 1)
+            {
+                Debug.Log("Data already submitted by this user - post request is ignored");
+                yield return null;
+            }
         }
 
         WWWForm form = new WWWForm();
@@ -59,7 +62,7 @@ public class DataHandler : MonoBehaviour
         webRequest.uploadHandler = uploadHandler;
         webRequest.SendWebRequest();
 
-        if (allowOneLogPerDevice)
+        if (OnlyOneLogPerDevice)
             PlayerPrefs.SetInt("dataSubmitted", 1);
 
         yield return webRequest;
