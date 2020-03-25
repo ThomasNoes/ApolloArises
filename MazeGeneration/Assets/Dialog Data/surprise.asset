@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20553fac56ec59645857c0732b787431, type: 3}
-  m_Name: OVRBuildConfig
+  m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
+  m_Name: surprise
   m_EditorClassIdentifier: 
-  androidSDKPath: C:\Program Files\Unity\Hub\Editor\2019.3.0f6\Editor\Data\PlaybackEngines\AndroidPlayer\SDK
-  gradlePath: 
-  jdkPath: 
+  text: surprise
+  textSpeed: 10
+  dialogEffect: 2

@@ -11,7 +11,7 @@ TagManager:
   - Wall
   - TileChecker
   - Tile
-  - DataLogger
+  - Button
   layers:
   - Default
   - TransparentFX
