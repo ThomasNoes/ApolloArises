@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+
 public class OculusButton : MonoBehaviour
 {
 
@@ -16,31 +17,32 @@ public class OculusButton : MonoBehaviour
     Vector3 startPos;
     Rigidbody rb;
 
-    bool firstPress = true;
+    bool registerPress = false;
 
     void Start()
     {
-        startPos = transform.position;
+        startPos = transform.localPosition;
         rb = GetComponent<Rigidbody>();
+        Invoke("DelayRegister", 0.1f) ;
+    }
+
+    void DelayRegister()
+    {
+        registerPress = true;
     }
 
     void Update()
     {
-
         // If our distance is greater than what we specified as a press
         // set it to our max distance and register a press if we haven't already
-        float distance = Mathf.Abs(transform.position.y - startPos.y);
+        float distance = Mathf.Abs(transform.localPosition.y - startPos.y);
         if (distance >= pressLength)
         {
             // Prevent the button from going past the pressLength
-            transform.position = new Vector3(transform.position.x, startPos.y - pressLength, transform.position.z);
+            transform.localPosition = new Vector3(transform.localPosition.x, startPos.y - pressLength, transform.localPosition.z);
             if (!pressed)
             {
-                if (firstPress)
-                {
-                    firstPress = false;
-                }
-                else
+                if (registerPress)
                 {
                     pressed = true;
                     // If we have an event, invoke it
@@ -54,9 +56,9 @@ public class OculusButton : MonoBehaviour
             pressed = false;
         }
         // Prevent button from springing back up past its original position
-        if (transform.position.y > startPos.y)
+        if (transform.localPosition.y > startPos.y)
         {
-            transform.position = new Vector3(transform.position.x, startPos.y, transform.position.z);
+            transform.localPosition = new Vector3(transform.localPosition.x, startPos.y, transform.position.z);
         }
     }
 }
