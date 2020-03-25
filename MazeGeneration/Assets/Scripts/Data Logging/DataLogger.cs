@@ -11,11 +11,12 @@ using UnityEditor;
 
 public class DataLogger : MonoBehaviour
 {
-    // References:
-    public AntiWallCollision antiWallCollision;
+    public VoidEvent wallHitEvent;
     public DataHandler dataHandler;
-    private GameObject mapManagerObj; // can be made public if manual ref required
-    private GameObject mapObj;
+    private DataEventListener listener;
+    //public GameObject mapManagerObj; // Currently not needed
+    //private GameObject mapObj;
+    public int conditionAmount = 3;
 
     // Save location:
     [HideInInspector] public string filePath = @"Assets/Resources/CSV";
@@ -32,9 +33,10 @@ public class DataLogger : MonoBehaviour
     // Lists & Arrays:
     private List<string> dataList;
     private string[] csvLabels;
+    private float[] prefWidths, prefHeights, loggedTimes, wallHits;
 
     // Other variables:
-    private int sessionNumber = -1, fpsSum, fpsCount;
+    private int sessionNumber = -1, fpsSum, fpsCount, wallHitsCount;
     private float updateInterval = 1.0f, avgFrames, frameRate, timeSpend;
     private string sicknessFirstRes, sicknessSecondRes, ageRes, experienceRes, genderRes, locationRes;
     private StreamWriter file;
@@ -42,25 +44,7 @@ public class DataLogger : MonoBehaviour
 
     private void Start()
     {
-        if (logWallHits && antiWallCollision == null)
-            logWallHits = false;
-
-        if (logPreferredWidth)
-        {
-            if (mapManagerObj == null)
-                mapManagerObj = gameObject;
-
-            mapObj = mapManagerObj.transform.GetChild(0).gameObject;
-
-            if (mapObj == null)
-            {
-                logPreferredWidth = false;
-                logPreferredHeight = false;
-                Debug.LogError("Datalogger Error: Maze 1 not found");
-            }
-        }
-
-        dataList = new List<string>();
+        Initialize();
 
         if (onlineLogging)
         {
@@ -69,10 +53,314 @@ public class DataLogger : MonoBehaviour
 
             if (dataHandler == null) // is still null?
                 logData = false;
+        }
+        else
+            InitializeCSV();
+    }
 
-            return;
+    private void Initialize()
+    {
+        if (logWallHits && wallHitEvent == null)
+            logWallHits = false;
+
+        //if (logPreferredWidth) // Curently not needed
+        //{
+        //    if (mapManagerObj == null)
+        //        mapManagerObj = gameObject;
+
+        //    mapObj = mapManagerObj.transform.GetChild(0).gameObject;
+
+        //    if (mapObj == null)
+        //    {
+        //        logPreferredWidth = false;
+        //        logPreferredHeight = false;
+        //        Debug.LogError("Datalogger Error: Maze 1 not found");
+        //    }
+        //}
+
+        dataList = new List<string>();
+
+        if (logTime)
+            loggedTimes = new float[conditionAmount];
+
+        if (logWallHits)
+        {
+            InitializeListeners();
+            wallHits = new float[conditionAmount];
         }
 
+        if (logPreferredWidth)
+            prefWidths = new float[conditionAmount];
+
+        if (logPreferredHeight)
+            prefHeights = new float[conditionAmount];
+    }
+
+    private void UpdateDataList()
+    {
+        string spec = "G";
+        CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
+
+        dataList.Add(sessionNumber.ToString());
+
+        if (logFrameRate)
+            dataList.Add(logAverageFrameRate ? avgFrames.ToString(spec, ci) : frameRate.ToString(spec, ci));
+
+        if (logTime)
+        {
+            foreach (float time in loggedTimes)
+            {
+                dataList.Add(time.ToString(spec, ci));
+            }
+        }
+
+        if (logWallHits)
+        {
+            foreach (float hits in wallHits)
+            {
+                dataList.Add(hits.ToString());
+            }
+        }
+
+        if (logPreferredWidth)
+        {
+            foreach (float width in prefWidths)
+            {
+                dataList.Add(width.ToString(spec, ci));
+            }
+        }
+
+        if (logPreferredHeight)
+        {
+            foreach (float height in prefHeights)
+            {
+                dataList.Add(height.ToString(spec, ci));
+            }
+        }
+
+        if (logPlayAreaSize && !Application.isEditor)
+            dataList.Add(GetPlayAreaSize().ToString());
+
+        if (logVRSickness)
+        {
+            dataList.Add(sicknessFirstRes);
+            dataList.Add(sicknessSecondRes);
+        }
+
+        if (onlineLogging)
+            if (logGeographic)
+            {
+                if (logGender)
+                    dataList.Add(genderRes);
+                if (logAge)
+                    dataList.Add(ageRes);
+                if (logLocation)
+                    dataList.Add(locationRes);
+                if (logExperience)
+                    dataList.Add(experienceRes);
+            }
+    }
+
+    /// <summary>
+    /// This function will send all data to Google Forms - So this should be called at the very end when all tests are done.
+    /// </summary>
+    public void PostDataOnline()
+    {
+        if (dataHandler == null)
+            return;
+
+        UpdateDataList();
+
+        dataHandler.SendData(dataList);
+    }
+
+    private Vector3 GetPlayAreaSize()
+    {
+        Vector3 size = new Vector3();
+        Vector3 chaperone = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+
+        if (chaperone != null)
+        {
+            size = new Vector3(Mathf.Round(chaperone.x), 0, Mathf.Round(chaperone.z));
+        }
+        return size;
+    }
+
+    public void SicknessResponse(bool firstResponse, bool response)
+    {
+        if (firstResponse)
+        {
+            if (response)
+                sicknessFirstRes = "Yes";
+            else
+                sicknessFirstRes = "No";
+        }
+        else
+        {
+            if (response)
+                sicknessSecondRes = "Yes";
+            else
+                sicknessSecondRes = "No";
+        }
+    }
+
+    public void PreferredWidthResponse(int testIndex, float preferredWidth)
+    {
+        if (prefWidths != null)
+            if (testIndex >= 0 && testIndex < prefWidths.Length)
+                prefWidths[testIndex] = preferredWidth;
+    }
+
+    public void PreferredHeightResponse(int testIndex, float preferredHeight)
+    {
+        if (prefHeights != null)
+            if (testIndex >= 0 && testIndex < prefHeights.Length)
+                prefHeights[testIndex] = preferredHeight;
+    }
+
+    public void AgeResponse(int age)
+    {
+        ageRes = age.ToString();
+    }
+
+    public void ExperienceResponse(int experienceIndex)
+    {
+        experienceRes = experienceIndex.ToString();
+    }
+
+    public void LogTimeStart(int testIndex)
+    {
+
+    }
+
+    public void LogTimeStop(int testIndex)
+    {
+
+    }
+
+    /// <summary>
+    /// This should be called at the END of the test condition session.
+    /// </summary>
+    public void LogWallHits(int testIndex)
+    {
+        if (wallHits != null)
+            if (testIndex >= 0 && testIndex < wallHits.Length)
+            {
+                wallHits[testIndex] = wallHitsCount;
+                wallHitsCount = 0; // TODO check if I can set to 0 already?
+            }
+    }
+
+    /// <param name="gender">0 = male, 1 = female, 2 = other</param>
+    public void GenderResponse(int gender)
+    {
+        if (gender == 0)
+            genderRes = "Male";
+        else if (gender == 1)
+            genderRes = "Female";
+        else
+            genderRes = "Other";
+    }
+
+    /// <param name="locationIndex">0 = Africa, 1 = Asia, 2 = Australia, 3 = Europe, 4 = North America, 5 = South America</param>
+    public void LocationResponse(int locationIndex)
+    {
+        if (locationIndex == 0)
+            locationRes = "Africa";
+        else if (locationIndex == 1)
+            locationRes = "Asia";
+        else if (locationIndex == 2)
+            locationRes = "Australia";
+        else if (locationIndex == 3)
+            locationRes = "Europe";
+        else if (locationIndex == 4)
+            locationRes = "North America";
+        else if (locationIndex == 5)
+            locationRes = "South America";
+    }
+
+    private void Update()
+    {
+        if (!logData)
+            return;
+
+        if (logFrameRate)
+        {
+            frameRate = (int)(1 / Time.deltaTime);
+            if (logAverageFrameRate)
+            {
+                fpsSum += (int)frameRate;
+                fpsCount++;
+                avgFrames = fpsSum/fpsCount;
+            }
+        }
+
+        if (logTime && timerRunning)
+            timeSpend += Time.deltaTime;
+
+        if (onlineLogging)
+            return;
+
+        #region OVR-Input
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) || Input.GetKeyDown("h"))
+        {
+            ToggleCSVLogging();
+            if (!Application.isEditor)
+                OVRInput.SetControllerVibration(0.7f, 0.1f, OVRInput.Controller.LTouch);
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetKeyDown("l"))
+        {
+            onFirstData = !onFirstData;
+            if (!Application.isEditor)
+                VibrateController(onFirstData ? 1 : 2, 0.5f, false);
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.Start))
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+            if (currentSceneIndex + 1 < SceneManager.sceneCount)
+                SceneManager.LoadScene(currentSceneIndex + 1);
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
+        {
+            int newParticipantNumber = PlayerPrefs.GetInt("participantNumber") + 1;
+            PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
+            StartCoroutine(VibrateController(newParticipantNumber, 0.7f, false));
+            initial = true;
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
+        {
+            int newParticipantNumber = PlayerPrefs.GetInt("participantNumber") - 1;
+
+            if (newParticipantNumber < 0)
+                return;
+
+            PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
+            StartCoroutine(VibrateController(newParticipantNumber, 0.7f, false));
+            initial = true;
+        }
+        #endregion
+    }
+
+    public void ToggleTimer(bool start)
+    {
+        if (start)
+        {
+            timerRunning = true;
+            timeSpend = 0;
+        }
+        else
+        {
+            timerRunning = false;
+        }
+    }
+
+    #region CSV
+    private void InitializeCSV()
+    {
 #if UNITY_ANDROID
         if (!Application.isEditor)
             filePath = Application.persistentDataPath;
@@ -89,7 +377,6 @@ public class DataLogger : MonoBehaviour
         }
     }
 
-    #region CSV
     private IEnumerator CSVDataLogRoutine()
     {
         if (initial)
@@ -205,16 +492,44 @@ public class DataLogger : MonoBehaviour
             tempLabels.Add("FPS");
 
         if (logTime)
-            tempLabels.Add("TimeSpend");
+        {
+            int i = 1;
+            foreach (float time in loggedTimes)
+            {
+                tempLabels.Add("TimeSpend Test " + i);
+                i++;
+            }
+        }
 
         if (logWallHits)
-            tempLabels.Add("WallHits");
+        {
+            int i = 1;
+            foreach (float hits in wallHits)
+            {
+                tempLabels.Add("WallHits Test " + i);
+                i++;
+            }
+        }
 
         if (logPreferredWidth)
-            tempLabels.Add("PreferredWidth");
+        {
+            int i = 1;
+            foreach (float width in prefWidths)
+            {
+                tempLabels.Add("PreferredWidth Test " + i);
+                i++;
+            }
+        }
 
         if (logPreferredHeight)
-            tempLabels.Add("PreferredHeight");
+        {
+            int i = 1;
+            foreach (float height in prefHeights)
+            {
+                tempLabels.Add("PreferredHeight Test " + i);
+                i++;
+            }
+        }
 
         if (logPlayAreaSize && !Application.isEditor)
             tempLabels.Add("PlayArea Size");
@@ -250,208 +565,6 @@ public class DataLogger : MonoBehaviour
     }
     #endregion
 
-    private void UpdateDataList()
-    {
-        string spec = "G";
-        CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
-
-        dataList.Add(sessionNumber.ToString());
-
-        if (logFrameRate)
-            dataList.Add(logAverageFrameRate ? avgFrames.ToString(spec, ci) : frameRate.ToString(spec, ci));
-
-        if (logTime)
-            dataList.Add(timeSpend.ToString(spec, ci));
-
-        if (logWallHits)
-            dataList.Add(antiWallCollision.wallHits.ToString());
-
-        if (logPreferredWidth)
-            dataList.Add(mapObj.transform.localScale.x.ToString(spec, ci));
-
-        if (logPreferredHeight)
-            dataList.Add(mapObj.transform.localScale.y.ToString(spec, ci));
-
-        if (logPlayAreaSize && !Application.isEditor)
-            dataList.Add(GetPlayAreaSize().ToString());
-
-        if (logVRSickness)
-        {
-            dataList.Add(sicknessFirstRes);
-            dataList.Add(sicknessSecondRes);
-        }
-
-        if (onlineLogging)
-            if (logGeographic)
-            {
-                if (logGender)
-                    dataList.Add(genderRes);
-                if (logAge)
-                    dataList.Add(ageRes);
-                if (logLocation)
-                    dataList.Add(locationRes);
-                if (logExperience)
-                    dataList.Add(experienceRes);
-            }
-    }
-
-    public void PostDataOnline()
-    {
-        if (dataHandler == null)
-            return;
-
-        UpdateDataList();
-
-        dataHandler.SendData(dataList);
-    }
-
-    private Vector3 GetPlayAreaSize()
-    {
-        Vector3 size = new Vector3();
-        Vector3 chaperone = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
-
-        if (chaperone != null)
-        {
-            size = new Vector3(Mathf.Round(chaperone.x), 0, Mathf.Round(chaperone.z));
-        }
-        return size;
-    }
-
-    public void SicknessResponse(bool firstResponse, bool response)
-    {
-        if (firstResponse)
-        {
-            if (response)
-                sicknessFirstRes = "Yes";
-            else
-                sicknessFirstRes = "No";
-        }
-        else
-        {
-            if (response)
-                sicknessSecondRes = "Yes";
-            else
-                sicknessSecondRes = "No";
-        }
-    }
-
-    public void AgeResponse(int age)
-    {
-        ageRes = age.ToString();
-    }
-
-    public void ExperienceResponse(int experienceIndex)
-    {
-        experienceRes = experienceIndex.ToString();
-    }
-
-    /// <param name="gender">0 = male, 1 = female, 2 = other</param>
-    public void GenderResponse(int gender)
-    {
-        if (gender == 0)
-            genderRes = "Male";
-        else if (gender == 1)
-            genderRes = "Female";
-        else
-            genderRes = "Other";
-    }
-
-    /// <param name="locationIndex">0 = Africa, 1 = Asia, 2 = Australia, 3 = Europe, 4 = North America, 5 = South America</param>
-    public void LocationResponse(int locationIndex)
-    {
-        if (locationIndex == 0)
-            locationRes = "Africa";
-        else if (locationIndex == 1)
-            locationRes = "Asia";
-        else if (locationIndex == 2)
-            locationRes = "Australia";
-        else if (locationIndex == 3)
-            locationRes = "Europe";
-        else if (locationIndex == 4)
-            locationRes = "North America";
-        else if (locationIndex == 5)
-            locationRes = "South America";
-    }
-
-    private void Update()
-    {
-        if (!logData)
-            return;
-
-        if (logFrameRate)
-        {
-            frameRate = (int)(1 / Time.deltaTime);
-            if (logAverageFrameRate)
-            {
-                fpsSum += (int)frameRate;
-                fpsCount++;
-                avgFrames = fpsSum/fpsCount;
-            }
-        }
-
-        if (logTime && timerRunning)
-            timeSpend += Time.deltaTime;
-
-        if (onlineLogging)
-            return;
-
-        #region OVR-Input
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) || Input.GetKeyDown("h"))
-        {
-            ToggleCSVLogging();
-            if (!Application.isEditor)
-                OVRInput.SetControllerVibration(0.7f, 0.1f, OVRInput.Controller.LTouch);
-        }
-
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetKeyDown("l"))
-        {
-            onFirstData = !onFirstData;
-            if (!Application.isEditor)
-                VibrateController(onFirstData ? 1 : 2, 0.5f, false);
-        }
-
-        if (OVRInput.GetDown(OVRInput.Button.Start))
-        {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-            if (currentSceneIndex + 1 < SceneManager.sceneCount)
-                SceneManager.LoadScene(currentSceneIndex + 1);
-        }
-
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickUp))
-        {
-            int newParticipantNumber = PlayerPrefs.GetInt("participantNumber") + 1;
-            PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
-            StartCoroutine(VibrateController(newParticipantNumber, 0.7f, false));
-            initial = true;
-        }
-        else if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstickDown))
-        {
-            int newParticipantNumber = PlayerPrefs.GetInt("participantNumber") - 1;
-
-            if (newParticipantNumber < 0)
-                return;
-
-            PlayerPrefs.SetInt("participantNumber", newParticipantNumber);
-            StartCoroutine(VibrateController(newParticipantNumber, 0.7f, false));
-            initial = true;
-        }
-        #endregion
-    }
-
-    public void ToggleTimer(bool start)
-    {
-        if (start)
-        {
-            timerRunning = true;
-            timeSpend = 0;
-        }
-        else
-        {
-            timerRunning = false;
-        }
-    }
-
     #region OVR-ControllerFeedback
     private IEnumerator VibrateController(int amount, float frequency, bool rightController)
     {
@@ -477,6 +590,26 @@ public class DataLogger : MonoBehaviour
         }
     }
     #endregion
+
+    #region DataEvents
+    private void InitializeListeners()   // TODO: should be made to have many more events than one
+    {
+        listener = new DataEventListener();
+        listener.GameEvent = wallHitEvent;
+        listener.UnityEventResponse = new UnityVoidEvent();
+        listener.UnityEventResponse.AddListener(ExecuterFunction);
+        listener.RemoteEnable();
+    }
+
+    private void ExecuterFunction(Void @void)
+    {
+        wallHitsCount++;
+    }
+
+    public class DataEventListener : BaseGameEventListener<Void, VoidEvent, UnityVoidEvent>
+    {
+    }
+    #endregion
 }
 
 #region CustomInspector
@@ -486,6 +619,7 @@ public class DataLogger_Editor : UnityEditor.Editor
 {
     public override void OnInspectorGUI()
     {
+        EditorGUILayout.HelpBox("This class should be persistent (DontDestroyOnLoad) to function! - And only one must exist!", MessageType.Warning);
         DrawDefaultInspector();
 
         var script = target as DataLogger;

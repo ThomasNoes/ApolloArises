@@ -7,6 +7,7 @@ public class AntiWallCollision : MonoBehaviour
     public bool useVisual = false;
     private float farClippingPlane;
     private bool active = false;
+    public VoidEvent wallHitEvent;
     [HideInInspector] public int wallHits;
 
     private void Start()
@@ -38,7 +39,7 @@ public class AntiWallCollision : MonoBehaviour
 
     private void AntiCheat(bool response) // true: activate, false: stop
     {
-        if (!active)
+        if (!active || Application.isEditor)
             return;
 
         if (response)
@@ -50,6 +51,7 @@ public class AntiWallCollision : MonoBehaviour
                 cheatCube?.SetActive(true);
 
             wallHits++;
+            wallHitEvent.Raise();
         }
         else
         {
