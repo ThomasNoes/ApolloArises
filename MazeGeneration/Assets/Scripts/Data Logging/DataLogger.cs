@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Globalization;
@@ -110,7 +111,8 @@ public class DataLogger : MonoBehaviour
         string spec = "G";
         CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
 
-        dataList.Add(sessionNumber.ToString());
+        if (!onlineLogging)
+            dataList.Add(sessionNumber.ToString());
 
         if (logFrameRate)
             dataList.Add(logAverageFrameRate ? avgFrames.ToString(spec, ci) : frameRate.ToString(spec, ci));
@@ -147,26 +149,58 @@ public class DataLogger : MonoBehaviour
             }
         }
 
-        if (logPlayAreaSize && !Application.isEditor)
-            dataList.Add(GetPlayAreaSize().ToString());
+        if (logPlayAreaSize)
+        {
+            if (!Application.isEditor)
+                dataList.Add(GetPlayAreaSize().ToString());
+            else
+                dataList.Add("Data not available");
+        }
 
         if (logVRSickness)
         {
-            dataList.Add(firstSicknessData.value);
-            dataList.Add(secondSicknessData.value);
+            if (String.IsNullOrEmpty(firstSicknessData.value))
+                dataList.Add("No data");
+            else
+                dataList.Add(firstSicknessData.value);
+
+            if (String.IsNullOrEmpty(secondSicknessData.value))
+                dataList.Add("No data");
+            else
+                dataList.Add(secondSicknessData.value);
         }
 
         if (onlineLogging)
             if (logGeographic)
             {
                 if (logGender)
-                    dataList.Add(genderData.value);
+                {
+                    if (String.IsNullOrEmpty(genderData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(genderData.value);
+                }
                 if (logAge)
-                    dataList.Add(ageData.value);
+                {
+                    if (String.IsNullOrEmpty(ageData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(ageData.value);
+                }
                 if (logLocation)
-                    dataList.Add(locationData.value);
+                {
+                    if (String.IsNullOrEmpty(locationData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(locationData.value);
+                }
                 if (logExperience)
-                    dataList.Add(experienceData.value);
+                {
+                    if (String.IsNullOrEmpty(experienceData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(experienceData.value);
+                }
             }
     }
 
@@ -345,6 +379,11 @@ public class DataLogger : MonoBehaviour
 
         if (logTime && timerRunning)
             timeSpend += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            PostDataOnline();
+        }
 
         if (onlineLogging)
             return;
