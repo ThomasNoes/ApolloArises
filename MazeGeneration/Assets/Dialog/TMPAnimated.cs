@@ -5,7 +5,7 @@ using TMPro;
 
 public class TMPAnimated : MonoBehaviour
 {
-    public VoidEvent success, surprise, confetti;
+    public VoidEvent textAppear, success, surprise, confetti, remark, question;
 
     private TextMeshProUGUI target;
     private DialogData dialog;
@@ -36,6 +36,7 @@ public class TMPAnimated : MonoBehaviour
         while (i < dialog.text.Length)
         {
             target.text += dialog.text[i];
+            textAppear.Raise();
             yield return delay;
             i++;
         }
@@ -58,6 +59,12 @@ public class TMPAnimated : MonoBehaviour
                 break;
             case DialogData.effect.confetti:
                 confetti.Raise();
+                break;
+            case DialogData.effect.remark:
+                remark.Raise();
+                break;
+            case DialogData.effect.question:
+                question.Raise();
                 break;
             default:
                 break;

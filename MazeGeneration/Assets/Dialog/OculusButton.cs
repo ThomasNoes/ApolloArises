@@ -9,14 +9,14 @@ public class OculusButton : MonoBehaviour
     [System.Serializable]
     public class ButtonEvent : UnityEvent { }
 
-    public VoidEvent ButtonDown;
-
     public float pressLength;
     public bool pressed;
     public ButtonEvent downEvent;
 
     Vector3 startPos;
     Rigidbody rb;
+
+    bool firstPress = true;
 
     void Start()
     {
@@ -26,6 +26,7 @@ public class OculusButton : MonoBehaviour
 
     void Update()
     {
+
         // If our distance is greater than what we specified as a press
         // set it to our max distance and register a press if we haven't already
         float distance = Mathf.Abs(transform.position.y - startPos.y);
@@ -35,9 +36,16 @@ public class OculusButton : MonoBehaviour
             transform.position = new Vector3(transform.position.x, startPos.y - pressLength, transform.position.z);
             if (!pressed)
             {
-                pressed = true;
-                // If we have an event, invoke it
-                downEvent?.Invoke();
+                if (firstPress)
+                {
+                    firstPress = false;
+                }
+                else
+                {
+                    pressed = true;
+                    // If we have an event, invoke it
+                    downEvent?.Invoke();
+                }
             }
         }
         else

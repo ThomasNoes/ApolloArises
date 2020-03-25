@@ -26,6 +26,8 @@ public class DialogData : ScriptableObject
         success = 1,
         surprise = 2,
         confetti = 3,
+        question = 4,
+        remark = 5
     }
 
 
