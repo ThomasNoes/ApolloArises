@@ -1,15 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class BaseGameEventListener<T, E, UER> : MonoBehaviour,
     IGameEventListener<T> where E : BaseGameEvent<T> where UER : UnityEvent<T>
 {
     [SerializeField] private E gameEvent;
-
+    
     public E GameEvent
     {
         get { return gameEvent; }
         set { gameEvent = value; }
+    }
+
+    [SerializeField] private float delay;
+
+    public float Delay
+    {
+        get { return delay; }
+        set { delay = value; }
     }
 
     [SerializeField] private UER unityEventResponse;
@@ -59,7 +68,16 @@ public abstract class BaseGameEventListener<T, E, UER> : MonoBehaviour,
     {
         if (unityEventResponse != null)
         {
-            unityEventResponse.Invoke(item);
+            if (delay <= 0)
+                unityEventResponse.Invoke(item);
+            else
+                StartCoroutine(DelayedEventRaise(item));
         }
+    }
+
+    private IEnumerator DelayedEventRaise(T item)
+    {
+        yield return new WaitForSeconds(delay);
+        unityEventResponse.Invoke(item);
     }
 }
