@@ -7,13 +7,11 @@ public class GuardainCalibration : MonoBehaviour
 
     public static Vector3[] GetBoundaryPoints()
     {
-        OVRManager ovr = FindObjectOfType<OVRManager>();
         return OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
     }
 
     public static void Calibrate(out Vector3 center, out Vector3 forward)
     {
-        OVRManager ovr = FindObjectOfType<OVRManager>();
         Vector3[] boundaryPoints = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
         IgnoreZ(boundaryPoints);
         center = CalculateCenter(boundaryPoints);

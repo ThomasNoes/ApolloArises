@@ -480,7 +480,17 @@ public class MapManager : MonoBehaviour
 
     void OffsetMap()
     {
-        transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+        //transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+        Vector3 center;
+        Vector3 forward;
+
+        GuardainCalibration.Calibrate(out center, out forward);
+
+        transform.position = center;
+        transform.forward = forward;
+
+        Debug.Log("mapmanager center is "+transform.position);
+        Debug.Log("mapmanager forward is " + transform.forward);
     }
 
     void GetStartSeedFromPlayerPosition(out int col, out int row, bool usePlayerPos)
