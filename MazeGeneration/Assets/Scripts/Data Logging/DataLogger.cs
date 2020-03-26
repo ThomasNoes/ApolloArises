@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Globalization;
@@ -21,6 +22,11 @@ public class DataLogger : MonoBehaviour
     [HideInInspector] public string filePath = @"Assets/Resources/CSV";
     private string fileName = "/session";
     private string fullPath;
+
+    // Scriptable Objects:
+    public FloatValue fpsData;
+    public StringValue firstSicknessData, secondSicknessData, ageData, experienceData, genderData, locationData;
+    public FloatArrayValue prefWidthsData, prefHeightsData, loggedTimesData, wallHitsData;
 
     // Bools:
     public bool onlineLogging = true, logData = true;
@@ -43,6 +49,9 @@ public class DataLogger : MonoBehaviour
 
     private void Start()
     {
+        if (!logData)
+            return;
+
         Initialize();
 
         if (onlineLogging)
@@ -64,32 +73,37 @@ public class DataLogger : MonoBehaviour
 
         if (logPreferredWidth) // Curently not needed
         {
-            if (mapManagerObj == null)
-                mapManagerObj = gameObject;
+            if (mapManagerObj != null)
+            {
+                mapObj = mapManagerObj.transform.GetChild(0).gameObject;
 
-            mapObj = mapManagerObj.transform.GetChild(0).gameObject;
-
-            if (mapObj == null)
+                if (mapObj == null)
+                {
+                    logPreferredWidth = false;
+                    logPreferredHeight = false;
+                    Debug.LogError("Datalogger Error: Maze 1 not found");
+                }
+            }
+            else
             {
                 logPreferredWidth = false;
                 logPreferredHeight = false;
-                Debug.LogError("Datalogger Error: Maze 1 not found");
-            }
+            } 
         }
 
         dataList = new List<string>();
 
         if (logTime)
-            loggedTimes = new float[conditionAmount];
+            loggedTimesData.values = new float[conditionAmount];
 
         if (logWallHits)
-            wallHits = new float[conditionAmount];
+            wallHitsData.values = new float[conditionAmount];
 
         if (logPreferredWidth)
-            prefWidths = new float[conditionAmount];
+            prefWidthsData.values = new float[conditionAmount];
 
         if (logPreferredHeight)
-            prefHeights = new float[conditionAmount];
+            prefHeightsData.values = new float[conditionAmount];
     }
 
     private void UpdateDataList()
@@ -97,14 +111,15 @@ public class DataLogger : MonoBehaviour
         string spec = "G";
         CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
 
-        dataList.Add(sessionNumber.ToString());
+        if (!onlineLogging)
+            dataList.Add(sessionNumber.ToString());
 
         if (logFrameRate)
             dataList.Add(logAverageFrameRate ? avgFrames.ToString(spec, ci) : frameRate.ToString(spec, ci));
 
         if (logTime)
         {
-            foreach (float time in loggedTimes)
+            foreach (float time in loggedTimesData.values)
             {
                 dataList.Add(time.ToString(spec, ci));
             }
@@ -112,7 +127,7 @@ public class DataLogger : MonoBehaviour
 
         if (logWallHits)
         {
-            foreach (float hits in wallHits)
+            foreach (float hits in wallHitsData.values)
             {
                 dataList.Add(hits.ToString());
             }
@@ -120,7 +135,7 @@ public class DataLogger : MonoBehaviour
 
         if (logPreferredWidth)
         {
-            foreach (float width in prefWidths)
+            foreach (float width in prefWidthsData.values)
             {
                 dataList.Add(width.ToString(spec, ci));
             }
@@ -128,32 +143,64 @@ public class DataLogger : MonoBehaviour
 
         if (logPreferredHeight)
         {
-            foreach (float height in prefHeights)
+            foreach (float height in prefHeightsData.values)
             {
                 dataList.Add(height.ToString(spec, ci));
             }
         }
 
-        if (logPlayAreaSize && !Application.isEditor)
-            dataList.Add(GetPlayAreaSize().ToString());
+        if (logPlayAreaSize)
+        {
+            if (!Application.isEditor)
+                dataList.Add(GetPlayAreaSize().ToString());
+            else
+                dataList.Add("Data not available");
+        }
 
         if (logVRSickness)
         {
-            dataList.Add(sicknessFirstRes);
-            dataList.Add(sicknessSecondRes);
+            if (String.IsNullOrEmpty(firstSicknessData.value))
+                dataList.Add("No data");
+            else
+                dataList.Add(firstSicknessData.value);
+
+            if (String.IsNullOrEmpty(secondSicknessData.value))
+                dataList.Add("No data");
+            else
+                dataList.Add(secondSicknessData.value);
         }
 
         if (onlineLogging)
             if (logGeographic)
             {
                 if (logGender)
-                    dataList.Add(genderRes);
+                {
+                    if (String.IsNullOrEmpty(genderData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(genderData.value);
+                }
                 if (logAge)
-                    dataList.Add(ageRes);
+                {
+                    if (String.IsNullOrEmpty(ageData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(ageData.value);
+                }
                 if (logLocation)
-                    dataList.Add(locationRes);
+                {
+                    if (String.IsNullOrEmpty(locationData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(locationData.value);
+                }
                 if (logExperience)
-                    dataList.Add(experienceRes);
+                {
+                    if (String.IsNullOrEmpty(experienceData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(experienceData.value);
+                }
             }
     }
 
@@ -184,42 +231,73 @@ public class DataLogger : MonoBehaviour
 
     public void FirstSicknessResponse(bool response)
     {
+        if (firstSicknessData == null)
+            return;
+
         if (response)
-            sicknessFirstRes = "Yes";
+            firstSicknessData.value = "Yes";
         else
-            sicknessFirstRes = "No";
+            firstSicknessData.value = "No";
     }
 
     public void SecondSicknessResponse(bool response)
     {
+        if (secondSicknessData == null)
+            return;
+
         if (response)
-            sicknessSecondRes = "Yes";
+            secondSicknessData.value = "Yes";
         else
-            sicknessSecondRes = "No";
+            secondSicknessData.value = "No";
     }
 
     public void PreferredWidthResponse(int testIndex)
     {
-        if (prefWidths != null && mapObj != null)
-            if (testIndex >= 0 && testIndex < prefWidths.Length)
-                prefWidths[testIndex] = mapObj.transform.localScale.x;
+        if (prefWidthsData != null && mapObj != null)
+            if (testIndex >= 0 && testIndex < prefWidthsData.values.Length)
+                prefWidthsData.values[testIndex] = mapObj.transform.localScale.x;
     }
 
     public void PreferredHeightResponse(int testIndex)
     {
-        if (prefHeights != null && mapObj != null)
-            if (testIndex >= 0 && testIndex < prefHeights.Length)
-                prefHeights[testIndex] = mapObj.transform.localScale.y;
+        if (prefHeightsData != null && mapObj != null)
+            if (testIndex >= 0 && testIndex < prefHeightsData.values.Length)
+                prefHeightsData.values[testIndex] = mapObj.transform.localScale.y;
     }
 
-    public void AgeResponse(int age)
+
+    /// <param name="age">= = 19 or less, 1 = 20-29, 2 = 30-39, 3 = 40 or more</param>
+    public void AgeResponse(int ageIndex)
     {
-        ageRes = age.ToString();
+        if (ageData == null)
+            return;
+
+        switch (ageIndex)
+        {
+            case 0:
+                ageData.value = "19 or less";
+                break;
+            case 1:
+                ageData.value = "20-29";
+                break;
+            case 2:
+                ageData.value = "30-39";
+                break;
+            case 3:
+                ageData.value = "40 or more";
+                break;
+            default:
+                ageData.value = "Not specified";
+                break;
+        }
     }
 
     public void ExperienceResponse(int experienceIndex)
     {
-        experienceRes = experienceIndex.ToString();
+        if (experienceData == null)
+            return;
+
+        experienceData.value = experienceIndex.ToString();
     }
 
     public void LogTimeStart()
@@ -231,9 +309,9 @@ public class DataLogger : MonoBehaviour
     {
         ToggleTimer(false);
 
-        if (loggedTimes != null)
-            if (testIndex >= 0 && testIndex < loggedTimes.Length)
-                loggedTimes[testIndex] = timeSpend;
+        if (loggedTimesData != null)
+            if (testIndex >= 0 && testIndex < loggedTimesData.values.Length)
+                loggedTimesData.values[testIndex] = timeSpend;
     }
 
     /// <summary>
@@ -241,10 +319,10 @@ public class DataLogger : MonoBehaviour
     /// </summary>
     public void LogWallHits(int testIndex)
     {
-        if (wallHits != null)
-            if (testIndex >= 0 && testIndex < wallHits.Length)
+        if (wallHitsData != null)
+            if (testIndex >= 0 && testIndex < wallHitsData.values.Length)
             {
-                wallHits[testIndex] = wallHitsCount;
+                wallHitsData.values[testIndex] = wallHitsCount;
                 wallHitsCount = 0; // TODO check if I can set to 0 already?
             }
     }
@@ -252,29 +330,35 @@ public class DataLogger : MonoBehaviour
     /// <param name="gender">0 = male, 1 = female, 2 = other</param>
     public void GenderResponse(int gender)
     {
+        if (genderData == null)
+            return;
+
         if (gender == 0)
-            genderRes = "Male";
+            genderData.value = "Male";
         else if (gender == 1)
-            genderRes = "Female";
+            genderData.value = "Female";
         else
-            genderRes = "Other";
+            genderData.value = "Other";
     }
 
     /// <param name="locationIndex">0 = Africa, 1 = Asia, 2 = Australia, 3 = Europe, 4 = North America, 5 = South America</param>
     public void LocationResponse(int locationIndex)
     {
+        if (locationData == null)
+            return;
+
         if (locationIndex == 0)
-            locationRes = "Africa";
+            locationData.value = "Africa";
         else if (locationIndex == 1)
-            locationRes = "Asia";
+            locationData.value = "Asia";
         else if (locationIndex == 2)
-            locationRes = "Australia";
+            locationData.value = "Australia";
         else if (locationIndex == 3)
-            locationRes = "Europe";
+            locationData.value = "Europe";
         else if (locationIndex == 4)
-            locationRes = "North America";
+            locationData.value = "North America";
         else if (locationIndex == 5)
-            locationRes = "South America";
+            locationData.value = "South America";
     }
 
     private void Update()
@@ -295,6 +379,11 @@ public class DataLogger : MonoBehaviour
 
         if (logTime && timerRunning)
             timeSpend += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            PostDataOnline();
+        }
 
         if (onlineLogging)
             return;
@@ -597,10 +686,15 @@ public class DataLogger_Editor : UnityEditor.Editor
 {
     public override void OnInspectorGUI()
     {
-        EditorGUILayout.HelpBox("Remember: connect MapManager object and AntiWallCollision script reference", MessageType.Info);
-        DrawDefaultInspector();
-
         var script = target as DataLogger;
+
+        if (script.wallCollision == null)
+            EditorGUILayout.HelpBox("Warning! - AntiCheat script reference null (can be found under CenterEyeAnchor)", MessageType.Error);
+
+        if (script.mapManagerObj == null)
+            EditorGUILayout.HelpBox("Warning! - No reference to mapmanager object (null reference)", MessageType.Warning);
+
+        DrawDefaultInspector();
 
         if (!script.onlineLogging)
         {

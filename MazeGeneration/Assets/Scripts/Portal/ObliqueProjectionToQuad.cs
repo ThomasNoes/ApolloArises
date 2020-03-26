@@ -4,17 +4,24 @@
 //[ExecuteInEditMode]
 
 public class ObliqueProjectionToQuad : MonoBehaviour {
+    public bool enable = true;
     public GameObject projectionScreen;
     public bool estimateViewFrustum = true;
     public bool setNearClipPlane = false;
     public float minNearClipDistance = 0.0001f;
     public float nearClipDistanceOffset = -0.01f;
+    public float farClippingPlane = 50.0f;
 
     private Camera cameraComponent;
 
     void OnPreCull () {
+
+        if (!enable)
+            return;
+
         cameraComponent = GetComponent<Camera> ();
         if (null != projectionScreen && null != cameraComponent) {
+
             Vector3 pa =
                 projectionScreen.transform.TransformPoint (
                     new Vector3 (-0.5f, -0.5f, 0.0f));
@@ -66,12 +73,12 @@ public class ObliqueProjectionToQuad : MonoBehaviour {
                 vc = pc - pe;
             }
 
-            vr.Normalize ();
-            vu.Normalize ();
+            Vector3.Normalize(vr);
+            Vector3.Normalize(vu);
             vn = -Vector3.Cross (vr, vu);
             // we need the minus sign because Unity 
             // uses a left-handed coordinate system
-            vn.Normalize ();
+            Vector3.Normalize(vn);
 
             d = -Vector3.Dot (va, vn);
             if (setNearClipPlane) {
