@@ -13,12 +13,20 @@ public class GuardainCalibration : MonoBehaviour
 
     public static void Calibrate(out Vector3 center, out Vector3 forward)
     {
-
         OVRManager ovr = FindObjectOfType<OVRManager>();
         Vector3[] boundaryPoints = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
+        IgnoreZ(boundaryPoints);
         center = CalculateCenter(boundaryPoints);
         forward = CalculateForward(center, boundaryPoints);
 
+    }
+
+    private static void IgnoreZ(Vector3[] points)
+    {
+        for (int i = 0; i < points.Length; i++)
+        {
+            points[i].z = 0;
+        }
     }
 
     private static Vector3 CalculateCenter(Vector3[] points)

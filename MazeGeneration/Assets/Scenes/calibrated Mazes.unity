@@ -447,7 +447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &893319286
 Transform:
   m_ObjectHideFlags: 0
@@ -649,11 +649,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6a4f6a8eac00244b3a16ee5512016c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enable: 1
   projectionScreen: {fileID: 0}
   estimateViewFrustum: 1
   setNearClipPlane: 1
   minNearClipDistance: 0.0001
   nearClipDistanceOffset: -0.01
+  farClippingPlane: 50
 --- !u!20 &995948999
 Camera:
   m_ObjectHideFlags: 0
@@ -756,11 +758,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6a4f6a8eac00244b3a16ee5512016c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enable: 1
   projectionScreen: {fileID: 0}
   estimateViewFrustum: 1
   setNearClipPlane: 1
   minNearClipDistance: 0.0001
   nearClipDistanceOffset: -0.01
+  farClippingPlane: 50
 --- !u!114 &1165058069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,11 +867,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6a4f6a8eac00244b3a16ee5512016c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enable: 1
   projectionScreen: {fileID: 0}
   estimateViewFrustum: 1
   setNearClipPlane: 1
   minNearClipDistance: 0.0001
   nearClipDistanceOffset: -0.01
+  farClippingPlane: 50
 --- !u!20 &1347709477
 Camera:
   m_ObjectHideFlags: 0
@@ -1050,7 +1056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1434299541
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1708,11 +1714,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6a4f6a8eac00244b3a16ee5512016c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enable: 1
   projectionScreen: {fileID: 0}
   estimateViewFrustum: 1
   setNearClipPlane: 1
   minNearClipDistance: 0.0001
   nearClipDistanceOffset: -0.01
+  farClippingPlane: 50
 --- !u!114 &1813671425
 MonoBehaviour:
   m_ObjectHideFlags: 0
