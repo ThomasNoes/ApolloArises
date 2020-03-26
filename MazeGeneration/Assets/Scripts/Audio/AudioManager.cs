@@ -111,7 +111,7 @@ public class SoundEvent
         audioSource.volume = soundVolume;
         audioSource.pitch = soundPitch;
         audioSource.Play();
-        Debug.Log("Playing Sound: " + audioClip.name);
+        //Debug.Log("Playing Sound: " + audioClip.name);
     }
 
     public IEnumerator WaitForDelay()

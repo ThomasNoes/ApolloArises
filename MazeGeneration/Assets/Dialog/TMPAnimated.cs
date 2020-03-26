@@ -26,7 +26,6 @@ public class TMPAnimated : MonoBehaviour
 
     IEnumerator Read()
     {
-        Debug.Log("here");
         target.text = "";
 
         WaitForSeconds delay = new WaitForSeconds(1f/dialog.textSpeed);

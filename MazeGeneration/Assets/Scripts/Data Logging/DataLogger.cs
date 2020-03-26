@@ -209,6 +209,7 @@ public class DataLogger : MonoBehaviour
     /// </summary>
     public void PostDataOnline()
     {
+        Debug.Log("post online");
         if (dataHandler == null)
             return;
 
@@ -231,6 +232,7 @@ public class DataLogger : MonoBehaviour
 
     public void FirstSicknessResponse(bool response)
     {
+        Debug.Log("first sickness");
         if (firstSicknessData == null)
             return;
 
@@ -242,6 +244,7 @@ public class DataLogger : MonoBehaviour
 
     public void SecondSicknessResponse(bool response)
     {
+        Debug.Log("second sickness");
         if (secondSicknessData == null)
             return;
 
@@ -253,6 +256,7 @@ public class DataLogger : MonoBehaviour
 
     public void PreferredWidthResponse(int testIndex)
     {
+        Debug.Log("Width");
         if (prefWidthsData != null && mapObj != null)
             if (testIndex >= 0 && testIndex < prefWidthsData.values.Length)
                 prefWidthsData.values[testIndex] = mapObj.transform.localScale.x;
@@ -260,6 +264,7 @@ public class DataLogger : MonoBehaviour
 
     public void PreferredHeightResponse(int testIndex)
     {
+        Debug.Log("height");
         if (prefHeightsData != null && mapObj != null)
             if (testIndex >= 0 && testIndex < prefHeightsData.values.Length)
                 prefHeightsData.values[testIndex] = mapObj.transform.localScale.y;
@@ -269,6 +274,7 @@ public class DataLogger : MonoBehaviour
     /// <param name="age">= = 19 or less, 1 = 20-29, 2 = 30-39, 3 = 40 or more</param>
     public void AgeResponse(int ageIndex)
     {
+        Debug.Log("age");
         if (ageData == null)
             return;
 
@@ -294,6 +300,7 @@ public class DataLogger : MonoBehaviour
 
     public void ExperienceResponse(int experienceIndex)
     {
+        Debug.Log("experience");
         if (experienceData == null)
             return;
 
@@ -330,6 +337,7 @@ public class DataLogger : MonoBehaviour
     /// <param name="gender">0 = male, 1 = female, 2 = other</param>
     public void GenderResponse(int gender)
     {
+        Debug.Log("gender");
         if (genderData == null)
             return;
 
@@ -344,6 +352,7 @@ public class DataLogger : MonoBehaviour
     /// <param name="locationIndex">0 = Africa, 1 = Asia, 2 = Australia, 3 = Europe, 4 = North America, 5 = South America</param>
     public void LocationResponse(int locationIndex)
     {
+        Debug.Log("location");
         if (locationData == null)
             return;
 
