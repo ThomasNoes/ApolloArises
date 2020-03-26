@@ -692,7 +692,7 @@ public class DataLogger_Editor : UnityEditor.Editor
             EditorGUILayout.HelpBox("Warning! - AntiCheat script reference null (can be found under CenterEyeAnchor)", MessageType.Error);
 
         if (script.mapManagerObj == null)
-            EditorGUILayout.HelpBox("Warning! - No reference to mapmanager object (null reference)", MessageType.Warning);
+            EditorGUILayout.HelpBox("Warning! - No reference to mapmanager object (null reference)", MessageType.Error);
 
         DrawDefaultInspector();
 
