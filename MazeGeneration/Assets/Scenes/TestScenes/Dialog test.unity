@@ -899,7 +899,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
     soundEventId: 0
     triggerDelay: 0
-    soundVolume: 1
+    soundVolume: 0.106
     soundPitch: 1
     triggerEvent: {fileID: 11400000, guid: d761c93ff9f62ab4bab4e72b28761a7a, type: 2}
     runOnce: 0
