@@ -686,10 +686,15 @@ public class DataLogger_Editor : UnityEditor.Editor
 {
     public override void OnInspectorGUI()
     {
-        EditorGUILayout.HelpBox("Remember: connect MapManager object and AntiWallCollision script reference", MessageType.Info);
-        DrawDefaultInspector();
-
         var script = target as DataLogger;
+
+        if (script.wallCollision == null)
+            EditorGUILayout.HelpBox("Warning! - AntiCheat script reference null (can be found under CenterEyeAnchor)", MessageType.Error);
+
+        if (script.mapManagerObj == null)
+            EditorGUILayout.HelpBox("Warning! - No reference to mapmanager object (null reference)", MessageType.Warning);
+
+        DrawDefaultInspector();
 
         if (!script.onlineLogging)
         {
