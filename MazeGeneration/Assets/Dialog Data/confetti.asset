@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: confetti
   m_EditorClassIdentifier: 
-  text: confetti
+  text: confetti confetti confetti confetti confetti
   textSpeed: 10
   dialogEffect: 3

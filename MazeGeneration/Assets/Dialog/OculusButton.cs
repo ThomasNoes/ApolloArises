@@ -39,7 +39,7 @@ public class OculusButton : MonoBehaviour
         if (distance >= pressLength)
         {
             // Prevent the button from going past the pressLength
-            transform.localPosition = new Vector3(transform.localPosition.x, startPos.y - pressLength, transform.localPosition.z);
+            transform.localPosition = new Vector3(0, startPos.y - pressLength, 0);
             if (!pressed)
             {
                 if (registerPress)
@@ -58,7 +58,7 @@ public class OculusButton : MonoBehaviour
         // Prevent button from springing back up past its original position
         if (transform.localPosition.y > startPos.y)
         {
-            transform.localPosition = new Vector3(transform.localPosition.x, startPos.y, transform.position.z);
+            transform.localPosition = new Vector3(0, startPos.y, 0);
         }
     }
 }
