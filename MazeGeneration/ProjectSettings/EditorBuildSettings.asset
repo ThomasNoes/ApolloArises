@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Corridor Evaluation/Wall Condition.unity
     guid: 7ecce46e665d40e4a8ebdee37a35f010
   - enabled: 1
-    path: Assets/Scenes/TestScenes/Dialog test.unity
-    guid: 078db149bbb7cf143bc7cad71d7e33d3
+    path: Assets/Scenes/TestScenes/calibration test.unity
+    guid: c090311b4331a1642ab32607993abb0f
   m_configObjects: {}

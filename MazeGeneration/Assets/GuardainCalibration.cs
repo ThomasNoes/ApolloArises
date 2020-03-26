@@ -4,16 +4,41 @@ using UnityEngine;
 
 public class GuardainCalibration : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public static Vector3[] GetBoundaryPoints()
     {
-        
+        OVRManager ovr = FindObjectOfType<OVRManager>();
+        return OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void Calibrate(out Vector3 center, out Vector3 forward)
     {
-        
+
+        OVRManager ovr = FindObjectOfType<OVRManager>();
+        Vector3[] boundaryPoints = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
+        center = CalculateCenter(boundaryPoints);
+        forward = CalculateForward(center, boundaryPoints);
+
+    }
+
+    private static Vector3 CalculateCenter(Vector3[] points)
+    {
+        //get the sum of points and divide
+        Vector3 center = Vector3.zero;
+        foreach (Vector3 v in points)
+        {
+            center += v;
+        }
+        center = center / points.Length; 
+        return center;
+    }
+
+    private static Vector3 CalculateForward(Vector3 center, Vector3[] points)
+    {
+        Vector3 forward = Vector3.zero;
+        Vector3 firstEdge = (points[0] + points[1]) / 2;
+
+        forward = (firstEdge - center).normalized;
+        return forward;
     }
 }
