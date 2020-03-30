@@ -33,8 +33,6 @@ public class PortalRenderController : MonoBehaviour
             portalCount = mapSequence.Length - 1;
             portalWidth = mapManager.tileWidth;
 
-            transform.position = mapManager.transform.position;
-
             prevProjectionQuadArray = new GameObject[portalCount];
             nextProjectionQuadArray = new GameObject[portalCount];
             prevRenderQuadArray = new GameObject[portalCount];
@@ -50,9 +48,12 @@ public class PortalRenderController : MonoBehaviour
     {
         if (useNewPortals && newPortalPrefab != null)
         {
+            Debug.Log("Using new portal setup");
             NewPortalSetup(isForward, i);
             return;
         }
+
+
 
         int j; // number added to i to distinguish between portals in the portal pair.
         string name;
@@ -127,11 +128,16 @@ public class PortalRenderController : MonoBehaviour
 
         TileInfo currentPortal = mapSequence[i].endSeed;
         //currentPortal.PrintTile();
-        tempPos = new Vector3(mapSequence[i + j].mapObject.transform.position.x + currentPortal.column * portalWidth,
-            mapSequence[i + j].mapObject.transform.position.y,
-            mapSequence[i + j].mapObject.transform.position.z - currentPortal.row * portalWidth);
+        tempPos = mapSequence[i + j].mapObject.transform.position;
 
-        GameObject tempPortal = Instantiate(newPortalPrefab, tempPos, Quaternion.identity);
+        //tempPos = new Vector3(mapSequence[i + j].mapObject.transform.position.x + currentPortal.column * portalWidth,
+            //mapSequence[i + j].mapObject.transform.position.y,
+            //mapSequence[i + j].mapObject.transform.position.z - currentPortal.row * portalWidth);
+
+        GameObject tempPortal = Instantiate(newPortalPrefab, tempPos, transform.rotation, transform);
+
+        //translate 
+        tempPortal.transform.Translate(currentPortal.column * portalWidth, 0, -currentPortal.row * portalWidth);
 
         NewTeleporter tempScript = tempPortal.GetComponent<NewTeleporter>();
         BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();
@@ -140,7 +146,7 @@ public class PortalRenderController : MonoBehaviour
         tempPortal.transform.Rotate(0f, (180 * (1 - j)) + 90f * currentPortal.direction, 0f);
         tempPortal.transform.Translate(0, 0, portalWidth / 2f /*- pillarOffset*/, Space.Self); // TODO removed pillar offset
 
-        tempScript.projectionQuad.Translate(isForward ? nextOffset : prevOffset, Space.World);
+        tempScript.projectionQuad.Translate(isForward ? nextOffset : prevOffset, Space.Self);
 
         tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth), 0, 0);
         tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth), 0, 0);
@@ -152,7 +158,7 @@ public class PortalRenderController : MonoBehaviour
         tempPortal.name = name + " Teleporter " + i;
         tempScript.renderQuad.name = name + "Render Quad " + i;
         tempScript.projectionQuad.name = name + " Projection Quad " + i;
-        tempPortal.transform.parent = transform;
+        //tempPortal.transform.parent = transform;
         tempScript.portalID = i;
         tempScript.mazeID = i + j;
         tempScript.isForwardTeleporter = isForward;

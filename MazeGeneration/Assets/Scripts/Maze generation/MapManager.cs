@@ -522,8 +522,8 @@ public class MapManager : MonoBehaviour
         transform.Translate((-mazeCols * tileWidth / 2)/2, 0, (mazeRows * tileWidth / 2)/2, Space.Self);
 
 
-        Debug.Log("mapmanager center is "+transform.position);
-        Debug.Log("mapmanager forward is " + transform.forward);
+        //Debug.Log("mapmanager center is "+transform.position);
+        //Debug.Log("mapmanager forward is " + transform.forward);
     }
 
     void GetStartSeedFromPlayerPosition(out int col, out int row, bool usePlayerPos)
