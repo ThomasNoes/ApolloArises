@@ -15,6 +15,7 @@ public class DebugWindow : MonoBehaviour
 
     void Awake()
     {
+        Application.logMessageReceived += Log;
         //if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
         active = true;
 
@@ -27,7 +28,7 @@ public class DebugWindow : MonoBehaviour
 
     void OnEnable()
     {
-        Application.logMessageReceived += Log;
+        //Application.logMessageReceived += Log;
     }
 
     void OnDisable()

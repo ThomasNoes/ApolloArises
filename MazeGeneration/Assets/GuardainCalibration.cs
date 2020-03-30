@@ -4,35 +4,42 @@ using UnityEngine;
 
 public class GuardainCalibration : MonoBehaviour
 {
+
+    public bool calibrateGameObject;
     public GameObject gizmo;
 
     public GameObject gizmoRed;
-
-    Vector3 center;
-
-    Vector3 forward;
 
     Vector3 centerOffset;
 
     Vector3[] points;
 
-    public Transform cube;
+    Vector3 c;
+    Vector3 f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        Calibrate();
+         Calibrate(out c, out f);
+        if (calibrateGameObject)
+        {
+            transform.position = new Vector3(c.x, 0, c.z);
+            //Debug.Log("Pos: " + transform.position);
+            transform.forward = c - f;
+            //Debug.Log("Rot: " + transform.rotation.eulerAngles);
+        }
     }
 
-    public void Calibrate()
+    public void Calibrate(out Vector3 center, out Vector3 forward)
     {
         points = GetBoundaryPoints();
-        SetReferencePoints(/*out center, out forward*/);
-        DrawCalibrationArea();
+        IgnoreY(points);
+        SetReferencePoints(out center, out forward);
+        DrawCalibrationArea(center, forward);
 
-        cube.position = new Vector3(center.x, cube.position.y, center.z);
+        //cube.position = new Vector3(center.x, cube.position.y, center.z);
 
-        cube.forward = center - forward;
+       // cube.forward = center - forward;
     }
 
     // Update is called once per frame
@@ -41,14 +48,17 @@ public class GuardainCalibration : MonoBehaviour
 
     }
 
-    public void DrawCalibrationArea()
+    public void DrawCalibrationArea(Vector3 center, Vector3 forward)
     {
         for (int i = 0; i < points.Length; i++)
         {
-            DrawGizmo(points[i],gizmo, 0.1f+(i/10.0f));
+            //Debug.Log("Corner: " + points[i]);
+            DrawGizmo(points[i],gizmo, 0.1f);
         }
-        DrawGizmo(center, gizmoRed,0.2f);
-        DrawGizmo(forward, gizmoRed, 0.2f);
+        DrawGizmo(center, gizmoRed,0.1f);
+        //Debug.Log("Center: " + center);
+        DrawGizmo(forward, gizmoRed, 0.1f);
+        //Debug.Log("Forward: " + forward);
     }
 
     private void DrawGizmo(Vector3 p, GameObject gizmo, float scale = 0.05f)
@@ -66,7 +76,7 @@ public class GuardainCalibration : MonoBehaviour
 
     public void ScaleObject()
     {
-        cube.localScale = new Vector3(GetWidth(points), 0.01f, GetLength(points));
+        transform.localScale = new Vector3(GetWidth(points), 0.01f, GetLength(points));
     }
 
     public float GetWidth(Vector3[] points)
@@ -87,9 +97,11 @@ public class GuardainCalibration : MonoBehaviour
     }
 
 
-    public void SetReferencePoints(/*out Vector3 center, out Vector3 forward*/)
+    public void SetReferencePoints(out Vector3 center, out Vector3 forward)
     {
         Vector3[] boundaryPoints = OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
+        IgnoreY(boundaryPoints);
+
         center = CalculateCenter(boundaryPoints);
         forward = CalculateForward(center, boundaryPoints);
 
@@ -97,9 +109,10 @@ public class GuardainCalibration : MonoBehaviour
 
     private void IgnoreY(Vector3[] points)
     {
+
         for (int i = 0; i < points.Length; i++)
         {
-            points[i].y = 0;
+            points[i].y = 1;
         }
     }
 
@@ -109,11 +122,9 @@ public class GuardainCalibration : MonoBehaviour
         Vector3 center = Vector3.zero;
         foreach (Vector3 v in points)
         {
-            Debug.Log("Corner: " + v);
             center += v;
         }
         center = center / points.Length;
-        Debug.Log("center: "+center);
         return center;
     }
 

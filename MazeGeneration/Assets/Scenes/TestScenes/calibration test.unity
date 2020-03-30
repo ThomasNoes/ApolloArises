@@ -904,6 +904,7 @@ GameObject:
   - component: {fileID: 372010464}
   - component: {fileID: 372010463}
   - component: {fileID: 372010462}
+  - component: {fileID: 372010465}
   m_Layer: 0
   m_Name: plane
   m_TagString: Untagged
@@ -985,6 +986,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 372010460}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &372010465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372010460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5328cccaaf89502448f483cd02d60053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calibrateGameObject: 1
+  gizmo: {fileID: 2497731189600166390, guid: 44f5791eb9b1eed4ba484ac26063bdfb, type: 3}
+  gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
+    type: 3}
 --- !u!20 &544019026 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5369379566301145499, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
@@ -1083,12 +1100,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!4 &1212458249 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5369379566299525895, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
-    type: 3}
-  m_PrefabInstance: {fileID: 106965049}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1431973521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1169,7 +1180,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1902074909}
-  - component: {fileID: 1902074910}
   m_Layer: 0
   m_Name: calibrator
   m_TagString: Untagged
@@ -1191,20 +1201,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1902074910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902074905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5328cccaaf89502448f483cd02d60053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gizmo: {fileID: 2497731189600166390, guid: 44f5791eb9b1eed4ba484ac26063bdfb, type: 3}
-  gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
-    type: 3}
-  cube: {fileID: 372010461}
-  camera: {fileID: 1212458249}

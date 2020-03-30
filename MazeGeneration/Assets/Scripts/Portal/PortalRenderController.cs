@@ -23,6 +23,10 @@ public class PortalRenderController : MonoBehaviour
     {
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
         mapSequence = mapManager.mapSequence;
+
+        transform.position = mapManager.transform.position;
+        transform.rotation = mapManager.transform.rotation;
+
         if (mapSequence.Length >1)
         {
             sequenceLength = mapSequence.Length;
@@ -69,7 +73,7 @@ public class PortalRenderController : MonoBehaviour
             mapSequence[i+j].mapObject.transform.position.y,
             mapSequence[i+j].mapObject.transform.position.z - currentPortal.row * portalWidth);
 
-        GameObject tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity);
+        GameObject tempPortal = Instantiate(portalPrefab, tempPos, Quaternion.identity, transform);
 
         Teleporter tempScript = tempPortal.GetComponent<Teleporter>();
         BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();
