@@ -25,13 +25,13 @@ public class DataLogger : MonoBehaviour
 
     // Scriptable Objects:
     public FloatValue fpsData;
-    public StringValue firstSicknessData, secondSicknessData, ageData, experienceData, genderData, locationData;
+    public StringValue firstSicknessData, secondSicknessData, ageData, experienceData, genderData, locationData, proficiencyData;
     public FloatArrayValue prefWidthsData, prefHeightsData, loggedTimesData, wallHitsData;
 
     // Bools:
     public bool onlineLogging = true, logData = true;
     [HideInInspector] public bool logFrameRate, logAverageFrameRate, logTime, logGender, logAge, logLocation, logExperience,
-        logWallHits, logPreferredWidth, logPreferredHeight, logGeographic, useSceneSwitch, logPlayAreaSize, logVRSickness;
+        logWallHits, logPreferredWidth, logPreferredHeight, logGeographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logProficiency;
     private bool active = false, initial = true, onFirstData = true, timerRunning;
     private bool[] dataWritten = new []{false, false};
 
@@ -201,6 +201,11 @@ public class DataLogger : MonoBehaviour
                     else
                         dataList.Add(experienceData.value);
                 }
+                if (logProficiency)
+                    if (String.IsNullOrEmpty(proficiencyData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(proficiencyData.value);
             }
     }
 
@@ -368,6 +373,32 @@ public class DataLogger : MonoBehaviour
             locationData.value = "North America";
         else if (locationIndex == 5)
             locationData.value = "South America";
+    }
+
+    /// <param name="proficiencyIndex">0: Not at all, 1: A little, 2: Decently, 3: Fluently</param>
+    public void ProficiencyResponse(int proficiencyIndex)
+    {
+        if (proficiencyData == null)
+            return;
+
+        switch (proficiencyIndex)
+        {
+            case 0:
+                proficiencyData.value = "Not at all";
+                break;
+            case 1:
+                proficiencyData.value = "A little";
+                break;
+            case 2:
+                proficiencyData.value = "Decently";
+                break;
+            case 3:
+                proficiencyData.value = "Fluently";
+                break;
+            default:
+                proficiencyData.value = "Wrong value given";
+                break;
+        }
     }
 
     private void Update()
@@ -738,6 +769,7 @@ public class DataLogger_Editor : UnityEditor.Editor
                 script.logAge = EditorGUILayout.Toggle("Age", script.logAge);
                 script.logLocation = EditorGUILayout.Toggle("Location", script.logLocation);
                 script.logExperience = EditorGUILayout.Toggle("VR Experience", script.logExperience);
+                script.logProficiency = EditorGUILayout.Toggle("English Proficiency", script.logProficiency);
                 EditorGUI.indentLevel -= 1;
             }
 
