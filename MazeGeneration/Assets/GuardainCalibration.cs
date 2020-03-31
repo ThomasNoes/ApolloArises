@@ -21,13 +21,16 @@ public class GuardainCalibration : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-         Calibrate(out c, out f);
-        if (calibrateGameObject)
+        if (!Application.isEditor)
         {
-            transform.position = new Vector3(c.x, 0, c.z);
-            //Debug.Log("Pos: " + transform.position);
-            transform.forward = c - f;
-            //Debug.Log("Rot: " + transform.rotation.eulerAngles);
+            Calibrate(out c, out f);
+            if (calibrateGameObject)
+            {
+                transform.position = new Vector3(c.x, 0, c.z);
+                //Debug.Log("Pos: " + transform.position);
+                transform.forward = c - f;
+                //Debug.Log("Rot: " + transform.rotation.eulerAngles);
+            }
         }
     }
 
