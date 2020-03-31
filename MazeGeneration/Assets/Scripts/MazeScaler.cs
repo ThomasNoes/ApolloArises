@@ -25,8 +25,8 @@ public class MazeScaler : MonoBehaviour
     float widthModifier=0;
     float heightModifier=0;
 
-    float widthStep = 0.025f;
-    float heightStep = 0.05f;
+    public float widthStep = 0.1f;
+    public float heightStep = 0.1f;
 
     int row;
     int col;

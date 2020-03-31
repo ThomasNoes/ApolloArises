@@ -692,10 +692,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7134693113245440968, guid: 46bfd7cf0e385e4449709a96183a7868,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.072
+      objectReference: {fileID: 0}
+    - target: {fileID: 7134693113245440968, guid: 46bfd7cf0e385e4449709a96183a7868,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.064
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268339689549284921, guid: 46bfd7cf0e385e4449709a96183a7868,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6245
+      objectReference: {fileID: 0}
     - target: {fileID: 8553440510836257198, guid: 46bfd7cf0e385e4449709a96183a7868,
         type: 3}
       propertyPath: m_Name
-      value: TestCompanion1 (1)
+      value: TestCompanion2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46bfd7cf0e385e4449709a96183a7868, type: 3}
@@ -1485,10 +1500,12 @@ MonoBehaviour:
   enableControls: 0
   width: 1
   height: 1
-  minimumWidth: 0.25
+  minimumWidth: 0.4
   minimumHeight: 1.5
-  maximumWidth: 1.5
+  maximumWidth: 1
   maximumHeight: 5
+  widthStep: 0.1
+  heightStep: 0.1
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
