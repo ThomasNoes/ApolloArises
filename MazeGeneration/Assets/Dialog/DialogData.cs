@@ -30,5 +30,6 @@ public class DialogData : ScriptableObject
         remark = 5
     }
 
+    public VoidEvent ButtonEvent;
 
 }

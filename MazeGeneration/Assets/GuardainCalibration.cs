@@ -6,6 +6,7 @@ public class GuardainCalibration : MonoBehaviour
 {
 
     public bool calibrateGameObject;
+    
     public GameObject gizmo;
 
     public GameObject gizmoRed;
