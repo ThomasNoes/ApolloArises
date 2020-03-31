@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 7
   m_EditorClassIdentifier: 
   text: Do you understand English?
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: 2fd72b762876a804c886c6e89b11c95b, type: 2}

@@ -18,6 +18,6 @@ MonoBehaviour:
     does not prohibit that!
 
 '
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

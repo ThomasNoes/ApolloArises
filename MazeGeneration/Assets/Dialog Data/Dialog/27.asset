@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: And please do not go through the experiment a second time, I will already
     have gathered your data. Do not worry.
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 5
   ButtonEvent: {fileID: 0}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 13
   m_EditorClassIdentifier: 
   text: Which gender do you identify yourself as?
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: ccac01673155412429d085449e9f7beb, type: 2}

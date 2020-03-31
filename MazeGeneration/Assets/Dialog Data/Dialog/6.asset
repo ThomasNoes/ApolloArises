@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 6
   m_EditorClassIdentifier: 
   text: I hope you are willing to answer some simple demographic questions for me!
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 14
   m_EditorClassIdentifier: 
   text: Excellent!
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 1
   ButtonEvent: {fileID: 0}

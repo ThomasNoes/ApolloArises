@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 25
   m_EditorClassIdentifier: 
   text: "I hope you are rea- \r\nOh, one last thing...\r\n"
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 2
   ButtonEvent: {fileID: 0}

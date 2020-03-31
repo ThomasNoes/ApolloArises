@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 29
   m_EditorClassIdentifier: 
   text: "Ready\u2026\r\nSet\u2026\r\nTransfer!\r"
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 2
   ButtonEvent: {fileID: 0}

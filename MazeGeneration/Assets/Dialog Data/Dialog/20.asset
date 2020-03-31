@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: At the end, I will appear again and ask you if you find the corridor width
     comfortable.
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

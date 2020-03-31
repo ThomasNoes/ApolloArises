@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 18
   m_EditorClassIdentifier: 
   text: "Thank You!\r\nNow\u2026 On to the experiment!\r\n"
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 1
   ButtonEvent: {fileID: 0}

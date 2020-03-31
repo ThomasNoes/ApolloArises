@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: I am here representing two master students from Aalborg University who are
     stuck at home in quarantine.
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

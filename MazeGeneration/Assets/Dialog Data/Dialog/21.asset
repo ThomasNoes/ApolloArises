@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: "If you say \u201CYes\u201D, The corridor width will shrink a little.\r\nYou
     then turn around and walk back to the beginning.\r\n"
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

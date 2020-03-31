@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 11
   m_EditorClassIdentifier: 
   text: Which age category are you in?
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: ef4bb30a61c38ca41970af3337870c19, type: 2}

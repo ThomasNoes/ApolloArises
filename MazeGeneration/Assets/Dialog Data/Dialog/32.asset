@@ -15,6 +15,6 @@ MonoBehaviour:
   text: 'OH-
 
     One last question, I almost forgot!'
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 2
   ButtonEvent: {fileID: 0}

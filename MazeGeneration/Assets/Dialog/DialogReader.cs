@@ -10,7 +10,7 @@ public class DialogReader : MonoBehaviour
 
     private TMPAnimated tmpa;
 
-    int index = 0;
+    public int index = 0;
 
     // Start is called before the first frame update
     void Start()

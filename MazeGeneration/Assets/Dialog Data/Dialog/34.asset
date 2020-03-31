@@ -17,6 +17,6 @@ MonoBehaviour:
     THANK YOU!
 
 '
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 1
   ButtonEvent: {fileID: 0}

@@ -13,6 +13,7 @@ public class OculusButton : MonoBehaviour
     public float pressLength;
     public bool pressed;
     public ButtonEvent downEvent;
+    public ButtonEvent upEvent;
 
     Vector3 startPos;
     Rigidbody rb;
@@ -47,6 +48,7 @@ public class OculusButton : MonoBehaviour
                     pressed = true;
                     // If we have an event, invoke it
                     downEvent?.Invoke();
+                    Invoke("UpEvent",0.5f);
                 }
             }
         }
@@ -58,8 +60,14 @@ public class OculusButton : MonoBehaviour
         // Prevent button from springing back up past its original position
         if (transform.localPosition.y > startPos.y)
         {
+
             transform.localPosition = new Vector3(0, startPos.y, 0);
         }
+    }
+
+    void UpEvent()
+    {
+        upEvent?.Invoke();
     }
 }
 

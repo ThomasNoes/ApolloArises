@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestScenes/calibration test.unity
     guid: c090311b4331a1642ab32607993abb0f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/calibrated Mazes.unity
     guid: eb0e730f97bd2d84d978239e882d3ca9
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/Dialog test.unity
+    guid: 078db149bbb7cf143bc7cad71d7e33d3
   m_configObjects: {}

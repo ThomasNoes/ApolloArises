@@ -15,9 +15,9 @@ MonoBehaviour:
   text: 'Do you currently feel any motion sickness?
 
     Like fatigue, headache,
-    eyestrain, blurred vision, dizzy eyes, or difficulty focusing, difficulty concentrating.
+    eyestrain, blurred vision, dizzy eyes, difficulty focusing, or difficulty concentrating.
 
 '
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: e18b04bceb74da949877a7c9603887ad, type: 2}

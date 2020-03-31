@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 30
   m_EditorClassIdentifier: 
   text: Did you find the corridor width comfortable to walk through?
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: 19a703c7c24d2d44489536fae5b46470, type: 2}

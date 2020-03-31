@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 16
   m_EditorClassIdentifier: 
   text: 'One Last Question! '
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 1
   ButtonEvent: {fileID: 0}

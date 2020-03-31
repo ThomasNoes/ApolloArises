@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: "At the beginning, I will ask about the corridor width again, and you answer
     \u201CYes\u201D or \u201CNo\u201D."
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

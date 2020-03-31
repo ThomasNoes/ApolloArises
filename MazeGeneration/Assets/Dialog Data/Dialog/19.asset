@@ -18,6 +18,6 @@ MonoBehaviour:
     job is to walk through the corridor until you reach the end.
 
 '
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 10
   m_EditorClassIdentifier: 
-  text: You are doing Fine!
-  textSpeed: 10
+  text: You are doing fine!
+  textSpeed: 25
   dialogEffect: 1
   ButtonEvent: {fileID: 0}

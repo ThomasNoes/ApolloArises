@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: 'Please, in the name of Science, do not walk through any wall, follow the
     corridor. I know you can do it. '
-  textSpeed: 10
+  textSpeed: 25
   dialogEffect: 5
   ButtonEvent: {fileID: 0}

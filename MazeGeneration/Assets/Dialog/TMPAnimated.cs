@@ -5,7 +5,12 @@ using TMPro;
 
 public class TMPAnimated : MonoBehaviour
 {
-    public VoidEvent textAppear, success, surprise, confetti, remark, question;
+    [Header("Sound effects")]
+    public VoidEvent textAppear;
+    public VoidEvent success, surprise, confetti, remark, question;
+
+
+    public GameObject proceedButton; 
 
     private TextMeshProUGUI target;
     private DialogData dialog;
@@ -20,6 +25,7 @@ public class TMPAnimated : MonoBehaviour
         StartCoroutine(Read());
 
         PlaySound();
+        RaiseEvent();
       
         return true;
     }
@@ -68,5 +74,18 @@ public class TMPAnimated : MonoBehaviour
             default:
                 break;
         }
+    }
+    void RaiseEvent()
+    {
+        if (dialog.ButtonEvent != null)
+        {
+            proceedButton.SetActive(false);
+            dialog.ButtonEvent.Raise();
+        }
+        else if (!proceedButton.activeSelf)
+        {
+            proceedButton.SetActive(true);
+        }
+        
     }
 }
