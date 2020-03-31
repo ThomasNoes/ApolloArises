@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 30
   m_EditorClassIdentifier: 
-  text: 
+  text: Did you find the corridor width comfortable to walk through?
   textSpeed: 10
-  dialogEffect: 0
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: 19a703c7c24d2d44489536fae5b46470, type: 2}

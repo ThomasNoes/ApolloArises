@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 13
   m_EditorClassIdentifier: 
-  text: 
+  text: Which gender do you identify yourself as?
   textSpeed: 10
-  dialogEffect: 0
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: ccac01673155412429d085449e9f7beb, type: 2}

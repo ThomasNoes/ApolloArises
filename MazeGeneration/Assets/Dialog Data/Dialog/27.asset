@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 27
   m_EditorClassIdentifier: 
-  text: 
+  text: And please do not go through the experiment a second time, I will already
+    have gathered your data. Do not worry.
   textSpeed: 10
-  dialogEffect: 0
+  dialogEffect: 5
   ButtonEvent: {fileID: 0}

@@ -15,4 +15,4 @@ MonoBehaviour:
   text: Do you understand English?
   textSpeed: 10
   dialogEffect: 4
-  ButtonEvent: {fileID: 11400000, guid: 9f8fa2c2a4aa1994aa84c502f79e2aea, type: 2}
+  ButtonEvent: {fileID: 11400000, guid: 2fd72b762876a804c886c6e89b11c95b, type: 2}

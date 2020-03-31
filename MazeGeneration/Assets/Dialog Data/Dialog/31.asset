@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 31
   m_EditorClassIdentifier: 
-  text: 
+  text: "Thank you for helping me!\r\nI will deliver the data to the students immediately!\r"
   textSpeed: 10
-  dialogEffect: 0
+  dialogEffect: 1
   ButtonEvent: {fileID: 0}

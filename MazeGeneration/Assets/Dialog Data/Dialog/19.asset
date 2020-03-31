@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 19
   m_EditorClassIdentifier: 
-  text: 
+  text: 'Soon you will be transferred to a new place with a long corridor!
+
+    Your
+    job is to walk through the corridor until you reach the end.
+
+'
   textSpeed: 10
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

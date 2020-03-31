@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 26
   m_EditorClassIdentifier: 
-  text: 
+  text: 'Please, in the name of Science, do not walk through any wall, follow the
+    corridor. I know you can do it. '
   textSpeed: 10
-  dialogEffect: 0
+  dialogEffect: 5
   ButtonEvent: {fileID: 0}
