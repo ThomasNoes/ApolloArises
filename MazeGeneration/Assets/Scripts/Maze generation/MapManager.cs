@@ -19,8 +19,11 @@ public class MapManager : MonoBehaviour
         Hallways
     }
 
+
+
     public GameObject gizmo;
     public TerrainGenerator terrainGenerator;
+    GuardainCalibration gc;
 
     public GameObject[] mazeGeneratorPrefab;
     public bool usePlayAreaCenter, setDimensionsAutomatically;
@@ -60,6 +63,14 @@ public class MapManager : MonoBehaviour
     public TileInfo[] portalInfo;
     public MapInfo[] mapSequence;
 
+    //debug
+    Vector3 beforePos;
+    Vector3 beforeRot;
+    Vector3 afterPos;
+    Vector3 afterRot;
+    Vector3 center;
+    Vector3 forward;
+
     void Awake()
     {
 #if UNITY_ANDROID
@@ -71,6 +82,8 @@ public class MapManager : MonoBehaviour
             {
                 mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
                 mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
+                mazeCols = 3;
+                mazeRows = 3;
             }
         }
 #endif
@@ -157,8 +170,19 @@ public class MapManager : MonoBehaviour
         {
             mg.GenerateIntArray();
         }
-
         OffsetMap();
+    }
+
+    private void Start()
+    {
+        Debug.Log("Before Pos: "+ beforePos);
+        Debug.Log("Before Rot: " + beforeRot);
+        //transform.forward = forward;
+        Debug.Log("After Pos: " + afterPos);
+        Debug.Log("After Rot: " + afterRot);
+
+        Debug.Log("Center: "+ center);
+        Debug.Log("Forward" + forward);
     }
 
     void GenerateMapSequenceHallway()
@@ -480,7 +504,26 @@ public class MapManager : MonoBehaviour
 
     void OffsetMap()
     {
-        transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+        gc = GetComponent<GuardainCalibration>();
+
+        gc.Calibrate(out center, out forward);
+        beforePos = transform.position;
+        beforeRot = transform.rotation.eulerAngles;
+        transform.forward = center - forward;
+        transform.position = new Vector3(center.x, transform.position.y, center.z);
+        afterPos = transform.position;
+        afterRot = transform.rotation.eulerAngles;
+
+        //transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+
+        //transform.Translate(transform.forward * (mazeCols * tileWidth / 2) / 2);
+        //transform.Translate(transform.right * (mazeRows * tileWidth / 2) / 2);
+
+        transform.Translate((-mazeCols * tileWidth / 2)/2, 0, (mazeRows * tileWidth / 2)/2, Space.Self);
+
+
+        //Debug.Log("mapmanager center is "+transform.position);
+        //Debug.Log("mapmanager forward is " + transform.forward);
     }
 
     void GetStartSeedFromPlayerPosition(out int col, out int row, bool usePlayerPos)
