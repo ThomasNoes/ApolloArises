@@ -20,7 +20,7 @@ public class MapManager : MonoBehaviour
     }
 
 
-
+    public bool evaluationMaze = false;
     public GameObject gizmo;
     public TerrainGenerator terrainGenerator;
     GuardainCalibration gc;
@@ -82,14 +82,15 @@ public class MapManager : MonoBehaviour
             {
                 mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
                 mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
-                mazeCols = 3;
-                mazeRows = 3;
             }
         }
 #endif
         if (terrainGenerator != null)
             if (terrainGenerator.useTextureSwitcherInEditor)
                 terrainGenerator.ResetTextures();
+
+        if (evaluationMaze)
+            mapSequence = new MapInfo[1] { mapSequence[0] };
         
         roomAlreadyInSegment = new bool[mapSequence.Length];
 
@@ -260,27 +261,30 @@ public class MapManager : MonoBehaviour
 
             //A star Path Finding
             AStarPathFinding aStar = new AStarPathFinding();
-            if (i == 0)
+            if (!evaluationMaze)
             {
-                TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].endSeed, i);
+                if (i == 0)
+                {
+                    TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].endSeed, i);
 
-                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed,false, true);
-                minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
-                //we need a start position
-            }
-            else if (i == mapSequence.Length - 1)
-            {
-                TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].startSeed, i);
+                    mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, furthestTile, mapSequence[i].endSeed, false, true);
+                    minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
+                                                                        //we need a start position
+                }
+                else if (i == mapSequence.Length - 1)
+                {
+                    TileInfo furthestTile = mapScript.GetFurthestDeadEnd(mapSequence[i].startSeed, i);
 
-                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile, true, false);
-                minimumMazeRoute += mapScript.aStarTiles.Count; // no - 1 because the end tile does not overlap
+                    mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, furthestTile, true, false);
+                    minimumMazeRoute += mapScript.aStarTiles.Count; // no - 1 because the end tile does not overlap
+                }
+                else
+                {
+                    mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
+                    minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
+                }
             }
-            else
-            {
-                mapScript.aStarTiles = aStar.BeginAStar(mapScript.tileArray, mapSequence[i].startSeed, mapSequence[i].endSeed);
-                minimumMazeRoute += mapScript.aStarTiles.Count - 1; // - 1 because portal tiles overlap
-            }
-
+           
             //Find outer tiles and determine how much their walls can be opened.
             if (maxIndexOuterWall != 0)
             {
@@ -298,7 +302,6 @@ public class MapManager : MonoBehaviour
                     }
                     else
                     {
-
                         mapScript.FindOuterWalls(mapSequence[i].startSeed, mapSequence[i].endSeed, maxIndexOuterWall);
 
                     }
@@ -311,7 +314,7 @@ public class MapManager : MonoBehaviour
             }
 
             //Find rooms
-            if (createRooms) //only search if we want to create rooms
+            if (createRooms || !evaluationMaze) //only search if we want to create rooms
             {
                 List<DeadEnd> deadends = mapScript.GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
                 foreach (DeadEnd de in deadends)
