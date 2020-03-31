@@ -48,7 +48,6 @@ public class PortalRenderController : MonoBehaviour
     {
         if (useNewPortals && newPortalPrefab != null)
         {
-            Debug.Log("Using new portal setup");
             NewPortalSetup(isForward, i);
             return;
         }
@@ -146,7 +145,7 @@ public class PortalRenderController : MonoBehaviour
         tempPortal.transform.Rotate(0f, (180 * (1 - j)) + 90f * currentPortal.direction, 0f);
         tempPortal.transform.Translate(0, 0, portalWidth / 2f /*- pillarOffset*/, Space.Self); // TODO removed pillar offset
 
-        tempScript.projectionQuad.Translate(isForward ? nextOffset : prevOffset, Space.Self);
+        tempScript.projectionQuad.Translate(isForward ? nextOffset : prevOffset, Space.World);
 
         tempScript.renderQuad.transform.localScale -= new Vector3((1 - portalWidth), 0, 0);
         tempScript.projectionQuad.transform.localScale -= new Vector3((1 - portalWidth), 0, 0);
