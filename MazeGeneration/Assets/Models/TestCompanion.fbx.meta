@@ -28,12 +28,12 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: TexturesCom_Plastic_PolypropyleneRough_512_albedo
-    second: {fileID: 2800000, guid: f6c466cacf84b894697423930951428d, type: 3}
+    second: {fileID: 2800000, guid: a27681b87793e304d9fdd02754e684c8, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: TexturesCom_Plastic_PolypropyleneRough_512_roughness
-    second: {fileID: 2800000, guid: 1aebec5c75164784eb264835f7073032, type: 3}
+    second: {fileID: 2800000, guid: c5e9d032a1030e94287bcf564e71b34d, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

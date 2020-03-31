@@ -504,26 +504,30 @@ public class MapManager : MonoBehaviour
 
     void OffsetMap()
     {
-        gc = GetComponent<GuardainCalibration>();
+        if (Application.isEditor)
+        {
+            transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+        }
+        else
+        {
+            gc = GetComponent<GuardainCalibration>();
 
-        gc.Calibrate(out center, out forward);
-        beforePos = transform.position;
-        beforeRot = transform.rotation.eulerAngles;
-        transform.forward = center - forward;
-        transform.position = new Vector3(center.x, transform.position.y, center.z);
-        afterPos = transform.position;
-        afterRot = transform.rotation.eulerAngles;
+            gc.Calibrate(out center, out forward);
+            beforePos = transform.position;
+            beforeRot = transform.rotation.eulerAngles;
+            transform.forward = center - forward;
+            transform.position = new Vector3(center.x, transform.position.y, center.z);
+            afterPos = transform.position;
+            afterRot = transform.rotation.eulerAngles;
 
-        //transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+            //transform.Translate(transform.forward * (mazeCols * tileWidth / 2) / 2);
+            //transform.Translate(transform.right * (mazeRows * tileWidth / 2) / 2);
 
-        //transform.Translate(transform.forward * (mazeCols * tileWidth / 2) / 2);
-        //transform.Translate(transform.right * (mazeRows * tileWidth / 2) / 2);
+            transform.Translate((-mazeCols * tileWidth / 2) / 2, 0, (mazeRows * tileWidth / 2) / 2, Space.Self);
 
-        transform.Translate((-mazeCols * tileWidth / 2)/2, 0, (mazeRows * tileWidth / 2)/2, Space.Self);
-
-
-        //Debug.Log("mapmanager center is "+transform.position);
-        //Debug.Log("mapmanager forward is " + transform.forward);
+            //Debug.Log("mapmanager center is "+transform.position);
+            //Debug.Log("mapmanager forward is " + transform.forward);
+        }
     }
 
     void GetStartSeedFromPlayerPosition(out int col, out int row, bool usePlayerPos)
