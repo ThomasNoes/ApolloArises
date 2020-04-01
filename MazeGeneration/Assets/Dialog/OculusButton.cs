@@ -6,6 +6,10 @@ using UnityEngine.Events;
 
 public class OculusButton : MonoBehaviour
 {
+    public bool isProceed;
+
+    public AudioManager am;
+    public DialogReader dr;
 
     [System.Serializable]
     public class ButtonEvent : UnityEvent { }
@@ -13,7 +17,6 @@ public class OculusButton : MonoBehaviour
     public float pressLength;
     public bool pressed;
     public ButtonEvent downEvent;
-    public ButtonEvent upEvent;
 
     Vector3 startPos;
     Rigidbody rb;
@@ -47,8 +50,16 @@ public class OculusButton : MonoBehaviour
                 {
                     pressed = true;
                     // If we have an event, invoke it
-                    downEvent?.Invoke();
-                    Invoke("UpEvent",0.5f);
+                    if (isProceed)
+                    {
+                        ProceedEvent();
+                    }
+                    else
+                    {
+                        downEvent?.Invoke();
+                        Invoke("SetToNotActive", 0.5f);
+                    }
+
                 }
             }
         }
@@ -65,9 +76,20 @@ public class OculusButton : MonoBehaviour
         }
     }
 
-    void UpEvent()
+    void SetToNotActive()
     {
-        upEvent?.Invoke();
+        transform.parent.parent.gameObject.SetActive(false);
     }
+
+    void ProceedEvent()
+    {
+        am.ExternalRaiseAtIndex(0);
+        Invoke("ProceedUp", 0.5f);
+    }
+    void ProceedUp()
+    {
+        dr.DisplayDialog();
+    }
+
 }
 
