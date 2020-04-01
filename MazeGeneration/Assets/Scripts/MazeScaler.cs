@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MazeScaler : MonoBehaviour
 {
+    public bool enableControls = false;
+
     [Header("Size in beginning")]
     public float width;
     public float height;
@@ -23,8 +25,8 @@ public class MazeScaler : MonoBehaviour
     float widthModifier=0;
     float heightModifier=0;
 
-    float widthStep = 0.025f;
-    float heightStep = 0.05f;
+    public float widthStep = 0.1f;
+    public float heightStep = 0.1f;
 
     int row;
     int col;
@@ -88,6 +90,8 @@ public class MazeScaler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!enableControls)
+            return;
 
         //pc controls
         if (Input.GetKeyDown("up"))
@@ -144,5 +148,31 @@ public class MazeScaler : MonoBehaviour
             SetLocalScale();
             SetPosition();
         }
+    }
+
+    public void ScaleWidthDown()
+    {
+        widthModifier -= widthStep;
+        SetLocalScale();
+        SetPosition();
+    }
+
+    public void ScaleWidthUp()
+    {
+        widthModifier += widthStep;
+        SetLocalScale();
+        SetPosition();
+    }
+
+    public void ScaleHeightDown()
+    {
+        heightModifier -= heightStep;
+        SetLocalScale();
+    }
+
+    public void ScaleHeightUp()
+    {
+        heightModifier += heightStep;
+        SetLocalScale();
     }
 }
