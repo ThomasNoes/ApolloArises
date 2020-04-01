@@ -6,7 +6,9 @@ public class GuardainCalibration : MonoBehaviour
 {
 
     public bool calibrateGameObject;
-    
+
+    public bool drawPlayArea;
+
     public GameObject gizmo;
 
     public GameObject gizmoRed;
@@ -54,15 +56,18 @@ public class GuardainCalibration : MonoBehaviour
 
     public void DrawCalibrationArea(Vector3 center, Vector3 forward)
     {
-        for (int i = 0; i < points.Length; i++)
+        if (drawPlayArea)
         {
-            //Debug.Log("Corner: " + points[i]);
-            DrawGizmo(points[i],gizmo, 0.1f);
+            for (int i = 0; i < points.Length; i++)
+            {
+                //Debug.Log("Corner: " + points[i]);
+                DrawGizmo(points[i], gizmo, 0.1f);
+            }
+            DrawGizmo(center, gizmoRed, 0.1f);
+            //Debug.Log("Center: " + center);
+            DrawGizmo(forward, gizmoRed, 0.1f);
+            //Debug.Log("Forward: " + forward);
         }
-        DrawGizmo(center, gizmoRed,0.1f);
-        //Debug.Log("Center: " + center);
-        DrawGizmo(forward, gizmoRed, 0.1f);
-        //Debug.Log("Forward: " + forward);
     }
 
     private void DrawGizmo(Vector3 p, GameObject gizmo, float scale = 0.05f)
