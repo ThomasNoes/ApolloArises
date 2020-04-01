@@ -12,7 +12,7 @@ public class OculusButton : MonoBehaviour
 {
     public bool isProceed;
 
-    private AudioManager am;
+    public AudioManager am;
     public DialogReader dr;
 
     [System.Serializable]
@@ -29,7 +29,9 @@ public class OculusButton : MonoBehaviour
 
     void Start()
     {
-        am = GetComponent<AudioManager>();
+        if (am == null)
+            am = GetComponent<AudioManager>();
+
         startPos = transform.localPosition;
         rb = GetComponent<Rigidbody>();
         Invoke("DelayRegister", 0.1f) ;
