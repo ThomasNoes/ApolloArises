@@ -15,6 +15,7 @@ public class TestSceneManager : MonoBehaviour
 
     private void Start()
     {
+        return; // TODO: temp disable
         dataLogger?.LogTimeStart();
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         camObj = Camera.main.gameObject;
@@ -51,7 +52,7 @@ public class TestSceneManager : MonoBehaviour
 
     public void NextSceneRandom()
     {
-        return;
+        return; // TODO: temp disable
 
         ScenesVisitedContainer SVC = new ScenesVisitedContainer();
 
