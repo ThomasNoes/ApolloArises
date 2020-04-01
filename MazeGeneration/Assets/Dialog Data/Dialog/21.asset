@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 21
   m_EditorClassIdentifier: 
   text: "If you say \u201CYes\u201D, The corridor width will shrink a little.\r\nYou
-    then turn around and walk back to the beginning.\r\n"
+    then turn around and walk to the other end of the corridor.\r\n"
   textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
