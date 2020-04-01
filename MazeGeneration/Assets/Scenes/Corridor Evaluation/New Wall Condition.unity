@@ -203,6 +203,11 @@ PrefabInstance:
       propertyPath: mapManager
       value: 
       objectReference: {fileID: 1604854433}
+    - target: {fileID: 8508843587545643520, guid: 46bfd7cf0e385e4449709a96183a7868,
+        type: 3}
+      propertyPath: enable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8553440510836257198, guid: 46bfd7cf0e385e4449709a96183a7868,
         type: 3}
       propertyPath: m_Name
@@ -506,6 +511,11 @@ PrefabInstance:
     - target: {fileID: 8508843587545643520, guid: 46bfd7cf0e385e4449709a96183a7868,
         type: 3}
       propertyPath: firstTile
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508843587545643520, guid: 46bfd7cf0e385e4449709a96183a7868,
+        type: 3}
+      propertyPath: enable
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8553440510836257198, guid: 46bfd7cf0e385e4449709a96183a7868,
