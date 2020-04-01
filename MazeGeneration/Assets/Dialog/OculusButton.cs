@@ -17,7 +17,6 @@ public class OculusButton : MonoBehaviour
     public float pressLength;
     public bool pressed;
     public ButtonEvent downEvent;
-    public ButtonEvent upEvent;
 
     Vector3 startPos;
     Rigidbody rb;
@@ -58,7 +57,7 @@ public class OculusButton : MonoBehaviour
                     else
                     {
                         downEvent?.Invoke();
-                        Invoke("UpEvent", 0.5f);
+                        Invoke("SetToNotActive", 0.5f);
                     }
 
                 }
@@ -77,9 +76,9 @@ public class OculusButton : MonoBehaviour
         }
     }
 
-    void UpEvent()
+    void SetToNotActive()
     {
-        upEvent?.Invoke();
+        transform.parent.parent.gameObject.SetActive(false);
     }
 
     void ProceedEvent()
