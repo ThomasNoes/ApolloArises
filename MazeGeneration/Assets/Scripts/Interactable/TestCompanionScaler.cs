@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TestCompanionScaler : MonoBehaviour
 {
-    public bool firstTile;
+    public bool enable, firstTile;
     public GameObject mainScreen;
     public GameObject mapManager;
 
@@ -13,6 +13,9 @@ public class TestCompanionScaler : MonoBehaviour
 
     public void Start()
     {
+        if (!enable)
+            return;
+
         if (firstTile)
             tileObj = GameObject.Find("Tile R0C0");
         else
@@ -38,7 +41,7 @@ public class TestCompanionScaler : MonoBehaviour
 
     public void ScaleWithMaze()
     {
-        if (mainScreen == null || mapManager == null)
+        if (mainScreen == null || mapManager == null || !enable)
             return;
 
         mainScreen.transform.localScale = new Vector3(mapManager.transform.GetChild(0).localScale.x, mapManager.transform.GetChild(0).localScale.x, 1.0f);

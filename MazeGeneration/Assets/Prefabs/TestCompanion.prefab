@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 4677187273891136445}
   - component: {fileID: 401385266601519272}
   - component: {fileID: 8508843587545643520}
+  - component: {fileID: 309231765135661960}
   m_Layer: 0
   m_Name: TestCompanion
   m_TagString: Untagged
@@ -480,6 +481,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5109691af284e0544b09e255cc04b7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enable: 0
   firstTile: 0
   mainScreen: {fileID: 5382416834861503886}
   mapManager: {fileID: 0}
+--- !u!65 &309231765135661960
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8553440510836257198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8890517, y: 0.750993, z: 0.13892728}
+  m_Center: {x: -0.0012786984, y: 1.4010893, z: 0.027471125}
