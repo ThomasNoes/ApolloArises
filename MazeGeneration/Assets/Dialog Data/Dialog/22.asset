@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 22
   m_EditorClassIdentifier: 
-  text: "At the beginning, I will ask about the corridor width again, and you answer
+  text: "in the other end, I will ask about the corridor width again, and you answer
     \u201CYes\u201D or \u201CNo\u201D."
   textSpeed: 25
   dialogEffect: 0
