@@ -1364,7 +1364,9 @@ MonoBehaviour:
   enable: 1
   firstTile: 1
   mainScreen: {fileID: 8918944436874063306}
+  smallScreen: {fileID: 2538633604593067867}
   mapManager: {fileID: 0}
+  text: {fileID: 90060731881249029}
 --- !u!65 &3836723332556661708
 BoxCollider:
   m_ObjectHideFlags: 0
