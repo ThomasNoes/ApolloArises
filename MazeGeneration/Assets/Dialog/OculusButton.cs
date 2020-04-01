@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 public class OculusButton : MonoBehaviour
 {
     public bool isProceed;
 
-    public AudioManager am;
+    private AudioManager am;
     public DialogReader dr;
 
     [System.Serializable]
@@ -25,6 +29,7 @@ public class OculusButton : MonoBehaviour
 
     void Start()
     {
+        am = GetComponent<AudioManager>();
         startPos = transform.localPosition;
         rb = GetComponent<Rigidbody>();
         Invoke("DelayRegister", 0.1f) ;
@@ -44,24 +49,7 @@ public class OculusButton : MonoBehaviour
         {
             // Prevent the button from going past the pressLength
             transform.localPosition = new Vector3(0, startPos.y - pressLength, 0);
-            if (!pressed)
-            {
-                if (registerPress)
-                {
-                    pressed = true;
-                    // If we have an event, invoke it
-                    if (isProceed)
-                    {
-                        ProceedEvent();
-                    }
-                    else
-                    {
-                        downEvent?.Invoke();
-                        Invoke("SetToNotActive", 0.5f);
-                    }
-
-                }
-            }
+            BtnPressed();
         }
         else
         {
@@ -73,6 +61,28 @@ public class OculusButton : MonoBehaviour
         {
 
             transform.localPosition = new Vector3(0, startPos.y, 0);
+        }
+    }
+
+    public void BtnPressed()
+    {
+        if (!pressed)
+        {
+            if (registerPress)
+            {
+                pressed = true;
+                // If we have an event, invoke it
+                if (isProceed)
+                {
+                    ProceedEvent();
+                }
+                else
+                {
+                    downEvent?.Invoke();
+                    Invoke("SetToNotActive", 0.5f);
+                }
+
+            }
         }
     }
 
@@ -93,3 +103,22 @@ public class OculusButton : MonoBehaviour
 
 }
 
+#if UNITY_EDITOR
+[CustomEditor(typeof(OculusButton))]
+public class OculusButtton_Inspector : UnityEditor.Editor
+{
+    private GUIStyle headerStyle;
+
+    public override void OnInspectorGUI()
+    {
+        var script = target as OculusButton;
+
+        DrawDefaultInspector(); // for other non-HideInInspector fields
+
+        if (GUILayout.Button("Press Button"))
+        {
+            script.BtnPressed();
+        }
+    }
+}
+#endif
