@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319364465794227999}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.112076804, y: 1.9971898, z: -0.064056806}
+  m_LocalPosition: {x: -0.166, y: 1.995, z: -0.064056806}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401385264858537921}
@@ -423,6 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4677187273891136445}
   - component: {fileID: 401385266601519272}
+  - component: {fileID: 8508843587545643520}
   m_Layer: 0
   m_Name: TestCompanion
   m_TagString: Untagged
@@ -467,3 +468,18 @@ MonoBehaviour:
   faceImage: {fileID: 401385264748435631}
   openEyes: {fileID: 21300000, guid: 2e856358770f187418d1dfe256f57851, type: 3}
   closedEyes: {fileID: 21300000, guid: d65f376e8ea0771419f532355811d8e0, type: 3}
+--- !u!114 &8508843587545643520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8553440510836257198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5109691af284e0544b09e255cc04b7ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileId: 
+  mainScreen: {fileID: 5382416834861503886}
+  mapManager: {fileID: 0}

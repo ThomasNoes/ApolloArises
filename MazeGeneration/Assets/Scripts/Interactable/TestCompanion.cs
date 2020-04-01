@@ -54,4 +54,20 @@ public class TestCompanion : MonoBehaviour
             yield return blinkFreq;
         }
     }
+
+    public void EnableMesh()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+    }
+
+    public void DisableMesh()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MazeScaler : MonoBehaviour
 {
-    public bool enableControls = false;
+    public bool enableOculusControls = false, enablePcControls = false;
 
     [Header("Size in beginning")]
     public float width;
@@ -31,6 +31,7 @@ public class MazeScaler : MonoBehaviour
     int row;
     int col;
 
+    public TestCompanionScaler[] companionScalers;
     Transform mainCamTrans;
 
     private Tile middle;
@@ -90,36 +91,27 @@ public class MazeScaler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!enableControls)
+        //pc controls
+        if (!enablePcControls)
             return;
 
-        //pc controls
         if (Input.GetKeyDown("up"))
-        {
-            heightModifier += heightStep;
-            SetLocalScale();
-        }
-
+            ScaleHeightUp();
+        
         if (Input.GetKeyDown("down"))
-        {
-            heightModifier -= heightStep;
-            SetLocalScale();
-        }
-
+            ScaleHeightDown();
+        
         if (Input.GetKeyDown("left"))
-        {
-            widthModifier -= widthStep;
-            SetLocalScale();
-            SetPosition();
-        }
+            ScaleWidthDown();
+        
         if (Input.GetKeyDown("right"))
-        {
-            widthModifier += widthStep;
-            SetLocalScale();
-            SetPosition();
-        }
+            ScaleWidthUp();
+
 
         //oculus controls
+        if (!enableOculusControls)
+            return;
+
         if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick)) //reset
         {
             heightModifier = 0;
@@ -127,27 +119,16 @@ public class MazeScaler : MonoBehaviour
             SetLocalScale();
         }
         if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickUp))
-        {
-            heightModifier += heightStep;
-            SetLocalScale();
-        }
+            ScaleHeightUp();
+        
         if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
-        {
-            heightModifier -= heightStep;
-            SetLocalScale();
-        }
+            ScaleHeightDown();
+        
         if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickRight))
-        {
-            widthModifier += widthStep;
-            SetLocalScale();
-            SetPosition();
-        }
+            ScaleWidthUp();
+        
         if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickLeft))
-        {
-            widthModifier -= widthStep;
-            SetLocalScale();
-            SetPosition();
-        }
+            ScaleWidthDown();       
     }
 
     public void ScaleWidthDown()
@@ -155,6 +136,11 @@ public class MazeScaler : MonoBehaviour
         widthModifier -= widthStep;
         SetLocalScale();
         SetPosition();
+
+        foreach (TestCompanionScaler cScaler in companionScalers)
+        {
+            cScaler.ScaleWithMaze();
+        }
     }
 
     public void ScaleWidthUp()
@@ -162,6 +148,11 @@ public class MazeScaler : MonoBehaviour
         widthModifier += widthStep;
         SetLocalScale();
         SetPosition();
+
+        foreach (TestCompanionScaler cScaler in companionScalers)
+        {
+            cScaler.ScaleWithMaze();
+        }
     }
 
     public void ScaleHeightDown()
