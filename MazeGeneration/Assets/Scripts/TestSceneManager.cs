@@ -28,7 +28,7 @@ public class TestSceneManager : MonoBehaviour
             PlayerPrefs.SetString("ScenesVisited", JsonUtility.ToJson(SVC));
         }
 
-            if (camObj != null && companion1 != null && companion2 != null)
+        if (camObj != null && companion1 != null && companion2 != null)
         {
             companion1Script = companion1.GetComponent<TestCompanion>();
             companion2Script = companion2.GetComponent<TestCompanion>();
