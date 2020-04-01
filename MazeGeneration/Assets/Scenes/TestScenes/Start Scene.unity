@@ -1534,6 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrateGameObject: 1
+  drawPlayArea: 0
   gizmo: {fileID: 2497731189600166390, guid: 44f5791eb9b1eed4ba484ac26063bdfb, type: 3}
   gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
     type: 3}
@@ -7879,6 +7880,11 @@ PrefabInstance:
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: index
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
+        type: 3}
+      propertyPath: toNextScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1004870475194667286, guid: 0de2365736a11784c95847a24a7a6304,

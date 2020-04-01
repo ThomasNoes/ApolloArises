@@ -221,6 +221,7 @@ public class DataLogger : MonoBehaviour
         UpdateDataList();
 
         dataHandler.SendData(dataList);
+        Debug.Log("Data is sent!");
     }
 
     private Vector3 GetPlayAreaSize()
