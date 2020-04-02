@@ -10,7 +10,7 @@ using UnityEditor;
 
 public class OculusButton : MonoBehaviour
 {
-    public bool isProceed;
+    public bool isProceed, doNotDisableOnPress;
 
     public AudioManager am;
     public DialogReader dr;
@@ -81,7 +81,9 @@ public class OculusButton : MonoBehaviour
                 else
                 {
                     downEvent?.Invoke();
-                    Invoke("SetToNotActive", 0.5f);
+
+                    if (!doNotDisableOnPress)
+                        Invoke("SetToNotActive", 0.5f);
                 }
 
             }

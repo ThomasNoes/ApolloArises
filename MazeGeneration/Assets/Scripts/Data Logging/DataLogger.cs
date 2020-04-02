@@ -199,14 +199,14 @@ public class DataLogger : MonoBehaviour
     /// </summary>
     public void PostDataOnline()
     {
+        //Debug.Log("Posting Online");
         if (dataHandler == null)
             return;
 
         UpdateDataList();
 
-        Debug.Log("Posting Online");
         dataHandler.SendData(dataList);
-        Debug.Log("Data is sent!");
+        //Debug.Log("Data is sent!");
     }
 
     private Vector3 GetPlayAreaSize()

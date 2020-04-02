@@ -1377,6 +1377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrateGameObject: 0
+  drawPlayArea: 0
   gizmo: {fileID: 2497731189600166390, guid: 44f5791eb9b1eed4ba484ac26063bdfb, type: 3}
   gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
     type: 3}
@@ -1432,9 +1433,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sessionChecker: {fileID: 11400000, guid: d54543e9333b6004b942a37561991810, type: 2}
-  companion1: {fileID: 0}
-  companion2: {fileID: 0}
-  dataLogger: {fileID: 0}
+  companion1: {fileID: 5172304999333169778}
+  companion2: {fileID: 5172304999121072167}
+  dataLogger: {fileID: 1915342116}
   testSceneIndexFrom: 1
   testSceneIndexTo: 3
 --- !u!1 &1629571677
@@ -4986,6 +4987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProceed: 0
+  doNotDisableOnPress: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
@@ -5017,6 +5019,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1604854439}
         m_MethodName: ScaleWidthDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3811834088983750945}
+        m_MethodName: EnableMesh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3811834088255673204}
+        m_MethodName: DisableMesh
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5039,6 +5063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProceed: 0
+  doNotDisableOnPress: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
@@ -5070,6 +5095,28 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1604854439}
         m_MethodName: ScaleWidthDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3811834088255673204}
+        m_MethodName: EnableMesh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3811834088983750945}
+        m_MethodName: DisableMesh
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6036,6 +6083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProceed: 0
+  doNotDisableOnPress: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
@@ -6111,6 +6159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProceed: 0
+  doNotDisableOnPress: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
