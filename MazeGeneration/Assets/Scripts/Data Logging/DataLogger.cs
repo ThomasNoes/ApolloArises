@@ -56,7 +56,7 @@ public class DataLogger : MonoBehaviour
             if (mapManagerObj != null)
                 mapObj = mapManagerObj.transform.GetChild(0).gameObject;
 
-        Initialize(); // TODO: this should not run on every scene. Make some kind of check, or make part of this class persistent?
+        Initialize();
 
         if (onlineLogging)
         {
@@ -72,22 +72,22 @@ public class DataLogger : MonoBehaviour
 
     private void Initialize()
     {
-        //if (logWallHits && wallCollision == null)
-        //    logWallHits = false;
-
         dataList = new List<string>();
 
-        if (logTime)
-            loggedTimesData.values = new float[conditionAmount];
+        if (loggedTimesData.values.Length == 0) // TODO: check if this works. 
+        {
+            if (logTime)
+                loggedTimesData.values = new float[conditionAmount];
 
-        if (logWallHits)
-            wallHitsData.values = new float[conditionAmount];
+            if (logWallHits)
+                wallHitsData.values = new float[conditionAmount];
 
-        if (logPreferredWidth)
-            prefWidthsData.values = new float[conditionAmount];
+            if (logPreferredWidth)
+                prefWidthsData.values = new float[conditionAmount];
 
-        if (logPreferredHeight)
-            prefHeightsData.values = new float[conditionAmount];
+            if (logPreferredHeight)
+                prefHeightsData.values = new float[conditionAmount];
+        }
     }
 
     private void UpdateDataList()
