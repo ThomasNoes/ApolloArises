@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(SessionHandler))]
 public class TestSceneManager : MonoBehaviour
 {
     public BoolValue sessionChecker;
@@ -10,13 +11,12 @@ public class TestSceneManager : MonoBehaviour
     public DataLogger dataLogger;
     public int testSceneIndexFrom = 1, testSceneIndexTo = 3;
 
-    private int currentSceneIndex = 0, sceneRange;
+    private int currentSceneIndex = 0, sceneRange, arrIndex;
 
     private void Start()
     {
         if (sessionChecker == null)
             return;
-
         dataLogger?.LogTimeStart();
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         camObj = Camera.main.gameObject;
@@ -62,7 +62,7 @@ public class TestSceneManager : MonoBehaviour
         if (SVC == null)
             return;
 
-        int arrIndex = RandomNumber(sceneRange);
+        arrIndex = RandomNumber(sceneRange);
 
         if (SVC.sceneVisited != null)
         {
@@ -70,18 +70,18 @@ public class TestSceneManager : MonoBehaviour
             {
                 if (arrIndex >= 0 && arrIndex < SVC.sceneVisited.Length)
                 {
-                    if (SVC.sceneVisited[arrIndex] != true)
+                    if (SVC.sceneVisited[arrIndex] == false)
                     {
                         SVC.sceneVisited[arrIndex] = true;
                         PlayerPrefs.SetString("ScenesVisited", JsonUtility.ToJson(SVC));
-                        SceneManager.LoadScene(testSceneIndexFrom + arrIndex);
+                        Invoke("DelayedSwitchScene", 0.5f);
                     }
                     else
                         arrIndex = (arrIndex + 1) % sceneRange;
                 }
             }
 
-            NextSceneLastIndex();
+            // NextSceneLastIndex();
         }
     }
 
@@ -109,6 +109,11 @@ public class TestSceneManager : MonoBehaviour
     public int RandomNumber(int to)
     {
         return (System.DateTime.Now.Second % to);
+    }
+
+    public void DelayedSwitchScene()
+    {
+        SceneManager.LoadScene(testSceneIndexFrom + arrIndex);
     }
 }
 

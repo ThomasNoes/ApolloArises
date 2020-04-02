@@ -1152,6 +1152,7 @@ GameObject:
   - component: {fileID: 1604854437}
   - component: {fileID: 1604854439}
   - component: {fileID: 1604854440}
+  - component: {fileID: 1604854441}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -1436,8 +1437,20 @@ MonoBehaviour:
   companion1: {fileID: 5172304999333169778}
   companion2: {fileID: 5172304999121072167}
   dataLogger: {fileID: 1915342116}
-  testSceneIndexFrom: 1
-  testSceneIndexTo: 3
+  testSceneIndexFrom: 0
+  testSceneIndexTo: 2
+--- !u!114 &1604854441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604854433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752499cc501b04f46ab582b44a004c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
