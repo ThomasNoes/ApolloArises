@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using TMPro;
 
 public class TestCompanionScaler : MonoBehaviour
 {
     public bool enable, firstTile;
-    public GameObject mainScreen;
+    public GameObject mainScreen, smallScreen;
     public GameObject mapManager;
+    public TextMeshProUGUI text;
 
-    private GameObject tileObj;
+    private GameObject tileObj, mazeObj;
 
     public void Start()
     {
@@ -31,7 +33,11 @@ public class TestCompanionScaler : MonoBehaviour
             Quaternion rot = Quaternion.Euler(0, 270, 0);
             transform.rotation = rot;
         }
-            
+
+        if (mapManager != null)
+            mazeObj = mapManager.transform.GetChild(0).gameObject;
+
+
 
         if (tileObj != null)
         {
@@ -41,18 +47,25 @@ public class TestCompanionScaler : MonoBehaviour
 
     public void ScaleWithMaze()
     {
-        if (mainScreen == null || mapManager == null || !enable)
+        if (mainScreen == null || mazeObj == null || !enable)
             return;
 
-        mainScreen.transform.localScale = new Vector3(mapManager.transform.GetChild(0).localScale.x, mapManager.transform.GetChild(0).localScale.x, 1.0f);
+        mainScreen.transform.localScale = new Vector3(mazeObj.transform.localScale.x, mazeObj.transform.localScale.x, 1.0f);
+
+        if (smallScreen != null)
+            smallScreen.transform.localScale = new Vector3(mazeObj.transform.localScale.x, mazeObj.transform.localScale.x, 1.0f);
+
+        if (text != null)
+            text.fontSize = text.fontSize + 0.01f;
+
         PlaceOnTile();
     }
 
     private void PlaceOnTile()
     {
         if (firstTile)
-            transform.position = new Vector3(tileObj.transform.position.x - (tileObj.transform.localScale.x / 2.0f), tileObj.transform.position.y, tileObj.transform.position.z + (tileObj.transform.localScale.z / 4.0f));
+            transform.position = new Vector3(tileObj.transform.position.x - (0.12f / tileObj.transform.localScale.x), tileObj.transform.position.y, tileObj.transform.position.z);
         else
-            transform.position = new Vector3(tileObj.transform.position.x, tileObj.transform.position.y, tileObj.transform.position.z + (tileObj.transform.localScale.z / 4.0f));
+            transform.position = new Vector3(tileObj.transform.position.x + (0.12f / tileObj.transform.localScale.x), tileObj.transform.position.y, tileObj.transform.position.z);
     }
 }

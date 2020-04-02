@@ -22,10 +22,13 @@ public class SelectPlayer : MonoBehaviour
         player = GameObject.Find("Player");
         debugPlayer = GameObject.Find("DebugPlayer");
 
-        portalManager = GameObject.Find("Portal Manager").GetComponent<PortalRenderController>(); ;
+        portalManager = GameObject.Find("Portal Manager")?.GetComponent<PortalRenderController>(); ;
 
-        portalCameraLeft = GameObject.Find("Next Maze Camera Left").GetComponent<FollowCam>();
-        portalCameraRight = GameObject.Find("Next Maze Camera Right").GetComponent<FollowCam>();
+        portalCameraLeft = GameObject.Find("Next Maze Camera Left")?.GetComponent<FollowCam>();
+        portalCameraRight = GameObject.Find("Next Maze Camera Right")?.GetComponent<FollowCam>();
+
+        if (portalCameraLeft == null || portalCameraRight == null)
+            return;
 
         //if (player == null || debugPlayer == null || portalManager == null)
         //    return;
