@@ -5,6 +5,7 @@ using TMPro;
 
 public class DialogReader : MonoBehaviour
 {
+    public bool toNextScene;
     public DialogData[] dialogs;
     public TextMeshProUGUI TMP_Object;
 
@@ -31,6 +32,10 @@ public class DialogReader : MonoBehaviour
         {
             tmpa.ReadText(dialogs[index], TMP_Object);
             index++;
+        }
+        else if (index == dialogs.Length && toNextScene)
+        {
+            Debug.Log("next scne!");
         }
 
     }

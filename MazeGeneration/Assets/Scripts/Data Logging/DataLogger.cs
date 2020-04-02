@@ -205,6 +205,7 @@ public class DataLogger : MonoBehaviour
 
         Debug.Log("Posting Online");
         dataHandler.SendData(dataList);
+        Debug.Log("Data is sent!");
     }
 
     private Vector3 GetPlayAreaSize()
