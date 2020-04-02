@@ -314,7 +314,7 @@ public class MapManager : MonoBehaviour
             }
 
             //Find rooms
-            if (createRooms || !evaluationMaze) //only search if we want to create rooms
+            if (createRooms && !evaluationMaze) //only search if we want to create rooms
             {
                 List<DeadEnd> deadends = mapScript.GetDeadEndListTile(mapSequence[i].startSeed, mapSequence[i].endSeed, i);
                 foreach (DeadEnd de in deadends)
