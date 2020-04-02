@@ -35,7 +35,7 @@ public class DialogReader : MonoBehaviour
         }
         else if (index == dialogs.Length && toNextScene)
         {
-            Debug.Log("next scne!");
+            //Debug.Log("next scne!");
             tsm.NextSceneRandom();
         }
 
