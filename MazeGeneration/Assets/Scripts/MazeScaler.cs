@@ -76,7 +76,7 @@ public class MazeScaler : MonoBehaviour
         }
 
         mazeSegment.transform.localScale = new Vector3(width+widthModifier, height+heightModifier, width + widthModifier);
-        SetPosition();
+        //SetPosition();
     }
 
     private void SetPosition()
@@ -135,7 +135,7 @@ public class MazeScaler : MonoBehaviour
     {
         widthModifier -= widthStep;
         SetLocalScale();
-        SetPosition();
+        //SetPosition();
 
         foreach (TestCompanionScaler cScaler in companionScalers)
         {
@@ -147,7 +147,7 @@ public class MazeScaler : MonoBehaviour
     {
         widthModifier += widthStep;
         SetLocalScale();
-        SetPosition();
+        //SetPosition();
 
         foreach (TestCompanionScaler cScaler in companionScalers)
         {

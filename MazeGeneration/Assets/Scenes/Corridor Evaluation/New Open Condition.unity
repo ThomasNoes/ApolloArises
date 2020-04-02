@@ -1172,6 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cf9fef809acdc4693f423e1214c4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  evaluationMaze: 0
   gizmo: {fileID: 0}
   terrainGenerator: {fileID: 0}
   mazeGeneratorPrefab:
@@ -1251,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrateGameObject: 0
-  drawPlayArea: 0
+  drawPlayArea: 1
   gizmo: {fileID: 2497731189600166390, guid: 44f5791eb9b1eed4ba484ac26063bdfb, type: 3}
   gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
     type: 3}
@@ -1283,7 +1284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableOculusControls: 0
   enablePcControls: 1
-  width: 1
+  width: 0.7
   height: 1
   minimumWidth: 0.4
   minimumHeight: 1.5
@@ -6863,7 +6864,7 @@ PrefabInstance:
     - target: {fileID: 7748457934529168359, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
       propertyPath: wallHeight
-      value: 3
+      value: 2.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7892fa38fcffbb49807b3c2ac709216, type: 3}

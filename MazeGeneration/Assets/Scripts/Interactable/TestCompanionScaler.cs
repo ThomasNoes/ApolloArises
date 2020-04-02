@@ -10,8 +10,8 @@ public class TestCompanionScaler : MonoBehaviour
     public GameObject mainScreen, smallScreen;
     public GameObject mapManager;
     public TextMeshProUGUI text;
-
     private GameObject tileObj, mazeObj;
+    MapManager mm;
 
     public void Start()
     {
@@ -25,12 +25,12 @@ public class TestCompanionScaler : MonoBehaviour
 
         if (firstTile)
         {
-            Quaternion rot = Quaternion.Euler(0, 90, 0);
+            Quaternion rot = Quaternion.Euler(0, 90, 0) * mapManager.transform.rotation;
             transform.rotation = rot;
         }
         else
         {
-            Quaternion rot = Quaternion.Euler(0, 270, 0);
+            Quaternion rot = Quaternion.Euler(0, 270, 0) * mapManager.transform.rotation;
             transform.rotation = rot;
         }
 
@@ -64,8 +64,8 @@ public class TestCompanionScaler : MonoBehaviour
     private void PlaceOnTile()
     {
         if (firstTile)
-            transform.position = new Vector3(tileObj.transform.position.x - (0.12f / tileObj.transform.localScale.x), tileObj.transform.position.y, tileObj.transform.position.z);
+            transform.position = new Vector3(tileObj.transform.position.x, tileObj.transform.position.y, tileObj.transform.position.z);
         else
-            transform.position = new Vector3(tileObj.transform.position.x + (0.12f / tileObj.transform.localScale.x), tileObj.transform.position.y, tileObj.transform.position.z);
+            transform.position = new Vector3(tileObj.transform.position.x, tileObj.transform.position.y, tileObj.transform.position.z);
     }
 }
