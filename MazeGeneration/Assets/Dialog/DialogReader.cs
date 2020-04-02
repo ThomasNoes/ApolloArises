@@ -8,7 +8,7 @@ public class DialogReader : MonoBehaviour
     public bool toNextScene;
     public DialogData[] dialogs;
     public TextMeshProUGUI TMP_Object;
-
+    public TestSceneManager tsm;
     private TMPAnimated tmpa;
 
     public int index = 0;
@@ -36,6 +36,7 @@ public class DialogReader : MonoBehaviour
         else if (index == dialogs.Length && toNextScene)
         {
             Debug.Log("next scne!");
+            tsm.NextSceneRandom();
         }
 
     }
