@@ -1437,8 +1437,8 @@ MonoBehaviour:
   companion1: {fileID: 5172304999333169778}
   companion2: {fileID: 5172304999121072167}
   dataLogger: {fileID: 1915342116}
-  testSceneIndexFrom: 0
-  testSceneIndexTo: 2
+  testSceneIndexFrom: 1
+  testSceneIndexTo: 3
 --- !u!114 &1604854441
 MonoBehaviour:
   m_ObjectHideFlags: 0
