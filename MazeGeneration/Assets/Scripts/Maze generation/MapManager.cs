@@ -174,17 +174,17 @@ public class MapManager : MonoBehaviour
         OffsetMap();
     }
 
-    private void Start()
-    {
-        Debug.Log("Before Pos: "+ beforePos);
-        Debug.Log("Before Rot: " + beforeRot);
-        //transform.forward = forward;
-        Debug.Log("After Pos: " + afterPos);
-        Debug.Log("After Rot: " + afterRot);
+    //private void Start()
+    //{
+    //    Debug.Log("Before Pos: "+ beforePos);
+    //    Debug.Log("Before Rot: " + beforeRot);
+    //    //transform.forward = forward;
+    //    Debug.Log("After Pos: " + afterPos);
+    //    Debug.Log("After Rot: " + afterRot);
 
-        Debug.Log("Center: "+ center);
-        Debug.Log("Forward" + forward);
-    }
+    //    Debug.Log("Center: "+ center);
+    //    Debug.Log("Forward" + forward);
+    //}
 
     void GenerateMapSequenceHallway()
     {

@@ -6,13 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Corridor Evaluation/Window Condition.unity
+    path: Assets/Scenes/Corridor Evaluation/Old scenes/Window Condition.unity
     guid: 4e4740801e9c25641b25d6d56ea06a5d
   - enabled: 0
-    path: Assets/Scenes/Corridor Evaluation/Balcony Condition.unity
+    path: Assets/Scenes/Corridor Evaluation/Old scenes/Balcony Condition.unity
     guid: 0718b3d4f81ed70408bad7f753f5519b
   - enabled: 0
-    path: Assets/Scenes/Corridor Evaluation/Wall Condition.unity
+    path: Assets/Scenes/Corridor Evaluation/Old scenes/Wall Condition.unity
     guid: 7ecce46e665d40e4a8ebdee37a35f010
   - enabled: 0
     path: Assets/Scenes/TestScenes/calibration test.unity
