@@ -3006,6 +3006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 748636788}
   - component: {fileID: 748636787}
+  - component: {fileID: 748636789}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -3045,6 +3046,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &748636789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748636786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752499cc501b04f46ab582b44a004c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &780056905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 342866825121487231, guid: 3e819571d4a925346a5c4a83065582a0,
@@ -7894,7 +7907,7 @@ PrefabInstance:
     - target: {fileID: 1004870475194667275, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: soundEvents.Array.data[2].soundVolume
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1004870475194667275, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
@@ -7910,6 +7923,11 @@ PrefabInstance:
         type: 3}
       propertyPath: soundEvents.Array.data[1].soundVolume
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004870475194667275, guid: 0de2365736a11784c95847a24a7a6304,
+        type: 3}
+      propertyPath: soundEvents.Array.data[2].soundPitch
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1004870475194667281, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
