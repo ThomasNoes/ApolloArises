@@ -5,19 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScenes/Start Scene.unity
     guid: 078db149bbb7cf143bc7cad71d7e33d3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Corridor Evaluation/New Wall Condition.unity
     guid: 50c2fb08515846b46a99c49841e1b191
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Corridor Evaluation/New Window Condition.unity
     guid: e7b05148065b96641a36d648987e9ccf
   - enabled: 1
     path: Assets/Scenes/Corridor Evaluation/New Open Condition.unity
     guid: cfa07243721e66a4a8ba2a0a62219065
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScenes/End Scene.unity
     guid: 26a37a5a4b82eb24db6d8e9dd1c37b7d
   m_configObjects: {}
