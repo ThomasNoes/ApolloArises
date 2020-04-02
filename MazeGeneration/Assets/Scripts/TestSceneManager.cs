@@ -1,31 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class TestSceneManager : MonoBehaviour
 {
+    public BoolValue sessionChecker;
     public GameObject companion1, companion2;
     private TestCompanion companion1Script, companion2Script;
     private GameObject camObj;
     public DataLogger dataLogger;
     public int testSceneIndexFrom = 1, testSceneIndexTo = 3;
 
-    private int currentSceneIndex = 0;
+    private int currentSceneIndex = 0, sceneRange;
 
     private void Start()
     {
-        return; // TODO: temp disable
+        if (sessionChecker == null)
+            return;
+
         dataLogger?.LogTimeStart();
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         camObj = Camera.main.gameObject;
+        sceneRange = (testSceneIndexTo + 1) - testSceneIndexFrom;
 
-        if (PlayerPrefs.GetInt("TestRunning") != 1)
+        if (!sessionChecker.value)
         {
-            PlayerPrefs.SetInt("TestRunning", 1);
+            sessionChecker.value = true;
 
             ScenesVisitedContainer SVC = new ScenesVisitedContainer();
-            SVC.sceneVisited = new bool[3];
+            SVC.sceneVisited = new bool[sceneRange];
             PlayerPrefs.SetString("ScenesVisited", JsonUtility.ToJson(SVC));
         }
 
@@ -52,8 +54,6 @@ public class TestSceneManager : MonoBehaviour
 
     public void NextSceneRandom()
     {
-        return; // TODO: temp disable
-
         ScenesVisitedContainer SVC = new ScenesVisitedContainer();
 
         string dataString = PlayerPrefs.GetString("ScenesVisited");
@@ -62,7 +62,7 @@ public class TestSceneManager : MonoBehaviour
         if (SVC == null)
             return;
 
-        int index = Random.Range(testSceneIndexFrom, testSceneIndexTo);
+        int index = Random.Range(0, sceneRange);
 
         if (SVC.sceneVisited != null)
         {
@@ -70,20 +70,32 @@ public class TestSceneManager : MonoBehaviour
             {
                 if (index >= 0 && index < SVC.sceneVisited.Length)
                 {
-
+                    if (SVC.sceneVisited[index] != true)
+                    {
+                        SVC.sceneVisited[index] = true;
+                        PlayerPrefs.SetString("ScenesVisited", JsonUtility.ToJson(SVC));
+                        SceneManager.LoadScene(index);
+                    }
+                    else
+                        index = (index + 1) % sceneRange;
                 }
             }
+
+            NextSceneLastIndex();
         }
     }
 
     public void NextSceneAtIndex(int index)
     {
-
+        if (index >= 0 && index < SceneManager.sceneCountInBuildSettings - 1)
+        {
+            SceneManager.LoadScene(index);
+        }
     }
 
     public void NextSceneLastIndex()
     {
-
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
     }
 }
 
