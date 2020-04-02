@@ -1431,9 +1431,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8494b2ba026dd9447bb6140074223149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sessionChecker: {fileID: 11400000, guid: d54543e9333b6004b942a37561991810, type: 2}
   companion1: {fileID: 0}
   companion2: {fileID: 0}
   dataLogger: {fileID: 0}
+  testSceneIndexFrom: 1
+  testSceneIndexTo: 3
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
