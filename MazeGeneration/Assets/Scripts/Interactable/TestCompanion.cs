@@ -57,13 +57,23 @@ public class TestCompanion : MonoBehaviour
 
     public void EnableMesh()
     {
+        EnableMeshExecute(); // No delay needed
+    }
+
+    public void DisableMesh()
+    {
+        Invoke("DisableMeshExecute", 0.5f);
+    }
+
+    public void EnableMeshExecute()
+    {
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
         }
     }
 
-    public void DisableMesh()
+    public void DisableMeshExecute()
     {
         foreach (Transform child in transform)
         {
