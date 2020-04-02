@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
+[RequireComponent(typeof(SessionHandler))]
 public class TestSceneManager : MonoBehaviour
 {
     public BoolValue sessionChecker;
@@ -11,13 +11,12 @@ public class TestSceneManager : MonoBehaviour
     public DataLogger dataLogger;
     public int testSceneIndexFrom = 1, testSceneIndexTo = 3;
 
-    private int currentSceneIndex = 0, sceneRange;
+    private int currentSceneIndex = 0, sceneRange, arrIndex;
 
     private void Start()
     {
         if (sessionChecker == null)
             return;
-
         dataLogger?.LogTimeStart();
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         camObj = Camera.main.gameObject;
@@ -63,23 +62,23 @@ public class TestSceneManager : MonoBehaviour
         if (SVC == null)
             return;
 
-
-        int index = DateTime.Now.Second % 3;
+        arrIndex = RandomNumber(sceneRange);
 
         if (SVC.sceneVisited != null)
         {
             for (int i = 0; i < SVC.sceneVisited.Length; i++)
             {
-                if (index >= 0 && index < SVC.sceneVisited.Length)
+                if (arrIndex >= 0 && arrIndex < SVC.sceneVisited.Length)
                 {
-                    if (SVC.sceneVisited[index] != true)
+                    if (SVC.sceneVisited[arrIndex] == false)
                     {
-                        SVC.sceneVisited[index] = true;
+                        SVC.sceneVisited[arrIndex] = true;
                         PlayerPrefs.SetString("ScenesVisited", JsonUtility.ToJson(SVC));
-                        SceneManager.LoadScene(index);
+                        Invoke("DelayedSwitchScene", 0.5f);
+                        return;
                     }
                     else
-                        index = (index + 1) % sceneRange;
+                        arrIndex = (arrIndex + 1) % sceneRange;
                 }
             }
             NextSceneLastIndex();
@@ -97,6 +96,24 @@ public class TestSceneManager : MonoBehaviour
     public void NextSceneLastIndex()
     {
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+    }
+
+    public void NextScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public int RandomNumber(int to)
+    {
+        return (System.DateTime.Now.Second % to);
+    }
+
+    public void DelayedSwitchScene()
+    {
+        SceneManager.LoadScene(testSceneIndexFrom + arrIndex);
     }
 }
 
