@@ -81,7 +81,6 @@ public class TestSceneManager : MonoBehaviour
                         arrIndex = (arrIndex + 1) % sceneRange;
                 }
             }
-
             NextSceneLastIndex();
         }
     }
