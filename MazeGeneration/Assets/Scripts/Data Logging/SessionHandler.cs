@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-#if UNITY_EDITOR
 [ExecuteInEditMode]
 public class SessionHandler : MonoBehaviour
 {
+#if UNITY_EDITOR
     private TestSceneManager manager;
 
     private void Update()
@@ -23,5 +23,5 @@ public class SessionHandler : MonoBehaviour
             }
         }
     }
-}
 #endif
+}
