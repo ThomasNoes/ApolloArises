@@ -62,22 +62,22 @@ public class TestSceneManager : MonoBehaviour
         if (SVC == null)
             return;
 
-        int index = Random.Range(0, sceneRange);
+        int arrIndex = RandomNumber(sceneRange);
 
         if (SVC.sceneVisited != null)
         {
             for (int i = 0; i < SVC.sceneVisited.Length; i++)
             {
-                if (index >= 0 && index < SVC.sceneVisited.Length)
+                if (arrIndex >= 0 && arrIndex < SVC.sceneVisited.Length)
                 {
-                    if (SVC.sceneVisited[index] != true)
+                    if (SVC.sceneVisited[arrIndex] != true)
                     {
-                        SVC.sceneVisited[index] = true;
+                        SVC.sceneVisited[arrIndex] = true;
                         PlayerPrefs.SetString("ScenesVisited", JsonUtility.ToJson(SVC));
-                        SceneManager.LoadScene(index);
+                        SceneManager.LoadScene(testSceneIndexFrom + arrIndex);
                     }
                     else
-                        index = (index + 1) % sceneRange;
+                        arrIndex = (arrIndex + 1) % sceneRange;
                 }
             }
 
@@ -96,6 +96,19 @@ public class TestSceneManager : MonoBehaviour
     public void NextSceneLastIndex()
     {
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings - 1);
+    }
+
+    public void NextScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public int RandomNumber(int to)
+    {
+        return (System.DateTime.Now.Second % to);
     }
 }
 
