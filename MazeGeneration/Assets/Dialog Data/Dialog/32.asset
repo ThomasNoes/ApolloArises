@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 32
   m_EditorClassIdentifier: 
-  text: 'OH-
+  text: 'OH- I almost forgot!
 
-    One last question, I almost forgot!'
+    One last question.'
   textSpeed: 25
   dialogEffect: 2
   ButtonEvent: {fileID: 0}
