@@ -75,13 +75,14 @@ public class TestSceneManager : MonoBehaviour
                         SVC.sceneVisited[arrIndex] = true;
                         PlayerPrefs.SetString("ScenesVisited", JsonUtility.ToJson(SVC));
                         Invoke("DelayedSwitchScene", 0.5f);
+                        return;
                     }
                     else
                         arrIndex = (arrIndex + 1) % sceneRange;
                 }
             }
 
-            // NextSceneLastIndex();
+            NextSceneLastIndex();
         }
     }
 
