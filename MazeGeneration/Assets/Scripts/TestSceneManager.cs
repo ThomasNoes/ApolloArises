@@ -39,16 +39,21 @@ public class TestSceneManager : MonoBehaviour
             if (companion1Script == null || companion2Script == null)
                 return;
 
-            if (Vector3.Distance(camObj.transform.position, companion1.transform.position) > Vector3.Distance(camObj.transform.position, companion2.transform.position))
-            {
-                companion1Script.EnableMesh();
-                companion2Script.DisableMesh();
-            }
-            else
-            {
-                companion1Script.DisableMesh();
-                companion2Script.EnableMesh();
-            }
+            Invoke("DelayDistanceCheck", 0.1f);
+        }
+    }
+
+    private void DelayDistanceCheck()
+    {
+        if (Vector3.Distance(camObj.transform.position, companion1.transform.position) > Vector3.Distance(camObj.transform.position, companion2.transform.position))
+        {
+            companion1Script.EnableMesh();
+            companion2Script.DisableMesh();
+        }
+        else
+        {
+            companion1Script.DisableMesh();
+            companion2Script.EnableMesh();
         }
     }
 
