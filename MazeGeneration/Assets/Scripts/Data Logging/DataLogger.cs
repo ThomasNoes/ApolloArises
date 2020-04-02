@@ -74,20 +74,21 @@ public class DataLogger : MonoBehaviour
     {
         dataList = new List<string>();
 
-        if (loggedTimesData.values.Length == 0) // TODO: check if this works. 
-        {
-            if (logTime)
+        if (logTime)
+            if (loggedTimesData.values.Length == 0)
                 loggedTimesData.values = new float[conditionAmount];
 
-            if (logWallHits)
+        if (logWallHits)
+            if (wallHitsData.values.Length == 0)
                 wallHitsData.values = new float[conditionAmount];
 
-            if (logPreferredWidth)
+        if (logPreferredWidth)
+            if (prefWidthsData.values.Length == 0)
                 prefWidthsData.values = new float[conditionAmount];
 
-            if (logPreferredHeight)
+        if (logPreferredHeight)
+            if (prefHeightsData.values.Length == 0)
                 prefHeightsData.values = new float[conditionAmount];
-        }
     }
 
     private void UpdateDataList()
