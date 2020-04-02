@@ -50,6 +50,28 @@ public class AudioManager : MonoBehaviour
         if (index >= 0 && index < soundEvents.Length)
             soundEvents[index].EventRaised(0);
     }
+
+    private void OnDisable()
+    {
+        if (soundEvents != null)
+        {
+            for (int i = 0; i < soundEvents.Length; i++)
+            {
+                soundEvents[i].Disable();
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (soundEvents != null)
+        {
+            for (int i = 0; i < soundEvents.Length; i++)
+            {
+                soundEvents[i].Enable();
+            }
+        }
+    }
 }
 
 [System.Serializable]
@@ -81,6 +103,16 @@ public class SoundEvent
         eventFired = false;
     }
 
+    public void Disable()
+    {
+        soundEventListener?.Disable();
+    }
+
+    public void Enable()
+    {
+        soundEventListener?.Enable();
+    }
+
     public void EventRaised(float value)
     {
         parsedValue = value;
@@ -103,7 +135,7 @@ public class SoundEvent
 
     private void PlaySound()
     {
-        if (audioClip == null)
+        if (audioClip == null || audioSource == null)
             return;
 
         audioSource.loop = loopSound;
