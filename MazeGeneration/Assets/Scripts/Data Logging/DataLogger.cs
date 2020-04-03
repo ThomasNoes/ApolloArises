@@ -25,13 +25,13 @@ public class DataLogger : MonoBehaviour
 
     // Scriptable Objects:
     public FloatValue fpsData;
-    public StringValue firstSicknessData, secondSicknessData, ageData, experienceData, genderData, locationData, proficiencyData;
+    public StringValue firstSicknessData, secondSicknessData, ageData, experienceData, genderData, locationData, /*proficiencyData,*/ understandingData;
     public FloatArrayValue prefWidthsData, prefHeightsData, loggedTimesData, wallHitsData;
 
     // Bools:
     public bool onlineLogging = true, logData = true;
     [HideInInspector] public bool logFrameRate, logAverageFrameRate, logTime, logGender, logAge, logLocation, logExperience,
-        logWallHits, logPreferredWidth, logPreferredHeight, logGeographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logProficiency;
+        logWallHits, logPreferredWidth, logPreferredHeight, logGeographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logUnderstanding;
     private bool active = false, initial = true, onFirstData = true, timerRunning;
     private bool[] dataWritten = new []{false, false};
 
@@ -186,11 +186,11 @@ public class DataLogger : MonoBehaviour
                     else
                         dataList.Add(experienceData.value);
                 }
-                if (logProficiency)
-                    if (String.IsNullOrEmpty(proficiencyData.value))
+                if (logUnderstanding)
+                    if (String.IsNullOrEmpty(understandingData.value))
                         dataList.Add("No data");
                     else
-                        dataList.Add(proficiencyData.value);
+                        dataList.Add(understandingData.value);
             }
     }
 
@@ -291,11 +291,16 @@ public class DataLogger : MonoBehaviour
 
     public void ExperienceResponse(int experienceIndex)
     {
-        //Debug.Log("experience");
         if (experienceData == null)
             return;
 
         experienceData.value = experienceIndex.ToString();
+    }
+
+    /// <param name="answerIndex">0: YYY</param>
+    public void UnderstandTaskResponse(int answerIndex)
+    {
+        // TODO: make this
     }
 
     public void LogTimeStart()
@@ -364,27 +369,27 @@ public class DataLogger : MonoBehaviour
     /// <param name="proficiencyIndex">0: Not at all, 1: A little, 2: Decently, 3: Fluently</param>
     public void ProficiencyResponse(int proficiencyIndex)
     {
-        if (proficiencyData == null)
-            return;
+        //if (proficiencyData == null)
+        //    return;
 
-        switch (proficiencyIndex)
-        {
-            case 0:
-                proficiencyData.value = "Not at all";
-                break;
-            case 1:
-                proficiencyData.value = "A little";
-                break;
-            case 2:
-                proficiencyData.value = "Decently";
-                break;
-            case 3:
-                proficiencyData.value = "Fluently";
-                break;
-            default:
-                proficiencyData.value = "Wrong value given";
-                break;
-        }
+        //switch (proficiencyIndex)
+        //{
+        //    case 0:
+        //        proficiencyData.value = "Not at all";
+        //        break;
+        //    case 1:
+        //        proficiencyData.value = "A little";
+        //        break;
+        //    case 2:
+        //        proficiencyData.value = "Decently";
+        //        break;
+        //    case 3:
+        //        proficiencyData.value = "Fluently";
+        //        break;
+        //    default:
+        //        proficiencyData.value = "Wrong value given";
+        //        break;
+        //}
     }
 
     private void Update()
@@ -755,7 +760,7 @@ public class DataLogger_Editor : UnityEditor.Editor
                 script.logAge = EditorGUILayout.Toggle("Age", script.logAge);
                 script.logLocation = EditorGUILayout.Toggle("Location", script.logLocation);
                 script.logExperience = EditorGUILayout.Toggle("VR Experience", script.logExperience);
-                script.logProficiency = EditorGUILayout.Toggle("English Proficiency", script.logProficiency);
+                script.logUnderstanding = EditorGUILayout.Toggle("Understand Task", script.logUnderstanding);
                 EditorGUI.indentLevel -= 1;
             }
 
