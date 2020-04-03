@@ -78,9 +78,26 @@ public class GuardainCalibration : MonoBehaviour
 
     }
 
-    public Vector3[] GetBoundaryPoints()
+    public static Vector3[] GetBoundaryPoints()
     {
         return OVRManager.boundary.GetGeometry(OVRBoundary.BoundaryType.PlayArea);
+    }
+
+    public static float GetShortestDimension()
+    {
+        Vector3[] points = GetBoundaryPoints();
+
+        //first Dimension
+        float width = Vector3.Distance(points[0], points[1]);
+        //second Dimension
+        float length = Vector3.Distance(points[1], points[2]);
+
+        if (length <=width)
+        {
+            return length;
+        }
+        return width;
+
     }
 
     public void ScaleObject()
