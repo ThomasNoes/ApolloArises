@@ -297,10 +297,23 @@ public class DataLogger : MonoBehaviour
         experienceData.value = experienceIndex.ToString();
     }
 
-    /// <param name="answerIndex">0: YYY</param>
+    /// <param name="answerIndex">0: with eyes closed, 1: not finding width comfortable, 2: as fast as possible</param>
     public void UnderstandTaskResponse(int answerIndex)
     {
-        // TODO: make this
+        switch (answerIndex)
+        {
+            case 0:
+                understandingData.value = "With my eyes closed";
+                break;
+            case 1:
+                understandingData.value = "Until I do not find the width comfortable";
+                break;
+            case 2:
+                understandingData.value = "As fast as possible";
+                break;
+            default:
+                break;
+        }
     }
 
     public void LogTimeStart()
