@@ -773,7 +773,7 @@ PrefabInstance:
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: AgeResponse
+      value: UnderstandTaskResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -1780,7 +1780,7 @@ PrefabInstance:
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: AgeResponse
+      value: UnderstandTaskResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -2170,7 +2170,7 @@ PrefabInstance:
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: AgeResponse
+      value: UnderstandTaskResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -2943,6 +2943,18 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2161042621043245907, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 17cd1bd3e751a9f4bac0efc75a21f452, type: 3}
+--- !u!114 &814815293 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 494955333806273333, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+    type: 3}
+  m_PrefabInstance: {fileID: 814815292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cd8e099c54a4247b2baf47f0291706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &845347681
 GameObject:
   m_ObjectHideFlags: 0
@@ -4728,6 +4740,11 @@ PrefabInstance:
       propertyPath: logData
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2627100202734912138, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
+        type: 3}
+      propertyPath: wallCollision
+      value: 
+      objectReference: {fileID: 814815293}
     - target: {fileID: 2627100202734912141, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}
       propertyPath: m_LocalPosition.x
