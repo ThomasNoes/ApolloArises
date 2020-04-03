@@ -25,15 +25,19 @@ public class OculusButton : MonoBehaviour
     Vector3 startPos;
     Rigidbody rb;
 
-    bool registerPress = false;
+    bool registerPress = false, btnInactive, delayRunning;
 
     void Start()
     {
         if (am == null)
             am = GetComponent<AudioManager>();
 
-        startPos = transform.localPosition;
         rb = GetComponent<Rigidbody>();
+
+        if (rb != null)
+            rb.sleepThreshold = 0.0f;
+
+        startPos = transform.localPosition;
         Invoke("DelayRegister", 0.1f) ;
     }
 
@@ -74,20 +78,29 @@ public class OculusButton : MonoBehaviour
             {
                 pressed = true;
                 // If we have an event, invoke it
-                if (isProceed)
+                if (!btnInactive)
                 {
-                    ProceedEvent();
-                }
-                else
-                {
-                    downEvent?.Invoke();
+                    btnInactive = true;
+                    Invoke("DelayedBtnActivate", 1.0f);
+                    if (isProceed)
+                    {
+                        ProceedEvent();
+                    }
+                    else
+                    {
+                        downEvent?.Invoke();
 
-                    if (!doNotDisableOnPress)
-                        Invoke("SetToNotActive", 0.5f);
+                        if (!doNotDisableOnPress)
+                            Invoke("SetToNotActive", 0.5f);
+                    }
                 }
-
             }
         }
+    }
+
+    private void DelayedBtnActivate()
+    {
+        btnInactive = false;
     }
 
     void SetToNotActive()
