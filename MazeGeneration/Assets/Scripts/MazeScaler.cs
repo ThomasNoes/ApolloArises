@@ -46,14 +46,16 @@ public class MazeScaler : MonoBehaviour
         mazeSegment = GameObject.Find("0 - Maze");
         mainCamTrans = Camera.main.gameObject.transform;
         middle = GameObject.Find("Tile R1C1").GetComponent<Tile>();
+
         SetLocalScale();
+
         minWidthMod = minimumWidth - width;
         minHeightMod = minimumHeight - height;
-
         maxWidthMod = maximumWidth - width;
         maxHeightMod = maximumHeight - height;
-
         initialPos = mazeSegment.transform.position;
+
+        ScaleToPlayArea();
 
         //scale companion
         foreach (TestCompanionScaler cScaler in companionScalers)
@@ -172,5 +174,17 @@ public class MazeScaler : MonoBehaviour
     {
         heightModifier += heightStep;
         SetLocalScale();
+    }
+
+    public void ScaleToPlayArea()
+    {
+        float length = GuardainCalibration.GetShortestDimension();
+        length = length / 3; // because we have 3 columns/row in test
+
+        while (mazeSegment.transform.localScale.x > length)
+        {
+            ScaleWidthDown();
+        }
+
     }
 }
