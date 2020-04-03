@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cf9fef809acdc4693f423e1214c4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evaluationMaze: 0
+  evaluationMaze: 1
   gizmo: {fileID: 0}
   terrainGenerator: {fileID: 0}
   mazeGeneratorPrefab:
@@ -1284,14 +1284,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableOculusControls: 0
   enablePcControls: 1
-  width: 0.7
-  height: 1
-  minimumWidth: 0.4
-  minimumHeight: 1.5
+  width: 0.65
+  height: 2.2
+  minimumWidth: 0.25
+  minimumHeight: 1
   maximumWidth: 1
   maximumHeight: 5
-  widthStep: 0.1
-  heightStep: 0.1
+  widthStep: 0.05
+  heightStep: 0.05
   companionScalers:
   - {fileID: 5143435149746831836}
   - {fileID: 5143435150591703945}
@@ -6864,7 +6864,7 @@ PrefabInstance:
     - target: {fileID: 7748457934529168359, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
       propertyPath: wallHeight
-      value: 2.2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7892fa38fcffbb49807b3c2ac709216, type: 3}

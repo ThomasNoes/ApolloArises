@@ -94,7 +94,7 @@ public class TestSceneManager : MonoBehaviour
     {
         if (index >= 0 && index < SceneManager.sceneCountInBuildSettings - 1)
         {
-            SceneManager.LoadScene(index);
+            SceneManager.LoadScene(index, LoadSceneMode.Single);
         }
     }
 
@@ -107,7 +107,7 @@ public class TestSceneManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
         }
     }
 
@@ -118,7 +118,7 @@ public class TestSceneManager : MonoBehaviour
 
     public void DelayedSwitchScene()
     {
-        SceneManager.LoadScene(testSceneIndexFrom + arrIndex);
+        SceneManager.LoadScene(testSceneIndexFrom + arrIndex, LoadSceneMode.Single);
     }
 }
 
