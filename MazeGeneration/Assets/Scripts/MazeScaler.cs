@@ -37,6 +37,9 @@ public class MazeScaler : MonoBehaviour
     private Tile middle;
 
     private GameObject mazeSegment;
+
+    private Vector3 initialPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +53,13 @@ public class MazeScaler : MonoBehaviour
         maxWidthMod = maximumWidth - width;
         maxHeightMod = maximumHeight - height;
 
+        initialPos = mazeSegment.transform.position;
 
+        //scale companion
+        foreach (TestCompanionScaler cScaler in companionScalers)
+        {
+            cScaler.ScaleWithMaze();
+        }
     }
 
     private void SetLocalScale()
@@ -76,15 +85,13 @@ public class MazeScaler : MonoBehaviour
         }
 
         mazeSegment.transform.localScale = new Vector3(width+widthModifier, height+heightModifier, width + widthModifier);
-        //SetPosition();
     }
 
     private void SetPosition()
     {
         //Debug.Log("before " + mazeSegment.transform.position);
-        float offset = (width + widthModifier);
         //Debug.Log(offset);
-        mazeSegment.transform.position = new Vector3(-offset, 0,offset);
+        mazeSegment.transform.position = initialPos + (mazeSegment.transform.forward*widthModifier) - (mazeSegment.transform.right * widthModifier);
         //Debug.Log("after " + mazeSegment.transform.position);
     }
 
@@ -135,7 +142,7 @@ public class MazeScaler : MonoBehaviour
     {
         widthModifier -= widthStep;
         SetLocalScale();
-        //SetPosition();
+        SetPosition();
 
         foreach (TestCompanionScaler cScaler in companionScalers)
         {
@@ -147,7 +154,7 @@ public class MazeScaler : MonoBehaviour
     {
         widthModifier += widthStep;
         SetLocalScale();
-        //SetPosition();
+        SetPosition();
 
         foreach (TestCompanionScaler cScaler in companionScalers)
         {
