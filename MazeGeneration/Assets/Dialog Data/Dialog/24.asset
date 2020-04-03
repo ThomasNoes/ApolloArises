@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 24
   m_EditorClassIdentifier: 
-  text: Then I will transfer you to a new corridor with a different type of walls
-    where you repeat the same job, before I finally transfer you to one last corridor
-    with a 3rd type of walls.
+  text: Did you find the corridor width comfortable to walk through?
   textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

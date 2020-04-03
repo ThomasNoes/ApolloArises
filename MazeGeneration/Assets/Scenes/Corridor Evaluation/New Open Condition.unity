@@ -2084,6 +2084,18 @@ Camera:
     type: 3}
   m_PrefabInstance: {fileID: 1688639263}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1688639268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 494955333806273333, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+    type: 3}
+  m_PrefabInstance: {fileID: 1688639263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cd8e099c54a4247b2baf47f0291706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1813671423
 GameObject:
   m_ObjectHideFlags: 0
@@ -3919,7 +3931,7 @@ PrefabInstance:
         type: 3}
       propertyPath: wallCollision
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1688639268}
     - target: {fileID: 2627100202734912138, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}
       propertyPath: mapManagerObj

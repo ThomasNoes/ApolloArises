@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 7
   m_EditorClassIdentifier: 
-  text: Do you understand English?
+  text: "Do you currently feel any motion sickness?\r\nLike fatigue, headache, eyestrain,
+    blurred vision, dizzy eyes, or difficulty focusing, difficulty concentrating.\r"
   textSpeed: 25
   dialogEffect: 4
-  ButtonEvent: {fileID: 11400000, guid: 2fd72b762876a804c886c6e89b11c95b, type: 2}
+  ButtonEvent: {fileID: 11400000, guid: e18b04bceb74da949877a7c9603887ad, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 4
   m_EditorClassIdentifier: 
   text: 'My  job is to gather data on the minimum tolerable corridor width to help
-    those guys make something awesome in VR. '
+    those guys make something <size=125%> awesome <size=100%>in VR. '
   textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

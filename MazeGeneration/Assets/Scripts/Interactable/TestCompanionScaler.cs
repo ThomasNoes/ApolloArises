@@ -67,12 +67,10 @@ public class TestCompanionScaler : MonoBehaviour
         if (firstTile)
         {
             transform.position = new Vector3(tileObj.transform.position.x, tileObj.transform.position.y, tileObj.transform.position.z);
-            transform.Translate(-transform.forward * 0.12f);
         }
         else
         {
             transform.position = new Vector3(tileObj.transform.position.x, tileObj.transform.position.y, tileObj.transform.position.z);
-            transform.Translate(-transform.forward * 0.12f);
         }
     }
 }

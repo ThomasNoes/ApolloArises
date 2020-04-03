@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 23
   m_EditorClassIdentifier: 
-  text: "You continue walking back and forth until you do not feel comfortable within
-    the corridor any more and answer \u201CNo\u201D."
+  text: "Ready\u2026\r\nSet\u2026\r\n<size=150%>Transfer!\r"
   textSpeed: 25
-  dialogEffect: 0
+  dialogEffect: 2
   ButtonEvent: {fileID: 0}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 27
   m_EditorClassIdentifier: 
-  text: And please do not go through the experiment a second time, I will already
-    have gathered your data. Do not worry.
+  text: "Do you currently feel any motion sickness?\r\nLike fatigue, headache, eyestrain,
+    blurred vision, dizzy eyes, or difficulty focusing, difficulty concentrating.\r"
   textSpeed: 25
-  dialogEffect: 5
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: f83971fab1d161d42b3bb0e4e4f16ecb, type: 2}
