@@ -11608,7 +11608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 3b29ce247db48374289790d07ee045c8, type: 2}
+  gameEvent: {fileID: 0}
   delay: 2.2
   unityEventResponse:
     m_PersistentCalls:
@@ -11664,7 +11664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 2fd72b762876a804c886c6e89b11c95b, type: 2}
+  gameEvent: {fileID: 0}
   delay: 1.5
   unityEventResponse:
     m_PersistentCalls:
@@ -11709,7 +11709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b3b87c0f1fff24e9d2781aaf0af202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: ef4bb30a61c38ca41970af3337870c19, type: 2}
+  gameEvent: {fileID: 0}
   delay: 1.7
   unityEventResponse:
     m_PersistentCalls:
@@ -12529,7 +12529,7 @@ PrefabInstance:
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
@@ -12540,25 +12540,37 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogs.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 6fb80ec4e98792b44978a3a62b966dd5,
+      objectReference: {fileID: 11400000, guid: 97b0577517730b04cb3abe5f5b33de5b,
         type: 2}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 86b0422e16495e94cbbccf82b038569c,
+      objectReference: {fileID: 11400000, guid: 343ef2aaa54e19d4e9c16aa49d311622,
         type: 2}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 673ee0587c4c4074190ecafcce8577ba,
+      objectReference: {fileID: 11400000, guid: 5dd8cf03bc1b92b42875351e163ea45c,
         type: 2}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 2ee961115cfef7a4fa82986e6d0cbb48,
+      objectReference: {fileID: 11400000, guid: 29a35c1a70586b4458523461fc612ebd,
+        type: 2}
+    - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
+        type: 3}
+      propertyPath: dialogs.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: e3bc8e989384e9a4fa76d813fc66e155,
+        type: 2}
+    - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
+        type: 3}
+      propertyPath: dialogs.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 757ed8411f087e24186a0030e72f9204,
         type: 2}
     - target: {fileID: 1004870475194667286, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}

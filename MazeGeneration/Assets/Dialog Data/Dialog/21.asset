@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 21
   m_EditorClassIdentifier: 
-  text: "If you say \u201CYes\u201D, The corridor width will shrink a little.\r\nYou
-    then turn around and walk to the other end of the corridor.\r\n"
+  text: 'Please, in the name of science, do not walk through any wall. Follow the
+    corridor, I know you can do it. '
   textSpeed: 25
-  dialogEffect: 0
+  dialogEffect: 5
   ButtonEvent: {fileID: 0}

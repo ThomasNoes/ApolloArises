@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 20
   m_EditorClassIdentifier: 
-  text: At the end, I will appear again and ask you if you find the corridor width
-    comfortable.
+  text: "<size=150%>Great, I hope you are rea- \r\n<size=75%>Oh, one last thing...\r\n"
   textSpeed: 25
-  dialogEffect: 0
+  dialogEffect: 2
   ButtonEvent: {fileID: 0}

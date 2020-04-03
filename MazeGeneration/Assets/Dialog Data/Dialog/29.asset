@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 29
   m_EditorClassIdentifier: 
-  text: "Ready\u2026\r\nSet\u2026\r\nTransfer!\r"
+  text: Will you give me consent to send your answer to the two students for their
+    experiment? Once again, it is anonymous.
   textSpeed: 25
-  dialogEffect: 2
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: ed188a706da40a24e955cff18f9b9f64, type: 2}
