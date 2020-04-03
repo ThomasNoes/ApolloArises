@@ -56,13 +56,13 @@ MonoBehaviour:
   experienceData: {fileID: 11400000, guid: 8c777b46b9ebe2f4fad38bd4520a81cf, type: 2}
   genderData: {fileID: 11400000, guid: a8871f4a62813634291c2cff9d3f4898, type: 2}
   locationData: {fileID: 11400000, guid: d2aa12be60083f946bb3167748a7333e, type: 2}
-  proficiencyData: {fileID: 11400000, guid: 6d3683c9d5e70964b8272596098b8feb, type: 2}
+  understandingData: {fileID: 11400000, guid: d764b8bc36ec40542bf39f01db6e9a0f, type: 2}
   prefWidthsData: {fileID: 11400000, guid: d26122a1355a3944d994e9694c5d5a10, type: 2}
   prefHeightsData: {fileID: 11400000, guid: ddd875b582ae4ab49a33ae3e40c67a01, type: 2}
   loggedTimesData: {fileID: 11400000, guid: 7910d158d8c4c6c429bd8c3c610bc6e5, type: 2}
   wallHitsData: {fileID: 11400000, guid: f59153d57cf4c624d98109bc0de2e260, type: 2}
   onlineLogging: 1
-  logData: 0
+  logData: 1
   logFrameRate: 1
   logAverageFrameRate: 1
   logTime: 1
@@ -77,7 +77,7 @@ MonoBehaviour:
   useSceneSwitch: 0
   logPlayAreaSize: 1
   logVRSickness: 1
-  logProficiency: 1
+  logUnderstanding: 1
 --- !u!114 &2627100202734912139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +107,5 @@ MonoBehaviour:
   - entry.862625402
   - entry.1178303894
   - entry.1604808555
-  - entry.450749378
-  - entry.1677142749
   - entry.279436481
   - entry.1262641040
