@@ -11,6 +11,7 @@ using UnityEditor;
 public class OculusButton : MonoBehaviour
 {
     public bool isProceed, doNotDisableOnPress;
+    public bool conditionButton = false;
 
     public AudioManager am;
     public DialogReader dr;
@@ -72,7 +73,7 @@ public class OculusButton : MonoBehaviour
 
     private void OnEnable()
     {
-        btnInactive = false;
+        DelayedBtnActivate();
     }
 
     public void BtnPressed()
@@ -86,7 +87,10 @@ public class OculusButton : MonoBehaviour
                 if (!btnInactive)
                 {
                     btnInactive = true;
-                    //Invoke("DelayedBtnActivate", 1.4f);
+                    if (!conditionButton)
+                    {
+                        Invoke("DelayedBtnActivate", 1.0f);
+                    }
                     if (isProceed)
                     {
                         ProceedEvent();
