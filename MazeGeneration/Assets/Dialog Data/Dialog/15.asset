@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 15
   m_EditorClassIdentifier: 
-  text: "If you say\u201CYes\u201D, The corridor width will shrink a little.\r\nYou
+  text: "If you say \u201CYes\u201D, The corridor width will shrink a little.\r\nYou
     then turn around and walk back to the other end of the corridor.\r\n"
   textSpeed: 25
   dialogEffect: 0

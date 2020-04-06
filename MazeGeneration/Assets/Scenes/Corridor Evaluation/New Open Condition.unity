@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrateGameObject: 0
-  drawPlayArea: 1
+  drawPlayArea: 0
   gizmo: {fileID: 2497731189600166390, guid: 44f5791eb9b1eed4ba484ac26063bdfb, type: 3}
   gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
     type: 3}
@@ -1284,14 +1284,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableOculusControls: 0
   enablePcControls: 1
-  width: 0.85
+  width: 0.8
   height: 2.2
-  minimumWidth: 0.25
+  minimumWidth: 0.35
   minimumHeight: 1
   maximumWidth: 1
   maximumHeight: 5
-  widthStep: 0.05
-  heightStep: 0.05
+  widthStep: 0.025
+  heightStep: 0.025
   companionScalers:
   - {fileID: 5143435149746831836}
   - {fileID: 5143435150591703945}
