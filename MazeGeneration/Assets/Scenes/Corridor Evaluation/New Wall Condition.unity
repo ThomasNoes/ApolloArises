@@ -1338,7 +1338,6 @@ MonoBehaviour:
   sessionChecker: {fileID: 11400000, guid: d54543e9333b6004b942a37561991810, type: 2}
   companion1: {fileID: 5172304999333169778}
   companion2: {fileID: 5172304999121072167}
-  dataLogger: {fileID: 1915342116}
   testSceneIndexFrom: 1
   testSceneIndexTo: 3
 --- !u!114 &1604854441
@@ -4980,6 +4979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProceed: 0
   doNotDisableOnPress: 1
+  conditionButton: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
@@ -5056,6 +5056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProceed: 0
   doNotDisableOnPress: 1
+  conditionButton: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
@@ -6010,6 +6011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProceed: 0
   doNotDisableOnPress: 1
+  conditionButton: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
@@ -6086,6 +6088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProceed: 0
   doNotDisableOnPress: 1
+  conditionButton: 1
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
