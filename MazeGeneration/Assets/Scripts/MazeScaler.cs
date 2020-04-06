@@ -70,6 +70,7 @@ public class MazeScaler : MonoBehaviour
         if (widthModifier < minWidthMod)
         {
             widthModifier = minWidthMod;
+            GetComponent<TestSceneManager>().NextSceneRandom();
         }
         if (heightModifier < minHeightMod)
         {
