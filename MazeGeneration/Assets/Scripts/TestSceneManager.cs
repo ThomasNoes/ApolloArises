@@ -8,7 +8,6 @@ public class TestSceneManager : MonoBehaviour
     public GameObject companion1, companion2;
     private TestCompanion companion1Script, companion2Script;
     private GameObject camObj;
-    public DataLogger dataLogger;
     public int testSceneIndexFrom = 1, testSceneIndexTo = 3;
 
     private int currentSceneIndex = 0, sceneRange, arrIndex;
@@ -17,7 +16,7 @@ public class TestSceneManager : MonoBehaviour
     {
         if (sessionChecker == null)
             return;
-        dataLogger?.LogTimeStart();
+
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         camObj = Camera.main.gameObject;
         sceneRange = (testSceneIndexTo + 1) - testSceneIndexFrom;

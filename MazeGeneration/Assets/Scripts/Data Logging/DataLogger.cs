@@ -56,6 +56,9 @@ public class DataLogger : MonoBehaviour
             if (mapManagerObj != null)
                 mapObj = mapManagerObj.transform.GetChild(0).gameObject;
 
+        if (logTime)
+            LogTimeStart();
+
         Initialize();
 
         if (onlineLogging)
@@ -335,12 +338,9 @@ public class DataLogger : MonoBehaviour
     /// </summary>
     public void LogWallHits(int testIndex)
     {
-        if (wallHitsData != null)
+        if (wallHitsData != null && wallCollision != null)
             if (testIndex >= 0 && testIndex < wallHitsData.values.Length)
-            {
-                wallHitsData.values[testIndex] = wallHitsCount;
-                wallHitsCount = 0; // TODO check if I can set to 0 already?
-            }
+                wallHitsData.values[testIndex] = wallCollision.wallHits;    
     }
 
     /// <param name="gender">0 = male, 1 = female, 2 = other</param>
