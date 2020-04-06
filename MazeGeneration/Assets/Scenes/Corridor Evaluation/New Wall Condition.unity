@@ -1312,14 +1312,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableOculusControls: 0
   enablePcControls: 1
-  width: 0.85
+  width: 0.8
   height: 2.2
-  minimumWidth: 0.25
+  minimumWidth: 0.35
   minimumHeight: 1
   maximumWidth: 1
   maximumHeight: 5
-  widthStep: 0.05
-  heightStep: 0.05
+  widthStep: 0.025
+  heightStep: 0.025
   companionScalers:
   - {fileID: 5143435150591703945}
   - {fileID: 5143435149746831836}

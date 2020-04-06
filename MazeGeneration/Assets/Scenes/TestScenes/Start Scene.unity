@@ -4329,7 +4329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: 1d7c7e6794393f74691a5b920e6d8480, type: 2}
-  delay: 1.8
+  delay: 2
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -4357,7 +4357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: e18b04bceb74da949877a7c9603887ad, type: 2}
-  delay: 7.1
+  delay: 7.9
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -4385,7 +4385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: ccac01673155412429d085449e9f7beb, type: 2}
-  delay: 2.2
+  delay: 2.3
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -4413,7 +4413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: c91651c0b0a619f4891c35f67389f2d7, type: 2}
-  delay: 3
+  delay: 6.2
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:

@@ -199,7 +199,7 @@ public class DataLogger : MonoBehaviour
     /// </summary>
     public void PostDataOnline()
     {
-        //Debug.Log("Posting Online");
+        Debug.Log("Posting Online");
         if (dataHandler == null)
             return;
 

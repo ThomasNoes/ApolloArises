@@ -11666,7 +11666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: ed188a706da40a24e955cff18f9b9f64, type: 2}
-  delay: 2
+  delay: 6.1
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -11694,7 +11694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: f83971fab1d161d42b3bb0e4e4f16ecb, type: 2}
-  delay: 7.1
+  delay: 7.6
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:

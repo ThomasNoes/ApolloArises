@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2627100202734912136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -67,8 +67,8 @@ MonoBehaviour:
   logAverageFrameRate: 1
   logTime: 1
   logGender: 1
-  logAge: 1
-  logLocation: 1
+  logAge: 0
+  logLocation: 0
   logExperience: 1
   logWallHits: 1
   logPreferredWidth: 1
