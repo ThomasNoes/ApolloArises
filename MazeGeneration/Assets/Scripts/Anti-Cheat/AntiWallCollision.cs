@@ -7,12 +7,12 @@ public class AntiWallCollision : MonoBehaviour
     public bool useVisual = false;
     private float farClippingPlane;
     private bool active = false;
-    public VoidEvent wallHitEvent;
     [HideInInspector] public int wallHits;
 
     private void Start()
     {
         farClippingPlane = Camera.main.farClipPlane;
+        wallHits = 0;
         Invoke("DelayedStart", 2.0f);
     }
 
@@ -51,7 +51,6 @@ public class AntiWallCollision : MonoBehaviour
                 cheatCube?.SetActive(true);
 
             wallHits++;
-            wallHitEvent.Raise();
         }
         else
         {

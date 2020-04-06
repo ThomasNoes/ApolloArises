@@ -422,7 +422,10 @@ public class DataLogger : MonoBehaviour
         }
 
         if (logTime && timerRunning)
+        {
             timeSpend += Time.deltaTime;
+            //Debug.Log(timeSpend);
+        }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
