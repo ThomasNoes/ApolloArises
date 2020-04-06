@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 19
   m_EditorClassIdentifier: 
-  text: "Just to make sure i explained the your job well, can you finish this sentence:
-    \n\n\"my job is to walk back and forth in the corridor...\n"
+  text: 'Just to make sure i explained your job well, can you finish this sentence?
+
+
+    "my
+    job is to walk back and forth in the corridor...
+
+'
   textSpeed: 25
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: c91651c0b0a619f4891c35f67389f2d7, type: 2}
