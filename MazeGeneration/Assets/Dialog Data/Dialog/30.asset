@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 30
   m_EditorClassIdentifier: 
-  text: '<size=125%>Complete!<size=100%> and Once again
+  text: 'Complete! and Once again
 
-    <size=200%> THANK YOU!
+    THANK YOU!
 
 '
   textSpeed: 25

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: 22
   m_EditorClassIdentifier: 
   text: "And please do not go through the experiment a second time, I will already
-    have gathered your data. \r\nBut you can let others try it! \n<size=125%>Let
-    them try too!\r\n"
+    have gathered your data. \r\nBut you can let others try it! Let them try too!\r\n"
   textSpeed: 25
   dialogEffect: 5
   ButtonEvent: {fileID: 0}

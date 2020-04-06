@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 17
   m_EditorClassIdentifier: 
   text: "You continue walking back and forth until you do not feel comfortable within
-    the corridor any more and answer<size=125%> \u201CNo\u201D."
+    the corridor any more and answer \u201CNo\u201D."
   textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

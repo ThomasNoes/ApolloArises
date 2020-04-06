@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 5
   m_EditorClassIdentifier: 
-  text: "For that i need human input! \n<size=150%>Your input!\r\n<size=100%>The
-    data will be anonymous so do not worry.\r"
+  text: "For that i need human input! \nYour input!\r\nThe data will be anonymous
+    so do not worry.\r"
   textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
