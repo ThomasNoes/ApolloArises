@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2627100202734912136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
   logWallHits: 1
   logPreferredWidth: 1
   logPreferredHeight: 0
-  logGeographic: 1
+  logDemographic: 1
   useSceneSwitch: 0
   logPlayAreaSize: 1
   logVRSickness: 1
