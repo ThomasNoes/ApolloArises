@@ -219,7 +219,7 @@ public class DataLogger : MonoBehaviour
 
         if (chaperone != null)
         {
-            size = new Vector3(Mathf.Round(chaperone.x), 0, Mathf.Round(chaperone.z));
+            size = new Vector3(chaperone.x, 0, chaperone.z);
         }
         return size;
     }
