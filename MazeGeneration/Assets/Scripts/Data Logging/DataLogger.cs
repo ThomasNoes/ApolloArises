@@ -31,7 +31,7 @@ public class DataLogger : MonoBehaviour
     // Bools:
     public bool onlineLogging = true, logData = true;
     [HideInInspector] public bool logFrameRate, logAverageFrameRate, logTime, logGender, logAge, logLocation, logExperience,
-        logWallHits, logPreferredWidth, logPreferredHeight, logGeographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logUnderstanding;
+        logWallHits, logPreferredWidth, logPreferredHeight, logDemographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logUnderstanding;
     private bool active = false, initial = true, onFirstData = true, timerRunning;
     private bool[] dataWritten = new []{false, false};
 
@@ -156,7 +156,7 @@ public class DataLogger : MonoBehaviour
         }
 
         if (onlineLogging)
-            if (logGeographic)
+            if (logDemographic)
             {
                 if (logGender)
                 {
@@ -764,9 +764,9 @@ public class DataLogger_Editor : UnityEditor.Editor
             script.logPreferredHeight = EditorGUILayout.Toggle("Pref. Height", script.logPreferredHeight);
             script.logPlayAreaSize = EditorGUILayout.Toggle("Play Area Size", script.logPlayAreaSize);
             script.logVRSickness = EditorGUILayout.Toggle("VR Sickness", script.logVRSickness);
-            script.logGeographic = EditorGUILayout.Toggle("Geographics", script.logGeographic);
+            script.logDemographic = EditorGUILayout.Toggle("Demographics", script.logDemographic);
 
-            if (script.logGeographic)
+            if (script.logDemographic)
             {
                 EditorGUI.indentLevel += 1;
                 script.logGender = EditorGUILayout.Toggle("Gender", script.logGender);
