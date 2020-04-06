@@ -140,6 +140,13 @@ public class TextureCustomizer_Editor : UnityEditor.Editor
             script.UpdateTextures(script.matIndex);
             Debug.Log("TextureCustomizer: called texture switcher");
         }
+
+        serializedObject.ApplyModifiedProperties();
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(script);
+        }
     }
 }
 #endif

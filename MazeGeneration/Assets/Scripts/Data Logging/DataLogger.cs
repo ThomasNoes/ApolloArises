@@ -779,6 +779,13 @@ public class DataLogger_Editor : UnityEditor.Editor
 
             EditorGUI.indentLevel -= 1;
         }
+
+        serializedObject.ApplyModifiedProperties();
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(script);
+        }
     }
 }
 #endif
