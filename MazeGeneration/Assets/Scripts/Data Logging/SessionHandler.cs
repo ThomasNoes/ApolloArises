@@ -16,10 +16,16 @@ public class SessionHandler : MonoBehaviour
             if (!Application.isPlaying)
             {
                 if (manager != null)
+                {
                     if (manager.sessionChecker?.value == true)
                     {
                         manager.sessionChecker.value = false;
                     }
+                    if (manager.conditionChecker?.value == true)
+                    {
+                        manager.conditionChecker.value = false;
+                    }
+                }
             }
         }
     }

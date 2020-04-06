@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(SessionHandler))]
 public class TestSceneManager : MonoBehaviour
 {
-    public BoolValue sessionChecker;
+    public BoolValue sessionChecker, conditionChecker;
     public GameObject companion1, companion2;
     private TestCompanion companion1Script, companion2Script;
     private GameObject camObj;
@@ -38,7 +38,19 @@ public class TestSceneManager : MonoBehaviour
             if (companion1Script == null || companion2Script == null)
                 return;
 
-            Invoke("DelayDistanceCheck", 0.1f);
+            if (conditionChecker != null)
+            {
+                if (conditionChecker.value)
+                {
+                    Invoke("DelayDistanceCheck", 0.1f);
+                }
+                else
+                {
+                    conditionChecker.value = true;
+                }
+            }
+            else
+                Invoke("DelayDistanceCheck", 0.1f);
         }
     }
 
