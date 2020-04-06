@@ -140,7 +140,10 @@ public class DataLogger : MonoBehaviour
         if (logPlayAreaSize)
         {
             if (!Application.isEditor)
-                dataList.Add(GetPlayAreaSize().ToString());
+            {
+                Vector3 sizeResult = GetPlayAreaSize();
+                dataList.Add(sizeResult.x.ToString(spec, ci) + " x " + sizeResult.z.ToString(spec, ci));
+            }
             else
                 dataList.Add("Data not available");
         }
