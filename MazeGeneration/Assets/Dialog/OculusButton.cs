@@ -89,7 +89,7 @@ public class OculusButton : MonoBehaviour
                     btnInactive = true;
                     if (!conditionButton)
                     {
-                        Invoke("DelayedBtnActivate", 1.4f);
+                        Invoke("DelayedBtnActivate", 1.0f);
                     }
                     if (isProceed)
                     {
