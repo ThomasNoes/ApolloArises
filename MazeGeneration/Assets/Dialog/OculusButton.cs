@@ -70,6 +70,11 @@ public class OculusButton : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        btnInactive = false;
+    }
+
     public void BtnPressed()
     {
         if (!pressed)
@@ -81,7 +86,7 @@ public class OculusButton : MonoBehaviour
                 if (!btnInactive)
                 {
                     btnInactive = true;
-                    Invoke("DelayedBtnActivate", 1.0f);
+                    //Invoke("DelayedBtnActivate", 1.4f);
                     if (isProceed)
                     {
                         ProceedEvent();
