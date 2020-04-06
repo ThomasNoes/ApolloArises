@@ -1308,6 +1308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sessionChecker: {fileID: 11400000, guid: d54543e9333b6004b942a37561991810, type: 2}
+  conditionChecker: {fileID: 11400000, guid: ee7de443e5056ad49a555a59b69755db, type: 2}
   companion1: {fileID: 5172304999333169778}
   companion2: {fileID: 5172304999121072167}
   testSceneIndexFrom: 1
