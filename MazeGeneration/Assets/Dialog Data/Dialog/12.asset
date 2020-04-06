@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 12
   m_EditorClassIdentifier: 
-  text: "<size=150%> Thank You!\r\n<size=100%> Now\u2026 On to the experiment!\r"
+  text: "Thank You!\r\nNow\u2026 On to the experiment!\r"
   textSpeed: 25
   dialogEffect: 1
   ButtonEvent: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 23
   m_EditorClassIdentifier: 
-  text: "Ready\u2026\r\nSet\u2026\r\n<size=150%>Transfer!\r"
+  text: "Ready\u2026\r\nSet\u2026\r\nTransfer!\r"
   textSpeed: 25
   dialogEffect: 2
   ButtonEvent: {fileID: 0}

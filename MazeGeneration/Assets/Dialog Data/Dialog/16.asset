@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 16
   m_EditorClassIdentifier: 
   text: "At the other end, I will ask about the corridor width again, and you answer
-    <size=125%>\u201CYes\u201D <size=100%>or <size=125%>\u201CNo\u201D."
+    \u201CYes\u201D or \u201CNo\u201D."
   textSpeed: 25
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

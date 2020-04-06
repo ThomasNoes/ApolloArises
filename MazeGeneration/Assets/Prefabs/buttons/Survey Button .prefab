@@ -282,6 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProceed: 0
+  doNotDisableOnPress: 0
   am: {fileID: 0}
   dr: {fileID: 0}
   pressLength: 0.2
@@ -618,8 +619,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.45
-  m_fontSizeBase: 0.45
+  m_fontSize: 0.39
+  m_fontSizeBase: 0.39
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -656,7 +657,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0.2347239, y: 0, z: 0.24443382, w: 0}
   m_textInfo:
     textComponent: {fileID: 8769029047898771761}
     characterCount: 8
