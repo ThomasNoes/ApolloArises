@@ -350,4 +350,25 @@ public class PortalRenderController : MonoBehaviour
     {
         return prevOffset;
     }
+
+    public Vector3 GetCurrentPos()
+    {
+        return mapSequence[currentMaze].mapObject.transform.position;
+    }
+
+    public Vector3 GetNextMazePos()
+    {
+        if (currentMaze + 1 < mapSequence.Length)
+            return mapSequence[currentMaze + 1].mapObject.transform.position;
+        else 
+            return mapSequence[currentMaze].mapObject.transform.position;
+    }
+
+    public Vector3 GetPrevMazePos()
+    {
+        if (currentMaze - 1 >= 0)
+            return mapSequence[currentMaze - 1].mapObject.transform.position;
+        else
+            return mapSequence[currentMaze].mapObject.transform.position;
+    }
 }

@@ -7,10 +7,10 @@
     public class InteractableObject : MonoBehaviour
     {
         public PortalRenderController renderController;
-        private Vector3 prevOffsetVector, nextOffsetVector;
+        private Vector3 offsetVector;
         private GameObject thisObjCopy, mainObj, rightHandObj, leftHandObj;
         private bool copyExist, activated;
-        [HideInInspector] public bool isParentObject = true;
+        [HideInInspector] public bool isParentObject = true, isInHand;
 
         private void Start()
         {
@@ -20,12 +20,6 @@
 
         private void DelayedStart()
         {
-            if (renderController == null)
-                return;
-
-            prevOffsetVector = renderController.GetPrevOffset();
-            nextOffsetVector = renderController.GetNextOffset();
-
             if (isParentObject)
                 activated = true;
         }
@@ -36,7 +30,7 @@
             {
                 if (thisObjCopy != null)
                 {
-                    thisObjCopy.transform.position = transform.position + nextOffsetVector;
+                    thisObjCopy.transform.position = transform.position + offsetVector;
                     thisObjCopy.transform.rotation = transform.rotation;
                 }
             }
@@ -53,13 +47,15 @@
         /// <param name="dir">false = prev, true = next</param>
         public void CopySpawner(bool dir, Collider col)
         {
-            if (copyExist || !isParentObject)
+            if (copyExist || !isParentObject || renderController == null)
                 return;
 
             if (dir)
-                thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + nextOffsetVector.x, transform.position.y + nextOffsetVector.y, transform.position.z + nextOffsetVector.z), transform.rotation);
+                offsetVector = renderController.GetNextOffset();
             else
-                thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + prevOffsetVector.x, transform.position.y + prevOffsetVector.y, transform.position.z + prevOffsetVector.z), transform.rotation);
+                offsetVector = renderController.GetPrevOffset();
+
+            thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + offsetVector.x, transform.position.y + offsetVector.y, transform.position.z + offsetVector.z), transform.rotation);
 
             InteractableObject tempScript = thisObjCopy.GetComponent<InteractableObject>();
             tempScript.isParentObject = false;
@@ -69,7 +65,10 @@
 
             if (col != null)
             {
-                col.gameObject.GetComponent<Teleporter>()?.AddTeleportCopy(thisObjCopy);
+                NewTeleporter tempTeleScript = col.gameObject.GetComponent<NewTeleporter>();
+
+                if (tempTeleScript != null)
+                   tempTeleScript.AddTeleportCopy(thisObjCopy);
             }
             
             copyExist = true;
@@ -84,19 +83,65 @@
         private void OnTriggerEnter(Collider col)
         {
             if (activated)
-                if (CompareTag("PortalGroundCol"))
+                if (!isInHand)
                 {
-                    CopySpawner(col.gameObject.GetComponent<Teleporter>().isForwardTeleporter ? true : false, col);
+                    if (col.CompareTag("PortalGroundCol"))
+                    {          
+                        if (copyExist && thisObjCopy != null)
+                        {
+                            Destroy(thisObjCopy);
+                            copyExist = false;
+                        }
+
+                        CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+                    }
+                    if (col.CompareTag("PortalRenderCol"))
+                    {
+                        activated = false;
+                        thisObjCopy.transform.position = transform.position;
+                        transform.Translate(offsetVector, Space.World);
+                        UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
+                        Debug.Log("TELEPORTED");
+                    }
                 }
+                else
+                {
+                    // TODO
+                }
+
+            //if (activated)
+            //    if (!isInHand)
+            //        if (col.CompareTag("PortalRenderCol"))
+            //        {
+            //            CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+            //        }
         }
 
         private void OnTriggerExit(Collider col)
         {
-            if (activated)
-                if (CompareTag("PortalGroundCol"))
-                {
-                    Destroy(thisObjCopy);
-                }
+            //if (activated)
+            //{
+            //    if (!isInHand && isParentObject)
+            //        if (col.CompareTag("PortalRenderCol"))
+            //        {
+            //            if (thisObjCopy != null)
+            //                Destroy(thisObjCopy);
+            //        }
+            //}
+        }
+
+        /// <param name="dir">false: prev, true: next</param>
+        public void UpdateOffset(bool dir)
+        {
+            if (renderController == null)
+                return;
+
+            if (dir)
+                offsetVector = renderController.GetCurrentPos() - renderController.GetNextMazePos();
+            else
+                offsetVector = renderController.GetCurrentPos() - renderController.GetPrevMazePos();
+
+            activated = true;
         }
 
         public void SetParentObject(GameObject parentObj)

@@ -12,6 +12,9 @@ TagManager:
   - TileChecker
   - Tile
   - Button
+  - DataLogger
+  - PortalGroundCol
+  - PortalRenderCol
   layers:
   - Default
   - TransparentFX
