@@ -340,4 +340,14 @@ public class PortalRenderController : MonoBehaviour
 
         return offset;
     }
+
+    public Vector3 GetNextOffset()
+    {
+        return nextOffset;
+    }
+
+    public Vector3 GetPrevOffset()
+    {
+        return prevOffset;
+    }
 }

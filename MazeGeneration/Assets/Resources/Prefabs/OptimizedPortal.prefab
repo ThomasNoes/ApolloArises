@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 759043208389249951}
   m_Layer: 2
   m_Name: GroundCollider
-  m_TagString: Untagged
+  m_TagString: PortalGroundCol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 1892008154167864845}
   m_Layer: 2
   m_Name: Portal Render Quad
-  m_TagString: Untagged
+  m_TagString: PortalRenderCol
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,21 +6,26 @@
     [RequireComponent(typeof(OVRGrabbable), typeof(Rigidbody))]
     public class InteractableObject : MonoBehaviour
     {
-        public float offset = 4.0f; // TODO: Temporary, make based on maze offset.
+        public PortalRenderController renderController;
         private Vector3 prevOffsetVector, nextOffsetVector;
-        private GameObject thisObjectCopy, parentObject;
+        private GameObject thisObjCopy, mainObj, rightHandObj, leftHandObj;
         private bool copyExist, activated;
         [HideInInspector] public bool isParentObject = true;
 
         private void Start()
         {
-            prevOffsetVector = new Vector3(-offset, 0, 0);
-            nextOffsetVector = new Vector3(offset, 0, 0);
+            renderController = FindObjectOfType<PortalRenderController>();
             Invoke("DelayedStart", 0.5f);
         }
 
         private void DelayedStart()
         {
+            if (renderController == null)
+                return;
+
+            prevOffsetVector = renderController.GetPrevOffset();
+            nextOffsetVector = renderController.GetNextOffset();
+
             if (isParentObject)
                 activated = true;
         }
@@ -29,61 +34,80 @@
         {
             if (activated && copyExist)
             {
-                if (thisObjectCopy != null)
+                if (thisObjCopy != null)
                 {
-                    thisObjectCopy.transform.position = transform.position + nextOffsetVector;
-                    thisObjectCopy.transform.rotation = transform.rotation;
+                    thisObjCopy.transform.position = transform.position + nextOffsetVector;
+                    thisObjCopy.transform.rotation = transform.rotation;
                 }
             }
         }
 
-        //private void Update()   // TODO: Used for debugging, remove later
-        //{
-        //    if (Input.GetKeyDown(KeyCode.F))
-        //    {
-        //        CopySpawner(1, null);
-        //    }
-        //}
+        private void Update()   // TODO: Used for debugging, remove later
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                CopySpawner(true, null);
+            }
+        }
 
-        public void CopySpawner(int dir, Collider col)    // 0 = prev, 1 = next
+        /// <param name="dir">false = prev, true = next</param>
+        public void CopySpawner(bool dir, Collider col)
         {
             if (copyExist || !isParentObject)
                 return;
 
-            thisObjectCopy = Instantiate(gameObject, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z), transform.rotation);
+            if (dir)
+                thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + nextOffsetVector.x, transform.position.y + nextOffsetVector.y, transform.position.z + nextOffsetVector.z), transform.rotation);
+            else
+                thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + prevOffsetVector.x, transform.position.y + prevOffsetVector.y, transform.position.z + prevOffsetVector.z), transform.rotation);
 
-            InteractableObject tempScript = thisObjectCopy.GetComponent<InteractableObject>();
+            InteractableObject tempScript = thisObjCopy.GetComponent<InteractableObject>();
             tempScript.isParentObject = false;
-            tempScript.parentObject = gameObject;
-            thisObjectCopy.GetComponent<Collider>().enabled = false;
-            thisObjectCopy.GetComponent<Rigidbody>().isKinematic = true;
+            tempScript.mainObj = gameObject;
+            thisObjCopy.GetComponent<Collider>().enabled = false;
+            thisObjCopy.GetComponent<Rigidbody>().isKinematic = true;
 
             if (col != null)
             {
-                col.gameObject.GetComponent<Teleporter>().AddTeleportCopy(thisObjectCopy);
+                col.gameObject.GetComponent<Teleporter>()?.AddTeleportCopy(thisObjCopy);
             }
             
             copyExist = true;
         }
 
+        public void CopyDespawnSelf()
+        {
+            if (!activated)
+                Destroy(this);
+        }
+
         private void OnTriggerEnter(Collider col)
         {
             if (activated)
-                if (CompareTag("Portal"))
+                if (CompareTag("PortalGroundCol"))
                 {
-                    CopySpawner(col.gameObject.GetComponent<Teleporter>().isForwardTeleporter ? 1 : 0, col);
+                    CopySpawner(col.gameObject.GetComponent<Teleporter>().isForwardTeleporter ? true : false, col);
+                }
+        }
+
+        private void OnTriggerExit(Collider col)
+        {
+            if (activated)
+                if (CompareTag("PortalGroundCol"))
+                {
+                    Destroy(thisObjCopy);
                 }
         }
 
         public void SetParentObject(GameObject parentObj)
         {
-            parentObject = parentObj;
+            mainObj = parentObj;
         }
 
         private void OnDestroy()
         {
-            if (!isParentObject && parentObject != null)
-                parentObject.GetComponent<InteractableObject>().copyExist = false;
+            if (!isParentObject && mainObj != null)
+                mainObj.GetComponent<InteractableObject>().copyExist = false;
         }
 
     }
