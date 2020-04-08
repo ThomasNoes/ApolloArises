@@ -2023,9 +2023,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sessionChecker: {fileID: 11400000, guid: d54543e9333b6004b942a37561991810, type: 2}
+  conditionChecker: {fileID: 0}
   companion1: {fileID: 0}
   companion2: {fileID: 0}
-  dataLogger: {fileID: 1796494441}
   testSceneIndexFrom: 1
   testSceneIndexTo: 3
 --- !u!4 &748636788
@@ -2934,6 +2934,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8129909324890793754, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9185601504404125415, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
