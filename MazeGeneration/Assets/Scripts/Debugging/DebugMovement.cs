@@ -38,6 +38,9 @@ public class DebugMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cam = transform.GetChild(0);
+
+        Transform tile = GameObject.Find("/MapManager/0 - Maze/Tile R0C0").transform;
+        transform.position = new Vector3(tile.position.x, transform.position.y,tile.position.z);
     }
 
     private void FixedUpdate()

@@ -36,6 +36,19 @@ public class GuardainCalibration : MonoBehaviour
         }
     }
 
+    public void DebugCalibration(out Vector3 center, out Vector3 forward)
+    {
+        float posX = Random.Range(-1.0f, 1.0f);
+        float posZ = Random.Range(-1.0f, 1.0f);
+        Debug.Log("posX: "+posX + " posZ: " + posZ);
+        float rotX = Random.Range(-1.0f, 1.0f);
+        float rotZ = Random.Range(-1.0f, 1.0f);
+
+        center = new Vector3(posX, transform.position.y, posZ);
+        forward = new Vector3(rotX,0, rotZ);
+    }
+
+
     public void Calibrate(out Vector3 center, out Vector3 forward)
     {
         points = GetBoundaryPoints();
@@ -45,11 +58,10 @@ public class GuardainCalibration : MonoBehaviour
 
         //cube.position = new Vector3(center.x, cube.position.y, center.z);
 
-       // cube.forward = center - forward;
+        //cube.forward = center - forward;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RoomScaling(float tileWidth, float bufferWidth = 0)
     {
 
     }
