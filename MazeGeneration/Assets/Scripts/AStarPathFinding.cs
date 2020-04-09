@@ -143,6 +143,7 @@ public  class AStarPathFinding : MonoBehaviour
             }
 
             tiles[i].SetAsAstarTile();
+            tiles[i].aStarId = i;
         }
     }
 
