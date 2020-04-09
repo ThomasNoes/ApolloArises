@@ -41,11 +41,11 @@ public class Room : MonoBehaviour
         {
             if (tiles[i].isAStarTile) // has to be an Astar tile
             {
-                if (tiles[i].prevDistance > closeToEntrance.prevDistance)
+                if (tiles[i].prevDistance < closeToEntrance.prevDistance)
                 {
                     closeToEntrance = tiles[i];
                 }
-                if (tiles[i].nextDistance > closeToExit.nextDistance)
+                if (tiles[i].nextDistance < closeToExit.nextDistance)
                 {
                     closeToExit = tiles[i];
                 }
