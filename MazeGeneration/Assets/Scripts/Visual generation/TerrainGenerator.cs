@@ -4,7 +4,7 @@
     public class TerrainGenerator : MonoBehaviour
     {
         // Variables:
-        public bool useNewPlacementMethod = false, useTextureSwitcherInEditor = false, useTextureSwitcherOnAndroid = true;
+        public bool useNewPlacementMethod = true, useTextureSwitcherInEditor = false, useTextureSwitcherOnAndroid = false;
         public float wallOffset = 0f, wallHeight = 1f, pillarScale = 1.5f;
         private float heightScale, wallWidth = 0.05f, tileScale;
 

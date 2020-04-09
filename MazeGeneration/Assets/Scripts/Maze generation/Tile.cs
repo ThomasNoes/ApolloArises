@@ -28,6 +28,7 @@ public class Tile : MonoBehaviour {
     public float tileWidth;
 
     //for A Star algorithm
+    public int aStarId;
     private int row;
     private int column;
     private int gCost = 0;
