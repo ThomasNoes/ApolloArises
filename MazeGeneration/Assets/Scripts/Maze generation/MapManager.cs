@@ -27,7 +27,7 @@ public class MapManager : MonoBehaviour
 
     GuardainCalibration gc;
     Vector3 center;
-    Vector3 forward = new Vector3(1,0,0);
+    Vector3 forward = new Vector3(0,0,1);
 
     public GameObject[] mazeGeneratorPrefab;
     public bool usePlayAreaCenter, roomScaleMaze;
