@@ -23,14 +23,25 @@ public class ItemSpawner : MonoBehaviour
 
     }
 
-    private void SpawnKey(int index)
+    private bool SpawnKey(int mazeIndex)
     {
         if (keyPrefab == null)
-            return;
+            return false;
 
-        //GameObject tempKey = Instantiate(doorPrefab, mapManager.deadEndList,
-        //            Quaternion.identity, room.exitTile.gameObject.transform);
+        if (mazeIndex - 1 >= 0)
+        {
+            for (int i = mapManager.deadEndList.Length - 1; i >= 0; i--)
+            {
+                GameObject tempKey = Instantiate(keyPrefab,
+                    mapManager.deadEndList[mazeIndex - 1][mapManager.deadEndList[mazeIndex - 1].Count - 1].transform
+                        .position,
+                    Quaternion.identity, transform);
+            }
+        }
+        else
+            return false;
 
+        return true;
     }
 
     private void DoorAndKeySpawner()
@@ -43,10 +54,11 @@ public class ItemSpawner : MonoBehaviour
         {
             if (counter == 0)
             {
-                GameObject tempDoor = Instantiate(doorPrefab, mapManager.roomList[i].exitTile.gameObject.transform.position,
-                    Quaternion.identity, mapManager.roomList[i].exitTile.gameObject.transform);
-
-                SpawnKey(i);
+                if (SpawnKey(mapManager.roomList[i].mazeID))
+                {
+                    GameObject tempDoor = Instantiate(doorPrefab, mapManager.roomList[i].exitTile.gameObject.transform.position,
+                                             Quaternion.identity, mapManager.roomList[i].exitTile.gameObject.transform);
+                }
             }
 
             counter = counter++ % spawnFrequency;
