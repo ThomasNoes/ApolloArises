@@ -2,6 +2,8 @@
 
 public class ItemSpawner : MonoBehaviour
 {
+    public bool enable = false;
+
     public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab;
     public bool spawnDoorsAndKeys = true, spawnPuzzleRobots = true;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
@@ -9,6 +11,9 @@ public class ItemSpawner : MonoBehaviour
 
     private void Start()
     {
+        if (!enable)
+            return;
+
         mapManager = GameObject.FindGameObjectWithTag("MapManager")?.GetComponent<MapManager>();
         if (mapManager == null)
             mapManager = FindObjectOfType<MapManager>();
