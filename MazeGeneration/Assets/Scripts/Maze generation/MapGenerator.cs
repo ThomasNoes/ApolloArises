@@ -40,10 +40,10 @@ public abstract class MapGenerator : MonoBehaviour
     }
 
     //I added this for debug purposes, we can remove it when we have a floor texture
-    void Update()
-    {
-        if (Input.GetKeyUp("b")) OpenAllDeadEnds();
-    }
+    //void Update()
+    //{
+    //    if (Input.GetKeyUp("b")) OpenAllDeadEnds();
+    //}
 
     public void GenerateIntArray()
     {
@@ -120,6 +120,29 @@ public abstract class MapGenerator : MonoBehaviour
             }
         }
         return deadEnd;
+    }
+
+    public List<Tile> UpdateDeadEndTileBools()
+    {
+        if (tileArray == null)
+        {
+            Debug.LogError("Error: Tile array not set yet! - Null ref");
+            return null;
+        }
+
+        List<int[]> deadEnds = GetDeadEndList();
+        List<Tile> returnList = new List<Tile>();
+
+        foreach (int[] deadEnd in deadEnds)
+        {
+            if (!tileArray[deadEnd[0], deadEnd[1]].isPortalTile)
+            {
+                tileArray[deadEnd[0], deadEnd[1]].isDeadEnd = true;
+                returnList.Add(tileArray[deadEnd[0], deadEnd[1]]);
+            }
+        }
+
+        return returnList;
     }
 
     public List<TileInfo> GetDeadEndListTileInfo()

@@ -14,7 +14,7 @@ public class DataLogger : MonoBehaviour
 {
     public DataHandler dataHandler;
     public AntiWallCollision wallCollision;
-    public GameObject mapManagerObj;
+    [HideInInspector] public GameObject mapManagerObj;
     private GameObject mapObj;
     public int conditionAmount = 3;
 
@@ -53,8 +53,15 @@ public class DataLogger : MonoBehaviour
             return;
 
         if (logPreferredWidth)
+        {
+            if (mapManagerObj == null)
+                mapManagerObj = GameObject.FindGameObjectWithTag("MapManager");
+            if (mapManagerObj == null)
+                mapManagerObj = FindObjectOfType<MapManager>().gameObject;
+
             if (mapManagerObj != null)
                 mapObj = mapManagerObj.transform.GetChild(0).gameObject;
+        }
 
         if (logTime)
             LogTimeStart();

@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7748457934529168358}
   - component: {fileID: 7748457934529168359}
+  - component: {fileID: 9105415572236804803}
   - component: {fileID: 7748457934529168361}
   m_Layer: 0
-  m_Name: TileGenerator
+  m_Name: VisualGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +58,24 @@ MonoBehaviour:
     type: 3}
   towerObj: {fileID: 8490072557984060639, guid: 69be8d700cef62047ad38c8d47c70c0c,
     type: 3}
+--- !u!114 &9105415572236804803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748457934529168356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2381cd58b3edf4187dc219e968bb6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyItemPrefab: {fileID: 0}
+  doorPrefab: {fileID: 4870544419900923797, guid: ab538789e638e604fb61f932939c0a7a,
+    type: 3}
+  spawnKeys: 0
+  spawnDoors: 1
+  spawnFrequency: 1
 --- !u!114 &7748457934529168361
 MonoBehaviour:
   m_ObjectHideFlags: 0

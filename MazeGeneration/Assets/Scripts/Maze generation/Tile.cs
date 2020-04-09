@@ -36,10 +36,10 @@ public class Tile : MonoBehaviour {
 
     //for room position
     public string RoomPosition = "Corridor";
-    public bool isRoomEntryTile =false;
+    public bool isRoomEntryTile = false;
 
     //tile type
-    public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof;
+    public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof, isDeadEnd;
     public int partOfMaze;
 
     void Awake () {

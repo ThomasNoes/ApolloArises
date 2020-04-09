@@ -50,7 +50,7 @@ public class MapManager : MonoBehaviour
 
     public int mazeRows;
     public int mazeCols;
-    public float tileWidth = 0.8f;
+    public float tileWidth = 0.7f;
     public int startRow;
     public int startCol;
 
@@ -62,6 +62,9 @@ public class MapManager : MonoBehaviour
     public PortalGenerationType portalGenerationLocation;
     public TileInfo[] portalInfo;
     public MapInfo[] mapSequence;
+
+    [HideInInspector] public List<Tile>[] deadEndList; // Every first index is maze segment, next is list of dead end tiles for that maze segment
+    [HideInInspector] public List<Room> roomList = new List<Room>();
 
     //debug
     Vector3 beforePos;
@@ -133,6 +136,7 @@ public class MapManager : MonoBehaviour
             {
                 //turn on again //r.DebugRoom();
                 r.CreateRoom();
+                roomList.Add(r);
             }
         }
         else 
@@ -163,13 +167,19 @@ public class MapManager : MonoBehaviour
             {
                 //turn on again //r.DebugRoom();
                 r.CreateRoom();
+                roomList.Add(r);
             }
         }
 
         //here each maze segment is set and this will start to instantiate the gameobject that make the maze
+        deadEndList = new List<Tile>[mapSequence.Length];
+        int counter = 0;
+
         foreach (MapGenerator mg in mapScripts)
         {
             mg.GenerateIntArray();
+            deadEndList[counter] = mg.UpdateDeadEndTileBools();
+            counter++;
         }
         OffsetMap();
     }
