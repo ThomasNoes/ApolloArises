@@ -46,6 +46,7 @@ public class GuardainCalibration : MonoBehaviour
 
         center = new Vector3(posX, transform.position.y, posZ);
         forward = new Vector3(rotX,0, rotZ);
+
     }
 
 
