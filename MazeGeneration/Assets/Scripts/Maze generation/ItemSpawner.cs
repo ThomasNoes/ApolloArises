@@ -31,8 +31,8 @@ public class ItemSpawner : MonoBehaviour
 
             if (spawnDoorsAndKeys)
                 DoorAndKeySpawner();
-            if (spawnPuzzleRobots)
-                PuzzleRobotSpawner();
+            //else if (spawnPuzzleRobots)
+            //    PuzzleRobotSpawner();
         }
     }
 
@@ -72,6 +72,9 @@ public class ItemSpawner : MonoBehaviour
         {
             if (counter == 0)
             {
+                if (room.mazeID == mapManager.mapSequence.Length - 1)
+                    break;
+
                 if (SpawnKey(room.mazeID))
                 {
                     Vector3 tilePosition = room.exitTile.gameObject.transform.position;
@@ -83,6 +86,9 @@ public class ItemSpawner : MonoBehaviour
 
                     tempDoor.transform.position = GetEdgePosition(room.exitTile, dir);
                     tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+
+                    if (spawnPuzzleRobots)
+                        PuzzleRobotSpawner(room);
                 }
             }
 
@@ -91,9 +97,30 @@ public class ItemSpawner : MonoBehaviour
 
     }
 
-    private void PuzzleRobotSpawner()
+    private void PuzzleRobotSpawner(Room room)
     {
-        // TODO - YYY
+        if (puzzleRobotPrefab == null)
+            return;
+
+        Tile tempTile = new Tile();
+
+        foreach (var tile in room.tiles)
+        {
+            if (!tile.isAStarTile)
+            {
+                tempTile = tile;
+            }
+        }
+
+        if (!tempTile.isRoomTile)
+            return;
+
+        // TODO: 
+        GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, tempTile.transform.position,
+            GetRotation(0), transform);
+        TestCompanion testCompanion = tempPuzzleRobot.GetComponent<TestCompanion>();
+        // testCompanion?.mainScreen.transform.localScale = YYY TODO
+
     }
 
     /// <summary>
