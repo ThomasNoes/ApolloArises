@@ -111,12 +111,12 @@ public class ItemSpawner : MonoBehaviour
         return Quaternion.identity;
     }
 
-    private Vector3 GetPosition(int dir)
-    {
-        switch (dir)
-        {
-            case 0:
+    //private Vector3 GetPosition(int dir)
+    //{
+    //    switch (dir)
+    //    {
+    //        case 0:
 
-        }
-    }
+    //    }
+    //}
 }
