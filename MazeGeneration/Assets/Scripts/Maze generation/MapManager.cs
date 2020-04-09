@@ -23,10 +23,14 @@ public class MapManager : MonoBehaviour
     public bool evaluationMaze = false;
     public GameObject gizmo;
     public TerrainGenerator terrainGenerator;
+
+
     GuardainCalibration gc;
+    Vector3 center;
+    Vector3 forward;
 
     public GameObject[] mazeGeneratorPrefab;
-    public bool usePlayAreaCenter, setDimensionsAutomatically;
+    public bool usePlayAreaCenter, roomScaleMaze;
     public MazePlacementType MazePlacement;
     public bool startMazeInOrigin;
     
@@ -71,23 +75,30 @@ public class MapManager : MonoBehaviour
     Vector3 beforeRot;
     Vector3 afterPos;
     Vector3 afterRot;
-    Vector3 center;
-    Vector3 forward;
 
     void Awake()
     {
-#if UNITY_ANDROID
-        if (!Application.isEditor)
-        {
-            playAreaSize = GetCameraRigSize();
 
-            if (setDimensionsAutomatically)
+        if (roomScaleMaze)
+        {
+            gc = GetComponent<GuardainCalibration>();
+            if (Application.isEditor)
             {
-                mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
-                mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
+                Debug.Log("Here");
+                gc.DebugCalibration(out center, out forward);
+
+            }
+            else
+            {
+                playAreaSize = GetCameraRigSize();
+                gc.Calibrate(out center, out forward);
+
+                //mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
+                //mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
             }
         }
-#endif
+
+
         if (terrainGenerator != null)
             if (terrainGenerator.useTextureSwitcherInEditor)
                 terrainGenerator.ResetTextures();
@@ -519,27 +530,20 @@ public class MapManager : MonoBehaviour
     {
         if (Application.isEditor)
         {
-            transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+            //transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
+
+            transform.position = center;
+            transform.forward = forward;
+
+            transform.Translate((-mazeCols * tileWidth / 2) / 2, 0, (mazeRows * tileWidth / 2) / 2, Space.Self);
         }
         else
         {
-            gc = GetComponent<GuardainCalibration>();
-
-            gc.Calibrate(out center, out forward);
-            beforePos = transform.position;
-            beforeRot = transform.rotation.eulerAngles;
             transform.forward = center - forward;
             transform.position = new Vector3(center.x, transform.position.y, center.z);
-            afterPos = transform.position;
-            afterRot = transform.rotation.eulerAngles;
-
-            //transform.Translate(transform.forward * (mazeCols * tileWidth / 2) / 2);
-            //transform.Translate(transform.right * (mazeRows * tileWidth / 2) / 2);
 
             transform.Translate((-mazeCols * tileWidth / 2) / 2, 0, (mazeRows * tileWidth / 2) / 2, Space.Self);
 
-            //Debug.Log("mapmanager center is "+transform.position);
-            //Debug.Log("mapmanager forward is " + transform.forward);
         }
     }
 
