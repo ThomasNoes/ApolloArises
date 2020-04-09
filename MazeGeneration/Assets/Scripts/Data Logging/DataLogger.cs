@@ -107,9 +107,9 @@ public class DataLogger : MonoBehaviour
 
         if (logTime)
         {
-            foreach (float time in loggedTimesData.values)
+            foreach (int time in loggedTimesData.values)
             {
-                dataList.Add(time.ToString(spec, ci));
+                dataList.Add(time.ToString());
             }
         }
 
