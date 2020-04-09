@@ -9,7 +9,8 @@ public class MapManager : MonoBehaviour
         OrderedAlongX,
         orderedAlongXProportionally,
         orderedDiagonally,
-        randomButIncreasesAlongY
+        randomButIncreasesAlongY,
+        Spiral
     }
     List<Vector3> spawnPoints = new List<Vector3>();
 
@@ -84,14 +85,14 @@ public class MapManager : MonoBehaviour
             gc = GetComponent<GuardainCalibration>();
             if (Application.isEditor)
             {
-                Debug.Log("Here");
                 gc.DebugCalibration(out center, out forward);
-
+                gc.RoomScaling(out mazeRows, out mazeCols, tileWidth, 0.3f,true);
             }
             else
             {
-                playAreaSize = GetCameraRigSize();
+                //playAreaSize = GetCameraRigSize();
                 gc.Calibrate(out center, out forward);
+                gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
 
                 //mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
                 //mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
@@ -231,6 +232,9 @@ public class MapManager : MonoBehaviour
                     break;
                 case MazePlacementType.randomButIncreasesAlongY:
                     PlaceRandomButIncreaseY(i, mapSequence.Length-1);
+                    break;
+                case MazePlacementType.Spiral:
+                    PlaceInSpiral(i, mapSequence.Length-1);
                     break;
                 default:
                     break;
@@ -668,6 +672,11 @@ public class MapManager : MonoBehaviour
         }
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], mapSpawnPoint, Quaternion.identity);
         spawnPoints.Add(mapSpawnPoint);
+    }
+
+    public void PlaceInSpiral(int index, int length)
+    {
+
     }
 
 }
