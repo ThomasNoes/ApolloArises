@@ -98,10 +98,12 @@ public class MapManager : MonoBehaviour
             }
         }
 
+        if (terrainGenerator == null)
+            terrainGenerator = FindObjectOfType<TerrainGenerator>();
 
-        if (terrainGenerator != null)
-            if (terrainGenerator.useTextureSwitcherInEditor)
-                terrainGenerator.ResetTextures();
+        //if (terrainGenerator != null)
+        //    if (terrainGenerator.useTextureSwitcherInEditor)
+        //        terrainGenerator.ResetTextures();
 
         if (evaluationMaze)
             mapSequence = new MapInfo[1] { mapSequence[0] };
