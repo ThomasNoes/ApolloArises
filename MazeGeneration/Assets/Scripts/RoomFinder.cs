@@ -91,6 +91,8 @@ public class RoomFinder : MonoBehaviour
             SetRoom(roomClockWise, roomCounterWise);
         }
 
+        //check if the 
+
         return roomExists;
     }
 
