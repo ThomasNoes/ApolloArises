@@ -73,11 +73,12 @@ MonoBehaviour:
   enable: 0
   keyPrefab: {fileID: 2383309507129550135, guid: 52af82ad4b9193449a93fa16ea974f63,
     type: 3}
-  doorPrefab: {fileID: 4870544419900923797, guid: ab538789e638e604fb61f932939c0a7a,
+  doorPrefab: {fileID: 906067179569708713, guid: 8f53d3f24dabbb54d95a6f46fc47b06a,
     type: 3}
   puzzleRobotPrefab: {fileID: 2319472639147113035, guid: 328afb4d478abb441bc4426898eb15fe,
     type: 3}
-  spawnDoorsAndKeys: 1
+  spawnDoors: 1
+  spawnKeysInDeadEnds: 1
   spawnPuzzleRobots: 1
   spawnFrequency: 1
 --- !u!114 &7748457934529168361

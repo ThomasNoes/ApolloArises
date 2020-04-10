@@ -91,11 +91,17 @@ public class ItemSpawner : MonoBehaviour
                         GetRotation(dir), transform);
 
                     tempDoor.transform.position = GetEdgePositionWall(room.exitTile, dir);
-                    tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
 
                     uniqueId++;
                     if (tempDoor.GetComponent<Door>() != null)
-                        tempDoor.GetComponent<Door>().uniqueId = uniqueId;
+                    {
+                        Door tempDoorScript = tempDoor.GetComponent<Door>();
+                        tempDoorScript.uniqueId = uniqueId;
+                        tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
+                            terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+                    }
+                    else
+                        tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
 
                     if (spawnPuzzleRobots)
                         PuzzleRobotSpawner(room, uniqueId);
@@ -181,7 +187,7 @@ public class ItemSpawner : MonoBehaviour
         }
 
         GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, GetEdgePositionGround(tempTiles[tileIndex], dir),
-            GetRotation((dir + 2) % 4), transform);
+            GetRotation(dir), transform);
         PuzzleRobot puzzleRobot = tempPuzzleRobot.GetComponent<PuzzleRobot>();
 
 
@@ -238,13 +244,13 @@ public class ItemSpawner : MonoBehaviour
         switch (dir)
         {
             case 0:
-                return Quaternion.Euler(0, 0, 0);
-            case 1:
-                return Quaternion.Euler(0, 90, 0);
-            case 2:
                 return Quaternion.Euler(0, 180, 0);
-            case 3:
+            case 1:
                 return Quaternion.Euler(0, 270, 0);
+            case 2:
+                return Quaternion.Euler(0, 0, 0);
+            case 3:
+                return Quaternion.Euler(0, 90, 0);
             default:
                 return Quaternion.identity;
         }

@@ -1,14 +1,34 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class Door : MonoBehaviour
 {
+    public GameObject doorMainObj, keyHoleObj;
     public int uniqueId;
     public bool useDelay;
     public float delay = 1.0f;
+    private bool doorControlBool;
+
+    private void Start()
+    {
+        if (keyHoleObj != null)
+        {
+            BoxCollider thisCollider = GetComponent<BoxCollider>();
+            thisCollider.size = keyHoleObj.transform.localScale;
+            thisCollider.center = keyHoleObj.transform.localPosition;
+        }
+        else if (doorMainObj != null)
+        {
+            BoxCollider thisCollider = GetComponent<BoxCollider>();
+            thisCollider.size = doorMainObj.transform.localScale;
+            thisCollider.center = doorMainObj.transform.localPosition;
+        }
+    }
 
     private void OpenDoor()
     {
-        // Debug.Log("Door " + uniqueId + " opened!");
+        // TODO: make door slide downwards
+        doorControlBool = true;
         gameObject.SetActive(false);
     }
 
@@ -31,5 +51,13 @@ public class Door : MonoBehaviour
                         Invoke("OpenDoor", delay);
                     }
             }
+    }
+
+    private void LateUpdate()
+    {
+        if (doorControlBool)
+        {
+
+        }
     }
 }
