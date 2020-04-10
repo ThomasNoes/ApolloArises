@@ -9,6 +9,9 @@ public class ItemSpawner : MonoBehaviour
     public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab;
     public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
+
+    public Material[] colourMaterials;
+
     private MapManager mapManager;
     private TerrainGenerator terrainGenerator;
 
@@ -57,7 +60,12 @@ public class ItemSpawner : MonoBehaviour
                     mapManager.deadEndList[i].RemoveAt(index);
 
                     if (tempKey.GetComponent<Key>() != null)
-                        tempKey.GetComponent<Key>().uniqueId = uniqueId + 1;
+                    {
+                        Key tempKeyScript = tempKey.GetComponent<Key>();
+                        tempKeyScript.uniqueId = uniqueId;
+                        tempKeyScript.colourMaterial = GetMaterialFromId(uniqueId);
+                    }
+
 
                     return true;
                 }
@@ -81,7 +89,7 @@ public class ItemSpawner : MonoBehaviour
                 if (room.mazeID == mapManager.mapSequence.Length - 1)
                     break;
 
-                if (SpawnKey(room.mazeID, uniqueId))
+                if (SpawnKey(room.mazeID, uniqueId + 1))
                 {
                     Vector3 tilePosition = room.exitTile.gameObject.transform.position;
 
@@ -99,6 +107,7 @@ public class ItemSpawner : MonoBehaviour
                         tempDoorScript.uniqueId = uniqueId;
                         tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
                             terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+                        tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
                     }
                     else
                         tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
@@ -201,6 +210,14 @@ public class ItemSpawner : MonoBehaviour
             puzzleRobot.uniqueId = uniqueId;
             puzzleRobot.SetVisualGeneratorObject(gameObject);
         }
+    }
+
+    private Material GetMaterialFromId(int id)
+    {
+        if (colourMaterials == null)
+            return new Material(Shader.Find("Standard"));
+
+        return colourMaterials.Length != 0 ? colourMaterials[(id - 1) % colourMaterials.Length] : new Material(Shader.Find("Standard"));
     }
 
     private int SuitableWallReturner(Tile tile)

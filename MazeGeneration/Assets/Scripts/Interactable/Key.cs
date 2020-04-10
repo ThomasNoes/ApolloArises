@@ -4,7 +4,7 @@
 public class Key : MonoBehaviour
 {
     public int uniqueId;
-    public Material[] colourMaterials;
+    public Material colourMaterial;
     private Renderer renderer;
 
     private void Start()
@@ -12,17 +12,13 @@ public class Key : MonoBehaviour
         GetComponent<SphereCollider>().isTrigger = true;
         renderer = GetComponent<Renderer>();
 
-        if (renderer != null && colourMaterials != null)
-            Invoke("DelayedStart", 0.5f);
+        if (renderer != null && colourMaterial != null)
+            Invoke("DelayedStart", 1.0f);
     }
 
     private void DelayedStart()
     {
-        if (colourMaterials.Length == 0)
-            return;
-
-        //int colourIndex = uniqueId % colourMaterials.Length;
-        //renderer.material = 
+        renderer.material = colourMaterial; // TODO, make work with new key texture (when it is done)
     }
 
     private void OnTriggerEnter(Collider col)

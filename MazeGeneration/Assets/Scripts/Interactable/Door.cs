@@ -3,10 +3,12 @@
 [RequireComponent(typeof(BoxCollider))]
 public class Door : MonoBehaviour
 {
+    public bool colourWholeDoor = true;
     public GameObject doorMainObj, keyHoleObj;
     public int uniqueId;
     public bool useDelay;
     public float delay = 1.0f;
+    [HideInInspector] public Material colourMaterial;
     private bool doorControlBool;
 
     private void Start()
@@ -22,6 +24,20 @@ public class Door : MonoBehaviour
             BoxCollider thisCollider = GetComponent<BoxCollider>();
             thisCollider.size = doorMainObj.transform.localScale;
             thisCollider.center = doorMainObj.transform.localPosition;
+        }
+
+        if (doorMainObj != null)
+            Invoke("DelayedStart", 1.0f);
+    }
+
+    private void DelayedStart()
+    {
+        if (colourWholeDoor)
+            doorMainObj.GetComponent<Renderer>().material = colourMaterial;
+        else
+        {
+            // TODO redo this at some point - not working currently
+            keyHoleObj.GetComponent<Renderer>().materials[2] = colourMaterial;
         }
     }
 

@@ -81,6 +81,16 @@ MonoBehaviour:
   spawnKeysInDeadEnds: 1
   spawnPuzzleRobots: 1
   spawnFrequency: 1
+  colourMaterials:
+  - {fileID: 2100000, guid: d0443b9c3f9f27d47acbdc3e23517000, type: 2}
+  - {fileID: 2100000, guid: dfd2f84af202ec4428ed50246ea9f6ae, type: 2}
+  - {fileID: 2100000, guid: 24da8163bb1c48f4c8627c4b67875709, type: 2}
+  - {fileID: 2100000, guid: e83bf3acc4bc3e84dbec3d30fca8d897, type: 2}
+  - {fileID: 2100000, guid: 5247b01c88055a245a6e7703ff480b73, type: 2}
+  - {fileID: 2100000, guid: fd78441d0db6ce248b8936dc9e9fe32a, type: 2}
+  - {fileID: 2100000, guid: df1ef2eb7008d4343962ae2bcd3aed47, type: 2}
+  - {fileID: 2100000, guid: c42d2207d001ab64599f92747eb0767e, type: 2}
+  - {fileID: 2100000, guid: 3ec3ebd322f1fed4b819b1846f584125, type: 2}
 --- !u!114 &7748457934529168361
 MonoBehaviour:
   m_ObjectHideFlags: 0
