@@ -7,7 +7,7 @@ public class ItemSpawner : MonoBehaviour
     public bool enable = false;
 
     public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab;
-    public bool spawnDoorsAndKeys = true, spawnPuzzleRobots = true;
+    public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
     private MapManager mapManager;
     private TerrainGenerator terrainGenerator;
@@ -30,13 +30,16 @@ public class ItemSpawner : MonoBehaviour
             if (terrainGenerator == null)
                 Debug.LogError("ERROR: Terrain generator is null on item spawner - could not be found");
 
-            if (spawnDoorsAndKeys)
+            if (spawnDoors)
                 DoorAndKeySpawner();
         }
     }
 
     private bool SpawnKey(int mazeIndex)
     {
+        if (!spawnKeysInDeadEnds)
+            return true;
+
         if (keyPrefab == null)
             return false;
 
