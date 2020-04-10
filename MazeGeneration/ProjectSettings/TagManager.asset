@@ -16,6 +16,7 @@ TagManager:
   - PortalGroundCol
   - PortalRenderCol
   - MapManager
+  - Key
   layers:
   - Default
   - TransparentFX
