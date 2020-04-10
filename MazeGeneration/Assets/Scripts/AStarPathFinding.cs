@@ -267,7 +267,7 @@ public  class AStarPathFinding : MonoBehaviour
         }
     }
 
-    public void DrawGizmo (Tile t, Color color, float scale = 0.5f)
+    public void DrawGizmo (Tile t, Color color, float scale = 0.25f)
     {
         if (gizmoPrefab == null)
         {

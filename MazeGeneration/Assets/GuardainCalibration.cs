@@ -40,15 +40,12 @@ public class GuardainCalibration : MonoBehaviour
     {
         float posX = Random.Range(-1.0f, 1.0f);
         float posZ = Random.Range(-1.0f, 1.0f);
-        Debug.Log("posX: "+posX + " posZ: " + posZ);
         float rotX = Random.Range(-1.0f, 1.0f);
         float rotZ = Random.Range(-1.0f, 1.0f);
 
         center = new Vector3(posX, transform.position.y, posZ);
         forward = new Vector3(rotX,0, rotZ);
-
     }
-
 
     public void Calibrate(out Vector3 center, out Vector3 forward)
     {
@@ -62,8 +59,35 @@ public class GuardainCalibration : MonoBehaviour
         //cube.forward = center - forward;
     }
 
-    public void RoomScaling(float tileWidth, float bufferWidth = 0)
+
+    public void RoomScaling(out int maxRows, out int maxColumns, float tileWidth, float bufferWidth = 0, bool debugging = false)
     {
+        float colLength=0;
+        float rowLength=0;
+
+        if (debugging)
+        {
+            colLength = 5;
+            rowLength = 3;
+        }
+        else
+        {
+            points = GetBoundaryPoints();
+
+            if (Vector3.Distance(points[0], points[1]) > Vector3.Distance(points[1], points[2]))
+            {
+                colLength = Vector3.Distance(points[0], points[1]);
+                rowLength = Vector3.Distance(points[1], points[2]);
+            }
+            else
+            {
+                colLength = Vector3.Distance(points[1], points[2]);
+                rowLength = Vector3.Distance(points[0], points[1]);
+            }
+        }
+        
+        maxRows = Mathf.FloorToInt((rowLength-2*bufferWidth) / tileWidth);
+        maxColumns = Mathf.FloorToInt((colLength-2*bufferWidth) / tileWidth);
 
     }
 
@@ -170,9 +194,19 @@ public class GuardainCalibration : MonoBehaviour
     private Vector3 CalculateForward(Vector3 center, Vector3[] points)
     {
         Vector3 forward = Vector3.zero;
-        Vector3 firstEdge = (points[0] + points[1]) / 2;
 
-        forward = Vector3.Lerp(points[0],points[1],0.5f);
+        Vector3 firstEdge = (points[0] + points[1]) / 2;
+        Vector3 secondEdge = (points[1] + points[2]) / 2;
+
+        // the edge closest to the center is also the widest.
+        if (Vector3.Distance(center, firstEdge) < Vector3.Distance(center, secondEdge))
+        {
+            forward = firstEdge;
+        }
+        else
+        {
+            forward = secondEdge;
+        }
         return forward;
     }
 }
