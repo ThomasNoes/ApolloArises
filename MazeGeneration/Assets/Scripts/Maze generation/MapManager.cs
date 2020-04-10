@@ -10,7 +10,7 @@ public class MapManager : MonoBehaviour
         orderedAlongXProportionally,
         orderedDiagonally,
         randomButIncreasesAlongY,
-        Spiral
+        Circle
     }
     List<Vector3> spawnPoints = new List<Vector3>();
 
@@ -235,8 +235,8 @@ public class MapManager : MonoBehaviour
                 case MazePlacementType.randomButIncreasesAlongY:
                     PlaceRandomButIncreaseY(i, mapSequence.Length-1);
                     break;
-                case MazePlacementType.Spiral:
-                    PlaceInSpiral(i, mapSequence.Length-1);
+                case MazePlacementType.Circle:
+                    PlaceInCircle(i, mapSequence.Length-1);
                     break;
                 default:
                     break;
@@ -676,9 +676,21 @@ public class MapManager : MonoBehaviour
         spawnPoints.Add(mapSpawnPoint);
     }
 
-    public void PlaceInSpiral(int index, int length)
+    public void PlaceInCircle(int index, int length)
     {
+        float openness = 1;
+        float distance = Mathf.Sqrt(mazeCols * mazeCols + mazeRows * mazeRows) * openness; // i treat the segment as a triablge and find the hypothenuse
 
+        float angle = 360 / length;
+
+        float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
+
+        Vector3 pos;
+        pos.x = center.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
+        pos.z = center.z + radius * Mathf.Cos(angle * index * Mathf.Deg2Rad);
+        pos.y = center.y;
+
+        tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], pos, Quaternion.identity);
     }
 
 }
