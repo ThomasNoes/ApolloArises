@@ -35,7 +35,7 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private bool SpawnKey(int mazeIndex)
+    private bool SpawnKey(int mazeIndex, int uniqueId)
     {
         if (!spawnKeysInDeadEnds)
             return true;
@@ -56,6 +56,9 @@ public class ItemSpawner : MonoBehaviour
                     GameObject tempKey = Instantiate(keyPrefab, spawnPos, Quaternion.identity, transform);
                     mapManager.deadEndList[i].RemoveAt(index);
 
+                    if (tempKey.GetComponent<Key>() != null)
+                        tempKey.GetComponent<Key>().uniqueId = uniqueId + 1;
+
                     return true;
                 }
             }
@@ -70,6 +73,7 @@ public class ItemSpawner : MonoBehaviour
             return;
 
         int counter = 0;
+        int uniqueId = 0;
         foreach (var room in mapManager.roomList)
         {
             if (counter == 0)
@@ -77,7 +81,7 @@ public class ItemSpawner : MonoBehaviour
                 if (room.mazeID == mapManager.mapSequence.Length - 1)
                     break;
 
-                if (SpawnKey(room.mazeID))
+                if (SpawnKey(room.mazeID, uniqueId))
                 {
                     Vector3 tilePosition = room.exitTile.gameObject.transform.position;
 
@@ -89,8 +93,12 @@ public class ItemSpawner : MonoBehaviour
                     tempDoor.transform.position = GetEdgePositionWall(room.exitTile, dir);
                     tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
 
+                    uniqueId++;
+                    if (tempDoor.GetComponent<Door>() != null)
+                        tempDoor.GetComponent<Door>().uniqueId = uniqueId;
+
                     if (spawnPuzzleRobots)
-                        PuzzleRobotSpawner(room);
+                        PuzzleRobotSpawner(room, uniqueId);
                 }
             }
 
@@ -139,7 +147,7 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private void PuzzleRobotSpawner(Room room)
+    private void PuzzleRobotSpawner(Room room, int uniqueId)
     {
         if (puzzleRobotPrefab == null)
             return;
@@ -181,9 +189,11 @@ public class ItemSpawner : MonoBehaviour
             Debug.LogError("Error: item spawner could not find puzzle robot script.");
         else
         {
-            Vector3 scaleVector = new Vector3(mapManager.tileWidth, mapManager.tileWidth, mapManager.tileWidth);
+            Vector3 scaleVector = new Vector3(mapManager.tileWidth, mapManager.tileWidth, puzzleRobot.mainScreenObj.transform.localScale.z);
             puzzleRobot.mainScreenObj.transform.localScale = scaleVector;
             puzzleRobot.headObj.transform.localScale = scaleVector;
+            puzzleRobot.uniqueId = uniqueId;
+            puzzleRobot.SetVisualGeneratorObject(gameObject);
         }
     }
 
