@@ -1,4 +1,4 @@
-﻿// Put this script on the main camera!
+﻿// Put this script on the main camera
 namespace Assets.Scripts.Camera
 {
     using UnityEngine;
@@ -16,9 +16,9 @@ namespace Assets.Scripts.Camera
         private LayerMask layerMask;
 
         public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
-        private bool prevInCamFrustum, nextInCamFrustum, currentDirection;
+        private bool prevInCamFrustum, nextInCamFrustum, currentDirection, tileDistanceSame;
         private int currentMaze = -1, mazeCount, prevScore, nextScore;
-        public float loopRepeatRate = 0.7f;
+        public float loopRepeatRate = 0.3f;
 
         private int mapSequenceLength;
 
@@ -71,16 +71,12 @@ namespace Assets.Scripts.Camera
 
             if (isForward) //looking at prev maze
             {
-                //followCamScriptLeft.offset = -1 * followCamScriptLeft.offset;
-                //followCamScriptRight.offset = -1 * followCamScriptRight.offset;
                 followCamScriptLeft.SetToNext();
                 followCamScriptRight.SetToNext();
                 pRController.SetProjectionQuads(true);
             }
             else
             {
-                //followCamScriptLeft.offset = -followCamScriptLeft.offset;
-                //followCamScriptRight.offset = -followCamScriptRight.offset;
                 followCamScriptLeft.SetToPrev();
                 followCamScriptRight.SetToPrev();
                 pRController.SetProjectionQuads(false);
@@ -156,12 +152,9 @@ namespace Assets.Scripts.Camera
 
         private void DistanceCheck()
         {
-            //nextScore = nextDistance;
-            //prevScore = prevDistance;
-
             RaycastHit hit;
 
-            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 10.0f, layerMask))
+            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 7.0f, layerMask))
             {
                 Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
@@ -169,11 +162,10 @@ namespace Assets.Scripts.Camera
                 {
                     nextScore = tempTile.nextDistance;
                     prevScore = tempTile.prevDistance;
+
+                    tileDistanceSame = nextScore == prevScore;
                 }
             }
-
-            //nextScore += Vector3.Distance(thisCamera.transform.position, currentNextPortal.transform.position) * 2.0f;
-            //prevScore += Vector3.Distance(thisCamera.transform.position, currentPrevPortal.transform.position) * 2.0f;
         }
 
 
@@ -233,5 +225,39 @@ namespace Assets.Scripts.Camera
 
             PositionSwitch(nextScore < prevScore);
         }
+
+        #region FasterAngleCheck
+        private void FixedUpdate()
+        {
+            if (tileDistanceSame)
+            {
+                AngleCheckOverride();
+            }
+        }
+
+        private void AngleCheckOverride()
+        {
+            Vector3 dirNext = currentNextPortal.transform.position - transform.position;
+            Vector3 dirPrev = currentPrevPortal.transform.position - transform.position;
+
+            if (Vector3.Angle(transform.forward, dirNext) <
+                Vector3.Angle(transform.forward, dirPrev))
+            {
+                if (currentDirection == false)
+                {
+                    PositionSwitchOverride(false);
+                    currentDirection = true;
+                }
+            }
+            else
+            {
+                if (currentDirection)
+                {
+                    PositionSwitchOverride(true);
+                    currentDirection = false;
+                }
+            }
+        }
+        #endregion
     }
 }

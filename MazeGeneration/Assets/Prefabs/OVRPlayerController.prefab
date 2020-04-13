@@ -642,7 +642,7 @@ MonoBehaviour:
   distanceCheck: 1
   rendererInViewCheck: 0
   useCameraAngle: 1
-  loopRepeatRate: 0.7
+  loopRepeatRate: 0.3
 --- !u!1 &5369379566299229997
 GameObject:
   m_ObjectHideFlags: 0
