@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 0
-  keyPrefab: {fileID: 2383309507129550135, guid: 52af82ad4b9193449a93fa16ea974f63,
+  keyPrefab: {fileID: 1816363879355849198, guid: e459ed1b6a664fb49afe45a21d88cd77,
     type: 3}
   doorPrefab: {fileID: 906067179569708713, guid: 8f53d3f24dabbb54d95a6f46fc47b06a,
     type: 3}

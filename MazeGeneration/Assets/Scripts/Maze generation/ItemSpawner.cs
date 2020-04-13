@@ -108,6 +108,7 @@ public class ItemSpawner : MonoBehaviour
                         tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
                             terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
                         tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
+                        tempDoorScript.height = terrainGenerator.wallHeight;
                     }
                     else
                         tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
