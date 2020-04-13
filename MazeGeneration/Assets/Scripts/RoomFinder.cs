@@ -87,11 +87,15 @@ public class RoomFinder : MonoBehaviour
         //check if a room exist and decide which room it is
         if (roomClockWise || roomCounterWise)
         {
-            roomExists = true;
             SetRoom(roomClockWise, roomCounterWise);
+
+            roomExists = NoOverlappingRoomCheck();
         }
 
-        //check if the 
+        if (roomExists)
+        {
+            SetAsPotentialRoom();
+        }
 
         return roomExists;
     }
@@ -295,6 +299,25 @@ public class RoomFinder : MonoBehaviour
         else if (roomCounterWise)
         {
             returnRoom = counterTiles;
+        }
+    }
+
+    private bool NoOverlappingRoomCheck()
+    {
+        foreach (Tile t in returnRoom)
+        {
+            if (t.GetIsPartOfPotentialRoom())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    private void SetAsPotentialRoom()
+    {
+        foreach ( Tile t in returnRoom)
+        {
+            t.SetIsPartOfPotentialRoom(true);
         }
     }
 

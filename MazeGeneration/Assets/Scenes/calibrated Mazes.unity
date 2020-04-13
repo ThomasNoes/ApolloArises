@@ -1178,7 +1178,7 @@ MonoBehaviour:
   - {fileID: 2500389178016090726, guid: 3767eab88ce28c4448bbd26f359914bc, type: 3}
   usePlayAreaCenter: 1
   roomScaleMaze: 1
-  MazePlacement: 3
+  MazePlacement: 4
   startMazeInOrigin: 0
   createRooms: 1
   idealDistanceBetweenRooms: 7
