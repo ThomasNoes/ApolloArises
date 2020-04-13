@@ -236,7 +236,7 @@ public class MapManager : MonoBehaviour
                     PlaceRandomButIncreaseY(i, mapSequence.Length-1);
                     break;
                 case MazePlacementType.Circle:
-                    PlaceInCircle(i, mapSequence.Length-1);
+                    PlaceInCircle(i, mapSequence.Length);
                     break;
                 default:
                     break;
@@ -688,7 +688,7 @@ public class MapManager : MonoBehaviour
         Vector3 pos;
         pos.x = center.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
         pos.z = center.z + radius * Mathf.Cos(angle * index * Mathf.Deg2Rad);
-        pos.y = center.y;
+        pos.y = index;
 
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], pos, Quaternion.identity);
     }

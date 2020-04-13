@@ -38,6 +38,7 @@ public class Tile : MonoBehaviour {
     //for room position
     public string RoomPosition = "Corridor";
     public bool isRoomEntryTile = false;
+    private bool isPartOfPotentialRoom = false;
 
     //tile type
     public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof, isDeadEnd;
@@ -263,6 +264,17 @@ public class Tile : MonoBehaviour {
             return false;
         }
     }
+
+    public void SetIsPartOfPotentialRoom(bool b)
+    {
+        isPartOfPotentialRoom = b;
+    }
+
+    public bool GetIsPartOfPotentialRoom()
+    {
+        return isPartOfPotentialRoom;
+    }
+
 
     //private void OnTriggerEnter(Collider col)
     //{
