@@ -9,6 +9,9 @@ public class ItemSpawner : MonoBehaviour
     public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab;
     public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
+
+    public Material[] colourMaterials;
+
     private MapManager mapManager;
     private TerrainGenerator terrainGenerator;
 
@@ -57,7 +60,12 @@ public class ItemSpawner : MonoBehaviour
                     mapManager.deadEndList[i].RemoveAt(index);
 
                     if (tempKey.GetComponent<Key>() != null)
-                        tempKey.GetComponent<Key>().uniqueId = uniqueId + 1;
+                    {
+                        Key tempKeyScript = tempKey.GetComponent<Key>();
+                        tempKeyScript.uniqueId = uniqueId;
+                        tempKeyScript.colourMaterial = GetMaterialFromId(uniqueId);
+                    }
+
 
                     return true;
                 }
@@ -81,7 +89,7 @@ public class ItemSpawner : MonoBehaviour
                 if (room.mazeID == mapManager.mapSequence.Length - 1)
                     break;
 
-                if (SpawnKey(room.mazeID, uniqueId))
+                if (SpawnKey(room.mazeID, uniqueId + 1))
                 {
                     Vector3 tilePosition = room.exitTile.gameObject.transform.position;
 
@@ -91,11 +99,19 @@ public class ItemSpawner : MonoBehaviour
                         GetRotation(dir), transform);
 
                     tempDoor.transform.position = GetEdgePositionWall(room.exitTile, dir);
-                    tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
 
                     uniqueId++;
                     if (tempDoor.GetComponent<Door>() != null)
-                        tempDoor.GetComponent<Door>().uniqueId = uniqueId;
+                    {
+                        Door tempDoorScript = tempDoor.GetComponent<Door>();
+                        tempDoorScript.uniqueId = uniqueId;
+                        tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
+                            terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+                        tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
+                        tempDoorScript.height = terrainGenerator.wallHeight;
+                    }
+                    else
+                        tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
 
                     if (spawnPuzzleRobots)
                         PuzzleRobotSpawner(room, uniqueId);
@@ -181,7 +197,7 @@ public class ItemSpawner : MonoBehaviour
         }
 
         GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, GetEdgePositionGround(tempTiles[tileIndex], dir),
-            GetRotation((dir + 2) % 4), transform);
+            GetRotation(dir), transform);
         PuzzleRobot puzzleRobot = tempPuzzleRobot.GetComponent<PuzzleRobot>();
 
 
@@ -195,6 +211,14 @@ public class ItemSpawner : MonoBehaviour
             puzzleRobot.uniqueId = uniqueId;
             puzzleRobot.SetVisualGeneratorObject(gameObject);
         }
+    }
+
+    private Material GetMaterialFromId(int id)
+    {
+        if (colourMaterials == null)
+            return new Material(Shader.Find("Standard"));
+
+        return colourMaterials.Length != 0 ? colourMaterials[(id - 1) % colourMaterials.Length] : new Material(Shader.Find("Standard"));
     }
 
     private int SuitableWallReturner(Tile tile)
@@ -238,13 +262,13 @@ public class ItemSpawner : MonoBehaviour
         switch (dir)
         {
             case 0:
-                return Quaternion.Euler(0, 0, 0);
-            case 1:
-                return Quaternion.Euler(0, 90, 0);
-            case 2:
                 return Quaternion.Euler(0, 180, 0);
-            case 3:
+            case 1:
                 return Quaternion.Euler(0, 270, 0);
+            case 2:
+                return Quaternion.Euler(0, 0, 0);
+            case 3:
+                return Quaternion.Euler(0, 90, 0);
             default:
                 return Quaternion.identity;
         }
