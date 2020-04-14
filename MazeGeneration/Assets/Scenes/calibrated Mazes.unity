@@ -589,9 +589,9 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: f3bc7eefbd68b254381e706a3d4a20c2, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 0
-  m_AllowDynamicResolution: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -712,9 +712,9 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: 292cba9a5b7af684d90ded3fdf5b08d4, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 0
-  m_AllowDynamicResolution: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1186,11 +1186,11 @@ MonoBehaviour:
   mapScripts: []
   playerHead: {fileID: 2526136163395224742}
   mazeRows: 3
-  mazeCols: 4
-  tileWidth: 0.5
+  mazeCols: 3
+  tileWidth: 0.8
   startRow: 0
   startCol: 0
-  playAreaSize: {x: 4, y: 0, z: 4}
+  playAreaSize: {x: 3, y: 0, z: 3}
   isMapSeeded: 0
   randomGeneratorSeed: 0
   portalGenerationLocation: 1
@@ -1840,6 +1840,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ClearFlags
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc399f754a05a8c4798ce883a14677f8, type: 3}
