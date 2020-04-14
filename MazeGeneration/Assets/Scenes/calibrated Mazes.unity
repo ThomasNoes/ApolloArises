@@ -589,9 +589,9 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: f3bc7eefbd68b254381e706a3d4a20c2, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_HDR: 0
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -712,9 +712,9 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: 292cba9a5b7af684d90ded3fdf5b08d4, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_HDR: 0
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
