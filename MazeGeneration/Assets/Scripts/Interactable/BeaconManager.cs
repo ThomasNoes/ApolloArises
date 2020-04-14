@@ -6,13 +6,15 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
+[RequireComponent(typeof(LineRenderer))]
 public class BeaconManager : MonoBehaviour
 {
     public List<Beacon> beacons = new List<Beacon>();
+    private LineRenderer lineRenderer;
 
     private void Start()
     {
-        
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     public void ConnectNextBeacon()
@@ -25,23 +27,36 @@ public class BeaconManager : MonoBehaviour
                 beacons[i].LightBeacon();
 
                 if (i > 0)
-                    ConnectBeam(beacons[i], beacons[i - 1]);
+                    ConnectBeam(i, i - 1);
 
                 break;
             }
         }
     }
 
-    private void ConnectBeam(Beacon to, Beacon from)
+    private void ConnectBeam(int indexTo, int indexFrom)
     {
-        Debug.Log("Beacon on " + from.gameObject.name + " is connected to " + to.gameObject.name);
-        from.connectedToForward = to;
-        to.connectedToBack = from;
+        Debug.Log("Beacon on " + beacons[indexFrom].gameObject.name + " is connected to " + beacons[indexTo].gameObject.name);
+        beacons[indexFrom].connectedToForward = beacons[indexTo];
+        beacons[indexTo].connectedToBack = beacons[indexFrom];
+
+        lineRenderer.positionCount++;
+
+        if (beacons[indexFrom].light != null && beacons[indexTo].light != null)
+        {
+            lineRenderer.SetPosition(indexFrom, beacons[indexFrom].light.transform.position);
+            lineRenderer.SetPosition(indexTo, beacons[indexTo].light.transform.position);
+        }
+        else
+        {
+            lineRenderer.SetPosition(indexFrom, beacons[indexFrom].gameObject.transform.position);
+            lineRenderer.SetPosition(indexTo, beacons[indexTo].gameObject.transform.position);
+        }
     }
 
     public void DisconnectNextBeacon()
     {
-
+        // TODO: not yet implemented - will be implemented if needed.
     }
 }
 

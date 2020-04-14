@@ -6,10 +6,14 @@ public class Beacon : MonoBehaviour
 {
     public bool isActive;
     public Beacon connectedToBack, connectedToForward;
+    public GameObject light;
     private BeaconManager beaconManager;
 
     private void Start()
     {
+        if (light != null)
+            light.SetActive(false);
+
         beaconManager = GetComponent<BeaconManager>();
 
         if (beaconManager == null)
@@ -22,6 +26,8 @@ public class Beacon : MonoBehaviour
     public void LightBeacon()
     {
         Debug.Log("Beacon on " + gameObject.name + " is lit!");
-        // TODO turn on some effect
+        
+        if (light != null)
+            light.SetActive(true);
     }
 }
