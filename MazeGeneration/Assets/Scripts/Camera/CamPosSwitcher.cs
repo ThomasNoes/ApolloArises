@@ -15,7 +15,7 @@ namespace Assets.Scripts.Camera
 
         private LayerMask layerMask;
 
-        public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true;
+        public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true, fastAngleChecks = true;
         private bool prevInCamFrustum, nextInCamFrustum, currentDirection, tileDistanceSame;
         private int currentMaze = -1, mazeCount, prevScore, nextScore;
         public float loopRepeatRate = 0.3f;
@@ -229,10 +229,11 @@ namespace Assets.Scripts.Camera
         #region FasterAngleCheck
         private void FixedUpdate()
         {
-            if (tileDistanceSame)
-            {
-                AngleCheckOverride();
-            }
+            if (fastAngleChecks)
+                if (tileDistanceSame)
+                {
+                    AngleCheckOverride();
+                }
         }
 
         private void AngleCheckOverride()
