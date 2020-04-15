@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(BoxCollider), typeof(AudioSource))]
 public class Door : MonoBehaviour
 {
     public bool colourWholeDoor = true;
@@ -12,11 +13,13 @@ public class Door : MonoBehaviour
     public int uniqueId;
     public bool useDelay;
     public float delay = 1.0f, moveSpeed = 1.0f, height;
+    public AudioClip unlockSound, openSound;
     [HideInInspector] public Material colourMaterial;
 
     private bool doorControlBool;
     private Vector3 startPos, endPos;
     private float fraction;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -38,6 +41,7 @@ public class Door : MonoBehaviour
 
         startPos = transform.position;
         endPos = new Vector3(transform.position.x, transform.position.y - (height - 0.02f), transform.position.z);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void DelayedStart()
@@ -50,7 +54,7 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        doorControlBool = true;
+        StartCoroutine(PlayDoorSoundWithDelay());
         //gameObject.SetActive(false);
     }
 
@@ -85,6 +89,23 @@ public class Door : MonoBehaviour
                 transform.position = Vector3.Lerp(startPos, endPos, fraction);
             }
         }
+    }
+
+    private IEnumerator PlayDoorSoundWithDelay()
+    {
+        PlaySound(unlockSound);
+        yield return new WaitForSeconds(0.6f);
+        doorControlBool = true;
+        PlaySound(openSound);
+    }
+
+    private void PlaySound(AudioClip audioClip)
+    {
+        if (audioClip == null || audioSource == null)
+            return;
+
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 }
 

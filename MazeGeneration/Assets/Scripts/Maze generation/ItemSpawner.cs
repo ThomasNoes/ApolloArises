@@ -28,6 +28,9 @@ public class ItemSpawner : MonoBehaviour
         {
             terrainGenerator = mapManager.terrainGenerator;
 
+            transform.rotation = mapManager.gameObject.transform.rotation;
+            transform.position = mapManager.gameObject.transform.position;
+
             if (terrainGenerator == null)
                 terrainGenerator = FindObjectOfType<TerrainGenerator>();
             if (terrainGenerator == null)
@@ -96,9 +99,10 @@ public class ItemSpawner : MonoBehaviour
                     int dir = DirectionCheckerNext(room.exitTile, room.mazeID);
 
                     GameObject tempDoor = Instantiate(doorPrefab, tilePosition,
-                        GetRotation(dir), transform);
+                        transform.rotation, transform);
 
-                    tempDoor.transform.position = GetEdgePositionWall(room.exitTile, dir);
+                    tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir));
+                    tempDoor.transform.Rotate(GetEulerRotation(dir));
 
                     uniqueId++;
                     if (tempDoor.GetComponent<Door>() != null)
@@ -155,8 +159,11 @@ public class ItemSpawner : MonoBehaviour
                 Tile tempTile = mapManager.deadEndList[inMazeIndex][0];
                 int dir = SuitableWallReturner(tempTile);
 
-                GameObject tempObj = Instantiate(objToSpawn, GetEdgePositionWall(tempTile, dir), GetRotation((dir + 2) % 4), transform);
+                GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, transform);
                 tempObj.transform.localScale = new Vector3(mapManager.tileWidth, mapManager.tileWidth, mapManager.tileWidth);
+
+                tempObj.transform.Rotate(GetEulerRotation((dir + 2) % 4));
+                tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir));
 
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
             }
@@ -196,10 +203,12 @@ public class ItemSpawner : MonoBehaviour
                 break;
         }
 
-        GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, GetEdgePositionGround(tempTiles[tileIndex], dir),
-            GetRotation(dir), transform);
+        GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, tempTiles[tileIndex].transform.position,
+            transform.rotation, transform);
         PuzzleRobot puzzleRobot = tempPuzzleRobot.GetComponent<PuzzleRobot>();
 
+        tempPuzzleRobot.transform.Translate(GetEdgePositionGround(tempTiles[tileIndex], dir));
+        tempPuzzleRobot.transform.Rotate(GetEulerRotation(dir));
 
         if (puzzleRobot == null)
             Debug.LogError("Error: item spawner could not find puzzle robot script.");
@@ -257,7 +266,7 @@ public class ItemSpawner : MonoBehaviour
         return -1;
     }
 
-    private Quaternion GetRotation(int dir)
+    private Quaternion GetQuaternionRotation(int dir)
     {
         switch (dir)
         {
@@ -273,6 +282,22 @@ public class ItemSpawner : MonoBehaviour
                 return Quaternion.identity;
         }
     }
+    private Vector3 GetEulerRotation(int dir)
+    {
+        switch (dir)
+        {
+            case 0:
+                return new Vector3(0, 180, 0);
+            case 1:
+                return new Vector3(0, 270, 0);
+            case 2:
+                return new Vector3(0, 0, 0);
+            case 3:
+                return new Vector3(0, 90, 0);
+            default:
+                return new Vector3(0,0,0);
+        }
+    }
 
     /// <param name="dir">0: up, 1: right, 2: down, 3: left</param>
     private Vector3 GetEdgePositionWall(Tile tile, int dir)
@@ -282,13 +307,13 @@ public class ItemSpawner : MonoBehaviour
         switch (dir)
         {
             case 0:
-                return new Vector3(tile.transform.position.x, tile.transform.position.y + terrainGenerator.wallHeight / 2.0f, tile.transform.position.z + (tileWidth / 2.0f));
+                return new Vector3(0, terrainGenerator.wallHeight / 2.0f, tileWidth / 2.0f);
             case 1:
-                return new Vector3(tile.transform.position.x + (tileWidth / 2.0f), tile.transform.position.y + terrainGenerator.wallHeight / 2.0f, tile.transform.position.z);
+                return new Vector3(tileWidth / 2.0f, terrainGenerator.wallHeight / 2.0f, 0);
             case 2:
-                return new Vector3(tile.transform.position.x, tile.transform.position.y + terrainGenerator.wallHeight / 2.0f, tile.transform.position.z - (tileWidth / 2.0f));
+                return new Vector3(0, terrainGenerator.wallHeight / 2.0f, -tileWidth / 2.0f);
             case 3:
-                return new Vector3(tile.transform.position.x - (tileWidth / 2.0f), tile.transform.position.y + terrainGenerator.wallHeight / 2.0f, tile.transform.position.z);
+                return new Vector3(-tileWidth / 2.0f, terrainGenerator.wallHeight / 2.0f, 0);
             default:
                 return new Vector3(0,0,0);
         }
@@ -302,13 +327,13 @@ public class ItemSpawner : MonoBehaviour
         switch (dir)
         {
             case 0:
-                return new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z - (tileWidth / 2.8f));
+                return new Vector3(0, 0, - tileWidth / 2.8f);
             case 1:
-                return new Vector3(tile.transform.position.x + (tileWidth / 2.8f), tile.transform.position.y, tile.transform.position.z);
+                return new Vector3(tileWidth / 2.8f, 0, 0);
             case 2:
-                return new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z + -(tileWidth / 2.8f));
+                return new Vector3(0, 0, tileWidth / 2.8f);
             case 3:
-                return new Vector3(tile.transform.position.x - (tileWidth / 2.8f), tile.transform.position.y, tile.transform.position.z);
+                return new Vector3(-tileWidth / 2.8f, 0, 0);
             default:
                 return new Vector3(0, 0, 0);
         }
