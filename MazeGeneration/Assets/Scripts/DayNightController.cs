@@ -5,17 +5,17 @@ public class DayNightController : MonoBehaviour
     public Material skyboxMaterial;
     public bool cycleActive = false, cycleAroundX = false, cycleSunHorizon = true;
     public float speed = 0.1f, sunHeightLimit = 20.0f, exposureModifier = 0.015f;
+    public Color startColor = Color.gray, endColor = Color.blue; 
 
     private float skyboxAngleZ, skyboxAngleX, skyboxExposure;
     private Color skyboxTintLevel;
-    private bool goingUp = true, underLimit, stopAtTop;
+    private bool goingUp = true, underLimit, stopAtTop, changingTint;
 
     void Start()
     {
         if (skyboxMaterial == null)
             return;
 
-        // skyboxTintLevel = skyboxMaterial.GetColor("_Tint");
         skyboxAngleZ = 0.0f;
         skyboxAngleX = 205.0f;
         skyboxExposure = 1.0f;
@@ -23,6 +23,7 @@ public class DayNightController : MonoBehaviour
         skyboxMaterial.SetFloat("_RotationZ", skyboxAngleZ);
         skyboxMaterial.SetFloat("_RotationX", skyboxAngleX);
         skyboxMaterial.SetFloat("_Exposure", skyboxExposure);
+        skyboxMaterial.SetColor("_Tint", startColor);
     }
 
     void LateUpdate()
@@ -32,8 +33,6 @@ public class DayNightController : MonoBehaviour
             if (skyboxMaterial == null)
                 return;
 
-            // skyboxMaterial.SetColor("_Tint", skyboxTintLevel);
-
             if (cycleSunHorizon)
             {
                 skyboxMaterial.SetFloat("_RotationZ", skyboxAngleZ);
@@ -41,8 +40,10 @@ public class DayNightController : MonoBehaviour
             }
 
             if (cycleAroundX)
+            {
                 skyboxMaterial.SetFloat("_RotationX", skyboxAngleX);
-
+                skyboxAngleX += Time.deltaTime * speed % 360;
+            }
 
             if (cycleSunHorizon)
             {
@@ -85,7 +86,10 @@ public class DayNightController : MonoBehaviour
                 }
             }
 
-            skyboxAngleX += Time.deltaTime * speed % 360;
+            if (changingTint)
+            {
+                skyboxMaterial.SetColor("_Tint", Color.Lerp(startColor, endColor, Time.deltaTime * speed));
+            }
 
         }
     }
@@ -94,5 +98,11 @@ public class DayNightController : MonoBehaviour
     {
         cycleActive = true;
         stopAtTop = _stopAtTop;
+    }
+
+    public void StartSkyboxAndTintChange(bool _stopAtTop)
+    {
+        changingTint = true;
+        StartSkybox(_stopAtTop);
     }
 }
