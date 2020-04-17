@@ -5,13 +5,14 @@ using UnityEngine.UI;
 public class Companion : MonoBehaviour
 {
     public float rotateSpeed = 1.0f, blinkDuration = 0.5f, blinkFrequency = 5.0f;
-    public bool enableBlinking = true, alwaysLookAtPlayer;
+    public bool enableBlinking = true, lookAtPlayer;
     public GameObject headObj, frameObj;
     public Image faceImage;
     public Sprite openEyes, closedEyes;
 
     private GameObject mainCamObj;
     private WaitForSeconds blinkDur, blinkFreq;
+    private bool isMoving;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class Companion : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (mainCamObj == null || !alwaysLookAtPlayer)
+        if (mainCamObj == null || !lookAtPlayer || isMoving)
             return;
 
         Vector3 targetDirection = mainCamObj.transform.position - headObj.transform.position;
