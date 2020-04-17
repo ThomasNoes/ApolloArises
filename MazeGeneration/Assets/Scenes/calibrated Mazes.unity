@@ -1179,7 +1179,7 @@ MonoBehaviour:
   - {fileID: 2500389178016090726, guid: 3767eab88ce28c4448bbd26f359914bc, type: 3}
   usePlayAreaCenter: 1
   roomScaleMaze: 0
-  MazePlacement: 0
+  MazePlacement: 4
   startMazeInOrigin: 0
   createRooms: 1
   idealDistanceBetweenRooms: 7
@@ -1197,6 +1197,258 @@ MonoBehaviour:
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
   - mapType: 0
     roomName: 
     isEndSeeded: 0
@@ -1423,6 +1675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e15d917da568bf47af1cff13e26b5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
