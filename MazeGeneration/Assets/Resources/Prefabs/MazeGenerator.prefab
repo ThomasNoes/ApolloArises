@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6700716075161373836}
   - component: {fileID: 6700716075161373837}
-  - component: {fileID: 1533870853277332830}
   m_Layer: 0
   m_Name: MazeGenerator
   m_TagString: Untagged
@@ -50,16 +49,4 @@ MonoBehaviour:
   tilePrefab: {fileID: 740540993216588661, guid: 702190ff65c258e46ab3fd7d688505b2,
     type: 3}
   aStarTiles: []
---- !u!114 &1533870853277332830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6700716075161373839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef922eea74182494e85b87d45b6b8305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isActive: 0
+  mazeCount: 0

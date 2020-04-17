@@ -7,39 +7,45 @@ public class Beacon : MonoBehaviour
     public bool isActive;
     public Beacon connectedToBack, connectedToForward;
     public GameObject orb;
-    private Material orbMaterial;
+    private Renderer orbRenderer;
+    private Animator animator;
     private BeaconManager beaconManager;
+    private Color startColor, endColor;
 
     private void Start()
     {
-        if (orb != null)
-        {
-            orbMaterial = orb.GetComponent<Material>();
-
-            if (orbMaterial != null)
-            {
-                orbMaterial.DisableKeyword("_EMISSION");
-                orbMaterial.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
-                orbMaterial.SetColor("_EmissionColor", Color.black);
-            }
-        }
-
+        animator = GetComponent<Animator>();
         beaconManager = GetComponent<BeaconManager>();
 
         if (beaconManager == null)
             beaconManager = FindObjectOfType<BeaconManager>();
 
-        if (beaconManager != null)
+        if (orb != null && beaconManager != null)
+        {
+            orbRenderer = orb.GetComponent<Renderer>();
             beaconManager.beacons.Add(this);
+
+            if (orbRenderer != null)
+            {
+                orbRenderer.material.DisableKeyword("_EMISSION");
+                orbRenderer.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+                orbRenderer.material.SetColor("_EmissionColor", beaconManager.orbStartEmission);
+                Debug.Log("Should work!");
+            }
+        }
     }
 
     public void LightBeacon()
     {
         Debug.Log("Beacon on " + gameObject.name + " is lit!");
+        animator?.SetBool("Close", true);
 
-        if (orb != null)
+        if (orbRenderer != null && beaconManager != null)
         {
-            // TODO
+            orbRenderer.material.EnableKeyword("_EMISSION");
+            orbRenderer.material.SetColor("_EmissionColor", beaconManager.orbEndEmission);
+
+            Debug.Log("Should still work!");
         }
     }
 }

@@ -43,23 +43,26 @@ public class BeaconManager : MonoBehaviour
         beacons[indexFrom].connectedToForward = beacons[indexTo];
         beacons[indexTo].connectedToBack = beacons[indexFrom];
 
+        StartCoroutine(DelayedLineRender(indexTo, indexFrom));
+    }
+
+    private IEnumerator DelayedLineRender(int indexTo, int indexFrom)
+    {
+        yield return new WaitForSeconds(6.5f);
+
         lineRenderer.positionCount++;
 
         if (beacons[indexFrom].orb != null && beacons[indexTo].orb != null)
         {
             lineRenderer.SetPosition(indexFrom, beacons[indexFrom].orb.transform.position);
             lineRenderer.SetPosition(indexTo, beacons[indexTo].orb.transform.position);
+
         }
         else
         {
             lineRenderer.SetPosition(indexFrom, beacons[indexFrom].gameObject.transform.position);
             lineRenderer.SetPosition(indexTo, beacons[indexTo].gameObject.transform.position);
         }
-    }
-
-    public void DisconnectNextBeacon()
-    {
-        // TODO: not yet implemented - will be implemented if needed.
     }
 }
 

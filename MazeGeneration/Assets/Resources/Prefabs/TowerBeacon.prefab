@@ -329,6 +329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 331872190995217579}
   - component: {fileID: 4747285700850751411}
+  - component: {fileID: 6696552269238003152}
   m_Layer: 0
   m_Name: TowerBeacon
   m_TagString: Untagged
@@ -375,6 +376,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6696552269238003152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3657013225830960824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef922eea74182494e85b87d45b6b8305, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isActive: 0
+  connectedToBack: {fileID: 0}
+  connectedToForward: {fileID: 0}
+  orb: {fileID: 3551180829058551758}
 --- !u!1 &7124828779084846818
 GameObject:
   m_ObjectHideFlags: 0
