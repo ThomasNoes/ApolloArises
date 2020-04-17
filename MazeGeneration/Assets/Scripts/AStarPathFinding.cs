@@ -48,7 +48,27 @@ public  class AStarPathFinding : MonoBehaviour
         return aStarTiles;
     }
 
-    private void FindPath()
+    public List<Tile> NPCPathFinding(Tile[,] tileArray, Tile start, Tile goal, bool startIsPortal = true, bool goalIsPortal = true)
+    {
+        this.tileArray = tileArray;
+        this.start = start;
+        this.goal = goal;
+
+        SetHCosts(tileArray); // the distance each tile has to the goal should not change. so here i set them all. 
+
+        openTiles.Add(start);
+
+        while (openTiles.Count > 0)
+        {
+            FindPath(false);
+        }
+
+
+        return aStarTiles;
+    }
+
+
+        private void FindPath(bool approval = true)
     {
         Tile current = FindLowestFTile(openTiles);
         openTiles.Remove(current);
@@ -57,7 +77,7 @@ public  class AStarPathFinding : MonoBehaviour
 
         if (current == goal)
         {
-            aStarTiles = RetracePath(start, goal);
+            aStarTiles = RetracePath(start, goal, approval);
             return;
         }
 
@@ -111,7 +131,7 @@ public  class AStarPathFinding : MonoBehaviour
         }
     }
 
-    private List<Tile> RetracePath(Tile start, Tile goal)
+    private List<Tile> RetracePath(Tile start, Tile goal, bool approval)
     {
         List<Tile> path = new List<Tile>();
         Tile current = goal;
@@ -124,7 +144,10 @@ public  class AStarPathFinding : MonoBehaviour
         path.Add(current);
         path.Reverse();
 
-        ApproveTiles(path);
+        if (approval)
+        {
+            ApproveTiles(path);
+        }
 
         return path;
     }
