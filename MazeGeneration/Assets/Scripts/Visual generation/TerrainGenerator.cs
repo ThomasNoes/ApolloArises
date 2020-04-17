@@ -4,12 +4,12 @@
     public class TerrainGenerator : MonoBehaviour
     {
         // Variables:
-        public bool useNewPlacementMethod = true, useTextureSwitcherInEditor = false, useTextureSwitcherOnAndroid = false;
+        public bool useNewPlacementMethod = true, useTextureSwitcherInEditor = false, useTextureSwitcherOnAndroid = false, enableBeacons = true;
         public float wallOffset = 0f, wallHeight = 1f, pillarScale = 1.5f;
         private float heightScale, wallWidth = 0.05f, tileScale;
 
         // Objects:
-        public GameObject ceilingObj, wallObj, pillarObj, towerObj;
+        public GameObject roofObj, wallObj, pillarObj, towerObj, ceilingObj;
         private GameObject tempCeiling, tempWall, tempPillar;
 
         // Refs:
@@ -39,8 +39,7 @@
             if (tempTile.isPortalTile)
                 TextureSwitchPortalOverride(true, tempTile);
 
-        
-            if (!tempTile.isOpenRoof)
+            if (!enableBeacons)
             {
                 // Place ceiling on the tile
                 // Set the object as a child of the current tile
@@ -297,12 +296,20 @@
             if (towerObj == null)
                 return;
 
+            // Tower:
             Transform towerTransform = generateTowers.go.transform;
-
             GameObject tempTower = Instantiate(towerObj, towerTransform.position, Quaternion.identity, towerTransform);
             tempTower.transform.localScale = new Vector3(generateTowers.widthX, tempTower.transform.localScale.y, generateTowers.widthY);
-
             tempTower.transform.Translate((generateTowers.widthX / 2f) - (generateTowers.tileWidth / 2f), 0, (-generateTowers.widthY / 2f) + (generateTowers.tileWidth / 2f));
+
+            if (!enableBeacons)
+                return;
+
+            // Beacon:
+            Transform beaconTransform = generateTowers.go.transform;
+            GameObject tempBeacon = Instantiate(roofObj, beaconTransform.position, Quaternion.identity, beaconTransform);
+            tempBeacon.transform.localScale = new Vector3(generateTowers.widthX, generateTowers.widthX, generateTowers.widthY);
+            tempBeacon.transform.Translate((generateTowers.widthX / 2f) - (generateTowers.tileWidth / 2f), wallHeight, (-generateTowers.widthY / 2f) + (generateTowers.tileWidth / 2f));
         }
 
         private void TextureSwitch(TextureSwitchEvent textureSwitch)
