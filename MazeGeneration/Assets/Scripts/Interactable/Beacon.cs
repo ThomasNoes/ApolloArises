@@ -30,22 +30,19 @@ public class Beacon : MonoBehaviour
                 orbRenderer.material.DisableKeyword("_EMISSION");
                 orbRenderer.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
                 orbRenderer.material.SetColor("_EmissionColor", beaconManager.orbStartEmission);
-                Debug.Log("Should work!");
             }
         }
     }
 
     public void LightBeacon()
     {
-        Debug.Log("Beacon on " + gameObject.name + " is lit!");
+        //Debug.Log("Beacon on " + gameObject.name + " is lit!");
         animator?.SetBool("Close", true);
 
         if (orbRenderer != null && beaconManager != null)
         {
             orbRenderer.material.EnableKeyword("_EMISSION");
             orbRenderer.material.SetColor("_EmissionColor", beaconManager.orbEndEmission);
-
-            Debug.Log("Should still work!");
         }
     }
 }

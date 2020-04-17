@@ -39,7 +39,7 @@ public class BeaconManager : MonoBehaviour
 
     private void ConnectBeam(int indexTo, int indexFrom)
     {
-        Debug.Log("Beacon on " + beacons[indexFrom].gameObject.name + " is connected to " + beacons[indexTo].gameObject.name);
+        //Debug.Log("Beacon on " + beacons[indexFrom].gameObject.name + " is connected to " + beacons[indexTo].gameObject.name);
         beacons[indexFrom].connectedToForward = beacons[indexTo];
         beacons[indexTo].connectedToBack = beacons[indexFrom];
 
