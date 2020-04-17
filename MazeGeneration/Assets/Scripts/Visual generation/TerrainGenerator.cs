@@ -39,15 +39,14 @@
             if (tempTile.isPortalTile)
                 TextureSwitchPortalOverride(true, tempTile);
 
-        
-            if (!tempTile.isOpenRoof)
-            {
-                // Place ceiling on the tile
-                // Set the object as a child of the current tile
-                tempCeiling = Instantiate(ceilingObj, new Vector3(tileTransform.position.x, tileTransform.position.y + wallHeight, tileTransform.position.z), Quaternion.AngleAxis(90, Vector3.left));
-                tempCeiling.transform.parent = tileTransform;
-                tempCeiling.transform.localScale = new Vector3(1, 1, 1);
-            }
+            //if (!tempTile.isOpenRoof)
+            //{
+            //    // Place ceiling on the tile
+            //    // Set the object as a child of the current tile
+            //    tempCeiling = Instantiate(ceilingObj, new Vector3(tileTransform.position.x, tileTransform.position.y + wallHeight, tileTransform.position.z), Quaternion.AngleAxis(90, Vector3.left));
+            //    tempCeiling.transform.parent = tileTransform;
+            //    tempCeiling.transform.localScale = new Vector3(1, 1, 1);
+            //}
 
             if (tempTile.isPortalTile)
             {
@@ -297,12 +296,17 @@
             if (towerObj == null)
                 return;
 
+            // Tower:
             Transform towerTransform = generateTowers.go.transform;
-
             GameObject tempTower = Instantiate(towerObj, towerTransform.position, Quaternion.identity, towerTransform);
             tempTower.transform.localScale = new Vector3(generateTowers.widthX, tempTower.transform.localScale.y, generateTowers.widthY);
-
             tempTower.transform.Translate((generateTowers.widthX / 2f) - (generateTowers.tileWidth / 2f), 0, (-generateTowers.widthY / 2f) + (generateTowers.tileWidth / 2f));
+
+            // Beacon:
+            Transform beaconTransform = generateTowers.go.transform;
+            GameObject tempBeacon = Instantiate(ceilingObj, beaconTransform.position, Quaternion.identity, beaconTransform);
+            tempBeacon.transform.localScale = new Vector3(generateTowers.widthX, generateTowers.widthX, generateTowers.widthY);
+            tempBeacon.transform.Translate((generateTowers.widthX / 2f) - (generateTowers.tileWidth / 2f), wallHeight, (-generateTowers.widthY / 2f) + (generateTowers.tileWidth / 2f));
         }
 
         private void TextureSwitch(TextureSwitchEvent textureSwitch)

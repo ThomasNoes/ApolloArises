@@ -12,6 +12,9 @@ public class BeaconManager : MonoBehaviour
     public List<Beacon> beacons = new List<Beacon>();
     private LineRenderer lineRenderer;
 
+    public Color orbStartEmission, orbEndEmission;
+
+
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -42,10 +45,10 @@ public class BeaconManager : MonoBehaviour
 
         lineRenderer.positionCount++;
 
-        if (beacons[indexFrom].light != null && beacons[indexTo].light != null)
+        if (beacons[indexFrom].orb != null && beacons[indexTo].orb != null)
         {
-            lineRenderer.SetPosition(indexFrom, beacons[indexFrom].light.transform.position);
-            lineRenderer.SetPosition(indexTo, beacons[indexTo].light.transform.position);
+            lineRenderer.SetPosition(indexFrom, beacons[indexFrom].orb.transform.position);
+            lineRenderer.SetPosition(indexTo, beacons[indexTo].orb.transform.position);
         }
         else
         {
