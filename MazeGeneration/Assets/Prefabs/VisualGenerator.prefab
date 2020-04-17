@@ -48,15 +48,17 @@ MonoBehaviour:
   useNewPlacementMethod: 1
   useTextureSwitcherInEditor: 0
   useTextureSwitcherOnAndroid: 0
+  enableBeacons: 1
   wallOffset: 0.1
   wallHeight: 2.5
   pillarScale: 1.5
-  ceilingObj: {fileID: 3657013225830960824, guid: e1180a6a735856047b99a6868532b36f,
-    type: 3}
+  roofObj: {fileID: 3657013225830960824, guid: e1180a6a735856047b99a6868532b36f, type: 3}
   wallObj: {fileID: 5064138798832107477, guid: e59470f358d4ff4489feb66753eddc9c, type: 3}
   pillarObj: {fileID: 6666421332874310094, guid: 020cd9494efbe9e4281f6a7967fc414a,
     type: 3}
   towerObj: {fileID: -927199367670048503, guid: 5feb8a9b27fbcf246acc40c3cf45378c,
+    type: 3}
+  ceilingObj: {fileID: 9109257161806172612, guid: d303b1d90640a1f46909707957f5889f,
     type: 3}
 --- !u!114 &9105415572236804803
 MonoBehaviour:
