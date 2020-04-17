@@ -13,12 +13,14 @@ public abstract class MapGenerator : MonoBehaviour
     public int[,] mazeIntArray;
     public bool[,] pillarBoolArray;
     public List<Tile> aStarTiles;
+    public int mazeCount;
 
     public void Initialize(int index)
     {
        /* MaterialSwitcher(index);*/ // Texture switch
 
         tileArray = new Tile[mazeRows, mazeColumns];
+        mazeCount = index;
         //float mazeHalfWidth = mazeRows / 2f; // Add scalability with tile width!
         //float mazeHalfHeight = mazeColumns / 2f; // Add scalability with tile height!
         for (int i = 0; i < mazeRows; i++) // nested forloop for positioning each tile in the individual mazes

@@ -678,7 +678,7 @@ public class MapManager : MonoBehaviour
 
     public void PlaceInCircle(int index, int length)
     {
-        float openness = 1;
+        float openness = 2;
         float distance = Mathf.Sqrt(mazeCols * mazeCols + mazeRows * mazeRows) * openness; // i treat the segment as a triablge and find the hypothenuse
 
         float angle = 360 / length;
