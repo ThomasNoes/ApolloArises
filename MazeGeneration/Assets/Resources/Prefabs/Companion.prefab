@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6065918783245672387}
   - component: {fileID: 5879208190926007453}
   - component: {fileID: 306741516183990157}
+  - component: {fileID: 2471123925323816699}
   m_Layer: 0
   m_Name: Companion
   m_TagString: Untagged
@@ -134,7 +135,7 @@ MonoBehaviour:
   blinkDuration: 0.2
   blinkFrequency: 5
   enableBlinking: 1
-  alwaysLookAtPlayer: 0
+  lookAtPlayer: 0
   headObj: {fileID: 1588122758515500619}
   frameObj: {fileID: 8824798737484025240}
   faceImage: {fileID: 8501710464243021268}
@@ -187,6 +188,23 @@ MonoBehaviour:
   isParentObject: 1
   groundCooldown: 0
   renderCooldown: 0
+--- !u!114 &2471123925323816699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448879130142221679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e15d917da568bf47af1cff13e26b5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFollowPlayer: 0
+  player: {fileID: 0}
+  currentTile: {fileID: 0}
+  targetTile: {fileID: 0}
+  speed: 1
 --- !u!1 &8501710464243021271
 GameObject:
   m_ObjectHideFlags: 0
