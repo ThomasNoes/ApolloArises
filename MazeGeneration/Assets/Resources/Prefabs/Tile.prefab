@@ -52,6 +52,7 @@ MonoBehaviour:
   outerWalls: 
   wallArray: 
   tileWidth: 0
+  aStarId: 0
   RoomPosition: Corridor
   isRoomEntryTile: 0
   isAStarTile: 0
@@ -59,6 +60,7 @@ MonoBehaviour:
   isOuterTile: 0
   isRoomTile: 0
   isOpenRoof: 0
+  isDeadEnd: 0
   partOfMaze: 0
 --- !u!65 &4126564364297773086
 BoxCollider:
@@ -85,7 +87,7 @@ GameObject:
   - component: {fileID: 740540993738681869}
   - component: {fileID: 740540993738681870}
   - component: {fileID: 2998176582415543387}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Floor
   m_TagString: Tile
   m_Icon: {fileID: 0}
