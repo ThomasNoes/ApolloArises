@@ -20,9 +20,11 @@ public class drawGizmo : MonoBehaviour
         Sphere
     }
 
+
     void OnDrawGizmosSelected()
     {
         DrawGizmo();
+        Destroy(gameObject);
     }
     void OnDrawGizmos()
     {

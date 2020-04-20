@@ -30,7 +30,7 @@ public abstract class MapGenerator : MonoBehaviour
                 Vector3 tileSpawnPosition = new Vector3(transform.position.x + j * tileWidth, 0, transform.position.z - i * tileWidth);
                 GameObject emptyTile = Instantiate(tilePrefab, tileSpawnPosition, Quaternion.identity);
                 //emptyTile.name = "Tile " + (mazeColumns * i + j).ToString();
-                emptyTile.name = "Tile R" + i + "C" + j;
+                emptyTile.name = "Tile R" + i + "C" + j +"M"+index;
                 emptyTile.transform.parent = transform;
                 tileArray[i, j] = emptyTile.GetComponent<Tile>();
                 tileArray[i, j].SetWidth(tileWidth);

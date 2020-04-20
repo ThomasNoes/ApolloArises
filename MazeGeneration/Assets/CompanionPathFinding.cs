@@ -22,7 +22,7 @@ public class CompanionPathFinding : MonoBehaviour
     TeleportableObject tele;
 
     public float speed = 1;
-    List<Tile> pathPoints;
+    List<Tile> pathPoints = new List<Tile>();
     bool isTravelling = false;
 
     AStarPathFinding Astar = new AStarPathFinding();
@@ -55,7 +55,7 @@ public class CompanionPathFinding : MonoBehaviour
 
         // debug placing 
         //targetTile = maps[6].aStarTiles[3];// maps[1].aStarTiles.Count - 1];
-        foreach (Tile t in maps[6].tileArray)
+        foreach (Tile t in maps[7].tileArray)
         {
             if (!t.isAStarTile)
             {
@@ -67,17 +67,13 @@ public class CompanionPathFinding : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        if (isFollowPlayer && player != null)
-        {
-            targetTile = GetTileUnderObject(player);
-        }
-
         if (!isTravelling)
         {
-            if (currentTile == null)
+            if (isFollowPlayer)
             {
+                targetTile = GetTileUnderObject(player);
                 currentTile = GetTileUnderObject(gameObject);
             }
 
@@ -97,13 +93,15 @@ public class CompanionPathFinding : MonoBehaviour
 
     private IEnumerator MoveToTarget()
     {
-        Tile pastPoint = currentTile;
+        Tile pastPoint = new Tile();// = currentTile;
+
+        //Debug.Log("currentTile in movetotarget:" + currentTile.name);
+        //Debug.Log("targetTile in movetotarget:" + pathPoints[pathPoints.Count-1].name);
         for (int i = 0; i < pathPoints.Count; i++)
         {
             //teleport
             if (pathPoints[i].isPortalTile && pastPoint.isPortalTile) // if the tile companion is going a portal and is currently on a portal tile 
             {
-
                 if (pathPoints[i].partOfMaze > pastPoint.partOfMaze) //teleport Next maze forward
                 {
                     tele.Teleport(true);
@@ -123,12 +121,13 @@ public class CompanionPathFinding : MonoBehaviour
             }
             pastPoint = pathPoints[i];
         }
+        pathPoints.Clear();
         isTravelling = false;
     }
 
     private void PlanRoute(Tile target)
     {
-        currentTile = GetTileUnderObject(gameObject);
+        //currentTile = GetTileUnderObject(gameObject);
 
         if (target == null)
         {
@@ -136,17 +135,14 @@ public class CompanionPathFinding : MonoBehaviour
             return;
         }
         List<Tile> tempPath = new List<Tile>();
-        tempPath.Add(currentTile);
+        //tempPath.Add(currentTile);
 
-        int targetMaze = target.partOfMaze;
         int currentMaze = currentTile.partOfMaze;
         Tile tempTile = currentTile;
         Tile tempTarget;
 
         while (tempTile != target)
         {
-            //currentMaze = tempTile.partOfMaze;
-            //for travelling to prev segment
             if (target.partOfMaze < tempTile.partOfMaze && // if the companion needs to travel to prev segment
                 tempTile == maps[currentMaze].aStarTiles[0]) // it stands on the portal tile to the prev segment 
             {
@@ -223,16 +219,16 @@ public class CompanionPathFinding : MonoBehaviour
     {
         RaycastHit hit;
 
-        Debug.DrawRay(go.transform.position, Vector3.down * 7, Color.yellow, 25);
+        //Debug.DrawRay(go.transform.position, Vector3.down * 7, Color.yellow, 25);
 
         if (Physics.Raycast(go.transform.position, Vector3.down, out hit, 7.0f, layerMask))
         {
-            Debug.Log(go.name+" has hit "+hit.collider.name +" on "+hit.collider.transform.parent.name + " on "+hit.collider.transform.parent.parent.name);
+            //Debug.Log(go.name+" has hit "+hit.collider.name +" on "+hit.collider.transform.parent.name + " on "+hit.collider.transform.parent.parent.name);
             Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
             if (tempTile != null)
             {
-                Debug.Log("found a tile");
+                //Debug.Log("found a tile");
                 return tempTile;
             }
         }
@@ -262,7 +258,7 @@ public class Companion_Inspector : UnityEditor.Editor
         if (GUILayout.Button("Go to Target"))
         {
             Debug.Log("pressing button");
-            script.GoToTarget();
+            script.Update();
         }
     }
 }
