@@ -88,7 +88,7 @@ public class DayNightController : MonoBehaviour
 
             if (changingTint)
             {
-                skyboxMaterial.SetColor("_Tint", Color.Lerp(startColor, endColor, Time.deltaTime * speed));
+                skyboxMaterial.SetColor("_Tint", Color.Lerp(skyboxMaterial.GetColor("_Tint"), endColor, Time.deltaTime * speed));
             }
 
         }

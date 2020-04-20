@@ -11,13 +11,16 @@ public class BeaconManager : MonoBehaviour
 {
     public List<Beacon> beacons = new List<Beacon>();
     private LineRenderer lineRenderer;
+    private DayNightController dayNightController;
 
     public Color orbStartEmission, orbEndEmission;
+    private bool lastBeacon;
 
 
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        dayNightController = FindObjectOfType<DayNightController>();
     }
 
     public void ConnectNextBeacon()
@@ -28,6 +31,9 @@ public class BeaconManager : MonoBehaviour
             {
                 beacons[i].isActive = true;
                 beacons[i].LightBeacon();
+
+                if (i == beacons.Count - 1)
+                    lastBeacon = true;
 
                 if (i > 0)
                     ConnectBeam(i, i - 1);
@@ -63,6 +69,10 @@ public class BeaconManager : MonoBehaviour
             lineRenderer.SetPosition(indexFrom, beacons[indexFrom].gameObject.transform.position);
             lineRenderer.SetPosition(indexTo, beacons[indexTo].gameObject.transform.position);
         }
+
+        if (lastBeacon)
+            if (dayNightController != null)
+                dayNightController.StartSkyboxAndTintChange(true);
     }
 }
 
