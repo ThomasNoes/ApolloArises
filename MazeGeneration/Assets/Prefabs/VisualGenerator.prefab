@@ -79,9 +79,13 @@ MonoBehaviour:
     type: 3}
   puzzleRobotPrefab: {fileID: 2319472639147113035, guid: 328afb4d478abb441bc4426898eb15fe,
     type: 3}
+  leverPrefab: {fileID: 7059904256379037892, guid: dad786a956dd53c4aa40fd758a5aa8e4,
+    type: 3}
   spawnDoors: 1
-  spawnKeysInDeadEnds: 1
+  spawnKeysInDeadEnds: 0
   spawnPuzzleRobots: 1
+  spawnLevers: 1
+  spawnPuzzleObjects: 1
   spawnFrequency: 1
   colourMaterials:
   - {fileID: 2100000, guid: d0443b9c3f9f27d47acbdc3e23517000, type: 2}

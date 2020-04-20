@@ -44,12 +44,12 @@ public class Room : MonoBehaviour
                 if (tiles[i].prevDistance < closeToEntrance.prevDistance)
                 {
                     closeToEntrance = tiles[i];
-                    Debug.Log("new entrance in maze" +mazeID);
+                    //Debug.Log("new entrance in maze" +mazeID);
                 }
                 if (tiles[i].nextDistance < closeToExit.nextDistance)
                 {
                     closeToExit = tiles[i];
-                    Debug.Log("new exit in maze" + mazeID);
+                    //Debug.Log("new exit in maze" + mazeID);
                 }
             }
 

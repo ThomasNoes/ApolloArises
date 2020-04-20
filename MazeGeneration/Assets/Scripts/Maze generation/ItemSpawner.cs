@@ -6,14 +6,17 @@ public class ItemSpawner : MonoBehaviour
 {
     public bool enable = false;
 
-    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab;
-    public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true;
+    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab;
+
+    public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true, spawnLevers = true, spawnPuzzleObjects = true;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
 
     public Material[] colourMaterials;
 
     private MapManager mapManager;
     private TerrainGenerator terrainGenerator;
+    private bool[] itemSpawnedChecker;
+    private int mapAmount = 0;
 
     private void Start()
     {
@@ -24,9 +27,16 @@ public class ItemSpawner : MonoBehaviour
         if (mapManager == null)
             mapManager = FindObjectOfType<MapManager>();
 
+        Invoke("DelayedStart", 1.0f);
+    }
+
+    private void DelayedStart()
+    {
         if (mapManager != null)
         {
             terrainGenerator = mapManager.terrainGenerator;
+
+            mapAmount = mapManager.mapSequence.Length;
 
             transform.rotation = mapManager.gameObject.transform.rotation;
             transform.position = mapManager.gameObject.transform.position;
@@ -38,6 +48,9 @@ public class ItemSpawner : MonoBehaviour
 
             if (spawnDoors)
                 DoorAndKeySpawner();
+
+            if (spawnLevers)
+                LeverSpawner();
         }
     }
 
@@ -69,7 +82,6 @@ public class ItemSpawner : MonoBehaviour
                         tempKeyScript.colourMaterial = GetMaterialFromId(uniqueId);
                     }
 
-
                     return true;
                 }
             }
@@ -89,7 +101,7 @@ public class ItemSpawner : MonoBehaviour
         {
             if (counter == 0)
             {
-                if (room.mazeID == mapManager.mapSequence.Length - 1)
+                if (room.mazeID == mapAmount - 1)
                     break;
 
                 if (SpawnKey(room.mazeID, uniqueId + 1))
@@ -101,7 +113,7 @@ public class ItemSpawner : MonoBehaviour
                     GameObject tempDoor = Instantiate(doorPrefab, tilePosition,
                         transform.rotation, transform);
 
-                    tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir));
+                    tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir, 0));
                     tempDoor.transform.Rotate(GetEulerRotation(dir));
 
                     uniqueId++;
@@ -132,7 +144,7 @@ public class ItemSpawner : MonoBehaviour
         if (mapManager == null)
             return;
 
-        if (inMazeIndex >= 0 && inMazeIndex < mapManager.mapSequence.Length)
+        if (inMazeIndex >= 0 && inMazeIndex < mapAmount)
         {
             if (mapManager.deadEndList[inMazeIndex].Count != 0)
             {
@@ -142,7 +154,9 @@ public class ItemSpawner : MonoBehaviour
                 Vector3 spawnPos = new Vector3(tilePos.x, tilePos.y + 0.5f, tilePos.z);
 
                 Instantiate(objToSpawn, spawnPos, Quaternion.identity, transform);
+
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
+                tempTile.occupied = true;
             }
         }
     }
@@ -152,22 +166,102 @@ public class ItemSpawner : MonoBehaviour
         if (mapManager == null)
             return;
 
-        if (inMazeIndex >= 0 && inMazeIndex < mapManager.mapSequence.Length)
+        if (inMazeIndex >= 0 && inMazeIndex < mapAmount)
         {
             if (mapManager.deadEndList[inMazeIndex].Count != 0)
             {
                 Tile tempTile = mapManager.deadEndList[inMazeIndex][0];
-                int dir = SuitableWallReturner(tempTile);
+                int dir = SuitableWallReturner(tempTile, true);
 
                 GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, transform);
-                tempObj.transform.localScale = new Vector3(mapManager.tileWidth, mapManager.tileWidth, mapManager.tileWidth);
+                //tempObj.transform.localScale = new Vector3(mapManager.tileWidth, mapManager.tileWidth, mapManager.tileWidth);
 
-                tempObj.transform.Rotate(GetEulerRotation((dir + 2) % 4));
-                tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir));
+                tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir, 0.4f));
+                tempObj.transform.rotation = Quaternion.Euler(GetEulerRotation(dir));
 
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
+                tempTile.occupied = true;
             }
         }
+    }
+
+    public void SpawnWallObjectOnSpecificTileAndWall(GameObject objToSpawn, Tile tile, int wall)
+    {
+        GameObject tempObj = Instantiate(objToSpawn, tile.transform.position, transform.rotation, transform);
+
+        tempObj.transform.Translate(GetEdgePositionWall(tile, wall, 0.4f));
+        tempObj.transform.rotation = Quaternion.Euler(GetEulerRotation(wall));
+
+        tile.occupied = true;
+    }
+
+    private void LeverSpawner()
+    {
+        if (mapManager == null && leverPrefab != null)
+            return;
+
+        itemSpawnedChecker = new bool[mapAmount];
+
+        for (int i = 0; i < mapAmount; i++)
+        {
+            if (mapManager.deadEndList[i].Count != 0)
+            {
+                SpawnWallObjectInDeadEndAtIndex(leverPrefab, i);
+                itemSpawnedChecker[i] = true;
+            }
+            else
+            {
+                for (int j = 0; j < mapManager.mapScripts[i].mazeRows; j++)
+                {
+                    for (int k = 0; k < mapManager.mapScripts[i].mazeColumns; k++)
+                    {
+                        if (itemSpawnedChecker[i])
+                            break;
+
+                        Tile tempTile = mapManager.mapScripts[i].tileArray[j, k];
+
+                        if (!tempTile.isRoomTile && !tempTile.isPortalTile && !tempTile.isDeadEnd && !tempTile.occupied)
+                        {
+                            if (SuitableWallReturner(tempTile, true) == -1)
+                                continue;
+
+                            SpawnWallObjectOnSpecificTileAndWall(leverPrefab, tempTile, SuitableWallReturner(tempTile, true));
+                            itemSpawnedChecker[i] = true;
+                        }
+                    }
+                }
+            }
+
+            if (!itemSpawnedChecker[i]) // If item still is not spawned, try again with rooms
+            {
+                for (int j = 0; j < mapManager.mapScripts[i].mazeRows; j++)
+                {
+                    for (int k = 0; k < mapManager.mapScripts[i].mazeColumns; k++)
+                    {
+                        if (itemSpawnedChecker[i])
+                            break;
+
+                        Tile tempTile = mapManager.mapScripts[i].tileArray[j, k];
+
+                        if (tempTile.isRoomTile && !tempTile.occupied)
+                        {
+                            if (SuitableWallReturner(tempTile, true) == -1)
+                                continue;
+
+                            SpawnWallObjectOnSpecificTileAndWall(leverPrefab, tempTile,
+                                SuitableWallReturner(tempTile, true));
+                            itemSpawnedChecker[i] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        //for (int i = 0; i < itemSpawnedChecker.Length; i++) // For debugging
+        //{
+        //    if (itemSpawnedChecker[i] == false)
+        //        Debug.LogError("Lever in maze " + i + " not spawned!");
+        //}
     }
 
     private void PuzzleRobotSpawner(Room room, int uniqueId)
@@ -189,7 +283,7 @@ public class ItemSpawner : MonoBehaviour
             return;
 
         int tileIndex = 0;
-        int dir = SuitableWallReturner(tempTiles[tileIndex]);
+        int dir = SuitableWallReturner(tempTiles[tileIndex], false);
 
         foreach (var tile in tempTiles)
         {
@@ -209,6 +303,8 @@ public class ItemSpawner : MonoBehaviour
 
         tempPuzzleRobot.transform.Translate(GetEdgePositionGround(tempTiles[tileIndex], dir));
         tempPuzzleRobot.transform.Rotate(GetEulerRotation(dir));
+
+        tempTiles[tileIndex].occupied = true;
 
         if (puzzleRobot == null)
             Debug.LogError("Error: item spawner could not find puzzle robot script.");
@@ -230,14 +326,32 @@ public class ItemSpawner : MonoBehaviour
         return colourMaterials.Length != 0 ? colourMaterials[(id - 1) % colourMaterials.Length] : new Material(Shader.Find("Standard"));
     }
 
-    private int SuitableWallReturner(Tile tile)
+    private int SuitableWallReturner(Tile tile, bool excludeWindowsAndBalconies)
     {
-        int dir = 0;
+        int dir = -1;
         for (int i = 0; i < tile.wallArray.Length; i++)
         {
-            if (tile.wallArray[i] == 0)
+            if (tile.isShutOffTile)
+                break;
+
+            if (!excludeWindowsAndBalconies && tile.wallArray[i] == 0)
             {
                 dir = i;
+            }
+            else if (excludeWindowsAndBalconies)
+            {
+                if (tile.wallArray[i] == 0 && !tile.isOuterTile)
+                {
+                    dir = i;
+                }
+                else if (tile.wallArray[i] == 0 && tile.isOuterTile)
+                {
+                    if (tile.outerWalls[i] == 0 || tile.outerWalls[i] == -1)
+                    {
+                        dir = i;
+                        Debug.Log(tile.name + " | " + tile.partOfMaze + " - ON POS: " + i);
+                    }
+                }
             }
         }
 
@@ -300,20 +414,20 @@ public class ItemSpawner : MonoBehaviour
     }
 
     /// <param name="dir">0: up, 1: right, 2: down, 3: left</param>
-    private Vector3 GetEdgePositionWall(Tile tile, int dir)
+    private Vector3 GetEdgePositionWall(Tile tile, int dir, float modifier)
     {
         float tileWidth = tile.tileWidth;
 
         switch (dir)
         {
             case 0:
-                return new Vector3(0, terrainGenerator.wallHeight / 2.0f, tileWidth / 2.0f);
+                return new Vector3(0, terrainGenerator.wallHeight / 2.0f, tileWidth / (2.0f + modifier));
             case 1:
-                return new Vector3(tileWidth / 2.0f, terrainGenerator.wallHeight / 2.0f, 0);
+                return new Vector3(tileWidth / (2.0f + modifier), terrainGenerator.wallHeight / 2.0f, 0);
             case 2:
-                return new Vector3(0, terrainGenerator.wallHeight / 2.0f, -tileWidth / 2.0f);
+                return new Vector3(0, terrainGenerator.wallHeight / 2.0f, -tileWidth / (2.0f + modifier));
             case 3:
-                return new Vector3(-tileWidth / 2.0f, terrainGenerator.wallHeight / 2.0f, 0);
+                return new Vector3(-tileWidth / (2.0f + modifier), terrainGenerator.wallHeight / 2.0f, 0);
             default:
                 return new Vector3(0,0,0);
         }
@@ -327,11 +441,11 @@ public class ItemSpawner : MonoBehaviour
         switch (dir)
         {
             case 0:
-                return new Vector3(0, 0, - tileWidth / 2.8f);
+                return new Vector3(0, 0, tileWidth / 2.8f);
             case 1:
                 return new Vector3(tileWidth / 2.8f, 0, 0);
             case 2:
-                return new Vector3(0, 0, tileWidth / 2.8f);
+                return new Vector3(0, 0, -tileWidth / 2.8f);
             case 3:
                 return new Vector3(-tileWidth / 2.8f, 0, 0);
             default:
