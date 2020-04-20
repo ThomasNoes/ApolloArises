@@ -63,7 +63,10 @@ public  class AStarPathFinding : MonoBehaviour
             FindPath(false);
         }
 
-
+        foreach (Tile t in aStarTiles)
+        {
+            DrawGizmo(t, Color.yellow, 0.1f);
+        }
         return aStarTiles;
     }
 
@@ -91,19 +94,31 @@ public  class AStarPathFinding : MonoBehaviour
                 {
                     case 0:
                         neighbor = tileArray[current.GetRow() - 1, current.GetCol()]; //neighbor tile north
-                        CheckNeighbor(current, neighbor);
+                        if (neighbor.wallArray[2] == 1)
+                        {
+                            CheckNeighbor(current, neighbor);
+                        }
                         break;
                     case 1:
                         neighbor = tileArray[current.GetRow(), current.GetCol() + 1]; //neighbor tile east
-                        CheckNeighbor(current, neighbor);
+                        if (neighbor.wallArray[3] == 1)
+                        {
+                            CheckNeighbor(current, neighbor);
+                        }
                         break;
                     case 2:
                         neighbor = tileArray[current.GetRow() + 1, current.GetCol()]; //neighbor tile south
-                        CheckNeighbor(current, neighbor);
+                        if (neighbor.wallArray[0] == 1)
+                        {
+                            CheckNeighbor(current, neighbor);
+                        }
                         break;
                     case 3:
                         neighbor = tileArray[current.GetRow(), current.GetCol() - 1]; //neighbor tile west
-                        CheckNeighbor(current, neighbor);
+                        if (neighbor.wallArray[1] == 1)
+                        {
+                            CheckNeighbor(current, neighbor);
+                        }
                         break;
                     default:
                         break;
