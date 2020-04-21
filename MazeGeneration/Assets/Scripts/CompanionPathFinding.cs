@@ -130,7 +130,6 @@ public class CompanionPathFinding : MonoBehaviour
                     //rotate the companion to face the direction it is about to move to
                     while (Vector3.Angle(transform.forward, newDirection)>1.0f)
                     {
-                        Debug.Log("forward:" + transform.forward + " newdirection" + newDirection);
                         transform.forward = Vector3.RotateTowards(transform.forward, newDirection, angularSpeed * Time.deltaTime, 0.0f);
                         yield return null;
                     }
