@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Companion : MonoBehaviour
+public class FaceScreenAnimation : MonoBehaviour
 {
     public float rotateSpeed = 1.0f, blinkDuration = 0.5f, blinkFrequency = 5.0f;
     public bool enableBlinking = true, lookAtPlayer;
