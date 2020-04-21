@@ -15,13 +15,12 @@
         private GameObject thisObjCopy, mainObj, rightHandObj, leftHandObj;
         private bool copyExist, activated;
         [HideInInspector] public bool isParentObject = true, isInHand;
-        private WaitForSeconds delay;
+        private Collider currentCollider;
 
         private void Start()
         {
             renderController = FindObjectOfType<PortalRenderController>();
-            delay = new WaitForSeconds(1.0f);
-            Invoke("DelayedStart", 0.5f);
+            Invoke("DelayedStart", 0.4f);
         }
 
         private void DelayedStart()
@@ -42,13 +41,13 @@
             }
         }
 
-        private void Update()   // TODO: Used for debugging, remove later
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                CopySpawner(true, null);
-            }
-        }
+        //private void Update()   // TODO: Used for debugging, remove later
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F))
+        //    {
+        //        CopySpawner(true, null);
+        //    }
+        //}
 
         /// <param name="dir">false = prev, true = next</param>
         public void CopySpawner(bool dir, Collider col)
@@ -93,11 +92,19 @@
                 {
                     if (col.CompareTag("PortalGroundCol"))
                     {
-                        StopAllCoroutines();
-
                         if (thisObjCopy == null)
                             CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
                     }
+
+                    if (col.CompareTag("EntryCol"))
+                    {
+                        currentCollider = col;
+
+                        if (thisObjCopy == null)
+                            CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+
+                    }
+
                     if (col.CompareTag("PortalRenderCol"))
                     {
                         StopAllCoroutines();
@@ -117,18 +124,22 @@
 
         private void OnTriggerExit(Collider col)
         {
-            if (col.CompareTag("PortalGroundCol"))
+            if (col.CompareTag("EntryCol"))
             {
-                StartCoroutine(InColliderCheck());
+                if (thisObjCopy != null)
+                {
+                    Vector3 currentRenderPlanePos = currentCollider.transform.parent.GetChild(0).transform.position;
+                    Vector3 currentRenderPlanePosNoY = new Vector3(currentRenderPlanePos.x, 0, currentRenderPlanePos.z);
+                    Vector3 currentPosNoY = new Vector3(transform.position.x, 0, transform.position.z);
+                    Vector3 currentEntryColNoY = new Vector3(currentCollider.transform.position.x, 0, currentCollider.transform.position.z);
+
+                    if (Vector3.Distance(currentEntryColNoY, currentRenderPlanePosNoY) <
+                        Vector3.Distance(currentRenderPlanePosNoY, currentPosNoY))
+                    {
+                        Destroy(thisObjCopy);
+                    }
+                }
             }
-        }
-
-        private IEnumerator InColliderCheck()
-        {
-            yield return delay;
-
-            if (thisObjCopy != null)
-                Destroy(thisObjCopy);
         }
 
         /// <param name="dir">false: prev, true: next</param>

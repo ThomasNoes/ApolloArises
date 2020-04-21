@@ -19,7 +19,7 @@ public class TeleportableObject : MonoBehaviour
     {
         GetComponent<Rigidbody>().isKinematic = true;
         renderController = FindObjectOfType<PortalRenderController>();
-        Invoke("DelayedStart", 0.5f);
+        Invoke("DelayedStart", 0.3f);
     }
 
     private void DelayedStart()
