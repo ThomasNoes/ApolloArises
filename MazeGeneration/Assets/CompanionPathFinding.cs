@@ -21,7 +21,8 @@ public class CompanionPathFinding : MonoBehaviour
     MapManager mm;
     TeleportableObject tele;
 
-    public float speed = 1;
+    public float speed = 1.5f;
+    public float angularSpeed = 1.75f;
     List<Tile> pathPoints = new List<Tile>();
     bool isTravelling = false;
 
@@ -35,7 +36,7 @@ public class CompanionPathFinding : MonoBehaviour
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
         maps = mm.mapScripts;
         tele = GetComponent<TeleportableObject>();
-
+        player = Camera.main.gameObject;
 
         //placing the companion on a star tile.
         Transform tile = maps[0].aStarTiles[0].transform;
@@ -55,7 +56,7 @@ public class CompanionPathFinding : MonoBehaviour
 
         // debug placing 
         //targetTile = maps[6].aStarTiles[3];// maps[1].aStarTiles.Count - 1];
-        foreach (Tile t in maps[7].tileArray)
+        foreach (Tile t in maps[0].tileArray)
         {
             if (!t.isAStarTile)
             {
@@ -93,35 +94,58 @@ public class CompanionPathFinding : MonoBehaviour
 
     private IEnumerator MoveToTarget()
     {
-        Tile pastPoint = new Tile();// = currentTile;
-
-        //Debug.Log("currentTile in movetotarget:" + currentTile.name);
-        //Debug.Log("targetTile in movetotarget:" + pathPoints[pathPoints.Count-1].name);
+        Tile pastPoint = currentTile;
+        bool teleAllowed = true;
         for (int i = 0; i < pathPoints.Count; i++)
         {
             //teleport
-            if (pathPoints[i].isPortalTile && pastPoint.isPortalTile) // if the tile companion is going a portal and is currently on a portal tile 
+            if (pathPoints[i].isPortalTile && pastPoint.isPortalTile && teleAllowed) // if the tile companion is going a portal and is currently on a portal tile 
             {
+                
                 if (pathPoints[i].partOfMaze > pastPoint.partOfMaze) //teleport Next maze forward
                 {
+                    Debug.Log("forward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
                     tele.Teleport(true);
+                    teleAllowed = false;
                 }
                 else if (pathPoints[i].partOfMaze < pastPoint.partOfMaze) //teleport prev maze backward
                 {
+                    Debug.Log("backward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
                     tele.Teleport(false);
+                    teleAllowed = false;
                 }
             }
-            //traverse
-            Vector3 point = pathPoints[i].transform.position;
-            point.y = transform.position.y;
-            while (transform.position != point)
+            else
             {
-                transform.position = Vector3.MoveTowards(transform.position, point, speed * Time.deltaTime);
-                yield return null;
+                //traverse and rotate
+                Vector3 point = pathPoints[i].transform.position;
+                point.y = transform.position.y;
+                Vector3 pastPointSameY = new Vector3(pastPoint.transform.position.x, transform.position.y, pastPoint.transform.position.z);
+
+                Vector3 newDirection = (point - pastPointSameY).normalized;
+                if (newDirection.magnitude == 1)
+                {
+                    //rotate the companion to face the direction it is about to move to
+                    while (Vector3.Angle(transform.forward, newDirection)>1.0f)
+                    {
+                        Debug.Log("forward:" + transform.forward + " newdirection" + newDirection);
+                        transform.forward = Vector3.RotateTowards(transform.forward, newDirection, angularSpeed * Time.deltaTime, 0.0f);
+                        yield return null;
+                    }
+                }
+
+                //new move to the next point!
+                while (transform.position != point)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, point, speed * Time.deltaTime);
+                    yield return null;
+                }
+                teleAllowed = true;
             }
+
             pastPoint = pathPoints[i];
         }
-        pathPoints.Clear();
+        //pathPoints.Clear();
         isTravelling = false;
     }
 
@@ -173,6 +197,7 @@ public class CompanionPathFinding : MonoBehaviour
             tempTile = tempTarget;
         }
         pathPoints = tempPath;
+        //pathPoints.RemoveAt(0);
     }
 
     private List<Tile> GetPartofAStarPath(Tile from, Tile to)
@@ -234,7 +259,11 @@ public class CompanionPathFinding : MonoBehaviour
         }
         else
         {
-            Debug.Log("no floor under " + go.name);
+            go.transform.position = new Vector3(
+                player.transform.position.x, 
+                go.transform.position.y, 
+                player.transform.position.z);
+            return GetTileUnderObject(go);
         }
         return null;
     }
