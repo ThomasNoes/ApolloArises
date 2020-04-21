@@ -9,6 +9,7 @@ using UnityEditor;
 public class CompanionPathFinding : MonoBehaviour
 {
     Vector3 posOffset = new Vector3(0, -0.2f, 0);
+    float height;
     LayerMask layerMask;
 
     public bool isFollowPlayer;
@@ -41,19 +42,19 @@ public class CompanionPathFinding : MonoBehaviour
         player = Camera.main.gameObject;
 
         //placing the companion on a star tile.
-        Transform tile = maps[0].aStarTiles[0].transform;
+        Tile tile = maps[0].aStarTiles[0];
 
         //placing companion on non a star tile
         foreach (Tile t in maps[0].tileArray)
         {
             if (!t.isAStarTile)
             {
-                tile = t.transform;
+                tile = t;
             }
         }
 
-        float height = FindObjectOfType<TerrainGenerator>().wallHeight;
-        transform.position = new Vector3(tile.position.x, tile.position.y + height, tile.position.z) + posOffset;
+        height= FindObjectOfType<TerrainGenerator>().wallHeight;
+        transform.position = GetCompanionPosFromTile(tile);
 
 
         // debug placing 
@@ -120,11 +121,11 @@ public class CompanionPathFinding : MonoBehaviour
             else
             {
                 //traverse and rotate
-                Vector3 point = pathPoints[i].transform.position;
-                point.y = transform.position.y;
-                Vector3 pastPointSameY = new Vector3(pastPoint.transform.position.x, transform.position.y, pastPoint.transform.position.z);
+                Vector3 point = GetCompanionPosFromTile(pathPoints[i]);
 
-                Vector3 newDirection = (point - pastPointSameY).normalized;
+                Vector3 pastPointOffsetted = GetCompanionPosFromTile(pastPoint);
+
+                Vector3 newDirection = (point - pastPointOffsetted).normalized;
                 if (newDirection.magnitude == 1)
                 {
                     //rotate the companion to face the direction it is about to move to
@@ -208,9 +209,16 @@ public class CompanionPathFinding : MonoBehaviour
         List<Tile> safeRoute = new List<Tile>();
         for (int i = 0; i < route.Count; i++)
         {
-            if (route[i].blocked || !bm.beacons[route[i].partOfMaze].isActive) //stop the forloop and return the route so far
+            if (route[i].blocked ) //stop the forloop and return the route so far
             {
                 break;
+            }
+            if (bm.beacons.Count != 0)
+            {
+                if (!bm.beacons[route[i].partOfMaze].isActive)
+                {
+                    break;
+                } 
             }
             else
             {
@@ -279,15 +287,15 @@ public class CompanionPathFinding : MonoBehaviour
         }
         else
         {
-            go.transform.position = new Vector3(
-                player.transform.position.x, 
-                go.transform.position.y, 
-                player.transform.position.z);
-            return GetTileUnderObject(go);
+            return GetTileUnderObject(player);
         }
         return null;
     }
 
+    private Vector3 GetCompanionPosFromTile(Tile tile)
+    {
+        return new Vector3(tile.transform.position.x, tile.transform.position.y + height, tile.transform.position.z) + posOffset;
+    }
 
 
 }
