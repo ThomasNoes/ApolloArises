@@ -19,7 +19,7 @@ public class PuzzleRobot : MonoBehaviour
         if (headObj == null)
             return;
 
-        mainCamObj = Camera.main.gameObject;
+        mainCamObj = Camera.main?.gameObject;
 
         if (faceImage != null && openEyes != null && closedEyes != null)
         {

@@ -275,7 +275,7 @@ public class ItemSpawner : MonoBehaviour
 
         foreach (var tile in room.tiles)
         {
-            if (!tile.isAStarTile && tile.isRoomTile)
+            if (tile.isRoomTile && !tile.blocked)
             {
                 tempTiles.Add(tile);
             }

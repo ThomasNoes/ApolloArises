@@ -60,6 +60,9 @@ public class IsVisible : MonoBehaviour
 
     static bool VisibleFromCamera(Renderer renderer, Camera camera)
     {
+        if (camera == null)
+            return false;
+
         Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(camera);
         return GeometryUtility.TestPlanesAABB(frustumPlanes, renderer.bounds);
     }
