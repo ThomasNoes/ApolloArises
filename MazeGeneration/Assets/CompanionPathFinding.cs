@@ -10,17 +10,20 @@ public class CompanionPathFinding : MonoBehaviour
 {
     Vector3 posOffset = new Vector3(0, -0.2f, 0);
     LayerMask layerMask;
-    GameObject player;
 
-
+    public bool isFollowPlayer;
+    public GameObject player;
     public Tile currentTile;
-    public Tile TargetTile;
+    public Tile targetTile;
 
+    //other scripts
     List<MapGenerator> maps;
     MapManager mm;
+    TeleportableObject tele;
 
     public float speed = 1;
     List<Tile> pathPoints;
+    bool isTravelling = false;
 
     AStarPathFinding Astar = new AStarPathFinding();
 
@@ -31,6 +34,8 @@ public class CompanionPathFinding : MonoBehaviour
 
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
         maps = mm.mapScripts;
+        tele = GetComponent<TeleportableObject>();
+
 
         //placing the companion on a star tile.
         Transform tile = maps[0].aStarTiles[0].transform;
@@ -49,8 +54,14 @@ public class CompanionPathFinding : MonoBehaviour
 
 
         // debug placing 
-        TargetTile = maps[0].aStarTiles[maps[0].aStarTiles.Count - 1];
-
+        //targetTile = maps[6].aStarTiles[3];// maps[1].aStarTiles.Count - 1];
+        foreach (Tile t in maps[6].tileArray)
+        {
+            if (!t.isAStarTile)
+            {
+                targetTile = t;
+            }
+        }
 
         layerMask = LayerMask.GetMask("Floor");
     }
@@ -58,21 +69,51 @@ public class CompanionPathFinding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //currentTile = GetObjectTile(gameObject);
-        //Debug.Log("cureent tile is " + currentTile.name);
+        if (isFollowPlayer && player != null)
+        {
+            targetTile = GetTileUnderObject(player);
+        }
+
+        if (!isTravelling)
+        {
+            if (currentTile == null)
+            {
+                currentTile = GetTileUnderObject(gameObject);
+            }
+
+            if (currentTile != targetTile && targetTile != null)
+            {
+                GoToTarget();
+            }
+        }
     }
 
     public void GoToTarget()
     {
-        currentTile = GetTileUnderObject(gameObject);
-        PlanRoute(TargetTile);
+        isTravelling = true;
+        PlanRoute(targetTile);
         StartCoroutine("MoveToTarget");
     }
 
     private IEnumerator MoveToTarget()
     {
+        Tile pastPoint = currentTile;
         for (int i = 0; i < pathPoints.Count; i++)
         {
+            //teleport
+            if (pathPoints[i].isPortalTile && pastPoint.isPortalTile) // if the tile companion is going a portal and is currently on a portal tile 
+            {
+
+                if (pathPoints[i].partOfMaze > pastPoint.partOfMaze) //teleport Next maze forward
+                {
+                    tele.Teleport(true);
+                }
+                else if (pathPoints[i].partOfMaze < pastPoint.partOfMaze) //teleport prev maze backward
+                {
+                    tele.Teleport(false);
+                }
+            }
+            //traverse
             Vector3 point = pathPoints[i].transform.position;
             point.y = transform.position.y;
             while (transform.position != point)
@@ -80,41 +121,60 @@ public class CompanionPathFinding : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, point, speed * Time.deltaTime);
                 yield return null;
             }
+            pastPoint = pathPoints[i];
         }
+        isTravelling = false;
     }
 
-    private void PlanRoute(Tile Target)
+    private void PlanRoute(Tile target)
     {
-        Debug.Log("target name "+Target.name);
-        if (Target == null)
+        currentTile = GetTileUnderObject(gameObject);
+
+        if (target == null)
         {
             Debug.Log("target is null");
             return;
         }
         List<Tile> tempPath = new List<Tile>();
-        if (Target.partOfMaze == currentTile.partOfMaze) // if the companion have to navigate in the current maze
+        tempPath.Add(currentTile);
+
+        int targetMaze = target.partOfMaze;
+        int currentMaze = currentTile.partOfMaze;
+        Tile tempTile = currentTile;
+        Tile tempTarget;
+
+        while (tempTile != target)
         {
-            
-            if (Target.isAStarTile && currentTile.isAStarTile) // if both are a AStar tile 
+            //currentMaze = tempTile.partOfMaze;
+            //for travelling to prev segment
+            if (target.partOfMaze < tempTile.partOfMaze && // if the companion needs to travel to prev segment
+                tempTile == maps[currentMaze].aStarTiles[0]) // it stands on the portal tile to the prev segment 
             {
-                Debug.Log("dedededede");
-                tempPath = GetPartofAStarPath(currentTile, Target);
+                currentMaze--;
+                tempTile = maps[currentMaze].tileArray[tempTile.GetRow(), tempTile.GetCol()];
             }
-            else // i need to find the a custom path, find path again.
+            else if (target.partOfMaze > tempTile.partOfMaze && // if the companion needs to travel to next segment
+                tempTile == maps[currentMaze].aStarTiles[maps[currentMaze].aStarTiles.Count-1]) // it stands on the portal tile to the next segment 
             {
-                tempPath =Astar.NPCPathFinding(maps[currentTile.partOfMaze].tileArray, currentTile, Target,false,false);
+                currentMaze++;
+                tempTile = maps[currentMaze].tileArray[tempTile.GetRow(), tempTile.GetCol()];
             }
-        }
-        if (Target.partOfMaze > currentTile.partOfMaze)
-        {
-            //move towards next maze with nextdistance
-            //first find path to the next portal -> check if the current tile is a astar tile.
-            //then the Astar path through the next maze segments
-            // in the tartet maze, find the path to the target tile -> check if it is astar tile
-        }
-        if (Target.partOfMaze < currentTile.partOfMaze)
-        {
-            //move towards prev maze with prevdistance
+
+            if (target.partOfMaze < tempTile.partOfMaze)
+            {
+                tempTarget = maps[currentMaze].aStarTiles[0];
+            }
+            else if (target.partOfMaze > tempTile.partOfMaze)
+            {
+                tempTarget = maps[currentMaze].aStarTiles[maps[currentMaze].aStarTiles.Count - 1];
+            }
+            else
+            {
+                tempTarget = target;
+            }
+
+            tempPath.AddRange(Astar.NPCPathFinding(maps[tempTile.partOfMaze].tileArray, tempTile, tempTarget, false, false));
+            tempTile = tempTarget;
         }
         pathPoints = tempPath;
     }
