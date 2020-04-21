@@ -14,6 +14,7 @@ public class TeleportableObject : MonoBehaviour
     private bool copyExist, activated;
     [HideInInspector] public bool isParentObject = true, groundCooldown, renderCooldown;
     private Collider currentCollider;
+    private int inCurrentMaze = 0;
 
     private void Start()
     {
@@ -90,6 +91,8 @@ public class TeleportableObject : MonoBehaviour
         {
             if (col.CompareTag("PortalGroundCol"))
             {
+                inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+
                 if (!groundCooldown)
                 {
                     if (cooldown >= 0.2f)
@@ -167,9 +170,9 @@ public class TeleportableObject : MonoBehaviour
             return;
 
         if (dir)
-            offsetVector = renderController.GetCurrentPos() - renderController.GetNextMazePos();
+            offsetVector = renderController.GetMazePosAtIndex(inCurrentMaze) - PortalRenderController.SetNextOffset(inCurrentMaze);
         else
-            offsetVector = renderController.GetCurrentPos() - renderController.GetPrevMazePos();
+            offsetVector = renderController.GetMazePosAtIndex(inCurrentMaze) - PortalRenderController.SetPrevOffset(inCurrentMaze);
     }
 
     public void SetParentObject(GameObject parentObj)

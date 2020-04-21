@@ -360,6 +360,11 @@ public class PortalRenderController : MonoBehaviour
         return mapSequence[currentMaze].mapObject.transform.position;
     }
 
+    public Vector3 GetMazePosAtIndex(int mazeIndex)
+    {
+        return mapSequence[mazeIndex].mapObject.transform.position;
+    }
+
     public Vector3 GetNextMazePos()
     {
         if (currentMaze + 1 < mapSequence.Length)

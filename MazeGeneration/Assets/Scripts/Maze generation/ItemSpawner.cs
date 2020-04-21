@@ -6,9 +6,10 @@ public class ItemSpawner : MonoBehaviour
 {
     public bool enable = false;
 
-    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab;
+    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, drawerPrefab;
 
-    public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true, spawnLevers = true, spawnPuzzleObjects = true;
+    public bool spawnDoors = true, spawnKeysInDeadEnds = false, spawnPuzzleRobots = true, spawnLevers = true, 
+        spawnPuzzleObjects = true, spawnDrawersInDeadEnds = true;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
 
     public Material[] colourMaterials;
@@ -47,7 +48,7 @@ public class ItemSpawner : MonoBehaviour
                 Debug.LogError("ERROR: Terrain generator is null on item spawner - could not be found");
 
             if (spawnDoors)
-                DoorAndKeySpawner();
+                PuzzleSpawner();
 
             if (spawnLevers)
                 LeverSpawner();
@@ -56,9 +57,6 @@ public class ItemSpawner : MonoBehaviour
 
     private bool SpawnKey(int mazeIndex, int uniqueId)
     {
-        if (!spawnKeysInDeadEnds)
-            return true;
-
         if (keyPrefab == null)
             return false;
 
@@ -90,7 +88,40 @@ public class ItemSpawner : MonoBehaviour
         return false;
     }
 
-    private void DoorAndKeySpawner()
+    private bool SpawnDrawer(int mazeIndex, int uniqueId)
+    {
+        if (drawerPrefab == null)
+            return false;
+
+        if (mazeIndex - 1 >= 0)
+        {
+            for (int i = mazeIndex - 1; i >= 0; i--)
+            {
+                if (mapManager.deadEndList[i].Count != 0)
+                {
+                    int index = mapManager.deadEndList[i].Count - 1;
+                    Tile tempTile = mapManager.deadEndList[i][index];
+                    Vector3 tilePos = tempTile.transform.position;
+                    Vector3 spawnPos = new Vector3(tilePos.x, tilePos.y + 0.5f, tilePos.z);
+                    GameObject tempDrawer = Instantiate(drawerPrefab, spawnPos, Quaternion.identity, transform);
+                    mapManager.deadEndList[i].RemoveAt(index);
+
+                    if (tempDrawer.GetComponent<Drawer>() != null)
+                    {
+                        Drawer tempKeyScript = tempDrawer.GetComponent<Drawer>();
+                        tempKeyScript.uniqueId = uniqueId;
+                        tempKeyScript.colourMaterial = GetMaterialFromId(uniqueId);
+                    }
+
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private void PuzzleSpawner()
     {
         if (doorPrefab == null)
             return;
@@ -104,41 +135,49 @@ public class ItemSpawner : MonoBehaviour
                 if (room.mazeID == mapAmount - 1)
                     break;
 
-                if (SpawnKey(room.mazeID, uniqueId + 1))
+                if (spawnKeysInDeadEnds)
                 {
-                    Vector3 tilePosition = room.exitTile.gameObject.transform.position;
-
-                    int dir = DirectionCheckerNext(room.exitTile, room.mazeID);
-
-                    GameObject tempDoor = Instantiate(doorPrefab, tilePosition,
-                        transform.rotation, transform);
-
-                    room.exitTile.blocked = true;
-
-                    tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir, 0));
-                    tempDoor.transform.Rotate(GetEulerRotation(dir));
-
-                    uniqueId++;
-                    if (tempDoor.GetComponent<Door>() != null)
-                    {
-                        Door tempDoorScript = tempDoor.GetComponent<Door>();
-                        tempDoorScript.uniqueId = uniqueId;
-                        tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
-                            terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
-                        tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
-                        tempDoorScript.height = terrainGenerator.wallHeight;
-                    }
-                    else
-                        tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
-
-                    if (spawnPuzzleRobots)
-                        PuzzleRobotSpawner(room, uniqueId);
+                    if (SpawnKey(room.mazeID, uniqueId + 1))
+                        SpawnDoor(room, uniqueId);
                 }
+                else if (spawnDrawersInDeadEnds)
+                    if (SpawnDrawer(room.mazeID, uniqueId + 1))
+                        SpawnDoor(room, uniqueId);
             }
 
             counter = (counter + 1) % (spawnFrequency + 1);
         }
+    }
 
+    private void SpawnDoor(Room room, int uniqueId)
+    {
+        Vector3 tilePosition = room.exitTile.gameObject.transform.position;
+
+        int dir = DirectionCheckerNext(room.exitTile, room.mazeID);
+
+        GameObject tempDoor = Instantiate(doorPrefab, tilePosition,
+            transform.rotation, transform);
+
+        room.exitTile.blocked = true;
+
+        tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir, 0));
+        tempDoor.transform.Rotate(GetEulerRotation(dir));
+
+        uniqueId++;
+        if (tempDoor.GetComponent<Door>() != null)
+        {
+            Door tempDoorScript = tempDoor.GetComponent<Door>();
+            tempDoorScript.uniqueId = uniqueId;
+            tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
+                terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+            tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
+            tempDoorScript.height = terrainGenerator.wallHeight;
+        }
+        else
+            tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+
+        if (spawnPuzzleRobots)
+            PuzzleRobotSpawner(room, uniqueId);
     }
 
     public void SpawnGroundObjectInDeadEndAtIndex(GameObject objToSpawn, int inMazeIndex)
