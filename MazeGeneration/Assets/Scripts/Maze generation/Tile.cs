@@ -43,7 +43,7 @@ public class Tile : MonoBehaviour {
     //tile type
     public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof, isDeadEnd, isShutOffTile;
     public int partOfMaze;
-    [HideInInspector] public bool occupied;
+    [HideInInspector] public bool occupied, blocked;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };

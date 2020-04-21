@@ -113,6 +113,8 @@ public class ItemSpawner : MonoBehaviour
                     GameObject tempDoor = Instantiate(doorPrefab, tilePosition,
                         transform.rotation, transform);
 
+                    room.exitTile.blocked = true;
+
                     tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir, 0));
                     tempDoor.transform.Rotate(GetEulerRotation(dir));
 
@@ -305,6 +307,7 @@ public class ItemSpawner : MonoBehaviour
         tempPuzzleRobot.transform.Rotate(GetEulerRotation(dir));
 
         tempTiles[tileIndex].occupied = true;
+        tempTiles[tileIndex].blocked = true;
 
         if (puzzleRobot == null)
             Debug.LogError("Error: item spawner could not find puzzle robot script.");
