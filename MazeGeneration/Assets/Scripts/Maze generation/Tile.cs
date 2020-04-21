@@ -41,8 +41,9 @@ public class Tile : MonoBehaviour {
     private bool isPartOfPotentialRoom = false;
 
     //tile type
-    public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof, isDeadEnd;
+    public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof, isDeadEnd, isShutOffTile;
     public int partOfMaze;
+    [HideInInspector] public bool occupied, blocked;
 
     void Awake () {
         wallArray = new int[] { 0, 0, 0, 0 };

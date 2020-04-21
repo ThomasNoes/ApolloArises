@@ -58,25 +58,24 @@ public abstract class MapGenerator : MonoBehaviour
             {
                 if (tileArray[i, j] != null)
                 {
+                    Tile tempTile = tileArray[i, j];
                     EventCallbacks.GenerateTerrainEvent gtei = new EventCallbacks.GenerateTerrainEvent();
                     mazeIntArray[i, j] = tileArray[i, j].GetTileID();
 
-                    gtei.go = tileArray[i, j].gameObject;
-                    gtei.wallArray = tileArray[i, j].GetWallArray();
+                    gtei.go = tempTile.gameObject;
+                    gtei.wallArray = tempTile.GetWallArray();
                     gtei.tileWidth = tileWidth;
                     gtei.mapGeneratorRef = this;
 
-                    //gtei.isRoomPart = tileArray[i, j].isRoomTile;
-                    //gtei.isPortalTile = tileArray[i, j].isPortalTile;
-                    //gtei.outerWalls = tileArray[i, j].outerWalls;
-                    //gtei.isOuterTile = tileArray[i, j].isOuterTile;
-                    //gtei.partOfMaze = tileArray[i, j].partOfMaze;
-
-                    gtei.tileRowPos = i; gtei.tileColPos = j; // Can include tile array and pos like this instead - TODO: remove some above as redundant
+                    gtei.tileRowPos = i; gtei.tileColPos = j;
                     gtei.tileArray = tileArray;
 
                     //ID Changing when creating new tile
                     gtei.FireEvent();
+
+                    if (tempTile.wallArray[0] == 0 && tempTile.wallArray[1] == 0 &&
+                        tempTile.wallArray[2] == 0 && tempTile.wallArray[3] == 0)
+                        tempTile.isShutOffTile = true;
                 }
                 else
                     mazeIntArray[i, j] = 0;
