@@ -20,6 +20,7 @@ public class CompanionPathFinding : MonoBehaviour
     List<MapGenerator> maps;
     MapManager mm;
     TeleportableObject tele;
+    BeaconManager bm;
 
     public float speed = 1.5f;
     public float angularSpeed = 1.75f;
@@ -36,6 +37,7 @@ public class CompanionPathFinding : MonoBehaviour
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
         maps = mm.mapScripts;
         tele = GetComponent<TeleportableObject>();
+        bm = GameObject.Find("BeaconManager").GetComponent<BeaconManager>();
         player = Camera.main.gameObject;
 
         //placing the companion on a star tile.
@@ -196,8 +198,27 @@ public class CompanionPathFinding : MonoBehaviour
             tempPath.AddRange(Astar.NPCPathFinding(maps[tempTile.partOfMaze].tileArray, tempTile, tempTarget, false, false));
             tempTile = tempTarget;
         }
-        pathPoints = tempPath;
+        //tempPath now have the complete route for the companion to follow.
+        //cut the route if there is a door blocking or the maze segment is turned of
+        pathPoints = CutRouteAtBlockade(tempPath);
         //pathPoints.RemoveAt(0);
+    }
+
+    private List<Tile> CutRouteAtBlockade(List<Tile> route)
+    {
+        List<Tile> safeRoute = new List<Tile>();
+        for (int i = 0; i < route.Count; i++)
+        {
+            if (route[i].blocked || !bm.beacons[route[i].partOfMaze].isActive) //stop the forloop and return the route so far
+            {
+                break;
+            }
+            else
+            {
+                safeRoute.Add(route[i]);
+            }
+        }
+        return safeRoute;
     }
 
     private List<Tile> GetPartofAStarPath(Tile from, Tile to)
