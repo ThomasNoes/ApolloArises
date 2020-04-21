@@ -1264,6 +1264,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2471123925323816699, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2471123925323816699, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: isFollowPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4448879130142221679, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
       propertyPath: m_Name
@@ -2010,62 +2020,6 @@ MonoBehaviour:
       direction: 0
       spelledDirection: 
     mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
   roomList: []
 --- !u!4 &1604854435
 Transform:
@@ -2715,12 +2669,12 @@ PrefabInstance:
     - target: {fileID: 1776048526178739768, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: sensitivityX
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739768, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: sensitivityY
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526178739775, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}

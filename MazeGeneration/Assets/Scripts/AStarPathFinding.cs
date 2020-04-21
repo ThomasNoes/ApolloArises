@@ -40,9 +40,9 @@ public  class AStarPathFinding : MonoBehaviour
 
         SetDistanceForRemainingTiles(aStarTiles);
 
-        DrawAStarPath();
-        DrawGizmo(start, Color.green);
-        DrawGizmo(goal, Color.red);
+        //DrawAStarPath();
+        //DrawGizmo(start, Color.green);
+        //DrawGizmo(goal, Color.red);
 
 
         return aStarTiles;
@@ -50,6 +50,10 @@ public  class AStarPathFinding : MonoBehaviour
 
     public List<Tile> NPCPathFinding(Tile[,] tileArray, Tile start, Tile goal, bool startIsPortal = true, bool goalIsPortal = true)
     {
+        aStarTiles.Clear();
+        openTiles.Clear();
+        closedTiles.Clear();
+
         this.tileArray = tileArray;
         this.start = start;
         this.goal = goal;
@@ -69,7 +73,6 @@ public  class AStarPathFinding : MonoBehaviour
         }
         return aStarTiles;
     }
-
 
         private void FindPath(bool approval = true)
     {
