@@ -91,11 +91,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857599448229894012}
-  - component: {fileID: 4448879130142221676}
   - component: {fileID: 6065918783245672387}
   - component: {fileID: 5879208190926007453}
-  - component: {fileID: 306741516183990157}
+  - component: {fileID: 2259891203929646606}
   - component: {fileID: 2471123925323816699}
+  - component: {fileID: 306741516183990157}
+  - component: {fileID: 6403625605632434526}
   m_Layer: 0
   m_Name: Companion
   m_TagString: Untagged
@@ -119,28 +120,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4448879130142221676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4448879130142221679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45c7cca02c67ee41ac10347a4e56ae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 1
-  blinkDuration: 0.2
-  blinkFrequency: 5
-  enableBlinking: 1
-  lookAtPlayer: 0
-  headObj: {fileID: 1588122758515500619}
-  frameObj: {fileID: 8824798737484025240}
-  faceImage: {fileID: 8501710464243021268}
-  openEyes: {fileID: 21300000, guid: 2e856358770f187418d1dfe256f57851, type: 3}
-  closedEyes: {fileID: 21300000, guid: d65f376e8ea0771419f532355811d8e0, type: 3}
 --- !u!135 &6065918783245672387
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -170,6 +149,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2259891203929646606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448879130142221679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a418a2eb71f6b4c956d11f858a4c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2471123925323816699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448879130142221679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e15d917da568bf47af1cff13e26b5d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFollowPlayer: 0
+  player: {fileID: 0}
+  currentTile: {fileID: 0}
+  targetTile: {fileID: 0}
+  speed: 1
+  angularSpeed: 1.75
 --- !u!114 &306741516183990157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +197,7 @@ MonoBehaviour:
   isParentObject: 1
   groundCooldown: 0
   renderCooldown: 0
---- !u!114 &2471123925323816699
+--- !u!114 &6403625605632434526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,14 +206,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4448879130142221679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e15d917da568bf47af1cff13e26b5d6, type: 3}
+  m_Script: {fileID: 11500000, guid: ad99f4c9edd33934581361e3153f4195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFollowPlayer: 0
-  player: {fileID: 0}
-  currentTile: {fileID: 0}
-  targetTile: {fileID: 0}
-  speed: 1
+  rotateSpeed: 1
+  blinkDuration: 0.5
+  blinkFrequency: 5
+  enableBlinking: 1
+  lookAtPlayer: 1
+  headObj: {fileID: 1588122758515500619}
+  frameObj: {fileID: 8824798737484025240}
+  faceImage: {fileID: 8501710464243021268}
+  openEyes: {fileID: 21300000, guid: 2e856358770f187418d1dfe256f57851, type: 3}
+  closedEyes: {fileID: 21300000, guid: d65f376e8ea0771419f532355811d8e0, type: 3}
 --- !u!1 &8501710464243021271
 GameObject:
   m_ObjectHideFlags: 0
