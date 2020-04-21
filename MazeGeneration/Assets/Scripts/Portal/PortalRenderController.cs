@@ -139,8 +139,9 @@ public class PortalRenderController : MonoBehaviour
         tempPortal.transform.Translate(currentPortal.column * portalWidth, 0, -currentPortal.row * portalWidth);
 
         NewTeleporter tempScript = tempPortal.GetComponent<NewTeleporter>();
-        BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();
+        // BoxCollider bc = tempScript.renderQuad.GetComponent<BoxCollider>();
         BoxCollider gbc = tempScript.groundCollider;
+        BoxCollider ebc = tempScript.entryCollider;
 
         tempPortal.transform.Rotate(0f, (180 * (1 - j)) + 90f * currentPortal.direction, 0f);
         tempPortal.transform.Translate(0, 0, portalWidth / 2f /*- pillarOffset*/, Space.Self); // TODO removed pillar offset
@@ -153,6 +154,9 @@ public class PortalRenderController : MonoBehaviour
         //bc.center = new Vector3(0, 0, -portalWidth / 2.0f + pillarOffset);
         gbc.gameObject.transform.localPosition = new Vector3(0, tempScript.renderQuad.localPosition.y, -portalWidth / 2.0f + pillarOffset);
         gbc.size = new Vector3(portalWidth, tempScript.projectionQuad.localScale.y, portalWidth - (pillarOffset * 2.0f));
+        ebc.gameObject.transform.localPosition = new Vector3(0, tempScript.renderQuad.localPosition.y, 0);
+        ebc.transform.Translate(0, 0, - portalWidth /*- pillarOffset*/, Space.Self);
+        ebc.size = new Vector3(portalWidth, tempScript.projectionQuad.localScale.y, 0.04f);
 
         tempPortal.name = name + " Teleporter " + i;
         tempScript.renderQuad.name = name + "Render Quad " + i;

@@ -17,6 +17,8 @@ TagManager:
   - PortalRenderCol
   - MapManager
   - Key
+  - WirePart
+  - EntryCol
   layers:
   - Default
   - TransparentFX

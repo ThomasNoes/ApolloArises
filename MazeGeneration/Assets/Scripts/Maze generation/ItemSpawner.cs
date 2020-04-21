@@ -178,7 +178,7 @@ public class ItemSpawner : MonoBehaviour
                 GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, transform);
                 //tempObj.transform.localScale = new Vector3(mapManager.tileWidth, mapManager.tileWidth, mapManager.tileWidth);
 
-                tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir, 0.4f));
+                tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir, 0.2f));
                 tempObj.transform.rotation = Quaternion.Euler(GetEulerRotation(dir));
 
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);

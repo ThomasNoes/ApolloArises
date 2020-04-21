@@ -8,7 +8,7 @@ public class NewTeleporter : MonoBehaviour
     public bool isForwardTeleporter;
     public int portalID, mazeID;
     public Transform renderQuad, projectionQuad;
-    public BoxCollider renderPlaneCollider, groundCollider;
+    public BoxCollider renderPlaneCollider, groundCollider, entryCollider;
 
     private List<GameObject> teleportCopies;
     private GameObject player;
