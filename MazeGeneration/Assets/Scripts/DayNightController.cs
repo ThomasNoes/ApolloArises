@@ -3,7 +3,7 @@
 public class DayNightController : MonoBehaviour
 {
     public Material skyboxMaterial;
-    public bool cycleActive = false, cycleAroundX = false, cycleSunHorizon = true;
+    public bool cycleActive = false, cycleAroundX = false, cycleSunHorizonUp = true;
     public float speed = 0.1f, sunHeightLimit = 20.0f, exposureModifier = 0.015f;
     public Color startColor = Color.gray, endColor = Color.blue; 
 
@@ -33,7 +33,7 @@ public class DayNightController : MonoBehaviour
             if (skyboxMaterial == null)
                 return;
 
-            if (cycleSunHorizon)
+            if (cycleSunHorizonUp)
             {
                 skyboxMaterial.SetFloat("_RotationZ", skyboxAngleZ);
                 skyboxMaterial.SetFloat("_Exposure", skyboxExposure);
@@ -45,7 +45,7 @@ public class DayNightController : MonoBehaviour
                 skyboxAngleX += Time.deltaTime * speed % 360;
             }
 
-            if (cycleSunHorizon)
+            if (cycleSunHorizonUp)
             {
                 if (goingUp)
                 {
