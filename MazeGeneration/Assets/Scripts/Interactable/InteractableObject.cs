@@ -16,6 +16,7 @@
         private bool copyExist, activated;
         [HideInInspector] public bool isParentObject = true, isInHand;
         private Collider currentCollider;
+        private int inCurrentMaze = 0;
 
         private void Start()
         {
@@ -55,10 +56,7 @@
             if (copyExist || !isParentObject || renderController == null)
                 return;
 
-            if (dir)
-                offsetVector = renderController.GetNextOffset();
-            else
-                offsetVector = renderController.GetPrevOffset();
+            UpdateOffset(dir);
 
             thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + offsetVector.x, transform.position.y + offsetVector.y, transform.position.z + offsetVector.z), transform.rotation);
 
@@ -148,10 +146,7 @@
             if (renderController == null)
                 return;
 
-            if (dir)
-                offsetVector = renderController.GetCurrentPos() - renderController.GetNextMazePos();
-            else
-                offsetVector = renderController.GetCurrentPos() - renderController.GetPrevMazePos();
+            offsetVector = dir ? PortalRenderController.SetNextOffset(inCurrentMaze) : PortalRenderController.SetPrevOffset(inCurrentMaze);
         }
 
         public void SetParentObject(GameObject parentObj)

@@ -55,10 +55,7 @@ public class TeleportableObject : MonoBehaviour
         if (copyExist || !isParentObject || renderController == null)
             return;
 
-        if (dir)
-            offsetVector = renderController.GetNextOffset();
-        else
-            offsetVector = renderController.GetPrevOffset();
+        UpdateOffset(dir);
 
         thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + offsetVector.x, transform.position.y + offsetVector.y, transform.position.z + offsetVector.z), transform.rotation);
 
@@ -108,6 +105,8 @@ public class TeleportableObject : MonoBehaviour
             if (col.CompareTag("EntryCol"))
             {
                 currentCollider = col;
+
+                inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
 
                 if (thisObjCopy == null)
                     CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
@@ -169,10 +168,7 @@ public class TeleportableObject : MonoBehaviour
         if (renderController == null)
             return;
 
-        if (dir)
-            offsetVector = renderController.GetMazePosAtIndex(inCurrentMaze) - PortalRenderController.SetNextOffset(inCurrentMaze);
-        else
-            offsetVector = renderController.GetMazePosAtIndex(inCurrentMaze) - PortalRenderController.SetPrevOffset(inCurrentMaze);
+        offsetVector = dir ? PortalRenderController.SetNextOffset(inCurrentMaze) : PortalRenderController.SetPrevOffset(inCurrentMaze);
     }
 
     public void SetParentObject(GameObject parentObj)
