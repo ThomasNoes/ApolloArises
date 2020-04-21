@@ -45,6 +45,7 @@ public class SVLever : MonoBehaviour {
 
         UpdateHingeJoint();
 
+        leverHingeJoint.anchor = Vector3.one;
         beaconManager = FindObjectOfType<BeaconManager>();
     }
 

@@ -352,7 +352,7 @@ public class ItemSpawner : MonoBehaviour
                     if (tile.outerWalls[i] == 0 || tile.outerWalls[i] == -1)
                     {
                         dir = i;
-                        Debug.Log(tile.name + " | " + tile.partOfMaze + " - ON POS: " + i);
+                        //Debug.Log(tile.name + " | " + tile.partOfMaze + " - ON POS: " + i);
                     }
                 }
             }
