@@ -112,8 +112,10 @@ public class TeleportableObject : MonoBehaviour
                     CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
 
             }
-            if (teleportOnCollision)
-                if (col.CompareTag("PortalRenderCol"))
+
+            if (col.CompareTag("PortalRenderCol"))
+            {
+                if (teleportOnCollision)
                 {
                     if (!renderCooldown)
                     {
@@ -123,6 +125,8 @@ public class TeleportableObject : MonoBehaviour
                             Invoke("RenderCooldown", cooldown);
                         }
 
+                        inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+
                         activated = false;
                         thisObjCopy.transform.position = transform.position;
                         transform.Translate(offsetVector, Space.World);
@@ -130,6 +134,10 @@ public class TeleportableObject : MonoBehaviour
                         activated = true;
                     }
                 }
+                else
+                    inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+            }
+            
         }
     }
 
