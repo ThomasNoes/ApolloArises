@@ -82,6 +82,12 @@ public class TeleportableObject : MonoBehaviour
             Destroy(this);
     }
 
+    public void DestroyCopy()
+    {
+        if (thisObjCopy != null)
+            Destroy(thisObjCopy);
+    }
+
     private void OnTriggerEnter(Collider col)
     {
         if (activated)
@@ -130,7 +136,8 @@ public class TeleportableObject : MonoBehaviour
                         activated = false;
                         thisObjCopy.transform.position = transform.position;
                         transform.Translate(offsetVector, Space.World);
-                        UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
+                        offsetVector *= -1;
+                        //UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
                         activated = true;
                     }
                 }
@@ -146,7 +153,9 @@ public class TeleportableObject : MonoBehaviour
         activated = false;
         thisObjCopy.transform.position = transform.position;
         transform.Translate(offsetVector, Space.World);
-        UpdateOffset(isForward);
+
+        offsetVector *= -1;
+
         activated = true;
     }
 
@@ -159,10 +168,11 @@ public class TeleportableObject : MonoBehaviour
         else
             inCurrentMaze = currentIndex - 1;
 
-
         thisObjCopy.transform.position = transform.position;
         transform.Translate(offsetVector, Space.World);
-        UpdateOffset(isForward, currentIndex);
+
+        offsetVector *= -1;
+
         activated = true;
     }
 
@@ -192,7 +202,7 @@ public class TeleportableObject : MonoBehaviour
         if (renderController == null)
             return;
 
-        offsetVector = dir ? PortalRenderController.SetNextOffset(inCurrentMaze) : PortalRenderController.SetPrevOffset(inCurrentMaze);
+        offsetVector = dir ? PortalRenderController.SetNextOffset(currentIndex) : PortalRenderController.SetPrevOffset(currentIndex);
     }
 
     public void UpdateOffset(bool dir)

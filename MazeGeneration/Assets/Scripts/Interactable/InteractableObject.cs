@@ -110,7 +110,8 @@
                         activated = false;
                         thisObjCopy.transform.position = transform.position;
                         transform.Translate(offsetVector, Space.World);
-                        UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
+                        offsetVector *= -1;
+                        //UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
                         activated = true;
                     }
                 }
