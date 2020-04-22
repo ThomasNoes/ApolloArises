@@ -57,19 +57,19 @@ public class TMPAnimated : MonoBehaviour
             case DialogData.effect.none:
                 break;
             case DialogData.effect.success:
-                success.Raise();
+                success?.Raise();
                 break;
             case DialogData.effect.surprise:
-                surprise.Raise();
+                surprise?.Raise();
                 break;
             case DialogData.effect.confetti:
-                confetti.Raise();
+                confetti?.Raise();
                 break;
             case DialogData.effect.remark:
-                remark.Raise();
+                remark?.Raise();
                 break;
             case DialogData.effect.question:
-                question.Raise();
+                question?.Raise();
                 break;
             default:
                 break;
@@ -79,12 +79,12 @@ public class TMPAnimated : MonoBehaviour
     {
         if (dialog.ButtonEvent != null)
         {
-            proceedButton.SetActive(false);
+            proceedButton?.SetActive(false);
             dialog.ButtonEvent.Raise();
         }
         else if (!proceedButton.activeSelf)
         {
-            proceedButton.SetActive(true);
+            proceedButton?.SetActive(true);
         }
         
     }
