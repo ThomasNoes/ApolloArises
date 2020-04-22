@@ -150,6 +150,22 @@ public class TeleportableObject : MonoBehaviour
         activated = true;
     }
 
+    public void TeleportFromIndex(bool isForward, int currentIndex)
+    {
+        activated = false;
+
+        if (isForward)
+            currentIndex = inCurrentMaze + 1;
+        else
+            currentIndex = inCurrentMaze - 1;
+
+
+        thisObjCopy.transform.position = transform.position;
+        transform.Translate(offsetVector, Space.World);
+        UpdateOffset(isForward, currentIndex);
+        activated = true;
+    }
+
     private void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("EntryCol"))
@@ -171,12 +187,17 @@ public class TeleportableObject : MonoBehaviour
     }
 
     /// <param name="dir">false: prev, true: next</param>
-    public void UpdateOffset(bool dir)
+    public void UpdateOffset(bool dir, int currentIndex)
     {
         if (renderController == null)
             return;
 
         offsetVector = dir ? PortalRenderController.SetNextOffset(inCurrentMaze) : PortalRenderController.SetPrevOffset(inCurrentMaze);
+    }
+
+    public void UpdateOffset(bool dir)
+    {
+        UpdateOffset(dir, inCurrentMaze);
     }
 
     public void SetParentObject(GameObject parentObj)
