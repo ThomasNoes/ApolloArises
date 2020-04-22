@@ -12,7 +12,6 @@ public class CompanionPathFinding : MonoBehaviour
     float height;
     LayerMask layerMask;
 
-    public bool isFollowPlayer;
     public GameObject player;
     public Tile currentTile;
     public Tile targetTile;
@@ -27,7 +26,7 @@ public class CompanionPathFinding : MonoBehaviour
     public float speed = 1.25f;
     public float angularSpeed = 2f;
     List<Tile> pathPoints = new List<Tile>();
-    bool isTravelling = false;
+    public bool isTravelling = false;
 
     AStarPathFinding Astar = new AStarPathFinding();
 
@@ -43,46 +42,19 @@ public class CompanionPathFinding : MonoBehaviour
         player = Camera.main.gameObject;
         tileWidth = mm.tileWidth;
 
-
-        Tile tile = maps[0].aStarTiles[0];
-
-
-        //placing companion on non a star tile
-        foreach (Tile t in maps[0].tileArray)
-        {
-            if (!t.isAStarTile)
-            {
-                tile = t;
-            }
-        }
-
         height= FindObjectOfType<TerrainGenerator>().wallHeight;
-        transform.position = GetCompanionPosFromTile(tile);
-
-
-        // debug placing 
-        //targetTile = maps[6].aStarTiles[3];// maps[1].aStarTiles.Count - 1];
-        foreach (Tile t in maps[0].tileArray)
-        {
-            if (!t.isAStarTile)
-            {
-                targetTile = t;
-            }
-        }
 
         layerMask = LayerMask.GetMask("Floor");
     }
 
     // Update is called once per frame
-    public void Update()
+    //public void Update()
+    public void FollowPlayer()
     {
         if (!isTravelling)
         {
-            if (isFollowPlayer)
-            {
-                targetTile = GetTileUnderObject(player);
-                currentTile = GetTileUnderObject(gameObject);
-            }
+            targetTile = GetTileUnderObject(player);
+            currentTile = GetTileUnderObject(gameObject);
 
             if (currentTile != targetTile && targetTile != null)
             {
@@ -159,6 +131,11 @@ public class CompanionPathFinding : MonoBehaviour
         }
         //pathPoints.Clear();
         isTravelling = false;
+    }
+
+    public void PlaceCompanionOnTile(Tile t)
+    {
+        transform.position = GetCompanionPosFromTile(t);
     }
 
     private void PlanRoute(Tile target)
@@ -299,7 +276,7 @@ public class CompanionPathFinding : MonoBehaviour
         {
             Debug.Log("the companion is not over a tile. and it is assumed the companion has teleported incorrectly. so it is placed on the same tile as the player");
             Tile playerTile = GetTileUnderObject(player);
-            transform.position = GetCompanionPosFromTile(playerTile);
+            PlaceCompanionOnTile(playerTile);
             return playerTile;
         }
         return null;

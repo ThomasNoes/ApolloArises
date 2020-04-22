@@ -14,6 +14,15 @@ public class CompanionBehaviour : MonoBehaviour
 
     public DialogReader dr;
     public CompanionPathFinding cpf;
+    MapManager mm;
+    List<MapGenerator> maps;
+
+
+    public bool isFollowPlayer;
+
+    Tile startTile;
+    Tile endtile;
+
 
 
     // Start is called before the first frame update
@@ -21,15 +30,69 @@ public class CompanionBehaviour : MonoBehaviour
     {
         dr = GetComponent<DialogReader>();
         cpf = GetComponent<CompanionPathFinding>();
+        mm = GameObject.Find("MapManager").GetComponent<MapManager>();
+        maps = mm.mapScripts;
+
+        startTile = FindStartEndTile(maps[0]);
+        endtile = FindStartEndTile(maps[maps.Count - 1]);
+
+        Invoke("LateStart",0);
+    }
+
+    void LateStart()
+    {
+        cpf.PlaceCompanionOnTile(startTile);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (true)
+        {
+
+        }
+
+        if(isFollowPlayer)
+        {
+            cpf.FollowPlayer();
+        }
     }
 
-    //start 
+
+    private Tile FindStartEndTile(MapGenerator map)
+    {
+        foreach (Tile t in map.tileArray) // finding the ideal tile
+        {
+            if (!t.isOuterTile && !t.isPortalTile && t.isRoomTile)
+            {
+                Debug.Log("ideal spot");
+                return t;
+            }
+        }
+        foreach (Tile t in map.tileArray) // else allow for outertiles
+        {
+            if ( !t.isPortalTile && t.isRoomTile)
+            {
+                Debug.Log("it is in a room");
+                return t;
+            }
+        }
+        foreach (Tile t in map.tileArray) // else just place it on a tile that is not a outer tile
+        {
+            if (!t.isOuterTile)
+            {
+                Debug.Log("just not a outer tile");
+                return t;
+            }
+        }
+        return null;
+    }
+
+    //start end event
+
+
+
+
 
 
 }
