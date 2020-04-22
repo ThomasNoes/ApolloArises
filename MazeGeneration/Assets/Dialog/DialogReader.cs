@@ -16,6 +16,8 @@ public class DialogReader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+
         if (tmpa == null)
             tmpa = GetComponent<TMPAnimated>();
     }
@@ -36,7 +38,7 @@ public class DialogReader : MonoBehaviour
         else if (index == dialogs.Length && toNextScene)
         {
             //Debug.Log("next scne!");
-            tsm.NextSceneRandom();
+            tsm?.NextSceneRandom();
         }
 
     }

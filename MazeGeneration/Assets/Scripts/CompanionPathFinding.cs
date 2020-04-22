@@ -16,6 +16,7 @@ public class CompanionPathFinding : MonoBehaviour
     public GameObject player;
     public Tile currentTile;
     public Tile targetTile;
+    float tileWidth;
 
     //other scripts
     List<MapGenerator> maps;
@@ -40,9 +41,11 @@ public class CompanionPathFinding : MonoBehaviour
         tele = GetComponent<TeleportableObject>();
         bm = GameObject.Find("BeaconManager").GetComponent<BeaconManager>();
         player = Camera.main.gameObject;
+        tileWidth = mm.tileWidth;
 
-        //placing the companion on a star tile.
+
         Tile tile = maps[0].aStarTiles[0];
+
 
         //placing companion on non a star tile
         foreach (Tile t in maps[0].tileArray)
@@ -126,6 +129,13 @@ public class CompanionPathFinding : MonoBehaviour
                 Vector3 pastPointOffsetted = GetCompanionPosFromTile(pastPoint);
 
                 Vector3 newDirection = (point - pastPointOffsetted).normalized;
+                if(Vector3.Distance(point, pastPointOffsetted) > tileWidth + 0.1) // this happens if the companion for some reason want to manual traverse between two maze segments
+                {
+                    Debug.Log("The distance is incorrect" + Vector3.Distance(point, pastPointOffsetted));
+                    tele.DestroyCopy(); //destroy copy object in case there is one
+                    transform.position = point; // put the companion at the point so the player do not need to wait.
+                }
+
                 if (newDirection.magnitude == 1)
                 {
                     //rotate the companion to face the direction it is about to move to
@@ -287,7 +297,10 @@ public class CompanionPathFinding : MonoBehaviour
         }
         else
         {
-            return GetTileUnderObject(player);
+            Debug.Log("the companion is not over a tile. and it is assumed the companion has teleported incorrectly. so it is placed on the same tile as the player");
+            Tile playerTile = GetTileUnderObject(player);
+            transform.position = GetCompanionPosFromTile(playerTile);
+            return playerTile;
         }
         return null;
     }
