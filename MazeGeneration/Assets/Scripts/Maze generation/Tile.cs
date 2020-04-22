@@ -40,6 +40,12 @@ public class Tile : MonoBehaviour {
     public bool isRoomEntryTile = false;
     private bool isPartOfPotentialRoom = false;
 
+    //connect a star tile for non a star tiles
+    public Tile ConnectedAStar = null;
+    public int connectAStarIndex;
+
+
+
     //tile type
     public bool isAStarTile, isPortalTile, isOuterTile, isRoomTile, isOpenRoof, isDeadEnd, isShutOffTile;
     public int partOfMaze;

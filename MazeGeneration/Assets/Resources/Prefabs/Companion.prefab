@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 2471123925323816699}
   - component: {fileID: 306741516183990157}
   - component: {fileID: 6403625605632434526}
+  - component: {fileID: 4051212256246950731}
+  - component: {fileID: 504940190194752636}
   m_Layer: 0
   m_Name: Companion
   m_TagString: Untagged
@@ -111,7 +113,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4448879130142221679}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -173,12 +175,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e15d917da568bf47af1cff13e26b5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFollowPlayer: 0
+  isFollowPlayer: 1
   player: {fileID: 0}
   currentTile: {fileID: 0}
   targetTile: {fileID: 0}
-  speed: 1
-  angularSpeed: 1.75
+  speed: 1.25
+  angularSpeed: 2
 --- !u!114 &306741516183990157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +221,43 @@ MonoBehaviour:
   faceImage: {fileID: 8501710464243021268}
   openEyes: {fileID: 21300000, guid: 2e856358770f187418d1dfe256f57851, type: 3}
   closedEyes: {fileID: 21300000, guid: d65f376e8ea0771419f532355811d8e0, type: 3}
+--- !u!114 &4051212256246950731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448879130142221679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b6126639a8fea34cbe3763e25bb6d80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toNextScene: 0
+  dialogs: []
+  TMP_Object: {fileID: 0}
+  tsm: {fileID: 0}
+  index: 0
+--- !u!114 &504940190194752636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4448879130142221679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5df6fe15e21e4d4dbdb22d529b15032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textAppear: {fileID: 0}
+  success: {fileID: 0}
+  surprise: {fileID: 0}
+  confetti: {fileID: 0}
+  remark: {fileID: 0}
+  question: {fileID: 0}
+  proceedButton: {fileID: 0}
+  isRunning: 0
 --- !u!1 &8501710464243021271
 GameObject:
   m_ObjectHideFlags: 0

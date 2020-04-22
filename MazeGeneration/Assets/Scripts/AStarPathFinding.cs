@@ -221,13 +221,13 @@ public  class AStarPathFinding : MonoBehaviour
     {
         for (int i = 1; i < tiles.Count-1; i++)
         {
-            CheckForNoneMarkedTile(tiles[i]);
+            CheckForNoneMarkedTile(tiles[i], tiles[i], i);
         }
         
 
         
     }
-    private void CheckForNoneMarkedTile(Tile t)
+    private void CheckForNoneMarkedTile(Tile t, Tile aStarTile, int aStarIndex)
     {
         for (int i = 0; i < t.wallArray.Length; i++)
         {
@@ -238,19 +238,19 @@ public  class AStarPathFinding : MonoBehaviour
                 {
                     case 0:
                         neighbor = tileArray[t.GetRow() - 1, t.GetCol()]; //neighbor tile north
-                        MarkTile(neighbor, t);
+                        MarkTile(neighbor, t, aStarTile, aStarIndex);
                         break;
                     case 1:
                         neighbor = tileArray[t.GetRow(), t.GetCol() + 1]; //neighbor tile east
-                        MarkTile(neighbor, t);
+                        MarkTile(neighbor, t, aStarTile, aStarIndex);
                         break;
                     case 2:
                         neighbor = tileArray[t.GetRow() + 1, t.GetCol()]; //neighbor tile south
-                        MarkTile(neighbor, t);
+                        MarkTile(neighbor, t, aStarTile, aStarIndex);
                         break;
                     case 3:
                         neighbor = tileArray[t.GetRow(), t.GetCol() - 1]; //neighbor tile west
-                        MarkTile(neighbor, t);
+                        MarkTile(neighbor, t, aStarTile, aStarIndex);
                         break;
                     default:
                         break;
@@ -259,13 +259,15 @@ public  class AStarPathFinding : MonoBehaviour
         }
     }
 
-    private void MarkTile(Tile neighbor, Tile t)
+    private void MarkTile(Tile neighbor, Tile t, Tile aStarTile, int aStarIndex)
     {
         if (!neighbor.isAStarTile && !neighbor.isMarked)
         {
+            neighbor.ConnectedAStar = aStarTile;
+            neighbor.connectAStarIndex = aStarIndex;
             neighbor.isMarked = true;
             neighbor.SetPortalDistance(t);
-            CheckForNoneMarkedTile(neighbor);
+            CheckForNoneMarkedTile(neighbor, aStarTile, aStarIndex);
         }
     }
 

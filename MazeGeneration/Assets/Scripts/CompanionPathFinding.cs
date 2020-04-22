@@ -24,8 +24,8 @@ public class CompanionPathFinding : MonoBehaviour
     TeleportableObject tele;
     BeaconManager bm;
 
-    public float speed = 1.5f;
-    public float angularSpeed = 1.75f;
+    public float speed = 1.25f;
+    public float angularSpeed = 2f;
     List<Tile> pathPoints = new List<Tile>();
     bool isTravelling = false;
 
