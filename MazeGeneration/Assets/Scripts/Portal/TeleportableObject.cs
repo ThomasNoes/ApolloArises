@@ -155,9 +155,9 @@ public class TeleportableObject : MonoBehaviour
         activated = false;
 
         if (isForward)
-            currentIndex = inCurrentMaze + 1;
+            inCurrentMaze = currentIndex + 1;
         else
-            currentIndex = inCurrentMaze - 1;
+            inCurrentMaze = currentIndex - 1;
 
 
         thisObjCopy.transform.position = transform.position;
