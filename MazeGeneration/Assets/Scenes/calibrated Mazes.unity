@@ -2081,7 +2081,7 @@ MonoBehaviour:
   - {fileID: 2500389178016090726, guid: 3767eab88ce28c4448bbd26f359914bc, type: 3}
   usePlayAreaCenter: 1
   roomScaleMaze: 0
-  MazePlacement: 3
+  MazePlacement: 1
   startMazeInOrigin: 0
   createRooms: 1
   idealDistanceBetweenRooms: 7
@@ -2241,7 +2241,7 @@ MonoBehaviour:
   skyboxMaterial: {fileID: 2100000, guid: e0cdd824e66e5be4099a999e8bdd60b4, type: 2}
   cycleActive: 0
   cycleAroundX: 0
-  cycleSunHorizon: 1
+  cycleSunHorizonUp: 1
   speed: 0.8
   sunHeightLimit: 20
   exposureModifier: 0.015

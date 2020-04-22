@@ -108,13 +108,13 @@ public class CompanionPathFinding : MonoBehaviour
                 if (pathPoints[i].partOfMaze > pastPoint.partOfMaze) //teleport Next maze forward
                 {
                     Debug.Log("forward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
-                    tele.Teleport(true);
+                    tele.TeleportFromIndex(true, pastPoint.partOfMaze);
                     teleAllowed = false;
                 }
                 else if (pathPoints[i].partOfMaze < pastPoint.partOfMaze) //teleport prev maze backward
                 {
                     Debug.Log("backward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
-                    tele.Teleport(false);
+                    tele.TeleportFromIndex(false, pastPoint.partOfMaze);
                     teleAllowed = false;
                 }
             }
