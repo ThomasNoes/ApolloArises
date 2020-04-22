@@ -129,13 +129,11 @@ public class CompanionPathFinding : MonoBehaviour
                 Vector3 pastPointOffsetted = GetCompanionPosFromTile(pastPoint);
 
                 Vector3 newDirection = (point - pastPointOffsetted).normalized;
-                if(Vector3.Distance(point, pastPointOffsetted) < tileWidth + 0.1)
-                {
-                    //Debug.Log("The distance is correct" + Vector3.Distance(point, pastPointOffsetted));
-                }
-                else
+                if(Vector3.Distance(point, pastPointOffsetted) > tileWidth + 0.1) // this happens if the companion for some reason want to manual traverse between two maze segments
                 {
                     Debug.Log("The distance is incorrect" + Vector3.Distance(point, pastPointOffsetted));
+                    tele.DestroyCopy(); //destroy copy object in case there is one
+                    transform.position = point; // put the companion at the point so the player do not need to wait.
                 }
 
                 if (newDirection.magnitude == 1)
