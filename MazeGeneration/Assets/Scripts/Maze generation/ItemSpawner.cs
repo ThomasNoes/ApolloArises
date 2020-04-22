@@ -230,13 +230,13 @@ public class ItemSpawner : MonoBehaviour
     {
         GameObject tempObj = Instantiate(objToSpawn, tile.transform.position, transform.rotation, transform);
 
-        tempObj.transform.Translate(GetEdgePositionWall(tile, wall, 0.4f));
+        tempObj.transform.Translate(GetEdgePositionWall(tile, wall, 0.2f));
         tempObj.transform.rotation = Quaternion.Euler(GetEulerRotation(wall));
 
         tile.occupied = true;
     }
 
-    private void LeverSpawner()
+    private void LeverSpawner() // TODO: optimize this code
     {
         if (mapManager == null && leverPrefab != null)
             return;
@@ -286,23 +286,25 @@ public class ItemSpawner : MonoBehaviour
 
                         if (tempTile.isRoomTile && !tempTile.occupied)
                         {
-                            if (SuitableWallReturner(tempTile, true) == -1)
+                            if (SuitableOverrideReturner(tempTile) == -1)
                                 continue;
 
                             SpawnWallObjectOnSpecificTileAndWall(leverPrefab, tempTile,
-                                SuitableWallReturner(tempTile, true));
+                                SuitableOverrideReturner(tempTile));
                             itemSpawnedChecker[i] = true;
+
+                            Debug.Log("Spawned in room in maze " + i);
                         }
                     }
                 }
             }
         }
 
-        //for (int i = 0; i < itemSpawnedChecker.Length; i++) // For debugging
-        //{
-        //    if (itemSpawnedChecker[i] == false)
-        //        Debug.LogError("Lever in maze " + i + " not spawned!");
-        //}
+        for (int i = 0; i < itemSpawnedChecker.Length; i++) // For debugging TODO - disable later
+        {
+            if (itemSpawnedChecker[i] == false)
+                Debug.LogError("Lever in maze " + i + " not spawned!");
+        }
     }
 
     private void PuzzleRobotSpawner(Room room, int uniqueId)
@@ -396,6 +398,22 @@ public class ItemSpawner : MonoBehaviour
                 }
             }
         }
+        return dir;
+    }
+
+    private int SuitableOverrideReturner(Tile tile)
+    {
+        int dir = -1;
+        for (int i = 0; i < tile.wallArray.Length; i++)
+        {
+            if (tile.isShutOffTile)
+                break;
+
+            if (tile.wallArray[i] == 0)
+            {
+                dir = i;
+            }
+        }
 
         return dir;
     }
@@ -422,22 +440,6 @@ public class ItemSpawner : MonoBehaviour
         return -1;
     }
 
-    private Quaternion GetQuaternionRotation(int dir)
-    {
-        switch (dir)
-        {
-            case 0:
-                return Quaternion.Euler(0, 180, 0);
-            case 1:
-                return Quaternion.Euler(0, 270, 0);
-            case 2:
-                return Quaternion.Euler(0, 0, 0);
-            case 3:
-                return Quaternion.Euler(0, 90, 0);
-            default:
-                return Quaternion.identity;
-        }
-    }
     private Vector3 GetEulerRotation(int dir)
     {
         switch (dir)
