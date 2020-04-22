@@ -18,6 +18,7 @@ public class ItemSpawner : MonoBehaviour
     private TerrainGenerator terrainGenerator;
     private bool[] itemSpawnedChecker;
     private int mapAmount = 0;
+    private float wallHeight;
 
     private void Start()
     {
@@ -44,8 +45,7 @@ public class ItemSpawner : MonoBehaviour
 
             if (terrainGenerator == null)
                 terrainGenerator = FindObjectOfType<TerrainGenerator>();
-            if (terrainGenerator == null)
-                Debug.LogError("ERROR: Terrain generator is null on item spawner - could not be found");
+            wallHeight = terrainGenerator != null ? terrainGenerator.wallHeight : 2.5f;
 
             if (spawnDoors)
                 PuzzleSpawner();
@@ -79,7 +79,6 @@ public class ItemSpawner : MonoBehaviour
                         tempKeyScript.uniqueId = uniqueId;
                         tempKeyScript.colourMaterial = GetMaterialFromId(uniqueId);
                     }
-
                     return true;
                 }
             }
@@ -169,12 +168,12 @@ public class ItemSpawner : MonoBehaviour
             Door tempDoorScript = tempDoor.GetComponent<Door>();
             tempDoorScript.uniqueId = uniqueId;
             tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
-                terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+                wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
             tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
-            tempDoorScript.height = terrainGenerator.wallHeight;
+            tempDoorScript.height = wallHeight;
         }
         else
-            tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, terrainGenerator.wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+            tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
 
         if (spawnPuzzleRobots)
             PuzzleRobotSpawner(room, uniqueId);
@@ -389,10 +388,7 @@ public class ItemSpawner : MonoBehaviour
                 else if (tile.wallArray[i] == 0 && tile.isOuterTile)
                 {
                     if (tile.outerWalls[i] == 0 || tile.outerWalls[i] == -1)
-                    {
                         dir = i;
-                        //Debug.Log(tile.name + " | " + tile.partOfMaze + " - ON POS: " + i);
-                    }
                 }
             }
         }
@@ -412,7 +408,6 @@ public class ItemSpawner : MonoBehaviour
                 dir = i;
             }
         }
-
         return dir;
     }
 
