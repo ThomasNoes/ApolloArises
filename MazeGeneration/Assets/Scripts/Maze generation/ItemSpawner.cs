@@ -292,8 +292,6 @@ public class ItemSpawner : MonoBehaviour
                             SpawnWallObjectOnSpecificTileAndWall(leverPrefab, tempTile,
                                 SuitableOverrideReturner(tempTile));
                             itemSpawnedChecker[i] = true;
-
-                            Debug.Log("Spawned in room in maze " + i);
                         }
                     }
                 }
