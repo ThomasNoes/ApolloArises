@@ -105,11 +105,10 @@ public class ItemSpawner : MonoBehaviour
                     tempCabinet.transform.localScale = new Vector3(tempCabinet.transform.localScale.x * tileWidth, 
                         tempCabinet.transform.localScale.y * tileWidth, tempCabinet.transform.localScale.z * tileWidth);
 
-                    if (tempCabinet.GetComponent<Drawer>() != null)
+                    if (tempCabinet.GetComponent<Cabinet>() != null)
                     {
-                        Drawer tempDrawerScript = tempCabinet.GetComponent<Drawer>();
-                        tempDrawerScript.uniqueId = uniqueId;
-                        tempDrawerScript.colourMaterial = GetMaterialFromId(uniqueId);
+                        Cabinet tempDrawerScript = tempCabinet.GetComponent<Cabinet>();
+
                     }
 
                     return true;
