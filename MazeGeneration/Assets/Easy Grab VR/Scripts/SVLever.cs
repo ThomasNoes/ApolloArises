@@ -22,11 +22,13 @@ public class SVLever : MonoBehaviour {
     private SVGrabbable grabbable;
     private bool wasGrabbed = false, isActive = true;
 
-    private Vector3 startingEuler;
+    private Vector3 startingEuler, anchor, axis;
     private BeaconManager beaconManager;
 
     void Start () {
         leverHingeJoint = GetComponent<HingeJoint>();
+        anchor = leverHingeJoint.anchor;
+        axis = leverHingeJoint.axis;
 
         JointLimits limits = leverHingeJoint.limits;
         limits.max = Mathf.Max(leverOnAngle, leverOffAngle);
@@ -45,7 +47,8 @@ public class SVLever : MonoBehaviour {
 
         UpdateHingeJoint();
 
-        leverHingeJoint.anchor = Vector3.one;
+        leverHingeJoint.anchor = anchor;
+        leverHingeJoint.axis = axis;
         beaconManager = FindObjectOfType<BeaconManager>();
     }
 

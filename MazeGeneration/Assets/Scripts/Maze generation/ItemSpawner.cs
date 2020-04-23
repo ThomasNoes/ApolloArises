@@ -6,7 +6,7 @@ public class ItemSpawner : MonoBehaviour
 {
     public bool enable = false;
 
-    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, drawerPrefab;
+    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, cabinetPrefab;
 
     public bool spawnDoors = true, spawnKeysInDeadEnds = false, spawnPuzzleRobots = true, spawnLevers = true, 
         spawnPuzzleObjects = true, spawnDrawersInDeadEnds = true;
@@ -18,7 +18,7 @@ public class ItemSpawner : MonoBehaviour
     private TerrainGenerator terrainGenerator;
     private bool[] itemSpawnedChecker;
     private int mapAmount = 0;
-    private float wallHeight;
+    private float wallHeight, tileWidth;
 
     private void Start()
     {
@@ -39,6 +39,7 @@ public class ItemSpawner : MonoBehaviour
             terrainGenerator = mapManager.terrainGenerator;
 
             mapAmount = mapManager.mapSequence.Length;
+            tileWidth = mapManager.tileWidth;
 
             transform.rotation = mapManager.gameObject.transform.rotation;
             transform.position = mapManager.gameObject.transform.position;
@@ -87,9 +88,9 @@ public class ItemSpawner : MonoBehaviour
         return false;
     }
 
-    private bool SpawnDrawer(int mazeIndex, int uniqueId)
+    private bool SpawnCabinet(int mazeIndex, int uniqueId)
     {
-        if (drawerPrefab == null)
+        if (cabinetPrefab == null)
             return false;
 
         if (mazeIndex - 1 >= 0)
@@ -99,17 +100,16 @@ public class ItemSpawner : MonoBehaviour
                 if (mapManager.deadEndList[i].Count != 0)
                 {
                     int index = mapManager.deadEndList[i].Count - 1;
-                    Tile tempTile = mapManager.deadEndList[i][index];
-                    Vector3 tilePos = tempTile.transform.position;
-                    Vector3 spawnPos = new Vector3(tilePos.x, tilePos.y + 0.5f, tilePos.z);
-                    GameObject tempDrawer = Instantiate(drawerPrefab, spawnPos, Quaternion.identity, transform);
-                    mapManager.deadEndList[i].RemoveAt(index);
+                    GameObject tempCabinet = SpawnWallObjectInDeadEndAtIndex(cabinetPrefab, index, true, 1.0f);
 
-                    if (tempDrawer.GetComponent<Drawer>() != null)
+                    tempCabinet.transform.localScale = new Vector3(tempCabinet.transform.localScale.x * tileWidth, 
+                        tempCabinet.transform.localScale.y * tileWidth, tempCabinet.transform.localScale.z * tileWidth);
+
+                    if (tempCabinet.GetComponent<Drawer>() != null)
                     {
-                        Drawer tempKeyScript = tempDrawer.GetComponent<Drawer>();
-                        tempKeyScript.uniqueId = uniqueId;
-                        tempKeyScript.colourMaterial = GetMaterialFromId(uniqueId);
+                        Drawer tempDrawerScript = tempCabinet.GetComponent<Drawer>();
+                        tempDrawerScript.uniqueId = uniqueId;
+                        tempDrawerScript.colourMaterial = GetMaterialFromId(uniqueId);
                     }
 
                     return true;
@@ -140,7 +140,7 @@ public class ItemSpawner : MonoBehaviour
                         SpawnDoor(room, uniqueId);
                 }
                 else if (spawnDrawersInDeadEnds)
-                    if (SpawnDrawer(room.mazeID, uniqueId + 1))
+                    if (SpawnCabinet(room.mazeID, uniqueId + 1))
                         SpawnDoor(room, uniqueId);
             }
 
@@ -201,10 +201,10 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnWallObjectInDeadEndAtIndex(GameObject objToSpawn, int inMazeIndex)
+    public GameObject SpawnWallObjectInDeadEndAtIndex(GameObject objToSpawn, int inMazeIndex, bool returnObj, float modifier)
     {
         if (mapManager == null)
-            return;
+            return new GameObject();
 
         if (inMazeIndex >= 0 && inMazeIndex < mapAmount)
         {
@@ -216,13 +216,21 @@ public class ItemSpawner : MonoBehaviour
                 GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, transform);
                 //tempObj.transform.localScale = new Vector3(mapManager.tileWidth, mapManager.tileWidth, mapManager.tileWidth);
 
-                tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir, 0.2f));
-                tempObj.transform.rotation = Quaternion.Euler(GetEulerRotation(dir));
+                tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir, modifier));
+                tempObj.transform.Rotate(GetEulerRotation(dir));
 
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
                 tempTile.occupied = true;
+                return tempObj;
             }
         }
+
+        return new GameObject();
+    }
+
+    public void SpawnWallObjectInDeadEndAtIndex(GameObject objToSpawn, int inMazeIndex, float modifier)
+    {
+        SpawnWallObjectInDeadEndAtIndex(objToSpawn, inMazeIndex, false, modifier);
     }
 
     public void SpawnWallObjectOnSpecificTileAndWall(GameObject objToSpawn, Tile tile, int wall)
@@ -230,7 +238,7 @@ public class ItemSpawner : MonoBehaviour
         GameObject tempObj = Instantiate(objToSpawn, tile.transform.position, transform.rotation, transform);
 
         tempObj.transform.Translate(GetEdgePositionWall(tile, wall, 0.2f));
-        tempObj.transform.rotation = Quaternion.Euler(GetEulerRotation(wall));
+        tempObj.transform.Rotate(GetEulerRotation(wall));
 
         tile.occupied = true;
     }
@@ -246,7 +254,7 @@ public class ItemSpawner : MonoBehaviour
         {
             if (mapManager.deadEndList[i].Count != 0)
             {
-                SpawnWallObjectInDeadEndAtIndex(leverPrefab, i);
+                SpawnWallObjectInDeadEndAtIndex(leverPrefab, i, 0.2f);
                 itemSpawnedChecker[i] = true;
             }
             else
@@ -448,6 +456,18 @@ public class ItemSpawner : MonoBehaviour
             default:
                 return new Vector3(0,0,0);
         }
+    }
+
+    private int GetOpenDirection(Tile tile)
+    {
+        int dir = -1;
+
+        for (int i = 0; i < tile.wallArray.Length; i++)
+        {
+            if (tile.wallArray[i] == 1)
+                dir = i;
+        }
+        return dir;
     }
 
     /// <param name="dir">0: up, 1: right, 2: down, 3: left</param>

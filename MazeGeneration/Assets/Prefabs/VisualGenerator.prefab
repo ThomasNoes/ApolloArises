@@ -81,7 +81,7 @@ MonoBehaviour:
     type: 3}
   leverPrefab: {fileID: 7122563961128578877, guid: dad786a956dd53c4aa40fd758a5aa8e4,
     type: 3}
-  drawerPrefab: {fileID: 102419702520036757, guid: 813017cc87269de4b83326069c1fa81c,
+  cabinetPrefab: {fileID: 5711385213444324181, guid: deddbae27ef141540bf910e13a7c16df,
     type: 3}
   spawnDoors: 1
   spawnKeysInDeadEnds: 0
