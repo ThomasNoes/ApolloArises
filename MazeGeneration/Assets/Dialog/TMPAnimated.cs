@@ -25,7 +25,12 @@ public class TMPAnimated : MonoBehaviour
         StartCoroutine(Read());
 
         PlaySound();
-        RaiseEvent();
+
+        if (proceedButton)
+        {
+            RaiseEvent();
+        }
+
       
         return true;
     }
@@ -41,7 +46,7 @@ public class TMPAnimated : MonoBehaviour
         while (i < dialog.text.Length)
         {
             target.text += dialog.text[i];
-            textAppear.Raise();
+            textAppear?.Raise();
             yield return delay;
             i++;
         }
@@ -79,12 +84,12 @@ public class TMPAnimated : MonoBehaviour
     {
         if (dialog.ButtonEvent != null)
         {
-            proceedButton?.SetActive(false);
+            proceedButton.SetActive(false);
             dialog.ButtonEvent.Raise();
         }
         else if (!proceedButton.activeSelf)
         {
-            proceedButton?.SetActive(true);
+            proceedButton.SetActive(true);
         }
         
     }
