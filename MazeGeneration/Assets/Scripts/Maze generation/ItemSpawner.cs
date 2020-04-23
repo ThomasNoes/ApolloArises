@@ -6,7 +6,7 @@ public class ItemSpawner : MonoBehaviour
 {
     public bool enable = false;
 
-    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, cabinetPrefab;
+    public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, cabinetPrefab, puzzleItemPrefab;
 
     public bool spawnDoors = true, spawnKeysInDeadEnds = false, spawnPuzzleRobots = true, spawnLevers = true, 
         spawnPuzzleObjects = true, spawnDrawersInDeadEnds = true;
@@ -107,8 +107,9 @@ public class ItemSpawner : MonoBehaviour
 
                     if (tempCabinet.GetComponent<Cabinet>() != null)
                     {
-                        Cabinet tempDrawerScript = tempCabinet.GetComponent<Cabinet>();
-
+                        Cabinet tempCabinetScript = tempCabinet.GetComponent<Cabinet>();
+                        tempCabinetScript.objToSpawnInCabinet = puzzleItemPrefab;
+                        tempCabinetScript.SpawnItemInCabinet(tempCabinet.transform);
                     }
 
                     return true;
@@ -224,6 +225,7 @@ public class ItemSpawner : MonoBehaviour
             }
         }
 
+        Debug.LogError("Item Spawner Error: spawning empty object");
         return new GameObject();
     }
 
@@ -366,7 +368,7 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private Material GetMaterialFromId(int id)
+    public Material GetMaterialFromId(int id)
     {
         if (colourMaterials == null)
             return new Material(Shader.Find("Standard"));

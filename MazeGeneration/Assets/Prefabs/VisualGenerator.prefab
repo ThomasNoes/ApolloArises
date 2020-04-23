@@ -83,6 +83,8 @@ MonoBehaviour:
     type: 3}
   cabinetPrefab: {fileID: 5711385213444324181, guid: deddbae27ef141540bf910e13a7c16df,
     type: 3}
+  puzzleItemPrefab: {fileID: 2106478002385789612, guid: 6848489cd245920439e1fac3ec35e627,
+    type: 3}
   spawnDoors: 1
   spawnKeysInDeadEnds: 0
   spawnPuzzleRobots: 1
