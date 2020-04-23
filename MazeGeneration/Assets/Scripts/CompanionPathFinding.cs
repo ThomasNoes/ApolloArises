@@ -55,8 +55,22 @@ public class CompanionPathFinding : MonoBehaviour
         {
             targetTile = GetTileUnderObject(player);
             currentTile = GetTileUnderObject(gameObject);
-
+    
             if (currentTile != targetTile && targetTile != null)
+            {
+                GoToTarget();
+            }
+        }
+    }
+
+    public void GoToSpecificTile(Tile t)
+    {
+        if (!isTravelling)
+        {
+            targetTile = t;
+            currentTile = GetTileUnderObject(gameObject);
+
+            if (currentTile != targetTile)
             {
                 GoToTarget();
             }
@@ -72,64 +86,70 @@ public class CompanionPathFinding : MonoBehaviour
 
     private IEnumerator MoveToTarget()
     {
-        Tile pastPoint = currentTile;
-        bool teleAllowed = true;
-        for (int i = 0; i < pathPoints.Count; i++)
+        if (pathPoints.Count ==0)
         {
-            //teleport
-            if (pathPoints[i].isPortalTile && pastPoint.isPortalTile && teleAllowed) // if the tile companion is going a portal and is currently on a portal tile 
+            yield break;
+        }
+        else
+        {
+            Tile pastPoint = currentTile;
+            bool teleAllowed = true;
+            for (int i = 0; i < pathPoints.Count; i++)
             {
-                
-                if (pathPoints[i].partOfMaze > pastPoint.partOfMaze) //teleport Next maze forward
+                //teleport
+                if (pathPoints[i].isPortalTile && pastPoint.isPortalTile && teleAllowed) // if the tile companion is going a portal and is currently on a portal tile 
                 {
-                    Debug.Log("forward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
-                    tele.TeleportFromIndex(true, pastPoint.partOfMaze);
-                    teleAllowed = false;
-                }
-                else if (pathPoints[i].partOfMaze < pastPoint.partOfMaze) //teleport prev maze backward
-                {
-                    Debug.Log("backward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
-                    tele.TeleportFromIndex(false, pastPoint.partOfMaze);
-                    teleAllowed = false;
-                }
-            }
-            else
-            {
-                //traverse and rotate
-                Vector3 point = GetCompanionPosFromTile(pathPoints[i]);
 
-                Vector3 pastPointOffsetted = GetCompanionPosFromTile(pastPoint);
-
-                Vector3 newDirection = (point - pastPointOffsetted).normalized;
-                if(Vector3.Distance(point, pastPointOffsetted) > tileWidth + 0.1) // this happens if the companion for some reason want to manual traverse between two maze segments
-                {
-                    Debug.Log("The distance is incorrect" + Vector3.Distance(point, pastPointOffsetted));
-                    tele.DestroyCopy(); //destroy copy object in case there is one
-                    transform.position = point; // put the companion at the point so the player do not need to wait.
-                }
-
-                if (newDirection.magnitude == 1)
-                {
-                    //rotate the companion to face the direction it is about to move to
-                    while (Vector3.Angle(transform.forward, newDirection)>1.0f)
+                    if (pathPoints[i].partOfMaze > pastPoint.partOfMaze) //teleport Next maze forward
                     {
-                        transform.forward = Vector3.RotateTowards(transform.forward, newDirection, angularSpeed * Time.deltaTime, 0.0f);
-                        yield return null;
+                        Debug.Log("forward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
+                        tele.TeleportFromIndex(true, pastPoint.partOfMaze);
+                        teleAllowed = false;
+                    }
+                    else if (pathPoints[i].partOfMaze < pastPoint.partOfMaze) //teleport prev maze backward
+                    {
+                        Debug.Log("backward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
+                        tele.TeleportFromIndex(false, pastPoint.partOfMaze);
+                        teleAllowed = false;
                     }
                 }
-
-                //new move to the next point!
-                while (transform.position != point)
+                else
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, point, speed * Time.deltaTime);
-                    yield return null;
-                }
-                teleAllowed = true;
-            }
+                    //traverse and rotate
+                    Vector3 point = GetCompanionPosFromTile(pathPoints[i]);
 
-            pastPoint = pathPoints[i];
+                    Vector3 pastPointOffsetted = GetCompanionPosFromTile(pastPoint);
+
+                    Vector3 newDirection = (point - pastPointOffsetted).normalized;
+                    if (Vector3.Distance(point, pastPointOffsetted) > tileWidth + 0.1) // this happens if the companion for some reason want to manual traverse between two maze segments
+                    {
+                        Debug.Log("The distance is incorrect" + Vector3.Distance(point, pastPointOffsetted));
+                        tele.DestroyCopy(); //destroy copy object in case there is one
+                        transform.position = point; // put the companion at the point so the player do not need to wait.
+                    }
+
+                    if (newDirection.magnitude == 1)
+                    {
+                        //rotate the companion to face the direction it is about to move to
+                        while (Vector3.Angle(transform.forward, newDirection) > 1.0f)
+                        {
+                            transform.forward = Vector3.RotateTowards(transform.forward, newDirection, angularSpeed * Time.deltaTime, 0.0f);
+                            yield return null;
+                        }
+                    }
+
+                    //new move to the next point!
+                    while (transform.position != point)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, point, speed * Time.deltaTime);
+                        yield return null;
+                    }
+                    teleAllowed = true;
+                }
+
+                pastPoint = pathPoints[i];
+            }
         }
-        //pathPoints.Clear();
         isTravelling = false;
     }
 
@@ -147,6 +167,7 @@ public class CompanionPathFinding : MonoBehaviour
             Debug.Log("target is null");
             return;
         }
+
         List<Tile> tempPath = new List<Tile>();
         //tempPath.Add(currentTile);
 
@@ -188,6 +209,7 @@ public class CompanionPathFinding : MonoBehaviour
         //tempPath now have the complete route for the companion to follow.
         //cut the route if there is a door blocking or the maze segment is turned of
         pathPoints = CutRouteAtBlockade(tempPath);
+
         //pathPoints.RemoveAt(0);
     }
 
@@ -207,11 +229,10 @@ public class CompanionPathFinding : MonoBehaviour
                     break;
                 } 
             }
-            else
-            {
-                safeRoute.Add(route[i]);
-            }
+            safeRoute.Add(route[i]);
         }
+
+        //targetTile = safeRoute[safeRoute.Count - 1];
         return safeRoute;
     }
 
@@ -255,7 +276,7 @@ public class CompanionPathFinding : MonoBehaviour
     }
 
 
-    private Tile GetTileUnderObject(GameObject go)
+    public Tile GetTileUnderObject(GameObject go)
     {
         RaycastHit hit;
 
@@ -272,7 +293,7 @@ public class CompanionPathFinding : MonoBehaviour
                 return tempTile;
             }
         }
-        else
+        else if(go = gameObject)
         {
             Debug.Log("the companion is not over a tile. and it is assumed the companion has teleported incorrectly. so it is placed on the same tile as the player");
             Tile playerTile = GetTileUnderObject(player);

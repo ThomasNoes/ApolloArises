@@ -12,10 +12,14 @@ public class CompanionBehaviour : MonoBehaviour
     //what to say and when to say
     //and generally listen to events that happens in the game, and what player actions happens
 
+    static public CompanionBehaviour instance;
+
     public DialogReader dr;
     public CompanionPathFinding cpf;
     MapManager mm;
     List<MapGenerator> maps;
+    GameObject player;
+    BeaconManager bm;
 
 
     public bool isFollowPlayer;
@@ -24,19 +28,31 @@ public class CompanionBehaviour : MonoBehaviour
     Tile endtile;
 
 
+    public DialogData goToGenDialog;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
+
+
         dr = GetComponent<DialogReader>();
         cpf = GetComponent<CompanionPathFinding>();
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
         maps = mm.mapScripts;
+        player = Camera.main.gameObject;
+        bm = GameObject.Find("BeaconManager").GetComponent<BeaconManager>();
 
         startTile = FindStartEndTile(maps[0]);
         endtile = FindStartEndTile(maps[maps.Count - 1]);
 
-        Invoke("LateStart",0);
+        Invoke("LateStart",0); //wait a frame
     }
 
     void LateStart()
@@ -44,20 +60,39 @@ public class CompanionBehaviour : MonoBehaviour
         cpf.PlaceCompanionOnTile(startTile);
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        if (true)
-        {
-
-        }
-
+        //movement companion
+        isFollowPlayer = UpdateIsFollowPlayer();
         if(isFollowPlayer)
         {
             cpf.FollowPlayer();
         }
     }
 
+
+    public bool UpdateIsFollowPlayer()
+    {
+        Tile playerTile = cpf.GetTileUnderObject(player);
+        if (bm.beacons.Count != 0)
+        {
+            if (!bm.beacons[playerTile.partOfMaze].isActive)
+            {
+                return false;
+            }
+            if (bm.beacons[bm.beacons.Count-1].isActive)
+            {
+                return false;
+            }
+        }
+        if (playerTile == null)
+        {
+            return false;
+        }
+        return true;
+    }
 
     private Tile FindStartEndTile(MapGenerator map)
     {
@@ -88,19 +123,14 @@ public class CompanionBehaviour : MonoBehaviour
         return null;
     }
 
-    //start end event
-
-
-
-
-
-
+    //end event
+    public void GoToGenerator()
+    {
+        Debug.Log("gotogenerator");
+        cpf.GoToSpecificTile(endtile);
+        dr.InjectDialog(goToGenDialog);
+    }
 }
-
-
-
-
-
 
 
 

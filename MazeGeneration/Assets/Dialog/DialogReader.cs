@@ -27,7 +27,10 @@ public class DialogReader : MonoBehaviour
 
     public void InjectDialog(DialogData dialog)
     {
-        tmpa.ReadText(dialog, TMP_Object);
+        if (!tmpa.isRunning)
+        {
+            tmpa.ReadText(dialog, TMP_Object);
+        }
     }
 
     public void SetBranchedDialogs(DialogData[] branchedDialogs)

@@ -71,8 +71,12 @@ public class BeaconManager : MonoBehaviour
         }
 
         if (lastBeacon)
+        {
+            CompanionBehaviour.instance.GoToGenerator();
             if (dayNightController != null)
                 dayNightController.StartSkyboxAndTintChange(true);
+        }
+
     }
 }
 
