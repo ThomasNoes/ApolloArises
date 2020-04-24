@@ -86,11 +86,12 @@ MonoBehaviour:
   puzzleItemPrefab: {fileID: 2106478002385789612, guid: 6848489cd245920439e1fac3ec35e627,
     type: 3}
   spawnDoors: 1
-  spawnKeysInDeadEnds: 0
+  spawnKeysInDeadEnds: 1
   spawnPuzzleRobots: 1
   spawnLevers: 1
   spawnPuzzleObjects: 1
-  spawnDrawersInDeadEnds: 1
+  spawnCogwheelsInDeadEnds: 1
+  initializeTutorialRoom: 0
   spawnFrequency: 1
   colourMaterials:
   - {fileID: 2100000, guid: d0443b9c3f9f27d47acbdc3e23517000, type: 2}

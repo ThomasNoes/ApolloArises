@@ -9,6 +9,8 @@ public class Beacon : MonoBehaviour
     public Beacon connectedToBack, connectedToForward;
     public GameObject orb;
     public AudioClip closingRoof, orbOn;
+    [HideInInspector] public Door doorRef;
+    [HideInInspector] public PuzzleRobot puzzleRobotRef;
 
     private Renderer orbRenderer;
     private Animator animator;
@@ -50,6 +52,9 @@ public class Beacon : MonoBehaviour
             orbRenderer.material.EnableKeyword("_EMISSION");
             orbRenderer.material.SetColor("_EmissionColor", beaconManager.orbEndEmission);
         }
+
+        puzzleRobotRef?.TurnOn();
+        doorRef?.PowerDoor();
     }
 
     private IEnumerator PlayBeaconSoundWithDelay()

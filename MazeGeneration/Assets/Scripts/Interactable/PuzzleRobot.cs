@@ -5,17 +5,20 @@ using UnityEngine.UI;
 public class PuzzleRobot : MonoBehaviour
 {
     public float rotateSpeed = 1.0f, blinkDuration = 0.5f, blinkFrequency = 5.0f;
-    public bool enableBlinking = true, turnedOff;
-    public GameObject headObj, mainScreenObj, keyPrefab, puzzleStandObj, puzzleDoor;
+    public bool enableBlinking = true, turnedOff, startsFixed;
+    public GameObject headObj, mainScreenObj, keyPrefab, puzzleStandObj, puzzleDoor, puzzleCogWheel;
     public GameObject mainScreenCanvas;
     public Image faceImage;
     public Sprite openEyes, closedEyes, turnedOffFace;
-    public int uniqueId = 0;
+    public int uniqueId = 0, inMaze;
     [HideInInspector] public ItemSpawner itemSpawner;
+    [HideInInspector] public bool inFirstRoom;
 
     private GameObject mainCamObj, visualGenObj;
     private WaitForSeconds blinkDur, blinkFreq;
-    private bool animatePuzzleDoor;
+    private BeaconManager beaconManager;
+    private PuzzleWheel puzzleWheel;
+    private bool animatePuzzleDoor, keySpawned;
     private Vector3 startPos, endPos;
     private float fraction;
 
@@ -25,17 +28,45 @@ public class PuzzleRobot : MonoBehaviour
             return;
 
         mainCamObj = Camera.main?.gameObject;
+        beaconManager = FindObjectOfType<BeaconManager>();
+
+        if (puzzleDoor != null)
+        {
+            startPos = puzzleDoor.transform.position;
+            endPos = new Vector3(puzzleDoor.transform.position.x, puzzleDoor.transform.position.y - (puzzleDoor.transform.localScale.y), puzzleDoor.transform.position.z);
+        }
+
+        if (inFirstRoom)
+        {
+            animatePuzzleDoor = true;
+            SpawnKey();
+        }
+        else if (startsFixed)
+        {
+            animatePuzzleDoor = true;
+            keySpawned = true;
+        }
+
+        if (puzzleCogWheel != null)
+            puzzleWheel = GetComponent<PuzzleWheel>();
+
+        Invoke("DelayedStart", 0.8f);
+    }
+
+    private void DelayedStart()
+    {
+        if (beaconManager != null && uniqueId != 0)
+        {
+            //Debug.Log(uniqueId + " | " + inMaze);
+
+            turnedOff = !beaconManager.beacons[inMaze].isActive;
+            beaconManager.beacons[inMaze].puzzleRobotRef = this;
+        }
 
         if (faceImage != null && openEyes != null && closedEyes != null)
         {
             blinkDur = new WaitForSeconds(blinkDuration);
             blinkFreq = new WaitForSeconds(blinkFrequency);
-
-            if (puzzleDoor != null)
-            {
-                startPos = puzzleDoor.transform.position;
-                endPos = new Vector3(puzzleDoor.transform.position.x, puzzleDoor.transform.position.y - (puzzleDoor.transform.localScale.y), puzzleDoor.transform.position.z);
-            }
 
             if (!turnedOff)
                 StartCoroutine(FaceBehaviour());
@@ -87,7 +118,7 @@ public class PuzzleRobot : MonoBehaviour
 
     public void SpawnKey()
     {
-        if (keyPrefab == null)
+        if (keyPrefab == null || keySpawned)
             return;
 
         Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
@@ -104,11 +135,12 @@ public class PuzzleRobot : MonoBehaviour
 
             if (itemSpawner != null)
             {
-                tempKeyScript.colourMaterial = itemSpawner.GetMaterialFromId(uniqueId);
+                tempKeyScript.itemSpawner = itemSpawner;
             }
         }
 
         animatePuzzleDoor = true;
+        keySpawned = true;
     }
 
     public void SetVisualGeneratorObject(GameObject obj)
@@ -118,6 +150,9 @@ public class PuzzleRobot : MonoBehaviour
 
     public void TurnOn()
     {
+        if (turnedOff == false)
+            return;
+
         turnedOff = false;
 
         if (mainScreenCanvas != null)
@@ -128,6 +163,9 @@ public class PuzzleRobot : MonoBehaviour
 
     public void TurnOff()
     {
+        if (turnedOff)
+            return;
+
         turnedOff = true;
 
         if (turnedOffFace != null)

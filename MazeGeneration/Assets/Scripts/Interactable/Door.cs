@@ -10,8 +10,8 @@ public class Door : MonoBehaviour
 {
     public bool colourWholeDoor = true;
     public GameObject doorMainObj, keyHoleObj;
-    public int uniqueId;
-    public bool useDelay;
+    public int uniqueId, inMaze;
+    public bool useDelay, isPowered;
     public float delay = 1.0f, moveSpeed = 1.0f, height;
     public AudioClip unlockSound, openSound;
     [HideInInspector] public Material colourMaterial;
@@ -20,9 +20,12 @@ public class Door : MonoBehaviour
     private Vector3 startPos, endPos;
     private float fraction;
     private AudioSource audioSource;
+    private BeaconManager beaconManager;
 
     private void Start()
     {
+        beaconManager = FindObjectOfType<BeaconManager>();
+
         if (keyHoleObj != null)
         {
             BoxCollider thisCollider = GetComponent<BoxCollider>();
@@ -38,6 +41,12 @@ public class Door : MonoBehaviour
 
         if (doorMainObj != null)
             Invoke("DelayedStart", 1.0f);
+
+        if (beaconManager != null && uniqueId != 0)
+        {
+            isPowered = beaconManager.beacons[inMaze].isActive;
+            beaconManager.beacons[inMaze].doorRef = this;
+        }
 
         startPos = transform.position;
         endPos = new Vector3(transform.position.x, transform.position.y - (height - 0.02f), transform.position.z);
@@ -60,6 +69,9 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
+        if (!isPowered)
+            return;
+
         if (col.CompareTag("Key"))
             if (col.GetComponent<Key>() != null)
             {
@@ -107,6 +119,8 @@ public class Door : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.Play();
     }
+
+    public void PowerDoor() => isPowered = true;
 }
 
 #region CustomInspector

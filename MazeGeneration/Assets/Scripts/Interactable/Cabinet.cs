@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Cabinet : MonoBehaviour
 {
+    public int uniqueId;
     public GameObject door, objToSpawnInCabinet;
     private HingeJoint hingeJoint;
     private Vector3 anchor, axis;
@@ -30,12 +31,19 @@ public class Cabinet : MonoBehaviour
         hingeJoint.axis = axis;
     }
 
-    public void SpawnItemInCabinet(Transform objTransform)
+    public void SpawnItemInCabinet(Transform objTransform, ItemSpawner itemSpawner)
     {
         if (objToSpawnInCabinet != null)
         {
             GameObject tempObj = Instantiate(objToSpawnInCabinet, transform.position, Quaternion.identity);
-            // tempObj.transform.localScale = new Vector3(tempObj.transform.localScale.x * tileWidth, tempObj.transform.localScale.y * tileWidth, tempObj.transform.localScale.z * tileWidth);
+
+            Key tempKey = tempObj.GetComponent<Key>();
+
+            if (tempKey != null)
+            {
+                tempKey.itemSpawner = itemSpawner;
+                tempKey.uniqueId = uniqueId;
+            }
         }
     }
 }
