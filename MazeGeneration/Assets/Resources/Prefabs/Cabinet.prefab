@@ -196,7 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5fe240d8725954ea51ad694c76d5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uniqueId: 0
   door: {fileID: 8413723351126625070}
+  objToSpawnInCabinet: {fileID: 0}
+  tileWidth: 0
 --- !u!54 &5600786427445657217
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,8 +227,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.52330387, y: 0.021215647, z: 0.19016227}
-  m_Center: {x: -0.00001347065, y: -0.17817797, z: 0.000027045608}
+  m_Size: {x: 0.52330387, y: 0.037989646, z: 0.19380246}
+  m_Center: {x: -0.00001347065, y: -0.16979097, z: -0.0017930493}
 --- !u!1 &7083253507410374622
 GameObject:
   m_ObjectHideFlags: 0
