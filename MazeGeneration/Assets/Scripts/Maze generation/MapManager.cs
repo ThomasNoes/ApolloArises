@@ -21,6 +21,8 @@ public class MapManager : MonoBehaviour
     }
 
 
+
+    public bool isCableLinked;
     public bool evaluationMaze = false;
     public GameObject gizmo;
     public TerrainGenerator terrainGenerator;
@@ -83,7 +85,7 @@ public class MapManager : MonoBehaviour
         if (roomScaleMaze)
         {
             gc = GetComponent<GuardainCalibration>();
-            if (Application.isEditor)
+            if (!isCableLinked && Application.isEditor)
             {
                 gc.DebugCalibration(out center, out forward);
                 gc.RoomScaling(out mazeRows, out mazeCols, tileWidth, 0.3f,true);
