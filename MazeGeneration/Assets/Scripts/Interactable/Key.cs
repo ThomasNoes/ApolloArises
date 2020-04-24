@@ -25,12 +25,4 @@ public class Key : MonoBehaviour
         colourMaterial = itemSpawner.GetMaterialFromId(uniqueId);
         renderer.material = colourMaterial; // TODO, make work with new key texture (when it is done)
     }
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (col.CompareTag("Respawn"))
-        {
-            gameObject.transform.position = Camera.main.gameObject.transform.position;
-        }
-    }
 }

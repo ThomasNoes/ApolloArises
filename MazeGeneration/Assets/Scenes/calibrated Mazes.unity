@@ -1952,6 +1952,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2059672653}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1566274728
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5902692639183386695, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927735055784872924, guid: edaa38773d2b9dd48828768fd56efdd5,
+        type: 3}
+      propertyPath: m_Name
+      value: ItemRespawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edaa38773d2b9dd48828768fd56efdd5, type: 3}
 --- !u!1 &1592407331
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,13 +2259,13 @@ MonoBehaviour:
   MazePlacement: 4
   startMazeInOrigin: 0
   createRooms: 1
-  idealDistanceBetweenRooms: 7
+  idealDistanceBetweenRooms: 1
   maxIndexOuterWall: 1
   mapScripts: []
   playerHead: {fileID: 2526136163395224742}
   mazeRows: 3
-  mazeCols: 3
-  tileWidth: 0.7
+  mazeCols: 4
+  tileWidth: 0.6
   startRow: 0
   startCol: 0
   playAreaSize: {x: 3, y: 0, z: 3}
@@ -2205,6 +2274,258 @@ MonoBehaviour:
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
   - mapType: 0
     roomName: 
     isEndSeeded: 0
@@ -3907,7 +4228,12 @@ PrefabInstance:
     - target: {fileID: 7748457934529168359, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
       propertyPath: enableBeacons
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105415572236804803, guid: c7892fa38fcffbb49807b3c2ac709216,
+        type: 3}
+      propertyPath: enable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7892fa38fcffbb49807b3c2ac709216, type: 3}
