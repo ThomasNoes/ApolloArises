@@ -6,12 +6,11 @@ using UnityEngine.Assertions;
 /**
  * Creates a VRLever. Heads up, we're using Euler Angles here so don't try to lever around the 360 angle.  Things will break!
  */ 
-[RequireComponent(typeof(HingeJoint))]
+[RequireComponent(typeof(HingeJoint), typeof(SVGrabbable))]
 public class SVLever : MonoBehaviour {
 
-    public float leverOnAngle = -45;
-    public float leverOffAngle = 45;
-    public int inMaze;
+    public float leverOnAngle = -60;
+    public float leverOffAngle = 60;
 
     public bool leverIsOn = false;
     public bool oneTimeUse = false;
@@ -21,10 +20,10 @@ public class SVLever : MonoBehaviour {
     private HingeJoint leverHingeJoint;
 
     private SVGrabbable grabbable;
+    private Lever lever;
     private bool wasGrabbed = false, isActive = true;
 
     private Vector3 startingEuler, anchor, axis;
-    private BeaconManager beaconManager;
 
     void Start () {
         leverHingeJoint = GetComponent<HingeJoint>();
@@ -39,10 +38,7 @@ public class SVLever : MonoBehaviour {
 
         // Get a grabbable on the Lever or one of it's children. You could technically have the grabbable outside of the lever
         // And connect it with a fixed joint, if so just set grabbable to public and set it in editor.
-        SVGrabbable[] grabbables = (SVGrabbable[])SVUtilities.AllComponentsOfType<SVGrabbable>(gameObject);
-        Assert.IsFalse(grabbables.Length > 1, "SVLever only supports one grabbing surface at a time.");
-        Assert.IsFalse(grabbables.Length <= 0, "SVLever requires a grabble component on it, or a child object, to function.");
-        grabbable = grabbables[0];
+        grabbable = GetComponent<SVGrabbable>();
 
         startingEuler = this.transform.localEulerAngles;
 
@@ -50,7 +46,7 @@ public class SVLever : MonoBehaviour {
 
         leverHingeJoint.anchor = anchor;
         leverHingeJoint.axis = axis;
-        beaconManager = FindObjectOfType<BeaconManager>();
+        lever = transform.parent.GetComponent<Lever>();
     }
 
     // Update is called once per frame
@@ -93,7 +89,7 @@ public class SVLever : MonoBehaviour {
             if (leverIsOn) {
                 spring.targetPosition = leverOnAngle;
             } else {
-                spring.targetPosition = leverOffAngle;
+                spring.targetPosition = leverOnAngle;
             }
             leverHingeJoint.useSpring = true;
         }
@@ -111,6 +107,6 @@ public class SVLever : MonoBehaviour {
 
     private void ActivateBeacon()
     {
-        beaconManager?.ConnectNextBeacon(inMaze, false);
+        lever?.ActivateBeacon();
     }
 }

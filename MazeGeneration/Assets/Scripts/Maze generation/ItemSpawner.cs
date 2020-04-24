@@ -390,7 +390,7 @@ public class ItemSpawner : MonoBehaviour
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
                 tempTile.occupied = true;
 
-                SVLever leverScript = tempObj.GetComponent<SVLever>();
+                Lever leverScript = tempObj.GetComponent<Lever>();
                 if (leverScript != null)
                     leverScript.inMaze = inMazeIndex;
 
@@ -416,7 +416,7 @@ public class ItemSpawner : MonoBehaviour
 
         tile.occupied = true;
 
-        SVLever leverScript = tempObj.GetComponent<SVLever>();
+        Lever leverScript = tempObj.GetComponent<Lever>();
         if (leverScript != null)
             leverScript.inMaze = tile.partOfMaze;
     }

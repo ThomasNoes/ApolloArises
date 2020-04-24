@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 2693971837058065695}
   - component: {fileID: 5584610662067610017}
   - component: {fileID: 4048616290826864559}
+  - component: {fileID: 2067105282178740672}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -159,6 +160,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2067105282178740672
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212713299757636824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 0.6999999, z: 0.2050796}
+  m_Center: {x: 0, y: 0, z: 0.29995126}
 --- !u!1 &1545044064527153759
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,10 +186,11 @@ GameObject:
   - component: {fileID: 4751989833101643226}
   - component: {fileID: 5328541767080431365}
   - component: {fileID: 3235675504362103756}
-  - component: {fileID: 5849532398198276189}
   - component: {fileID: 6250677705135447478}
   - component: {fileID: 791366940263595905}
   - component: {fileID: 9048673919510902586}
+  - component: {fileID: 7059043804216545557}
+  - component: {fileID: 2106903140654147350}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -273,20 +288,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &5849532398198276189
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545044064527153759}
-  m_ConnectedBody: {fileID: 7978265699571367016}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &6250677705135447478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +345,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorActive: 0
   glowColor: {r: 1, g: 0.99157, b: 0.4470588, a: 0.653}
+--- !u!59 &7059043804216545557
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545044064527153759}
+  m_ConnectedBody: {fileID: 7978265699571367016}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0.02978714}
+  m_UseSpring: 1
+  m_Spring:
+    spring: 0.09
+    damper: 0.05
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
+--- !u!114 &2106903140654147350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545044064527153759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8bb230f7ab7674a9a2c672a665dd92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leverOnAngle: -25
+  leverOffAngle: 60
+  leverIsOn: 1
+  oneTimeUse: 1
+  beaconLever: 1
+  leverWasSwitched: 0
 --- !u!1 &7122563961128578877
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,10 +407,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6089772656851655982}
-  - component: {fileID: 5149774764902719285}
   - component: {fileID: 7978265699571367016}
-  - component: {fileID: 960480920195264226}
-  - component: {fileID: 7026615195125828341}
+  - component: {fileID: 6568411815717630576}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -381,23 +433,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5149774764902719285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7122563961128578877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: accc829febb65ae49b999df14d7f0565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leverDown: {fileID: 0}
-  leverUp: {fileID: 0}
-  minPitch: 0.8
-  maxPitch: 1.2
-  volume: 1
 --- !u!54 &7978265699571367016
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -414,42 +449,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!59 &960480920195264226
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7122563961128578877}
-  m_ConnectedBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_UseSpring: 1
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 0
-  m_Limits:
-    min: 0
-    max: 0
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
---- !u!114 &7026615195125828341
+--- !u!114 &6568411815717630576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -458,12 +458,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7122563961128578877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe8bb230f7ab7674a9a2c672a665dd92, type: 3}
+  m_Script: {fileID: 11500000, guid: eba2d9c4039a7ed428467517add639e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leverOnAngle: -20
-  leverOffAngle: 60
-  leverIsOn: 1
-  oneTimeUse: 1
-  beaconLever: 1
-  leverWasSwitched: 0
+  inMaze: 0

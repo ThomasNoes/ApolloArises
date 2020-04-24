@@ -1,11 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
-    public SphereCollider handleCollider;
+    public int inMaze;
+    private BeaconManager beaconManager;
 
+    private void Start()
+    {
+        beaconManager = FindObjectOfType<BeaconManager>();
+    }
 
-
+    public void ActivateBeacon()
+    {
+        beaconManager?.ConnectNextBeacon(inMaze, false);
+    }
 }
