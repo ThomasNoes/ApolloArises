@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
-  m_Name: GoToGenerator
+  m_Name: PickUpCogwheel
   m_EditorClassIdentifier: 
-  text: Hey, that was the last lever! Follow me to the generator!
+  text: Oh no, that belongs to my colleague! Poor unit...
   textSpeed: 10
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
