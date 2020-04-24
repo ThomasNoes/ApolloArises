@@ -2,6 +2,7 @@
  *	Quick and dirty defines manager for Revolver Kit VR
  */
 
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -116,3 +117,4 @@ public class DefineManager : EditorWindow
 		AssetDatabase.ImportAsset(SCRIPT_PATH, ImportAssetOptions.ForceUpdate);
 	}
 }
+#endif

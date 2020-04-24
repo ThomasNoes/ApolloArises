@@ -41,7 +41,7 @@ public class Tile : MonoBehaviour {
     private bool isPartOfPotentialRoom = false;
 
     //connect a star tile for non a star tiles
-    public Tile ConnectedAStar = null;
+    public Tile ConnectedAStar;
     public int connectAStarIndex;
 
 
