@@ -389,6 +389,11 @@ public class ItemSpawner : MonoBehaviour
 
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
                 tempTile.occupied = true;
+
+                SVLever leverScript = tempObj.GetComponent<SVLever>();
+                if (leverScript != null)
+                    leverScript.inMaze = inMazeIndex;
+
                 return tempObj;
             }
         }
@@ -410,6 +415,10 @@ public class ItemSpawner : MonoBehaviour
         tempObj.transform.Rotate(GetEulerRotation(wall));
 
         tile.occupied = true;
+
+        SVLever leverScript = tempObj.GetComponent<SVLever>();
+        if (leverScript != null)
+            leverScript.inMaze = tile.partOfMaze;
     }
     #endregion
 

@@ -23,12 +23,15 @@ public class BeaconManager : MonoBehaviour
         dayNightController = FindObjectOfType<DayNightController>();
     }
 
-    public void ConnectNextBeacon()
+    public void ConnectNextBeacon(int mazeIndex, bool overrideIndex)
     {
         for (int i = 0; i < beacons.Count; i++)
         {
             if (!beacons[i].isActive)
             {
+                if (i != mazeIndex && !overrideIndex)
+                    continue;
+
                 beacons[i].isActive = true;
                 beacons[i].LightBeacon();
 
@@ -93,7 +96,7 @@ public class BeaconManager_Editor : UnityEditor.Editor
 
         if (GUILayout.Button("Connect next beacon!"))
         {
-            script.ConnectNextBeacon();
+            script.ConnectNextBeacon(0, true);
         }
     }
 }

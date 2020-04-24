@@ -11,6 +11,7 @@ public class SVLever : MonoBehaviour {
 
     public float leverOnAngle = -45;
     public float leverOffAngle = 45;
+    public int inMaze;
 
     public bool leverIsOn = false;
     public bool oneTimeUse = false;
@@ -110,6 +111,6 @@ public class SVLever : MonoBehaviour {
 
     private void ActivateBeacon()
     {
-        beaconManager?.ConnectNextBeacon();
+        beaconManager?.ConnectNextBeacon(inMaze, false);
     }
 }
