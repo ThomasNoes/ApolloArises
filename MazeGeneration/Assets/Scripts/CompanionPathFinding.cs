@@ -155,7 +155,15 @@ public class CompanionPathFinding : MonoBehaviour
 
     public void PlaceCompanionOnTile(Tile t)
     {
-        transform.position = GetCompanionPosFromTile(t);
+        if (t != null)
+        {
+            transform.position = GetCompanionPosFromTile(t);
+        }
+        else
+        {
+            Debug.Log("Error: companion can not be moved to player position if the player is not on a tile");
+        }
+
     }
 
     private void PlanRoute(Tile target)
