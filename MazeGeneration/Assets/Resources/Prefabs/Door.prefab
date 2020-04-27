@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.11752117}
-  m_Center: {x: 0, y: 0, z: 0.0013103187}
+  m_Size: {x: 1, y: 1, z: 0.05367023}
+  m_Center: {x: 0, y: 0, z: 0.0012536738}
 --- !u!114 &906067179569708712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,10 +235,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 7811637081356049621, guid: d9729be1cb5119747959a2e72c64ec83,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.14246927
+      objectReference: {fileID: 0}
     - target: {fileID: 8940632808050562651, guid: d9729be1cb5119747959a2e72c64ec83,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.42049
+      value: 0.4350108
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9729be1cb5119747959a2e72c64ec83, type: 3}
