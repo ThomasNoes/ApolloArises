@@ -163,6 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a418a2eb71f6b4c956d11f858a4c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dr: {fileID: 0}
+  cpf: {fileID: 0}
+  isFollowPlayer: 0
+  goToGenDialog: {fileID: 0}
 --- !u!114 &2471123925323816699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,12 +179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e15d917da568bf47af1cff13e26b5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFollowPlayer: 1
   player: {fileID: 0}
   currentTile: {fileID: 0}
   targetTile: {fileID: 0}
   speed: 1.25
   angularSpeed: 2
+  isTravelling: 0
 --- !u!114 &306741516183990157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toNextScene: 0
   dialogs: []
+  branchedDialogs: []
   TMP_Object: {fileID: 0}
   tsm: {fileID: 0}
   index: 0
@@ -321,7 +326,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e856358770f187418d1dfe256f57851, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dab589fac649cee48b4c0f5b8bcc33a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
