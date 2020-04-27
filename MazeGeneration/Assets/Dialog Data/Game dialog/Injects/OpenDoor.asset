@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
-  m_Name: New Dialog Data 1
+  m_Name: OpenDoor
   m_EditorClassIdentifier: 
-  text: 
+  text: "Let\u2019s continue!"
   textSpeed: 10
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

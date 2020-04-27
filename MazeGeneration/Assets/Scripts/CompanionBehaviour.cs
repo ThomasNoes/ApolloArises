@@ -27,8 +27,8 @@ public class CompanionBehaviour : MonoBehaviour
     Tile startTile;
     Tile endtile;
 
-    public DialogData openDoor;
-    public DialogData openFirstDoor;
+    public DialogData openDoor; //
+    public DialogData openFirstDoor; //
     public DialogData pickUpCogwheel; //
     public DialogData pickUpKey; //
     public DialogData wrongLever; //
@@ -37,7 +37,7 @@ public class CompanionBehaviour : MonoBehaviour
     public DialogData lastLever; //
     public DialogData throughDoor; //
     public DialogData throughWall; //
-    public DialogData walkToNewTower;
+    public DialogData walkToNewTower; // correct
 
     bool firstDoor = true;
 
@@ -185,7 +185,7 @@ public class CompanionBehaviour : MonoBehaviour
     {
         if (firstDoor)
         {
-            dr.InjectDialog(walkToNewTower);
+            dr.InjectDialog(openFirstDoor);
                 //public DialogData openFirstDoor;
             firstDoor = false;
         }
