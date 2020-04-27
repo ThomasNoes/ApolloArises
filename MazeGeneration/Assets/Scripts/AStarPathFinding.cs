@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public  class AStarPathFinding : MonoBehaviour
+public class AStarPathFinding
 {
     // https://www.youtube.com/watch?v=-L-WgKMFuhE
 
@@ -92,7 +92,7 @@ public  class AStarPathFinding : MonoBehaviour
         {
             if (current.wallArray[i] == 1) // if the tile is traversable in that direction
             {
-                Tile neighbor = new Tile();
+                Tile neighbor;
                 switch (i)
                 {
                     case 0:
@@ -233,7 +233,7 @@ public  class AStarPathFinding : MonoBehaviour
         {
             if (t.wallArray[i] == 1) // if the tile is traversable in that direction
             {
-                Tile neighbor = new Tile();
+                Tile neighbor;
                 switch (i)
                 {
                     case 0:
@@ -316,7 +316,7 @@ public  class AStarPathFinding : MonoBehaviour
         {
             SetGizmoPrefab();
         }
-        GameObject gizmo = Instantiate(gizmoPrefab, t.transform);
+        GameObject gizmo = GameObject.Instantiate(gizmoPrefab, t.transform);
         gizmo.GetComponent<drawGizmo>().SetColor(color);
         gizmo.GetComponent<drawGizmo>().SetSize(scale);
         gizmo.name = "Gizmo: R" + t.GetRow() + "C" + t.GetCol();

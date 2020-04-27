@@ -123,6 +123,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugText: {fileID: 5935817467734110200}
   debugPanel: {fileID: 6970780816905330646}
+  scrollRect: {fileID: 4985186784553698941}
+  testPrefab: {fileID: 0}
 --- !u!1 &6970780815873102357
 GameObject:
   m_ObjectHideFlags: 0

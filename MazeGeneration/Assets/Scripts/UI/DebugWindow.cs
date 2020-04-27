@@ -9,7 +9,7 @@ public class DebugWindow : MonoBehaviour
     private bool active;
     public Text debugText;
     public GameObject debugPanel;
-    private ScrollRect scrollRect;
+    public ScrollRect scrollRect;
 
     public GameObject testPrefab;
 
@@ -18,12 +18,17 @@ public class DebugWindow : MonoBehaviour
         Application.logMessageReceived += Log;
         //if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
         active = true;
+    }
 
+    void Start()
+    {
         if (!active || debugText == null)
             return;
 
-        scrollRect = debugText.gameObject.GetComponent<ScrollRect>();
-        InvokeRepeating("CustomUpdate", 1.0f, 3.0f);
+        if (scrollRect == null)
+            scrollRect = debugText.gameObject.transform.parent.GetComponent<ScrollRect>();
+
+        InvokeRepeating("CustomUpdate", 0.4f, 3.0f);
     }
 
     void OnEnable()
@@ -66,10 +71,10 @@ public class DebugWindow : MonoBehaviour
                 debugPanel.SetActive(!debugPanel.activeSelf);
         }
 
-        //if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickUp))
-        //    ScrollToTop();
-        //else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
-        //    ScrollToBottom();
+        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickUp))
+            ScrollToTop();
+        else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
+            ScrollToBottom();
     }
 
     public void ScrollToTop()

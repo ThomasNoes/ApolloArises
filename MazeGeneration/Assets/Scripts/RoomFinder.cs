@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomFinder : MonoBehaviour
+public class RoomFinder
 {
     public Tile de;
     public int mazeID;

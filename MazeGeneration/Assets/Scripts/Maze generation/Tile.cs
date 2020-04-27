@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour {
 
     [Header("A Star information")]
     //A star information
-    public bool isMarked = false;
+    public bool isMarked;
     public int nextDistance;
     public int prevDistance;
 
@@ -31,14 +31,14 @@ public class Tile : MonoBehaviour {
     public int aStarId;
     private int row;
     private int column;
-    private int gCost = 0;
-    private int hCost = 0;
+    private int gCost;
+    private int hCost;
     private Tile parent;
 
     //for room position
     public string RoomPosition = "Corridor";
-    public bool isRoomEntryTile = false;
-    private bool isPartOfPotentialRoom = false;
+    public bool isRoomEntryTile;
+    private bool isPartOfPotentialRoom;
 
     //connect a star tile for non a star tiles
     public Tile ConnectedAStar;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadEnd : MonoBehaviour
+public class DeadEnd
 {
     public Tile de;
     public int mazeID;

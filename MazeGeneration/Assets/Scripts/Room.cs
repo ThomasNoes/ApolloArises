@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public class Room
 {
     public int mazeID; // the maze segment that the room is in
     public List<Tile> tiles = new List<Tile>();// should only contain empty tiles which content can be place before used to generating content
