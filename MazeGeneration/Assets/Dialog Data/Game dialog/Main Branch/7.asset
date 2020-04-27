@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 7
   m_EditorClassIdentifier: 
-  text: 
+  text: All towers are turned off so I cannot compute my path at all!
   textSpeed: 10
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
