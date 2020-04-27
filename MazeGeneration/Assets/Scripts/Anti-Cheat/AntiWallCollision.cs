@@ -6,7 +6,7 @@ public class AntiWallCollision : MonoBehaviour
     public bool useVibration = true;
     public bool useVisual = false;
     private float farClippingPlane;
-    private bool active = false;
+    private bool active, cooldown;
     [HideInInspector] public int wallHits;
 
     private void Start()
@@ -42,15 +42,20 @@ public class AntiWallCollision : MonoBehaviour
         if (!active || Application.isEditor)
             return;
 
-        if (response)
+        if (response && !cooldown)
         {
+            cooldown = true;
+
             if (useVibration)
                 OVRInput.SetControllerVibration(1, 1, OVRInput.Controller.RTouch);
 
             if (useVisual)
                 cheatCube?.SetActive(true);
 
+            CompanionBehaviour.instance.OnAntiCheatWall();
             wallHits++;
+
+            Invoke("DelayedResponse", 2.0f);
         }
         else
         {
@@ -60,5 +65,10 @@ public class AntiWallCollision : MonoBehaviour
             if (useVisual)
                 cheatCube?.SetActive(false);
         }
+    }
+
+    private void DelayedResponse()
+    {
+        cooldown = false;
     }
 }

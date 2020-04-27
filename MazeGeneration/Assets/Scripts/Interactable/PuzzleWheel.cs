@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(HingeJoint))]
+[RequireComponent(typeof(ConfigurableJoint))]
 public class PuzzleWheel : MonoBehaviour
 {
     public int spins = 0, amountToActivate = 3;
@@ -11,12 +11,12 @@ public class PuzzleWheel : MonoBehaviour
     public PuzzleRobot puzzleRobotRef;
     private bool cooldown, goingForward, activated;
     private float prevYAngle;
-    private HingeJoint hingeJoint;
+    private ConfigurableJoint hingeJoint;
     private Vector3 anchor, axis;
 
     private void Start()
     {
-        hingeJoint = GetComponent<HingeJoint>();
+        hingeJoint = GetComponent<ConfigurableJoint>();
         anchor = hingeJoint.anchor;
         axis = hingeJoint.axis;
 

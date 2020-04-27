@@ -30,7 +30,10 @@ public class BeaconManager : MonoBehaviour
             if (!beacons[i].isActive)
             {
                 if (i != mazeIndex && !overrideIndex)
+                {
+                    CompanionBehaviour.instance.OnWrongLeverPulled();
                     break;
+                }
 
                 beacons[i].isActive = true;
                 beacons[i].LightBeacon();

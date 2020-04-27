@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canGrab: 1
-  shouldFly: 1
+  shouldFly: 0
   grabFlyDistance: 0.35
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leverOnAngle: -25
-  leverOffAngle: 180
+  leverOffAngle: 145
   leverIsOn: 1
   oneTimeUse: 1
   beaconLever: 1

@@ -7,6 +7,7 @@ public class Key : MonoBehaviour
     public Material colourMaterial;
     public ItemSpawner itemSpawner;
     private Renderer renderer;
+    private bool pickedUp;
 
     private void Start()
     {
@@ -24,5 +25,17 @@ public class Key : MonoBehaviour
 
         colourMaterial = itemSpawner.GetMaterialFromId(uniqueId);
         renderer.material = colourMaterial; // TODO, make work with new key texture (when it is done)
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (pickedUp)
+            return;
+
+        if (col.gameObject.tag == "Player")
+        {
+            pickedUp = true;
+            CompanionBehaviour.instance.OnPickUpKey();
+        }
     }
 }

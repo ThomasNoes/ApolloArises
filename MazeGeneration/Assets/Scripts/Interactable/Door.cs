@@ -81,6 +81,7 @@ public class Door : MonoBehaviour
                     if (!useDelay)
                     {
                         Destroy(col.gameObject);
+                        CompanionBehaviour.instance.OnOpenDoor();
                         OpenDoor();
                     }
                     else
