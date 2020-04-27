@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2915244982593524647}
   - component: {fileID: 4046290063866573187}
   - component: {fileID: 3888615825982719784}
+  - component: {fileID: 8460682179567444068}
   m_Layer: 0
   m_Name: HandleCol
   m_TagString: Untagged
@@ -203,6 +204,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorActive: 0
   glowColor: {r: 1, g: 0.92565995, b: 0.4009434, a: 0}
+--- !u!65 &8460682179567444068
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569229028549492290}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5711385213444324181
 GameObject:
   m_ObjectHideFlags: 0

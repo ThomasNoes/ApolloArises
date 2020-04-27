@@ -10193,6 +10193,7 @@ GameObject:
   - component: {fileID: 6192710929387345392}
   - component: {fileID: 2272362889611508889}
   - component: {fileID: 6150773317311696070}
+  - component: {fileID: 5809797017203534700}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -10322,6 +10323,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorActive: 0
   glowColor: {r: 1, g: 0.97002935, b: 0.3160377, a: 0}
+--- !u!65 &5809797017203534700
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862303822587554687}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.034077756, y: 0.067969754, z: 0.031672005}
+  m_Center: {x: 0.0013572508, y: -0.009313321, z: 0.00021545934}
 --- !u!1 &4006112889633428072
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,9 @@ public class PuzzleWheel : MonoBehaviour
         anchor = hingeJoint.anchor;
         axis = hingeJoint.axis;
 
+        hingeJoint.anchor = Vector3.zero;
+        hingeJoint.axis = Vector3.zero;
+
         Invoke("DelayedStart", 0.2f);
     }
 
