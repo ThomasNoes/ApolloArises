@@ -123,6 +123,39 @@ public class CompanionBehaviour : MonoBehaviour
         return null;
     }
 
+    public void OnLeverPulled(int mazeIndex)
+    {
+
+    }
+    public void OnWrongLeverPulled()
+    {
+
+    }
+    public void OnAntiCheatDoor()
+    {
+
+    }
+    public void OnAntiCheatWall()
+    {
+
+    }
+    public void OnPickUpKey()
+    {
+
+    }
+    public void OnPickUpCogWheel()
+    {
+
+    }
+    public void OnTeleportToTower(int IndexForDestinationTower)
+    {
+
+    }
+    public void OnOpenDoor()
+    {
+
+    }
+
     //end event
     public void GoToGenerator()
     {

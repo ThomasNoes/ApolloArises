@@ -1371,6 +1371,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Companion
       objectReference: {fileID: 0}
+    - target: {fileID: 6403625605632434526, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: openEyes
+      value: 
+      objectReference: {fileID: 21300000, guid: dab589fac649cee48b4c0f5b8bcc33a4,
+        type: 3}
+    - target: {fileID: 6403625605632434526, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: closedEyes
+      value: 
+      objectReference: {fileID: 21300000, guid: a043724df3d654a44941c20145a44c86,
+        type: 3}
     - target: {fileID: 8501710464559620800, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -2248,6 +2260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cf9fef809acdc4693f423e1214c4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCableLinked: 0
   evaluationMaze: 0
   gizmo: {fileID: 3298887824379130255, guid: 66a87d3283452014db07342e3c61e05c, type: 3}
   terrainGenerator: {fileID: 0}
@@ -3434,6 +3447,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 866163125679064768, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 866163125679064768, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.00065
+      objectReference: {fileID: 0}
+    - target: {fileID: 866163125679064768, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.00066
+      objectReference: {fileID: 0}
+    - target: {fileID: 866163125679064768, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 940191591616484579, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
@@ -3618,6 +3651,16 @@ PrefabInstance:
         type: 3}
       propertyPath: resetHmdPoseOnRelease
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077740964445460961, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 350
+      objectReference: {fileID: 0}
+    - target: {fileID: 6077740964445460961, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 6478454306252387876, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
@@ -4084,6 +4127,90 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8739582458175987018, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_Name
+      value: Companion Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_text
+      value: Companion Dialog Here Companion Dialog Here Companion Dialog Here Companion
+        Dialog Here Companion Dialog Here Companion Dialog Here Companion Dialog
+        Here Companion Dialog Here
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 132
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 36.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 36.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.4431373
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.3647059
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.18039216
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4281228657
+      objectReference: {fileID: 0}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 614bd16098443684abff6f822326a62c,
+        type: 2}
+    - target: {fileID: 8931314121844177873, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8504155826088728939, guid: 614bd16098443684abff6f822326a62c,
+        type: 2}
     - target: {fileID: 9185601504404125415, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Enabled
