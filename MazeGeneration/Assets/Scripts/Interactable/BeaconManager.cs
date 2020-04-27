@@ -34,6 +34,7 @@ public class BeaconManager : MonoBehaviour
 
                 beacons[i].isActive = true;
                 beacons[i].LightBeacon();
+                CompanionBehaviour.instance.OnLeverPulledAtIndex(i);
 
                 if (i == beacons.Count - 1)
                     lastBeacon = true;
@@ -75,7 +76,6 @@ public class BeaconManager : MonoBehaviour
 
         if (lastBeacon)
         {
-            CompanionBehaviour.instance.GoToGenerator();
             if (dayNightController != null)
                 dayNightController.StartSkyboxAndTintChange(true);
         }
