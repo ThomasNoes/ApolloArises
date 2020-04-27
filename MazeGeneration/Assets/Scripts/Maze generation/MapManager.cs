@@ -536,7 +536,7 @@ public class MapManager : MonoBehaviour
 
     void OffsetMap()
     {
-        if (Application.isEditor)
+        if (!isCableLinked && Application.isEditor)
         {
             //transform.Translate((-playAreaSize.x / 2f) / 2f, 0, (playAreaSize.z / 2f) / 2f);
 

@@ -286,7 +286,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &6250677705135447478
 MonoBehaviour:
@@ -318,17 +318,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canGrab: 1
-  shouldFly: 1
-  grabFlyDistance: 0.35
-  grabFlyTime: 0.1
+  shouldFly: 0
+  grabFlyDistance: 0.2
+  grabFlyTime: 0
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
-  forceRotationInHand: 0
-  rotationInHand: {x: 0, y: 0, z: 0}
+  forceRotationInHand: 1
+  rotationInHand: {x: 0, y: 1, z: 0}
   ignorePhysicsInHand: 0
   locomotionSupported: 0
   inHandLerpSpeed: 1
-  objectDropDistance: 0.4
+  objectDropDistance: 0
   isKnockable: 1
   inHand: 0
 --- !u!114 &9048673919510902586
