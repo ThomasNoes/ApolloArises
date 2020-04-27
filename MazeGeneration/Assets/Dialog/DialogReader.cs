@@ -12,7 +12,10 @@ public class DialogReader : MonoBehaviour
     public TestSceneManager tsm;
     private TMPAnimated tmpa;
 
+    public int branchedIndex = 0;
     public int index = 0;
+
+    private IEnumerator coroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -40,14 +43,26 @@ public class DialogReader : MonoBehaviour
 
     public void DisplayBranchedDialog()
     {
-        if (!tmpa.isRunning && index < branchedDialogs.Length)
+        if (!tmpa.isRunning && branchedIndex < branchedDialogs.Length)
         {
-            tmpa.ReadText(branchedDialogs[index], TMP_Object);
-            index++;
+            tmpa.ReadText(branchedDialogs[branchedIndex], TMP_Object);
+            branchedIndex++;
         }
     }
 
+    public void DisplayAllBranchedDialog()
+    {
+        StartCoroutine("GoThroughBranchedDialog");
+    }
 
+    private IEnumerator GoThroughBranchedDialog()
+    {
+        while (branchedIndex != branchedDialogs.Length)
+        {
+            DisplayBranchedDialog();
+            yield return new WaitForSeconds(2);
+        }
+    }
 
     public void DisplayBranchedDialogAtIndex(int i)
     {

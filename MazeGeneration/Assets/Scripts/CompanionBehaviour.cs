@@ -70,6 +70,7 @@ public class CompanionBehaviour : MonoBehaviour
     {
         cpf.PlaceCompanionOnTile(startTile);
         InvokeRepeating("MyUpdate", 2.0f, 1f);
+        dr.DisplayAllBranchedDialog();
     }
 
 
