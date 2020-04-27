@@ -8,7 +8,7 @@ using UnityEditor;
 
 public class CompanionPathFinding : MonoBehaviour
 {
-    Vector3 posOffset = new Vector3(0, -0.2f, 0);
+    Vector3 posOffset = new Vector3(0, 0f, 0);
     float height;
     LayerMask layerMask;
 
