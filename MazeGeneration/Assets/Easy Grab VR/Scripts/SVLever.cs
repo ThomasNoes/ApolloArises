@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 /**
  * Creates a VRLever. Heads up, we're using Euler Angles here so don't try to lever around the 360 angle.  Things will break!
  */ 
-[RequireComponent(typeof(HingeJoint), typeof(SVGrabbable))]
+[RequireComponent(typeof(ConfigurableJoint), typeof(SVGrabbable))]
 public class SVLever : MonoBehaviour {
 
     public float leverOnAngle = -60;
@@ -17,7 +17,7 @@ public class SVLever : MonoBehaviour {
     public bool beaconLever = false;
     public bool leverWasSwitched = false;
 
-    private HingeJoint leverHingeJoint;
+    private ConfigurableJoint leverHingeJoint;
 
     private SVGrabbable grabbable;
     private Lever lever;
@@ -26,15 +26,15 @@ public class SVLever : MonoBehaviour {
     private Vector3 startingEuler, anchor, axis;
 
     void Start () {
-        leverHingeJoint = GetComponent<HingeJoint>();
+        leverHingeJoint = GetComponent<ConfigurableJoint>();
         anchor = leverHingeJoint.anchor;
         axis = leverHingeJoint.axis;
 
-        JointLimits limits = leverHingeJoint.limits;
-        limits.max = Mathf.Max(leverOnAngle, leverOffAngle);
-        limits.min = Mathf.Min(leverOnAngle, leverOffAngle);
-        leverHingeJoint.limits = limits;
-        leverHingeJoint.useLimits = true;
+        //JointLimits limits = leverHingeJoint.limits;
+        //limits.max = Mathf.Max(leverOnAngle, leverOffAngle);
+        //limits.min = Mathf.Min(leverOnAngle, leverOffAngle);
+        //leverHingeJoint.limits = limits;
+        //leverHingeJoint.useLimits = true;
 
         // Get a grabbable on the Lever or one of it's children. You could technically have the grabbable outside of the lever
         // And connect it with a fixed joint, if so just set grabbable to public and set it in editor.
@@ -81,20 +81,20 @@ public class SVLever : MonoBehaviour {
 	}
 
     private void UpdateHingeJoint() {
-        JointSpring spring = leverHingeJoint.spring;
+        //JointSpring spring = leverHingeJoint.spring;
 
-        if (grabbable.inHand) {
-            leverHingeJoint.useSpring = false;
-        } else {
-            if (leverIsOn) {
-                spring.targetPosition = leverOnAngle;
-            } else {
-                spring.targetPosition = leverOnAngle;
-            }
-            leverHingeJoint.useSpring = true;
-        }
+        //if (grabbable.inHand) {
+        //    leverHingeJoint.useSpring = false;
+        //} else {
+        //    if (leverIsOn) {
+        //        spring.targetPosition = leverOnAngle;
+        //    } else {
+        //        spring.targetPosition = leverOnAngle;
+        //    }
+        //    leverHingeJoint.useSpring = true;
+        //}
 
-        leverHingeJoint.spring = spring;
+        //leverHingeJoint.spring = spring;
     }
 
     private Quaternion OnHingeAngle() {

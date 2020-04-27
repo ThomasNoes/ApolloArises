@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2381cd58b3edf4187dc219e968bb6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enable: 0
+  enable: 1
   keyPrefab: {fileID: 1816363879355849198, guid: e459ed1b6a664fb49afe45a21d88cd77,
     type: 3}
   doorPrefab: {fileID: 906067179569708713, guid: 8f53d3f24dabbb54d95a6f46fc47b06a,

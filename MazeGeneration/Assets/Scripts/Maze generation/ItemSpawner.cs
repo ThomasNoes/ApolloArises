@@ -208,12 +208,12 @@ public class ItemSpawner : MonoBehaviour
             tempDoorScript.uniqueId = uniqueId;
             tempDoorScript.inMaze = room.mazeID;
             tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
-                wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+                wallHeight, tempDoor.transform.localScale.z * 0.1f/** room.exitTile.tileWidth*/);
             tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
             tempDoorScript.height = wallHeight;
         }
         else
-            tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, wallHeight, tempDoor.transform.localScale.z * room.exitTile.tileWidth);
+            tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, wallHeight, tempDoor.transform.localScale.z /** room.exitTile.tileWidth*/);
 
         if (spawnPuzzleRobots)
         {
