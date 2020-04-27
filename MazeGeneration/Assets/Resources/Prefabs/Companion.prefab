@@ -166,7 +166,17 @@ MonoBehaviour:
   dr: {fileID: 0}
   cpf: {fileID: 0}
   isFollowPlayer: 0
-  goToGenDialog: {fileID: 0}
+  openDoor: {fileID: 11400000, guid: 9ba30e86374f2c04e82a91ed8de0f32f, type: 2}
+  openFirstDoor: {fileID: 11400000, guid: 721636e0b4953f347be898d80d1aaf99, type: 2}
+  pickUpCogwheel: {fileID: 11400000, guid: f9706a3f3d2b01841a0693b07de6d78c, type: 2}
+  pickUpKey: {fileID: 11400000, guid: f038c6ad2bc2cb2429e2d8bb46e47384, type: 2}
+  wrongLever: {fileID: 11400000, guid: 05c3386ce58747545922c57165f7b576, type: 2}
+  defaultLever: {fileID: 11400000, guid: b684b15a9a29e8042a51cf401188f75e, type: 2}
+  secondLastLever: {fileID: 11400000, guid: 31569afa7807e5248b7521edadb7615e, type: 2}
+  lastLever: {fileID: 11400000, guid: 8a55c63d2e2f8be43bcf9eadad5d5b0a, type: 2}
+  throughDoor: {fileID: 11400000, guid: a88dd827255bca545aaa53803e12c6f5, type: 2}
+  throughWall: {fileID: 11400000, guid: 527c703b8b72ba040b1124abfffe1977, type: 2}
+  walkToNewTower: {fileID: 11400000, guid: 98bda5fb6ff71e84e91b9073d0c93c0c, type: 2}
 --- !u!114 &2471123925323816699
 MonoBehaviour:
   m_ObjectHideFlags: 0
