@@ -17,11 +17,15 @@ public class CompanionPathFinding : MonoBehaviour
     public Tile targetTile;
     float tileWidth;
 
+    public Tile safeTile;
+
     //other scripts
     List<MapGenerator> maps;
     MapManager mm;
     TeleportableObject tele;
     BeaconManager bm;
+
+
 
     public float speed = 1.25f;
     public float angularSpeed = 2f;
@@ -45,6 +49,9 @@ public class CompanionPathFinding : MonoBehaviour
         height= FindObjectOfType<TerrainGenerator>().wallHeight;
 
         layerMask = LayerMask.GetMask("Floor");
+
+        safeTile = maps[0].tileArray[0, 0];
+        
     }
 
     // Update is called once per frame
@@ -292,6 +299,7 @@ public class CompanionPathFinding : MonoBehaviour
 
         if (Physics.Raycast(go.transform.position, Vector3.down, out hit, 7.0f, layerMask))
         {
+            //Debug.Log(go.name + " is hitting someting");
             //Debug.Log(go.name+" has hit "+hit.collider.name +" on "+hit.collider.transform.parent.name + " on "+hit.collider.transform.parent.parent.name);
             Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
@@ -301,13 +309,14 @@ public class CompanionPathFinding : MonoBehaviour
                 return tempTile;
             }
         }
-        else if(go = gameObject)
+        else if(go == gameObject)
         {
             Debug.Log("the companion is not over a tile. and it is assumed the companion has teleported incorrectly. so it is placed on the same tile as the player");
             Tile playerTile = GetTileUnderObject(player);
             PlaceCompanionOnTile(playerTile);
             return playerTile;
         }
+
         return null;
     }
 

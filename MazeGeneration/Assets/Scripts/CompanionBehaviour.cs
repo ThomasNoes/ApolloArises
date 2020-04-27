@@ -66,7 +66,7 @@ public class CompanionBehaviour : MonoBehaviour
     {
         //movement companion
         isFollowPlayer = UpdateIsFollowPlayer();
-        if(isFollowPlayer)
+        if (isFollowPlayer)
         {
             cpf.FollowPlayer();
         }
@@ -87,7 +87,7 @@ public class CompanionBehaviour : MonoBehaviour
                 return false;
             }
         }
-        if (playerTile == null)
+        if (ReferenceEquals(playerTile, null))
         {
             return false;
         }
