@@ -27,8 +27,19 @@ public class CompanionBehaviour : MonoBehaviour
     Tile startTile;
     Tile endtile;
 
+    public DialogData openDoor;
+    public DialogData openFirstDoor;
+    public DialogData pickUpCogwheel; //
+    public DialogData pickUpKey; //
+    public DialogData wrongLever; //
+    public DialogData defaultLever; //
+    public DialogData secondLastLever; //
+    public DialogData lastLever; //
+    public DialogData throughDoor; //
+    public DialogData throughWall; //
+    public DialogData walkToNewTower;
 
-    public DialogData goToGenDialog;
+    bool firstDoor = true;
 
     private void Awake()
     {
@@ -52,17 +63,18 @@ public class CompanionBehaviour : MonoBehaviour
         startTile = FindStartEndTile(maps[0]);
         endtile = FindStartEndTile(maps[maps.Count - 1]);
 
-        Invoke("LateStart",0); //wait a frame
+        Invoke("LateStart", 0); //wait a frame
     }
 
     void LateStart()
     {
         cpf.PlaceCompanionOnTile(startTile);
+        InvokeRepeating("MyUpdate", 2.0f, 1f);
     }
 
 
     // Update is called once per frame
-    void Update()
+    void MyUpdate()
     {
         //movement companion
         isFollowPlayer = UpdateIsFollowPlayer();
@@ -82,7 +94,7 @@ public class CompanionBehaviour : MonoBehaviour
             {
                 return false;
             }
-            if (bm.beacons[bm.beacons.Count-1].isActive)
+            if (bm.beacons[bm.beacons.Count - 1].isActive)
             {
                 return false;
             }
@@ -106,7 +118,7 @@ public class CompanionBehaviour : MonoBehaviour
         }
         foreach (Tile t in map.tileArray) // else allow for outertiles
         {
-            if ( !t.isPortalTile && t.isRoomTile)
+            if (!t.isPortalTile && t.isRoomTile)
             {
                 Debug.Log("it is in a room");
                 return t;
@@ -123,45 +135,64 @@ public class CompanionBehaviour : MonoBehaviour
         return null;
     }
 
-    public void OnLeverPulled(int mazeIndex)
+    public void OnLeverPulledAtIndex(int mazeIndex)
     {
-
+        if (mazeIndex == maps.Count-1) // last maze segment
+        {
+            cpf.GoToSpecificTile(endtile);
+            dr.InjectDialog(lastLever);
+        }
+        else if (mazeIndex == maps.Count - 2) // second last
+        {
+            dr.InjectDialog(secondLastLever);
+        }
+        else if(mazeIndex >0)
+        {
+            dr.InjectDialog(defaultLever);
+        }
     }
     public void OnWrongLeverPulled()
     {
-
+        dr.InjectDialog(wrongLever);
     }
     public void OnAntiCheatDoor()
     {
-
+        dr.InjectDialog(throughDoor);
     }
     public void OnAntiCheatWall()
     {
-
+        dr.InjectDialog(throughWall);
     }
     public void OnPickUpKey()
     {
-
+        dr.InjectDialog(pickUpKey);
     }
     public void OnPickUpCogWheel()
     {
-
+        dr.InjectDialog(pickUpCogwheel);
     }
     public void OnTeleportToTower(int IndexForDestinationTower)
     {
-
+        if (bm.beacons.Count != 0)
+        {
+            if (!bm.beacons[IndexForDestinationTower].isActive)
+            {
+                dr.InjectDialog(walkToNewTower);
+            }
+        }
     }
     public void OnOpenDoor()
     {
-
-    }
-
-    //end event
-    public void GoToGenerator()
-    {
-        Debug.Log("gotogenerator");
-        cpf.GoToSpecificTile(endtile);
-        dr.InjectDialog(goToGenDialog);
+        if (firstDoor)
+        {
+            dr.InjectDialog(walkToNewTower);
+                //public DialogData openFirstDoor;
+            firstDoor = false;
+        }
+        else
+        {
+            dr.InjectDialog(openDoor);
+        }
     }
 }
 

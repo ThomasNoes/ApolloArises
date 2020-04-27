@@ -182,6 +182,7 @@ MonoBehaviour:
   player: {fileID: 0}
   currentTile: {fileID: 0}
   targetTile: {fileID: 0}
+  safeTile: {fileID: 0}
   speed: 1.25
   angularSpeed: 2
   isTravelling: 0
@@ -238,8 +239,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toNextScene: 0
-  dialogs: []
-  branchedDialogs: []
+  dialogs:
+  - {fileID: 11400000, guid: f4389669b42c3944bbd879a12f97dd0d, type: 2}
+  - {fileID: 11400000, guid: 01946fab40500674daab56d41e289e5d, type: 2}
+  - {fileID: 11400000, guid: be9cc4c2eed0376488053973d872dfbe, type: 2}
+  branchedDialogs:
+  - {fileID: 11400000, guid: 583589ae0c752eb48a7e6625f0bbeb0b, type: 2}
+  - {fileID: 11400000, guid: 583589ae0c752eb48a7e6625f0bbeb0b, type: 2}
+  - {fileID: 11400000, guid: 583589ae0c752eb48a7e6625f0bbeb0b, type: 2}
+  - {fileID: 11400000, guid: 2532ecd0e13e511458313a680b6f2c10, type: 2}
+  - {fileID: 11400000, guid: 1a42768465b99ab41a2357f7f17aada1, type: 2}
+  - {fileID: 11400000, guid: 5667acab6bed6ed4ab8e374ef0df29e8, type: 2}
+  - {fileID: 11400000, guid: 35b7b6c4f5d76994c8d0134bb063b9a9, type: 2}
+  - {fileID: 11400000, guid: 4df60e5bba9bfaf47acf16f079736332, type: 2}
+  - {fileID: 11400000, guid: 515bf3403452f5246900b774aa5115a4, type: 2}
+  - {fileID: 11400000, guid: 650e667f45dd95d4e9c337aa38468a2a, type: 2}
   TMP_Object: {fileID: 0}
   tsm: {fileID: 0}
   index: 0
