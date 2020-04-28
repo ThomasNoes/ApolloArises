@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: "Did you just pass through the door? can you \u201Chumbly\u201D come back
     and open it for me!"
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

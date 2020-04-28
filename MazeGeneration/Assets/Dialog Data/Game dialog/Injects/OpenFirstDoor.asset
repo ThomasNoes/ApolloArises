@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: OpenFirstDoor
   m_EditorClassIdentifier: 
   text: You are becoming quite resourceful to me. You have to find next key yourself
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

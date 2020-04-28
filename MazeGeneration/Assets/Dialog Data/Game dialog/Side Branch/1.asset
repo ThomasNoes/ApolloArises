@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   text: "Requesting for assistance\u2026."
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

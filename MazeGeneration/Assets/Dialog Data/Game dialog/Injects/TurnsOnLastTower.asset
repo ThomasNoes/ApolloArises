@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TurnsOnLastTower
   m_EditorClassIdentifier: 
   text: I can finally maneuver to the last maze now. To the control panel!
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

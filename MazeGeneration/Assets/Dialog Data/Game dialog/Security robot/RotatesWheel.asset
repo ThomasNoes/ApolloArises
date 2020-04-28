@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RotatesWheel
   m_EditorClassIdentifier: 
   text: Thank you, you may take the key
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

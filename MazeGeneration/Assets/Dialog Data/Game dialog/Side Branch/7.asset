@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 7
   m_EditorClassIdentifier: 
   text: All towers are turned off so I cannot compute my path at all!
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

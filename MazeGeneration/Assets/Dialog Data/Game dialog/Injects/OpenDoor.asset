@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: OpenDoor
   m_EditorClassIdentifier: 
   text: "Let\u2019s continue!"
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

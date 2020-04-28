@@ -192,6 +192,7 @@ public class CompanionBehaviour : MonoBehaviour
         }
         else
         {
+            Debug.Log("");
             dr.InjectDialog(openDoor);
         }
     }

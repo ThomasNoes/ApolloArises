@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PickUpKey
   m_EditorClassIdentifier: 
   text: 'Great find! '
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

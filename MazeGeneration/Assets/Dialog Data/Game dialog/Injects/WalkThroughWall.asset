@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WalkThroughWall
   m_EditorClassIdentifier: 
   text: Did you just pass through the wall? Are you sure you are human?
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
