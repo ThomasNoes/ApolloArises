@@ -45,6 +45,19 @@ public class PuzzleRobot : MonoBehaviour
             animatePuzzleDoor = true;
             keySpawned = true;
         }
+        else if (!startsFixed)
+        {
+            if (puzzleCogWheel != null)
+            {
+                puzzleWheel = puzzleCogWheel.GetComponent<PuzzleWheel>();
+
+                if (puzzleWheel != null)
+                {
+                    puzzleWheel.notFixed = true;
+                    puzzleWheel.Disable();
+                }
+            }
+        }
 
         if (puzzleCogWheel != null)
             puzzleWheel = GetComponent<PuzzleWheel>();

@@ -171,8 +171,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.6999999, z: 0.2050796}
-  m_Center: {x: 0, y: 0, z: 0.29995126}
+  m_Size: {x: 0.7, y: 0.6999999, z: 0.27853054}
+  m_Center: {x: 0, y: 0, z: 0.33667687}
 --- !u!1 &1545044064527153759
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,13 +184,13 @@ GameObject:
   - component: {fileID: 609146468298347588}
   - component: {fileID: 2703182387647355493}
   - component: {fileID: 4751989833101643226}
-  - component: {fileID: 5328541767080431365}
   - component: {fileID: 3235675504362103756}
   - component: {fileID: 6250677705135447478}
   - component: {fileID: 791366940263595905}
   - component: {fileID: 9048673919510902586}
   - component: {fileID: 2106903140654147350}
   - component: {fileID: 4741093429783249446}
+  - component: {fileID: 8391916853843800368}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -259,19 +259,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5328541767080431365
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545044064527153759}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.3824241
-  m_Center: {x: -0.028752431, y: 18.740036, z: 0.1349597}
 --- !u!54 &3235675504362103756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -304,7 +291,6 @@ MonoBehaviour:
   releaseGripButton: -1
   gripAutoHolds: 0
   activeController: 0
-  controllerManager: {fileID: 0}
 --- !u!114 &791366940263595905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +445,19 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!65 &8391916853843800368
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545044064527153759}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.287162, y: 15.591279, z: 1.3595197}
+  m_Center: {x: 0.014635099, y: 12.01607, z: 0.018851679}
 --- !u!1 &7122563961128578877
 GameObject:
   m_ObjectHideFlags: 0

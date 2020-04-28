@@ -3,20 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ConfigurableJoint))]
+[RequireComponent(typeof(HingeJoint))]
 public class PuzzleWheel : MonoBehaviour
 {
     public int spins = 0, amountToActivate = 3;
     public float cooldownTime = 0.3f;
     public PuzzleRobot puzzleRobotRef;
-    private bool cooldown, goingForward, activated, stayInPlace;
+    public bool notFixed;
+    private bool cooldown, goingForward, activated;
     private float prevYAngle;
-    private ConfigurableJoint hingeJoint;
+    private HingeJoint hingeJoint;
+    private Rigidbody rb;
+    private MeshRenderer mr;
     private Vector3 anchor, axis, initialPos;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        mr = GetComponent<MeshRenderer>();
+    }
 
     private void Start()
     {
-        hingeJoint = GetComponent<ConfigurableJoint>();
+        hingeJoint = GetComponent<HingeJoint>();
         anchor = hingeJoint.anchor;
         axis = hingeJoint.axis;
 
@@ -30,8 +39,8 @@ public class PuzzleWheel : MonoBehaviour
     {
         hingeJoint.anchor = anchor;
         hingeJoint.axis = axis;
-        initialPos = transform.position;
-        stayInPlace = true;
+        //initialPos = transform.position;
+        //stayInPlace = true;
     }
 
     private void FixedUpdate()
@@ -66,12 +75,6 @@ public class PuzzleWheel : MonoBehaviour
         prevYAngle = currentYAngle;
     }
 
-    private void LateUpdate()
-    {
-        if (stayInPlace)
-            transform.position = initialPos;
-    }
-
     private void Cooldown()
     {
         cooldown = false;
@@ -85,8 +88,40 @@ public class PuzzleWheel : MonoBehaviour
             puzzleRobotRef.SpawnKey();
     }
 
+    public void Enable()
+    {
+        if (rb == null || mr == null)
+            return;
+
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezePositionX;
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
+        rb.constraints = RigidbodyConstraints.FreezePositionZ;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX;
+        rb.constraints = RigidbodyConstraints.FreezeRotationZ;
+
+        mr.enabled = true;
+    }
+
+    public void Disable()
+    {
+        if (rb == null || mr == null)
+            return;
+
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        mr.enabled = false;
+    }
+
     private void OnTriggerEnter(Collider col)
     {
-        // TODO check when puzzle object collides if this is disabled.
+        if (col.CompareTag("CogWheel"))
+        {
+            if (notFixed)
+            {
+                notFixed = false;
+                Enable();
+            }
+        }
     }
 }

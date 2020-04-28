@@ -1112,7 +1112,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 55
+  far clip plane: 50
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1334,7 +1334,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 55
+  far clip plane: 50
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -2306,7 +2306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1597187704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,7 +2397,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1604854435}
   - component: {fileID: 1604854434}
-  - component: {fileID: 1604854436}
   - component: {fileID: 1604854438}
   - component: {fileID: 1604854437}
   - component: {fileID: 1604854439}
@@ -2658,6 +2657,76 @@ MonoBehaviour:
       direction: 0
       spelledDirection: 
     mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
+  - mapType: 0
+    roomName: 
+    isEndSeeded: 0
+    startSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    endSeed:
+      row: 0
+      column: 0
+      direction: 0
+      spelledDirection: 
+    mapObject: {fileID: 0}
 --- !u!4 &1604854435
 Transform:
   m_ObjectHideFlags: 0
@@ -2672,19 +2741,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1604854436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1604854433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acdfc59815f49de48ac01cd791794197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useDebugPlayer: 1
 --- !u!114 &1604854437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3406,6 +3462,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1210066871468344993, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683365476724869493, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1827309492251208658, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Text
@@ -3471,6 +3537,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.11769629
       objectReference: {fileID: 0}
+    - target: {fileID: 3136364601880566779, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3136364601880566780, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
@@ -3485,6 +3556,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585856019970387695, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3887374555199132084, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}

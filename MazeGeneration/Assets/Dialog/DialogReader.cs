@@ -134,7 +134,7 @@ public class DialogReader : MonoBehaviour
 
     private float CalculateWaitTime(DialogData dd, float scale = 2f)
     {
-        Debug.Log((float)dd.text.Length * (1 / (float)dd.textSpeed) * scale);
+        //Debug.Log((float)dd.text.Length * (1 / (float)dd.textSpeed) * scale);
         return (float)dd.text.Length * (1 / (float)dd.textSpeed)*scale;
     }
 

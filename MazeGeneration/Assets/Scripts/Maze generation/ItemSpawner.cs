@@ -112,15 +112,11 @@ public class ItemSpawner : MonoBehaviour
                         tempCabinetScript.uniqueId = uniqueId;
 
                         if (itemInCabinet == puzzleItemPrefab)
-                        {
                             tempCabinetScript.objToSpawnInCabinet = puzzleItemPrefab;
-                            tempCabinetScript.SpawnItemInCabinet(tempCabinet.transform, this);
-                        }
                         else if (itemInCabinet == keyPrefab)
-                        {
                             tempCabinetScript.objToSpawnInCabinet = keyPrefab;
-                            tempCabinetScript.SpawnItemInCabinet(tempCabinet.transform, this);
-                        }
+
+                        tempCabinetScript.SpawnItemInCabinet(tempCabinet.transform, this);
                     }
 
                     return true;
