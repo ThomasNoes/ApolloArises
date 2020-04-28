@@ -270,8 +270,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.4745166
-  m_Center: {x: 0, y: 19.204779, z: 0.03026286}
+  m_Radius: 1.3824241
+  m_Center: {x: -0.028752431, y: 18.740036, z: 0.1349597}
 --- !u!54 &3235675504362103756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -327,8 +327,9 @@ MonoBehaviour:
   rotationInHand: {x: 0, y: 0, z: 0}
   ignorePhysicsInHand: 0
   locomotionSupported: 0
-  inHandLerpSpeed: 1
+  inHandLerpSpeed: 0.4
   objectDropDistance: 0.4
+  stayInPlace: 1
   isKnockable: 1
   inHand: 0
 --- !u!114 &9048673919510902586
@@ -358,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leverOnAngle: -25
-  leverOffAngle: 145
+  leverOffAngle: 165
   leverIsOn: 1
   oneTimeUse: 1
   beaconLever: 1
@@ -384,7 +385,7 @@ ConfigurableJoint:
   m_AngularYMotion: 0
   m_AngularZMotion: 0
   m_LinearLimitSpring:
-    spring: 0
+    spring: 1
     damper: 0
   m_LinearLimit:
     limit: 0
@@ -421,7 +422,7 @@ ConfigurableJoint:
     maximumForce: 3.4028233e+38
   m_YDrive:
     serializedVersion: 3
-    positionSpring: 0
+    positionSpring: 2
     positionDamper: 0
     maximumForce: 3.4028233e+38
   m_ZDrive:

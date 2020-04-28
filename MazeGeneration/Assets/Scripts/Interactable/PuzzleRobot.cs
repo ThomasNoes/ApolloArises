@@ -38,7 +38,6 @@ public class PuzzleRobot : MonoBehaviour
 
         if (inFirstRoom)
         {
-            animatePuzzleDoor = true;
             SpawnKey();
         }
         else if (startsFixed)
@@ -57,10 +56,11 @@ public class PuzzleRobot : MonoBehaviour
     {
         if (beaconManager != null && uniqueId != 0)
         {
-            //Debug.Log(uniqueId + " | " + inMaze);
-
-            turnedOff = !beaconManager.beacons[inMaze].isActive;
-            beaconManager.beacons[inMaze].puzzleRobotRef = this;
+            if (beaconManager.beacons.Count != 0)
+            {
+                turnedOff = !beaconManager.beacons[inMaze].isActive;
+                beaconManager.beacons[inMaze].puzzleRobotRef = this;
+            }
         }
 
         if (faceImage != null && openEyes != null && closedEyes != null)
@@ -131,12 +131,12 @@ public class PuzzleRobot : MonoBehaviour
 
         if (tempKeyScript != null)
         {
-            tempKeyScript.uniqueId = uniqueId;
-
             if (itemSpawner != null)
             {
                 tempKeyScript.itemSpawner = itemSpawner;
             }
+
+            tempKeyScript.uniqueId = uniqueId;
         }
 
         animatePuzzleDoor = true;

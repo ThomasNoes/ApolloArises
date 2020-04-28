@@ -9,10 +9,10 @@ public class PuzzleWheel : MonoBehaviour
     public int spins = 0, amountToActivate = 3;
     public float cooldownTime = 0.3f;
     public PuzzleRobot puzzleRobotRef;
-    private bool cooldown, goingForward, activated;
+    private bool cooldown, goingForward, activated, stayInPlace;
     private float prevYAngle;
     private ConfigurableJoint hingeJoint;
-    private Vector3 anchor, axis;
+    private Vector3 anchor, axis, initialPos;
 
     private void Start()
     {
@@ -30,6 +30,8 @@ public class PuzzleWheel : MonoBehaviour
     {
         hingeJoint.anchor = anchor;
         hingeJoint.axis = axis;
+        initialPos = transform.position;
+        stayInPlace = true;
     }
 
     private void FixedUpdate()
@@ -62,6 +64,12 @@ public class PuzzleWheel : MonoBehaviour
         }
 
         prevYAngle = currentYAngle;
+    }
+
+    private void LateUpdate()
+    {
+        if (stayInPlace)
+            transform.position = initialPos;
     }
 
     private void Cooldown()

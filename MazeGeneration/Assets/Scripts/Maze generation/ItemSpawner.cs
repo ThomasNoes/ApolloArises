@@ -340,6 +340,7 @@ public class ItemSpawner : MonoBehaviour
             Vector3 scaleVector = new Vector3(mapManager.tileWidth, mapManager.tileWidth, puzzleRobot.mainScreenObj.transform.localScale.z);
             puzzleRobot.mainScreenObj.transform.localScale = scaleVector;
             puzzleRobot.headObj.transform.localScale = scaleVector;
+            puzzleRobot.itemSpawner = this;
             puzzleRobot.uniqueId = uniqueId;
             puzzleRobot.inMaze = room.mazeID;
             puzzleRobot.SetVisualGeneratorObject(gameObject);

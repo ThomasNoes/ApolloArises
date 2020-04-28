@@ -54,7 +54,7 @@ public class SVControllerInput : MonoBehaviour {
 	public SteamVR_RenderModel activeRenderModel;
 	private SteamVR_ControllerManager controllerManager;
 	#elif USES_OPEN_VR
-	public OVRManager controllerManager;
+	private OVRManager controllerManager;
 	private Dictionary<int, bool>buttonStateLeft;
 	private Dictionary<int, bool>buttonStateRight;
 	OVRHapticsClip clipHard;

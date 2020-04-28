@@ -10194,6 +10194,7 @@ GameObject:
   - component: {fileID: 2272362889611508889}
   - component: {fileID: 6150773317311696070}
   - component: {fileID: 5809797017203534700}
+  - component: {fileID: 1372574541870587916}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -10270,9 +10271,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3862303822587554687}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 2
+  m_Drag: 2
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -10306,9 +10307,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_allowOffhandGrab: 1
   m_snapPosition: 1
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
+  m_snapOrientation: 1
+  m_snapOffset: {fileID: 2926406017683735908}
+  m_grabPoints:
+  - {fileID: 5809797017203534700}
 --- !u!114 &6150773317311696070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10334,8 +10336,20 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.034077756, y: 0.067969754, z: 0.031672005}
-  m_Center: {x: 0.0013572508, y: -0.009313321, z: 0.00021545934}
+  m_Size: {x: 0.029824827, y: 0.06115941, z: 0.02574586}
+  m_Center: {x: 0.0006743879, y: -0.012718485, z: -0.000016712225}
+--- !u!114 &1372574541870587916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862303822587554687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec5104bc40a04046a42eb04fa0e0008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4006112889633428072
 GameObject:
   m_ObjectHideFlags: 0
@@ -15377,7 +15391,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
@@ -15725,9 +15739,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6223301018872483693}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 20
-  m_AngularDrag: 0.8
+  m_Mass: 6
+  m_Drag: 5
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -15747,7 +15761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spins: 0
   amountToActivate: 3
-  cooldownTime: 0.2
+  cooldownTime: 0.4
   puzzleRobotRef: {fileID: 6828766005254679309}
 --- !u!153 &1631202399208062304
 ConfigurableJoint:
@@ -15762,7 +15776,7 @@ ConfigurableJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: -0.000000040233132, y: 0.01948595, z: 0.000000029802322}
   serializedVersion: 2
-  m_SecondaryAxis: {x: 0, y: 1, z: 0}
+  m_SecondaryAxis: {x: 0, y: 0, z: 0}
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
@@ -15771,7 +15785,7 @@ ConfigurableJoint:
   m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
-    damper: 3.32
+    damper: 2
   m_LinearLimit:
     limit: 0
     bounciness: 0
@@ -15808,7 +15822,7 @@ ConfigurableJoint:
   m_YDrive:
     serializedVersion: 3
     positionSpring: 0
-    positionDamper: 3.02
+    positionDamper: 0
     maximumForce: 3.4028233e+38
   m_ZDrive:
     serializedVersion: 3
@@ -15842,7 +15856,7 @@ ConfigurableJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 5
+  m_MassScale: 3
   m_ConnectedMassScale: 1
 --- !u!1 &7426237286225496915
 GameObject:

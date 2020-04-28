@@ -52,6 +52,8 @@ public class SVGrabbable : MonoBehaviour {
     [Tooltip("How far from your hand the object needs to be before we drop it automatically. Useful for collisions.")]
     public float objectDropDistance = 0.3f;
 
+    public bool stayInPlace;
+
     [Space(15)]
     [Header("Collision Settings")]
 
@@ -87,6 +89,8 @@ public class SVGrabbable : MonoBehaviour {
     private GrabData grabData;
     private Rigidbody rb;
     private Collider[] colliders;
+    private Vector3 initialPos;
+    private bool posActive;
 
     //------------------------
     // Init
@@ -111,7 +115,17 @@ public class SVGrabbable : MonoBehaviour {
             obj.AddComponent<SVColliderUpdater>().isLeft = false;
             SVGrabbable.rightHandCollider = obj;
         }
+
+        if (stayInPlace)
+            Invoke("DelayedStart", 0.5f);
     }
+
+    private void DelayedStart()
+    {
+        initialPos = transform.position;
+        posActive = true;
+    }
+
 
     //------------------------
     // Public
@@ -142,6 +156,9 @@ public class SVGrabbable : MonoBehaviour {
         if(locomotionSupported) {
             DoGrabbedUpdate();
         }
+
+        if (stayInPlace && posActive)
+            transform.position = initialPos;
     }
 
     void DoGrabbedUpdate() {

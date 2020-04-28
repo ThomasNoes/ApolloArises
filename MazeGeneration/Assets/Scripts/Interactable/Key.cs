@@ -15,7 +15,7 @@ public class Key : MonoBehaviour
         renderer = GetComponent<Renderer>();
 
         if (renderer != null)
-            Invoke("DelayedStart", 1.0f);
+            Invoke("DelayedStart", 0.8f);
     }
 
     private void DelayedStart()

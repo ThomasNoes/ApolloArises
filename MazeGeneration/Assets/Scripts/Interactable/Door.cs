@@ -44,8 +44,11 @@ public class Door : MonoBehaviour
 
         if (beaconManager != null && uniqueId != 0)
         {
-            isPowered = beaconManager.beacons[inMaze].isActive;
-            beaconManager.beacons[inMaze].doorRef = this;
+            if (beaconManager.beacons.Count != 0)
+            {
+                isPowered = beaconManager.beacons[inMaze].isActive;
+                beaconManager.beacons[inMaze].doorRef = this;
+            }
         }
 
         startPos = transform.position;

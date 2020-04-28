@@ -6,23 +6,18 @@ public class DebugWindow : MonoBehaviour
 {
     private string _dLog;
     private Queue _dLogQueue = new Queue();
-    private bool active;
     public Text debugText;
     public GameObject debugPanel;
     public ScrollRect scrollRect;
 
-    public GameObject testPrefab;
-
     void Awake()
     {
         Application.logMessageReceived += Log;
-        //if (OVRInput.IsControllerConnected(OVRInput.Controller.RTrackedRemote))
-        active = true;
     }
 
     void Start()
     {
-        if (!active || debugText == null)
+        if (debugText == null)
             return;
 
         if (scrollRect == null)
@@ -31,10 +26,10 @@ public class DebugWindow : MonoBehaviour
         InvokeRepeating("CustomUpdate", 0.4f, 3.0f);
     }
 
-    void OnEnable()
-    {
-        //Application.logMessageReceived += Log;
-    }
+    //void OnEnable()
+    //{
+    //    Application.logMessageReceived += Log;
+    //}
 
     void OnDisable()
     {
@@ -71,20 +66,20 @@ public class DebugWindow : MonoBehaviour
                 debugPanel.SetActive(!debugPanel.activeSelf);
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickUp))
+        if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
             ScrollToTop();
-        else if (OVRInput.GetDown(OVRInput.Button.SecondaryThumbstickDown))
+        else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
             ScrollToBottom();
     }
 
     public void ScrollToTop()
     {
-        if (scrollRect.normalizedPosition.y >= 0 && scrollRect.normalizedPosition.y <= 1)
-            scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, scrollRect.normalizedPosition.y + 0.05f * Time.deltaTime);
+        if (scrollRect.verticalNormalizedPosition <= 1.0f)
+            scrollRect.verticalNormalizedPosition += 0.02f;
     }
     public void ScrollToBottom()
     {
-        if (scrollRect.normalizedPosition.y >= 0 && scrollRect.normalizedPosition.y <= 1)
-            scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, scrollRect.normalizedPosition.y - 0.05f * Time.deltaTime);
+        if (scrollRect.verticalNormalizedPosition >= 0.0f)
+            scrollRect.verticalNormalizedPosition -= 0.02f;
     }
 }
