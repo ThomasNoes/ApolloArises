@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 10
   m_EditorClassIdentifier: 
   text: And look at that view outside. This is the city I was built to serve.
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

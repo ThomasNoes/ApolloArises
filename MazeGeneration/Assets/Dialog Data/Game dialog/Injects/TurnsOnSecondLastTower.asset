@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TurnsOnSecondLastTower
   m_EditorClassIdentifier: 
   text: We Just need to turn on the last tower now! You have been a great assistance.
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

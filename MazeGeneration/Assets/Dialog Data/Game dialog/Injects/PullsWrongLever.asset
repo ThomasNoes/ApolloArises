@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PullsWrongLever
   m_EditorClassIdentifier: 
   text: You can not turn it on yet! Go back and turn on the previous tower.
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

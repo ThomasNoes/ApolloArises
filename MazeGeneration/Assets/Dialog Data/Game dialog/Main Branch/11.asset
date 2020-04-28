@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 11
   m_EditorClassIdentifier: 
   text: Here, take this key and open the door.
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

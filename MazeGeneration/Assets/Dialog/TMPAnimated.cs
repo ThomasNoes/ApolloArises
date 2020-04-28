@@ -17,8 +17,24 @@ public class TMPAnimated : MonoBehaviour
 
     public bool isRunning = false;
 
+    float ClearTextTimer = 4.0f;
+    float counter = 0;
+
+    private void Update()
+    {
+        if (!isRunning)
+        {
+            counter += Time.deltaTime;
+            if (counter > ClearTextTimer)
+            {
+                target.text = "";
+            }
+        }
+    }
+
     public bool ReadText(DialogData newDialog, TextMeshProUGUI Target)
     {
+        counter = 0;
         isRunning = true;
         target = Target;
         dialog = newDialog;

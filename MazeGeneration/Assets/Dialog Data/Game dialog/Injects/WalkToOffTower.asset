@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WalkToOffTower
   m_EditorClassIdentifier: 
   text: You are in a turned off tower. Find the lever in there!
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

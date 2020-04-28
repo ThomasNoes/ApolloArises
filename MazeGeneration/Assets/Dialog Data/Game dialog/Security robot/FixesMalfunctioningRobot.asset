@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FixesMalfunctioningRobot
   m_EditorClassIdentifier: 
   text: Thank you for fixing me Sir, I humbly ask you to rotate the wheel on me.
-  textSpeed: 10
+  textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
