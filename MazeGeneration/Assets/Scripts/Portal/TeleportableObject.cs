@@ -41,14 +41,6 @@ public class TeleportableObject : MonoBehaviour
         }
     }
 
-    //private void Update()   // TODO: Used for debugging, remove later
-    //{
-    //    if (Input.GetKeyDown(KeyCode.F))
-    //    {
-    //        CopySpawner(true, null);
-    //    }
-    //}
-
     /// <param name="dir">false = prev, true = next</param>
     public void CopySpawner(bool dir, Collider col)
     {

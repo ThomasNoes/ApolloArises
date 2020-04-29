@@ -316,9 +316,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canGrab: 1
-  shouldFly: 0
-  grabFlyDistance: 0.35
-  grabFlyTime: 0.1
+  shouldFly: 1
+  grabFlyDistance: 0.2
+  grabFlyTime: 0.2
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
@@ -328,6 +328,9 @@ MonoBehaviour:
   inHandLerpSpeed: 0.4
   objectDropDistance: 0.1
   stayInPlace: 1
+  noRotationY: 1
+  noRotationZ: 0
+  noRotationX: 1
   isKnockable: 1
   inHand: 0
 --- !u!114 &9113368750633704306

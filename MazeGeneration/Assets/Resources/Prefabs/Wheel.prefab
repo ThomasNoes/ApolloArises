@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 8468241239826058042}
   - component: {fileID: 7710412753107847584}
   - component: {fileID: 1892089591387595200}
-  - component: {fileID: 409743952563983720}
   - component: {fileID: 4563095398487599133}
   - component: {fileID: 983415375218475253}
+  - component: {fileID: 8254329131344108157}
+  - component: {fileID: 1602158096410150698}
+  - component: {fileID: 5384634187551953947}
   m_Layer: 0
   m_Name: Wheel
   m_TagString: CogWheel
@@ -114,23 +116,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &409743952563983720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3005469045176247120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!114 &4563095398487599133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +140,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fa77d2ca05d4948bb07cd68fe6971b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8254329131344108157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3005469045176247120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2daadec7d02b024b868b500c71a0eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gripButton: 5
+  releaseGripButton: -1
+  gripAutoHolds: 0
+  activeController: 0
+--- !u!114 &1602158096410150698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3005469045176247120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b737e6c5c2b34c8622863e889eb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canGrab: 1
+  shouldFly: 1
+  grabFlyDistance: 0.35
+  grabFlyTime: 0.1
+  mirrorXOffsetInLeftHand: 1
+  positionOffsetInHand: {x: 0, y: 0, z: 0}
+  forceRotationInHand: 0
+  rotationInHand: {x: 0, y: 0, z: 0}
+  ignorePhysicsInHand: 1
+  locomotionSupported: 1
+  inHandLerpSpeed: 0.4
+  objectDropDistance: 0.3
+  stayInPlace: 0
+  noRotationY: 0
+  noRotationZ: 0
+  noRotationX: 0
+  isKnockable: 1
+  inHand: 0
+--- !u!114 &5384634187551953947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3005469045176247120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae83b4bd3f55ba940b4b1bf76f10bf93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderController: {fileID: 0}
+  isParentObject: 1
+  isInHand: 0
