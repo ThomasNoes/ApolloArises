@@ -27,7 +27,6 @@ public class MapManager : MonoBehaviour
     public GameObject gizmo;
     public TerrainGenerator terrainGenerator;
 
-
     GuardainCalibration gc;
     Vector3 center;
     Vector3 forward = new Vector3(0,0,1);
@@ -687,9 +686,13 @@ public class MapManager : MonoBehaviour
 
         float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
 
+        Vector3 offset;
+        offset.x = center.x + radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
+        offset.z = center.z + radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
+
         Vector3 pos;
-        pos.x = center.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
-        pos.z = center.z + radius * Mathf.Cos(angle * index * Mathf.Deg2Rad);
+        pos.x = offset.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
+        pos.z = offset.z + radius * Mathf.Cos(angle * index * Mathf.Deg2Rad);
         pos.y = index;
 
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], pos, Quaternion.identity);
