@@ -59,6 +59,30 @@ public class GuardainCalibration : MonoBehaviour
         //cube.forward = center - forward;
     }
 
+    public bool RoomScaling3x4Check(float tileWidth)
+    {
+        float colLength = 0;
+        float rowLength = 0;
+
+        points = GetBoundaryPoints();
+
+        if (Vector3.Distance(points[0], points[1]) > Vector3.Distance(points[1], points[2]))
+        {
+            colLength = Vector3.Distance(points[0], points[1]);
+            rowLength = Vector3.Distance(points[1], points[2]);
+        }
+        else
+        {
+            colLength = Vector3.Distance(points[1], points[2]);
+            rowLength = Vector3.Distance(points[0], points[1]);
+        }
+
+        if(Mathf.FloorToInt(rowLength / tileWidth) >= 3 && Mathf.FloorToInt(colLength / tileWidth) >=4)
+        {
+            return true;
+        }
+        return false;
+    }
 
     public void RoomScaling(out int maxRows, out int maxColumns, float tileWidth, float bufferWidth = 0, bool debugging = false)
     {
@@ -86,8 +110,8 @@ public class GuardainCalibration : MonoBehaviour
             }
         }
         
-        maxRows = Mathf.FloorToInt((rowLength-2*bufferWidth) / tileWidth);
-        maxColumns = Mathf.FloorToInt((colLength-2*bufferWidth) / tileWidth);
+        maxRows = Mathf.FloorToInt((rowLength-2.0f*bufferWidth) / tileWidth);
+        maxColumns = Mathf.FloorToInt((colLength-2.0f*bufferWidth) / tileWidth);
 
     }
 
