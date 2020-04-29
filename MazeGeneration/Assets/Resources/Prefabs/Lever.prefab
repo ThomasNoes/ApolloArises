@@ -269,7 +269,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 4
-  m_AngularDrag: 0.1
+  m_AngularDrag: 0.5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -304,8 +304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canGrab: 1
-  shouldFly: 0
-  grabFlyDistance: 0.35
+  shouldFly: 1
+  grabFlyDistance: 0.23
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
@@ -319,7 +319,7 @@ MonoBehaviour:
   noRotationY: 1
   noRotationZ: 1
   noRotationX: 0
-  isKnockable: 1
+  isKnockable: 0
   inHand: 0
 --- !u!114 &9048673919510902586
 MonoBehaviour:
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8bb230f7ab7674a9a2c672a665dd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leverOnAngle: -25
+  leverOnAngle: -20
   leverOffAngle: 165
   leverIsOn: 1
   oneTimeUse: 1
@@ -374,23 +374,23 @@ ConfigurableJoint:
   m_AngularYMotion: 0
   m_AngularZMotion: 0
   m_LinearLimitSpring:
-    spring: 2
+    spring: 3
     damper: 0
   m_LinearLimit:
     limit: 0
     bounciness: 0
     contactDistance: 0
   m_AngularXLimitSpring:
-    spring: 10
-    damper: 2
+    spring: 5
+    damper: 1
   m_LowAngularXLimit:
-    limit: -25
+    limit: -59.138386
     bounciness: 0
-    contactDistance: 0.2
+    contactDistance: 1
   m_HighAngularXLimit:
     limit: -1.3462524
     bounciness: 0
-    contactDistance: 0.2
+    contactDistance: 1
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0

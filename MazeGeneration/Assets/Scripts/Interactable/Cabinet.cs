@@ -17,6 +17,10 @@ public class Cabinet : MonoBehaviour
             return;
 
         hingeJoint = door.GetComponent<HingeJoint>();
+
+        if (hingeJoint == null)
+            return;
+
         anchor = hingeJoint.anchor;
         axis = hingeJoint.axis;
         hingeJoint.anchor = Vector3.zero;
