@@ -42,8 +42,6 @@ public class SVLever : MonoBehaviour {
 
         startingEuler = this.transform.localEulerAngles;
 
-        UpdateHingeJoint();
-
         leverHingeJoint.anchor = anchor;
         leverHingeJoint.axis = axis;
         lever = transform.parent.GetComponent<Lever>();
@@ -70,32 +68,12 @@ public class SVLever : MonoBehaviour {
 
             if (oneTimeUse)
                 isActive = false;
-
-            UpdateHingeJoint();
         }
 
         if (wasGrabbed != grabbable.inHand) {
             wasGrabbed = grabbable.inHand;
-            UpdateHingeJoint();
         }
 	}
-
-    private void UpdateHingeJoint() {
-        //JointSpring spring = leverHingeJoint.spring;
-
-        //if (grabbable.inHand) {
-        //    leverHingeJoint.useSpring = false;
-        //} else {
-        //    if (leverIsOn) {
-        //        spring.targetPosition = leverOnAngle;
-        //    } else {
-        //        spring.targetPosition = leverOnAngle;
-        //    }
-        //    leverHingeJoint.useSpring = true;
-        //}
-
-        //leverHingeJoint.spring = spring;
-    }
 
     private Quaternion OnHingeAngle() {
         return Quaternion.Euler(this.leverHingeJoint.axis * leverOnAngle + startingEuler);

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(OVRGrabbable), typeof(Rigidbody))]
+[RequireComponent(typeof(SVGrabbable), typeof(Rigidbody))]
 public class ItemCogwheel : MonoBehaviour
 {
     private OVRGrabbable ovrGrabbable;

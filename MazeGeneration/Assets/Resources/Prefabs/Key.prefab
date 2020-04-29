@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 2580114887120104262}
   - component: {fileID: 5208876245263289802}
   - component: {fileID: 8133103830023871102}
-  - component: {fileID: 4317121020395528423}
   - component: {fileID: 5988794247123955859}
+  - component: {fileID: 2942855095018471011}
+  - component: {fileID: -2865195882622196062}
   m_Layer: 0
   m_Name: Key
   m_TagString: Key
@@ -126,8 +127,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.20191713
-  m_Center: {x: 0.14413513, y: -0.04929418, z: 0.038339354}
+  m_Radius: 0.18492618
+  m_Center: {x: 0.1646667, y: -0.049294136, z: 0.0008168612}
 --- !u!114 &5208876245263289802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,23 +156,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7fa77d2ca05d4948bb07cd68fe6971b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4317121020395528423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1816363879355849198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!114 &5988794247123955859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +171,49 @@ MonoBehaviour:
   renderController: {fileID: 0}
   isParentObject: 1
   isInHand: 0
+--- !u!114 &2942855095018471011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816363879355849198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2daadec7d02b024b868b500c71a0eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gripButton: 5
+  releaseGripButton: -1
+  gripAutoHolds: 0
+  activeController: 0
+--- !u!114 &-2865195882622196062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816363879355849198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352b737e6c5c2b34c8622863e889eb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canGrab: 1
+  shouldFly: 1
+  grabFlyDistance: 0.35
+  grabFlyTime: 0.1
+  mirrorXOffsetInLeftHand: 1
+  positionOffsetInHand: {x: 0, y: 0, z: 0}
+  forceRotationInHand: 0
+  rotationInHand: {x: 0, y: 0, z: 0}
+  ignorePhysicsInHand: 1
+  locomotionSupported: 1
+  inHandLerpSpeed: 0.4
+  objectDropDistance: 0.3
+  stayInPlace: 0
+  noRotationY: 0
+  noRotationZ: 0
+  noRotationX: 0
+  isKnockable: 1
+  inHand: 0
