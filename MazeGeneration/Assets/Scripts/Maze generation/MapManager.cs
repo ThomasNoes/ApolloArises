@@ -19,8 +19,8 @@ public class MapManager : MonoBehaviour
         Everywhere,
         Hallways
     }
-
-
+    [HideInInspector]
+    public Vector3 offset = Vector3.zero;
 
     public bool isCableLinked;
     public bool evaluationMaze = false;
@@ -686,14 +686,14 @@ public class MapManager : MonoBehaviour
 
         float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
 
-        Vector3 offset;
+
         offset.x = center.x + radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
         offset.z = center.z + radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
 
         Vector3 pos;
         pos.x = offset.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
         pos.z = offset.z + radius * Mathf.Cos(angle * index * Mathf.Deg2Rad);
-        pos.y = index;
+        pos.y = index*1.7f;
 
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], pos, Quaternion.identity);
     }

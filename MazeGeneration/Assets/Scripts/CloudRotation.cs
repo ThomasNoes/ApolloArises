@@ -6,9 +6,15 @@ public class CloudRotation : MonoBehaviour
 {
 
     public float Speed =1;
+
+    MapManager mm;
+    
     // Start is called before the first frame update
     void Start()
     {
+        mm = GameObject.Find("MapManager").GetComponent<MapManager>();
+        transform.rotation = mm.transform.rotation;
+        transform.Translate(mm.offset);
         MakeChildrenFaceCenter();
     }
 

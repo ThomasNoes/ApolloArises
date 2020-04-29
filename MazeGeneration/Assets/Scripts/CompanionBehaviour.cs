@@ -89,6 +89,10 @@ public class CompanionBehaviour : MonoBehaviour
     public bool UpdateIsFollowPlayer()
     {
         Tile playerTile = cpf.GetTileUnderObject(player);
+        if (ReferenceEquals(playerTile, null))
+        {
+            return false;
+        }
         if (bm.beacons.Count != 0)
         {
             if (!bm.beacons[playerTile.partOfMaze].isActive)
@@ -99,10 +103,6 @@ public class CompanionBehaviour : MonoBehaviour
             {
                 return false;
             }
-        }
-        if (ReferenceEquals(playerTile, null))
-        {
-            return false;
         }
         return true;
     }

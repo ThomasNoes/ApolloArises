@@ -91,7 +91,7 @@ public class GuardainCalibration : MonoBehaviour
 
         if (debugging)
         {
-            colLength = 5;
+            colLength = 4;
             rowLength = 3;
         }
         else
