@@ -687,8 +687,8 @@ public class MapManager : MonoBehaviour
         float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
 
         Vector3 offset;
-        offset.x = center.x + radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
-        offset.z = center.z + radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
+        offset.x = center.x - radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
+        offset.z = center.z - radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
 
         Vector3 pos;
         pos.x = offset.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
