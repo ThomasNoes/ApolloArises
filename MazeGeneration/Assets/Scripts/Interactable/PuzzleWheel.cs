@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(HingeJoint))]
 public class PuzzleWheel : MonoBehaviour
 {
     public int spins = 0, amountToActivate = 3;
@@ -15,6 +14,7 @@ public class PuzzleWheel : MonoBehaviour
     private HingeJoint hingeJoint;
     private Rigidbody rb;
     private MeshRenderer mr;
+    private GameObject handle;
     private Vector3 anchor, axis, initialPos;
 
     private void Awake()
@@ -26,6 +26,10 @@ public class PuzzleWheel : MonoBehaviour
     private void Start()
     {
         hingeJoint = GetComponent<HingeJoint>();
+
+        if (hingeJoint == null)
+            return;
+
         anchor = hingeJoint.anchor;
         axis = hingeJoint.axis;
 
@@ -101,6 +105,7 @@ public class PuzzleWheel : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationZ;
 
         mr.enabled = true;
+        handle?.SetActive(true);
     }
 
     public void Disable()
@@ -111,6 +116,7 @@ public class PuzzleWheel : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
         mr.enabled = false;
+        handle?.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider col)

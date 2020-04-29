@@ -171,8 +171,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.6999999, z: 0.27853054}
-  m_Center: {x: 0, y: 0, z: 0.33667687}
+  m_Size: {x: 0.7, y: 0.6999999, z: 0.23518367}
+  m_Center: {x: 0, y: 0, z: 0.31500357}
 --- !u!1 &1545044064527153759
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +269,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 4
-  m_AngularDrag: 0.1
+  m_AngularDrag: 0.5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -304,8 +304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canGrab: 1
-  shouldFly: 0
-  grabFlyDistance: 0.35
+  shouldFly: 1
+  grabFlyDistance: 0.23
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
@@ -316,7 +316,10 @@ MonoBehaviour:
   inHandLerpSpeed: 0.4
   objectDropDistance: 0.4
   stayInPlace: 1
-  isKnockable: 1
+  noRotationY: 1
+  noRotationZ: 1
+  noRotationX: 0
+  isKnockable: 0
   inHand: 0
 --- !u!114 &9048673919510902586
 MonoBehaviour:
@@ -344,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8bb230f7ab7674a9a2c672a665dd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leverOnAngle: -25
+  leverOnAngle: -20
   leverOffAngle: 165
   leverIsOn: 1
   oneTimeUse: 1
@@ -371,23 +374,23 @@ ConfigurableJoint:
   m_AngularYMotion: 0
   m_AngularZMotion: 0
   m_LinearLimitSpring:
-    spring: 1
+    spring: 3
     damper: 0
   m_LinearLimit:
     limit: 0
     bounciness: 0
     contactDistance: 0
   m_AngularXLimitSpring:
-    spring: 10
-    damper: 2
+    spring: 12
+    damper: 5
   m_LowAngularXLimit:
-    limit: -25
+    limit: -59.138386
     bounciness: 0
-    contactDistance: 0
+    contactDistance: 1
   m_HighAngularXLimit:
-    limit: 60
+    limit: 10.096724
     bounciness: 0
-    contactDistance: 0
+    contactDistance: 1
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
@@ -456,8 +459,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.287162, y: 15.591279, z: 1.3595197}
-  m_Center: {x: 0.014635099, y: 12.01607, z: 0.018851679}
+  m_Size: {x: 1.287162, y: 16.095467, z: 1.3595197}
+  m_Center: {x: 0.014635099, y: 12.268157, z: 0.018851789}
 --- !u!1 &7122563961128578877
 GameObject:
   m_ObjectHideFlags: 0

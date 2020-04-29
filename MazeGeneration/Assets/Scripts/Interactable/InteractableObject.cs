@@ -7,7 +7,7 @@
     using UnityEditor;
 #endif
 
-    [RequireComponent(typeof(OVRGrabbable), typeof(Rigidbody))]
+    [RequireComponent(typeof(SVGrabbable), typeof(Rigidbody))]
     public class InteractableObject : MonoBehaviour
     {
         public PortalRenderController renderController;
@@ -41,14 +41,6 @@
                 }
             }
         }
-
-        //private void Update()   // TODO: Used for debugging, remove later
-        //{
-        //    if (Input.GetKeyDown(KeyCode.F))
-        //    {
-        //        CopySpawner(true, null);
-        //    }
-        //}
 
         /// <param name="dir">false = prev, true = next</param>
         public void CopySpawner(bool dir, Collider col)
@@ -90,6 +82,8 @@
                 {
                     if (col.CompareTag("PortalGroundCol"))
                     {
+                        inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+
                         if (thisObjCopy == null)
                             CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
                     }
@@ -97,6 +91,7 @@
                     if (col.CompareTag("EntryCol"))
                     {
                         currentCollider = col;
+                        inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
 
                         if (thisObjCopy == null)
                             CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
@@ -105,7 +100,7 @@
 
                     if (col.CompareTag("PortalRenderCol"))
                     {
-                        StopAllCoroutines();
+                        inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
 
                         activated = false;
                         thisObjCopy.transform.position = transform.position;
@@ -160,7 +155,6 @@
             if (!isParentObject && mainObj != null)
                 mainObj.GetComponent<InteractableObject>().copyExist = false;
         }
-
     }
 
 #if UNITY_EDITOR
