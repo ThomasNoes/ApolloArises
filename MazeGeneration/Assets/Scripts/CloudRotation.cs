@@ -16,6 +16,10 @@ public class CloudRotation : MonoBehaviour
         transform.rotation = mm.transform.rotation;
         transform.Translate(mm.offset);
         MakeChildrenFaceCenter();
+        if (Speed == 0)
+        {
+            this.enabled = false;
+        }
     }
 
     // Update is called once per frame
