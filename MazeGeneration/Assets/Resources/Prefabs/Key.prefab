@@ -209,7 +209,7 @@ MonoBehaviour:
   rotationInHand: {x: 0, y: 0, z: 0}
   ignorePhysicsInHand: 0
   locomotionSupported: 1
-  inHandLerpSpeed: 0.07
+  inHandLerpSpeed: 0.03
   objectDropDistance: 0.2
   stayInPlace: 0
   noRotationY: 0

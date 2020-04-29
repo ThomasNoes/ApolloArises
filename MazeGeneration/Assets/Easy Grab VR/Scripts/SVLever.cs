@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 /**
  * Creates a VRLever. Heads up, we're using Euler Angles here so don't try to lever around the 360 angle.  Things will break!
  */ 
-[RequireComponent(typeof(ConfigurableJoint), typeof(SVGrabbable))]
+[RequireComponent(typeof(HingeJoint), typeof(SVGrabbable))]
 public class SVLever : MonoBehaviour {
 
     public float leverOnAngle = -60;
@@ -17,7 +17,7 @@ public class SVLever : MonoBehaviour {
     public bool beaconLever = false;
     public bool leverWasSwitched = false;
 
-    private ConfigurableJoint leverHingeJoint;
+    private HingeJoint leverHingeJoint;
 
     private SVGrabbable grabbable;
     private Lever lever;
@@ -26,7 +26,7 @@ public class SVLever : MonoBehaviour {
     private Vector3 startingEuler, anchor, axis;
 
     void Start () {
-        leverHingeJoint = GetComponent<ConfigurableJoint>();
+        leverHingeJoint = GetComponent<HingeJoint>();
         anchor = leverHingeJoint.anchor;
         axis = leverHingeJoint.axis;
 
