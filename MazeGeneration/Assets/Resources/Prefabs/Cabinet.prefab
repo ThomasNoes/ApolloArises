@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 183073389696435966}
   - component: {fileID: 3766880952776704146}
   - component: {fileID: 528253906526878857}
+  - component: {fileID: 4000685228214989702}
+  - component: {fileID: 7386650883233879051}
   m_Layer: 0
   m_Name: HandleCol
   m_TagString: Untagged
@@ -31,8 +33,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821481376221526998}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.609, y: 0, z: 1}
-  m_LocalScale: {x: 0.11206655, y: 0.11206655, z: 0.78089035}
+  m_LocalPosition: {x: -0.61346, y: 0, z: 0.94}
+  m_LocalScale: {x: 0.08362209, y: 0.11206655, z: 0.65985084}
   m_Children: []
   m_Father: {fileID: 4643358182482490375}
   m_RootOrder: 0
@@ -52,7 +54,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821481376221526998}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -63,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: aadd70ca61f6d8f4a980a5bfbb478e2d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,7 +113,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!138 &183073389696435966
 FixedJoint:
@@ -157,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGrab: 1
   shouldFly: 1
-  grabFlyDistance: 0.3
+  grabFlyDistance: 0.4
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
@@ -171,8 +173,34 @@ MonoBehaviour:
   noRotationY: 1
   noRotationZ: 1
   noRotationX: 1
-  isKnockable: 1
+  isKnockable: 0
   inHand: 0
+--- !u!114 &4000685228214989702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821481376221526998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ee590a3f3844a44ba94137c0982775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicatorActive: 0
+  glowColor: {r: 1, g: 0.92565995, b: 0.4009434, a: 0}
+--- !u!114 &7386650883233879051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821481376221526998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec5104bc40a04046a42eb04fa0e0008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5711385213444324181
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +389,6 @@ GameObject:
   - component: {fileID: 6060832097636298240}
   - component: {fileID: 8768226164756086994}
   - component: {fileID: 498528839152811321}
-  - component: {fileID: 9113368750633704306}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -506,17 +533,3 @@ MonoBehaviour:
   noRotationX: 1
   isKnockable: 1
   inHand: 0
---- !u!114 &9113368750633704306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8413723351126625070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5ee590a3f3844a44ba94137c0982775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicatorActive: 0
-  glowColor: {r: 1, g: 0.92565995, b: 0.4009434, a: 0}

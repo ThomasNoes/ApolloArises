@@ -52,7 +52,7 @@ public class AntiWallCollision : MonoBehaviour
             if (useVisual)
                 cheatCube?.SetActive(true);
 
-            CompanionBehaviour.instance.OnAntiCheatWall();
+            CompanionBehaviour.instance?.OnAntiCheatWall();
             wallHits++;
 
             Invoke("DelayedResponse", 2.0f);

@@ -31,13 +31,13 @@ public class BeaconManager : MonoBehaviour
             {
                 if (i != mazeIndex && !overrideIndex)
                 {
-                    CompanionBehaviour.instance.OnWrongLeverPulled();
+                    CompanionBehaviour.instance?.OnWrongLeverPulled();
                     break;
                 }
 
                 beacons[i].isActive = true;
                 beacons[i].LightBeacon();
-                CompanionBehaviour.instance.OnLeverPulledAtIndex(i);
+                CompanionBehaviour.instance?.OnLeverPulledAtIndex(i);
 
                 if (i == beacons.Count - 1)
                     lastBeacon = true;

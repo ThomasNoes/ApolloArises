@@ -302,7 +302,7 @@ public class PortalRenderController : MonoBehaviour
     public void TeleportPlayer(int mazeID)
     {
         currentMaze = mazeID;
-        CompanionBehaviour.instance.OnTeleportToTower(mazeID);
+        CompanionBehaviour.instance?.OnTeleportToTower(mazeID);
         //SetProjectionQuads(true);
         //Debug.Log("Teleported player to: " + currentMaze);
     }
