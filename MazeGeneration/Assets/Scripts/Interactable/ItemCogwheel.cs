@@ -3,13 +3,13 @@
 [RequireComponent(typeof(SVGrabbable), typeof(Rigidbody))]
 public class ItemCogwheel : MonoBehaviour
 {
-    private OVRGrabbable ovrGrabbable;
+    private SVGrabbable grabbable;
     private Rigidbody rb;
     private bool isGrabbed;
 
     void Start()
     {
-        ovrGrabbable = GetComponent<OVRGrabbable>();
+        grabbable = GetComponent<SVGrabbable>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeAll;
     }
@@ -19,7 +19,7 @@ public class ItemCogwheel : MonoBehaviour
         if (isGrabbed)
             return;
 
-        if (ovrGrabbable.isGrabbed)
+        if (grabbable.inHand)
         {
             isGrabbed = true;
             rb.constraints = RigidbodyConstraints.None;
