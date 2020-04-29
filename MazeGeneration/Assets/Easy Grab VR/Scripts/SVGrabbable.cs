@@ -170,12 +170,6 @@ public class SVGrabbable : MonoBehaviour {
         
     }
 
-    private void Update()
-    {
-        Debug.DrawRay(transform.position, transform.forward, Color.green);
-        Debug.DrawRay(transform.position, transform.right, Color.red);
-    }
-
     /* Why Late Update? Good Question kind sir / madam. It's so we can run AFTER our physics calculations.  This enables us to lerp objects that you need to carry around with you
      * think sword for example.
 	*/
