@@ -27,7 +27,6 @@ public class MapManager : MonoBehaviour
     public GameObject gizmo;
     public TerrainGenerator terrainGenerator;
 
-
     GuardainCalibration gc;
     Vector3 center;
     Vector3 forward = new Vector3(0,0,1);
