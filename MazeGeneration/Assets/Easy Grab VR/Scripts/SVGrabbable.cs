@@ -52,7 +52,7 @@ public class SVGrabbable : MonoBehaviour {
     [Tooltip("How far from your hand the object needs to be before we drop it automatically. Useful for collisions.")]
     public float objectDropDistance = 0.3f;
 
-    public bool stayInPlace;
+    public bool stayInPlace, noRotationY, noRotationZ, noRotationX;
 
     [Space(15)]
     [Header("Collision Settings")]
@@ -89,8 +89,9 @@ public class SVGrabbable : MonoBehaviour {
     private GrabData grabData;
     private Rigidbody rb;
     private Collider[] colliders;
+    private float yValue, zValue, xValue;
     private Vector3 initialPos;
-    private bool posActive;
+    private bool posActive, rotActive;
 
     //------------------------
     // Init
@@ -122,8 +123,26 @@ public class SVGrabbable : MonoBehaviour {
 
     private void DelayedStart()
     {
-        initialPos = transform.position;
-        posActive = true;
+        if (stayInPlace)
+        {
+            initialPos = transform.position;
+            posActive = true;
+        }
+        if (noRotationY)
+        {
+            yValue = transform.rotation.eulerAngles.y;
+            rotActive = true;
+        }
+        if (noRotationZ)
+        {
+            zValue = transform.rotation.eulerAngles.z;
+            rotActive = true;
+        }
+        if (noRotationX)
+        {
+            xValue = transform.rotation.eulerAngles.x;
+            rotActive = true;
+        }
     }
 
 
@@ -147,6 +166,14 @@ public class SVGrabbable : MonoBehaviour {
         if (!locomotionSupported) {
             DoGrabbedUpdate();
         }
+
+        
+    }
+
+    private void Update()
+    {
+        Debug.DrawRay(transform.position, transform.forward, Color.green);
+        Debug.DrawRay(transform.position, transform.right, Color.red);
     }
 
     /* Why Late Update? Good Question kind sir / madam. It's so we can run AFTER our physics calculations.  This enables us to lerp objects that you need to carry around with you
@@ -159,6 +186,18 @@ public class SVGrabbable : MonoBehaviour {
 
         if (stayInPlace && posActive)
             transform.position = initialPos;
+
+        if (rotActive)
+        {
+            if (!noRotationY)
+                yValue = transform.rotation.eulerAngles.y;
+            if (!noRotationX)
+                xValue = transform.rotation.eulerAngles.x;
+            if (!noRotationZ)
+                zValue = transform.rotation.eulerAngles.z;
+
+            transform.rotation = Quaternion.Euler(xValue, yValue, zValue);
+        }
     }
 
     void DoGrabbedUpdate() {

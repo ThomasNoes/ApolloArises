@@ -171,8 +171,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.6999999, z: 0.27853054}
-  m_Center: {x: 0, y: 0, z: 0.33667687}
+  m_Size: {x: 0.7, y: 0.6999999, z: 0.23518367}
+  m_Center: {x: 0, y: 0, z: 0.31500357}
 --- !u!1 &1545044064527153759
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +316,9 @@ MonoBehaviour:
   inHandLerpSpeed: 0.4
   objectDropDistance: 0.4
   stayInPlace: 1
+  noRotationY: 1
+  noRotationZ: 1
+  noRotationX: 0
   isKnockable: 1
   inHand: 0
 --- !u!114 &9048673919510902586
@@ -371,7 +374,7 @@ ConfigurableJoint:
   m_AngularYMotion: 0
   m_AngularZMotion: 0
   m_LinearLimitSpring:
-    spring: 1
+    spring: 2
     damper: 0
   m_LinearLimit:
     limit: 0
@@ -383,11 +386,11 @@ ConfigurableJoint:
   m_LowAngularXLimit:
     limit: -25
     bounciness: 0
-    contactDistance: 0
+    contactDistance: 0.2
   m_HighAngularXLimit:
-    limit: 60
+    limit: -1.3462524
     bounciness: 0
-    contactDistance: 0
+    contactDistance: 0.2
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
@@ -456,8 +459,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.287162, y: 15.591279, z: 1.3595197}
-  m_Center: {x: 0.014635099, y: 12.01607, z: 0.018851679}
+  m_Size: {x: 1.287162, y: 16.095467, z: 1.3595197}
+  m_Center: {x: 0.014635099, y: 12.268157, z: 0.018851789}
 --- !u!1 &7122563961128578877
 GameObject:
   m_ObjectHideFlags: 0
