@@ -42,6 +42,9 @@ public class SVGrabbable : MonoBehaviour {
     [Tooltip("If true a held object won't collide with anything and doesn't use inHandLerpSpeed, rather it sets its position directly.")]
     public bool ignorePhysicsInHand = true;
 
+    [Tooltip("If true a held object will collide with anything but still use inHandLerpSpeed, so it sets its position directly.")]
+    public bool enablePhysicsInHand;
+
     [Tooltip("If true, physics will work better with collisions for objects in your hand. This is really useful for things like joints, but it will make the object fall from your hand while moving around.")]
     public bool locomotionSupported = false;
 
@@ -97,8 +100,8 @@ public class SVGrabbable : MonoBehaviour {
     // Init
     //------------------------
     void Start() {
-        if (this.gameObject.GetComponent<SVAbstractGripIndicator>()) {
-            gripIndicatorComponent = this.gameObject.GetComponent<SVAbstractGripIndicator>();
+        if (GetComponent<SVGlowIndicator>() != null) {
+            gripIndicatorComponent = GetComponent<SVGlowIndicator>();
         }
 
         this.input = this.gameObject.GetComponent<SVControllerInput>();
@@ -166,8 +169,13 @@ public class SVGrabbable : MonoBehaviour {
         if (!locomotionSupported) {
             DoGrabbedUpdate();
         }
+    }
 
-        
+    private void Update()
+    {
+        if (OVRInput.GetDown(OVRInput.Button.Two)) // TODO for debugging YYY
+            if (inHand)
+                Debug.Log(gameObject.name + " is in hand!");
     }
 
     /* Why Late Update? Good Question kind sir / madam. It's so we can run AFTER our physics calculations.  This enables us to lerp objects that you need to carry around with you
@@ -353,7 +361,7 @@ public class SVGrabbable : MonoBehaviour {
 
             // If we're moving too quickly and allow physics, drop the object. This also gives us the ability to drop it if you are trying to move it through
             // a solid object.
-            if (!this.ignorePhysicsInHand &&
+            if (!this.ignorePhysicsInHand && !this.enablePhysicsInHand &&
                 (transform.position - targetPosition).magnitude >= objectDropDistance) {
                 grabData.recentlyDropped = true;
                 this.ClearActiveController();
@@ -365,7 +373,7 @@ public class SVGrabbable : MonoBehaviour {
             if (this.grabData.hasJoint) {
                 transform.position = targetPosition + targetOffset;
             } else {  // otherwise just lock to the hand position so there is no delay
-                if (this.ignorePhysicsInHand) {
+                if (this.ignorePhysicsInHand || this.enablePhysicsInHand) {
                     this.transform.SetPositionAndRotation(targetPosition + targetOffset, targetRotation);
                 } else {
                     transform.position = Vector3.Lerp(this.transform.position, targetPosition + targetOffset, inHandLerpSpeed);
@@ -408,12 +416,21 @@ public class SVGrabbable : MonoBehaviour {
             // Update our rigidbody to respect being controlled by the player
             grabData.wasKinematic = rb.isKinematic;
             grabData.didHaveGravity = rb.useGravity;
-            if (this.ignorePhysicsInHand) {
+            if (this.ignorePhysicsInHand && !this.enablePhysicsInHand) {
                 rb.isKinematic = true;
                 foreach (Collider collider in this.colliders) {
                     collider.enabled = false;
                 }
-            } else {
+            }
+            else if (this.enablePhysicsInHand)
+            {
+                rb.isKinematic = false;
+                foreach (Collider collider in this.colliders)
+                {
+                    collider.enabled = true;
+                }
+            }
+            else {
                 rb.useGravity = false;
             }
 
@@ -434,7 +451,7 @@ public class SVGrabbable : MonoBehaviour {
         rb.isKinematic = grabData.wasKinematic;
         rb.useGravity = grabData.didHaveGravity;
 
-        if (this.ignorePhysicsInHand) {
+        if (this.ignorePhysicsInHand || this.enablePhysicsInHand) {
             foreach (Collider collider in this.colliders) {
                 collider.enabled = true;
             }

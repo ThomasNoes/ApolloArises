@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4173198226173254112
 Transform:
   m_ObjectHideFlags: 0
@@ -258,6 +258,7 @@ MonoBehaviour:
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
   ignorePhysicsInHand: 0
+  enablePhysicsInHand: 1
   locomotionSupported: 1
   inHandLerpSpeed: 0.4
   objectDropDistance: 0.3
@@ -281,7 +282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderController: {fileID: 0}
   isParentObject: 1
-  isInHand: 0
 --- !u!135 &7631830420179239892
 SphereCollider:
   m_ObjectHideFlags: 0

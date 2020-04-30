@@ -312,6 +312,7 @@ MonoBehaviour:
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
   ignorePhysicsInHand: 0
+  enablePhysicsInHand: 0
   locomotionSupported: 0
   inHandLerpSpeed: 0.4
   objectDropDistance: 0.4
@@ -347,10 +348,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8bb230f7ab7674a9a2c672a665dd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leverOnAngle: -20
-  leverOffAngle: 165
+  leverOnAngle: -25
+  leverOffAngle: 50
   leverIsOn: 1
-  oneTimeUse: 1
+  oneTimeUse: 0
   beaconLever: 1
   leverWasSwitched: 0
 --- !u!65 &8391916853843800368
@@ -391,7 +392,7 @@ HingeJoint:
   m_UseLimits: 1
   m_Limits:
     min: -59
-    max: 50
+    max: 56.523113
     bounciness: 0
     bounceMinVelocity: 4
     contactDistance: 0

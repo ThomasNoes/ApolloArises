@@ -140,9 +140,9 @@ public class ItemSpawner : MonoBehaviour
             {
                 if (initializeTutorialRoom && room.mazeID == 0)
                 {
-                    Debug.Log("Initialized Tutorial Room!");
-                    SpawnDoor(room, uniqueId, true);
+                    SpawnDoor(room, uniqueId, true, true);
                     counter = (counter + 1) % (spawnFrequency + 1);
+                    uniqueId++;
                     continue;
                 }
 
@@ -156,23 +156,23 @@ public class ItemSpawner : MonoBehaviour
                     if (randomNumber == 0)
                     {
                         if (SpawnCabinet(room.mazeID, uniqueId + 1, keyPrefab))
-                            SpawnDoor(room, uniqueId, true);
+                            SpawnDoor(room, uniqueId, true, false);
                     }
                     else
                     {
                         if (SpawnCabinet(room.mazeID, uniqueId + 1, puzzleItemPrefab))
-                            SpawnDoor(room, uniqueId, false);
+                            SpawnDoor(room, uniqueId, false, false);
                     }
                 }
                 else if (spawnCogwheelsInDeadEnds && !spawnKeysInDeadEnds)
                 {
                     if (SpawnCabinet(room.mazeID, uniqueId + 1, puzzleItemPrefab))
-                        SpawnDoor(room, uniqueId, false);
+                        SpawnDoor(room, uniqueId, false, false);
                 }
                 else if (spawnKeysInDeadEnds)
                 {
                     if (SpawnKey(room.mazeID, uniqueId + 1))
-                        SpawnDoor(room, uniqueId, false);
+                        SpawnDoor(room, uniqueId, false, false);
                 }
 
                 uniqueId++;
@@ -183,7 +183,7 @@ public class ItemSpawner : MonoBehaviour
     }
 
 
-    private void SpawnDoor(Room room, int uniqueId, bool roomFixedPuzzleRobot)
+    private void SpawnDoor(Room room, int uniqueId, bool roomFixedPuzzleRobot, bool isFirstRoom)
     {
         Vector3 tilePosition = room.exitTile.gameObject.transform.position;
 
@@ -204,20 +204,20 @@ public class ItemSpawner : MonoBehaviour
             tempDoorScript.uniqueId = uniqueId;
             tempDoorScript.inMaze = room.mazeID;
             tempDoorScript.doorMainObj.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth,
-                wallHeight, tempDoor.transform.localScale.z * 0.1f/** room.exitTile.tileWidth*/);
+                wallHeight, tempDoor.transform.localScale.z * 0.2f/** room.exitTile.tileWidth*/);
             tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
             tempDoorScript.height = wallHeight;
         }
         else
             tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, wallHeight, tempDoor.transform.localScale.z /** room.exitTile.tileWidth*/);
 
-        if (spawnPuzzleRobots)
+        if (spawnPuzzleRobots && !isFirstRoom)
         {
             PuzzleRobotSpawner(room, uniqueId, roomFixedPuzzleRobot);
         }
     }
 
-    private void LeverSpawner() // TODO: optimize this code
+    private void LeverSpawner() // TODO: optimize this code later
     {
         if (mapManager == null && leverPrefab != null)
             return;

@@ -13,13 +13,13 @@ GameObject:
   - component: {fileID: 6186601497139152588}
   - component: {fileID: 2823194456533168320}
   - component: {fileID: 1502439130758546154}
-  - component: {fileID: 183073389696435966}
   - component: {fileID: 3766880952776704146}
   - component: {fileID: 528253906526878857}
-  - component: {fileID: 4000685228214989702}
   - component: {fileID: 7386650883233879051}
+  - component: {fileID: 7818840006387402870}
+  - component: {fileID: 2782687016705828290}
   m_Layer: 0
-  m_Name: HandleCol
+  m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,20 +115,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!138 &183073389696435966
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821481376221526998}
-  m_ConnectedBody: {fileID: 3482041007115006884}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!114 &3766880952776704146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +151,8 @@ MonoBehaviour:
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
-  ignorePhysicsInHand: 1
+  ignorePhysicsInHand: 0
+  enablePhysicsInHand: 0
   locomotionSupported: 0
   inHandLerpSpeed: 0.4
   objectDropDistance: 0.3
@@ -175,7 +162,19 @@ MonoBehaviour:
   noRotationX: 1
   isKnockable: 0
   inHand: 0
---- !u!114 &4000685228214989702
+--- !u!114 &7386650883233879051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821481376221526998}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec5104bc40a04046a42eb04fa0e0008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7818840006387402870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,19 +187,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indicatorActive: 0
-  glowColor: {r: 1, g: 0.92565995, b: 0.4009434, a: 0}
---- !u!114 &7386650883233879051
-MonoBehaviour:
+  glowColor: {r: 0.990566, g: 0.9215171, b: 0.43454072, a: 0}
+--- !u!138 &2782687016705828290
+FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821481376221526998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ec5104bc40a04046a42eb04fa0e0008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_ConnectedBody: {fileID: 3482041007115006884}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &5711385213444324181
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +215,8 @@ GameObject:
   - component: {fileID: 5600786427445657217}
   - component: {fileID: 1339388830485236105}
   - component: {fileID: 566825051023860450}
+  - component: {fileID: 5093532138748163104}
+  - component: {fileID: 7215352772030477653}
   m_Layer: 0
   m_Name: Cabinet
   m_TagString: Untagged
@@ -250,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqueId: 0
+  handle: {fileID: 821481376221526998}
   door: {fileID: 8413723351126625070}
   objToSpawnInCabinet: {fileID: 0}
   tileWidth: 0
@@ -280,8 +284,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.52330387, y: 0.037989646, z: 0.17049128}
-  m_Center: {x: -0.00001347065, y: -0.16979097, z: -0.013448641}
+  m_Size: {x: 0.52330387, y: 0.037989646, z: 0.18099445}
+  m_Center: {x: -0.00001347065, y: -0.16979097, z: -0.008197058}
 --- !u!65 &566825051023860450
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -293,8 +297,34 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.51940763, y: 0.036183357, z: 0.17434129}
-  m_Center: {x: -0.0034181476, y: 0.5887611, z: -0.008506607}
+  m_Size: {x: 0.51940763, y: 0.036183357, z: 0.183002}
+  m_Center: {x: -0.0034181476, y: 0.5887611, z: -0.004176259}
+--- !u!65 &5093532138748163104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711385213444324181}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.021820307, y: 0.72145855, z: 0.18146622}
+  m_Center: {x: -0.25124893, y: 0.20353836, z: -0.0088223815}
+--- !u!65 &7215352772030477653
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5711385213444324181}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.01426971, y: 0.709532, z: 0.17870468}
+  m_Center: {x: 0.25176203, y: 0.21468353, z: -0.0082221925}
 --- !u!1 &7083253507410374622
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,9 +496,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8413723351126625070}
   serializedVersion: 2
-  m_Mass: 2
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Mass: 1
+  m_Drag: 0.1
+  m_AngularDrag: 0.1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -483,7 +513,7 @@ BoxCollider:
   m_GameObject: {fileID: 8413723351126625070}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.69696134, y: 0.70000005, z: 0.9799514}
   m_Center: {x: -0.3499312, y: 0, z: 0}
@@ -494,7 +524,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8413723351126625070}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2daadec7d02b024b868b500c71a0eee, type: 3}
   m_Name: 
@@ -510,23 +540,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8413723351126625070}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 352b737e6c5c2b34c8622863e889eb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canGrab: 0
   shouldFly: 0
-  grabFlyDistance: 0.2
-  grabFlyTime: 0.2
+  grabFlyDistance: 0.3
+  grabFlyTime: 0.5
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
   ignorePhysicsInHand: 0
+  enablePhysicsInHand: 0
   locomotionSupported: 0
-  inHandLerpSpeed: 0.4
-  objectDropDistance: 0.1
+  inHandLerpSpeed: 0.314
+  objectDropDistance: 0.3
   stayInPlace: 1
   noRotationY: 0
   noRotationZ: 1

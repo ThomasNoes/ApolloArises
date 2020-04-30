@@ -32,12 +32,12 @@ public class Door : MonoBehaviour
             thisCollider.size = keyHoleObj.transform.localScale;
             thisCollider.center = keyHoleObj.transform.localPosition;
         }
-        else if (doorMainObj != null)
-        {
-            BoxCollider thisCollider = GetComponent<BoxCollider>();
-            thisCollider.size = doorMainObj.transform.localScale;
-            thisCollider.center = doorMainObj.transform.localPosition;
-        }
+        //else if (doorMainObj != null)
+        //{
+        //    BoxCollider thisCollider = doorMainObj.GetComponent<BoxCollider>();
+        //    thisCollider.size = doorMainObj.transform.localScale;
+        //    thisCollider.center = doorMainObj.transform.localPosition;
+        //}
 
         if (doorMainObj != null)
             Invoke("DelayedStart", 1.0f);

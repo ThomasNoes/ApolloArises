@@ -127,6 +127,7 @@ public class PuzzleWheel : MonoBehaviour
             {
                 notFixed = false;
                 Enable();
+                Destroy(col.gameObject);
             }
         }
     }

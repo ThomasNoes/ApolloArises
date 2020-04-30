@@ -21,11 +21,11 @@ public class MazeDisabler : MonoBehaviour
 
         if (mapManager == null || pRController == null)
             active = false;
-        else if (Application.isEditor)
+        else /*if (Application.isEditor)*/
         {
-#if UNITY_EDITOR
-            Invoke("Initialize", 0.3f);
-#endif
+//#if UNITY_EDITOR
+            Invoke("Initialize", 2.0f);
+//#endif
         }
     }
 

@@ -90,7 +90,7 @@ MonoBehaviour:
   spawnLevers: 1
   spawnPuzzleObjects: 1
   spawnCogwheelsInDeadEnds: 1
-  initializeTutorialRoom: 0
+  initializeTutorialRoom: 1
   spawnFrequency: 1
   colourMaterials:
   - {fileID: 2100000, guid: d0443b9c3f9f27d47acbdc3e23517000, type: 2}

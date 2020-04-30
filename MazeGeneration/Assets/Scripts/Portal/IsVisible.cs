@@ -1,21 +1,27 @@
 ﻿// This script must be placed on the portal render quad in portal prefab
+
+using Assets.Scripts.Camera;
 using UnityEngine;
 
 public class IsVisible : MonoBehaviour
 {
     public PortalRenderController pRController;
-    public bool isStereoscopic = true;
+    public bool isStereoscopic = true, checkDistance;
+    public float minDistance = 25.0f;
     private Renderer thisRenderer;
     private Texture2D disabledTexture;
     private Material enabledTexture;
     private Texture rightText, leftText;
     private bool active, isAndroid;
+    private float currentDistance;
+    private GameObject mainCam;
 
     private void Start()
     {
         Invoke("DelayedStart", 1.0f);
 
         pRController = transform.root.GetComponent<PortalRenderController>();
+        mainCam = Camera.main.gameObject;
 
         if (pRController == null)
         {
@@ -37,6 +43,9 @@ public class IsVisible : MonoBehaviour
                 rightText = enabledTexture.GetTexture("_RightTex");
             }
         }
+
+        if (checkDistance)
+            InvokeRepeating("CustomLoop", 1.0f, 1.0f);
 
         #if UNITY_ANDROID
         isAndroid = true;
@@ -67,22 +76,39 @@ public class IsVisible : MonoBehaviour
         return GeometryUtility.TestPlanesAABB(frustumPlanes, renderer.bounds);
     }
 
-    public void Render()
+    private void LateUpdate()
     {
-        if (!VisibleFromCamera(thisRenderer, Camera.main))
+        if (active)
         {
-            if (!isAndroid)
+            if (!VisibleFromCamera(thisRenderer, Camera.main))
             {
-                thisRenderer.material.SetTexture(1, disabledTexture);
+                RenderOff();
             }
             else
             {
-                thisRenderer.material.SetTexture("_LeftTex", disabledTexture);
-                thisRenderer.material.SetTexture("_RightTex", disabledTexture);
+                if (!checkDistance)
+                    renderOn();
+                else if (currentDistance <= minDistance)
+                    renderOn();
             }
-            return;
         }
+    }
 
+    private void RenderOff()
+    {
+        if (!isAndroid)
+        {
+            thisRenderer.material.SetTexture(1, disabledTexture);
+        }
+        else
+        {
+            thisRenderer.material.SetTexture("_LeftTex", disabledTexture);
+            thisRenderer.material.SetTexture("_RightTex", disabledTexture);
+        }
+    }
+
+    private void renderOn()
+    {
         if (!isAndroid)
         {
             thisRenderer.material.SetTexture(1, enabledTexture.mainTexture);
@@ -94,9 +120,8 @@ public class IsVisible : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void CustomLoop()
     {
-        if (active)
-            Render();
+        currentDistance = Vector3.Distance(this.gameObject.transform.position, mainCam.transform.position);
     }
 }

@@ -210,6 +210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pRController: {fileID: 0}
   isStereoscopic: 1
+  checkDistance: 1
+  minDistance: 25
 --- !u!65 &7488657441937378617
 BoxCollider:
   m_ObjectHideFlags: 0

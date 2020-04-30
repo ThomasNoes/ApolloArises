@@ -13,14 +13,16 @@
         public PortalRenderController renderController;
         private Vector3 offsetVector;
         private GameObject thisObjCopy, mainObj, rightHandObj, leftHandObj;
-        private bool copyExist, activated;
-        [HideInInspector] public bool isParentObject = true, isInHand;
+        private bool copyExist, activated, inHand;
+        [HideInInspector] public bool isParentObject = true;
         private Collider currentCollider;
+        private SVGrabbable svGrabbable;
         private int inCurrentMaze = 0;
 
         private void Start()
         {
             renderController = FindObjectOfType<PortalRenderController>();
+            svGrabbable = GetComponent<SVGrabbable>();
             Invoke("DelayedStart", 0.4f);
         }
 
@@ -28,6 +30,11 @@
         {
             if (isParentObject)
                 activated = true;
+        }
+
+        private void Cooldown()
+        {
+            inHand = false;
         }
 
         private void LateUpdate()
@@ -38,6 +45,23 @@
                 {
                     thisObjCopy.transform.position = transform.position + offsetVector;
                     thisObjCopy.transform.rotation = transform.rotation;
+                }
+            }
+        }
+
+        private void Update()
+        {
+            if (svGrabbable == null)
+                return;
+
+            if (svGrabbable.inHand && !inHand)
+            {
+                inHand = true;
+                Invoke("Cooldown", 2.0f);
+
+                if (!isParentObject)
+                {
+                    // TODO
                 }
             }
         }
@@ -77,43 +101,46 @@
 
         private void OnTriggerEnter(Collider col)
         {
+            if (!isParentObject)
+                return;
+
             if (activated)
-                if (!isInHand)
+                if (col.CompareTag("PortalGroundCol"))
                 {
-                    if (col.CompareTag("PortalGroundCol"))
-                    {
-                        inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+                    inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
 
-                        if (thisObjCopy == null)
-                            CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
-                    }
-
-                    if (col.CompareTag("EntryCol"))
-                    {
-                        currentCollider = col;
-                        inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
-
-                        if (thisObjCopy == null)
-                            CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
-
-                    }
-
-                    if (col.CompareTag("PortalRenderCol"))
-                    {
-                        inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
-
-                        activated = false;
-                        thisObjCopy.transform.position = transform.position;
-                        transform.Translate(offsetVector, Space.World);
-                        offsetVector *= -1;
-                        //UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
-                        activated = true;
-                    }
+                    if (thisObjCopy == null)
+                        CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
                 }
-                else
+
+            if (col.CompareTag("EntryCol"))
+            {
+                currentCollider = col;
+                inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+
+                if (thisObjCopy == null)
+                    CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+
+            }
+
+            if (col.CompareTag("PortalRenderCol"))
+            {
+                inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+
+                activated = false;
+
+                if (thisObjCopy == null)
+                    CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+
+                if (thisObjCopy != null)
                 {
-                    // TODO
+                    thisObjCopy.transform.position = transform.position;
+                    transform.Translate(offsetVector, Space.World);
+                    offsetVector *= -1;
+                    //UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
+                    activated = true;
                 }
+            }
         }
 
         private void OnTriggerExit(Collider col)
