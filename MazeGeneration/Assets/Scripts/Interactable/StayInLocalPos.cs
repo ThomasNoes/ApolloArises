@@ -5,6 +5,11 @@ public class StayInLocalPos : MonoBehaviour
     private Vector3 initialPos;
     private bool posTransform;
 
+    void Awake()
+    {
+        initialPos = transform.localPosition;
+    }
+
     void Start()
     {
         Invoke("DelayedStart", 0.3f);
@@ -12,7 +17,7 @@ public class StayInLocalPos : MonoBehaviour
 
     void DelayedStart()
     {
-        initialPos = transform.localPosition;
+        // initialPos = transform.localPosition;
         posTransform = true;
     }
 
