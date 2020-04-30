@@ -433,7 +433,9 @@ MonoBehaviour:
   amountToActivate: 2
   cooldownTime: 0.4
   puzzleRobotRef: {fileID: 0}
+  pdm: {fileID: 0}
   notFixed: 0
+  handle: {fileID: 8464148380276482797}
 --- !u!65 &2928838103864173118
 BoxCollider:
   m_ObjectHideFlags: 0

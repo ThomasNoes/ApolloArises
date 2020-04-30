@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8517361490579513711}
   - component: {fileID: 7655874703060929134}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: UI-Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
