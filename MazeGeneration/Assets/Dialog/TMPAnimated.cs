@@ -22,7 +22,7 @@ public class TMPAnimated : MonoBehaviour
 
     private void Update()
     {
-        if (!isRunning)
+        if (!isRunning && target)
         {
             counter += Time.deltaTime;
             if (counter > ClearTextTimer)
