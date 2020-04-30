@@ -14,13 +14,19 @@ public class CompanionBehaviour : MonoBehaviour
 
     static public CompanionBehaviour instance;
 
+
+    [HideInInspector]
     public DialogReader dr;
+    [HideInInspector]
     public CompanionPathFinding cpf;
+
+    public GameObject controlPanel;
+
     MapManager mm;
     List<MapGenerator> maps;
     GameObject player;
     BeaconManager bm;
-
+    DayNightController dnc;
 
     public bool isFollowPlayer;
 
@@ -52,7 +58,7 @@ public class CompanionBehaviour : MonoBehaviour
     void Start()
     {
 
-
+        dnc = FindObjectOfType<DayNightController>();
         dr = GetComponent<DialogReader>();
         cpf = GetComponent<CompanionPathFinding>();
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
@@ -63,6 +69,8 @@ public class CompanionBehaviour : MonoBehaviour
         startTile = FindStartEndTile(maps[0]);
         endtile = FindStartEndTile(maps[maps.Count - 1]);
 
+
+
         Invoke("LateStart", 0); //wait a frame
     }
 
@@ -71,6 +79,8 @@ public class CompanionBehaviour : MonoBehaviour
         cpf.PlaceCompanionOnTile(startTile);
         InvokeRepeating("MyUpdate", 2.0f, 1f);
         dr.DisplayAllBranchedDialog();
+
+        ControlPanelSetup();
     }
 
 
@@ -195,6 +205,27 @@ public class CompanionBehaviour : MonoBehaviour
             Debug.Log("");
             dr.InjectDialog(openDoor);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "ControlPanel")
+        {
+            //play sound of booting control panel
+            Invoke("SkyEvent", 3);
+
+        }
+    }
+
+    private void SkyEvent()
+    {
+        dnc.StartSkyboxAndTintChange(true);
+    }
+
+    private void ControlPanelSetup()
+    {
+        controlPanel.transform.rotation = mm.transform.rotation;
+        controlPanel.transform.position = new Vector3(endtile.transform.position.x, 26.26f, endtile.transform.position.z);
     }
 }
 
