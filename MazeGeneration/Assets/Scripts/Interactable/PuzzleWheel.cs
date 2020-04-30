@@ -8,6 +8,7 @@ public class PuzzleWheel : MonoBehaviour
     public int spins = 0, amountToActivate = 3;
     public float cooldownTime = 0.3f;
     public PuzzleRobot puzzleRobotRef;
+    public PuzzleDialogManager pdm;
     public bool notFixed;
     private bool cooldown, goingForward, activated;
     private float prevYAngle;
@@ -72,7 +73,11 @@ public class PuzzleWheel : MonoBehaviour
                     Invoke("Cooldown", cooldownTime);
 
                     if (spins >= amountToActivate && !activated)
+                    {
+                        pdm.OnRotateWheelDone();
                         Activate();
+                    }
+
                 }
         }
 
@@ -128,6 +133,7 @@ public class PuzzleWheel : MonoBehaviour
                 notFixed = false;
                 Enable();
                 Destroy(col.gameObject);
+                pdm.OnRobotFixed();
             }
         }
     }
