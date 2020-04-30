@@ -730,6 +730,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
+--- !u!114 &401492473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4866124827574828966, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+    type: 3}
+  m_PrefabInstance: {fileID: 2526136163395224739}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &451613999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2205,7 @@ PrefabInstance:
         type: 3}
       propertyPath: TMP_Object
       value: 
-      objectReference: {fileID: 397171680}
+      objectReference: {fileID: 401492473}
     - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
       propertyPath: dialogs.Array.data[0]
