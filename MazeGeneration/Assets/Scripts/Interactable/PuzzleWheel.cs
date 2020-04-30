@@ -15,7 +15,7 @@ public class PuzzleWheel : MonoBehaviour
     private HingeJoint hingeJoint;
     private Rigidbody rb;
     private MeshRenderer mr;
-    private GameObject handle;
+    public GameObject handle;
     private Vector3 anchor, axis, initialPos;
 
     private void Awake()

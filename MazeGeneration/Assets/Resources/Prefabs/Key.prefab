@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5988794247123955859}
   - component: {fileID: 2942855095018471011}
   - component: {fileID: -2865195882622196062}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Key
   m_TagString: Key
   m_Icon: {fileID: 0}
@@ -170,7 +170,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderController: {fileID: 0}
   isParentObject: 1
-  isInHand: 0
 --- !u!114 &2942855095018471011
 MonoBehaviour:
   m_ObjectHideFlags: 0

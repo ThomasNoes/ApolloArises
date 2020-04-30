@@ -15,9 +15,8 @@ GameObject:
   - component: {fileID: 1502439130758546154}
   - component: {fileID: 3766880952776704146}
   - component: {fileID: 528253906526878857}
-  - component: {fileID: 7386650883233879051}
-  - component: {fileID: 7818840006387402870}
-  - component: {fileID: 2782687016705828290}
+  - component: {fileID: 7203586962315725346}
+  - component: {fileID: 20330560793716873}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -32,12 +31,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821481376221526998}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.61346, y: 0, z: 0.94}
-  m_LocalScale: {x: 0.08362209, y: 0.11206655, z: 0.65985084}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.19376299, y: 0.193119, z: 0.15209128}
+  m_LocalScale: {x: 0.10072887, y: 0.1741975, z: 0.035594184}
   m_Children: []
-  m_Father: {fileID: 4643358182482490375}
-  m_RootOrder: 0
+  m_Father: {fileID: 8726202907194722630}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3441425425895800533
 MeshFilter:
@@ -54,7 +53,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821481376221526998}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -107,13 +106,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 821481376221526998}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 2
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &3766880952776704146
 MonoBehaviour:
@@ -162,33 +161,7 @@ MonoBehaviour:
   noRotationX: 1
   isKnockable: 0
   inHand: 0
---- !u!114 &7386650883233879051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821481376221526998}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ec5104bc40a04046a42eb04fa0e0008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7818840006387402870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 821481376221526998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5ee590a3f3844a44ba94137c0982775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indicatorActive: 0
-  glowColor: {r: 0.990566, g: 0.9215171, b: 0.43454072, a: 0}
---- !u!138 &2782687016705828290
+--- !u!138 &7203586962315725346
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -202,6 +175,19 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &20330560793716873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821481376221526998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec5104bc40a04046a42eb04fa0e0008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onlySetOnce: 1
 --- !u!1 &5711385213444324181
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +222,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8569293007131418804}
+  - {fileID: 7321143803672998398}
   - {fileID: 4643358182482490375}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -436,10 +423,9 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.259, y: 0.2086, z: 0.1076359}
   m_LocalScale: {x: 0.738, y: 1.13, z: 0.026828835}
-  m_Children:
-  - {fileID: 7321143803672998398}
+  m_Children: []
   m_Father: {fileID: 8726202907194722630}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6130144458138860277
 MeshFilter:

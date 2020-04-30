@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 4173198226173254112}
   - component: {fileID: 1449473940011587521}
   - component: {fileID: 8100928179214549118}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4173198226173254112
 Transform:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 1602158096410150698}
   - component: {fileID: 5384634187551953947}
   - component: {fileID: 7631830420179239892}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Wheel
   m_TagString: CogWheel
   m_Icon: {fileID: 0}

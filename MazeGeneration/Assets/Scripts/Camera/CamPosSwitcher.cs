@@ -154,7 +154,7 @@ namespace Assets.Scripts.Camera
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 7.0f, layerMask))
+            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 8.0f, layerMask))
             {
                 Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
