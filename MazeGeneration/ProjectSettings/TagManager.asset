@@ -20,6 +20,8 @@ TagManager:
   - WirePart
   - EntryCol
   - CogWheel
+  - Companion
+  - ControlPanel
   layers:
   - Default
   - TransparentFX
