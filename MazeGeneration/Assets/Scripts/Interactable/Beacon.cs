@@ -17,6 +17,7 @@ public class Beacon : MonoBehaviour
     private BeaconManager beaconManager;
     private Color startColor, endColor;
     private AudioSource audioSource;
+    public GameObject electricity;
 
     private void Start()
     {
@@ -62,6 +63,7 @@ public class Beacon : MonoBehaviour
         PlaySound(closingRoof);
         yield return new WaitForSeconds(6.0f);
         PlaySound(orbOn);
+        electricity.SetActive(true);
     }
 
     private void PlaySound(AudioClip audioClip)
