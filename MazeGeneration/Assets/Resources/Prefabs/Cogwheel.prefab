@@ -114,9 +114,9 @@ GameObject:
   - component: {fileID: 1928742914385923073}
   - component: {fileID: 4283153952051792007}
   - component: {fileID: 5653734793003000731}
+  - component: {fileID: 4064758459636671765}
   - component: {fileID: 4203915395513390424}
   - component: {fileID: 6322383642756807181}
-  - component: {fileID: 4064758459636671765}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -276,6 +276,20 @@ MonoBehaviour:
   releaseGripButton: -1
   gripAutoHolds: 0
   activeController: 0
+--- !u!138 &4064758459636671765
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464148380276482797}
+  m_ConnectedBody: {fileID: 6261743046997914716}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!65 &4203915395513390424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -303,20 +317,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onlySetOnce: 0
   continuePosSetting: 0
---- !u!138 &4064758459636671765
-FixedJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8464148380276482797}
-  m_ConnectedBody: {fileID: 6261743046997914716}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &9046440922413680291
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +485,7 @@ MonoBehaviour:
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
-  ignorePhysicsInHand: 1
+  ignorePhysicsInHand: 0
   enablePhysicsInHand: 0
   locomotionSupported: 0
   inHandLerpSpeed: 0.4

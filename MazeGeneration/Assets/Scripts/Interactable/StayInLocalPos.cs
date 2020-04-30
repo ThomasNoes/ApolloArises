@@ -10,20 +10,30 @@ public class StayInLocalPos : MonoBehaviour
 
     void Awake()
     {
+        //initialPos = transform.localPosition;
+        //fixedJoint = GetComponent<FixedJoint>();
+
+        //if (fixedJoint != null)
+        //{
+        //    fixedJoint.autoConfigureConnectedAnchor = true;
+        //    anchor = fixedJoint.anchor;
+        //    axis = fixedJoint.axis;
+        //}
+    }
+
+    void Start()
+    {
         initialPos = transform.localPosition;
         fixedJoint = GetComponent<FixedJoint>();
 
         if (fixedJoint != null)
         {
-            fixedJoint.autoConfigureConnectedAnchor = true;
+            fixedJoint.autoConfigureConnectedAnchor = false;
             anchor = fixedJoint.anchor;
             axis = fixedJoint.axis;
         }
-    }
 
-    void Start()
-    {
-        Invoke("DelayedStart", 0.3f);
+        Invoke("DelayedStart", 0.4f);
     }
 
     void DelayedStart()
@@ -37,6 +47,7 @@ public class StayInLocalPos : MonoBehaviour
         {
             fixedJoint.anchor = anchor;
             fixedJoint.axis = axis;
+            fixedJoint.autoConfigureConnectedAnchor = true;
         }
     }
 
