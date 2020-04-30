@@ -106,7 +106,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683365476724869493}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.19}
   m_LocalScale: {x: 0.0006, y: 0.0006, z: 1}
   m_Children:
   - {fileID: 4076626222571076418}
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 1025
+  m_textAlignment: 1026
   m_characterSpacing: 3.3
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1383,12 +1383,12 @@ PrefabInstance:
     - target: {fileID: 6970780816905330642, guid: f7cc3dac1aa183246b951f9f45939594,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6970780816905330642, guid: f7cc3dac1aa183246b951f9f45939594,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6970780816905330642, guid: f7cc3dac1aa183246b951f9f45939594,
         type: 3}
@@ -1418,7 +1418,22 @@ PrefabInstance:
     - target: {fileID: 6970780816905330642, guid: f7cc3dac1aa183246b951f9f45939594,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.08468578
+      value: 0.040164027
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970780816905330642, guid: f7cc3dac1aa183246b951f9f45939594,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05581996
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970780816905330642, guid: f7cc3dac1aa183246b951f9f45939594,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.064808674
+      objectReference: {fileID: 0}
+    - target: {fileID: 6970780816905330642, guid: f7cc3dac1aa183246b951f9f45939594,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.515
       objectReference: {fileID: 0}
     - target: {fileID: 6970780816905330646, guid: f7cc3dac1aa183246b951f9f45939594,
         type: 3}

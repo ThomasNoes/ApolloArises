@@ -14,14 +14,16 @@ public class IsVisible : MonoBehaviour
     private Texture rightText, leftText;
     private bool active, isAndroid;
     private float currentDistance;
-    private GameObject mainCam;
+    private GameObject mainCamObj;
+    private Camera mainCam;
 
     private void Start()
     {
         Invoke("DelayedStart", 1.0f);
 
         pRController = transform.root.GetComponent<PortalRenderController>();
-        mainCam = Camera.main.gameObject;
+        mainCamObj = Camera.main.gameObject;
+        mainCam = Camera.main;
 
         if (pRController == null)
         {
@@ -80,7 +82,7 @@ public class IsVisible : MonoBehaviour
     {
         if (active)
         {
-            if (!VisibleFromCamera(thisRenderer, Camera.main))
+            if (!VisibleFromCamera(thisRenderer, mainCam))
             {
                 RenderOff();
             }
@@ -122,6 +124,6 @@ public class IsVisible : MonoBehaviour
 
     private void CustomLoop()
     {
-        currentDistance = Vector3.Distance(this.gameObject.transform.position, mainCam.transform.position);
+        currentDistance = Vector3.Distance(this.gameObject.transform.position, mainCamObj.transform.position);
     }
 }
