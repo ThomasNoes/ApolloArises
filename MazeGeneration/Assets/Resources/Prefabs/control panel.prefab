@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4478584686848708647}
   - component: {fileID: 4862805353224481297}
   - component: {fileID: 1171128176288192232}
+  - component: {fileID: 7946509434701298823}
   m_Layer: 0
   m_Name: control panel
   m_TagString: Untagged
@@ -83,6 +84,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &7946509434701298823
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611496499792699956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.6000002
+  m_Height: 2.66
+  m_Direction: 1
+  m_Center: {x: 0.00000011920929, y: -0.11434135, z: 0.00000011920929}
 --- !u!1 &2031181727877668204
 GameObject:
   m_ObjectHideFlags: 0
