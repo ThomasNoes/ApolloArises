@@ -30,6 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.9346, z: 0.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7526557327579663606}
   - {fileID: 3790892731917407112}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -115,6 +116,7 @@ GameObject:
   - component: {fileID: 5653734793003000731}
   - component: {fileID: 4203915395513390424}
   - component: {fileID: 6322383642756807181}
+  - component: {fileID: 4064758459636671765}
   m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
@@ -130,10 +132,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8464148380276482797}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0372, z: 0.09739189}
+  m_LocalPosition: {x: 0, y: 0.056685984, z: 0.09739192}
   m_LocalScale: {x: 1.14, y: 1.14, z: 1.14}
   m_Children: []
-  m_Father: {fileID: 3790892731917407112}
+  m_Father: {fileID: 6898801135259796928}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5009139063831429847
@@ -193,11 +195,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!138 &7247650691929325771
 FixedJoint:
@@ -227,16 +229,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGrab: 1
   shouldFly: 1
-  grabFlyDistance: 0.3
+  grabFlyDistance: 0.35
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
-  ignorePhysicsInHand: 1
+  ignorePhysicsInHand: 0
+  enablePhysicsInHand: 0
   locomotionSupported: 0
-  inHandLerpSpeed: 0.3
-  objectDropDistance: 0.3
+  inHandLerpSpeed: 0.119
+  objectDropDistance: 0.35
   stayInPlace: 0
   noRotationY: 0
   noRotationZ: 1
@@ -298,6 +301,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec5104bc40a04046a42eb04fa0e0008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onlySetOnce: 0
+  continuePosSetting: 0
+--- !u!138 &4064758459636671765
+FixedJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464148380276482797}
+  m_ConnectedBody: {fileID: 6261743046997914716}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &9046440922413680291
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,10 +350,9 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.000000040233132, y: 0.019485977, z: 0.00000003218651}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7526557327579663606}
+  m_Children: []
   m_Father: {fileID: 6898801135259796928}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3764027030212972559
 MeshFilter:
@@ -391,9 +409,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9046440922413680291}
   serializedVersion: 2
-  m_Mass: 8
-  m_Drag: 6
-  m_AngularDrag: 3
+  m_Mass: 2
+  m_Drag: 1
+  m_AngularDrag: 0.5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -412,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spins: 0
-  amountToActivate: 3
+  amountToActivate: 2
   cooldownTime: 0.4
   puzzleRobotRef: {fileID: 0}
   notFixed: 0
@@ -459,13 +477,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGrab: 0
   shouldFly: 0
-  grabFlyDistance: 0.35
+  grabFlyDistance: 0
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
   ignorePhysicsInHand: 1
+  enablePhysicsInHand: 0
   locomotionSupported: 0
   inHandLerpSpeed: 0.4
   objectDropDistance: 0.3

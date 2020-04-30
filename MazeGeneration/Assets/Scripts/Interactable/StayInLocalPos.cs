@@ -2,12 +2,23 @@
 
 public class StayInLocalPos : MonoBehaviour
 {
+    public bool onlySetOnce, continuePosSetting;
     private Vector3 initialPos;
     private bool posTransform;
+    private FixedJoint fixedJoint;
+    private Vector3 anchor, axis; 
 
     void Awake()
     {
         initialPos = transform.localPosition;
+        fixedJoint = GetComponent<FixedJoint>();
+
+        if (fixedJoint != null)
+        {
+            fixedJoint.autoConfigureConnectedAnchor = true;
+            anchor = fixedJoint.anchor;
+            axis = fixedJoint.axis;
+        }
     }
 
     void Start()
@@ -17,8 +28,16 @@ public class StayInLocalPos : MonoBehaviour
 
     void DelayedStart()
     {
-        // initialPos = transform.localPosition;
-        posTransform = true;
+        if (onlySetOnce)
+            transform.localPosition = initialPos;
+        else if (continuePosSetting)
+            posTransform = true;
+
+        if (fixedJoint != null)
+        {
+            fixedJoint.anchor = anchor;
+            fixedJoint.axis = axis;
+        }
     }
 
     void LateUpdate()
