@@ -15,7 +15,7 @@ public class PuzzleWheel : MonoBehaviour
     private HingeJoint hingeJoint;
     private Rigidbody rb;
     private MeshRenderer mr;
-    public GameObject handle;
+    public GameObject handle, handleInteractObj;
     private Vector3 anchor, axis, initialPos;
 
     private void Awake()
@@ -74,10 +74,9 @@ public class PuzzleWheel : MonoBehaviour
 
                     if (spins >= amountToActivate && !activated)
                     {
-                        pdm.OnRotateWheelDone();
+                        pdm?.OnRotateWheelDone();
                         Activate();
                     }
-
                 }
         }
 
@@ -110,7 +109,12 @@ public class PuzzleWheel : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotationZ;
 
         mr.enabled = true;
-        handle?.SetActive(true);
+
+        if (handle != null)
+            handle.SetActive(true);
+
+        if (handleInteractObj != null)
+            handleInteractObj.SetActive(true);
     }
 
     public void Disable()
@@ -121,7 +125,11 @@ public class PuzzleWheel : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
 
         mr.enabled = false;
-        handle?.SetActive(false);
+        if (handle != null)
+            handle.SetActive(false);
+
+        if (handleInteractObj != null)
+            handleInteractObj.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider col)
@@ -133,7 +141,7 @@ public class PuzzleWheel : MonoBehaviour
                 notFixed = false;
                 Enable();
                 Destroy(col.gameObject);
-                pdm.OnRobotFixed();
+                pdm?.OnRobotFixed();
             }
         }
     }

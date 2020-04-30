@@ -173,9 +173,15 @@ public class SVGrabbable : MonoBehaviour {
 
     private void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.Two)) // TODO for debugging YYY
+        if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
             if (inHand)
                 Debug.Log(gameObject.name + " is in hand!");
+            if (grabData.recentlyDropped)
+                Debug.Log(gameObject.name + " - item was recently dropped");
+            if (grabData.recentlyReleased)
+                Debug.Log(gameObject.name + " - item was recently released");
+        }
     }
 
     /* Why Late Update? Good Question kind sir / madam. It's so we can run AFTER our physics calculations.  This enables us to lerp objects that you need to carry around with you
@@ -259,7 +265,7 @@ public class SVGrabbable : MonoBehaviour {
         if (grabFlyDistance > distanceToLeftHand ||
             grabFlyDistance > distanceToRightHand) {
             float distance = Mathf.Min(distanceToLeftHand, distanceToRightHand);
-            if (this.gripIndicatorComponent) {
+            if (gripIndicatorComponent != null) {
                 float distanceForHighlight = grabFlyDistance / 4f;
                 float highlight = Mathf.Max(0, Mathf.Min(1, (grabFlyDistance - distance) / distanceForHighlight));
                 gripIndicatorComponent.indicatorActive = highlight;
@@ -302,7 +308,7 @@ public class SVGrabbable : MonoBehaviour {
             }
 
         } else {
-            if (this.gripIndicatorComponent) {
+            if (gripIndicatorComponent != null) {
                 gripIndicatorComponent.indicatorActive = 0;
             }
             // Clear our object as nearest if it's not in grabbin range!
@@ -409,7 +415,7 @@ public class SVGrabbable : MonoBehaviour {
             this.grabData.grabStartWorldRotation = this.gameObject.transform.rotation;
             this.grabData.grabStartLocalRotation = Quaternion.Inverse(this.input.RotationForController(controller)) * this.grabData.grabStartWorldRotation;
             this.grabData.hasJoint = (this.gameObject.GetComponent<Joint>() != null);
-            if (this.gripIndicatorComponent) {
+            if (gripIndicatorComponent != null) {
                 gripIndicatorComponent.indicatorActive = 0;
             }
 
