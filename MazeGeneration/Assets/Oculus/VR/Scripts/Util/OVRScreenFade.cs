@@ -182,13 +182,17 @@ public class OVRScreenFade : MonoBehaviour
     {
         float overallFadeTime = fadeTime + timeBeforeFade;
 		float elapsedTime = 0.0f;
-		while (elapsedTime < overallFadeTime)
+
+        currentAlpha = startAlpha;
+        SetMaterialAlpha();
+
+        while (elapsedTime < overallFadeTime)
 		{
 			elapsedTime += Time.deltaTime;
 
             if (elapsedTime >= timeBeforeFade)
             {
-                currentAlpha = Mathf.Lerp(startAlpha, endAlpha, Mathf.Clamp01(elapsedTime / fadeTime));
+                currentAlpha = Mathf.Lerp(startAlpha, endAlpha, Mathf.Clamp01(elapsedTime - timeBeforeFade));
                 SetMaterialAlpha();
             }
             yield return new WaitForEndOfFrame();
