@@ -70,30 +70,52 @@ public class Door : MonoBehaviour
         //gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider col)
+    //private void OnTriggerEnter(Collider col)
+    //{
+    //    if (!isPowered)
+    //        return;
+
+    //    if (col.CompareTag("Key"))
+    //        if (col.GetComponent<Key>() != null)
+    //        {
+    //            int tempId = col.GetComponent<Key>().uniqueId;
+    //            col.GetComponent<SVGrabbable>()?.ClearActiveController();
+
+    //            if (tempId == uniqueId)
+    //                if (!useDelay)
+    //                {
+    //                    Destroy(col.gameObject);
+    //                    CompanionBehaviour.instance?.OnOpenDoor();
+    //                    OpenDoor();
+    //                }
+    //                else
+    //                {
+    //                    Destroy(col.gameObject);
+    //                    Invoke("OpenDoor", delay);
+    //                }
+    //        }
+    //}
+
+    private void OnCollisionEnter(Collision col)
     {
-        if (!isPowered)
-            return;
+        if (col.gameObject.GetComponent<Key>() != null)
+        {
+            int tempId = col.gameObject.GetComponent<Key>().uniqueId;
+            col.gameObject.GetComponent<SVGrabbable>()?.ClearActiveController();
 
-        if (col.CompareTag("Key"))
-            if (col.GetComponent<Key>() != null)
-            {
-                int tempId = col.GetComponent<Key>().uniqueId;
-                col.GetComponent<SVGrabbable>()?.ClearActiveController();
-
-                if (tempId == uniqueId)
-                    if (!useDelay)
-                    {
-                        Destroy(col.gameObject);
-                        CompanionBehaviour.instance?.OnOpenDoor();
-                        OpenDoor();
-                    }
-                    else
-                    {
-                        Destroy(col.gameObject);
-                        Invoke("OpenDoor", delay);
-                    }
-            }
+            if (tempId == uniqueId)
+                if (!useDelay)
+                {
+                    Destroy(col.gameObject);
+                    CompanionBehaviour.instance?.OnOpenDoor();
+                    OpenDoor();
+                }
+                else
+                {
+                    Destroy(col.gameObject);
+                    Invoke("OpenDoor", delay);
+                }
+        }
     }
 
     private void LateUpdate()
