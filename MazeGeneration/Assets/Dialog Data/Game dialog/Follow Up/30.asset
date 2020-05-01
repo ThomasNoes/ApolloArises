@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: How comfortable did you find the interaction with objects?
   textSpeed: 40
-  dialogEffect: 0
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: 48a54dd28061aad4c8d3aec41e5906d7, type: 2}

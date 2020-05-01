@@ -102,6 +102,7 @@ public class TMPAnimated : MonoBehaviour
         if (dialog.ButtonEvent != null)
         {
             proceedButton.SetActive(false);
+            Debug.Log(dialog.ButtonEvent.name);
             dialog.ButtonEvent.Raise();
         }
         else if (!proceedButton.activeSelf)

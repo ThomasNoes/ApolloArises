@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: How comfortable did you frame rate?
   textSpeed: 40
-  dialogEffect: 0
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: 0b71466fb08dd0044933811b6b918f5d, type: 2}

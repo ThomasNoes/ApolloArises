@@ -11671,7 +11671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: ed188a706da40a24e955cff18f9b9f64, type: 2}
-  delay: 6.1
+  delay: 4
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -11908,7 +11908,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527084633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.064, y: 1.37, z: 0.091}
+  m_LocalPosition: {x: -0.259, y: 1.268, z: 0.288}
   m_LocalScale: {x: 0.18344, y: 0.18344, z: 0.18344}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12722,6 +12722,11 @@ PrefabInstance:
       propertyPath: proceedButton
       value: 
       objectReference: {fileID: 1135089549}
+    - target: {fileID: 1004870475194667284, guid: 0de2365736a11784c95847a24a7a6304,
+        type: 3}
+      propertyPath: clearText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.size

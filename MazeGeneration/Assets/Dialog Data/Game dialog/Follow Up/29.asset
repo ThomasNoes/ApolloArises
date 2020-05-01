@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: How comfortable did you find the robots?
   textSpeed: 40
-  dialogEffect: 0
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: 58add9cb7745509419abca3c463f3bf4, type: 2}

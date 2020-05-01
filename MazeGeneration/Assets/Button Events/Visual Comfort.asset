@@ -9,10 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
-  m_Name: 24
+  m_Script: {fileID: 11500000, guid: cafa16ae2b93f284dbc7a0164d65dbb8, type: 3}
+  m_Name: Visual Comfort
   m_EditorClassIdentifier: 
-  text: How comfortable did you find the corridor width in the maze?
-  textSpeed: 40
-  dialogEffect: 4
-  ButtonEvent: {fileID: 11400000, guid: f18a5d4a6cafe2e4c8e0215c677837ce, type: 2}

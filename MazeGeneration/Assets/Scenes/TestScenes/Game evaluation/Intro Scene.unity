@@ -833,7 +833,7 @@ PrefabInstance:
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: m_Name
-      value: as fast as possible
+      value: Count the amount of towers
       objectReference: {fileID: 0}
     - target: {fileID: 5403584426831557178, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -1840,7 +1840,7 @@ PrefabInstance:
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: m_Name
-      value: Until I do not find the width comfortable
+      value: Reach the end of the maze
       objectReference: {fileID: 0}
     - target: {fileID: 5403584426831557178, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -2220,7 +2220,7 @@ PrefabInstance:
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: m_Name
-      value: With my eyes closed
+      value: Find out how you switched to another maze
       objectReference: {fileID: 0}
     - target: {fileID: 5403584426831557178, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -4334,7 +4334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: 1d7c7e6794393f74691a5b920e6d8480, type: 2}
-  delay: 2
+  delay: 1.7
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -4362,7 +4362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: e18b04bceb74da949877a7c9603887ad, type: 2}
-  delay: 7.9
+  delay: 5.2
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -4390,7 +4390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: ccac01673155412429d085449e9f7beb, type: 2}
-  delay: 2.3
+  delay: 1.7
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -4418,7 +4418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: c91651c0b0a619f4891c35f67389f2d7, type: 2}
-  delay: 6.2
+  delay: 3.5
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:

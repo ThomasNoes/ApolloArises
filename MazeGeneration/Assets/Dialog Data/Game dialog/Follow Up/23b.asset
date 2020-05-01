@@ -17,5 +17,5 @@ MonoBehaviour:
 
 '
   textSpeed: 40
-  dialogEffect: 0
-  ButtonEvent: {fileID: 0}
+  dialogEffect: 4
+  ButtonEvent: {fileID: 11400000, guid: d8774639f1ca5b1459e1e38186aea07d, type: 2}

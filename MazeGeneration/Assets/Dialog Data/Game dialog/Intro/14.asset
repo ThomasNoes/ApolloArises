@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: I will be transferring you to two similar environments where you will be
     standing in a maze on top of a tower. Your goal will be to get the end of the
-    maze that is in the tallest tower.
+    maze that is on the tallest tower.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
