@@ -17,12 +17,13 @@ public class TMPAnimated : MonoBehaviour
 
     public bool isRunning = false;
 
+    public bool clearText = true;
     float ClearTextTimer = 4.0f;
     float counter = 0;
 
     private void Update()
     {
-        if (!isRunning && target)
+        if (!isRunning && target && clearText)
         {
             counter += Time.deltaTime;
             if (counter > ClearTextTimer)
