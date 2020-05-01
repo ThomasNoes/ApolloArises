@@ -140,6 +140,8 @@ public class PuzzleWheel : MonoBehaviour
             {
                 notFixed = false;
                 Enable();
+
+                col.GetComponent<SVGrabbable>()?.ClearActiveController();
                 Destroy(col.gameObject);
                 pdm?.OnRobotFixed();
             }

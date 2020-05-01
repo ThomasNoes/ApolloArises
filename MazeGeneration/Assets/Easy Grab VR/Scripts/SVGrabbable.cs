@@ -450,7 +450,7 @@ public class SVGrabbable : MonoBehaviour {
         }
     }
 
-    private void ClearActiveController() {
+    public void ClearActiveController() {
         grabData.grabEndTime = Time.time;
         grabData.recentlyReleased = true;
 

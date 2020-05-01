@@ -6,13 +6,14 @@ using UnityEngine;
 public class IsVisible : MonoBehaviour
 {
     public PortalRenderController pRController;
-    public bool isStereoscopic = true, checkDistance;
+    public NewTeleporter thisTeleporter;
+    public bool isStereoscopic = true, checkDistance, checkCurrentMaze, checkViewFrustum;
     public float minDistance = 25.0f;
     private Renderer thisRenderer;
     private Texture2D disabledTexture;
     private Material enabledTexture;
     private Texture rightText, leftText;
-    private bool active, isAndroid;
+    private bool active, isAndroid, inNearbyMaze;
     private float currentDistance;
     private GameObject mainCamObj;
     private Camera mainCam;
@@ -22,6 +23,10 @@ public class IsVisible : MonoBehaviour
         Invoke("DelayedStart", 1.0f);
 
         pRController = transform.root.GetComponent<PortalRenderController>();
+
+        if (thisTeleporter == null)
+            thisTeleporter = GetComponentInParent<NewTeleporter>();
+
         mainCamObj = Camera.main.gameObject;
         mainCam = Camera.main;
 
@@ -46,7 +51,7 @@ public class IsVisible : MonoBehaviour
             }
         }
 
-        if (checkDistance)
+        if (checkDistance || checkCurrentMaze)
             InvokeRepeating("CustomLoop", 1.0f, 1.0f);
 
         #if UNITY_ANDROID
@@ -80,9 +85,9 @@ public class IsVisible : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (active)
+        if (active && checkViewFrustum)
         {
-            if (!VisibleFromCamera(thisRenderer, mainCam))
+            if (!VisibleFromCamera(thisRenderer, mainCam) || !inNearbyMaze)
             {
                 RenderOff();
             }
@@ -124,6 +129,32 @@ public class IsVisible : MonoBehaviour
 
     private void CustomLoop()
     {
-        currentDistance = Vector3.Distance(this.gameObject.transform.position, mainCamObj.transform.position);
+        if (checkDistance)
+            currentDistance = Vector3.Distance(this.gameObject.transform.position, mainCamObj.transform.position);
+
+        if (checkCurrentMaze)
+        {
+            if (pRController.currentMaze - 1 == thisTeleporter.mazeID || 
+                pRController.currentMaze == thisTeleporter.mazeID ||
+                pRController.currentMaze + 1 == thisTeleporter.mazeID)
+                inNearbyMaze = true;
+            else
+                inNearbyMaze = false;
+        }
+
+        if (!checkViewFrustum)
+        {
+            if (!inNearbyMaze)
+            {
+                RenderOff();
+            }
+            else
+            {
+                if (!checkDistance)
+                    renderOn();
+                else if (currentDistance <= minDistance)
+                    renderOn();
+            }
+        }
     }
 }

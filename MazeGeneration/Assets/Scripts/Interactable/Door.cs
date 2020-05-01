@@ -79,6 +79,7 @@ public class Door : MonoBehaviour
             if (col.GetComponent<Key>() != null)
             {
                 int tempId = col.GetComponent<Key>().uniqueId;
+                col.GetComponent<SVGrabbable>()?.ClearActiveController();
 
                 if (tempId == uniqueId)
                     if (!useDelay)

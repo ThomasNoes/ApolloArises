@@ -9,7 +9,8 @@ public class MazeDisabler : MonoBehaviour
     private MapManager mapManager;
     private GameObject[][] portals;
     private bool active = true;
-    private int currentMaze;
+    private int currentMaze, mazeAmount, localBufferAmount;
+    private bool[] enabledMazes;
 
     private void Start()
     {
@@ -18,6 +19,7 @@ public class MazeDisabler : MonoBehaviour
 
         mapManager = gameObject.GetComponent<MapManager>();
         pRController = FindObjectOfType<PortalRenderController>();
+        localBufferAmount = bufferAmount + 1;
 
         if (mapManager == null || pRController == null)
             active = false;
@@ -32,6 +34,7 @@ public class MazeDisabler : MonoBehaviour
     public void Initialize()
     {
         InitializePortalArray();
+        mazeAmount = mapManager.mapSequence.Length;
 
         if (portals.Length <= 0)
         {
@@ -39,7 +42,7 @@ public class MazeDisabler : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < mapManager.mapSequence.Length; i++)
+        for (int i = 0; i < mazeAmount; i++)
             mapManager.mapSequence[i].mapObject.SetActive(false);
 
         foreach (var t in portals)
@@ -79,25 +82,47 @@ public class MazeDisabler : MonoBehaviour
             return;
 
         currentMaze = pRController.currentMaze;
-        SetMaze(currentMaze, true);
+        enabledMazes = new bool[mazeAmount];
 
-        for (int i = 1; i < bufferAmount + 1; i++)
+        SetMaze(currentMaze, true);
+        enabledMazes[currentMaze] = true;
+
+        for (int i = 1; i < localBufferAmount; i++)
         {
             SetMaze(currentMaze + i, true);
             SetMaze(currentMaze - i, true);
         }
 
-        SetMaze(currentMaze + (bufferAmount + 1), false);
-        SetMaze(currentMaze - (bufferAmount + 1), false);
-
+        for (int i = 0; i < mazeAmount; i++)
+        {
+            if (enabledMazes[i] == false)
+                SetMaze(i, false);
+        }
     }
 
     private void SetMaze(int index, bool enable)
     {
-        if (index < 0 || index > mapManager.mapSequence.Length - 1)
-            return;
+        if (index < 0 || index > mazeAmount - 1)
+        {
+            if (enable)
+            {
+                if (index > mazeAmount - 1)
+                {
+                    index %= mazeAmount - 1;
+                }
+                else if (index < 0)
+                {
+                    index = mazeAmount + (index - 1);
+                }
+            }
+            else
+                return;
+        }
 
         mapManager.mapSequence[index].mapObject.SetActive(enable);
+
+        if (enable)
+            enabledMazes[index] = true;
 
         if (index != portals.Length)
         {
