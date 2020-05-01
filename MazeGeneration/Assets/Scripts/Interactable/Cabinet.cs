@@ -16,7 +16,7 @@ public class Cabinet : MonoBehaviour
             Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + 0.05f, transform.position.z);
             Quaternion spawnRot = Quaternion.Euler(90, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-            GameObject tempObj = Instantiate(objToSpawnInCabinet, spawnPos, spawnRot, itemSpawner.gameObject.transform);
+            GameObject tempObj = Instantiate(objToSpawnInCabinet, spawnPos, spawnRot, objTransform.parent != null ? objTransform.parent : objTransform);
 
             Key tempKey = tempObj.GetComponent<Key>();
 

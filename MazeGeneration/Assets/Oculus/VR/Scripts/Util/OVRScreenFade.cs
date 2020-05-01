@@ -22,6 +22,9 @@ using System.Collections; // required for Coroutines
 /// </summary>
 public class OVRScreenFade : MonoBehaviour
 {
+    [Tooltip("Time it takes before fade starts")]
+    public float timeBeforeFade = 2.0f;
+
     [Tooltip("Fade duration")]
 	public float fadeTime = 2.0f;
 
@@ -176,14 +179,23 @@ public class OVRScreenFade : MonoBehaviour
 	/// Fades alpha from 1.0 to 0.0
 	/// </summary>
 	IEnumerator Fade(float startAlpha, float endAlpha)
-	{
+    {
+        float overallFadeTime = fadeTime + timeBeforeFade;
 		float elapsedTime = 0.0f;
-		while (elapsedTime < fadeTime)
+
+        currentAlpha = startAlpha;
+        SetMaterialAlpha();
+
+        while (elapsedTime < overallFadeTime)
 		{
 			elapsedTime += Time.deltaTime;
-            currentAlpha = Mathf.Lerp(startAlpha, endAlpha, Mathf.Clamp01(elapsedTime / fadeTime));
-            SetMaterialAlpha();
-			yield return new WaitForEndOfFrame();
+
+            if (elapsedTime >= timeBeforeFade)
+            {
+                currentAlpha = Mathf.Lerp(startAlpha, endAlpha, Mathf.Clamp01(elapsedTime - timeBeforeFade));
+                SetMaterialAlpha();
+            }
+            yield return new WaitForEndOfFrame();
 		}
 	}
 

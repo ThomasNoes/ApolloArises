@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onlySetOnce: 1
+  continuePosSetting: 0
 --- !u!1 &5711385213444324181
 GameObject:
   m_ObjectHideFlags: 0

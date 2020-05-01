@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(SphereCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class Key : MonoBehaviour
 {
     public int uniqueId;
@@ -11,7 +11,6 @@ public class Key : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<SphereCollider>().isTrigger = true;
         renderer = GetComponent<Renderer>();
 
         if (renderer != null)

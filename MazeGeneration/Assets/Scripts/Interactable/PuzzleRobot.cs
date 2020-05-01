@@ -6,8 +6,7 @@ public class PuzzleRobot : MonoBehaviour
 {
     public float rotateSpeed = 1.0f, blinkDuration = 0.5f, blinkFrequency = 5.0f;
     public bool enableBlinking = true, turnedOff, startsFixed;
-    public GameObject headObj, mainScreenObj, keyPrefab, puzzleStandObj, puzzleDoor, puzzleCogWheel;
-    public GameObject mainScreenCanvas;
+    public GameObject headObj, mainScreenObj, keyPrefab, puzzleStandObj, puzzleDoor, puzzleCogWheel, mainScreenCanvas;
     public Image faceImage;
     public Sprite openEyes, closedEyes, turnedOffFace;
     public int uniqueId = 0, inMaze;
@@ -17,6 +16,7 @@ public class PuzzleRobot : MonoBehaviour
     private GameObject mainCamObj, visualGenObj;
     private WaitForSeconds blinkDur, blinkFreq;
     private BeaconManager beaconManager;
+
     private PuzzleWheel puzzleWheel;
     private bool animatePuzzleDoor, keySpawned;
     private Vector3 startPos, endPos;

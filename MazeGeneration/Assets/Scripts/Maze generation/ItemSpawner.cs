@@ -30,6 +30,12 @@ public class ItemSpawner : MonoBehaviour
         if (mapManager == null)
             mapManager = FindObjectOfType<MapManager>();
 
+        if (mapManager == null) // If it somehow is still null, then return
+        {
+            Debug.LogError("Item Spawner Error: Mapmanager script could not be found!");
+            return;
+        }
+
         Invoke("DelayedStart", 1.0f);
     }
 
@@ -73,7 +79,7 @@ public class ItemSpawner : MonoBehaviour
                     Tile tempTile = mapManager.deadEndList[i][index];
                     Vector3 tilePos = tempTile.transform.position;
                     Vector3 spawnPos = new Vector3(tilePos.x, tilePos.y + 0.5f, tilePos.z);
-                    GameObject tempKey = Instantiate(keyPrefab, spawnPos, Quaternion.identity, transform);
+                    GameObject tempKey = Instantiate(keyPrefab, spawnPos, Quaternion.identity, mapManager.mapSequence[mazeIndex].mapObject.transform);
                     mapManager.deadEndList[i].RemoveAt(index);
 
                     if (tempKey.GetComponent<Key>() != null)
@@ -190,7 +196,7 @@ public class ItemSpawner : MonoBehaviour
         int dir = DirectionCheckerNext(room.exitTile, room.mazeID);
 
         GameObject tempDoor = Instantiate(doorPrefab, tilePosition,
-            transform.rotation, transform);
+            transform.rotation, mapManager.mapSequence[room.mazeID].mapObject.transform);
 
         room.exitTile.blocked = true;
 
@@ -320,7 +326,7 @@ public class ItemSpawner : MonoBehaviour
         }
 
         GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, tempTiles[tileIndex].transform.position,
-            transform.rotation, transform);
+            transform.rotation, mapManager.mapSequence[room.mazeID].mapObject.transform);
         PuzzleRobot puzzleRobot = tempPuzzleRobot.GetComponent<PuzzleRobot>();
 
         tempPuzzleRobot.transform.Translate(GetEdgePositionGround(tempTiles[tileIndex], dir));
@@ -359,7 +365,7 @@ public class ItemSpawner : MonoBehaviour
                 Vector3 tilePos = tempTile.transform.position;
                 Vector3 spawnPos = new Vector3(tilePos.x, tilePos.y + 0.5f, tilePos.z);
 
-                Instantiate(objToSpawn, spawnPos, Quaternion.identity, transform);
+                Instantiate(objToSpawn, spawnPos, Quaternion.identity, mapManager.mapSequence[inMazeIndex].mapObject.transform);
 
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
                 tempTile.occupied = true;
@@ -379,7 +385,8 @@ public class ItemSpawner : MonoBehaviour
                 Tile tempTile = mapManager.deadEndList[inMazeIndex][0];
                 int dir = SuitableWallReturner(tempTile, true);
 
-                GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, transform);
+                GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, 
+                    mapManager.mapSequence[inMazeIndex].mapObject.transform);
 
                 tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir, modifier));
                 tempObj.transform.Rotate(GetEulerRotation(dir));
@@ -406,7 +413,7 @@ public class ItemSpawner : MonoBehaviour
 
     public void SpawnWallObjectOnSpecificTileAndWall(GameObject objToSpawn, Tile tile, int wall)
     {
-        GameObject tempObj = Instantiate(objToSpawn, tile.transform.position, transform.rotation, transform);
+        GameObject tempObj = Instantiate(objToSpawn, tile.transform.position, transform.rotation, mapManager.mapSequence[tile.partOfMaze].mapObject.transform);
 
         tempObj.transform.Translate(GetEdgePositionWall(tile, wall, 0.2f));
         tempObj.transform.Rotate(GetEulerRotation(wall));
@@ -569,4 +576,12 @@ public class ItemSpawner : MonoBehaviour
         return ((Random.Range(1, 53) * mazeId) % to);
     }
     #endregion
+
+    public MapManager GetMapManager()
+    {
+        if (mapManager != null)
+            return mapManager;
+        else
+            return null;
+    }
 }
