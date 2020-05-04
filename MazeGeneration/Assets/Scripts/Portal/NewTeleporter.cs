@@ -80,13 +80,13 @@ public class NewTeleporter : MonoBehaviour
             cPosSwitcher?.PositionSwitchOverride(false);
         }
 
-        if (teleportCopies.Count > 0)
-        {
-            foreach (var item in teleportCopies)
-            {
-                Destroy(item);
-            }
-        }
+        //if (teleportCopies.Count > 0)
+        //{
+        //    foreach (var item in teleportCopies)
+        //    {
+        //        Destroy(item);
+        //    }
+        //}
 
         mazeDisabler?.UpdateDisabled();
     }

@@ -49,7 +49,8 @@ public class TeleportableObject : MonoBehaviour
 
         UpdateOffset(dir);
 
-        thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + offsetVector.x, transform.position.y + offsetVector.y, transform.position.z + offsetVector.z), transform.rotation);
+        thisObjCopy = Instantiate(gameObject, new Vector3(transform.position.x + offsetVector.x, 
+            transform.position.y + offsetVector.y, transform.position.z + offsetVector.z), transform.rotation);
 
         TeleportableObject tempScript = thisObjCopy.GetComponent<TeleportableObject>();
         tempScript.isParentObject = false;
@@ -57,13 +58,13 @@ public class TeleportableObject : MonoBehaviour
         thisObjCopy.GetComponent<Collider>().enabled = false;
         thisObjCopy.GetComponent<Rigidbody>().isKinematic = true;
 
-        if (col != null)
-        {
-            NewTeleporter tempTeleScript = col.gameObject.GetComponent<NewTeleporter>();
+        //if (col != null)
+        //{
+        //    NewTeleporter tempTeleScript = col.gameObject.GetComponent<NewTeleporter>();
 
-            if (tempTeleScript != null)
-                tempTeleScript.AddTeleportCopy(thisObjCopy);
-        }
+        //    if (tempTeleScript != null)
+        //        tempTeleScript.AddTeleportCopy(thisObjCopy);
+        //}
 
         copyExist = true;
     }
@@ -86,7 +87,9 @@ public class TeleportableObject : MonoBehaviour
         {
             if (col.CompareTag("PortalGroundCol"))
             {
-                inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+                NewTeleporter thisTeleporter = col.transform.parent.GetComponent<NewTeleporter>();
+
+                inCurrentMaze = thisTeleporter.mazeID;
 
                 if (!groundCooldown)
                 {
@@ -97,17 +100,18 @@ public class TeleportableObject : MonoBehaviour
                     }
 
                     if (thisObjCopy == null)
-                        CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+                        CopySpawner(thisTeleporter.isForwardTeleporter ? true : false, col);
                 }
             }
             if (col.CompareTag("EntryCol"))
             {
                 currentCollider = col;
+                NewTeleporter thisTeleporter = col.transform.parent.GetComponent<NewTeleporter>();
 
-                inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+                inCurrentMaze = thisTeleporter.mazeID;
 
                 if (thisObjCopy == null)
-                    CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+                    CopySpawner(thisTeleporter.isForwardTeleporter ? true : false, col);
 
             }
 
