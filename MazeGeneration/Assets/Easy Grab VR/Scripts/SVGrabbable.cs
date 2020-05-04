@@ -171,19 +171,6 @@ public class SVGrabbable : MonoBehaviour {
         }
     }
 
-    private void Update()
-    {
-        if (OVRInput.GetDown(OVRInput.Button.Two))
-        {
-            if (inHand)
-                Debug.Log(gameObject.name + " is in hand!");
-            if (grabData.recentlyDropped)
-                Debug.Log(gameObject.name + " - item was recently dropped");
-            if (grabData.recentlyReleased)
-                Debug.Log(gameObject.name + " - item was recently released");
-        }
-    }
-
     /* Why Late Update? Good Question kind sir / madam. It's so we can run AFTER our physics calculations.  This enables us to lerp objects that you need to carry around with you
      * think sword for example.
 	*/
