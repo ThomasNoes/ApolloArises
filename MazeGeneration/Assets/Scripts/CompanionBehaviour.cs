@@ -72,6 +72,11 @@ public class CompanionBehaviour : MonoBehaviour
 
 
         Invoke("LateStart", 0); //wait a frame
+
+
+        Debug.Log("playerpos: "+player.transform.position);
+        Debug.Log("0th maze pos: " + maps[0].transform.position);
+        Debug.Log("0th maze rot: " + maps[0].transform.forward);
     }
 
     void LateStart()

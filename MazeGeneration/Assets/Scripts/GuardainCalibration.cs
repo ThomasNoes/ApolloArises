@@ -19,13 +19,13 @@ public class GuardainCalibration : MonoBehaviour
 
     Vector3 c;
     Vector3 f;
-
+    Vector3[] ps;
     // Start is called before the first frame update
     void Awake()
     {
         if (!Application.isEditor)
         {
-            Calibrate(out c, out f);
+            Calibrate(out c, out f, out ps);
             if (calibrateGameObject)
             {
                 transform.position = new Vector3(c.x, 0, c.z);
@@ -47,7 +47,7 @@ public class GuardainCalibration : MonoBehaviour
         forward = new Vector3(rotX,0, rotZ);
     }
 
-    public void Calibrate(out Vector3 center, out Vector3 forward)
+    public void Calibrate(out Vector3 center, out Vector3 forward, out Vector3[] points)
     {
         points = GetBoundaryPoints();
         IgnoreY(points);

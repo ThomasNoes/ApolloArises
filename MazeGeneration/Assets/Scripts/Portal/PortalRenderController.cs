@@ -324,7 +324,6 @@ public class PortalRenderController : MonoBehaviour
     {
         Vector3 offset;
         int nextMaze = currentMaze + 1;
-
         if (nextMaze <= mapSequence.Length-1) // if there is a next maze
             offset = mapSequence[nextMaze].mapObject.transform.position - mapSequence[currentMaze].mapObject.transform.position; // TODO: prev and next seems to be mixed around?
         else

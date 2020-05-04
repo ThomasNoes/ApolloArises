@@ -73,10 +73,9 @@ public class MapManager : MonoBehaviour
     [HideInInspector] public List<Room> roomList = new List<Room>();
 
     //debug
-    Vector3 beforePos;
-    Vector3 beforeRot;
-    Vector3 afterPos;
-    Vector3 afterRot;
+    bool realCalibration = false;
+    Vector3[] points;
+
 
     void Awake()
     {
@@ -91,8 +90,8 @@ public class MapManager : MonoBehaviour
             }
             else
             {
-                //playAreaSize = GetCameraRigSize();
-                gc.Calibrate(out center, out forward);
+                realCalibration = true;
+                gc.Calibrate(out center, out forward, out points);
                 gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
 
                 //mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
@@ -199,17 +198,19 @@ public class MapManager : MonoBehaviour
         OffsetMap();
     }
 
-    //private void Start()
-    //{
-    //    Debug.Log("Before Pos: "+ beforePos);
-    //    Debug.Log("Before Rot: " + beforeRot);
-    //    //transform.forward = forward;
-    //    Debug.Log("After Pos: " + afterPos);
-    //    Debug.Log("After Rot: " + afterRot);
-
-    //    Debug.Log("Center: "+ center);
-    //    Debug.Log("Forward" + forward);
-    //}
+    private void Start()
+    {
+        if (realCalibration)
+        {
+            Debug.Log("Using real calibration");
+        }
+        //for (int i = 0; i < points.Length; i++)
+        //{
+        //    Debug.Log("point " +i+ ": " +points[i]);
+        //}
+        Debug.Log("Center: " + center);
+        Debug.Log("Forward" + forward);
+    }
 
     void GenerateMapSequenceHallway()
     {
@@ -250,7 +251,7 @@ public class MapManager : MonoBehaviour
             mapScripts.Add(mapScript);
             mapScript.SetDimensions(mazeRows, mazeCols, tileWidth);
             mapScript.Initialize(i);
-            //Debug.Log("Maze " + i + " Initialized!");
+            Debug.Log("Maze " + i + " Initialized!");
 
             //calculate start seed
             if (i > 0) // setting the start seed in each maze segment that is not the first one.
@@ -687,8 +688,8 @@ public class MapManager : MonoBehaviour
         float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
 
 
-        offset.x = center.x + radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
-        offset.z = center.z + radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
+        offset.x = center.x - radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
+        offset.z = center.z - radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
 
         Vector3 pos;
         pos.x = offset.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
