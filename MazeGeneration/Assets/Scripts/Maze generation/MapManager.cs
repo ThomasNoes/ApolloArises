@@ -78,6 +78,7 @@ public class MapManager : MonoBehaviour
     Vector3 afterPos;
     Vector3 afterRot;
 
+
     void Awake()
     {
 
@@ -199,17 +200,11 @@ public class MapManager : MonoBehaviour
         OffsetMap();
     }
 
-    //private void Start()
-    //{
-    //    Debug.Log("Before Pos: "+ beforePos);
-    //    Debug.Log("Before Rot: " + beforeRot);
-    //    //transform.forward = forward;
-    //    Debug.Log("After Pos: " + afterPos);
-    //    Debug.Log("After Rot: " + afterRot);
-
-    //    Debug.Log("Center: "+ center);
-    //    Debug.Log("Forward" + forward);
-    //}
+    private void Start()
+    {
+        Debug.Log("Center: " + center);
+        Debug.Log("Forward" + forward);
+    }
 
     void GenerateMapSequenceHallway()
     {
@@ -680,15 +675,18 @@ public class MapManager : MonoBehaviour
     public void PlaceInCircle(int index, int length)
     {
         float openness = 2;
-        float distance = Mathf.Sqrt(mazeCols * mazeCols + mazeRows * mazeRows) * openness; // i treat the segment as a triablge and find the hypothenuse
+        float distance = Mathf.Sqrt(3 * 3 + 4 * 4) * openness; // i treat the segment as a triablge and find the hypothenuse
 
         float angle = 360 / length;
 
         float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
 
 
-        offset.x = center.x + radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
-        offset.z = center.z + radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
+        offset.x = transform.position.x - radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
+        offset.z = transform.position.z - radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
+
+        //offset.x = center.x - radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
+        //offset.z = center.z - radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
 
         Vector3 pos;
         pos.x = offset.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
