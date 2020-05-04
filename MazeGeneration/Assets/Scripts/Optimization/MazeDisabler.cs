@@ -112,7 +112,7 @@ public class MazeDisabler : MonoBehaviour
                 }
                 else if (index < 0)
                 {
-                    index = mazeAmount + (index - 1);
+                    index = mazeAmount + index;
                 }
             }
             else
