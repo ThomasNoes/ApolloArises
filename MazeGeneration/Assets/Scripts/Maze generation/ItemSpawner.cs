@@ -8,7 +8,7 @@ public class ItemSpawner : MonoBehaviour
 
     public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, cabinetPrefab, puzzleItemPrefab;
 
-    public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true, spawnLevers = true, 
+    public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true, spawnLevers = true, spawnLeversBeforeDoors = true,
         spawnPuzzleObjects = true, spawnCogwheelsInDeadEnds = true, initializeTutorialRoom;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
 
@@ -188,7 +188,6 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-
     private void SpawnDoor(Room room, int uniqueId, bool roomFixedPuzzleRobot, bool isFirstRoom)
     {
         Vector3 tilePosition = room.exitTile.gameObject.transform.position;
@@ -199,7 +198,7 @@ public class ItemSpawner : MonoBehaviour
             transform.rotation, mapManager.mapSequence[room.mazeID].mapObject.transform);
 
         room.exitTile.blocked = true;
-        room.isDoorTile = true;
+        room.exitTile.isDoorTile = true;
 
         tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir, 0));
         tempDoor.transform.Rotate(GetEulerRotation(dir));
@@ -224,7 +223,7 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private void LeverSpawner() // TODO: optimize this code later
+    private void LeverSpawner()
     {
         if (mapManager == null && leverPrefab != null)
             return;
@@ -233,63 +232,10 @@ public class ItemSpawner : MonoBehaviour
 
         for (int i = 0; i < mapAmount; i++)
         {
-            if (mapManager.deadEndList[i].Count != 0)
-            {
-                SpawnWallObjectInDeadEndAtIndex(leverPrefab, i, 0.2f);
-                itemSpawnedChecker[i] = true;
-            }
-            else
-            {
-                for (int j = 0; j < mapManager.mapScripts[i].mazeRows; j++)
-                {
-                    for (int k = 0; k < mapManager.mapScripts[i].mazeColumns; k++)
-                    {
-                        if (itemSpawnedChecker[i])
-                            break;
+            List<Tile> tempTiles = GetSuitableLeverTiles(i);
+            Tile tempTile = tempTiles[Random.Range(0, tempTiles.Count)];
 
-                        Tile tempTile = mapManager.mapScripts[i].tileArray[j, k];
-
-                        if (!tempTile.isRoomTile && !tempTile.isPortalTile && !tempTile.isDeadEnd && !tempTile.occupied)
-                        {
-                            if (SuitableWallReturner(tempTile, true) == -1)
-                                continue;
-
-                            SpawnWallObjectOnSpecificTileAndWall(leverPrefab, tempTile, SuitableWallReturner(tempTile, true));
-                            itemSpawnedChecker[i] = true;
-                        }
-                    }
-                }
-            }
-
-            if (!itemSpawnedChecker[i]) // If item still is not spawned, try again with rooms
-            {
-                for (int j = 0; j < mapManager.mapScripts[i].mazeRows; j++)
-                {
-                    for (int k = 0; k < mapManager.mapScripts[i].mazeColumns; k++)
-                    {
-                        if (itemSpawnedChecker[i])
-                            break;
-
-                        Tile tempTile = mapManager.mapScripts[i].tileArray[j, k];
-
-                        if (tempTile.isRoomTile && !tempTile.occupied)
-                        {
-                            if (SuitableOverrideReturner(tempTile) == -1)
-                                continue;
-
-                            SpawnWallObjectOnSpecificTileAndWall(leverPrefab, tempTile,
-                                SuitableOverrideReturner(tempTile));
-                            itemSpawnedChecker[i] = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < itemSpawnedChecker.Length; i++) // For debugging TODO - disable later
-        {
-            if (itemSpawnedChecker[i] == false)
-                Debug.LogError("Lever in maze " + i + " not spawned!");
+            SpawnWallObjectOnSpecificTileAndWall(leverPrefab, tempTile, SuitableWallReturner(tempTile, false));
         }
     }
 
@@ -503,11 +449,48 @@ public class ItemSpawner : MonoBehaviour
         return -1;
     }
 
-    private bool IsBeforeDoor()
+    private List<Tile> GetSuitableLeverTiles(int mazeIndex)
     {
+        List<Tile> tempList = new List<Tile>();
+        List<Tile> suitableTiles = new List<Tile>();
+        int doorIndex = -1, tempAStarId = 999;
 
+        foreach (var tile in mapManager.mapScripts[mazeIndex].tileArray)
+        {
+            tempList.Add(tile);
 
-        return true;
+            if (tile.isDoorTile)
+                if (tile.aStarId < tempAStarId)
+                {
+                    tempAStarId = tile.aStarId;
+                }
+        }
+
+        foreach (var potentialTile in tempList)
+        {
+            if (spawnLeversBeforeDoors && tempAStarId != 999)
+            {
+                if (potentialTile.isPortalTile && potentialTile.occupied && potentialTile.blocked)
+                    continue;
+
+                if (potentialTile.isAStarTile)
+                {
+                    if (potentialTile.aStarId < tempAStarId)
+                        suitableTiles.Add(potentialTile);
+                }
+                else if (potentialTile.ConnectedAStar?.aStarId < tempAStarId)
+                {
+                    suitableTiles.Add(potentialTile);
+                }
+            }
+            else
+            {
+                if (!potentialTile.isPortalTile || !potentialTile.occupied || !potentialTile.blocked)
+                    suitableTiles.Add(potentialTile);
+            }
+        }
+
+        return suitableTiles;
     }
 
     private Vector3 GetEulerRotation(int dir)

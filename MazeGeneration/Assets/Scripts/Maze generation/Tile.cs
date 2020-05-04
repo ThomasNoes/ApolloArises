@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour {
 
     //for room position
     public string RoomPosition = "Corridor";
-    public bool isRoomEntryTile;
+    public bool isRoomEntryTile, isDoorTile;
     private bool isPartOfPotentialRoom;
 
     //connect a star tile for non a star tiles
