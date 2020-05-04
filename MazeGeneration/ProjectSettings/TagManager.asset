@@ -22,6 +22,7 @@ TagManager:
   - CogWheel
   - Companion
   - ControlPanel
+  - Hands
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - ObjectLayer
   - Head
   - Floor
-  - 
+  - Player
   - 
   - 
   - 

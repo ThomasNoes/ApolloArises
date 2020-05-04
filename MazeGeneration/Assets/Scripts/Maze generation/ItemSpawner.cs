@@ -199,6 +199,7 @@ public class ItemSpawner : MonoBehaviour
             transform.rotation, mapManager.mapSequence[room.mazeID].mapObject.transform);
 
         room.exitTile.blocked = true;
+        room.isDoorTile = true;
 
         tempDoor.transform.Translate(GetEdgePositionWall(room.exitTile, dir, 0));
         tempDoor.transform.Rotate(GetEulerRotation(dir));
@@ -500,6 +501,13 @@ public class ItemSpawner : MonoBehaviour
             return 3;
 
         return -1;
+    }
+
+    private bool IsBeforeDoor()
+    {
+
+
+        return true;
     }
 
     private Vector3 GetEulerRotation(int dir)

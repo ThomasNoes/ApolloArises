@@ -2936,6 +2936,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edaa38773d2b9dd48828768fd56efdd5, type: 3}
+--- !u!1 &1574052327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1776048526464005713, guid: dc399f754a05a8c4798ce883a14677f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1776048526422341044}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1574052329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574052327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8e1d778abf442e4bec449c360e9e1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeFade: 2
+  fadeTime: 2
+  fadeColor: {r: 0.01, g: 0.01, b: 0.01, a: 1}
+  fadeOnStart: 1
+  renderQueue: 5000
 --- !u!1 &1592407331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4492,11 +4515,6 @@ PrefabInstance:
       propertyPath: usePerEyeCameras
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5369379566296636139, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 5369379566299229987, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Name
@@ -4657,6 +4675,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6479454962692437218, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hands
+      objectReference: {fileID: 0}
     - target: {fileID: 6479454962692438410, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Layer
@@ -4682,6 +4705,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6479454962692593794, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hands
+      objectReference: {fileID: 0}
     - target: {fileID: 6479454962692594378, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Layer
@@ -4701,6 +4729,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6479454962692602130, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hands
       objectReference: {fileID: 0}
     - target: {fileID: 6479454962692602188, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
@@ -5052,6 +5085,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7493337572342411366, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hands
+      objectReference: {fileID: 0}
+    - target: {fileID: 7493337572342411856, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hands
+      objectReference: {fileID: 0}
     - target: {fileID: 7493337572342416404, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Layer
@@ -5076,6 +5119,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7493337572342425942, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hands
       objectReference: {fileID: 0}
     - target: {fileID: 7493337572342449000, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}

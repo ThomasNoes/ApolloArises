@@ -31,7 +31,7 @@ public class Key : MonoBehaviour
         if (pickedUp)
             return;
 
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Hands")
         {
             pickedUp = true;
             CompanionBehaviour.instance?.OnPickUpKey();

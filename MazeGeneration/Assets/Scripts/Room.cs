@@ -8,6 +8,7 @@ public class Room
     public List<Tile> tiles = new List<Tile>();// should only contain empty tiles which content can be place before used to generating content
     public Tile exitTile;
     public Tile entranceTile;
+    public bool isDoorTile;
 
 
     public Room(RoomFinder rf)

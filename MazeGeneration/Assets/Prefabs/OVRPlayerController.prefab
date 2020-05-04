@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 5369379566293736129}
   - component: {fileID: 5369379566293798531}
   - component: {fileID: 5369379566293830621}
-  m_Layer: 2
+  m_Layer: 14
   m_Name: OVRPlayerController
   m_TagString: Player
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
@@ -625,7 +625,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.2
+  m_Radius: 0.001
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.01
@@ -876,6 +876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8e1d778abf442e4bec449c360e9e1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBeforeFade: 2
   fadeTime: 2
   fadeColor: {r: 0.01, g: 0.01, b: 0.01, a: 1}
   fadeOnStart: 1

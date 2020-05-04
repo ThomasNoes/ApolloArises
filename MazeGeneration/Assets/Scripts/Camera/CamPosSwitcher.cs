@@ -25,8 +25,9 @@ namespace Assets.Scripts.Camera
         #region Start
         private void Start()
         {
-            layerMask = LayerMask.GetMask("Head");
-            layerMask |= LayerMask.GetMask("Ignore Raycast");
+            layerMask = LayerMask.GetMask("Ignore Raycast");
+            layerMask |= LayerMask.GetMask("Head");
+            layerMask |= LayerMask.GetMask("Player");
             layerMask = ~layerMask;
 
             mapSequenceLength = GameObject.Find("MapManager").GetComponent<MapManager>().mapSequence.Length;
