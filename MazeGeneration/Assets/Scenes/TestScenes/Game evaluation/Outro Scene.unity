@@ -273,7 +273,7 @@ PrefabInstance:
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: m_Name
-      value: Yes
+      value: With the game included
       objectReference: {fileID: 0}
     - target: {fileID: 5403584426831557178, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -1512,7 +1512,7 @@ GameObject:
   m_Component:
   - component: {fileID: 845347682}
   m_Layer: 0
-  m_Name: Post Sickness Response
+  m_Name: Preference
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6856,7 +6856,7 @@ PrefabInstance:
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: m_Name
-      value: No
+      value: Without the game in it
       objectReference: {fileID: 0}
     - target: {fileID: 5403584426831557178, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -11699,7 +11699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: f83971fab1d161d42b3bb0e4e4f16ecb, type: 2}
-  delay: 7.6
+  delay: 4
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -12730,7 +12730,7 @@ PrefabInstance:
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
@@ -12747,19 +12747,19 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogs.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 343ef2aaa54e19d4e9c16aa49d311622,
+      objectReference: {fileID: 11400000, guid: 3f7b1346ca67a7f4ea30fa12a7a18a32,
         type: 2}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 3f7b1346ca67a7f4ea30fa12a7a18a32,
+      objectReference: {fileID: 11400000, guid: 9a174cf58428bdc4aa3442466864b720,
         type: 2}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: dialogs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 9a174cf58428bdc4aa3442466864b720,
+      objectReference: {fileID: 11400000, guid: e221b5acaa565444e8c9832650ee6a5b,
         type: 2}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}

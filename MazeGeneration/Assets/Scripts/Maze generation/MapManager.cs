@@ -92,10 +92,19 @@ public class MapManager : MonoBehaviour
             }
             else
             {
-                //playAreaSize = GetCameraRigSize();
-                gc.Calibrate(out center, out forward);
-                gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
 
+                gc.Calibrate(out center, out forward);
+
+
+                if (gc.RoomScaling3x4Check(tileWidth))
+                {
+                    mazeCols = 4;
+                    mazeRows = 3;
+                }
+                else
+                {
+                    gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
+                }
                 //mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
                 //mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
             }
@@ -204,6 +213,9 @@ public class MapManager : MonoBehaviour
     {
         Debug.Log("Center: " + center);
         Debug.Log("Forward" + forward);
+
+
+        Debug.Log("3x4 maze: " + gc.RoomScaling3x4Check(tileWidth));
     }
 
     void GenerateMapSequenceHallway()
