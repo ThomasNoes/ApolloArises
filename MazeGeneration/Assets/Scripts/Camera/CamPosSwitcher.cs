@@ -17,7 +17,7 @@ namespace Assets.Scripts.Camera
 
         public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true, fastAngleChecks = true;
         private bool prevInCamFrustum, nextInCamFrustum, currentDirection, tileDistanceSame;
-        private int currentMaze = -1, mazeCount, prevScore, nextScore;
+        private int currentMaze = -1, mazeCount, prevScore, nextScore, distanceToNext, distanceToPrev;
         public float loopRepeatRate = 0.3f;
 
         private int mapSequenceLength;
@@ -25,9 +25,9 @@ namespace Assets.Scripts.Camera
         #region Start
         private void Start()
         {
-            layerMask = LayerMask.GetMask("Ignore Raycast");
-            layerMask |= LayerMask.GetMask("Head");
-            layerMask |= LayerMask.GetMask("Player");
+            layerMask |= (1 << LayerMask.NameToLayer("Ignore Raycast"));
+            layerMask |= (1 << LayerMask.NameToLayer("Head"));
+            layerMask |= (1 << LayerMask.NameToLayer("Player"));
             layerMask = ~layerMask;
 
             mapSequenceLength = GameObject.Find("MapManager").GetComponent<MapManager>().mapSequence.Length;
@@ -44,6 +44,14 @@ namespace Assets.Scripts.Camera
                     InvokeRepeating("CheckerLoop", 2.5f, loopRepeatRate);
                     Invoke("DelayedStart", 0.7f);
                 }
+            }
+        }
+
+        private void Update()
+        {
+            if (OVRInput.GetDown(OVRInput.Button.Three)) // TODO Remove after debugging YYY
+            {
+                Debug.Log("In maze: " + currentMaze + " | " + distanceToNext + " tiles from next and " + distanceToPrev + " from prev | " + tileDistanceSame);
             }
         }
 
@@ -163,6 +171,9 @@ namespace Assets.Scripts.Camera
                 {
                     nextScore = tempTile.nextDistance;
                     prevScore = tempTile.prevDistance;
+
+                    distanceToNext = nextScore;
+                    distanceToPrev = prevScore;
 
                     tileDistanceSame = nextScore == prevScore;
                 }

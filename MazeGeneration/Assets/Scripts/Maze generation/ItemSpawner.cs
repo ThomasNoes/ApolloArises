@@ -470,7 +470,7 @@ public class ItemSpawner : MonoBehaviour
         {
             if (spawnLeversBeforeDoors && tempAStarId != 999)
             {
-                if (potentialTile.isPortalTile && potentialTile.occupied && potentialTile.blocked)
+                if (potentialTile.isPortalTile || potentialTile.occupied || potentialTile.blocked)
                     continue;
 
                 if (potentialTile.isAStarTile)

@@ -8,6 +8,8 @@ public class PortalRenderController : MonoBehaviour
     public ObliqueProjectionToQuad nextPortalCameraLeftEye;
     public ObliqueProjectionToQuad nextPortalCameraRightEye;
 
+    public RenderTexture leftRenderTexture, rightRenderTexture;
+
     public GameObject portalPrefab, newPortalPrefab;
     public bool useNewPortals = true, isStereoscopic;
     static public MapInfo[] mapSequence;
@@ -42,6 +44,15 @@ public class PortalRenderController : MonoBehaviour
             SetProjectionQuads(true);
             OffsetCameras(0);
         }
+    }
+
+    void OnPostRender()
+    {
+        if (leftRenderTexture != null)
+            leftRenderTexture.DiscardContents();
+
+        if (rightRenderTexture != null)
+            rightRenderTexture.DiscardContents();
     }
 
     private void PortalSetup(bool isForward, int i)

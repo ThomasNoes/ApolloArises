@@ -41,8 +41,8 @@ public class InteractableObject : MonoBehaviour
         {
             if (thisObjCopy != null)
             {
-                thisObjCopy.transform.position = transform.position + offsetVector;
-                thisObjCopy.transform.rotation = transform.rotation;
+                thisObjCopy.transform.position = this.gameObject.transform.position + offsetVector;
+                thisObjCopy.transform.rotation = this.gameObject.transform.rotation;
             }
         }
     }
@@ -125,7 +125,6 @@ public class InteractableObject : MonoBehaviour
         {
             currentCollider = col;
             inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
-            // Debug.Log(inCurrentMaze); // TODO remove
 
             if (thisObjCopy == null)
                 CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
