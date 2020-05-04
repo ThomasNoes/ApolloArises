@@ -485,8 +485,10 @@ public class ItemSpawner : MonoBehaviour
             }
             else
             {
-                if (!potentialTile.isPortalTile || !potentialTile.occupied || !potentialTile.blocked)
-                    suitableTiles.Add(potentialTile);
+                if (potentialTile.isPortalTile || potentialTile.occupied || potentialTile.blocked)
+                    continue;
+
+                suitableTiles.Add(potentialTile);
             }
         }
 

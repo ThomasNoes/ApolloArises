@@ -98,7 +98,10 @@ public class Door : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.GetComponent<Key>() != null)
+        if (!isPowered)
+            return;
+
+            if (col.gameObject.GetComponent<Key>() != null)
         {
             int tempId = col.gameObject.GetComponent<Key>().uniqueId;
             col.gameObject.GetComponent<SVGrabbable>()?.ClearActiveController();
