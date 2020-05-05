@@ -27,6 +27,7 @@ public class CompanionBehaviour : MonoBehaviour
     GameObject player;
     BeaconManager bm;
     DayNightController dnc;
+    ItemSpawner itemSpawner;
 
     public bool isFollowPlayer;
 
@@ -45,7 +46,7 @@ public class CompanionBehaviour : MonoBehaviour
     public DialogData throughWall; //
     public DialogData walkToNewTower; // correct
 
-    bool firstDoor = true;
+    bool firstDoor = true, keySpawned;
 
     private void Awake()
     {
@@ -65,6 +66,7 @@ public class CompanionBehaviour : MonoBehaviour
         maps = mm.mapScripts;
         player = Camera.main.gameObject;
         bm = GameObject.Find("BeaconManager").GetComponent<BeaconManager>();
+        itemSpawner = FindObjectOfType<ItemSpawner>();
 
         startTile = FindStartEndTile(maps[0]);
         endtile = FindStartEndTile(maps[maps.Count - 1]);
@@ -231,6 +233,27 @@ public class CompanionBehaviour : MonoBehaviour
     {
         controlPanel.transform.rotation = mm.transform.rotation;
         controlPanel.transform.position = new Vector3(endtile.transform.position.x, 26.26f, endtile.transform.position.z);
+    }
+
+    public void SpawnKeyForFirstDoor()
+    {
+        if (keySpawned || itemSpawner == null)
+            return;
+
+        keySpawned = true;
+        Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
+
+        GameObject tempKey = Instantiate(itemSpawner.keyPrefab, spawnPos, Quaternion.identity);
+
+        Key key = tempKey.GetComponent<Key>();
+
+        if (key != null)
+        {
+            key.colourMaterial = itemSpawner.GetMaterialFromId(0);
+            key.uniqueId = 1;
+        }
+
+        Debug.Log("First key spawned!");
     }
 }
 

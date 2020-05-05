@@ -29,10 +29,13 @@ public class BeaconManager : MonoBehaviour
         {
             if (!beacons[i].isActive)
             {
+                Debug.Log("Index: " + mazeIndex + " at i: " + i);
+
                 if (i != mazeIndex && !overrideIndex)
                 {
                     CompanionBehaviour.instance?.OnWrongLeverPulled();
-                    break;
+                    Debug.Log("Wrong lever pulled"); // TODO Remove later - YYY
+                    return;
                 }
 
                 beacons[i].isActive = true;
@@ -45,7 +48,8 @@ public class BeaconManager : MonoBehaviour
                 if (i > 0)
                     ConnectBeam(i, i - 1);
 
-                break;
+                Debug.Log("Returned on lever called!"); // TODO remove later YYY
+                return;
             }
         }
     }
@@ -76,13 +80,6 @@ public class BeaconManager : MonoBehaviour
             lineRenderer.SetPosition(indexFrom, beacons[indexFrom].gameObject.transform.position);
             lineRenderer.SetPosition(indexTo, beacons[indexTo].gameObject.transform.position);
         }
-
-        //if (lastBeacon)
-        //{
-        //    if (dayNightController != null)
-        //        dayNightController.StartSkyboxAndTintChange(true);
-        //}
-
     }
 }
 

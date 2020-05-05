@@ -39,7 +39,23 @@ public class InteractableObject : MonoBehaviour
     {
         if (svGrabbable != null)
             if (!svGrabbable.inHand)
-            {
+            {//TODO Fix this - YYY
+                //if (isParentObject && renderController != null)
+                //{
+                //    if (renderController.currentMaze != inCurrentMaze)
+                //    {
+                //        if (thisObjCopy != null)
+                //        {
+                //            activated = false;
+                //            offsetVector *= -1;
+                //            transform.Translate(offsetVector, Space.World);
+                //            thisObjCopy.transform.position = transform.position;
+                //            offsetVector *= -1;
+                //            activated = true;
+                //        }
+                //    }
+                //}
+
                 // TODO check if main object in same maze as player, else teleport it there
             }
 
@@ -52,32 +68,6 @@ public class InteractableObject : MonoBehaviour
                 thisObjCopy.transform.rotation = transform.rotation;
             }
         }
-    }
-
-    private void Update()
-    {
-        if (OVRInput.GetDown(OVRInput.Button.Two)) // TODO Remove after debugging YYY
-        {
-            if (!isParentObject)
-                Debug.Log("COPY: World Pos: " + transform.position + " | World Rot: " + transform.rotation.ToEuler() + " | Offset: " + offsetVector);
-
-            if (thisObjCopy != null)
-                Debug.Log("MAIN: World Pos: " + transform.position + " | World Rot: " + transform.rotation.ToEuler() + " | Offset: " + offsetVector);
-        }
-
-        //if (svGrabbable == null)
-        //    return;
-
-        //if (svGrabbable.inHand && !inHand)
-        //{
-        //    inHand = true;
-        //    Invoke("Cooldown", 2.0f);
-
-        //    if (!isParentObject)
-        //    {
-        //        // TODO
-        //    }
-        //}
     }
 
     /// <param name="dir">false = prev, true = next</param>
@@ -123,28 +113,31 @@ public class InteractableObject : MonoBehaviour
         if (activated)
             if (col.CompareTag("PortalGroundCol"))
             {
-                inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+                NewTeleporter thisTeleporter = col.transform.parent.GetComponent<NewTeleporter>();
+                inCurrentMaze = thisTeleporter.mazeID;
 
                 if (thisObjCopy == null)
-                    CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+                    CopySpawner(thisTeleporter.isForwardTeleporter ? true : false, col);
             }
 
         if (col.CompareTag("EntryCol"))
         {
+            NewTeleporter thisTeleporter = col.transform.parent.GetComponent<NewTeleporter>();
             currentCollider = col;
-            inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+            inCurrentMaze = thisTeleporter.mazeID;
 
             if (thisObjCopy == null)
-                CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+                CopySpawner(thisTeleporter.isForwardTeleporter ? true : false, col);
 
         }
 
         if (col.CompareTag("PortalRenderCol"))
         {
-            inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
+            NewTeleporter thisTeleporter = col.transform.parent.GetComponent<NewTeleporter>();
+            inCurrentMaze = thisTeleporter.mazeID;
 
             if (thisObjCopy == null)
-                CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
+                CopySpawner(thisTeleporter.isForwardTeleporter ? true : false, col);
 
             if (svGrabbable != null)
                 if (svGrabbable.inHand)
@@ -156,6 +149,12 @@ public class InteractableObject : MonoBehaviour
                 thisObjCopy.transform.position = transform.position;
                 transform.Translate(offsetVector, Space.World);
                 offsetVector *= -1;
+
+                if (thisTeleporter.isForwardTeleporter)
+                    inCurrentMaze++;
+                else
+                    inCurrentMaze--;
+
                 //UpdateOffset(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter);
                 activated = true;
             }

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderPlaneCollider: {fileID: 7488657441937378617}
-  activationAngle: 65
+  activationAngle: 75
 --- !u!1 &1747615143729970028
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +213,7 @@ MonoBehaviour:
   isStereoscopic: 1
   checkDistance: 0
   checkCurrentMaze: 1
+  checkViewFrustum: 0
   minDistance: 15
 --- !u!65 &7488657441937378617
 BoxCollider:
