@@ -896,10 +896,13 @@ MonoBehaviour:
   followCamLeft: {fileID: 0}
   followCamRight: {fileID: 0}
   pRController: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8193
   distanceCheck: 1
   rendererInViewCheck: 0
   useCameraAngle: 1
-  fastAngleChecks: 0
+  fastAngleChecks: 1
   loopRepeatRate: 0.3
 --- !u!1 &5369379566299229997
 GameObject:

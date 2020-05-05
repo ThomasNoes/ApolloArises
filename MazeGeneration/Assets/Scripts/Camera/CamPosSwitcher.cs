@@ -25,10 +25,7 @@ namespace Assets.Scripts.Camera
         #region Start
         private void Start()
         {
-            layerMask |= (1 << LayerMask.NameToLayer("Ignore Raycast"));
-            layerMask |= (1 << LayerMask.NameToLayer("Head"));
-            layerMask |= (1 << LayerMask.NameToLayer("Player"));
-            layerMask = ~layerMask;
+            layerMask = LayerMask.GetMask("Floor");
 
             mapSequenceLength = GameObject.Find("MapManager").GetComponent<MapManager>().mapSequence.Length;
 
@@ -41,8 +38,8 @@ namespace Assets.Scripts.Camera
             {
                 if (mapSequenceLength > 1)
                 {
-                    InvokeRepeating("CheckerLoop", 2.5f, loopRepeatRate);
                     Invoke("DelayedStart", 0.7f);
+                    InvokeRepeating("CheckerLoop", 2.1f, loopRepeatRate);
                 }
             }
         }
@@ -163,7 +160,7 @@ namespace Assets.Scripts.Camera
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 8.0f, layerMask))
+            if (Physics.Raycast(gameObject.transform.position, Vector3.down, out hit, 7.0f, layerMask))
             {
                 Tile tempTile = hit.collider.gameObject.GetComponentInParent<Tile>();
 
@@ -232,7 +229,7 @@ namespace Assets.Scripts.Camera
             if (distanceCheck)
                 DistanceCheck();
 
-            if (nextScore == prevScore)
+            if (tileDistanceSame)
                 AngleCheck();
 
             PositionSwitch(nextScore < prevScore);
@@ -242,10 +239,12 @@ namespace Assets.Scripts.Camera
         private void FixedUpdate()
         {
             if (fastAngleChecks)
+            {
                 if (tileDistanceSame)
                 {
                     AngleCheckOverride();
                 }
+            }
         }
 
         private void AngleCheckOverride()
