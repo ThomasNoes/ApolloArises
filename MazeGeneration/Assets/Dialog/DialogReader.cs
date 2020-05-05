@@ -123,7 +123,7 @@ public class DialogReader : MonoBehaviour
         else if (index == dialogs.Length && toNextScene)
         {
             //Debug.Log("next scne!");
-            tsm?.NextSceneRandom();
+            FinalTestSceneManager.instance.GoToNextScene();
         }
         else if (index == dialogs.Length && EnableEvent)
         {
