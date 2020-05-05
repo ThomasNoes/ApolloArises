@@ -78,6 +78,7 @@ public class MapManager : MonoBehaviour
     Vector3 afterPos;
     Vector3 afterRot;
 
+
     void Awake()
     {
 
@@ -91,10 +92,19 @@ public class MapManager : MonoBehaviour
             }
             else
             {
-                //playAreaSize = GetCameraRigSize();
-                gc.Calibrate(out center, out forward);
-                gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
 
+                gc.Calibrate(out center, out forward);
+
+
+                if (gc.RoomScaling3x4Check(tileWidth))
+                {
+                    mazeCols = 4;
+                    mazeRows = 3;
+                }
+                else
+                {
+                    gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
+                }
                 //mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
                 //mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
             }
@@ -199,17 +209,14 @@ public class MapManager : MonoBehaviour
         OffsetMap();
     }
 
-    //private void Start()
-    //{
-    //    Debug.Log("Before Pos: "+ beforePos);
-    //    Debug.Log("Before Rot: " + beforeRot);
-    //    //transform.forward = forward;
-    //    Debug.Log("After Pos: " + afterPos);
-    //    Debug.Log("After Rot: " + afterRot);
+    private void Start()
+    {
+        Debug.Log("Center: " + center);
+        Debug.Log("Forward" + forward);
 
-    //    Debug.Log("Center: "+ center);
-    //    Debug.Log("Forward" + forward);
-    //}
+
+        Debug.Log("3x4 maze: " + gc.RoomScaling3x4Check(tileWidth));
+    }
 
     void GenerateMapSequenceHallway()
     {
@@ -680,15 +687,18 @@ public class MapManager : MonoBehaviour
     public void PlaceInCircle(int index, int length)
     {
         float openness = 2;
-        float distance = Mathf.Sqrt(mazeCols * mazeCols + mazeRows * mazeRows) * openness; // i treat the segment as a triablge and find the hypothenuse
+        float distance = Mathf.Sqrt(3 * 3 + 4 * 4) * openness; // i treat the segment as a triablge and find the hypothenuse
 
         float angle = 360 / length;
 
         float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
 
 
-        offset.x = center.x + radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
-        offset.z = center.z + radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
+        offset.x = transform.position.x - radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
+        offset.z = transform.position.z - radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
+
+        //offset.x = center.x - radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
+        //offset.z = center.z - radius * Mathf.Cos(angle * 0 * Mathf.Deg2Rad);
 
         Vector3 pos;
         pos.x = offset.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);

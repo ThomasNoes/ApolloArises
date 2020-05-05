@@ -71,6 +71,7 @@ public class CompanionBehaviour : MonoBehaviour
 
 
 
+
         Invoke("LateStart", 0); //wait a frame
     }
 
@@ -79,6 +80,10 @@ public class CompanionBehaviour : MonoBehaviour
         cpf.PlaceCompanionOnTile(startTile);
         InvokeRepeating("MyUpdate", 2.0f, 1f);
         dr.DisplayAllBranchedDialog();
+
+        Debug.Log("0th maze pos " + maps[0].transform.position);
+        Debug.Log("0th maze rot " + maps[0].transform.forward);
+        Debug.Log("player pos " + player.transform.position);
 
         ControlPanelSetup();
     }

@@ -200,6 +200,7 @@ public class GuardainCalibration : MonoBehaviour
         for (int i = 0; i < points.Length; i++)
         {
             points[i].y = 1;
+            Debug.Log("point " + i +": " + points[i]);
         }
     }
 
