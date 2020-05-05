@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2627100202734912141}
-  - component: {fileID: 2627100202734912138}
   - component: {fileID: 2627100202734912139}
+  - component: {fileID: 884465142}
   m_Layer: 0
   m_Name: DataLogger
   m_TagString: DataLogger
@@ -32,52 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2627100202734912138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2627100202734912136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c33aacff76cab444810b841f19c8c3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dataHandler: {fileID: 2627100202734912139}
-  wallCollision: {fileID: 0}
-  mapManagerObj: {fileID: 0}
-  conditionAmount: 3
-  filePath: Assets/Resources/CSV
-  fpsData: {fileID: 11400000, guid: c1c963f7d134a1543b664292cc474a5f, type: 2}
-  firstSicknessData: {fileID: 11400000, guid: acb6d7c9a04b41d408a57878d5e991c4, type: 2}
-  secondSicknessData: {fileID: 11400000, guid: b3cf6c50cbd25d741b38cd8e48b6204b, type: 2}
-  ageData: {fileID: 11400000, guid: 19a0162c0d04cf544ba603234295148e, type: 2}
-  experienceData: {fileID: 11400000, guid: 8c777b46b9ebe2f4fad38bd4520a81cf, type: 2}
-  genderData: {fileID: 11400000, guid: a8871f4a62813634291c2cff9d3f4898, type: 2}
-  locationData: {fileID: 11400000, guid: d2aa12be60083f946bb3167748a7333e, type: 2}
-  understandingData: {fileID: 11400000, guid: d764b8bc36ec40542bf39f01db6e9a0f, type: 2}
-  prefWidthsData: {fileID: 11400000, guid: d26122a1355a3944d994e9694c5d5a10, type: 2}
-  prefHeightsData: {fileID: 11400000, guid: ddd875b582ae4ab49a33ae3e40c67a01, type: 2}
-  loggedTimesData: {fileID: 11400000, guid: 7910d158d8c4c6c429bd8c3c610bc6e5, type: 2}
-  wallHitsData: {fileID: 11400000, guid: f59153d57cf4c624d98109bc0de2e260, type: 2}
-  onlineLogging: 1
-  logData: 1
-  logFrameRate: 1
-  logAverageFrameRate: 1
-  logTime: 1
-  logGender: 1
-  logAge: 0
-  logLocation: 0
-  logExperience: 1
-  logWallHits: 1
-  logPreferredWidth: 1
-  logPreferredHeight: 0
-  logDemographic: 1
-  useSceneSwitch: 0
-  logPlayAreaSize: 1
-  logVRSickness: 1
-  logUnderstanding: 1
 --- !u!114 &2627100202734912139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,21 +45,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyOneLogPerDevice: 0
-  baseURL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSexhH0eNIisO1cU7O5TQCkf-3D1MT7xRdEyn2EP7fd4uKRfLw/formResponse
+  baseURL: https://docs.google.com/forms/d/e/1FAIpQLSfsHpZqDqfoW_9q8v6JP4ktivDWyoMfGvzpx-be95gj_ou2vg/viewform?usp=sf_link
   entryIds:
   - entry.748259335
-  - entry.1356966820
-  - entry.1415704000
-  - entry.588266708
+  - entry.931911253
   - entry.1249109112
   - entry.1030407368
-  - entry.1542220109
-  - entry.1931438654
-  - entry.469418512
-  - entry.1869166334
   - entry.744913646
   - entry.862625402
   - entry.1178303894
+  - entry.882395574
   - entry.1604808555
   - entry.279436481
   - entry.1262641040
+  - entry.726233827
+  - entry.1272134595
+  - entry.1464534031
+  - entry.126838425
+  - entry.1760002280
+  - entry.2097920393
+  - entry.775184370
+  - entry.882128143
+  - entry.1067381863
+  - entry.1786676071
+  - entry.1015874666
+  - entry.996984974
+  - entry.1521233923
+  - entry.2001032409
+  - entry.1309092924
+  - entry.435116871
+  - entry.1095748526
+--- !u!114 &884465142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2627100202734912136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78810eb72c1a3247bee19c45adbd86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataHandler: {fileID: 2627100202734912139}
+  wallCollision: {fileID: 0}
+  mapManagerObj: {fileID: 0}
+  conditionAmount: 2
+  filePath: Assets/Resources/CSV
+  fpsData: {fileID: 11400000, guid: ef33e17007590ac4ab70ed7b0d5766cf, type: 2}
+  preSicknessData: {fileID: 11400000, guid: 538efd36a9a77344f87630d7ab71f66e, type: 2}
+  noGameSicknessData: {fileID: 11400000, guid: 33b6bfc4d8aaef84fad25f175a9deb12, type: 2}
+  gameSicknessData: {fileID: 11400000, guid: 2a150b43ad939084891053c3bf324a2f, type: 2}
+  VRData: {fileID: 11400000, guid: 2c817846761ad6a49aae628d5c68398d, type: 2}
+  genderData: {fileID: 11400000, guid: ce07cef688ad7704bb52b4117031437f, type: 2}
+  understandingData: {fileID: 11400000, guid: 6e4e09578c14d214eb1ae9e5c545501b, type: 2}
+  preferenceData: {fileID: 11400000, guid: 9a2dac57d96031c47983a677b705c7bb, type: 2}
+  comfortOverallData: {fileID: 11400000, guid: 3d82274ef93a20245817a82cf156f275, type: 2}
+  comfortEnvironmentData: {fileID: 11400000, guid: 64b98548da144554fb9740e4372f3c38,
+    type: 2}
+  comfortCorridorData: {fileID: 11400000, guid: f4ee3244d0713124885f403a3175766c,
+    type: 2}
+  comfortSoundData: {fileID: 11400000, guid: 328d5470b918b954b8d268350823e77a, type: 2}
+  comfortVisualData: {fileID: 11400000, guid: a1b938c56c0f56b44a999add34d7cb16, type: 2}
+  comfortFramerateData: {fileID: 11400000, guid: 8ed905db6aeab2d47b0ff52cea9830d0,
+    type: 2}
+  comfortTechnicalData: {fileID: 11400000, guid: 89c8fa91ec0700d4682736c7a684b10a,
+    type: 2}
+  comfortOverallGameData: {fileID: 11400000, guid: 33c1aac963d58f849b447837b7a96960,
+    type: 2}
+  comfortEnvironmentGameData: {fileID: 11400000, guid: 39713fcfa61c4fa4ead42cbf338c6237,
+    type: 2}
+  comfortCorridorGameData: {fileID: 11400000, guid: 354b7e6a63c2e4242b09754ce6a8d49c,
+    type: 2}
+  comfortSoundGameData: {fileID: 11400000, guid: 134fd78b32c7d6d4f8299be43fe2f17a,
+    type: 2}
+  comfortVisualGameData: {fileID: 11400000, guid: f77f7051199ffdc4890b4cb3264bd3a8,
+    type: 2}
+  comfortFramerateGameData: {fileID: 11400000, guid: b61d067a4f57211448119ea849b5affc,
+    type: 2}
+  comfortTechnicalGameData: {fileID: 11400000, guid: bab1e96d1bf20e74989ba234cb1df688,
+    type: 2}
+  comfortRobotGameData: {fileID: 11400000, guid: 5ea13435e2b19464fa7d6b55eaeb635f,
+    type: 2}
+  comfortInteractionGameData: {fileID: 11400000, guid: 071edd009fa88a14a98049fe3c19b26e,
+    type: 2}
+  wallHitsData: {fileID: 11400000, guid: 7ffbc76752ad6054ea0602ed59111ab7, type: 2}
+  onlineLogging: 1
+  logData: 1
+  logFrameRate: 1
+  logAverageFrameRate: 1
+  logMinimumFrameRate: 1
+  logGender: 1
+  logVR: 1
+  logPreference: 0
+  logWallHits: 1
+  logDemographic: 1
+  useSceneSwitch: 0
+  logPlayAreaSize: 1
+  logVRSickness: 1
+  logUnderstanding: 1
+  logComfort: 1

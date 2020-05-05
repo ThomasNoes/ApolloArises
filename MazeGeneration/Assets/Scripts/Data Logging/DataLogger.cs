@@ -211,15 +211,15 @@ public class DataLogger : MonoBehaviour
     /// This function will send all data to Google Forms - So this should be called at the very end when all tests are done.
     /// </summary>
     public void PostDataOnline()
-    {
-        Debug.Log("Posting Online");
-        if (dataHandler == null)
-            return;
+    { 
+ Debug.Log("Posting Online");
+            if (dataHandler == null)
+                return;
 
-        UpdateDataList();
+            UpdateDataList();
 
-        dataHandler.SendData(dataList);
-        //Debug.Log("Data is sent!");
+            dataHandler.SendData(dataList);
+            //Debug.Log("Data is sent!");
     }
 
     private Vector3 GetPlayAreaSize()

@@ -209,7 +209,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1796494441}
+      objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -6535,6 +6535,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1796494440}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1285117292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285117291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5328cccaaf89502448f483cd02d60053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calibrateGameObject: 0
+  drawPlayArea: 0
+  gizmo: {fileID: 3298887824379130255, guid: 66a87d3283452014db07342e3c61e05c, type: 3}
+  gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
+    type: 3}
 --- !u!4 &1328101568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 342866825121487231, guid: 3e819571d4a925346a5c4a83065582a0,
@@ -6622,7 +6639,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1796494441}
+      objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -6797,7 +6814,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1796494441}
+      objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -12031,6 +12048,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logFrameRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logWallHits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2627100202734912136, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}
       propertyPath: m_Name
@@ -12103,18 +12128,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
---- !u!114 &1796494441 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2627100202734912138, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
-    type: 3}
-  m_PrefabInstance: {fileID: 1796494440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1285117291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c33aacff76cab444810b841f19c8c3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1971736613
 GameObject:
   m_ObjectHideFlags: 0
@@ -12447,7 +12460,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1796494441}
+      objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -13552,7 +13565,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1796494441}
+      objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName

@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1438c9a985f40ad4498ce040d12b8113, type: 3}
-  m_Name: VR 16
+  m_Name: ComfortTechnicalGame
   m_EditorClassIdentifier: 
   value: 
