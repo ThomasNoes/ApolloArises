@@ -32,12 +32,6 @@ public class Door : MonoBehaviour
             thisCollider.size = keyHoleObj.transform.localScale;
             thisCollider.center = keyHoleObj.transform.localPosition;
         }
-        //else if (doorMainObj != null)
-        //{
-        //    BoxCollider thisCollider = doorMainObj.GetComponent<BoxCollider>();
-        //    thisCollider.size = doorMainObj.transform.localScale;
-        //    thisCollider.center = doorMainObj.transform.localPosition;
-        //}
 
         if (doorMainObj != null)
             Invoke("DelayedStart", 1.0f);
@@ -52,7 +46,7 @@ public class Door : MonoBehaviour
         }
 
         startPos = transform.position;
-        endPos = new Vector3(transform.position.x, transform.position.y - (height - 0.02f), transform.position.z);
+        endPos = new Vector3(transform.position.x, transform.position.y - (height - 0.01f), transform.position.z);
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -69,32 +63,6 @@ public class Door : MonoBehaviour
         StartCoroutine(PlayDoorSoundWithDelay());
         //gameObject.SetActive(false);
     }
-
-    //private void OnTriggerEnter(Collider col)
-    //{
-    //    if (!isPowered)
-    //        return;
-
-    //    if (col.CompareTag("Key"))
-    //        if (col.GetComponent<Key>() != null)
-    //        {
-    //            int tempId = col.GetComponent<Key>().uniqueId;
-    //            col.GetComponent<SVGrabbable>()?.ClearActiveController();
-
-    //            if (tempId == uniqueId)
-    //                if (!useDelay)
-    //                {
-    //                    Destroy(col.gameObject);
-    //                    CompanionBehaviour.instance?.OnOpenDoor();
-    //                    OpenDoor();
-    //                }
-    //                else
-    //                {
-    //                    Destroy(col.gameObject);
-    //                    Invoke("OpenDoor", delay);
-    //                }
-    //        }
-    //}
 
     private void OnCollisionEnter(Collision col)
     {
