@@ -33,7 +33,7 @@ public class DataLogger2 : MonoBehaviour
     public bool onlineLogging = true, logData = true;
     [HideInInspector]
     public bool logFrameRate, logAverageFrameRate, logMinimumFrameRate, logTime, logGender,  logVR,
-        logWallHits, logDemographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logUnderstanding;
+        logWallHits, logDemographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logUnderstanding, logComfort;
     private bool active = false, initial = true, onFirstData = true, timerRunning;
     private bool[] dataWritten = new[] { false, false };
 
@@ -1016,6 +1016,7 @@ public class DataLogger_Editor2 : UnityEditor.Editor
             script.logWallHits = EditorGUILayout.Toggle("Wall Hits", script.logWallHits);
             script.logPlayAreaSize = EditorGUILayout.Toggle("Play Area Size", script.logPlayAreaSize);
             script.logVRSickness = EditorGUILayout.Toggle("VR Sickness", script.logVRSickness);
+            script.logComfort = EditorGUILayout.Toggle("Comfort", script.logComfort);
             script.logDemographic = EditorGUILayout.Toggle("Demographics", script.logDemographic);
 
             if (script.logDemographic)
