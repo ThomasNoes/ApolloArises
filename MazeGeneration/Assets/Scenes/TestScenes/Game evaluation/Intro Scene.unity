@@ -228,7 +228,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -439,11 +439,11 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: FirstSicknessResponse
+      value: PreSicknessResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -769,7 +769,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -1222,11 +1222,11 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ExperienceResponse
+      value: VRResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -1552,11 +1552,11 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ExperienceResponse
+      value: VRResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -1776,7 +1776,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -2179,7 +2179,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -3062,6 +3062,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+--- !u!114 &884465141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
+    type: 3}
+  m_PrefabInstance: {fileID: 884465140}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78810eb72c1a3247bee19c45adbd86f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &893563931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3168,11 +3180,11 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ExperienceResponse
+      value: VRResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -3392,7 +3404,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -3866,7 +3878,7 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -4080,11 +4092,11 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ExperienceResponse
+      value: VRResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
@@ -4275,11 +4287,11 @@ PrefabInstance:
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 884465141}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: downEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: FirstSicknessResponse
+      value: PreSicknessResponse
       objectReference: {fileID: 0}
     - target: {fileID: 748745960800259449, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}

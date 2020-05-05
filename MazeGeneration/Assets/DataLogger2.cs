@@ -271,13 +271,13 @@ public class DataLogger2 : MonoBehaviour
         switch (answerIndex)
         {
             case 0:
-                understandingData.value = "With my eyes closed";
+                understandingData.value = "Find out how you switched to another maze";
                 break;
             case 1:
-                understandingData.value = "Until I do not find the width comfortable";
+                understandingData.value = "Reach the end of the maze";
                 break;
             case 2:
-                understandingData.value = "As fast as possible";
+                understandingData.value = "Count the amount of towers";
                 break;
             default:
                 break;
