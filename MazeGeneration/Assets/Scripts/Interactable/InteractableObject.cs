@@ -41,8 +41,8 @@ public class InteractableObject : MonoBehaviour
         {
             if (thisObjCopy != null)
             {
-                thisObjCopy.transform.position = this.gameObject.transform.position + offsetVector;
-                thisObjCopy.transform.rotation = this.gameObject.transform.rotation;
+                thisObjCopy.transform.position = transform.position + offsetVector;
+                thisObjCopy.transform.rotation = transform.rotation;
             }
         }
     }
@@ -58,19 +58,19 @@ public class InteractableObject : MonoBehaviour
                 Debug.Log("MAIN: World Pos: " + transform.position + " | World Rot: " + transform.rotation.ToEuler() + " | Offset: " + offsetVector);
         }
 
-        if (svGrabbable == null)
-            return;
+        //if (svGrabbable == null)
+        //    return;
 
-        if (svGrabbable.inHand && !inHand)
-        {
-            inHand = true;
-            Invoke("Cooldown", 2.0f);
+        //if (svGrabbable.inHand && !inHand)
+        //{
+        //    inHand = true;
+        //    Invoke("Cooldown", 2.0f);
 
-            if (!isParentObject)
-            {
-                // TODO
-            }
-        }
+        //    if (!isParentObject)
+        //    {
+        //        // TODO
+        //    }
+        //}
     }
 
     /// <param name="dir">false = prev, true = next</param>
@@ -90,13 +90,14 @@ public class InteractableObject : MonoBehaviour
         thisObjCopy.GetComponent<Collider>().enabled = false;
         thisObjCopy.GetComponent<Rigidbody>().isKinematic = true;
 
-        //if (col != null)
-        //{
-        //    NewTeleporter tempTeleScript = col.gameObject.GetComponent<NewTeleporter>();
+        SVGrabbable grabbable = thisObjCopy.GetComponent<SVGrabbable>();
 
-        //    if (tempTeleScript != null)
-        //        tempTeleScript.AddTeleportCopy(thisObjCopy);
-        //}
+        if (grabbable != null)
+        {
+            grabbable.canGrab = false;
+            grabbable.inHand = false;
+            grabbable.isKnockable = false;
+        }
 
         copyExist = true;
     }
