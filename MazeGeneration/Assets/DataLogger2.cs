@@ -15,7 +15,7 @@ public class DataLogger2 : MonoBehaviour
     public AntiWallCollision wallCollision;
     [HideInInspector] public GameObject mapManagerObj;
     private GameObject mapObj;
-    public int conditionAmount = 3;
+    public int conditionAmount = 2;
 
     // Save location:
     [HideInInspector] public string filePath = @"Assets/Resources/CSV";
@@ -27,12 +27,12 @@ public class DataLogger2 : MonoBehaviour
     public StringValue preSicknessData, noGameSicknessData, gameSicknessData, VRData, genderData, understandingData, preferenceData;
     public StringValue comfortOverallData, comfortEnvironmentData, comfortCorridorData, comfortSoundData, comfortVisualData, comfortFramerateData, comfortTechnicalData;
     public StringValue comfortOverallGameData, comfortEnvironmentGameData, comfortCorridorGameData, comfortSoundGameData, comfortVisualGameData, comfortFramerateGameData, comfortTechnicalGameData, comfortRobotGameData, comfortInteractionGameData;
-    public FloatArrayValue loggedTimesData, wallHitsData;
+    public FloatArrayValue wallHitsData;
 
     // Bools:
     public bool onlineLogging = true, logData = true;
     [HideInInspector]
-    public bool logFrameRate, logAverageFrameRate, logMinimumFrameRate, logTime, logGender,  logVR,
+    public bool logFrameRate, logAverageFrameRate, logMinimumFrameRate, logGender, logVR, logPreference,
         logWallHits, logDemographic, useSceneSwitch, logPlayAreaSize, logVRSickness, logUnderstanding, logComfort;
     private bool active = false, initial = true, onFirstData = true, timerRunning;
     private bool[] dataWritten = new[] { false, false };
@@ -44,7 +44,7 @@ public class DataLogger2 : MonoBehaviour
 
     // Other variables:
     private int sessionNumber = -1, fpsSum, fpsCount, wallHitsCount;
-    private float updateInterval = 1.0f, avgFrames, frameRate, timeSpend;
+    private float updateInterval = 1.0f, avgFrames, lowestFrame = float.MaxValue, frameRate, timeSpend;
     private string preSicknesRes, noGameSicknessRes, gameSicknessRes, VRRes, genderRes;
     private StreamWriter file;
     private WaitForSeconds delay;
@@ -53,9 +53,6 @@ public class DataLogger2 : MonoBehaviour
     {
         if (!logData)
             return;
-
-        if (logTime)
-            LogTimeStart();
 
         Initialize();
 
@@ -75,10 +72,6 @@ public class DataLogger2 : MonoBehaviour
     {
         dataList = new List<string>();
 
-        if (logTime)
-            if (loggedTimesData.values.Length == 0)
-                loggedTimesData.values = new float[conditionAmount];
-
         if (logWallHits)
             if (wallHitsData.values.Length == 0)
                 wallHitsData.values = new float[conditionAmount];
@@ -95,13 +88,8 @@ public class DataLogger2 : MonoBehaviour
         if (logFrameRate)
             dataList.Add(logAverageFrameRate ? avgFrames.ToString(spec, ci) : frameRate.ToString(spec, ci));
 
-        if (logTime)
-        {
-            foreach (int time in loggedTimesData.values)
-            {
-                dataList.Add(time.ToString());
-            }
-        }
+        if (logFrameRate) //added minimum -> test
+            dataList.Add(logMinimumFrameRate ? lowestFrame.ToString(spec, ci) : frameRate.ToString(spec, ci));
 
         if (logWallHits)
         {
@@ -141,6 +129,7 @@ public class DataLogger2 : MonoBehaviour
         }
 
         if (onlineLogging)
+        {
             if (logDemographic)
             {
                 if (logGender)
@@ -150,7 +139,7 @@ public class DataLogger2 : MonoBehaviour
                     else
                         dataList.Add(genderData.value);
                 }
-                
+
                 if (logVR)
                 {
                     if (String.IsNullOrEmpty(VRData.value))
@@ -163,9 +152,44 @@ public class DataLogger2 : MonoBehaviour
                         dataList.Add("No data");
                     else
                         dataList.Add(understandingData.value);
+                if (logPreference)
+                {
+                    if (String.IsNullOrEmpty(preferenceData.value))
+                        dataList.Add("No data");
+                    else
+                        dataList.Add(preferenceData.value);
+                }
             }
+        }
+        if (logComfort)
+        {
+            AddToDataList(comfortOverallData);
+            AddToDataList(comfortOverallGameData);
+            AddToDataList(comfortEnvironmentData);
+            AddToDataList(comfortEnvironmentGameData);
+            AddToDataList(comfortCorridorData);
+            AddToDataList(comfortCorridorGameData);
+            AddToDataList(comfortSoundData);
+            AddToDataList(comfortSoundGameData);
+            AddToDataList(comfortVisualData);
+            AddToDataList(comfortVisualGameData);
+            AddToDataList(comfortFramerateData);
+            AddToDataList(comfortFramerateGameData);
+            AddToDataList(comfortTechnicalData);
+            AddToDataList(comfortTechnicalGameData);
+            AddToDataList(comfortRobotGameData);
+            AddToDataList(comfortInteractionGameData);
+        }
     }
 
+
+    private void AddToDataList(StringValue data)
+    {
+        if (String.IsNullOrEmpty(data.value))
+            dataList.Add("No data");
+        else
+            dataList.Add(data.value);
+    }
     /// <summary>
     /// This function will send all data to Google Forms - So this should be called at the very end when all tests are done.
     /// </summary>
@@ -261,15 +285,6 @@ public class DataLogger2 : MonoBehaviour
         ToggleTimer(true);
     }
 
-    public void LogTimeStop(int testIndex)
-    {
-        ToggleTimer(false);
-
-        if (loggedTimesData != null)
-            if (testIndex >= 0 && testIndex < loggedTimesData.values.Length)
-                loggedTimesData.values[testIndex] = timeSpend;
-    }
-
     /// <summary>
     /// This should be called at the END of the test condition session.
     /// </summary>
@@ -294,7 +309,6 @@ public class DataLogger2 : MonoBehaviour
         else
             genderData.value = "Other";
     }
-
     public void PreferenceResponse(bool prefGame)
     {
         //Debug.Log("gender");
@@ -306,7 +320,6 @@ public class DataLogger2 : MonoBehaviour
         else
             preferenceData.value = "without game";
     }
-
     public void ComfortOverallResponse(int level)
     {
         //Debug.Log("gender");
@@ -583,7 +596,6 @@ public class DataLogger2 : MonoBehaviour
         }
         comfortFramerateGameData.value = answer;
     }
-
     public void ComfortTechnicalResponse(int level)
     {
         //Debug.Log("gender");
@@ -691,11 +703,13 @@ public class DataLogger2 : MonoBehaviour
                 fpsCount++;
                 avgFrames = fpsSum / fpsCount;
             }
-        }
-
-        if (logTime && timerRunning)
-        {
-            timeSpend += Time.deltaTime;
+            if (logMinimumFrameRate)
+            {
+                if (frameRate <lowestFrame)
+                {
+                    lowestFrame = frameRate;
+                }
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.K))
@@ -896,16 +910,6 @@ public class DataLogger2 : MonoBehaviour
         if (logFrameRate)
             tempLabels.Add("FPS");
 
-        if (logTime)
-        {
-            int i = 1;
-            foreach (float time in loggedTimes)
-            {
-                tempLabels.Add("TimeSpend Test " + i);
-                i++;
-            }
-        }
-
         if (logWallHits)
         {
             int i = 1;
@@ -1010,9 +1014,9 @@ public class DataLogger_Editor2 : UnityEditor.Editor
             {
                 EditorGUI.indentLevel += 1;
                 script.logAverageFrameRate = EditorGUILayout.Toggle("Log Average", script.logAverageFrameRate);
+                script.logMinimumFrameRate = EditorGUILayout.Toggle("Log minimum", script.logMinimumFrameRate);
                 EditorGUI.indentLevel -= 1;
             }
-            script.logTime = EditorGUILayout.Toggle("Time Spend", script.logTime);
             script.logWallHits = EditorGUILayout.Toggle("Wall Hits", script.logWallHits);
             script.logPlayAreaSize = EditorGUILayout.Toggle("Play Area Size", script.logPlayAreaSize);
             script.logVRSickness = EditorGUILayout.Toggle("VR Sickness", script.logVRSickness);
