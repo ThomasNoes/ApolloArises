@@ -212,6 +212,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 48772642}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &141683809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2259891203929646606, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1184616061}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a418a2eb71f6b4c956d11f858a4c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &209761932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
@@ -787,8 +799,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextPortalCameraLeftEye: {fileID: 1165058068}
   nextPortalCameraRightEye: {fileID: 995948998}
-  leftRenderTexture: {fileID: 0}
-  rightRenderTexture: {fileID: 0}
+  leftRenderTexture: {fileID: 8400000, guid: 292cba9a5b7af684d90ded3fdf5b08d4, type: 2}
+  rightRenderTexture: {fileID: 8400000, guid: f3bc7eefbd68b254381e706a3d4a20c2, type: 2}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
   newPortalPrefab: {fileID: 1747615143729970028, guid: d86d468a0662e0640af510c4d77ba070,
@@ -2209,18 +2221,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2095865296}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1183110413 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1184616061}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6126639a8fea34cbe3763e25bb6d80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1184616061
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2352,11 +2352,11 @@ PrefabInstance:
         type: 3}
       propertyPath: EndEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1183110413}
+      objectReference: {fileID: 141683809}
     - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
       propertyPath: EndEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TestEvent
+      value: SpawnKeyForFirstDoor
       objectReference: {fileID: 0}
     - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
@@ -2367,6 +2367,11 @@ PrefabInstance:
         type: 3}
       propertyPath: branchedIndex
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: EnableEvent
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4448879130142221679, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
