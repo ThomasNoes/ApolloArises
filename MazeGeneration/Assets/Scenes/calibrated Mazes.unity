@@ -787,6 +787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextPortalCameraLeftEye: {fileID: 1165058068}
   nextPortalCameraRightEye: {fileID: 995948998}
+  leftRenderTexture: {fileID: 0}
+  rightRenderTexture: {fileID: 0}
   portalPrefab: {fileID: 1747615143729970028, guid: 0e7682cb11c237641b9a0a8a9d979f36,
     type: 3}
   newPortalPrefab: {fileID: 1747615143729970028, guid: d86d468a0662e0640af510c4d77ba070,
@@ -802,6 +804,108 @@ MonoBehaviour:
   nextProjectionQuadArray: []
   prevRenderQuadArray: []
   nextRenderQuadArray: []
+--- !u!1 &506771677 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5369379566299229991, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+    type: 3}
+  m_PrefabInstance: {fileID: 2526136163395224739}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &506771678
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506771677}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d8591696f15fd8e458a996bb76e718d9, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.4
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &516282183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1753,7 +1857,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 65
+  far clip plane: 70
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -2066,7 +2170,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 65
+  far clip plane: 70
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -3501,7 +3605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enable: 1
-  bufferAmount: 4
+  bufferAmount: 3
 --- !u!114 &1604854439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4330,7 +4434,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739775, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -4435,11 +4539,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2526136162196613260, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.09
-      objectReference: {fileID: 0}
     - target: {fileID: 3136364599825520187, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_Camera
@@ -4498,7 +4597,7 @@ PrefabInstance:
     - target: {fileID: 4866124827574828966, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 18
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4866124827574828966, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
@@ -4510,6 +4609,11 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 4866124827574828966, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
     - target: {fileID: 5369379566293736159, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: usePerEyeCameras
@@ -5372,7 +5476,7 @@ PrefabInstance:
     - target: {fileID: 9105415572236804803, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
       propertyPath: initializeTutorialRoom
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7892fa38fcffbb49807b3c2ac709216, type: 3}

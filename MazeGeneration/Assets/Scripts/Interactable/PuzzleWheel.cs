@@ -17,11 +17,13 @@ public class PuzzleWheel : MonoBehaviour
     private MeshRenderer mr;
     public GameObject handle, handleInteractObj;
     private Vector3 anchor, axis, initialPos;
+    private AudioSource audioSourceWheel;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         mr = GetComponent<MeshRenderer>();
+        audioSourceWheel = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -54,6 +56,8 @@ public class PuzzleWheel : MonoBehaviour
 
         if (!currentYAngle.Equals(prevYAngle))
         {
+
+
             if (currentYAngle > prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)
             {
                 //Debug.Log("FORWARD! | " + Math.Abs(currentYAngle - prevYAngle) + " | Prev: " + prevYAngle + " | Current: " + currentYAngle);
@@ -81,6 +85,24 @@ public class PuzzleWheel : MonoBehaviour
         }
 
         prevYAngle = currentYAngle;
+    }
+
+    private void StopSound()
+    {
+        if (audioSourceWheel == null)
+            return;
+
+        if (audioSourceWheel.isPlaying)
+            audioSourceWheel.Stop();
+    }
+
+    private void StartSound()
+    {
+        if (audioSourceWheel == null)
+            return;
+
+        if (!audioSourceWheel.isPlaying)
+            audioSourceWheel.Play();
     }
 
     private void Cooldown()

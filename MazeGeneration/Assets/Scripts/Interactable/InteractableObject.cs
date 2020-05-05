@@ -37,6 +37,13 @@ public class InteractableObject : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (svGrabbable != null)
+            if (!svGrabbable.inHand)
+            {
+                // TODO check if main object in same maze as player, else teleport it there
+            }
+
+
         if (activated && copyExist)
         {
             if (thisObjCopy != null)
@@ -136,13 +143,16 @@ public class InteractableObject : MonoBehaviour
         {
             inCurrentMaze = col.transform.parent.GetComponent<NewTeleporter>().mazeID;
 
-            activated = false;
-
             if (thisObjCopy == null)
                 CopySpawner(col.transform.parent.gameObject.GetComponent<NewTeleporter>().isForwardTeleporter ? true : false, col);
 
+            if (svGrabbable != null)
+                if (svGrabbable.inHand)
+                    return;
+
             if (thisObjCopy != null)
             {
+                activated = false;
                 thisObjCopy.transform.position = transform.position;
                 transform.Translate(offsetVector, Space.World);
                 offsetVector *= -1;

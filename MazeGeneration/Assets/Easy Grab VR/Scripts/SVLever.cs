@@ -21,7 +21,7 @@ public class SVLever : MonoBehaviour {
 
     private SVGrabbable grabbable;
     private Lever lever;
-    private bool wasGrabbed = false, isActive = true;
+    private bool wasGrabbed = false, isActive = false;
 
     private Vector3 startingEuler, anchor, axis;
 
@@ -40,11 +40,17 @@ public class SVLever : MonoBehaviour {
         // And connect it with a fixed joint, if so just set grabbable to public and set it in editor.
         grabbable = GetComponent<SVGrabbable>();
 
-        startingEuler = this.transform.localEulerAngles;
+        startingEuler = transform.localEulerAngles;
 
+        lever = transform.parent.GetComponent<Lever>();
+        Invoke("DelayedStart", 0.6f);
+    }
+
+    private void DelayedStart()
+    {
         leverHingeJoint.anchor = anchor;
         leverHingeJoint.axis = axis;
-        lever = transform.parent.GetComponent<Lever>();
+        isActive = true;
     }
 
     // Update is called once per frame
@@ -55,8 +61,8 @@ public class SVLever : MonoBehaviour {
 
         leverWasSwitched = false;
 
-        float offDistance = Quaternion.Angle(this.transform.localRotation, OffHingeAngle());
-        float onDistance = Quaternion.Angle(this.transform.localRotation, OnHingeAngle());
+        float offDistance = Quaternion.Angle(transform.localRotation, OffHingeAngle());
+        float onDistance = Quaternion.Angle(transform.localRotation, OnHingeAngle());
 
         bool shouldBeOn = (Mathf.Abs(onDistance) < Mathf.Abs(offDistance));
         if (shouldBeOn != leverIsOn) {
@@ -76,11 +82,11 @@ public class SVLever : MonoBehaviour {
 	}
 
     private Quaternion OnHingeAngle() {
-        return Quaternion.Euler(this.leverHingeJoint.axis * leverOnAngle + startingEuler);
+        return Quaternion.Euler(leverHingeJoint.axis * leverOnAngle + startingEuler);
     }
 
     private Quaternion OffHingeAngle() {
-        return Quaternion.Euler(this.leverHingeJoint.axis * leverOffAngle + startingEuler);
+        return Quaternion.Euler(leverHingeJoint.axis * leverOffAngle + startingEuler);
     }
 
     private void ActivateBeacon()

@@ -10,6 +10,7 @@ public class PuzzleRobot : MonoBehaviour
     public Image faceImage;
     public Sprite openEyes, closedEyes, turnedOffFace;
     public int uniqueId = 0, inMaze;
+    public AudioSource audioSourceDoor;
     [HideInInspector] public ItemSpawner itemSpawner;
     [HideInInspector] public bool inFirstRoom;
 
@@ -152,6 +153,7 @@ public class PuzzleRobot : MonoBehaviour
             tempKeyScript.uniqueId = uniqueId;
         }
 
+        audioSourceDoor?.Play();
         animatePuzzleDoor = true;
         keySpawned = true;
     }

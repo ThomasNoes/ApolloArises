@@ -108,7 +108,7 @@ Rigidbody:
   m_GameObject: {fileID: 1816363879355849198}
   serializedVersion: 2
   m_Mass: 0.3
-  m_Drag: 0.3
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -187,14 +187,14 @@ MonoBehaviour:
   canGrab: 1
   shouldFly: 1
   grabFlyDistance: 0.23
-  grabFlyTime: 0.2
+  grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
   rotationInHand: {x: 0, y: 0, z: 0}
   ignorePhysicsInHand: 0
   enablePhysicsInHand: 1
-  locomotionSupported: 0
+  locomotionSupported: 1
   inHandLerpSpeed: 0.03
   objectDropDistance: 0.2
   stayInPlace: 0
