@@ -23,7 +23,7 @@ public class PortalCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.tag != "PlayerCollider" || !active) return;
+        if (!col.CompareTag("PlayerCollider") || !active) return;
 
         onPortalTile = false;
         teleporter.Teleport(col);

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderPlaneCollider: {fileID: 7488657441937378617}
-  activationAngle: 75
+  activationAngle: 77
 --- !u!1 &1747615143729970028
 GameObject:
   m_ObjectHideFlags: 0

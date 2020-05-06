@@ -141,7 +141,10 @@ public class InteractableObject : MonoBehaviour
 
             if (svGrabbable != null)
                 if (svGrabbable.inHand)
+                {
+                    offsetVector *= -1;
                     return;
+                }
 
             if (thisObjCopy != null)
             {

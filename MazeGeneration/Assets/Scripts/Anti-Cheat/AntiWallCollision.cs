@@ -23,7 +23,7 @@ public class AntiWallCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Wall")
+        if (col.CompareTag("Wall"))
         {
             AntiCheat(true);
         }
@@ -31,7 +31,7 @@ public class AntiWallCollision : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Wall")
+        if (col.CompareTag("Wall"))
         {
             AntiCheat(false);
         }

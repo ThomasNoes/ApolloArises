@@ -26,7 +26,7 @@ public class MazeDisabler : MonoBehaviour
         else /*if (Application.isEditor)*/
         {
 //#if UNITY_EDITOR
-            Invoke("Initialize", 2.0f);
+            Invoke("Initialize", 3.0f);
 //#endif
         }
     }
@@ -108,7 +108,7 @@ public class MazeDisabler : MonoBehaviour
             {
                 if (index > mazeAmount - 1)
                 {
-                    index %= mazeAmount - 1;
+                    index = index % mazeAmount;
                 }
                 else if (index < 0)
                 {
