@@ -18,6 +18,7 @@ public class SVLever : MonoBehaviour {
     public bool leverWasSwitched = false;
 
     private HingeJoint leverHingeJoint;
+    // private Rigidbody rb;
 
     private SVGrabbable grabbable;
     private Lever lever;
@@ -27,6 +28,8 @@ public class SVLever : MonoBehaviour {
 
     void Start () {
         leverHingeJoint = GetComponent<HingeJoint>();
+        // rb = GetComponent<Rigidbody>();
+
         anchor = leverHingeJoint.anchor;
         axis = leverHingeJoint.axis;
 
@@ -51,6 +54,15 @@ public class SVLever : MonoBehaviour {
         leverHingeJoint.anchor = anchor;
         leverHingeJoint.axis = axis;
         isActive = true;
+    }
+
+    private void OnEnable()
+    {
+        if (isActive)
+        {
+            leverHingeJoint.anchor = anchor;
+            leverHingeJoint.axis = axis;
+        }
     }
 
     // Update is called once per frame

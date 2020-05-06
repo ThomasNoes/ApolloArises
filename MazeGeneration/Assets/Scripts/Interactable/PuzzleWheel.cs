@@ -19,6 +19,9 @@ public class PuzzleWheel : MonoBehaviour
     private Vector3 anchor, axis, initialPos;
     private AudioSource audioSourceWheel;
 
+    private Quaternion lastRot;
+    private Vector3 angularVelocity;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -57,7 +60,6 @@ public class PuzzleWheel : MonoBehaviour
         if (!currentYAngle.Equals(prevYAngle))
         {
 
-
             if (currentYAngle > prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)
             {
                 //Debug.Log("FORWARD! | " + Math.Abs(currentYAngle - prevYAngle) + " | Prev: " + prevYAngle + " | Current: " + currentYAngle);
@@ -84,8 +86,32 @@ public class PuzzleWheel : MonoBehaviour
                 }
         }
 
+        if (rb != null && handle != null)
+        {
+            CalculateAngularVelocity();
+
+            if (angularVelocity.magnitude >= 9.0f)
+            {
+                StartSound();
+            }
+            else
+            {
+                StopSound();
+            }
+        }
+
         prevYAngle = currentYAngle;
     }
+
+    private void CalculateAngularVelocity()
+    {
+        var deltaRot = transform.rotation * Quaternion.Inverse(lastRot);
+        var eulerRot = new Vector3(Mathf.DeltaAngle(0, deltaRot.eulerAngles.x), Mathf.DeltaAngle(0, deltaRot.eulerAngles.y), Mathf.DeltaAngle(0, deltaRot.eulerAngles.z));
+
+        angularVelocity = eulerRot / Time.fixedDeltaTime;
+        lastRot = transform.rotation;
+    }
+
 
     private void StopSound()
     {
@@ -93,7 +119,9 @@ public class PuzzleWheel : MonoBehaviour
             return;
 
         if (audioSourceWheel.isPlaying)
+        {
             audioSourceWheel.Stop();
+        }
     }
 
     private void StartSound()
@@ -102,7 +130,9 @@ public class PuzzleWheel : MonoBehaviour
             return;
 
         if (!audioSourceWheel.isPlaying)
+        {
             audioSourceWheel.Play();
+        }
     }
 
     private void Cooldown()

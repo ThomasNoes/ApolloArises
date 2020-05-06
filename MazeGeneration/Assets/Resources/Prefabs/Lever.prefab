@@ -171,8 +171,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.6999999, z: 0.23518367}
-  m_Center: {x: 0, y: 0, z: 0.31500357}
+  m_Size: {x: 0.7, y: 0.6999999, z: 0.09403932}
+  m_Center: {x: 0, y: 0, z: 0.2444315}
 --- !u!1 &1545044064527153759
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,13 +204,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545044064527153759}
-  m_LocalRotation: {x: 0.2227596, y: -0, z: -0, w: 0.9748734}
-  m_LocalPosition: {x: 0, y: 0, z: 0.02978714}
+  m_LocalRotation: {x: 0.3065726, y: -0, z: -0, w: 0.95184726}
+  m_LocalPosition: {x: 0, y: -0.0025, z: 0.0291}
   m_LocalScale: {x: 0.014458216, y: 0.0074421256, z: 0.014458216}
   m_Children: []
   m_Father: {fileID: 6089772656851655982}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 35.706, y: 0, z: 0}
 --- !u!33 &2703182387647355493
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -333,8 +333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8bb230f7ab7674a9a2c672a665dd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leverOnAngle: -25
-  leverOffAngle: 50
+  leverOnAngle: 25
+  leverOffAngle: 70
   leverIsOn: 1
   oneTimeUse: 0
   beaconLever: 1
@@ -350,8 +350,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.287162, y: 16.095467, z: 1.3595197}
-  m_Center: {x: 0.014635099, y: 12.268157, z: 0.018851789}
+  m_Size: {x: 1.287162, y: 10.312316, z: 1.3595197}
+  m_Center: {x: 0.014635099, y: 15.159723, z: 0.018855236}
 --- !u!59 &4566255942982881577
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0.02978714}
+  m_ConnectedAnchor: {x: 0, y: -0.0025, z: 0.0291}
   m_UseSpring: 1
   m_Spring:
     spring: 3
@@ -376,10 +376,10 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 1
   m_Limits:
-    min: -59
-    max: 56.523113
+    min: -54.646698
+    max: 53.54881
     bounciness: 0
-    bounceMinVelocity: 4
+    bounceMinVelocity: 0
     contactDistance: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity

@@ -17,6 +17,7 @@ public class ItemSpawner : MonoBehaviour
     private MapManager mapManager;
     private TerrainGenerator terrainGenerator;
     private bool[] itemSpawnedChecker;
+    private bool firstDoorSpawned;
     private int mapAmount = 0;
     private float wallHeight, tileWidth;
 
@@ -144,11 +145,12 @@ public class ItemSpawner : MonoBehaviour
         {
             if (counter == 0)
             {
-                if (initializeTutorialRoom && room.mazeID == 0)
+                if (initializeTutorialRoom && room.mazeID == 0 && !firstDoorSpawned)
                 {
                     SpawnDoor(room, uniqueId, true, true);
                     counter = (counter + 1) % (spawnFrequency + 1);
                     uniqueId++;
+                    firstDoorSpawned = true;
                     continue;
                 }
 
@@ -213,6 +215,7 @@ public class ItemSpawner : MonoBehaviour
                 wallHeight, tempDoor.transform.localScale.z * 0.2f/** room.exitTile.tileWidth*/);
             tempDoorScript.colourMaterial = GetMaterialFromId(uniqueId);
             tempDoorScript.height = wallHeight;
+            tempDoorScript.thisTile = room.exitTile;
         }
         else
             tempDoor.transform.localScale = new Vector3(tempDoor.transform.localScale.x * room.exitTile.tileWidth, wallHeight, tempDoor.transform.localScale.z /** room.exitTile.tileWidth*/);

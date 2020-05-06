@@ -15,6 +15,7 @@ public class Door : MonoBehaviour
     public float delay = 1.0f, moveSpeed = 1.0f, height;
     public AudioClip unlockSound, openSound;
     [HideInInspector] public Material colourMaterial;
+    [HideInInspector] public Tile thisTile;
 
     private bool doorControlBool;
     private Vector3 startPos, endPos;
@@ -106,6 +107,10 @@ public class Door : MonoBehaviour
         PlaySound(unlockSound);
         yield return new WaitForSeconds(0.6f);
         doorControlBool = true;
+
+        if (thisTile != null)
+            thisTile.blocked = false;
+
         PlaySound(openSound);
     }
 

@@ -21,7 +21,7 @@ public class PortalGroundCollider : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "PlayerCollider")
+        if (col.CompareTag("PlayerCollider"))
         {
             //Debug.Log("Player on tile");
             isInCollider = true;
@@ -30,7 +30,7 @@ public class PortalGroundCollider : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "PlayerCollider")
+        if (col.CompareTag("PlayerCollider"))
         {
             //Debug.Log("Player off tile");
             isInCollider = false;

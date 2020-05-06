@@ -3,7 +3,7 @@
 public class Lever : MonoBehaviour
 {
     public int inMaze;
-    private bool leverActivated;
+    private bool leverCooldown;
     private BeaconManager beaconManager;
 
     private void Start()
@@ -13,10 +13,17 @@ public class Lever : MonoBehaviour
 
     public void ActivateBeacon()
     {
-        if (leverActivated)
+        if (leverCooldown)
             return;
 
         beaconManager?.ConnectNextBeacon(inMaze, false);
-        leverActivated = true;
+
+        leverCooldown = true;
+        Invoke("Cooldown", 5.0f);
+    }
+
+    private void Cooldown()
+    {
+        leverCooldown = false;
     }
 }

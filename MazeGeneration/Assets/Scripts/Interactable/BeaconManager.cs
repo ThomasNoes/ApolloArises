@@ -29,12 +29,10 @@ public class BeaconManager : MonoBehaviour
         {
             if (!beacons[i].isActive)
             {
-                Debug.Log("Index: " + mazeIndex + " at i: " + i);
 
                 if (i != mazeIndex && !overrideIndex)
                 {
                     CompanionBehaviour.instance?.OnWrongLeverPulled();
-                    Debug.Log("Wrong lever pulled"); // TODO Remove later - YYY
                     return;
                 }
 
@@ -48,7 +46,6 @@ public class BeaconManager : MonoBehaviour
                 if (i > 0)
                     ConnectBeam(i, i - 1);
 
-                Debug.Log("Returned on lever called!"); // TODO remove later YYY
                 return;
             }
         }
