@@ -133,6 +133,7 @@ public class DialogReader : MonoBehaviour
         }
         else if (index == dialogs.Length && EnableEvent)
         {
+            Debug.Log("end event is invoked!!!!!!");
             EndEvent.Invoke();
         }
 
