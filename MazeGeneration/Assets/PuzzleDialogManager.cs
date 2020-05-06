@@ -28,19 +28,22 @@ public class PuzzleDialogManager : MonoBehaviour
     
     public void OnRotateWheelDone()
     {
+        Debug.Log("RotateWheel done");
         dr.InjectDialog(endDialog);
     }
 
     public void OnRobotFixed()
     {
+        Debug.Log("robot is fixed");
         dr.InjectDialog(malFunctionDialog);
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "PlayerCollider")
+        if (other.transform.root.name == "Player" || other.transform.root.name == "DebugPlayer")
         {
+            Debug.Log("player collided with functioning robot.");
             dr.InjectDialog(functionDialog);
         }
     }
