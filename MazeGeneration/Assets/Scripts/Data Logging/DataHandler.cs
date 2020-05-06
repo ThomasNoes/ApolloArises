@@ -38,6 +38,7 @@ public class DataHandler : MonoBehaviour
 
     IEnumerator Post(List<string> finalData)
     {
+        Debug.Log("sending Data");
         bool sendData = true;
 
         if (entryIds == null || finalData == null)

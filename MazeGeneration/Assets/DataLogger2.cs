@@ -23,8 +23,8 @@ public class DataLogger2 : MonoBehaviour
     private string fullPath;
 
     // Scriptable Objects:
-    public FloatValue fpsData;
-    public StringValue preSicknessData, noGameSicknessData, gameSicknessData, VRData, genderData, understandingData, preferenceData;
+    public FloatValue fpsData, fpsSumData, fpsCountData, minimumFrameFloat;
+    public StringValue averageFrameData, minimumFrameData, preSicknessData, noGameSicknessData, gameSicknessData, VRData, genderData, understandingData, preferenceData;
     public StringValue comfortOverallData, comfortEnvironmentData, comfortCorridorData, comfortSoundData, comfortVisualData, comfortFramerateData, comfortTechnicalData;
     public StringValue comfortOverallGameData, comfortEnvironmentGameData, comfortCorridorGameData, comfortSoundGameData, comfortVisualGameData, comfortFramerateGameData, comfortTechnicalGameData, comfortRobotGameData, comfortInteractionGameData;
     public FloatArrayValue wallHitsData;
@@ -49,8 +49,14 @@ public class DataLogger2 : MonoBehaviour
     private StreamWriter file;
     private WaitForSeconds delay;
 
+    string spec;
+    CultureInfo ci;
+
     private void Start()
     {
+        spec = "G";
+        ci = CultureInfo.CreateSpecificCulture("en-US");
+
         if (!logData)
             return;
 
@@ -79,17 +85,17 @@ public class DataLogger2 : MonoBehaviour
 
     private void UpdateDataList()
     {
-        string spec = "G";
-        CultureInfo ci = CultureInfo.CreateSpecificCulture("en-US");
 
         if (!onlineLogging)
             dataList.Add(sessionNumber.ToString());
 
         if (logFrameRate)
-            dataList.Add(logAverageFrameRate ? avgFrames.ToString(spec, ci) : frameRate.ToString(spec, ci));
+            dataList.Add(logAverageFrameRate ? averageFrameData.value : frameRate.ToString(spec, ci));
 
         if (logFrameRate) //added minimum -> test
-            dataList.Add(logMinimumFrameRate ? lowestFrame.ToString(spec, ci) : frameRate.ToString(spec, ci));
+            dataList.Add(logMinimumFrameRate ? minimumFrameData.value: frameRate.ToString(spec, ci));
+
+
 
         if (logWallHits)
         {
@@ -185,6 +191,7 @@ public class DataLogger2 : MonoBehaviour
 
     private void AddToDataList(StringValue data)
     {
+        Debug.Log("added data: "+data.name);
         if (String.IsNullOrEmpty(data.value))
             dataList.Add("No data");
         else
@@ -196,7 +203,7 @@ public class DataLogger2 : MonoBehaviour
     /// </summary>
     public void PostDataOnline()
     {
-        if (GetComponent<GuardainCalibration>().RoomScaling3x4Check(0.57f)) //only getting data if their play area is large enough
+        //if (GetComponent<GuardainCalibration>().RoomScaling3x4Check(0.57f)) //only getting data if their play area is large enough
         {
             Debug.Log("Posting Online");
             if (dataHandler == null)
@@ -315,7 +322,7 @@ public class DataLogger2 : MonoBehaviour
     }
     public void PreferenceResponse(bool prefGame)
     {
-        //Debug.Log("gender");
+        Debug.Log("preference "+ prefGame);
         if (preferenceData == null)
             return;
 
@@ -703,15 +710,18 @@ public class DataLogger2 : MonoBehaviour
             frameRate = (int)(1 / Time.deltaTime);
             if (logAverageFrameRate)
             {
-                fpsSum += (int)frameRate;
-                fpsCount++;
-                avgFrames = fpsSum / fpsCount;
+                Debug.Log("logging average frame count: " + fpsCountData.value + " sum: " + fpsSumData.value + " average: " + averageFrameData.value);
+                fpsSumData.value += (int)frameRate;
+                fpsCountData.value++;
+                averageFrameData.value = (fpsSumData.value / fpsCountData.value).ToString(spec, ci);
             }
-            if (logMinimumFrameRate)
+            if (logMinimumFrameRate && Time.timeSinceLevelLoad >10)
             {
-                if (frameRate <lowestFrame)
+                if (frameRate < minimumFrameFloat.value)
                 {
-                    lowestFrame = frameRate;
+                    minimumFrameFloat.value = frameRate;
+                    minimumFrameData.value = frameRate.ToString(spec, ci) + " in " + SceneManager.GetActiveScene().name;
+
                 }
             }
         }
@@ -1025,6 +1035,7 @@ public class DataLogger_Editor2 : UnityEditor.Editor
             script.logPlayAreaSize = EditorGUILayout.Toggle("Play Area Size", script.logPlayAreaSize);
             script.logVRSickness = EditorGUILayout.Toggle("VR Sickness", script.logVRSickness);
             script.logComfort = EditorGUILayout.Toggle("Comfort", script.logComfort);
+            script.logPreference = EditorGUILayout.Toggle("Preference", script.logPreference);
             script.logDemographic = EditorGUILayout.Toggle("Demographics", script.logDemographic);
 
             if (script.logDemographic)

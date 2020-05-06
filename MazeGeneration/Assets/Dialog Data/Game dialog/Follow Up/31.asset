@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 31
   m_EditorClassIdentifier: 
   text: 'Great! if you have more some more comments, you can leave them in the questionnaire,
-    which was included in the post your found about this experiment.  '
+    which was included in the post where your found about this experiment.   '
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
