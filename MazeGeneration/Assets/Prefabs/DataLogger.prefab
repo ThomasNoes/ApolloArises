@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2627100202734912141}
   - component: {fileID: 2627100202734912139}
   - component: {fileID: 884465142}
+  - component: {fileID: 1285117292}
   m_Layer: 0
   m_Name: DataLogger
   m_TagString: DataLogger
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyOneLogPerDevice: 0
-  baseURL: https://docs.google.com/forms/d/e/1FAIpQLSfsHpZqDqfoW_9q8v6JP4ktivDWyoMfGvzpx-be95gj_ou2vg/viewform?usp=sf_link
+  baseURL: https://docs.google.com/forms/u/0/d/e/1FAIpQLSfsHpZqDqfoW_9q8v6JP4ktivDWyoMfGvzpx-be95gj_ou2vg/formResponse
   entryIds:
   - entry.748259335
   - entry.931911253
@@ -93,6 +94,11 @@ MonoBehaviour:
   conditionAmount: 2
   filePath: Assets/Resources/CSV
   fpsData: {fileID: 11400000, guid: ef33e17007590ac4ab70ed7b0d5766cf, type: 2}
+  fpsSumData: {fileID: 11400000, guid: 65a3e48a5a5c9ef4f88c1fa2b9c8401f, type: 2}
+  fpsCountData: {fileID: 11400000, guid: 1d2c60cf25d407640a1e706dea49b996, type: 2}
+  minimumFrameFloat: {fileID: 11400000, guid: b2ce4653949425f438417c3dc4ad79df, type: 2}
+  averageFrameData: {fileID: 11400000, guid: 407012aa03d039f41aee865ad777d60d, type: 2}
+  minimumFrameData: {fileID: 11400000, guid: 6db2432160cf51c4aa85bca0294afa91, type: 2}
   preSicknessData: {fileID: 11400000, guid: 538efd36a9a77344f87630d7ab71f66e, type: 2}
   noGameSicknessData: {fileID: 11400000, guid: 33b6bfc4d8aaef84fad25f175a9deb12, type: 2}
   gameSicknessData: {fileID: 11400000, guid: 2a150b43ad939084891053c3bf324a2f, type: 2}
@@ -132,12 +138,12 @@ MonoBehaviour:
   wallHitsData: {fileID: 11400000, guid: 7ffbc76752ad6054ea0602ed59111ab7, type: 2}
   onlineLogging: 1
   logData: 1
-  logFrameRate: 1
-  logAverageFrameRate: 1
-  logMinimumFrameRate: 1
+  logFrameRate: 0
+  logAverageFrameRate: 0
+  logMinimumFrameRate: 0
   logGender: 1
   logVR: 1
-  logPreference: 0
+  logPreference: 1
   logWallHits: 1
   logDemographic: 1
   useSceneSwitch: 0
@@ -145,3 +151,20 @@ MonoBehaviour:
   logVRSickness: 1
   logUnderstanding: 1
   logComfort: 1
+--- !u!114 &1285117292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2627100202734912136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5328cccaaf89502448f483cd02d60053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calibrateGameObject: 0
+  drawPlayArea: 0
+  gizmo: {fileID: 3298887824379130255, guid: 66a87d3283452014db07342e3c61e05c, type: 3}
+  gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
+    type: 3}

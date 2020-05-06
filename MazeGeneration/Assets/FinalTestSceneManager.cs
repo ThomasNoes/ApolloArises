@@ -9,6 +9,8 @@ public class FinalTestSceneManager : MonoBehaviour
 
     public static FinalTestSceneManager instance;
 
+    public FloatValue fpsCountData, fpsSumData, minimumFrameFloat;
+
     int[] evenOrder = new int[6] {0, 1, 2, 3, 4, 5};
     int[] oddOrder = new int[6] { 0, 3, 4, 1, 2, 5 };
 
@@ -26,14 +28,22 @@ public class FinalTestSceneManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            ResetData();
         }
+    }
+
+    private void ResetData()
+    {
+        fpsCountData.value = 0;
+        fpsSumData.value = 0;
+        minimumFrameFloat.value = float.MaxValue;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        int sec= (int) DateTime.Now.Second;
-
+        int sec = (int) DateTime.Now.Second;
+        sec = 0;
         if (sec % 2 == 0)
         {
             order = evenOrder;

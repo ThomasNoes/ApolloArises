@@ -2050,7 +2050,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748636786}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 752499cc501b04f46ab582b44a004c39, type: 3}
   m_Name: 
@@ -2067,6 +2067,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee1f551626467b45902553440c21619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fpsCountData: {fileID: 11400000, guid: 1d2c60cf25d407640a1e706dea49b996, type: 2}
+  fpsSumData: {fileID: 11400000, guid: 65a3e48a5a5c9ef4f88c1fa2b9c8401f, type: 2}
+  minimumFrameFloat: {fileID: 11400000, guid: b2ce4653949425f438417c3dc4ad79df, type: 2}
 --- !u!4 &780056905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 342866825121487231, guid: 3e819571d4a925346a5c4a83065582a0,
@@ -3000,10 +3003,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logPreference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logFrameRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logWallHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logAverageFrameRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logMinimumFrameRate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2627100202734912136, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}
       propertyPath: m_Name
       value: DataLogger 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627100202734912139, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
+        type: 3}
+      propertyPath: baseURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSfsHpZqDqfoW_9q8v6JP4ktivDWyoMfGvzpx-be95gj_ou2vg/formResponse
       objectReference: {fileID: 0}
     - target: {fileID: 2627100202734912141, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}
@@ -4720,7 +4748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527084633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.77, y: 1.301, z: 0.277}
+  m_LocalPosition: {x: -0.395, y: 1.301, z: 0.277}
   m_LocalScale: {x: 0.18344, y: 0.18344, z: 0.18344}
   m_Children: []
   m_Father: {fileID: 0}

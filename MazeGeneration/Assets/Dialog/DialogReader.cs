@@ -75,7 +75,7 @@ public class DialogReader : MonoBehaviour
 
     private IEnumerator GoThroughMainDialog()
     {
-        while (index < dialogs.Length)
+        while (index <= dialogs.Length)
         {
             DisplayDialog();
             yield return new WaitForSeconds(CalculateWaitTime(latestDialog));
