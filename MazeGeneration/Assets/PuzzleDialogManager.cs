@@ -41,7 +41,7 @@ public class PuzzleDialogManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "PlayerCollider")
+        if (other.transform.root.name == "Player" || other.transform.root.name == "DebugPlayer")
         {
             Debug.Log("player collided with functioning robot.");
             dr.InjectDialog(functionDialog);
