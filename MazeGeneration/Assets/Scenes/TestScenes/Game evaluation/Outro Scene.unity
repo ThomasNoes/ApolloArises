@@ -13368,7 +13368,7 @@ PrefabInstance:
     - target: {fileID: 1004870476709769636, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: m_text
-      value: "Thank you again for helping me!\r"
+      value: Let's finish the last questions.
       objectReference: {fileID: 0}
     - target: {fileID: 1004870476709769636, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
@@ -13378,17 +13378,22 @@ PrefabInstance:
     - target: {fileID: 1004870476709769636, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1004870476709769636, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1004870476709769636, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004870476709769636, guid: 0de2365736a11784c95847a24a7a6304,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1004870476928685708, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
