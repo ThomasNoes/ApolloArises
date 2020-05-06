@@ -2312,6 +2312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
+      propertyPath: branchedDialogs.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
       propertyPath: TMP_Object
       value: 
       objectReference: {fileID: 401492473}
@@ -2366,13 +2371,43 @@ PrefabInstance:
     - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
       propertyPath: branchedIndex
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
       propertyPath: EnableEvent
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: branchedDialogs.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 5667acab6bed6ed4ab8e374ef0df29e8,
+        type: 2}
+    - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: branchedDialogs.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 35b7b6c4f5d76994c8d0134bb063b9a9,
+        type: 2}
+    - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: branchedDialogs.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4df60e5bba9bfaf47acf16f079736332,
+        type: 2}
+    - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: branchedDialogs.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: 515bf3403452f5246900b774aa5115a4,
+        type: 2}
+    - target: {fileID: 4051212256246950731, guid: cc155d2aaf0acaf468be45d9442f0a2d,
+        type: 3}
+      propertyPath: branchedDialogs.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 650e667f45dd95d4e9c337aa38468a2a,
+        type: 2}
     - target: {fileID: 4448879130142221679, guid: cc155d2aaf0acaf468be45d9442f0a2d,
         type: 3}
       propertyPath: m_Name
@@ -4439,7 +4474,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739775, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}

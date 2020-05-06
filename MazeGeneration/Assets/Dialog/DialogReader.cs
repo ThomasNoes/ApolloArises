@@ -15,6 +15,8 @@ public class DialogReader : MonoBehaviour
     public TestSceneManager tsm;
     private TMPAnimated tmpa;
 
+    bool IsIncoroutine = false;
+
     DialogData latestDialog;
     public int branchedIndex = 0;
     public int index = 0;
@@ -56,6 +58,7 @@ public class DialogReader : MonoBehaviour
 
     public void DisplayAllBranchedDialog()
     {
+        IsIncoroutine = true;
         StartCoroutine("GoThroughBranchedDialog");
     }
 
@@ -67,9 +70,11 @@ public class DialogReader : MonoBehaviour
             
             yield return new WaitForSeconds(CalculateWaitTime(latestDialog));
         }
+        IsIncoroutine = false;
     }
     public void DisplayAllMainDialog()
     {
+        IsIncoroutine = true;
         StartCoroutine("GoThroughMainDialog");
     }
 
@@ -80,6 +85,7 @@ public class DialogReader : MonoBehaviour
             DisplayDialog();
             yield return new WaitForSeconds(CalculateWaitTime(latestDialog));
         }
+        IsIncoroutine = false;
     }
 
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 10
   m_EditorClassIdentifier: 
-  text: And look at that view outside. This is the city I was built to serve.
+  text: And look at that view outside. This is the beautiful mountain I Work in.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
