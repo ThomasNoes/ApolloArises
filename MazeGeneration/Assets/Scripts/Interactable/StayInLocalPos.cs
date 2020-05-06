@@ -4,7 +4,7 @@ public class StayInLocalPos : MonoBehaviour
 {
     public bool onlySetOnce, continuePosSetting;
     private Vector3 initialPos;
-    private bool posTransform;
+    private bool posTransform, startedOnce;
     private FixedJoint fixedJoint;
     private Vector3 anchor, axis; 
 
@@ -23,6 +23,11 @@ public class StayInLocalPos : MonoBehaviour
 
     void Start()
     {
+        if (startedOnce)
+            return;
+
+        startedOnce = true;
+
         initialPos = transform.localPosition;
         fixedJoint = GetComponent<FixedJoint>();
 

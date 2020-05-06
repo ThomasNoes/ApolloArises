@@ -94,12 +94,18 @@ public class SVGrabbable : MonoBehaviour {
     private Collider[] colliders;
     private float yValue, zValue, xValue;
     private Vector3 initialPos;
-    private bool posActive, rotActive;
+    private bool posActive, rotActive, startedOnce;
 
     //------------------------
     // Init
     //------------------------
     void Start() {
+
+        if (startedOnce)
+            return;
+
+        startedOnce = true;
+
         if (GetComponent<SVGlowIndicator>() != null) {
             gripIndicatorComponent = GetComponent<SVGlowIndicator>();
         }

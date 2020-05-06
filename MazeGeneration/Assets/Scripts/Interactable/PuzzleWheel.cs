@@ -10,7 +10,7 @@ public class PuzzleWheel : MonoBehaviour
     public PuzzleRobot puzzleRobotRef;
     public PuzzleDialogManager pdm;
     public bool notFixed;
-    private bool cooldown, goingForward, activated;
+    private bool cooldown, goingForward, activated, startedOnce;
     private float prevYAngle;
     private HingeJoint hingeJoint;
     private Rigidbody rb;
@@ -31,6 +31,11 @@ public class PuzzleWheel : MonoBehaviour
 
     private void Start()
     {
+        if (startedOnce)
+            return;
+
+        startedOnce = true;
+
         hingeJoint = GetComponent<HingeJoint>();
 
         if (hingeJoint == null)
