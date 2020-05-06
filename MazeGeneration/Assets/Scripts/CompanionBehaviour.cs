@@ -164,6 +164,10 @@ public class CompanionBehaviour : MonoBehaviour
         {
             dr.InjectDialog(secondLastLever);
         }
+        else if (mazeIndex == 0)
+        {
+            dr.DisplayAllMainDialog();
+        }
         else if(mazeIndex >0)
         {
             dr.InjectDialog(defaultLever);
