@@ -5,6 +5,7 @@ public class RigidBodyWaker : MonoBehaviour
     private Rigidbody rb;
     private bool isAlreadyKinematic, lateStart;
     private Vector3 startPos;
+    private Quaternion startRot;
 
     private void Start()
     {
@@ -22,6 +23,7 @@ public class RigidBodyWaker : MonoBehaviour
     private void LateStart()
     {
         startPos = transform.position;
+        startRot = transform.rotation;
         lateStart = true;
     }
 
@@ -35,7 +37,10 @@ public class RigidBodyWaker : MonoBehaviour
         rb.WakeUp();
 
         if (lateStart)
-            transform.position = startPos;
+        {
+            //    transform.position = startPos;
+            transform.rotation = startRot;
+        }
     }
 
     private void OnDisable()
@@ -46,6 +51,6 @@ public class RigidBodyWaker : MonoBehaviour
         if (!isAlreadyKinematic)
             rb.isKinematic = true;
 
-        rb.Sleep();
+        // rb.Sleep();
     }
 }

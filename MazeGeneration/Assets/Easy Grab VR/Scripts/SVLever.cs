@@ -22,11 +22,17 @@ public class SVLever : MonoBehaviour {
 
     private SVGrabbable grabbable;
     private Lever lever;
-    private bool wasGrabbed = false, isActive = false;
+    private bool wasGrabbed = false, isActive = false, startedOnce = false;
 
     private Vector3 startingEuler, anchor, axis;
 
-    void Start () {
+    void Start ()
+    {
+
+        if (startedOnce)
+            return;
+
+        startedOnce = true;
         leverHingeJoint = GetComponent<HingeJoint>();
         // rb = GetComponent<Rigidbody>();
 

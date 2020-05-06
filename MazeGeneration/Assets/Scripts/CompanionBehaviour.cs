@@ -253,11 +253,9 @@ public class CompanionBehaviour : MonoBehaviour
 
         if (key != null)
         {
-            key.colourMaterial = itemSpawner.GetMaterialFromId(0);
+            key.itemSpawner = itemSpawner;
             key.uniqueId = 1;
         }
-
-        Debug.Log("First key spawned!");
     }
 }
 
