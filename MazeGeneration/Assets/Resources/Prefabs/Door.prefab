@@ -72,6 +72,7 @@ MonoBehaviour:
   unlockSound: {fileID: 8300000, guid: 034824526bd25154d9cc2ba7febb3d0f, type: 3}
   openSound: {fileID: 8300000, guid: 1743855e794c2c142b299ebb04b9c8a0, type: 3}
   colourMaterial: {fileID: 0}
+  thisTile: {fileID: 0}
 --- !u!82 &5305966075936021552
 AudioSource:
   m_ObjectHideFlags: 0
@@ -83,7 +84,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
