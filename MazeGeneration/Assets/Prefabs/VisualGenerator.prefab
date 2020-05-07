@@ -88,9 +88,12 @@ MonoBehaviour:
   spawnKeysInDeadEnds: 1
   spawnPuzzleRobots: 1
   spawnLevers: 1
+  spawnLeversBeforeDoors: 1
   spawnPuzzleObjects: 1
   spawnCogwheelsInDeadEnds: 1
   initializeTutorialRoom: 1
+  firstRoomIsRobotFixed: 1
+  secondRoomIsRobotUnfixed: 1
   spawnFrequency: 0
   colourMaterials:
   - {fileID: 2100000, guid: d0443b9c3f9f27d47acbdc3e23517000, type: 2}

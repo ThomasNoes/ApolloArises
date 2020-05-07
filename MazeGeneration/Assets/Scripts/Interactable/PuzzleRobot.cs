@@ -12,7 +12,7 @@ public class PuzzleRobot : MonoBehaviour
     public int uniqueId = 0, inMaze;
     public AudioSource audioSourceDoor;
     [HideInInspector] public ItemSpawner itemSpawner;
-    [HideInInspector] public bool inFirstRoom;
+    [HideInInspector] public bool inFirstRoom, withKey, startedOnce;
 
     private GameObject mainCamObj, visualGenObj;
     private WaitForSeconds blinkDur, blinkFreq;
@@ -25,9 +25,10 @@ public class PuzzleRobot : MonoBehaviour
 
     private void Start()
     {
-        if (headObj == null)
+        if (headObj == null || startedOnce)
             return;
 
+        startedOnce = true;
         mainCamObj = Camera.main?.gameObject;
         beaconManager = FindObjectOfType<BeaconManager>();
 
@@ -41,7 +42,7 @@ public class PuzzleRobot : MonoBehaviour
         {
             SpawnKey();
         }
-        else if (startsFixed)
+        else if (startsFixed && !withKey)
         {
             animatePuzzleDoor = true;
             keySpawned = true;

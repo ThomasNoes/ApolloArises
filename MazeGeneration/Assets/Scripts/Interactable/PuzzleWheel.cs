@@ -47,6 +47,9 @@ public class PuzzleWheel : MonoBehaviour
         hingeJoint.anchor = Vector3.zero;
         hingeJoint.axis = Vector3.zero;
 
+        if (puzzleRobotRef == null)
+            Debug.LogError("Puzzle wheel error: no ref to puzzle robot!");
+
         Invoke("DelayedStart", 0.2f);
     }
 
@@ -60,9 +63,12 @@ public class PuzzleWheel : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (puzzleRobotRef == null)
+            return;
+
         float currentYAngle = transform.rotation.eulerAngles.y;
 
-        if (!currentYAngle.Equals(prevYAngle))
+        if (!currentYAngle.Equals(prevYAngle) && !puzzleRobotRef.turnedOff)
         {
 
             if (currentYAngle > prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)

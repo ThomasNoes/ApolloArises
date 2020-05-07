@@ -9,7 +9,7 @@ public class ItemSpawner : MonoBehaviour
     public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, cabinetPrefab, puzzleItemPrefab;
 
     public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true, spawnLevers = true, spawnLeversBeforeDoors = true,
-        spawnPuzzleObjects = true, spawnCogwheelsInDeadEnds = true, initializeTutorialRoom;
+        spawnPuzzleObjects = true, spawnCogwheelsInDeadEnds = true, initializeTutorialRoom, firstRoomIsRobotFixed, secondRoomIsRobotUnfixed;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
 
     public Material[] colourMaterials;
@@ -154,12 +154,24 @@ public class ItemSpawner : MonoBehaviour
                     continue;
                 }
 
+                if (firstRoomIsRobotFixed && room.mazeID != 0)
+                {
+                    SpawnDoor(room, uniqueId, true, false);
+                    counter = (counter + 1) % (spawnFrequency + 1);
+                    uniqueId++;
+                    firstRoomIsRobotFixed = false;
+                    continue;
+                }
+
                 if (room.mazeID == mapAmount - 1)
                     break;
 
                 if (spawnKeysInDeadEnds && spawnCogwheelsInDeadEnds)
                 {
                     int randomNumber = RandomNumber(2, room.mazeID);
+
+                    if (secondRoomIsRobotUnfixed)
+                        randomNumber = 1;
 
                     if (randomNumber == 0)
                     {
@@ -222,7 +234,7 @@ public class ItemSpawner : MonoBehaviour
 
         if (spawnPuzzleRobots && !isFirstRoom)
         {
-            PuzzleRobotSpawner(room, uniqueId, roomFixedPuzzleRobot);
+            PuzzleRobotSpawner(room, uniqueId, roomFixedPuzzleRobot, firstRoomIsRobotFixed);
         }
     }
 
@@ -242,9 +254,12 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private void PuzzleRobotSpawner(Room room, int uniqueId, bool isFixed)
+    private void PuzzleRobotSpawner(Room room, int uniqueId, bool isFixed, bool withKey)
     {
         if (puzzleRobotPrefab == null)
+            return;
+
+        if (isFixed && !withKey)
             return;
 
         List<Tile> tempTiles = new List<Tile>();
@@ -296,6 +311,7 @@ public class ItemSpawner : MonoBehaviour
             puzzleRobot.uniqueId = uniqueId;
             puzzleRobot.inMaze = room.mazeID;
             puzzleRobot.SetVisualGeneratorObject(gameObject);
+            puzzleRobot.withKey = withKey;
             puzzleRobot.startsFixed = isFixed;
         }
     }
