@@ -247,7 +247,7 @@ public class CompanionBehaviour : MonoBehaviour
         keySpawned = true;
         Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
 
-        GameObject tempKey = Instantiate(itemSpawner.keyPrefab, spawnPos, Quaternion.identity);
+        GameObject tempKey = Instantiate(itemSpawner.keyPrefab, spawnPos, Quaternion.identity, itemSpawner.transform);
 
         Key key = tempKey.GetComponent<Key>();
 

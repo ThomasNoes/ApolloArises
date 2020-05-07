@@ -113,11 +113,15 @@ namespace Assets.Scripts.Camera
         #region AngleCheck
         private void AngleCheck()
         {
-            Vector3 dirNext = currentNextPortal.transform.position - transform.position;
-            Vector3 dirPrev = currentPrevPortal.transform.position - transform.position;
+            Vector2 dirNext = new Vector2(currentNextPortal.transform.position.x - transform.position.x, currentNextPortal.transform.position.z - transform.position.z);
+            Vector2 dirPrev = new Vector2(currentPrevPortal.transform.position.x - transform.position.x, currentPrevPortal.transform.position.z - transform.position.z);
+            Vector2 forward2d = new Vector2(transform.forward.x, transform.forward.z);
 
-            if (Vector3.Angle(transform.forward, dirNext) <
-                Vector3.Angle(transform.forward, dirPrev))
+            //Vector3 dirNext = currentNextPortal.transform.position - transform.position;
+            //Vector3 dirPrev = currentPrevPortal.transform.position - transform.position;
+
+            if (Vector2.Angle(forward2d, dirNext) <
+                Vector2.Angle(forward2d, dirPrev))
             {
                 nextScore -= 1;
             }
@@ -249,11 +253,12 @@ namespace Assets.Scripts.Camera
 
         private void AngleCheckOverride()
         {
-            Vector3 dirNext = currentNextPortal.transform.position - transform.position;
-            Vector3 dirPrev = currentPrevPortal.transform.position - transform.position;
+            Vector2 dirNext = new Vector2(currentNextPortal.transform.position.x - transform.position.x, currentNextPortal.transform.position.z - transform.position.z);
+            Vector2 dirPrev = new Vector2(currentPrevPortal.transform.position.x - transform.position.x, currentPrevPortal.transform.position.z - transform.position.z);
+            Vector2 forward2d = new Vector2(transform.forward.x, transform.forward.z);
 
-            if (Vector3.Angle(transform.forward, dirNext) <
-                Vector3.Angle(transform.forward, dirPrev))
+            if (Vector2.Angle(forward2d, dirNext) <
+                Vector2.Angle(forward2d, dirPrev))
             {
                 if (currentDirection == false)
                 {

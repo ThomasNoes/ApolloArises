@@ -9,7 +9,7 @@ public class ItemSpawner : MonoBehaviour
     public GameObject keyPrefab, doorPrefab, puzzleRobotPrefab, leverPrefab, cabinetPrefab, puzzleItemPrefab;
 
     public bool spawnDoors = true, spawnKeysInDeadEnds = true, spawnPuzzleRobots = true, spawnLevers = true, spawnLeversBeforeDoors = true,
-        spawnPuzzleObjects = true, spawnCogwheelsInDeadEnds = true, initializeTutorialRoom, firstRoomIsRobotFixed, secondRoomIsRobotUnfixed;
+        spawnPuzzleObjects = true, spawnCogwheelsInDeadEnds = true, tutorialSequence;
     [Tooltip("Example: 2 means for every second room")] public int spawnFrequency = 3;
 
     public Material[] colourMaterials;
@@ -17,7 +17,7 @@ public class ItemSpawner : MonoBehaviour
     private MapManager mapManager;
     private TerrainGenerator terrainGenerator;
     private bool[] itemSpawnedChecker;
-    private bool firstDoorSpawned;
+    private bool firstDoorSpawned, firstRoomJustKey = true, secondRoomIsRobotFixed = true, thirdRoomIsRobotUnfixed = true;
     private int mapAmount = 0;
     private float wallHeight, tileWidth;
 
@@ -80,7 +80,7 @@ public class ItemSpawner : MonoBehaviour
                     Tile tempTile = mapManager.deadEndList[i][index];
                     Vector3 tilePos = tempTile.transform.position;
                     Vector3 spawnPos = new Vector3(tilePos.x, tilePos.y + 0.5f, tilePos.z);
-                    GameObject tempKey = Instantiate(keyPrefab, spawnPos, Quaternion.identity, mapManager.mapSequence[mazeIndex].mapObject.transform);
+                    GameObject tempKey = Instantiate(keyPrefab, spawnPos, Quaternion.identity, transform);
                     mapManager.deadEndList[i].RemoveAt(index);
 
                     if (tempKey.GetComponent<Key>() != null)
@@ -108,7 +108,7 @@ public class ItemSpawner : MonoBehaviour
             {
                 if (mapManager.deadEndList[i].Count != 0)
                 {
-                    GameObject tempCabinet = SpawnWallObjectInDeadEndAtIndex(cabinetPrefab, i, true, 1.0f);
+                    GameObject tempCabinet = SpawnWallObjectInDeadEndAtIndex(cabinetPrefab, i, true, 0.7f);
 
                     tempCabinet.transform.localScale = new Vector3(tempCabinet.transform.localScale.x * tileWidth, 
                         tempCabinet.transform.localScale.y * tileWidth, tempCabinet.transform.localScale.z * tileWidth);
@@ -145,7 +145,7 @@ public class ItemSpawner : MonoBehaviour
         {
             if (counter == 0)
             {
-                if (initializeTutorialRoom && room.mazeID == 0 && !firstDoorSpawned)
+                if (tutorialSequence && room.mazeID == 0 && !firstDoorSpawned)
                 {
                     SpawnDoor(room, uniqueId, true, true);
                     counter = (counter + 1) % (spawnFrequency + 1);
@@ -154,14 +154,15 @@ public class ItemSpawner : MonoBehaviour
                     continue;
                 }
 
-                if (firstRoomIsRobotFixed && room.mazeID != 0)
-                {
-                    SpawnDoor(room, uniqueId, true, false);
-                    counter = (counter + 1) % (spawnFrequency + 1);
-                    uniqueId++;
-                    firstRoomIsRobotFixed = false;
-                    continue;
-                }
+                if (tutorialSequence)
+                    if (secondRoomIsRobotFixed && room.mazeID != 0 && !firstRoomJustKey)
+                    {
+                        SpawnDoor(room, uniqueId, true, false);
+                        counter = (counter + 1) % (spawnFrequency + 1);
+                        uniqueId++;
+                        secondRoomIsRobotFixed = false;
+                        continue;
+                    }
 
                 if (room.mazeID == mapAmount - 1)
                     break;
@@ -170,8 +171,15 @@ public class ItemSpawner : MonoBehaviour
                 {
                     int randomNumber = RandomNumber(2, room.mazeID);
 
-                    if (secondRoomIsRobotUnfixed)
-                        randomNumber = 1;
+                    if (tutorialSequence)
+                        if (thirdRoomIsRobotUnfixed && !firstRoomJustKey)
+                        {
+                            randomNumber = 1;
+                        }
+                        else if (firstRoomJustKey)
+                        {
+                            randomNumber = 0;
+                        }
 
                     if (randomNumber == 0)
                     {
@@ -208,8 +216,7 @@ public class ItemSpawner : MonoBehaviour
 
         int dir = DirectionCheckerNext(room.exitTile, room.mazeID);
 
-        GameObject tempDoor = Instantiate(doorPrefab, tilePosition,
-            transform.rotation, mapManager.mapSequence[room.mazeID].mapObject.transform);
+        GameObject tempDoor = Instantiate(doorPrefab, tilePosition, transform.rotation, mapManager.mapScripts[room.mazeID].transform);
 
         room.exitTile.blocked = true;
         room.exitTile.isDoorTile = true;
@@ -234,7 +241,7 @@ public class ItemSpawner : MonoBehaviour
 
         if (spawnPuzzleRobots && !isFirstRoom)
         {
-            PuzzleRobotSpawner(room, uniqueId, roomFixedPuzzleRobot, firstRoomIsRobotFixed);
+            PuzzleRobotSpawner(room, uniqueId, roomFixedPuzzleRobot);
         }
     }
 
@@ -254,13 +261,23 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private void PuzzleRobotSpawner(Room room, int uniqueId, bool isFixed, bool withKey)
+    private void PuzzleRobotSpawner(Room room, int uniqueId, bool isFixed)
     {
         if (puzzleRobotPrefab == null)
             return;
 
-        if (isFixed && !withKey)
+
+        if (tutorialSequence && !firstRoomJustKey && secondRoomIsRobotFixed)
+        {
+            // then proceed
+        }
+        else if (isFixed)
+        {
+            if (firstRoomJustKey)
+                firstRoomJustKey = false;
+
             return;
+        }
 
         List<Tile> tempTiles = new List<Tile>();
 
@@ -290,8 +307,7 @@ public class ItemSpawner : MonoBehaviour
                 break;
         }
 
-        GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, tempTiles[tileIndex].transform.position,
-            transform.rotation, mapManager.mapSequence[room.mazeID].mapObject.transform);
+        GameObject tempPuzzleRobot = Instantiate(puzzleRobotPrefab, tempTiles[tileIndex].transform.position, transform.rotation, transform);
         PuzzleRobot puzzleRobot = tempPuzzleRobot.GetComponent<PuzzleRobot>();
 
         tempPuzzleRobot.transform.Translate(GetEdgePositionGround(tempTiles[tileIndex], dir));
@@ -311,7 +327,13 @@ public class ItemSpawner : MonoBehaviour
             puzzleRobot.uniqueId = uniqueId;
             puzzleRobot.inMaze = room.mazeID;
             puzzleRobot.SetVisualGeneratorObject(gameObject);
-            puzzleRobot.withKey = withKey;
+
+            if (tutorialSequence && !firstRoomJustKey && secondRoomIsRobotFixed)
+            {
+                puzzleRobot.withKey = true;
+                secondRoomIsRobotFixed = false;
+            }
+
             puzzleRobot.startsFixed = isFixed;
         }
     }
@@ -331,7 +353,7 @@ public class ItemSpawner : MonoBehaviour
                 Vector3 tilePos = tempTile.transform.position;
                 Vector3 spawnPos = new Vector3(tilePos.x, tilePos.y + 0.5f, tilePos.z);
 
-                Instantiate(objToSpawn, spawnPos, Quaternion.identity, mapManager.mapSequence[inMazeIndex].mapObject.transform);
+                Instantiate(objToSpawn, spawnPos, Quaternion.identity, transform);
 
                 mapManager.deadEndList[inMazeIndex].RemoveAt(0);
                 tempTile.occupied = true;
@@ -351,8 +373,7 @@ public class ItemSpawner : MonoBehaviour
                 Tile tempTile = mapManager.deadEndList[inMazeIndex][0];
                 int dir = SuitableWallReturner(tempTile, true);
 
-                GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, 
-                    mapManager.mapSequence[inMazeIndex].mapObject.transform);
+                GameObject tempObj = Instantiate(objToSpawn, tempTile.transform.position, transform.rotation, transform);
 
                 tempObj.transform.Translate(GetEdgePositionWall(tempTile, dir, modifier));
                 tempObj.transform.Rotate(GetEulerRotation(dir));
@@ -379,7 +400,7 @@ public class ItemSpawner : MonoBehaviour
 
     public void SpawnWallObjectOnSpecificTileAndWall(GameObject objToSpawn, Tile tile, int wall)
     {
-        GameObject tempObj = Instantiate(objToSpawn, tile.transform.position, transform.rotation, mapManager.mapSequence[tile.partOfMaze].mapObject.transform);
+        GameObject tempObj = Instantiate(objToSpawn, tile.transform.position, transform.rotation, transform);
 
         tempObj.transform.Translate(GetEdgePositionWall(tile, wall, 0.2f));
         tempObj.transform.Rotate(GetEulerRotation(wall));
@@ -585,7 +606,7 @@ public class ItemSpawner : MonoBehaviour
 
     public int RandomNumber(int to, int mazeId)
     {
-        return ((Random.Range(1, 53) * mazeId) % to);
+        return ((Random.Range(1, 57) * mazeId) % to);
     }
     #endregion
 
