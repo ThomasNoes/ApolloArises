@@ -56,11 +56,12 @@ public class CompanionPathFinding : MonoBehaviour
 
     // Update is called once per frame
     //public void Update()
-    public void FollowPlayer()
+    public void FollowPlayer(Tile playerTile)
     {
         if (!isTravelling)
         {
-            targetTile = GetTileUnderObject(player);
+            Debug.Log("checking new path for companion"+ System.DateTime.Now.Second.ToString());
+            targetTile = playerTile;
             currentTile = GetTileUnderObject(gameObject);
     
             if (currentTile != targetTile && targetTile != null)

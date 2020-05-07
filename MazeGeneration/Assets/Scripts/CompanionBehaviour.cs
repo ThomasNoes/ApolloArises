@@ -47,7 +47,7 @@ public class CompanionBehaviour : MonoBehaviour
     public DialogData walkToNewTower; // correct
 
     bool firstDoor = true, keySpawned;
-
+    Tile playerTile;
     private void Awake()
     {
         if (instance == null)
@@ -80,12 +80,12 @@ public class CompanionBehaviour : MonoBehaviour
     void LateStart()
     {
         cpf.PlaceCompanionOnTile(startTile);
-        InvokeRepeating("MyUpdate", 2.0f, 1f);
+        InvokeRepeating("MyUpdate", 2.0f, 5f);
         dr.DisplayAllBranchedDialog();
 
-        Debug.Log("0th maze pos " + maps[0].transform.position);
-        Debug.Log("0th maze rot " + maps[0].transform.forward);
-        Debug.Log("player pos " + player.transform.position);
+        //Debug.Log("0th maze pos " + maps[0].transform.position);
+        //Debug.Log("0th maze rot " + maps[0].transform.forward);
+        //Debug.Log("player pos " + player.transform.position);
 
         ControlPanelSetup();
     }
@@ -98,14 +98,15 @@ public class CompanionBehaviour : MonoBehaviour
         isFollowPlayer = UpdateIsFollowPlayer();
         if (isFollowPlayer)
         {
-            cpf.FollowPlayer();
+            cpf.FollowPlayer(playerTile);
         }
     }
 
 
     public bool UpdateIsFollowPlayer()
     {
-        Tile playerTile = cpf.GetTileUnderObject(player);
+        Debug.Log("updating follow player " + System.DateTime.Now.Second.ToString());
+        playerTile = cpf.GetTileUnderObject(player);
         if (ReferenceEquals(playerTile, null))
         {
             return false;
