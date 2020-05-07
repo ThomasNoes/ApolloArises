@@ -12,7 +12,7 @@ public class PuzzleDialogManager : MonoBehaviour
     public PuzzleWheel pw;
     public DialogReader dr;
 
-
+    bool hasCollid = false;
 
     Collider col;
 
@@ -43,8 +43,11 @@ public class PuzzleDialogManager : MonoBehaviour
     {
         if (other.transform.root.name == "Player" || other.transform.root.name == "DebugPlayer")
         {
-            Debug.Log("player collided with functioning robot.");
-            dr.InjectDialog(functionDialog);
+            if (!hasCollid)
+            {
+                dr.InjectDialog(functionDialog);
+            }
+            hasCollid = true;
         }
     }
 
