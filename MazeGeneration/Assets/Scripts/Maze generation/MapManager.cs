@@ -686,12 +686,13 @@ public class MapManager : MonoBehaviour
 
     public void PlaceInCircle(int index, int length)
     {
-        float openness = 2;
+        float openness = 2.1f;
         float distance = Mathf.Sqrt(3 * 3 + 4 * 4) * openness; // i treat the segment as a triablge and find the hypothenuse
 
         float angle = 360 / length;
 
-        float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
+        //float radius = (distance / 2) / (Mathf.Sin(angle / 2 * Mathf.Deg2Rad));
+        float radius = (distance / 2) / (Mathf.Sin(360/15 / 2 * Mathf.Deg2Rad));
 
 
         offset.x = transform.position.x - radius * Mathf.Sin(angle * 0 * Mathf.Deg2Rad);
@@ -703,7 +704,7 @@ public class MapManager : MonoBehaviour
         Vector3 pos;
         pos.x = offset.x + radius * Mathf.Sin(angle * index * Mathf.Deg2Rad);
         pos.z = offset.z + radius * Mathf.Cos(angle * index * Mathf.Deg2Rad);
-        pos.y = index*1.7f;
+        pos.y = (index*2f);
 
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], pos, Quaternion.identity);
     }
