@@ -40,9 +40,9 @@ public class AStarPathFinding
 
         SetDistanceForRemainingTiles(aStarTiles);
 
-        //DrawAStarPath();
-        //DrawGizmo(start, Color.green);
-        //DrawGizmo(goal, Color.red);
+        DrawAStarPath();
+        DrawGizmo(start, Color.green);
+        DrawGizmo(goal, Color.red);
 
 
         return aStarTiles;

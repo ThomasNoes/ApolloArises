@@ -236,7 +236,7 @@ public class CompanionBehaviour : MonoBehaviour
     private void ControlPanelSetup()
     {
         controlPanel.transform.rotation = mm.transform.rotation;
-        controlPanel.transform.position = new Vector3(endtile.transform.position.x, 26.26f, endtile.transform.position.z);
+        controlPanel.transform.position = new Vector3(endtile.transform.position.x, 20.489f, endtile.transform.position.z);
     }
 
     public void SpawnKeyForFirstDoor()

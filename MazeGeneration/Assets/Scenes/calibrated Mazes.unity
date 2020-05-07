@@ -3373,81 +3373,11 @@ MonoBehaviour:
   startRow: 0
   startCol: 0
   playAreaSize: {x: 3, y: 0, z: 3}
-  isMapSeeded: 0
-  randomGeneratorSeed: 0
+  isMapSeeded: 1
+  randomGeneratorSeed: 81
   portalGenerationLocation: 1
   portalInfo: []
   mapSequence:
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
-  - mapType: 0
-    roomName: 
-    isEndSeeded: 0
-    startSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    endSeed:
-      row: 0
-      column: 0
-      direction: 0
-      spelledDirection: 
-    mapObject: {fileID: 0}
   - mapType: 0
     roomName: 
     isEndSeeded: 0
@@ -4474,7 +4404,7 @@ PrefabInstance:
     - target: {fileID: 1776048526178739775, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
@@ -4667,7 +4597,7 @@ PrefabInstance:
     - target: {fileID: 5369379566299229987, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5369379566299525889, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
@@ -5506,7 +5436,7 @@ PrefabInstance:
     - target: {fileID: 7748457934529168359, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
       propertyPath: enableBeacons
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9105415572236804803, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
