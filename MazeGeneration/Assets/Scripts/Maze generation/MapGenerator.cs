@@ -369,11 +369,11 @@ public abstract class MapGenerator : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < leadIns.Count; i++)
+        for (int i = 0; i < leadIns.Count; i++) // //outer walls for lead-in tiles
         {
             if (leadIns[i].isOuterTile)
             {
-                SetOuterwalls(leadIns[i], 1, maxIndex); //only allow them to be windows
+                SetOuterwalls(leadIns[i], 0, maxIndex); //only allow them to be windows
             }
         }
 

@@ -5436,7 +5436,7 @@ PrefabInstance:
     - target: {fileID: 7748457934529168359, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
       propertyPath: enableBeacons
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9105415572236804803, guid: c7892fa38fcffbb49807b3c2ac709216,
         type: 3}
