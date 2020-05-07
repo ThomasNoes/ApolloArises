@@ -11,7 +11,7 @@ public class InteractableObject : MonoBehaviour
     public PortalRenderController renderController;
     private Vector3 offsetVector;
     private GameObject thisObjCopy, mainObj, rightHandObj, leftHandObj;
-    private bool copyExist, activated, inHand;
+    private bool copyExist, activated, inHand, justTeleported;
     [HideInInspector] public bool isParentObject = true;
     private Collider currentCollider;
     private SVGrabbable svGrabbable;
@@ -38,27 +38,23 @@ public class InteractableObject : MonoBehaviour
     private void LateUpdate()
     {
         if (svGrabbable != null)
-            if (!svGrabbable.inHand)
-            {//TODO Fix this - YYY
-                //if (isParentObject && renderController != null)
-                //{
-                //    if (renderController.currentMaze != inCurrentMaze)
-                //    {
-                //        if (thisObjCopy != null)
-                //        {
-                //            activated = false;
-                //            offsetVector *= -1;
-                //            transform.Translate(offsetVector, Space.World);
-                //            thisObjCopy.transform.position = transform.position;
-                //            offsetVector *= -1;
-                //            activated = true;
-                //        }
-                //    }
-                //}
+            if (svGrabbable.inHand && thisObjCopy != null)
+            {
+                if (isParentObject && renderController != null)
+                {
+                    if (renderController.currentMaze != inCurrentMaze)
+                    {
+                        Debug.Log("Player teleported with object in hand");
+                        if (thisObjCopy != null)
+                        {
+                            Destroy(thisObjCopy);
+                            copyExist = false;
+                        }
+                    }
+                }
 
                 // TODO check if main object in same maze as player, else teleport it there
             }
-
 
         if (activated && copyExist)
         {
@@ -97,12 +93,6 @@ public class InteractableObject : MonoBehaviour
         }
 
         copyExist = true;
-    }
-
-    public void CopyDespawnSelf()
-    {
-        if (!activated)
-            Destroy(this);
     }
 
     private void OnTriggerEnter(Collider col)
@@ -179,6 +169,7 @@ public class InteractableObject : MonoBehaviour
                     Vector3.Distance(currentRenderPlanePosNoY, currentPosNoY))
                 {
                     Destroy(thisObjCopy);
+                    copyExist = false;
                 }
             }
         }
@@ -202,6 +193,9 @@ public class InteractableObject : MonoBehaviour
     {
         if (!isParentObject && mainObj != null)
             mainObj.GetComponent<InteractableObject>().copyExist = false;
+
+        if (isParentObject && thisObjCopy != null)
+            Destroy(thisObjCopy);
     }
 }
 

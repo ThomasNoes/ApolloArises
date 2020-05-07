@@ -74,7 +74,7 @@ public class SVLever : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if (!isActive)
+        if (!isActive || grabbable == null)
             return;
 
         leverWasSwitched = false;
@@ -87,8 +87,11 @@ public class SVLever : MonoBehaviour {
             leverIsOn = !leverIsOn;
             leverWasSwitched = true;
 
-            if (beaconLever)
+            if (beaconLever && grabbable.inHand)
+            {
                 ActivateBeacon();
+                grabbable.ClearActiveController();
+            }
 
             if (oneTimeUse)
                 isActive = false;

@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2daadec7d02b024b868b500c71a0eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gripButton: 5
+  gripButton: 6
   releaseGripButton: -1
   gripAutoHolds: 0
   activeController: 0
