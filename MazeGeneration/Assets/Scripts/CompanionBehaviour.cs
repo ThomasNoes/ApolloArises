@@ -80,7 +80,7 @@ public class CompanionBehaviour : MonoBehaviour
     void LateStart()
     {
         cpf.PlaceCompanionOnTile(startTile);
-        InvokeRepeating("MyUpdate", 2.0f, 1f);
+        InvokeRepeating("MyUpdate", 2.0f, 5f);
         dr.DisplayAllBranchedDialog();
 
         //Debug.Log("0th maze pos " + maps[0].transform.position);
