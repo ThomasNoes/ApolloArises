@@ -314,7 +314,6 @@ public class ItemSpawner : MonoBehaviour
         tempPuzzleRobot.transform.Rotate(GetEulerRotation(dir));
 
         tempTiles[tileIndex].occupied = true;
-        tempTiles[tileIndex].blocked = true;
 
         if (puzzleRobot == null)
             Debug.LogError("Error: item spawner could not find puzzle robot script.");

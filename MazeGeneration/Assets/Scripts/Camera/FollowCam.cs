@@ -8,6 +8,7 @@ public class FollowCam : MonoBehaviour
     Vector3 offset;
     public bool isStereoscopic;
     public bool isRightEye;
+    private Camera mainCam;
 
     Vector3 nextOffset;
     Vector3 prevOffset;
@@ -21,6 +22,11 @@ public class FollowCam : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        mainCam = Camera.main;
+    }
+
     void LateUpdate()
     {
         SetCamera();
@@ -31,23 +37,23 @@ public class FollowCam : MonoBehaviour
         Vector3 mainCameraPosition;
         if (!isStereoscopic)
         {
-            transform.position = new Vector3(Camera.main.transform.position.x + offset.x, Camera.main.transform.position.y + offset.y, Camera.main.transform.position.z + +offset.z);
+            transform.position = new Vector3(mainCam.transform.position.x + offset.x, mainCam.transform.position.y + offset.y, mainCam.transform.position.z + +offset.z);
         }
         else
         {
             if (isRightEye)
             {
-                Matrix4x4 viewMatrix = Camera.main.GetStereoViewMatrix(Camera.StereoscopicEye.Right);
+                Matrix4x4 viewMatrix = mainCam.GetStereoViewMatrix(Camera.StereoscopicEye.Right);
                 mainCameraPosition = viewMatrix.inverse.GetColumn(3);
             }
             else
             {
-                Matrix4x4 viewMatrix = Camera.main.GetStereoViewMatrix(Camera.StereoscopicEye.Left);
+                Matrix4x4 viewMatrix = mainCam.GetStereoViewMatrix(Camera.StereoscopicEye.Left);
                 mainCameraPosition = viewMatrix.inverse.GetColumn(3);
             }
             transform.position = new Vector3(mainCameraPosition.x + offset.x, mainCameraPosition.y + offset.y, mainCameraPosition.z + offset.z);
         }
-        transform.rotation = Camera.main.transform.rotation;
+        transform.rotation = mainCam.transform.rotation;
     }
 
     public void SwitchOffset()
