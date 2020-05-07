@@ -83,7 +83,7 @@ public class PuzzleWheel : MonoBehaviour
             }
 
             if (!cooldown)
-                if (transform.rotation.eulerAngles.y >= 358f)
+                if (transform.rotation.eulerAngles.y >= 145f && transform.rotation.eulerAngles.y <= 147f)
                 {
                     spins++;
                     cooldown = true;

@@ -12,7 +12,7 @@ public class PuzzleRobot : MonoBehaviour
     public int uniqueId = 0, inMaze;
     public AudioSource audioSourceDoor;
     [HideInInspector] public ItemSpawner itemSpawner;
-    [HideInInspector] public bool inFirstRoom, withKey, startedOnce;
+    [HideInInspector] public bool withKey, startedOnce;
 
     private GameObject mainCamObj, visualGenObj;
     private WaitForSeconds blinkDur, blinkFreq;
@@ -38,11 +38,7 @@ public class PuzzleRobot : MonoBehaviour
             endPos = new Vector3(puzzleDoor.transform.position.x, puzzleDoor.transform.position.y - (puzzleDoor.transform.localScale.y), puzzleDoor.transform.position.z);
         }
 
-        if (inFirstRoom)
-        {
-            SpawnKey();
-        }
-        else if (startsFixed && !withKey)
+        if (startsFixed && !withKey)
         {
             animatePuzzleDoor = true;
             keySpawned = true;
