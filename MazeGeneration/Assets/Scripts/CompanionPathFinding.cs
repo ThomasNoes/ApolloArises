@@ -95,6 +95,7 @@ public class CompanionPathFinding : MonoBehaviour
     {
         if (pathPoints.Count ==0)
         {
+            isTravelling = false;
             yield break;
         }
         else
@@ -233,14 +234,17 @@ public class CompanionPathFinding : MonoBehaviour
         List<Tile> safeRoute = new List<Tile>();
         for (int i = 0; i < route.Count; i++)
         {
+            Debug.Log("CutRouteAtBlockade: checking " + route[i].name);
             if (route[i].blocked ) //stop the forloop and return the route so far
             {
+                Debug.Log("the path is blocked");
                 break;
             }
             if (bm.beacons.Count != 0)
             {
                 if (!bm.beacons[route[i].partOfMaze].isActive)
                 {
+                    Debug.Log("the tower is turn off");
                     break;
                 } 
             }
