@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 4
   m_EditorClassIdentifier: 
-  text: I am Apollo from the Sun Control Department and I have to complete my Duty!
+  text: I am Apollo from the Sun Control Department and I have to complete my duty!
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 31b
   m_EditorClassIdentifier: 
-  text: Lets move on!
+  text: Let's move on!
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

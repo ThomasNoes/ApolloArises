@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   text: "Ah, I can finally maneuver in space again, or \u201Cwalk\u201D as you humans
-    call it."
+    call it"
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 32
   m_EditorClassIdentifier: 
-  text: "I will deliver the data to the students but before that, will you give me
-    consent to do so? your data is anonymous!\r"
+  text: "I will deliver the data to the students, but before that, will you give
+    me consent to do so? your data is anonymous!\r"
   textSpeed: 40
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: ed188a706da40a24e955cff18f9b9f64, type: 2}

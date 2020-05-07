@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 5
   m_EditorClassIdentifier: 
-  text: As you may see, the skydoom is out of sync and I need to recalibrate it.
+  text: As you may see, the skydome is out of sync and I need to recalibrate it.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

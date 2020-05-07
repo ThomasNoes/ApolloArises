@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 2
   m_EditorClassIdentifier: 
-  text: "Oh great, A human! can you help me? I am in a bit of a pickle\u2026"
+  text: "Oh great, a human! can you help me? I am in a bit of a pickle\u2026"
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

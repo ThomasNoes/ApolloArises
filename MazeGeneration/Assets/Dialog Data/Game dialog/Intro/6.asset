@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 6
   m_EditorClassIdentifier: 
-  text: I hope you are willing to answer some simple demographic questions for me!y.
+  text: I hope you are willing to answer some simple demographic questions for me.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
