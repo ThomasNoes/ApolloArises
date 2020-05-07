@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 4173808679317978845}
   - component: {fileID: 1975394642676444916}
   - component: {fileID: 4899941387162132144}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Red Button
   m_TagString: Button
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 1.202, z: -0.087}
+  m_ConnectedAnchor: {x: 0, y: 0.76, z: 0.05200026}
   serializedVersion: 2
   m_Spring: 100
   m_Damper: 10
@@ -274,6 +274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02f08571a55034458f8b73dcf15598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProceed: 0
+  doNotDisableOnPress: 0
+  conditionButton: 0
+  am: {fileID: 0}
+  dr: {fileID: 0}
   pressLength: 0.2
   pressed: 0
   downEvent:
