@@ -398,6 +398,7 @@ GameObject:
   - component: {fileID: 6089772656851655982}
   - component: {fileID: 7978265699571367016}
   - component: {fileID: 6568411815717630576}
+  - component: {fileID: 2045283159355164695}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -451,3 +452,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inMaze: 0
+--- !u!114 &2045283159355164695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122563961128578877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ce9b7f576bb544d8024ee773270315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stayInPlace: 1
+  noRotationX: 0
+  noRotationY: 0
+  noRotationZ: 0

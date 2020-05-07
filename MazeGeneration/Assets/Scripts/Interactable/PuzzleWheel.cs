@@ -6,7 +6,7 @@ using UnityEngine;
 public class PuzzleWheel : MonoBehaviour
 {
     public int spins = 0, amountToActivate = 3;
-    public float cooldownTime = 0.3f;
+    public float cooldownTime = 0.5f;
     public PuzzleRobot puzzleRobotRef;
     public PuzzleDialogManager pdm;
     public bool notFixed;
@@ -82,7 +82,7 @@ public class PuzzleWheel : MonoBehaviour
                 goingForward = false;
             }
 
-            if (goingForward && !cooldown)
+            if (!cooldown)
                 if (transform.rotation.eulerAngles.y >= 358f)
                 {
                     spins++;
@@ -109,6 +109,9 @@ public class PuzzleWheel : MonoBehaviour
             {
                 StopSound();
             }
+
+            //if (audioSourceWheel != null)
+            //    audioSourceWheel.pitch = angularVelocity.magnitude * 0.1f;
         }
 
         prevYAngle = currentYAngle;
