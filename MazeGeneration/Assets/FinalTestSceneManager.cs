@@ -27,6 +27,7 @@ public class FinalTestSceneManager : MonoBehaviour
         else
         {
             instance = this;
+            Debug.Log("final test scene manager is set");
             DontDestroyOnLoad(gameObject);
             ResetData();
         }
