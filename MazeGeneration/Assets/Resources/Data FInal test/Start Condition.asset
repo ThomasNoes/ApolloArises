@@ -9,18 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
-  m_Name: 33
+  m_Script: {fileID: 11500000, guid: 1438c9a985f40ad4498ce040d12b8113, type: 3}
+  m_Name: Start Condition
   m_EditorClassIdentifier: 
-  text: 'Complete! and Once again
-
-    THANK YOU!
-
-
-    You can safely close the
-    application now.
-
-'
-  textSpeed: 40
-  dialogEffect: 1
-  ButtonEvent: {fileID: 0}
+  value: 
