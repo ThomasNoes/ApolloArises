@@ -80,7 +80,7 @@ public class CompanionBehaviour : MonoBehaviour
     void LateStart()
     {
         cpf.PlaceCompanionOnTile(startTile);
-        InvokeRepeating("MyUpdate", 2.0f, 5f);
+        InvokeRepeating("MyUpdate", 2.0f, 2f);
         dr.DisplayAllBranchedDialog();
 
         //Debug.Log("0th maze pos " + maps[0].transform.position);
@@ -105,7 +105,7 @@ public class CompanionBehaviour : MonoBehaviour
 
     public bool UpdateIsFollowPlayer()
     {
-        Debug.Log("updating follow player " + System.DateTime.Now.Second.ToString());
+        // Debug.Log("updating follow player " + System.DateTime.Now.Second.ToString());
         playerTile = cpf.GetTileUnderObject(player);
         if (ReferenceEquals(playerTile, null))
         {
@@ -131,7 +131,7 @@ public class CompanionBehaviour : MonoBehaviour
         {
             if (!t.isOuterTile && !t.isPortalTile && t.isRoomTile)
             {
-                Debug.Log("ideal spot");
+                //Debug.Log("ideal spot");
                 return t;
             }
         }
@@ -139,7 +139,7 @@ public class CompanionBehaviour : MonoBehaviour
         {
             if (!t.isPortalTile && t.isRoomTile)
             {
-                Debug.Log("it is in a room");
+                //Debug.Log("it is in a room");
                 return t;
             }
         }
@@ -147,7 +147,7 @@ public class CompanionBehaviour : MonoBehaviour
         {
             if (!t.isOuterTile)
             {
-                Debug.Log("just not a outer tile");
+                //Debug.Log("just not a outer tile");
                 return t;
             }
         }
