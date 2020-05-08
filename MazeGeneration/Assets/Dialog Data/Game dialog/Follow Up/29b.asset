@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
-  m_Name: 31c
+  m_Name: 29b
   m_EditorClassIdentifier: 
-  text: Now that you have tried walking through the mazes with and without a game,
-    which one did you find more comfortable?
+  text: Did you have any problems with any of the following interactions?
   textSpeed: 40
   dialogEffect: 4
-  ButtonEvent: {fileID: 11400000, guid: 5173cf6d47b77174e89d430c05265353, type: 2}
+  ButtonEvent: {fileID: 11400000, guid: fe73a890044383943be84b61759b9e7e, type: 2}

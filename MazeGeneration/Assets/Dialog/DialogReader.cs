@@ -15,7 +15,8 @@ public class DialogReader : MonoBehaviour
     public TestSceneManager tsm;
     private TMPAnimated tmpa;
 
-    bool IsIncoroutine = false;
+    bool branchInCoroutine = false;
+    //bool mainInCoroutine = false;
 
     DialogData latestDialog;
     public int branchedIndex = 0;
@@ -58,7 +59,7 @@ public class DialogReader : MonoBehaviour
 
     public void DisplayAllBranchedDialog()
     {
-        IsIncoroutine = true;
+        branchInCoroutine = true;
         StartCoroutine("GoThroughBranchedDialog");
     }
 
@@ -66,15 +67,14 @@ public class DialogReader : MonoBehaviour
     {
         while (branchedIndex < branchedDialogs.Length)
         {
-            DisplayBranchedDialog();
-            
-            yield return new WaitForSeconds(CalculateWaitTime(latestDialog));
+                DisplayBranchedDialog();
+                yield return new WaitForSeconds(CalculateWaitTime(latestDialog));
         }
-        IsIncoroutine = false;
+        branchInCoroutine = false;
     }
     public void DisplayAllMainDialog()
     {
-        IsIncoroutine = true;
+        //mainInCoroutine = true;
         StartCoroutine("GoThroughMainDialog");
     }
 
@@ -82,10 +82,18 @@ public class DialogReader : MonoBehaviour
     {
         while (index <= dialogs.Length)
         {
-            DisplayDialog();
-            yield return new WaitForSeconds(CalculateWaitTime(latestDialog));
+            if (!branchInCoroutine)
+            {
+                DisplayDialog();
+                yield return new WaitForSeconds(CalculateWaitTime(latestDialog));
+            }
+            else
+            {
+                yield return new WaitForSeconds(1);
+            }
+
         }
-        IsIncoroutine = false;
+        //mainInCoroutine = false;
     }
 
 
@@ -113,7 +121,6 @@ public class DialogReader : MonoBehaviour
         if (!tmpa.isRunning)
         {
             tmpa.ReadText(latestDialog, TMP_Object);
-
         }
     }
 
@@ -124,7 +131,6 @@ public class DialogReader : MonoBehaviour
             tmpa.ReadText(dialogs[index], TMP_Object);
             latestDialog = dialogs[index];
             index++;
-
         }
         else if (index == dialogs.Length && toNextScene)
         {
@@ -139,7 +145,7 @@ public class DialogReader : MonoBehaviour
 
     }
 
-    private float CalculateWaitTime(DialogData dd, float scale = 4f)
+    private float CalculateWaitTime(DialogData dd, float scale = 5f)
     {
         //Debug.Log((float)dd.text.Length * (1 / (float)dd.textSpeed) * scale);
         return (float)dd.text.Length * (1 / (float)dd.textSpeed)*scale;

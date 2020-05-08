@@ -241,9 +241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee1f551626467b45902553440c21619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fpsCountData: {fileID: 0}
-  fpsSumData: {fileID: 0}
-  minimumFrameFloat: {fileID: 0}
+  fpsCountData: {fileID: 11400000, guid: 1d2c60cf25d407640a1e706dea49b996, type: 2}
+  fpsSumData: {fileID: 11400000, guid: 65a3e48a5a5c9ef4f88c1fa2b9c8401f, type: 2}
+  minimumFrameFloat: {fileID: 11400000, guid: b2ce4653949425f438417c3dc4ad79df, type: 2}
+  startCondition: {fileID: 11400000, guid: 6ceb2a7ffecb0eb4794d6cc5b1ace424, type: 2}
 --- !u!4 &102933815
 Transform:
   m_ObjectHideFlags: 0
@@ -5710,6 +5711,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logFrameRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logAverageFrameRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 884465142, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29, type: 3}
+      propertyPath: logMinimumFrameRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2627100202734912136, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}
       propertyPath: m_Name
@@ -5718,7 +5731,7 @@ PrefabInstance:
     - target: {fileID: 2627100202734912136, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2627100202734912138, guid: 35c6d1d46e6fc1f4d96cd1a397fe0a29,
         type: 3}

@@ -24,9 +24,9 @@ public class DataLogger2 : MonoBehaviour
 
     // Scriptable Objects:
     public FloatValue fpsData, fpsSumData, fpsCountData, minimumFrameFloat;
-    public StringValue averageFrameData, minimumFrameData, preSicknessData, noGameSicknessData, gameSicknessData, VRData, genderData, understandingData, preferenceData;
+    public StringValue averageFrameData, minimumFrameData, startConditionData, preSicknessData, noGameSicknessData, gameSicknessData, VRData, genderData, understandingData, preferenceData, visualArtifactData;
     public StringValue comfortOverallData, comfortEnvironmentData, comfortCorridorData, comfortSoundData, comfortVisualData, comfortFramerateData, comfortTechnicalData;
-    public StringValue comfortOverallGameData, comfortEnvironmentGameData, comfortCorridorGameData, comfortSoundGameData, comfortVisualGameData, comfortFramerateGameData, comfortTechnicalGameData, comfortRobotGameData, comfortInteractionGameData;
+    public StringValue comfortOverallGameData, comfortEnvironmentGameData, comfortCorridorGameData, comfortSoundGameData, comfortVisualGameData, comfortFramerateGameData, comfortTechnicalGameData, comfortRobotGameData, problemInteractionGameData, worstInteractionGameData, comfortInteractionGameData;
     public FloatArrayValue wallHitsData;
 
     // Bools:
@@ -89,11 +89,9 @@ public class DataLogger2 : MonoBehaviour
         if (!onlineLogging)
             dataList.Add(sessionNumber.ToString());
 
-        if (logFrameRate)
-            dataList.Add(logAverageFrameRate ? averageFrameData.value : frameRate.ToString(spec, ci));
+            dataList.Add(averageFrameData.value);
 
-        if (logFrameRate) //added minimum -> test
-            dataList.Add(logMinimumFrameRate ? minimumFrameData.value: frameRate.ToString(spec, ci));
+            dataList.Add(minimumFrameData.value);
 
 
 
@@ -104,7 +102,7 @@ public class DataLogger2 : MonoBehaviour
                 dataList.Add(hits.ToString());
             }
         }
-
+        AddToDataList(startConditionData);
         if (logPlayAreaSize)
         {
             if (!Application.isEditor)
@@ -165,6 +163,7 @@ public class DataLogger2 : MonoBehaviour
                     else
                         dataList.Add(preferenceData.value);
                 }
+                AddToDataList(visualArtifactData);
             }
         }
         if (logComfort)
@@ -184,6 +183,8 @@ public class DataLogger2 : MonoBehaviour
             AddToDataList(comfortTechnicalData);
             AddToDataList(comfortTechnicalGameData);
             AddToDataList(comfortRobotGameData);
+            AddToDataList(problemInteractionGameData);
+            AddToDataList(worstInteractionGameData);
             AddToDataList(comfortInteractionGameData);
         }
     }
@@ -343,13 +344,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortOverallData.value = answer;
@@ -366,13 +370,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortOverallGameData.value = answer;
@@ -389,13 +396,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortEnvironmentData.value = answer;
@@ -412,13 +422,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortEnvironmentGameData.value = answer;
@@ -435,13 +448,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortCorridorData.value = answer;
@@ -458,13 +474,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortCorridorGameData.value = answer;
@@ -481,13 +500,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortSoundData.value = answer;
@@ -504,13 +526,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortSoundGameData.value = answer;
@@ -527,13 +552,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortVisualData.value = answer;
@@ -550,13 +578,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortVisualGameData.value = answer;
@@ -573,13 +604,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortFramerateData.value = answer;
@@ -596,13 +630,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortFramerateGameData.value = answer;
@@ -619,13 +656,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortTechnicalData.value = answer;
@@ -642,13 +682,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortTechnicalGameData.value = answer;
@@ -665,13 +708,16 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortRobotGameData.value = answer;
@@ -688,16 +734,95 @@ public class DataLogger2 : MonoBehaviour
                 answer = "Comfortable";
                 break;
             case 1:
-                answer = "Slightly uncomfortable";
+                answer = "Slightly comfortable";
                 break;
             case 2:
-                answer = "Moderately uncomfortable";
+                answer = "Indifferent";
+                break;
+            case 3:
+                answer = "Slighty uncomfortable";
                 break;
             default:
-                answer = "Severely uncomfortable";
+                answer = "Uncomfortable";
                 break;
         }
         comfortInteractionGameData.value = answer;
+    }
+    public void ProblemInteractionGameResponse(int level)
+    {
+        if (problemInteractionGameData == null)
+            return;
+        string answer;
+        switch (level)
+        {
+            case 0:
+                answer = "None";
+                break;
+            case 1:
+                answer = "Pull lever";
+                break;
+            case 2:
+                answer = "Grab key or wheel";
+                break;
+            case 3:
+                answer = "Rotate wheel";
+                break;
+            default:
+                answer = "Press Button";
+                break;
+        }
+        problemInteractionGameData.value = answer;
+    }
+    public void WorstInteractionGameResponse(int level)
+    {
+        if (worstInteractionGameData == null)
+            return;
+        string answer;
+        switch (level)
+        {
+            case 0:
+                answer = "None";
+                break;
+            case 1:
+                answer = "Pull lever";
+                break;
+            case 2:
+                answer = "Grab key or wheel";
+                break;
+            case 3:
+                answer = "Rotate wheel";
+                break;
+            default:
+                answer = "Press Button";
+                break;
+        }
+        worstInteractionGameData.value = answer;
+    }
+    public void VisualArtifactResponse(int level)
+    {
+        if (visualArtifactData == null)
+            return;
+        string answer;
+        switch (level)
+        {
+            //did you notice any visual artifacts?
+            case 0:
+                answer = "None";
+                break;
+            case 1:
+                answer = "On walls";
+                break;
+            case 2:
+                answer = "On the Floor";
+                break;
+            case 3:
+                answer = "On interactable objects";
+                break;
+            default:
+                answer = "On hands";
+                break;
+        }
+        visualArtifactData.value = answer;
     }
 
     private void Update()
