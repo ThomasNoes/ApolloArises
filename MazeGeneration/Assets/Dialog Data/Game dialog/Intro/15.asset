@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 15
   m_EditorClassIdentifier: 
-  text: But in one of the environments, the goal of getting the tallest tower is
-    the context of the game where you escort a robot.
+  text: But in one of the environments, the goal of reaching the end of the maze
+    is the context of the game where you escort a robot.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

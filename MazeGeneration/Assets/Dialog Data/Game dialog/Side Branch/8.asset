@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 8
   m_EditorClassIdentifier: 
-  text: "Therefore I will follow protocol and ask you to \u201Chumbly\u201D pull
-    the lever on the wall.\n"
+  text: 'Therefore I will ask if you will be so kind to pull the lever on the wall
+    next to you.
+
+'
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

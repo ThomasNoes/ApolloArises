@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 16
   m_EditorClassIdentifier: 
-  text: After each time you have reached the top, you will answer some questions
+  text: After each time you have reached the end, you will answer some questions
     about your experience. Then you are done!
   textSpeed: 40
   dialogEffect: 0
