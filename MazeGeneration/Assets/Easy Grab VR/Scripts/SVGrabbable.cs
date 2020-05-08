@@ -62,7 +62,7 @@ public class SVGrabbable : MonoBehaviour {
 
     [Tooltip("If you can knock the object around with your controller.")]
     public bool isKnockable = true;
-    private bool lastKnockableValue = true;
+    private bool lastKnockableValue = true, useGravity;
 
     [HideInInspector]
     public bool inHand = false;
@@ -112,6 +112,7 @@ public class SVGrabbable : MonoBehaviour {
 
         this.input = this.gameObject.GetComponent<SVControllerInput>();
         this.rb = this.GetComponent<Rigidbody>();
+        useGravity = rb.useGravity;
         this.colliders = (Collider[])SVUtilities.AllComponentsOfType<Collider>(gameObject);
 
         if (SVGrabbable.leftHandCollider == null) {
@@ -361,7 +362,8 @@ public class SVGrabbable : MonoBehaviour {
             // If we're moving too quickly and allow physics, drop the object. This also gives us the ability to drop it if you are trying to move it through
             // a solid object.
             if (!this.ignorePhysicsInHand && !this.enablePhysicsInHand &&
-                (transform.position - targetPosition).magnitude >= objectDropDistance) {
+                (transform.position - targetPosition).magnitude >= objectDropDistance)
+            {
                 grabData.recentlyDropped = true;
                 this.ClearActiveController();
                 return;
@@ -424,6 +426,7 @@ public class SVGrabbable : MonoBehaviour {
             else if (this.enablePhysicsInHand)
             {
                 rb.isKinematic = false;
+                rb.useGravity = false;
                 foreach (Collider collider in this.colliders)
                 {
                     collider.enabled = true;
@@ -446,6 +449,9 @@ public class SVGrabbable : MonoBehaviour {
     public void ClearActiveController() {
         grabData.grabEndTime = Time.time;
         grabData.recentlyReleased = true;
+
+        if (!rb.useGravity && useGravity && enablePhysicsInHand)
+            rb.useGravity = useGravity;
 
         rb.isKinematic = grabData.wasKinematic;
         rb.useGravity = grabData.didHaveGravity;
