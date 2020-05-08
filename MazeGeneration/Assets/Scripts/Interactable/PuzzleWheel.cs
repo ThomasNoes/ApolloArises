@@ -70,7 +70,6 @@ public class PuzzleWheel : MonoBehaviour
 
         if (!currentYAngle.Equals(prevYAngle) && !puzzleRobotRef.turnedOff)
         {
-
             if (currentYAngle > prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)
             {
                 //Debug.Log("FORWARD! | " + Math.Abs(currentYAngle - prevYAngle) + " | Prev: " + prevYAngle + " | Current: " + currentYAngle);
@@ -83,7 +82,7 @@ public class PuzzleWheel : MonoBehaviour
             }
 
             if (!cooldown)
-                if (transform.rotation.eulerAngles.y >= 145f && transform.rotation.eulerAngles.y <= 147f)
+                if (transform.rotation.eulerAngles.y >= 145f && transform.rotation.eulerAngles.y <= 147.5f)
                 {
                     spins++;
                     cooldown = true;
@@ -101,7 +100,7 @@ public class PuzzleWheel : MonoBehaviour
         {
             CalculateAngularVelocity();
 
-            if (angularVelocity.magnitude >= 9.0f)
+            if (angularVelocity.magnitude >= 12.0f)
             {
                 StartSound();
             }
@@ -109,9 +108,6 @@ public class PuzzleWheel : MonoBehaviour
             {
                 StopSound();
             }
-
-            //if (audioSourceWheel != null)
-            //    audioSourceWheel.pitch = angularVelocity.magnitude * 0.1f;
         }
 
         prevYAngle = currentYAngle;

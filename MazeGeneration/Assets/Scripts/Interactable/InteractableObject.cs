@@ -11,7 +11,7 @@ public class InteractableObject : MonoBehaviour
     public PortalRenderController renderController;
     private Vector3 offsetVector;
     private GameObject thisObjCopy, mainObj, rightHandObj, leftHandObj;
-    private bool copyExist, activated, inHand, justTeleported;
+    private bool copyExist, activated, inHand, justTeleported, inPortal;
     [HideInInspector] public bool isParentObject = true;
     private Collider currentCollider;
     private SVGrabbable svGrabbable;
@@ -37,23 +37,24 @@ public class InteractableObject : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (svGrabbable != null)
-            if (svGrabbable.inHand && thisObjCopy != null)
+        if (thisObjCopy != null)
+            if (isParentObject && renderController != null)
             {
-                if (isParentObject && renderController != null)
+                if (renderController.currentMaze != inCurrentMaze)
                 {
-                    if (renderController.currentMaze != inCurrentMaze)
+                    if (renderController.currentMaze == inCurrentMaze + 1 ||
+                        renderController.currentMaze == inCurrentMaze - 1)
                     {
-                        Debug.Log("Player teleported with object in hand");
-                        if (thisObjCopy != null)
+                        if (svGrabbable.inHand)
+                            offsetVector *= -1;
+                        else
                         {
-                            Destroy(thisObjCopy);
-                            copyExist = false;
+                            transform.Translate(offsetVector, Space.World);
+                            inCurrentMaze = renderController.currentMaze;
+                            offsetVector *= -1;
                         }
                     }
                 }
-
-                // TODO check if main object in same maze as player, else teleport it there
             }
 
         if (activated && copyExist)
@@ -65,6 +66,38 @@ public class InteractableObject : MonoBehaviour
             }
         }
     }
+
+    //private IEnumerator InPortal()
+    //{
+    //    inPortal = true;
+
+    //    while (thisObjCopy != null)
+    //    {
+    //        if (thisObjCopy != null)
+    //            if (isParentObject && renderController != null)
+    //            {
+    //                if (renderController.currentMaze != inCurrentMaze)
+    //                {
+    //                    if (renderController.currentMaze == inCurrentMaze + 1 ||
+    //                        renderController.currentMaze == inCurrentMaze - 1)
+    //                    {
+    //                        if (svGrabbable.inHand)
+    //                            offsetVector *= -1;
+    //                        else
+    //                        {
+    //                            transform.Translate(offsetVector, Space.World);
+    //                            inCurrentMaze = renderController.currentMaze;
+    //                            offsetVector *= -1;
+    //                        }
+    //                    }
+    //                }
+    //            }
+
+    //        yield return new WaitForEndOfFrame();
+    //    }
+
+    //    inPortal = false;
+    //}
 
     /// <param name="dir">false = prev, true = next</param>
     public void CopySpawner(bool dir, Collider col)
@@ -91,6 +124,9 @@ public class InteractableObject : MonoBehaviour
             grabbable.inHand = false;
             grabbable.isKnockable = false;
         }
+
+        //if (!inPortal)
+        //    StartCoroutine(InPortal());
 
         copyExist = true;
     }
