@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class PuzzleWheel : MonoBehaviour
 {
-    public int spins = 0, amountToActivate = 3;
+    public int spins = 0, amountToActivate = 2;
     public float cooldownTime = 0.5f;
     public PuzzleRobot puzzleRobotRef;
     public PuzzleDialogManager pdm;
     public bool notFixed;
     private bool cooldown, goingForward, activated, startedOnce;
-    private float prevYAngle;
+    private float prevYAngle, currentValue;
     private HingeJoint hingeJoint;
     private Rigidbody rb;
     private MeshRenderer mr;
@@ -57,43 +57,42 @@ public class PuzzleWheel : MonoBehaviour
     {
         hingeJoint.anchor = anchor;
         hingeJoint.axis = axis;
-        //initialPos = transform.position;
-        //stayInPlace = true;
     }
 
     private void FixedUpdate()
     {
-        if (puzzleRobotRef == null)
-            return;
-
-        float currentYAngle = transform.rotation.eulerAngles.y;
-
-        if (!currentYAngle.Equals(prevYAngle) && !puzzleRobotRef.turnedOff)
+        if (puzzleRobotRef != null && !activated)
         {
-            if (currentYAngle > prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)
-            {
-                //Debug.Log("FORWARD! | " + Math.Abs(currentYAngle - prevYAngle) + " | Prev: " + prevYAngle + " | Current: " + currentYAngle);
-                goingForward = true;
-            }
-            else if (transform.rotation.eulerAngles.y < prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)
-            {
-                //Debug.Log("BACKWARD! | " + Math.Abs(currentYAngle - prevYAngle) + " | Prev: " + prevYAngle + " | Current: " + currentYAngle);
-                goingForward = false;
-            }
+            float currentYAngle = transform.rotation.eulerAngles.y;
 
-            if (!cooldown)
-                if (transform.rotation.eulerAngles.y >= 145f && transform.rotation.eulerAngles.y <= 147.5f)
+            if (!currentYAngle.Equals(prevYAngle) && !puzzleRobotRef.turnedOff)
+            {
+                if (currentYAngle > prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)
                 {
-                    spins++;
-                    cooldown = true;
-                    Invoke("Cooldown", cooldownTime);
-
-                    if (spins >= amountToActivate && !activated)
-                    {
-                        pdm?.OnRotateWheelDone();
-                        Activate();
-                    }
+                    //Debug.Log("FORWARD! | " + Math.Abs(currentYAngle - prevYAngle) + " | Prev: " + prevYAngle + " | Current: " + currentYAngle);
+                    goingForward = true;
                 }
+                else if (transform.rotation.eulerAngles.y < prevYAngle && Math.Abs(currentYAngle - prevYAngle) < 170)
+                {
+                    //Debug.Log("BACKWARD! | " + Math.Abs(currentYAngle - prevYAngle) + " | Prev: " + prevYAngle + " | Current: " + currentYAngle);
+                    goingForward = false;
+                }
+
+                if (!cooldown)
+                    if (transform.rotation.eulerAngles.y >= 145f && transform.rotation.eulerAngles.y <= 150f)
+                    {
+                        spins++;
+                        cooldown = true;
+                        Invoke("Cooldown", cooldownTime);
+
+                        if (spins >= amountToActivate && !activated)
+                        {
+                            pdm?.OnRotateWheelDone();
+                            Activate();
+                        }
+                    }
+            }
+            prevYAngle = currentYAngle;
         }
 
         if (rb != null && handle != null)
@@ -109,8 +108,6 @@ public class PuzzleWheel : MonoBehaviour
                 StopSound();
             }
         }
-
-        prevYAngle = currentYAngle;
     }
 
     private void CalculateAngularVelocity()
@@ -164,9 +161,7 @@ public class PuzzleWheel : MonoBehaviour
             return;
 
         rb.constraints = RigidbodyConstraints.None;
-        //rb.constraints = RigidbodyConstraints.FreezePositionX;
         rb.constraints = RigidbodyConstraints.FreezePositionY;
-        //rb.constraints = RigidbodyConstraints.FreezePositionZ;
         rb.constraints = RigidbodyConstraints.FreezeRotationX;
         rb.constraints = RigidbodyConstraints.FreezeRotationZ;
 
