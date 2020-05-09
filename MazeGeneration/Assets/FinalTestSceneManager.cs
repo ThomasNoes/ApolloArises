@@ -19,6 +19,16 @@ public class FinalTestSceneManager : MonoBehaviour
 
     int index = 0;
 
+    //logging framerate
+    float framerate;
+    float sum;
+    float count;
+    float average;
+    float minimum = float.MaxValue;
+    string minimumScene;
+
+     
+     
     private void Awake()
     {
         if (instance != null)
@@ -57,6 +67,26 @@ public class FinalTestSceneManager : MonoBehaviour
         }
     }
 
+
+    private void Update()
+    {
+
+        framerate = 1 / Time.deltaTime;
+        sum += framerate;
+        count++;
+        average = sum/count;
+
+        if (Time.timeSinceLevelLoad > 10)
+        {
+            if (framerate < minimum)
+            {
+                minimum = framerate;
+                minimumScene = SceneManager.GetActiveScene().name;
+            }
+        }
+
+    }
+
     public void GoToNextScene()
     {
         index++;
@@ -70,5 +100,15 @@ public class FinalTestSceneManager : MonoBehaviour
     private void NewScene()
     {
         SceneManager.LoadScene(order[index]);
+    }
+
+
+    public string GetAverageFramerate()
+    {
+        return ((int)average).ToString();
+    }
+    public string GetMinimumFramerate()
+    {
+        return ((int)minimum).ToString() + " " + minimumScene;
     }
 }

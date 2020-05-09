@@ -89,9 +89,9 @@ public class DataLogger2 : MonoBehaviour
         if (!onlineLogging)
             dataList.Add(sessionNumber.ToString());
 
-            dataList.Add(averageFrameData.value);
+        dataList.Add(FinalTestSceneManager.instance.GetAverageFramerate());
 
-            dataList.Add(minimumFrameData.value);
+        dataList.Add(FinalTestSceneManager.instance.GetMinimumFramerate());
 
 
 
@@ -829,26 +829,6 @@ public class DataLogger2 : MonoBehaviour
     {
         if (!logData)
             return;
-
-        if (logFrameRate)
-        {
-            frameRate = (int)(1 / Time.deltaTime);
-            if (logAverageFrameRate)
-            {
-                Debug.Log("logging average frame count: " + fpsCountData.value + " sum: " + fpsSumData.value + " average: " + averageFrameData.value);
-                fpsSumData.value += (int)frameRate;
-                fpsCountData.value++;
-                averageFrameData.value = (fpsSumData.value / fpsCountData.value).ToString(spec, ci);
-            }
-            if (logMinimumFrameRate && Time.timeSinceLevelLoad >10)
-            {
-                if (frameRate < minimumFrameFloat.value)
-                {
-                    minimumFrameFloat.value = frameRate;
-                    minimumFrameData.value = frameRate.ToString(spec, ci) + " in " + SceneManager.GetActiveScene().name;
-                }
-            }
-        }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
