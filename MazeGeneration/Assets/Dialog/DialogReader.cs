@@ -89,9 +89,8 @@ public class DialogReader : MonoBehaviour
             }
             else
             {
-                yield return new WaitForSeconds(1);
+                yield return null;
             }
-
         }
         //mainInCoroutine = false;
     }

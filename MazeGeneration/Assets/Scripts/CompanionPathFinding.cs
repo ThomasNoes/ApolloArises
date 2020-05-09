@@ -25,6 +25,7 @@ public class CompanionPathFinding : MonoBehaviour
     TeleportableObject tele;
     BeaconManager bm;
 
+    public AudioSource audio;
 
 
     public float speed = 1.25f;
@@ -38,7 +39,6 @@ public class CompanionPathFinding : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
         maps = mm.mapScripts;
         tele = GetComponent<TeleportableObject>();
@@ -142,6 +142,10 @@ public class CompanionPathFinding : MonoBehaviour
                         //rotate the companion to face the direction it is about to move to
                         while (Vector3.Angle(transform.forward, newDirection) > 1.0f)
                         {
+                            if (!audio.isPlaying)
+                            {
+                                audio?.Play();
+                            }
                             transform.forward = Vector3.RotateTowards(transform.forward, newDirection, angularSpeed * Time.deltaTime, 0.0f);
                             yield return null;
                         }
@@ -150,16 +154,23 @@ public class CompanionPathFinding : MonoBehaviour
                     //new move to the next point!
                     while (transform.position != point)
                     {
+                        if (!audio.isPlaying)
+                        {
+                            audio?.Play();
+                        }
                         transform.position = Vector3.MoveTowards(transform.position, point, speed * Time.deltaTime);
                         yield return null;
                     }
+                    audio.Pause();
                     teleAllowed = true;
                 }
 
                 pastPoint = pathPoints[i];
             }
         }
+
         isTravelling = false;
+        audio.Stop();
     }
 
     public void PlaceCompanionOnTile(Tile t)
