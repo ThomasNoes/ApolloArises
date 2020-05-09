@@ -549,5 +549,5 @@ MonoBehaviour:
   noRotationY: 0
   noRotationZ: 1
   noRotationX: 1
-  isKnockable: 1
+  isKnockable: 0
   inHand: 0
