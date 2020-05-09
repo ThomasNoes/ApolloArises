@@ -306,7 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGrab: 1
   shouldFly: 1
-  grabFlyDistance: 0.35
+  grabFlyDistance: 0.2
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
@@ -462,7 +462,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 2.5
   m_Drag: 2
-  m_AngularDrag: 0.9
+  m_AngularDrag: 4
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
