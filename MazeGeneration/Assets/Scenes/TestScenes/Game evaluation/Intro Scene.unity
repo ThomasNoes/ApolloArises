@@ -2070,6 +2070,7 @@ MonoBehaviour:
   fpsCountData: {fileID: 11400000, guid: 1d2c60cf25d407640a1e706dea49b996, type: 2}
   fpsSumData: {fileID: 11400000, guid: 65a3e48a5a5c9ef4f88c1fa2b9c8401f, type: 2}
   minimumFrameFloat: {fileID: 11400000, guid: b2ce4653949425f438417c3dc4ad79df, type: 2}
+  startCondition: {fileID: 0}
 --- !u!4 &780056905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 342866825121487231, guid: 3e819571d4a925346a5c4a83065582a0,
@@ -5325,7 +5326,7 @@ PrefabInstance:
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
       propertyPath: index
-      value: 1
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1004870475194667285, guid: 0de2365736a11784c95847a24a7a6304,
         type: 3}
