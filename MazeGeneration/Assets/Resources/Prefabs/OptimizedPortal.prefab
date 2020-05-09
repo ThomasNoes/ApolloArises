@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pRController: {fileID: 0}
-  thisTeleporter: {fileID: 0}
+  thisTeleporter: {fileID: 7926531021130958168}
   isStereoscopic: 1
   checkDistance: 0
   checkCurrentMaze: 1

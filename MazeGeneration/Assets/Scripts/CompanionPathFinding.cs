@@ -60,7 +60,7 @@ public class CompanionPathFinding : MonoBehaviour
     {
         if (!isTravelling)
         {
-            Debug.Log("checking new path for companion"+ System.DateTime.Now.Second.ToString());
+            //Debug.Log("checking new path for companion"+ System.DateTime.Now.Second.ToString());
             targetTile = playerTile;
             currentTile = GetTileUnderObject(gameObject);
     
@@ -111,13 +111,13 @@ public class CompanionPathFinding : MonoBehaviour
 
                     if (pathPoints[i].partOfMaze > pastPoint.partOfMaze) //teleport Next maze forward
                     {
-                        Debug.Log("forward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
+                        //Debug.Log("forward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
                         tele.TeleportFromIndex(true, pastPoint.partOfMaze);
                         teleAllowed = false;
                     }
                     else if (pathPoints[i].partOfMaze < pastPoint.partOfMaze) //teleport prev maze backward
                     {
-                        Debug.Log("backward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
+                        //Debug.Log("backward tele: pathpoint " + pathPoints[i].name + " pastpoint " + pastPoint.name);
                         tele.TeleportFromIndex(false, pastPoint.partOfMaze);
                         teleAllowed = false;
                     }
@@ -132,7 +132,7 @@ public class CompanionPathFinding : MonoBehaviour
                     Vector3 newDirection = (point - pastPointOffsetted).normalized;
                     if (Vector3.Distance(point, pastPointOffsetted) > tileWidth + 0.1) // this happens if the companion for some reason want to manual traverse between two maze segments
                     {
-                        Debug.Log("The distance is incorrect" + Vector3.Distance(point, pastPointOffsetted));
+                        //Debug.Log("The distance is incorrect" + Vector3.Distance(point, pastPointOffsetted));
                         tele.DestroyCopy(); //destroy copy object in case there is one
                         transform.position = point; // put the companion at the point so the player do not need to wait.
                     }
@@ -181,7 +181,7 @@ public class CompanionPathFinding : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error: companion can not be moved to player position if the player is not on a tile");
+            //Debug.Log("Error: companion can not be moved to player position if the player is not on a tile");
         }
 
     }
@@ -192,7 +192,7 @@ public class CompanionPathFinding : MonoBehaviour
 
         if (target == null)
         {
-            Debug.Log("target is null");
+            //Debug.Log("target is null");
             return;
         }
 
@@ -246,17 +246,17 @@ public class CompanionPathFinding : MonoBehaviour
         List<Tile> safeRoute = new List<Tile>();
         for (int i = 0; i < route.Count; i++)
         {
-            Debug.Log("CutRouteAtBlockade: checking " + route[i].name);
+            //Debug.Log("CutRouteAtBlockade: checking " + route[i].name);
             if (route[i].blocked ) //stop the forloop and return the route so far
             {
-                Debug.Log("the path is blocked");
+                //Debug.Log("the path is blocked");
                 break;
             }
             if (bm.beacons.Count != 0)
             {
                 if (!bm.beacons[route[i].partOfMaze].isActive)
                 {
-                    Debug.Log("the tower is turn off");
+                    //Debug.Log("the tower is turn off");
                     break;
                 } 
             }
@@ -327,7 +327,7 @@ public class CompanionPathFinding : MonoBehaviour
         }
         else if(go == gameObject)
         {
-            Debug.Log("the companion is not over a tile. and it is assumed the companion has teleported incorrectly. so it is placed on the same tile as the player");
+            //Debug.Log("the companion is not over a tile. and it is assumed the companion has teleported incorrectly. so it is placed on the same tile as the player");
             Tile playerTile = GetTileUnderObject(player);
             PlaceCompanionOnTile(playerTile);
             return playerTile;
