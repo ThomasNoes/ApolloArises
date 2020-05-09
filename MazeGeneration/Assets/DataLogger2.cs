@@ -846,7 +846,6 @@ public class DataLogger2 : MonoBehaviour
                 {
                     minimumFrameFloat.value = frameRate;
                     minimumFrameData.value = frameRate.ToString(spec, ci) + " in " + SceneManager.GetActiveScene().name;
-
                 }
             }
         }

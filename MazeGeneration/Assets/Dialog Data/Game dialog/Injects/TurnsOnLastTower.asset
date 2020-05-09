@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: TurnsOnLastTower
   m_EditorClassIdentifier: 
-  text: I can finally maneuver to the last maze now. To the control panel!
+  text: I can finally maneuver to the control panel!
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 9
   m_EditorClassIdentifier: 
-  text: "Ah, I can finally maneuver in space again, or \u201Cwalk\u201D as you humans
-    call it"
+  text: Ah, I can finally maneuver in space again.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
