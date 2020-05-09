@@ -62,7 +62,13 @@ public class FinalTestSceneManager : MonoBehaviour
         index++;
         if (index < order.Length)
         {
-            SceneManager.LoadScene(order[index]);
+            Camera.main.GetComponent<OVRScreenFade>().ExitSceneFade();
+            Invoke("NewScene", 2);
         }
+    }
+
+    private void NewScene()
+    {
+        SceneManager.LoadScene(order[index]);
     }
 }

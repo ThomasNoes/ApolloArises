@@ -209,15 +209,6 @@ public class MapManager : MonoBehaviour
         OffsetMap();
     }
 
-    private void Start()
-    {
-        Debug.Log("Center: " + center);
-        Debug.Log("Forward" + forward);
-
-
-        Debug.Log("3x4 maze: " + gc.RoomScaling3x4Check(tileWidth));
-    }
-
     void GenerateMapSequenceHallway()
     {
         if (mapSequence.Length > 0)
