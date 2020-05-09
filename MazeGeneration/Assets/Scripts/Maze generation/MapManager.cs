@@ -697,7 +697,8 @@ public class MapManager : MonoBehaviour
         pos.z = offset.z + radius * Mathf.Cos(angle * index * Mathf.Deg2Rad);
         pos.y = (index*2f);
 
-        pos += -transform.right*0.25f;
+        pos += -transform.right*0.26f;
+        pos += transform.forward * 0.1f;
 
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], pos, Quaternion.identity);
     }
