@@ -7,6 +7,7 @@ public class PortalGroundCollider : MonoBehaviour
     private PortalCollider renderColScript;
     private bool isInCollider, cooldownActive;
     private Renderer portalRenderer;
+    private Camera mainCam;
 
     private void Start()
     {
@@ -15,6 +16,7 @@ public class PortalGroundCollider : MonoBehaviour
 
         renderColScript = renderPlaneCollider.GetComponent<PortalCollider>();
         portalRenderer = renderColScript.GetComponent<Renderer>();
+        mainCam = Camera.main;
 
         //InvokeRepeating("TestLoop", 4.0f, 2.0f);
     }
@@ -52,10 +54,10 @@ public class PortalGroundCollider : MonoBehaviour
 
     private bool VisibleFromCamera()
     {
-        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        Plane[] frustumPlanes = GeometryUtility.CalculateFrustumPlanes(mainCam);
         if (GeometryUtility.TestPlanesAABB(frustumPlanes, portalRenderer.bounds))
         {
-            if (Vector3.Distance(portalRenderer.gameObject.transform.position, Camera.main.transform.position) < 2.0f)
+            if (Vector3.Distance(portalRenderer.gameObject.transform.position, mainCam.transform.position) < 2.0f)
             {
                 return true;
             }
@@ -66,9 +68,9 @@ public class PortalGroundCollider : MonoBehaviour
 
     private bool IsLookingTowardsPortal()
     {
-        Vector2 camForward2D = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z);
+        Vector2 camForward2D = new Vector2(mainCam.transform.forward.x, mainCam.transform.forward.z);
         Vector2 dir2d = new Vector2(renderPlaneCollider.gameObject.transform.position.x, renderPlaneCollider.gameObject.transform.position.z) -
-                        new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.z);
+                        new Vector2(mainCam.transform.position.x, mainCam.transform.position.z);
 
         if (Vector2.Angle(camForward2D, dir2d) < activationAngle)
             return true;
@@ -82,15 +84,4 @@ public class PortalGroundCollider : MonoBehaviour
         Invoke("Cooldown", time);
     }
     private void Cooldown() { cooldownActive = false; }
-
-    private void TestLoop()
-    {
-        if (isInCollider)
-        {
-            Vector2 camForward2D = new Vector2(Camera.main.transform.forward.x, Camera.main.transform.forward.z);
-            Vector2 dir2d = new Vector2(renderPlaneCollider.gameObject.transform.position.x, renderPlaneCollider.gameObject.transform.position.z) -
-                           new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.z);
-            Debug.Log("Player 2d angle to portal: " + Vector2.Angle(camForward2D, dir2d));
-        }
-    }
 }

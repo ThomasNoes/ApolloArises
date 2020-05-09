@@ -710,8 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd425c2d06f39bf4899d07c05d0f10eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabBegin: 0.55
-  grabEnd: 0.35
+  grabBegin: 0.45
+  grabEnd: 0.25
   m_parentHeldObject: 0
   m_moveHandPosition: 0
   m_gripTransform: {fileID: 479836}

@@ -304,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canGrab: 1
   shouldFly: 1
-  grabFlyDistance: 0.23
+  grabFlyDistance: 0.18
   grabFlyTime: 0.1
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}

@@ -11,16 +11,19 @@ public class InteractableObject : MonoBehaviour
     public PortalRenderController renderController;
     private Vector3 offsetVector;
     private GameObject thisObjCopy, mainObj, rightHandObj, leftHandObj;
-    private bool copyExist, activated, inHand, justTeleported, inPortal, disableTeleport, thrownThrough;
+    private bool copyExist, activated, inHand, justTeleported, inPortal, inEntryCol, thrownThrough;
     [HideInInspector] public bool isParentObject = true;
     private Collider currentCollider;
     private SVGrabbable svGrabbable;
+    private Rigidbody rb;
     private int inCurrentMaze = 0;
 
     private void Start()
     {
         renderController = FindObjectOfType<PortalRenderController>();
         svGrabbable = GetComponent<SVGrabbable>();
+        rb = GetComponent<Rigidbody>();
+
         Invoke("DelayedStart", 0.4f);
     }
 
@@ -37,7 +40,7 @@ public class InteractableObject : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (thisObjCopy != null)
+        if (thisObjCopy != null && activated)
         {
             if (isParentObject && renderController != null)
             {
@@ -48,7 +51,7 @@ public class InteractableObject : MonoBehaviour
                     {
                         if (svGrabbable.inHand)
                             offsetVector *= -1;
-                        else
+                        else if (!thrownThrough && !inEntryCol)
                         {
                             transform.Translate(offsetVector, Space.World);
                             inCurrentMaze = renderController.currentMaze;
@@ -56,14 +59,9 @@ public class InteractableObject : MonoBehaviour
                         }
                     }
                 }
-
-                if (svGrabbable.inHand && thrownThrough)
-                {
-                    thrownThrough = false;
-                }
             }
 
-            if (activated && copyExist)
+            if (copyExist)
             {
                 thisObjCopy.transform.position = transform.position + offsetVector;
                 thisObjCopy.transform.rotation = transform.rotation;
@@ -85,7 +83,13 @@ public class InteractableObject : MonoBehaviour
         InteractableObject tempScript = thisObjCopy.GetComponent<InteractableObject>();
         tempScript.isParentObject = false;
         tempScript.mainObj = gameObject;
-        thisObjCopy.GetComponent<Collider>().enabled = false;
+
+        Collider[] colliders = thisObjCopy.GetComponents<Collider>();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = false;
+        }
+
         thisObjCopy.GetComponent<Rigidbody>().isKinematic = true;
 
         SVGrabbable grabbable = thisObjCopy.GetComponent<SVGrabbable>();
@@ -117,6 +121,7 @@ public class InteractableObject : MonoBehaviour
 
         if (col.CompareTag("EntryCol"))
         {
+            inEntryCol = true;
             NewTeleporter thisTeleporter = col.transform.parent.GetComponent<NewTeleporter>();
             currentCollider = col;
             inCurrentMaze = thisTeleporter.mazeID;
@@ -136,13 +141,13 @@ public class InteractableObject : MonoBehaviour
 
             if (svGrabbable.inHand)
             {
-                //offsetVector *= -1; // TODO should be disabled?
                 return;
             }
 
             if (thisObjCopy != null && !thrownThrough)
             {
                 activated = false;
+
                 thisObjCopy.transform.position = transform.position;
                 transform.Translate(offsetVector, Space.World);
                 offsetVector *= -1;
@@ -152,8 +157,10 @@ public class InteractableObject : MonoBehaviour
                 else
                     inCurrentMaze--;
 
-                activated = true;
                 thrownThrough = true;
+                Invoke("IsThrownCooldown", 1.2f);
+
+                activated = true;
             }
         }
     }
@@ -176,6 +183,8 @@ public class InteractableObject : MonoBehaviour
                     copyExist = false;
                 }
             }
+
+            inEntryCol = false;
         }
     }
 
@@ -191,6 +200,11 @@ public class InteractableObject : MonoBehaviour
     public void SetParentObject(GameObject parentObj)
     {
         mainObj = parentObj;
+    }
+
+    private void IsThrownCooldown()
+    {
+        thrownThrough = false;
     }
 
     private void OnDestroy()
