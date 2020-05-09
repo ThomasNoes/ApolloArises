@@ -125,6 +125,10 @@ public class OVRScreenFade : MonoBehaviour
         StartCoroutine(Fade(0,1));
     }
 
+    public void ExitSceneFade()
+    {
+        StartCoroutine(Fade(1,0));
+    }
 
 	/// <summary>
 	/// Starts a fade in when a new level is loaded

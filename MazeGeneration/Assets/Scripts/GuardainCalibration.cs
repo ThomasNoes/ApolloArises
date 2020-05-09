@@ -93,7 +93,7 @@ public class GuardainCalibration : MonoBehaviour
         {
             //colLength = 4;
             //rowLength = 3;
-            Debug.Log("debug room scale");
+            //Debug.Log("debug room scale");
             maxRows = 3;
             maxColumns = 4;
             return;

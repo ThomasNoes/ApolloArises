@@ -224,7 +224,8 @@ public class CompanionBehaviour : MonoBehaviour
         if(other.tag == "ControlPanel")
         {
             //play sound of booting control panel
-            Invoke("SkyEvent", 3);
+            Invoke("RebootEvent", 2);
+            Invoke("SkyEvent", 5);
 
         }
     }
@@ -233,7 +234,10 @@ public class CompanionBehaviour : MonoBehaviour
     {
         dnc.StartSkyboxAndTintChange(true);
     }
-
+    private void RebootEvent()
+    {
+        controlPanel.GetComponent<AudioSource>()?.Play();
+    }
     private void ControlPanelSetup()
     {
         controlPanel.transform.rotation = mm.transform.rotation;

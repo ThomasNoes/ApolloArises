@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: OpenFirstDoor
   m_EditorClassIdentifier: 
-  text: You are becoming quite resourceful to me. You have to find next key yourself
+  text: You are becoming quite resourceful to me. You have to find the next key yourself
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
