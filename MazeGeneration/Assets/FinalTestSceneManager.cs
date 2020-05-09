@@ -70,6 +70,11 @@ public class FinalTestSceneManager : MonoBehaviour
 
     private void Update()
     {
+        if (OVRManager.boundary.GetVisible())
+        {
+            OVRManager.boundary.SetVisible(false);
+        }
+
 
         framerate = 1 / Time.deltaTime;
         sum += framerate;

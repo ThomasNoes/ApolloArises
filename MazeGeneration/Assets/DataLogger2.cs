@@ -217,7 +217,7 @@ public class DataLogger2 : MonoBehaviour
         }
     }
 
-    private Vector3 GetPlayAreaSize()
+    static public  Vector3 GetPlayAreaSize()
     {
         Vector3 size = new Vector3();
         Vector3 chaperone = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
@@ -227,6 +227,17 @@ public class DataLogger2 : MonoBehaviour
             size = new Vector3(chaperone.x, 0, chaperone.z);
         }
         return size;
+    }
+    static public bool CheckPlayAreaSize()
+    {
+        Vector3 chaperone = OVRManager.boundary.GetDimensions(OVRBoundary.BoundaryType.PlayArea);
+
+        if (chaperone != null)
+        {
+            return true;
+        }
+        return false;
+
     }
 
     public void PreSicknessResponse(bool response)
