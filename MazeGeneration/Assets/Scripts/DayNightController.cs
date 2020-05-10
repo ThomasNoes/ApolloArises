@@ -5,11 +5,13 @@ public class DayNightController : MonoBehaviour
     public Material skyboxMaterial;
     public bool cycleActive = false, cycleAroundX = false, cycleSunHorizonUp = true;
     public float speed = 0.1f, sunHeightLimit = 20.0f, exposureModifier = 0.015f;
-    public Color startColor = Color.gray, endColor = Color.blue; 
+    public Color startColor = Color.gray, endColor = Color.blue;
 
     private float skyboxAngleZ, skyboxAngleX, skyboxExposure;
     private Color skyboxTintLevel;
     private bool goingUp = true, underLimit, stopAtTop, changingTint;
+
+    public GameObject proceedButton;
 
     void Start()
     {
@@ -97,6 +99,10 @@ public class DayNightController : MonoBehaviour
     public void StartSkybox(bool _stopAtTop)
     {
         cycleActive = true;
+
+        if (proceedButton != null)
+            proceedButton.SetActive(true);
+
         stopAtTop = _stopAtTop;
     }
 

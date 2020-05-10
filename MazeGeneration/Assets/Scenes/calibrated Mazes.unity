@@ -1511,6 +1511,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   height: 19.199
   inEndMaze: 1
+--- !u!114 &1318831206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318831204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4b53df4b16e3342afde68f7272e06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1347709475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,6 +2498,7 @@ MonoBehaviour:
   exposureModifier: 0.015
   startColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   endColor: {r: 0.5960751, g: 0.8551801, b: 0.8962264, a: 1}
+  proceedButton: {fileID: 1318831204}
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
