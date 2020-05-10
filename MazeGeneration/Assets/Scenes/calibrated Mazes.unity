@@ -187,22 +187,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -566,22 +571,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -656,22 +666,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -740,22 +755,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -913,7 +933,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 30
+  far clip plane: 28
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1004,8 +1024,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085916830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -19.69, z: 0}
-  m_LocalScale: {x: 0.8054982, y: 0.8054982, z: 0.8054982}
+  m_LocalPosition: {x: 0, y: -22, z: 0}
+  m_LocalScale: {x: 0.87106675, y: 0.87106675, z: 0.87106675}
   m_Children:
   - {fileID: 1042033507}
   - {fileID: 1188334484}
@@ -1083,22 +1103,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -1217,7 +1242,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 30
+  far clip plane: 28
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1830,22 +1855,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -2390,7 +2420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   calibrateGameObject: 0
-  drawPlayArea: 1
+  drawPlayArea: 0
   gizmo: {fileID: 2497731189600166390, guid: 44f5791eb9b1eed4ba484ac26063bdfb, type: 3}
   gizmoRed: {fileID: 1659638753046137560, guid: 156785a5c7a544a4faa68a073c5c3ba6,
     type: 3}
@@ -2873,7 +2903,7 @@ GameObject:
   - component: {fileID: 2095540619}
   - component: {fileID: 2095540618}
   - component: {fileID: 2095540621}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3017,22 +3047,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -3101,22 +3136,27 @@ PrefabInstance:
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.2562464
+      value: 1.5377712
       objectReference: {fileID: 0}
     - target: {fileID: 1189883700668930957, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6868573
+      value: 0.840782
       objectReference: {fileID: 0}
     - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
         type: 3}
       propertyPath: m_Name
       value: Cloud (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798997283225528734, guid: 673587c41b6999d4499a38cbda5c921e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 673587c41b6999d4499a38cbda5c921e, type: 3}
@@ -3269,11 +3309,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
         type: 3}
-      propertyPath: m_ClearFlags
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
-        type: 3}
       propertyPath: m_AllowDynamicResolution
       value: 0
       objectReference: {fileID: 0}
@@ -3281,6 +3316,11 @@ PrefabInstance:
         type: 3}
       propertyPath: far clip plane
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776048526464005724, guid: dc399f754a05a8c4798ce883a14677f8,
+        type: 3}
+      propertyPath: m_Depth
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc399f754a05a8c4798ce883a14677f8, type: 3}
@@ -3409,6 +3449,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301067466978147271, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4866124827574828966, guid: 17cd1bd3e751a9f4bac0efc75a21f452,
         type: 3}
