@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 19
   m_EditorClassIdentifier: 
   text: Do me a favor and do not walk through the walls in the maze, and do not go
-    through the experiment a second time. you can let others try, but I can only
+    through the experiment a second time. You can let others try, but I can only
     use your data once.
   textSpeed: 40
   dialogEffect: 5
