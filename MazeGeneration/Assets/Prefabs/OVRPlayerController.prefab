@@ -1014,7 +1014,7 @@ MonoBehaviour:
   clippingAmount: 65
   onLayer: 31
   autoSetDefault: 0
-  defaultClippingValue: 25
+  defaultClippingValue: 30
 --- !u!1 &5369379566299229997
 GameObject:
   m_ObjectHideFlags: 0
