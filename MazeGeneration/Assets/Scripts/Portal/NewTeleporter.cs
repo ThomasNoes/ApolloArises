@@ -20,7 +20,7 @@ public class NewTeleporter : MonoBehaviour
 
     private LayerMask layerMask;
 
-    private bool cooldownActive;
+    private bool cooldownActive, teleportEnabled;
     private Vector3 nextOffset, prevOffset;
 
     void Start()
@@ -34,6 +34,8 @@ public class NewTeleporter : MonoBehaviour
         nextOffset = PortalRenderController.SetNextOffset(mazeID);
         prevOffset = PortalRenderController.SetPrevOffset(mazeID);
         prController = transform.parent.GetComponent<PortalRenderController>();
+
+        Invoke("EnableTeleport", 2.0f);
     }
 
     public void AddTeleportCopy(GameObject obj)
@@ -42,9 +44,14 @@ public class NewTeleporter : MonoBehaviour
             teleportCopies.Add(obj);
     }
 
+    private void EnableTeleport()
+    {
+        teleportEnabled = true;
+    }
+
     public void Teleport(Collider col)
     {
-        if (cooldownActive)
+        if (cooldownActive || !teleportEnabled)
             return;
 
         StartCooldown(0.15f);
