@@ -27,7 +27,7 @@ public class FinalTestSceneManager : MonoBehaviour
     float minimum = float.MaxValue;
     string minimumScene;
 
-     
+    bool activate = true;
      
     private void Awake()
     {
@@ -95,11 +95,18 @@ public class FinalTestSceneManager : MonoBehaviour
     public void GoToNextScene()
     {
         index++;
-        if (index < order.Length)
+        if (index < order.Length && activate)
         {
             Camera.main.GetComponent<OVRScreenFade>().ExitSceneFade();
             Invoke("NewScene", 2);
+            activate = false;
+            Invoke("SetToActivate", 5);
         }
+    }
+
+    void SetToActivate()
+    {
+        activate = true;
     }
 
     private void NewScene()
