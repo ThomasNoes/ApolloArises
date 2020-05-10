@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 15
   m_EditorClassIdentifier: 
   text: But in one of the environments, the goal of reaching the end of the maze
-    is the context of the game where you escort a robot.
+    is in the context of a game where you  escort a robot.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

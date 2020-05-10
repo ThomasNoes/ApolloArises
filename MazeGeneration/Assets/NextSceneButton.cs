@@ -9,15 +9,28 @@ public class NextSceneButton : MonoBehaviour
     Tile targetTile;
 
     bool registerPress = false;
+
+    public float height;
+
+    public bool inEndMaze; 
+
     // Start is called before the first frame update
     void Start()
     {
         mm = GameObject.Find("MapManager").GetComponent<MapManager>();
         maps = mm.mapScripts;
 
-        targetTile = FindStartEndTile(maps[maps.Count - 1]);
-        transform.rotation = mm.transform.rotation;
-        transform.position = new Vector3(targetTile.transform.position.x, 19.199f, targetTile.transform.position.z);
+        if (inEndMaze)
+        {
+            targetTile = FindStartEndTile(maps[maps.Count - 1]);
+        }
+        else
+        {
+            targetTile = FindStartEndTile2(maps[0]);
+        }
+
+        transform.rotation = transform.rotation * mm.transform.rotation;
+        transform.position = new Vector3(targetTile.transform.position.x, height, targetTile.transform.position.z);
     }
 
     public void GoToNextScene()
@@ -28,8 +41,18 @@ public class NextSceneButton : MonoBehaviour
         }
         registerPress = true;
     }
-
-    private Tile FindStartEndTile(MapGenerator map)
+    private Tile FindStartEndTile2(MapGenerator map)
+    {
+        foreach (Tile t in map.tileArray) // finding the ideal tile
+        {
+            if (!t.isOuterTile && !t.isPortalTile && t.isRoomTile)
+            {
+                return t;
+            }
+        }
+        return null;
+    }
+        private Tile FindStartEndTile(MapGenerator map)
     {
         foreach (Tile t in map.tileArray) // finding the ideal tile
         {
