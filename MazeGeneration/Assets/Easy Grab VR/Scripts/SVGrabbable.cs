@@ -12,6 +12,8 @@ public class SVGrabbable : MonoBehaviour {
     //------------------------
     private const float kGrabResetTime = 0.5f; // 120 ms.
 
+    public bool interactionFixer;
+
     //------------------------
     // Variables
     //------------------------
@@ -65,7 +67,7 @@ public class SVGrabbable : MonoBehaviour {
     private bool lastKnockableValue = true, useGravity;
 
     [HideInInspector]
-    public bool inHand = false;
+    public bool inHand = false, wasInHand;
 
     // Private Components
     private SVAbstractGripIndicator gripIndicatorComponent;
@@ -176,6 +178,23 @@ public class SVGrabbable : MonoBehaviour {
         if (!locomotionSupported) {
             DoGrabbedUpdate();
         }
+
+        if (interactionFixer)
+        {
+            if (inHand && !wasInHand)
+                wasInHand = true;
+
+            if (wasInHand && !inHand)
+            {
+                wasInHand = false;
+                Invoke("DelayedClearController", 0.5f);
+            }
+        }
+    }
+
+    void DelayedClearController()
+    {
+        ClearActiveController();
     }
 
     /* Why Late Update? Good Question kind sir / madam. It's so we can run AFTER our physics calculations.  This enables us to lerp objects that you need to carry around with you

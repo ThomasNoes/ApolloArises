@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 7
   m_EditorClassIdentifier: 
-  text: all power is off and the power needs to be turn on with the levers one by
-    one.
+  text: All power is off and the power needs to be turned on with the levers one
+    by one.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

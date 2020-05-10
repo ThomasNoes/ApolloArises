@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 9
   m_EditorClassIdentifier: 
   text: That is what this experiment is about and that is what they need you for!
-    First I have some questions you need to answer first. I hope you are up for it.
+    First I have some questions you need to answer. I hope you are up for it.
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}
