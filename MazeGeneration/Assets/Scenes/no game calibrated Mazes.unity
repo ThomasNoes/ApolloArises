@@ -4070,7 +4070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f75a1bc6822f95647aa1ee7d6d434892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 2
+  height: 1.5
   inEndMaze: 0
 --- !u!1 &2095540617
 GameObject:
