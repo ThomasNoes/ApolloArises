@@ -121,6 +121,6 @@ public class FinalTestSceneManager : MonoBehaviour
     }
     public string GetMinimumFramerate()
     {
-        return ((int)minimum).ToString() + " " + minimumScene;
+        return ((int)minimum).ToString() + " in " + minimumScene + " at time: " + Time.timeSinceLevelLoad;
     }
 }
