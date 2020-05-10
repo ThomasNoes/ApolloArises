@@ -27,9 +27,8 @@ public class BeaconManager : MonoBehaviour
     {
         for (int i = 0; i < beacons.Count; i++)
         {
-            if (!beacons[i].isActive && i == mazeIndex)
+            if (!beacons[i].isActive && i == mazeIndex || overrideIndex)
             {
-
                 beacons[i].isActive = true;
                 beacons[i].LightBeacon();
                 CompanionBehaviour.instance?.OnLeverPulledAtIndex(i);
@@ -42,7 +41,11 @@ public class BeaconManager : MonoBehaviour
 
                 return;
             }
-            else if (i != mazeIndex && !overrideIndex)
+            else if (beacons[i].isActive && i == mazeIndex)
+            {
+                return;
+            }
+            else if (!beacons[i].isActive && i != mazeIndex)
             {
                 CompanionBehaviour.instance?.OnWrongLeverPulled();
                 return;
