@@ -18,7 +18,7 @@ public class TMPAnimated : MonoBehaviour
     public bool isRunning = false;
 
     public bool clearText = true;
-    float ClearTextTimer = 6.0f;
+    float ClearTextTimer = 7.5f;
     float counter = 0;
 
     private void Update()
