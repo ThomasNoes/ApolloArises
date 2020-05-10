@@ -698,7 +698,7 @@ public class MapManager : MonoBehaviour
         pos.y = (index*2f);
 
         pos += -transform.right*0.26f;
-        pos += transform.forward * 0.1f;
+        pos += transform.forward * 0.15f;
 
         tempMap = Instantiate(mazeGeneratorPrefab[(int)mapSequence[index].mapType], pos, Quaternion.identity);
     }

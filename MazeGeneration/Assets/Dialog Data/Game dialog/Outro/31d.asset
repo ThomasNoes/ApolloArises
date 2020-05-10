@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 31d
   m_EditorClassIdentifier: 
-  text: Did you notice any visual artifacts during the experiment?
+  text: Did you notice any visual glitches  during the experiment?
   textSpeed: 40
   dialogEffect: 4
   ButtonEvent: {fileID: 11400000, guid: f1e15a11b6ac4c9419a88d0a1c7b1084, type: 2}
