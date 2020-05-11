@@ -10,7 +10,7 @@ public class Beacon : MonoBehaviour
     public GameObject orb;
     public AudioClip closingRoof, orbOn;
     [HideInInspector] public Door doorRef;
-    [HideInInspector] public PuzzleRobot puzzleRobotRef;
+    [HideInInspector] public List<PuzzleRobot> puzzleRobotRefs = new List<PuzzleRobot>();
 
     private Renderer orbRenderer;
     private Animator animator;
@@ -54,7 +54,11 @@ public class Beacon : MonoBehaviour
             orbRenderer.material.SetColor("_EmissionColor", beaconManager.orbEndEmission);
         }
 
-        puzzleRobotRef?.TurnOn();
+        foreach (var puzzleRobot in puzzleRobotRefs)
+        {
+            puzzleRobot.TurnOn();
+        }
+        
         doorRef?.PowerDoor();
     }
 

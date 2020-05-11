@@ -70,7 +70,7 @@ public class PuzzleRobot : MonoBehaviour
             if (beaconManager.beacons.Count != 0)
             {
                 turnedOff = !beaconManager.beacons[inMaze].isActive;
-                beaconManager.beacons[inMaze].puzzleRobotRef = this;
+                beaconManager.beacons[inMaze].puzzleRobotRefs.Add(this);
             }
         }
 
