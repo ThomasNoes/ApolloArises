@@ -14,12 +14,16 @@ public class ObliqueProjectionToQuad : MonoBehaviour {
 
     private Camera cameraComponent;
 
+    void Start()
+    {
+        cameraComponent = GetComponent<Camera>();
+    }
+
     void OnPreCull () {
 
         if (!enable)
             return;
 
-        cameraComponent = GetComponent<Camera> ();
         if (null != projectionScreen && null != cameraComponent) {
 
             Vector3 pa =

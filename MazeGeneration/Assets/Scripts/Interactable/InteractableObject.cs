@@ -101,6 +101,8 @@ public class InteractableObject : MonoBehaviour
             grabbable.isKnockable = false;
         }
 
+        thisObjCopy.GetComponent<ItemCogwheel>()?.Disable();
+
         copyExist = true;
     }
 

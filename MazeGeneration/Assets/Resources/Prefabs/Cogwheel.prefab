@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352b737e6c5c2b34c8622863e889eb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionFixer: 0
   canGrab: 1
   shouldFly: 1
   grabFlyDistance: 0.2
@@ -323,6 +324,7 @@ MonoBehaviour:
   noRotationX: 1
   isKnockable: 0
   inHand: 0
+  wasInHand: 0
 --- !u!114 &5653734793003000731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352b737e6c5c2b34c8622863e889eb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionFixer: 0
   canGrab: 0
   shouldFly: 0
   grabFlyDistance: 0
@@ -548,6 +551,7 @@ MonoBehaviour:
   noRotationX: 1
   isKnockable: 0
   inHand: 0
+  wasInHand: 0
 --- !u!82 &676779451330453595
 AudioSource:
   m_ObjectHideFlags: 0
@@ -560,7 +564,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4828a327a9ae90c49a32b8e409bfeb52, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -569,7 +573,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 3
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

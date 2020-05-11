@@ -5,6 +5,8 @@ using TMPro;
 
 public class TMPAnimated : MonoBehaviour
 {
+    public bool dontUseEvents;
+
     [Header("Sound effects")]
     public VoidEvent textAppear;
     public VoidEvent success, surprise, confetti, remark, question;
@@ -20,6 +22,13 @@ public class TMPAnimated : MonoBehaviour
     public bool clearText = true;
     float ClearTextTimer = 7.5f;
     float counter = 0;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    private AudioSource audioSource;
 
     private void Update()
     {
@@ -63,7 +72,16 @@ public class TMPAnimated : MonoBehaviour
         while (i < dialog.text.Length)
         {
             target.text += dialog.text[i];
-            textAppear?.Raise();
+
+            if (audioSource != null && dontUseEvents)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                textAppear?.Raise();
+            }
+
             yield return delay;
             i++;
         }
@@ -109,6 +127,5 @@ public class TMPAnimated : MonoBehaviour
         {
             proceedButton.SetActive(true);
         }
-        
     }
 }

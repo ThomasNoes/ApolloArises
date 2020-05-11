@@ -28,13 +28,13 @@ public class PuzzleDialogManager : MonoBehaviour
     
     public void OnRotateWheelDone()
     {
-        Debug.Log("RotateWheel done");
+        //Debug.Log("RotateWheel done");
         dr.InjectDialog(endDialog);
     }
 
     public void OnRobotFixed()
     {
-        Debug.Log("robot is fixed");
+        //Debug.Log("robot is fixed");
         dr.InjectDialog(malFunctionDialog);
     }
 
