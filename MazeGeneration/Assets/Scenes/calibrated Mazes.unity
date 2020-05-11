@@ -1159,6 +1159,41 @@ PrefabInstance:
       propertyPath: beacons.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5250091451462604413, guid: dac4f615ac2cff34982ce19c1ba72706,
+        type: 3}
+      propertyPath: eventOnLastBeacon.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250091451462604413, guid: dac4f615ac2cff34982ce19c1ba72706,
+        type: 3}
+      propertyPath: eventOnLastBeacon.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250091451462604413, guid: dac4f615ac2cff34982ce19c1ba72706,
+        type: 3}
+      propertyPath: eventOnLastBeacon.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250091451462604413, guid: dac4f615ac2cff34982ce19c1ba72706,
+        type: 3}
+      propertyPath: eventOnLastBeacon.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1318831206}
+    - target: {fileID: 5250091451462604413, guid: dac4f615ac2cff34982ce19c1ba72706,
+        type: 3}
+      propertyPath: eventOnLastBeacon.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateAfterTime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250091451462604413, guid: dac4f615ac2cff34982ce19c1ba72706,
+        type: 3}
+      propertyPath: eventOnLastBeacon.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250091451462604413, guid: dac4f615ac2cff34982ce19c1ba72706,
+        type: 3}
+      propertyPath: eventOnLastBeacon.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7784085036124375944, guid: dac4f615ac2cff34982ce19c1ba72706,
         type: 3}
       propertyPath: m_Name

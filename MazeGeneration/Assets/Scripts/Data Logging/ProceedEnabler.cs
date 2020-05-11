@@ -18,4 +18,9 @@ public class ProceedEnabler : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
+
+    public void ActivateAfterTime(float time)
+    {
+        Invoke("ActivateButton", time);
+    }
 }
