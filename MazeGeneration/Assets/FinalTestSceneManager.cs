@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using EventCallbacks;
 
 public class FinalTestSceneManager : MonoBehaviour
 {
 
     public static FinalTestSceneManager instance;
+    private TerrainGenerator terrainGenerator;
 
     public FloatValue fpsCountData, fpsSumData, minimumFrameFloat;
     public StringValue startCondition;
@@ -39,6 +41,7 @@ public class FinalTestSceneManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
             ResetData();
         }
     }
@@ -48,6 +51,12 @@ public class FinalTestSceneManager : MonoBehaviour
         fpsCountData.value = 0;
         fpsSumData.value = 0;
         minimumFrameFloat.value = float.MaxValue;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        terrainGenerator = null;
+        terrainGenerator = FindObjectOfType<TerrainGenerator>();
     }
 
     // Start is called before the first frame update
@@ -65,7 +74,7 @@ public class FinalTestSceneManager : MonoBehaviour
             order = oddOrder;
             startCondition.value = "No Game First";
         }
-    }
+}
 
 
     private void Update()
@@ -111,7 +120,10 @@ public class FinalTestSceneManager : MonoBehaviour
 
     private void NewScene()
     {
-        SceneManager.LoadScene(order[index]);
+        if (terrainGenerator != null)
+            terrainGenerator.UnregisterListeners();
+
+        SceneManager.LoadScene(order[index], LoadSceneMode.Single);
     }
 
 

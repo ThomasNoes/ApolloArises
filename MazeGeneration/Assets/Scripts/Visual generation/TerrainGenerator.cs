@@ -20,7 +20,7 @@
         {
             GenerateTerrainEvent.RegisterListener(OnGenerateTerrain);
             GenerateTowersEvent.RegisterListener(TowerGenerator);
-            TextureSwitchEvent.RegisterListener(TextureSwitch);
+            // TextureSwitchEvent.RegisterListener(TextureSwitch);
             textureCustomizer = GetComponent<TextureCustomizer>();
 
             if (useTextureSwitcherInEditor)
@@ -361,6 +361,12 @@
         public void ResetTextures()
         {
             textureCustomizer?.ResetTextures();
+        }
+
+        public void UnregisterListeners()
+        {
+            GenerateTerrainEvent.UnregisterListener(OnGenerateTerrain);
+            GenerateTowersEvent.UnregisterListener(TowerGenerator);
         }
     }
 }
