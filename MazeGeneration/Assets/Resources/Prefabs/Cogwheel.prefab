@@ -382,9 +382,8 @@ GameObject:
   - component: {fileID: 6261743046997914716}
   - component: {fileID: 3263791806324789103}
   - component: {fileID: 2928838103864173118}
-  - component: {fileID: 4428213136302654341}
-  - component: {fileID: 37970996993066170}
   - component: {fileID: 676779451330453595}
+  - component: {fileID: 8184961437715569292}
   m_Layer: 0
   m_Name: Wheel
   m_TagString: Untagged
@@ -490,6 +489,7 @@ MonoBehaviour:
   notFixed: 0
   handle: {fileID: 6097232418364273557}
   handleInteractObj: {fileID: 8464148380276482797}
+  grabbable: {fileID: 1928742914385923073}
 --- !u!65 &2928838103864173118
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -503,55 +503,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19819519, y: 0.023363657, z: 0.20244983}
   m_Center: {x: 0.0034198165, y: 0.0027209856, z: 0.00001603365}
---- !u!114 &4428213136302654341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9046440922413680291}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2daadec7d02b024b868b500c71a0eee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gripButton: -1
-  releaseGripButton: -1
-  gripAutoHolds: 0
-  activeController: 0
---- !u!114 &37970996993066170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9046440922413680291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352b737e6c5c2b34c8622863e889eb9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionFixer: 0
-  canGrab: 0
-  shouldFly: 0
-  grabFlyDistance: 0
-  grabFlyTime: 0.1
-  mirrorXOffsetInLeftHand: 1
-  positionOffsetInHand: {x: 0, y: 0, z: 0}
-  forceRotationInHand: 0
-  rotationInHand: {x: 0, y: 0, z: 0}
-  ignorePhysicsInHand: 0
-  enablePhysicsInHand: 1
-  locomotionSupported: 0
-  inHandLerpSpeed: 0.107
-  objectDropDistance: 0.2
-  stayInPlace: 1
-  noRotationY: 0
-  noRotationZ: 1
-  noRotationX: 1
-  isKnockable: 0
-  inHand: 0
-  wasInHand: 0
 --- !u!82 &676779451330453595
 AudioSource:
   m_ObjectHideFlags: 0
@@ -564,7 +515,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4828a327a9ae90c49a32b8e409bfeb52, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -573,7 +524,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 3
+  MaxDistance: 2.5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -648,3 +599,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8184961437715569292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9046440922413680291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ce9b7f576bb544d8024ee773270315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stayInPlace: 1
+  noRotationX: 1
+  noRotationY: 0
+  noRotationZ: 1

@@ -18,6 +18,7 @@ public class PuzzleWheel : MonoBehaviour
     public GameObject handle, handleInteractObj;
     private Vector3 anchor, axis, initialPos;
     private AudioSource audioSourceWheel;
+    public SVGrabbable grabbable;
 
     private Quaternion lastRot;
     private Vector3 angularVelocity;
@@ -95,13 +96,20 @@ public class PuzzleWheel : MonoBehaviour
             prevYAngle = currentYAngle;
         }
 
-        if (rb != null && handle != null)
+        if (rb != null && handle != null && grabbable != null)
         {
-            CalculateAngularVelocity();
-
-            if (angularVelocity.magnitude >= 12.0f)
+            if (grabbable.inHand)
             {
-                StartSound();
+                CalculateAngularVelocity();
+
+                if (angularVelocity.magnitude >= 12.0f)
+                {
+                    StartSound();
+                }
+                else
+                {
+                    StopSound();
+                }
             }
             else
             {
