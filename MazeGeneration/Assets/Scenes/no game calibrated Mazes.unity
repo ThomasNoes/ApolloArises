@@ -3082,6 +3082,7 @@ MonoBehaviour:
   exposureModifier: 0.015
   startColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   endColor: {r: 0.5960751, g: 0.8551801, b: 0.8962264, a: 1}
+  proceedButton: {fileID: 0}
 --- !u!1 &1629571677
 GameObject:
   m_ObjectHideFlags: 0
@@ -3655,7 +3656,7 @@ PrefabInstance:
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: m_Name
-      value: You have reached the top. Press here to continue
+      value: You have reached the end. Press here to continue
       objectReference: {fileID: 0}
     - target: {fileID: 5403584426831557178, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}

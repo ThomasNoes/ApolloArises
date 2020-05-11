@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: 28
   m_EditorClassIdentifier: 
-  text: How comfortable did you find other technical aspects? Like track of hands
+  text: How comfortable did you find other technical aspects? Like tracking of hands
     or misplaced objects
   textSpeed: 40
   dialogEffect: 4

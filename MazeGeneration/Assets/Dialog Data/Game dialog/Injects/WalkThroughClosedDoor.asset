@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d420c8690d329aa4cabd9e3226a29469, type: 3}
   m_Name: WalkThroughClosedDoor
   m_EditorClassIdentifier: 
-  text: "Did you just pass through the door? can you \u201Chumbly\u201D come back
-    and open it for me!"
+  text: Did you just pass through the door? can you  come back and open it for me!
   textSpeed: 40
   dialogEffect: 0
   ButtonEvent: {fileID: 0}

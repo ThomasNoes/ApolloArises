@@ -2882,7 +2882,7 @@ PrefabInstance:
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
       propertyPath: m_Name
-      value: You have reached the top. Press here to continue
+      value: You have reached the end. Press here to continue
       objectReference: {fileID: 0}
     - target: {fileID: 4352716298212611839, guid: 3e819571d4a925346a5c4a83065582a0,
         type: 3}
