@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -15,6 +15,8 @@ public class BeaconManager : MonoBehaviour
 
     public Color orbStartEmission, orbEndEmission;
     private bool lastBeacon;
+
+    public UnityEvent eventOnLastBeacon;
 
 
     private void Start()
@@ -79,6 +81,9 @@ public class BeaconManager : MonoBehaviour
             lineRenderer.SetPosition(indexFrom, beacons[indexFrom].gameObject.transform.position);
             lineRenderer.SetPosition(indexTo, beacons[indexTo].gameObject.transform.position);
         }
+
+        if (lastBeacon)
+            eventOnLastBeacon?.Invoke();
     }
 }
 

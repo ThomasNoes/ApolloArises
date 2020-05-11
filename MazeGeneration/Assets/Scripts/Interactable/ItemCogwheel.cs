@@ -5,7 +5,7 @@ public class ItemCogwheel : MonoBehaviour
 {
     private SVGrabbable grabbable;
     private Rigidbody rb;
-    private bool isGrabbed;
+    private bool isGrabbed, disabled;
     private Vector3 startPos;
 
     void Start()
@@ -18,7 +18,7 @@ public class ItemCogwheel : MonoBehaviour
 
     void Update()
     {
-        if (isGrabbed)
+        if (isGrabbed || disabled)
             return;
 
         if (grabbable.inHand)
@@ -30,7 +30,12 @@ public class ItemCogwheel : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!isGrabbed && !grabbable.inHand)
+        if (!isGrabbed && !grabbable.inHand && !disabled)
             transform.position = startPos;
+    }
+
+    public void Disable()
+    {
+        disabled = true;
     }
 }

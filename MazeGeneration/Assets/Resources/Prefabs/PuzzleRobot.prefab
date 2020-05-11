@@ -10195,7 +10195,6 @@ GameObject:
   - component: {fileID: 8445881985307952006}
   - component: {fileID: 2447200727488680839}
   - component: {fileID: 988963097633867427}
-  - component: {fileID: 8139574764629516130}
   m_Layer: 2
   m_Name: Puzzle Dialog manager
   m_TagString: Untagged
@@ -10283,6 +10282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5df6fe15e21e4d4dbdb22d529b15032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontUseEvents: 1
   textAppear: {fileID: 11400000, guid: d761c93ff9f62ab4bab4e72b28761a7a, type: 2}
   success: {fileID: 0}
   surprise: {fileID: 0}
@@ -10302,9 +10302,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: 944710650aa5d1b4382789dede333286, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10313,7 +10313,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -10388,31 +10388,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8139574764629516130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2678986578024536769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d26027b0d77fb847944a82e807de35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundEvents:
-  - thisAudioManager: {fileID: 0}
-    audioClip: {fileID: 8300000, guid: 944710650aa5d1b4382789dede333286, type: 3}
-    audioSource: {fileID: 0}
-    soundEventId: 0
-    triggerDelay: 0
-    soundVolume: 0.1
-    soundPitch: 1
-    triggerEvent: {fileID: 11400000, guid: d761c93ff9f62ab4bab4e72b28761a7a, type: 2}
-    runOnce: 0
-    runOnStart: 0
-    loopSound: 0
-    instantiated: 1
 --- !u!1 &4006112889633428072
 GameObject:
   m_ObjectHideFlags: 0
@@ -25459,6 +25434,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8d22f599459c1e45b20ab94dc9a11cd, type: 3}
+--- !u!4 &8388946407402638350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6898801135259796928, guid: c8d22f599459c1e45b20ab94dc9a11cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3158977563372472782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6223301018872483693 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9046440922413680291, guid: c8d22f599459c1e45b20ab94dc9a11cd,
@@ -25477,12 +25458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3bd4a522ead76242884f864cdfe7ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8388946407402638350 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6898801135259796928, guid: c8d22f599459c1e45b20ab94dc9a11cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 3158977563372472782}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4244084110586525374
 PrefabInstance:
   m_ObjectHideFlags: 0

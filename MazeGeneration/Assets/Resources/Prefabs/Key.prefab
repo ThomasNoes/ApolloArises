@@ -187,10 +187,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 352b737e6c5c2b34c8622863e889eb9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionFixer: 0
   canGrab: 1
   shouldFly: 1
-  grabFlyDistance: 0.23
-  grabFlyTime: 0.01
+  grabFlyDistance: 0.19
+  grabFlyTime: 0
   mirrorXOffsetInLeftHand: 1
   positionOffsetInHand: {x: 0, y: 0, z: 0}
   forceRotationInHand: 0
@@ -198,7 +199,7 @@ MonoBehaviour:
   ignorePhysicsInHand: 0
   enablePhysicsInHand: 1
   locomotionSupported: 1
-  inHandLerpSpeed: 0.03
+  inHandLerpSpeed: 1
   objectDropDistance: 0.2
   stayInPlace: 0
   noRotationY: 0
@@ -206,6 +207,7 @@ MonoBehaviour:
   noRotationX: 0
   isKnockable: 0
   inHand: 0
+  wasInHand: 0
 --- !u!65 &4549219895534124851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -240,7 +242,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
