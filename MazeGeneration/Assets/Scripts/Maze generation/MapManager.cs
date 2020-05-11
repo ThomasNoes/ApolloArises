@@ -103,7 +103,9 @@ public class MapManager : MonoBehaviour
                 }
                 else
                 {
-                    gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
+                    mazeCols = 4;
+                    mazeRows = 3;
+                    //gc.RoomScaling(out mazeRows, out mazeCols, tileWidth);
                 }
                 //mazeRows = Mathf.RoundToInt(playAreaSize.z / tileWidth);
                 //mazeCols = Mathf.RoundToInt(playAreaSize.x / tileWidth);
