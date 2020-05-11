@@ -42,7 +42,7 @@ public class Door : MonoBehaviour
             if (beaconManager.beacons.Count != 0)
             {
                 isPowered = beaconManager.beacons[inMaze].isActive;
-                beaconManager.beacons[inMaze].doorRef = this;
+                beaconManager.beacons[inMaze].doorRefs.Add(this);
             }
         }
 

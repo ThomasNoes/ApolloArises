@@ -9,7 +9,7 @@ public class Beacon : MonoBehaviour
     public Beacon connectedToBack, connectedToForward;
     public GameObject orb;
     public AudioClip closingRoof, orbOn;
-    [HideInInspector] public Door doorRef;
+    [HideInInspector] public List<Door> doorRefs = new List<Door>();
     [HideInInspector] public List<PuzzleRobot> puzzleRobotRefs = new List<PuzzleRobot>();
 
     private Renderer orbRenderer;
@@ -58,8 +58,11 @@ public class Beacon : MonoBehaviour
         {
             puzzleRobot.TurnOn();
         }
-        
-        doorRef?.PowerDoor();
+
+        foreach (var door in doorRefs)
+        {
+            door.PowerDoor();
+        }
     }
 
     private IEnumerator PlayBeaconSoundWithDelay()
