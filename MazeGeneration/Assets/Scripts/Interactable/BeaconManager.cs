@@ -29,7 +29,7 @@ public class BeaconManager : MonoBehaviour
     {
         for (int i = 0; i < beacons.Count; i++)
         {
-            if (!beacons[i].isActive && i == mazeIndex || overrideIndex)
+            if (!beacons[i].isActive && i == mazeIndex)
             {
                 beacons[i].isActive = true;
                 beacons[i].LightBeacon();
@@ -100,7 +100,21 @@ public class BeaconManager_Editor : UnityEditor.Editor
 
         if (GUILayout.Button("Connect next beacon!"))
         {
-            script.ConnectNextBeacon(0, true);
+            if (script.beacons.Count == 0)
+                return;
+
+            int beaconId = 0;
+
+            for (int i = 0; i < script.beacons.Count; i++)
+            {
+                if (!script.beacons[i].isActive)
+                {
+                    beaconId = i;
+                    break;
+                }
+            }
+
+            script.ConnectNextBeacon(beaconId, true);
         }
     }
 }
