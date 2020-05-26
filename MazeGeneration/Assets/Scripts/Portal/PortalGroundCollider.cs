@@ -72,10 +72,7 @@ public class PortalGroundCollider : MonoBehaviour
         Vector2 dir2d = new Vector2(renderPlaneCollider.gameObject.transform.position.x, renderPlaneCollider.gameObject.transform.position.z) -
                         new Vector2(mainCam.transform.position.x, mainCam.transform.position.z);
 
-        if (Vector2.Angle(camForward2D, dir2d) < activationAngle)
-            return true;
-        else
-            return false;
+        return Vector2.Angle(camForward2D, dir2d) < activationAngle;
     }
 
     private void StartCooldown(float time)

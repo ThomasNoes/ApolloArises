@@ -58,14 +58,6 @@ public class TeleportableObject : MonoBehaviour
         thisObjCopy.GetComponent<Collider>().enabled = false;
         thisObjCopy.GetComponent<Rigidbody>().isKinematic = true;
 
-        //if (col != null)
-        //{
-        //    NewTeleporter tempTeleScript = col.gameObject.GetComponent<NewTeleporter>();
-
-        //    if (tempTeleScript != null)
-        //        tempTeleScript.AddTeleportCopy(thisObjCopy);
-        //}
-
         copyExist = true;
     }
 

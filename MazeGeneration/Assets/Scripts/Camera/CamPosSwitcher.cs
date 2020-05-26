@@ -17,7 +17,7 @@ namespace Assets.Scripts.Camera
 
         public bool distanceCheck = true, rendererInViewCheck = true, useCameraAngle = true, fastAngleChecks = true;
         private bool prevInCamFrustum, nextInCamFrustum, currentDirection, tileDistanceSame;
-        private int currentMaze = -1, mazeCount, prevScore, nextScore, distanceToNext, distanceToPrev;
+        private int currentMaze = -1, mazeCount, prevScore, nextScore;
         public float loopRepeatRate = 0.3f;
 
         private int mapSequenceLength;
@@ -41,14 +41,6 @@ namespace Assets.Scripts.Camera
                     Invoke("DelayedStart", 0.7f);
                     InvokeRepeating("CheckerLoop", 2.1f, loopRepeatRate);
                 }
-            }
-        }
-
-        private void Update()
-        {
-            if (OVRInput.GetDown(OVRInput.Button.Three)) // TODO Remove after debugging YYY
-            {
-                Debug.Log("In maze: " + currentMaze + " | " + distanceToNext + " tiles from next and " + distanceToPrev + " from prev | " + tileDistanceSame);
             }
         }
 
@@ -172,9 +164,6 @@ namespace Assets.Scripts.Camera
                 {
                     nextScore = tempTile.nextDistance;
                     prevScore = tempTile.prevDistance;
-
-                    distanceToNext = nextScore;
-                    distanceToPrev = prevScore;
 
                     tileDistanceSame = nextScore == prevScore;
                 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class FarClippingOnLayer : MonoBehaviour
 {
-    public float clippingAmount;
+    public float farClippingAmount = 100.0f;
     [Range(0, 31)]public int onLayer;
-    public bool autoSetDefault = false;
-    public float defaultClippingValue;
+    public bool autoSet = false;
+    public float defaultClippingValue = 40.0f;
     private float[] distances;
     private Camera mainCam;
 
@@ -15,8 +15,10 @@ public class FarClippingOnLayer : MonoBehaviour
     {
         mainCam = Camera.main;
 
-        if (autoSetDefault)
-            defaultClippingValue = mainCam.farClipPlane;
+        if (autoSet)
+            farClippingAmount = mainCam.farClipPlane;
+        else
+            mainCam.farClipPlane = farClippingAmount;
 
         distances = new float[32];
 
@@ -25,7 +27,7 @@ public class FarClippingOnLayer : MonoBehaviour
             distances[i] = defaultClippingValue;
         }
 
-        distances[onLayer] = clippingAmount;
+        distances[onLayer] = farClippingAmount;
 
         mainCam.layerCullDistances = distances;
     }

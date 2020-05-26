@@ -1011,9 +1011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706114284684c174db0ca223aaab7df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clippingAmount: 65
+  farClippingAmount: 65
   onLayer: 31
-  autoSetDefault: 0
+  autoSet: 0
   defaultClippingValue: 35
 --- !u!1 &5369379566299229997
 GameObject:
